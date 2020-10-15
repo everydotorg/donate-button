@@ -1,20 +1,5 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import EveryMonth from './EveryMonth/EveryMonth'
+import everyMonth from './everyMonthWidget'
 import * as serviceWorker from './serviceWorker'
-
-window.everyMonth = {
-  show: (element, options) => {
-    const root = document.createElement('div')
-    element.attachShadow({ mode: 'closed' }).appendChild(root)
-    ReactDOM.render(
-      <React.StrictMode>
-        <EveryMonth options={options} />
-      </React.StrictMode>,
-      root
-    )
-  }
-}
 
 // This code would normally be in the host webpage
 const everyMonthOptions = {
@@ -53,10 +38,19 @@ const everyMonthOptions = {
     }
   }
 }
-window.everyMonth.show(
-  document.getElementById('every-month'),
-  everyMonthOptions
-)
+
+// init
+// everyMonth.init(everyMonthOptions)
+
+// init showing
+everyMonth.init({ ...everyMonthOptions, show: true })
+
+// Show/Hide
+// everyMonth.hide()
+// everyMonth.show()
+
+// for dev
+window.everyMonth = everyMonth
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

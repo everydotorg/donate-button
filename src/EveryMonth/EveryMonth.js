@@ -1,11 +1,11 @@
 import React from 'react'
 import logo from './logo.svg'
-import styles from './everyMonthStyles'
+import './style.css'
 
-function EveryMonth({options}) {
+function EveryMonth({ options, hide }) {
   return (
-    <div style={styles.wrapper}>
-      <div style={styles.widget}>
+    <div className="wrapper">
+      <div className="widget" onClick={()=> console.log('s')}>
         <pre>{JSON.stringify(options, null, 2)}</pre>
         <img src={logo} alt="logo" />
       </div>
