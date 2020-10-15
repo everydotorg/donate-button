@@ -1,4 +1,22 @@
+/* 
+* Reset stylesheet
+*/
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+/* 
+* Base styles
+*/
+
 .wrapper {
+  --color-primary: #2e3434;
+
   position: fixed;
   top: 0;
   bottom: 0;
@@ -8,13 +26,73 @@
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
+  color: var(--color-primary);
 }
+
+/* 
+* Typography
+*/
+
+.t-headline-primary {
+  font-size: 2rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.t-heading-secondary {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #000000;
+  letter-spacing: -0.01em;
+}
+
+.t-title {
+  font-size: 1rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.t-body--small {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+/* 
+* Components
+*/
+
 .widget {
-  width: 400px;
-  height: 400px;
+  width: 888px;
+  height: 773px;
   background: white;
   border-radius: 10px;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 70% 1fr;
+
+  box-sizing: border-box;
+  font-family: "Basis Grotesque Pro";
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.2;
 }
+
+.images {
+  background: greenyellow;
+
+  grid-row: 1 / 2;
+}
+
+.info {
+  background: royalblue;
+
+  grid-row: 2 / 3;
+}
+
 .widget:hover {
   border-radius: 2px;
 }
