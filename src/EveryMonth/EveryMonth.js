@@ -8,7 +8,7 @@ import OptionsContext from './optionsContext';
 
 function EveryMonth({ options, hide }) {
   const hideOnWrapperClick = e => e.target === e.currentTarget && hide()
-  const [monthlyDonation, setMonthlyDonation] = useState(false);
+  const [monthlyDonation, setMonthlyDonation] = useState(true);
   
   
   return (
@@ -22,8 +22,9 @@ function EveryMonth({ options, hide }) {
               <h2 className="t-heading-secondary">Monthly gifts help nonprofits focus on their mission and long-term impact.</h2>
             </div>
             <Donations monthlyDonation={monthlyDonation}/>
-  <ToggleDonationType handleClick={() => setMonthlyDonation(!monthlyDonation)}>{
-    monthlyDonation ? 'One time donation' : 'Monthly donation'}</ToggleDonationType>
+            <ToggleDonationType handleClick={() => setMonthlyDonation(!monthlyDonation)}>
+              {monthlyDonation ? 'One time donation' : 'Monthly donation'}
+            </ToggleDonationType>
           </div>
           <div className="images"></div>
           <div className="info"></div>
