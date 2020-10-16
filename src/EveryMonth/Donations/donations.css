@@ -12,6 +12,25 @@
     margin-bottom: 0.5rem;
 }
 
-.donations__form > *:not(:last-child) {
+.donations__form--monthly > *:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.donations__form--one-time {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.donations__input--one-time {
+    grid-column: 1 / -1;
+}
+
+.donations__submit {
+    display: flex;
+    flex-direction: column;
+}
+
+.donations__submit > *:not(:last-child) {
     margin-bottom: 1rem;
 }

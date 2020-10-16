@@ -1,6 +1,7 @@
 .radio-button {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    transition: all 0.2s;
 }
 
 .radio-button--selected {
@@ -16,17 +17,5 @@
     cursor: pointer;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
-
-/* .radio-button__input:checked ~ .radio-button__label {
-    border-color: #000000;
-} */
-
-/* .radio-button__text {
-    font-si
-}
-
-.radio-button__amount {
-} */

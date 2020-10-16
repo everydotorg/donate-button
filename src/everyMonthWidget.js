@@ -28,6 +28,15 @@ const Root = () => {
   return <EveryMonth options={options} hide={everyMonthInterface.hide} />
 }
 
+  //Add fonts
+  const link = document.createElement('link');
+
+  link.type ="text/css";
+  link.rel ="stylesheet";
+  link.href="//db.onlinewebfonts.com/c/3ddd0e3d1a076e112b27d8d9b7e20200?family=Basis+Grotesque+Pro"
+  
+  document.head.appendChild(link);
+
 // Create Shadow DOM
 const element = document.getElementById('every-month-widget')
 const shadowRoot = element.attachShadow({ mode: 'open' })
@@ -45,3 +54,4 @@ ReactDOM.render(
 )
 
 export default everyMonthInterface
+

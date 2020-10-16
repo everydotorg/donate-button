@@ -44,6 +44,7 @@
   line-height: 1.5;
   color: #000000;
   letter-spacing: -0.01em;
+  font-weight: 400;
 }
 
 .t-title {
@@ -67,7 +68,7 @@
   width: 888px;
   height: 773px;
   background: white;
-  border-radius: 10px;
+  border-radius: 1.5rem;
 
   display: grid;
 
@@ -93,6 +94,14 @@
   grid-row: 2 / 3;
 }
 
-.widget:hover {
-  border-radius: 2px;
+/* 
+* Utils
+*/
+
+.u-justify-content-space-between {
+  justify-content: space-between;
+}
+
+.u-justify-content-center {
+  justify-content: center;
 }
