@@ -1,7 +1,7 @@
 import React from 'react'
 import './toggle-donation-type.css';
-import useI18n from '../../hooks/useI18n';
-import { replaceTagWithComponent } from '../../helpers/interpolation';
+import useI18n from '../../../hooks/useI18n';
+import { replaceTagWithComponent } from '../../../helpers/interpolation';
 
 const getActionFormatted = (switchText, handleClick) => {
     const comp = 'span';
