@@ -11,7 +11,7 @@ export const replaceKeys = (keysToReplace, text) => {
     const pattern = /{{(\w*)}}/g;
     console.log(keysToReplace);
     return text.replace(pattern, (_, key)=> {
-        return keysToReplace[key] ? keysToReplace[key] : key
+        return keysToReplace[key] ? keysToReplace[key] : ''
     });
 }
 

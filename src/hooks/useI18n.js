@@ -1,5 +1,5 @@
 const { useContext } = require("react")
-const { default: OptionsContext } = require("../EveryMonth/optionsContext")
+const { default: OptionsContext } = require("../contexts/optionsContext")
 
 const defaultI18n = 'en';
 
