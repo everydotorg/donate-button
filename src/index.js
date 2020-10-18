@@ -25,7 +25,7 @@ const everyMonthOptions = {
           text: 'on <link>every.org</link>',
           link: 'https://every.org',
         },
-        header: 'Support the Fungi',
+        header: 'Support the Fungi!',
         info: 'Monthy gifts help us focus on our mission and long-term impact.',
         levels: [
           {
@@ -69,6 +69,58 @@ const everyMonthOptions = {
         description: 'We explore wild places of earth to document Fungi for conservation, habitat protection & livelihoods of those who depend on them',
         button: 'Donate {{amount}}',
         switch: 'Or make a <action>Monthly donation</action>'
+      }
+    },
+    es: {
+      monthly: {
+        logo: {
+          header: 'Donación mensual',
+          text: 'en <link>every.org</link>',
+          link: 'https://every.org',
+        },
+        header: '¡Apoya los hongos!',
+        info: 'Las ayudas mensuales nos permiten centrarnos en nuestra misión y en el impacto a largo plazo',
+        levels: [
+          {
+            amount: '25',
+            name: 'Miembro hongo',
+            description1: 'Como <bold>Miembro Hongo:</bold> Nos ayudarás a seguir enseñando e inspirando a miles de personas sobre el fantástico mundo de los hongos.',
+            description2: 'Exploramos lugares salvajes de la tierra para documentar los hongos para su conservación, la protección de su hábitat y las formas de vida de las personas que dependen de ellos.'
+          },
+          {
+            amount: '50',
+            name: 'Amante Fungi',
+            description1: 'As a <bold>Fungi Lover:</bold> You will help us explore and document hundreds of species of fungi in some of the oldest Patagonian Temperate Rainforests.',
+            description2: 'Exploramos lugares salvajes de la tierra para documentar los hongos para su conservación, la protección de su hábitat y las formas de vida de las personas que dependen de ellos.'
+          },
+            {
+            amount: '100',
+            name: 'Expansor del micelio',
+            description1: 'Como <bold>Expansor/a del Micelio:</bold> Nos ayudarás a desarrollar el primer mapa dinámico de los usos ancestrales conocidos de los hongos.',
+            description2: 'Exploramos lugares salvajes de la tierra para documentar los hongos para su conservación, la protección de su hábitat y las formas de vida de las personas que dependen de ellos.'
+          },
+        ],
+        custom: {
+          label: 'Personalizado',
+          placeholder: 'Ingrese el monto',
+        },
+        button: 'Donar {{amount}} cada mes',
+        switch: 'O haga una <action>Donación única</action>'
+      },
+      oneTime: {
+        logo: {
+          header: 'Donación única',
+          text: 'en <link>every.org</link>',
+          link: 'https://every.org',
+        },
+        header: '¡Tu aporte hace la diferencia!',
+        info: '¡Gracias por apoyar la misión de la fundación!',
+        custom: {
+          placeholder: 'Introduzca la cantidad deseada'
+        },
+        description: 'Exploramos lugares salvajes de la tierra para documentar los hongos para su conservación, la protección de su hábitat y las formas de vida de las personas que dependen de ellos.',
+        button: 'Donar {{amount}}',
+        switch: 'O haga una <action>Donación mensual</action>'
       }
     }
   }

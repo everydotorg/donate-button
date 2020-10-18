@@ -6,7 +6,6 @@
     align-items: center;
     justify-content: center;
     padding: 2.5rem;
-    border-bottom-right-radius: 1.5rem;
 }
 
 .description > *:not(:last-child) {

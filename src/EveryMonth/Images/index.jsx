@@ -18,10 +18,10 @@ const Images = () => {
     const options = useContext(OptionsContext);
     const {donationAmount, monthlyDonation} = useContext(DonationsContext);
 
+    <img className="images__img" src={getImage(donationAmount, monthlyDonation, options)} alt="Fungi"/>
 
     return (
-        <div className='images'>
-            <img className="images__img" src={getImage(donationAmount, monthlyDonation, options)} alt="Fungi"/>
+        <div className='images' style={{backgroundImage: `url(${getImage(donationAmount, monthlyDonation, options)})`}}>
             <Company />
         </div>
     )

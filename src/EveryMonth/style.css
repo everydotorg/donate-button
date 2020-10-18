@@ -69,11 +69,12 @@
   height: 773px;
   background: white;
   border-radius: 1.5rem;
+  overflow: hidden;
 
   display: grid;
 
   grid-template-columns: repeat(2, 50%);
-  grid-template-rows: 69% 1fr;
+  grid-template-rows: 1fr max-content;
 
   box-sizing: border-box;
   font-family: "Basis Grotesque Pro";

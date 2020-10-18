@@ -1,6 +1,7 @@
 .images {
     grid-row: 1 / 2;
     position: relative;
+    background-size: cover;
 }
 
 .images__img {
@@ -8,5 +9,4 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    border-top-right-radius: 1.5rem;
 }
