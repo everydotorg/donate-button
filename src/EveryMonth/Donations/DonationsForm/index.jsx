@@ -17,7 +17,6 @@ const getButtonTextFormatted = (amount, text) => {
 
 const DonationsForm = ({monthlyDonation}) => {
     const {donationAmount, setDonationAmount, customDonation, setCustomDonation} = useContext(DonationsContext)
-    const [customAmount, setCustomAmount] = useState('');
 
     const { monthly, oneTime } = useContext(OptionsContext);
     const lang = useI18n();
@@ -46,7 +45,7 @@ const DonationsForm = ({monthlyDonation}) => {
           <RadioButton 
               key={i}
               name="amount"
-              text={formText.levels[i]}
+              text={formText.levels.find(level  => level.amount === option.amount)?.name}
               amount={option.amount}
               selected={donationAmount === option.amount}
               handleClick={() => handleRadioButtonClick(option.amount)} 

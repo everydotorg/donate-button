@@ -5,15 +5,16 @@ import * as serviceWorker from './serviceWorker'
 const everyMonthOptions = {
   monthly: {
     levels: [
-      { label: 'Sponge Supporter', amount: '25' },
-      { label: 'Friend of the reef', amount: '50' },
-      { label: 'Coral Champion', amount: '100' },
+      { amount: '25', bgColor: '#BCD9DD' },
+      { amount: '50', bgColor: '#F4BF86' },
+      { amount: '100', bgColor: '#A0CBFE' },
     ],
-    allowCustom: true
+    allowCustom: true,
   },
   oneTime: {
     levels: [5, 10, 20, 50, 100, 200],
-    allowCustom: true
+    allowCustom: true,
+    bgColor: '#BCD9DD'
   },
   i18n: {
     en: {
@@ -26,13 +27,28 @@ const everyMonthOptions = {
         header: 'Support the Fungi',
         info: 'Monthy gifts help us focus on our mission and long-term impact.',
         levels: [
-          'Mushroom Member',
-          'Fungi Lover',
-          'Mycelium Expander'
+          {
+            amount: '25',
+            name: 'Mushroom Member',
+            description1: 'As a <bold>Mushroom Member:</bold> You will help us continue to teach and inspire thousands of people about the fantastic world of Fungi.',
+            description2: 'We explore wild places of earth to document Fungi for conservation, habitat protection & livelihoods of those who depend on them'
+          },
+          {
+            amount: '50',
+            name: 'Fungi Lover',
+            description1: 'As a <bold>Fungi Lover:</bold> You will help us explore and document hundreds of species of fungi in some of the oldest Patagonian Temperate Rainforests.',
+            description2: 'We explore wild places of earth to document Fungi for conservation, habitat protection & livelihoods of those who depend on them'
+          },
+            {
+            amount: '100',
+            name: 'Mycelium Expander',
+            description1: 'As a <bold>Mycelium Expander:</bold> you will help us develop the first dynamic map of known ancestral uses of fungi.',
+            description2: 'We explore wild places of earth to document Fungi for conservation, habitat protection & livelihoods of those who depend on them'
+          },
         ],
         custom: {
           label: 'Custom',
-          placeholder: 'Enter amount'
+          placeholder: 'Enter amount',
         },
         button: 'Donate {{amount}} every month',
         switch: 'Or make a <action>One Time Donation</action>'
@@ -49,6 +65,7 @@ const everyMonthOptions = {
         custom: {
           placeholder: 'Enter custom amount'
         },
+        description: 'We explore wild places of earth to document Fungi for conservation, habitat protection & livelihoods of those who depend on them',
         button: 'Donate {{amount}}',
         switch: 'Or make a <action>Monthly donation</action>'
       }

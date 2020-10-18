@@ -1,13 +1,11 @@
 .description {
-    --description-bg-color: #ffffff;
-
     grid-row: 2 / 3;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 2.5rem;
-    background-color: var(--description-bg-color);
 }
 
 .description > *:not(:last-child) {

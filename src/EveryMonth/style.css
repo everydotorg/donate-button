@@ -73,13 +73,14 @@
   display: grid;
 
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 70% 1fr;
+  grid-template-rows: 1fr max-content;
 
   box-sizing: border-box;
   font-family: "Basis Grotesque Pro";
   font-weight: normal;
   font-size: 1rem;
   line-height: 1.2;
+  transition: all 0.2s;
 }
 
 .images {
