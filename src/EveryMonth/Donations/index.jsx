@@ -5,12 +5,22 @@ import RadioButton from '../RadioButton';
 import Input from '../Input';
 import Button from '../Button';
 import OptionsContext from '../optionsContext';
+import useI18n from '../../hooks/useI18n';
+import { replaceKeys } from '../../helpers/interpolation';
+
+const getButtonTextFormatted = (amount, text) => {
+  return replaceKeys({amount}, text);
+}
 
 const Donations = ({monthlyDonation}) => {
     const [selectedOption, setSelectedOption] = useState('25');
     const [customAmount, setCustomAmount] = useState('');
 
     const { monthly, oneTime } = useContext(OptionsContext);
+    const lang = useI18n();
+    const formText = monthlyDonation ? lang.monthly : lang.oneTime;
+
+  
     const formClasses = ["donations__form"]
       .concat([monthlyDonation ? "donations__form--monthly" : "donations__form--one-time"])
 
@@ -19,17 +29,19 @@ const Donations = ({monthlyDonation}) => {
         <div className={formClasses.join(' ')}>
           {monthlyDonation &&
           <>
-          {monthly?.levels?.map((option) => (
+          {monthly?.levels?.map((option, i) => (
           <RadioButton 
-              key={option.amount}
+              key={i}
               name="amount"
-              text={option.label}
+              text={formText.levels[i]}
               amount={option.amount}
               selected={selectedOption === option.amount}
               handleClick={() => setSelectedOption(option.amount)} 
             />
             ))}
             {monthly.allowCustom && <Input 
+              label={formText.custom.label}
+              placeholder={formText.custom.placeholder}
               value={customAmount}
               setValue={setCustomAmount}
             />}
@@ -48,6 +60,7 @@ const Donations = ({monthlyDonation}) => {
             />
             ))}
             {oneTime.allowCustom && <Input 
+              placeholder={formText.custom.placeholder}
               value={customAmount}
               setValue={setCustomAmount}
               extraClasses={["donations__input--one-time"]}
@@ -57,7 +70,7 @@ const Donations = ({monthlyDonation}) => {
             
         </div>
         <div className="donations__submit">
-          <Button>Donate every month</Button>
+          <Button>{getButtonTextFormatted(selectedOption, formText.button)}</Button>
           <p className="t-body--small">
             Great Barrier Reef Legacy uses our trusted partner Every.org, to power donation processing. 
             You will be directed to Every.org to complete your donation.

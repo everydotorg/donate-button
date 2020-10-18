@@ -18,26 +18,39 @@ const everyMonthOptions = {
   i18n: {
     en: {
       monthly: {
-        header: 'Support the Fungi',
-        info: 'Monthly donations help...',
-        levels: {
-          level1: 'Mushroom Meber'
+        logo: {
+          header: 'Monthly donation',
+          text: 'on <link>every.org</link>',
+          link: 'https://every.org',
         },
+        header: 'Support the Fungi',
+        info: 'Monthy gifts help us focus on our mission and long-term impact.',
+        levels: [
+          'Mushroom Member',
+          'Fungi Lover',
+          'Mycelium Expander'
+        ],
         custom: {
           label: 'Custom',
           placeholder: 'Enter amount'
         },
-        button: 'Donate {{amount, currency}}',
-        switch: 'Or make a <1>Monthly donation</1>'
+        button: 'Donate ${{amount}} every month',
+        switch: 'Or make a <action>One Time Donation</action>'
       },
       oneTime: {
-        header: 'Every dollar helps!',
-        info: 'Message here',
+        logo: {
+          header: 'One time donation',
+          text: 'on <link>every.org</link>',
+          link: 'https://every.org',
+        },
+        name: 'One time donation',
+        header: 'Your support makes a difference!',
+        info: 'Thank you for supporting the mission of the foundation!',
         custom: {
           placeholder: 'Enter custom amount'
         },
-        button: 'Donate {{amount, currency}}',
-        switch: 'Or make a <1>One time donation</1>'
+        button: 'Donate ${{amount}}',
+        switch: 'Or make a <action>Monthly donation</action>'
       }
     }
   }
