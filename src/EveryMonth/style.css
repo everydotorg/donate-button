@@ -72,8 +72,8 @@
 
   display: grid;
 
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr max-content;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: 69% 1fr;
 
   box-sizing: border-box;
   font-family: "Basis Grotesque Pro";
@@ -81,12 +81,6 @@
   font-size: 1rem;
   line-height: 1.2;
   transition: all 0.2s;
-}
-
-.images {
-  background: greenyellow;
-
-  grid-row: 1 / 2;
 }
 
 /* 

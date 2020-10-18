@@ -5,6 +5,7 @@ import DonationsContext from '../../contexts/donationsContext';
 import useI18n from '../../hooks/useI18n';
 import OptionsContext from '../../contexts/optionsContext';
 import { replaceTagWithComponent } from '../../helpers/interpolation';
+import { getCustomDonationLevel } from '../../helpers/donation-level';
 
 const getBoldFormatted = (text, link) => {
     const comp = 'strong';
@@ -12,18 +13,6 @@ const getBoldFormatted = (text, link) => {
     const tag = 'bold';
 
     return replaceTagWithComponent(text, tag, comp, props);
-}
-
-
-const getCustomDonationLevel = (monthlyLevels, donationAmount) => {
-    console.log(donationAmount);
-    return monthlyLevels.reduce((level, currentlevel) => {
-        if(parseInt(currentlevel.amount,10) <= parseInt(donationAmount, 10)){
-            return currentlevel;
-        }
-
-        return level
-    })
 }
 
 const getDescriptionText = (lang, monthlyDonation, donationAmount) => {
@@ -43,23 +32,19 @@ const getDescriptionText = (lang, monthlyDonation, donationAmount) => {
 
 const Description = () => {
     const descrRef = useRef(null);
-    const {donationAmount, customDonation, monthlyDonation} = useContext(DonationsContext);
+    const {donationAmount, monthlyDonation} = useContext(DonationsContext);
     const options = useContext(OptionsContext);
     const lang = useI18n();
 
     useLayoutEffect(() => {
         if(descrRef.current){
             if(monthlyDonation) {
-                if(customDonation) {
-                    descrRef.current.style.background = getCustomDonationLevel(options.monthly.levels, donationAmount).bgColor;
-                } else {
-                    descrRef.current.style.background = options.monthly.levels.find(level => level.amount === donationAmount)?.bgColor;
-                }
+                descrRef.current.style.background = getCustomDonationLevel(options.monthly.levels, donationAmount).bgColor;
             } else {
                 descrRef.current.style.background = options.oneTime.bgColor;
             }
         }
-    }, [donationAmount, customDonation, monthlyDonation, options]);
+    }, [donationAmount, monthlyDonation, options]);
 
 
     console.log(descrRef.current);

@@ -5,16 +5,17 @@ import * as serviceWorker from './serviceWorker'
 const everyMonthOptions = {
   monthly: {
     levels: [
-      { amount: '25', bgColor: '#BCD9DD' },
-      { amount: '50', bgColor: '#F4BF86' },
-      { amount: '100', bgColor: '#A0CBFE' },
+      { amount: '25', bgColor: '#BCD9DD', img: "https://images.unsplash.com/photo-1454425064867-5ba516caf601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" },
+      { amount: '50', bgColor: '#F4BF86', img:  "https://images.unsplash.com/photo-1558241048-9cd68a14f4ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"},
+      { amount: '100', bgColor: '#A0CBFE', img:  "https://images.unsplash.com/photo-1567346325130-4c4167641eb9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"},
     ],
     allowCustom: true,
   },
   oneTime: {
     levels: [5, 10, 20, 50, 100, 200],
     allowCustom: true,
-    bgColor: '#BCD9DD'
+    bgColor: '#BCD9DD',
+    img: 'https://images.unsplash.com/photo-1543904856-8257e34283d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80'
   },
   i18n: {
     en: {

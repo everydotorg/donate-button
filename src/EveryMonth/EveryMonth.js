@@ -5,6 +5,7 @@ import Donations from './Donations';
 import OptionsContext from '../contexts/optionsContext';
 import Description from './Description';
 import DonationsContext from '../contexts/donationsContext';
+import Images from './Images';
 
 function EveryMonth({ options, hide }) {
   const hideOnWrapperClick = e => e.target === e.currentTarget && hide()
@@ -30,8 +31,8 @@ function EveryMonth({ options, hide }) {
             monthlyDonation={monthlyDonation}
             setMonthlyDonation={setMonthlyDonation}
           />
-          <div className="images"></div>
-          <Description monthlyDonation={monthlyDonation} />
+          <Images />
+          <Description />
         </div>
       </DonationsContext.Provider>
       </OptionsContext.Provider>
