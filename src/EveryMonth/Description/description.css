@@ -8,6 +8,12 @@
     padding: 2.5rem;
 }
 
+@media only screen and (max-width: 56.25em) {
+    .description {
+        padding: 1.5rem;
+    }
+}
+
 .description > *:not(:last-child) {
     margin-bottom: 1rem;
 }

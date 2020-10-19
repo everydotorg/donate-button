@@ -19,6 +19,11 @@ const everyMonthOptions = {
   },
   i18n: {
     en: {
+      company: {
+        logo: '',
+        name: 'Fungi Foundation',
+        location: 'Santiago, Chile',
+      },
       monthly: {
         logo: {
           header: 'Monthly donation',
@@ -72,6 +77,11 @@ const everyMonthOptions = {
       }
     },
     es: {
+      company: {
+        logo: '',
+        name: 'Fundación Fungi',
+        location: 'Santiago, Chile',
+      },
       monthly: {
         logo: {
           header: 'Donación mensual',

@@ -8,6 +8,13 @@
     row-gap: 2rem;
 }
 
+@media only screen and (max-width: 56.25em) {
+    .donations {
+        row-gap: 1rem;
+        padding: 1rem 1.625rem;
+    }
+}
+
 .donations__header *:not(:last-child) {
     margin-bottom: 0.5rem;
 }

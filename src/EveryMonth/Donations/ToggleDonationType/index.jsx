@@ -16,7 +16,7 @@ const ToggleDonationType = ({handleClick, monthlyDonation}) => {
     const formText = monthlyDonation ? lang.monthly : lang.oneTime;
 
     return (
-        <p className="donation-type">{getActionFormatted(formText.switch, handleClick)}</p>
+        <p className="t-title donation-type">{getActionFormatted(formText.switch, handleClick)}</p>
     )
 }
 

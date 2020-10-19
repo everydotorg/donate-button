@@ -33,7 +33,7 @@
 * Typography
 */
 
-.t-headline-primary {
+.t-heading-primary {
   font-size: 2rem;
   line-height: 1.25;
   font-weight: 700;
@@ -60,6 +60,21 @@
   opacity: 0.6;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .t-heading-primary {
+    font-size: 1.5rem;
+  }
+
+  .t-heading-secondary,
+  .t-title {
+    font-size: 0.75rem;
+  }
+
+  .t-body--small {
+    font-size: 0.5rem;
+  }
+}
+
 /* 
 * Components
 */
@@ -79,9 +94,15 @@
   box-sizing: border-box;
   font-family: "Basis Grotesque Pro";
   font-weight: normal;
-  font-size: 1rem;
   line-height: 1.2;
   transition: all 0.2s;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .widget {
+    width: 600px;
+    height: 625px;
+  }
 }
 
 /* 
