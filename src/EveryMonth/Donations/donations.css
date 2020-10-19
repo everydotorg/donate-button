@@ -1,0 +1,36 @@
+.donations {
+    grid-column: 1 / 2;
+    grid-row: 1 / -1;
+    padding: 1.875rem 2.5rem;
+
+    display: grid;
+    grid-template-rows: repeat(5, max-content);
+    row-gap: 2rem;
+}
+
+.donations__header *:not(:last-child) {
+    margin-bottom: 0.5rem;
+}
+
+.donations__form--monthly > *:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.donations__form--one-time {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.donations__input--one-time {
+    grid-column: 1 / -1;
+}
+
+.donations__submit {
+    display: flex;
+    flex-direction: column;
+}
+
+.donations__submit > *:not(:last-child) {
+    margin-bottom: 1rem;
+}

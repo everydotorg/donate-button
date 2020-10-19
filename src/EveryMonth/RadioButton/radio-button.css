@@ -1,0 +1,21 @@
+.radio-button {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.radio-button--selected {
+    border-color: #000000;
+}
+
+.radio-button__input {
+    display: none;
+}
+
+.radio-button__label {
+    padding: 1rem;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+}

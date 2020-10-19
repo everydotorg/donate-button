@@ -4,7 +4,11 @@ import * as serviceWorker from './serviceWorker'
 // This code would normally be in the host webpage
 const everyMonthOptions = {
   monthly: {
-    levels: [{ name: 'level1', amount: '25' }],
+    levels: [
+      { label: 'Sponge Supporter', amount: '25' },
+      { label: 'Friend of the reef', amount: '50' },
+      { label: 'Coral Champion', amount: '100' },
+    ],
     allowCustom: true
   },
   oneTime: {

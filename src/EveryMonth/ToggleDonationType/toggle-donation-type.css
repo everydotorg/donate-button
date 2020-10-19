@@ -1,0 +1,12 @@
+.donation-type {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.donation-type span {
+    color: #00a37f;
+    text-decoration: underline;
+    cursor: pointer;
+}
