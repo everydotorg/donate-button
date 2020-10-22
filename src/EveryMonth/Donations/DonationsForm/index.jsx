@@ -6,6 +6,7 @@ import Button from '../../Button';
 import OptionsContext from '../../../contexts/optionsContext';
 import useI18n from '../../../hooks/useI18n';
 import { replaceKeys } from '../../../helpers/interpolation';
+import isFunction from '../../../helpers/is-function';
 import DonationsContext from '../../../contexts/donationsContext';
 
 const getButtonTextFormatted = (amount, text) => {
@@ -15,10 +16,19 @@ const getButtonTextFormatted = (amount, text) => {
   return replaceKeys({amount: ''}, text);
 }
 
+const constructEveryUrl = (company, frequency, amount, extras) => {
+  const baseUrl = `https://www.every.org/${company}/donate?frequency=${frequency}&amount=${amount}`
+  const extraParams = Object.keys(extras).reduce((prev, key) => {
+    return prev.concat(`&${key}=${extras[key]}`)
+  }, '');
+
+  return `${baseUrl}${extraParams}`;
+}
+
 const DonationsForm = ({monthlyDonation}) => {
     const {donationAmount, setDonationAmount, customDonation, setCustomDonation} = useContext(DonationsContext)
 
-    const { monthly, oneTime } = useContext(OptionsContext);
+    const { monthly, oneTime, onSubmit } = useContext(OptionsContext);
     const lang = useI18n();
     const formText = monthlyDonation ? lang.monthly : lang.oneTime;
 
@@ -31,6 +41,19 @@ const DonationsForm = ({monthlyDonation}) => {
     const handleInputChange = (value) => {
       setDonationAmount(value);
       setCustomDonation(value);
+    }
+
+    const handleDonateButton = () => {
+      if(!isNaN(donationAmount)){
+        const frequency = monthlyDonation ? 'MONTHLY' : 'ONCE';
+
+        if(isFunction(onSubmit)) {
+          onSubmit({amount: donationAmount, frequency })
+        } else {
+          const url = constructEveryUrl(onSubmit.charity, frequency, donationAmount, onSubmit.params);
+          window.location.href = url;
+        }
+      }
     }
 
     const formClasses = ["donations__form"]
@@ -82,7 +105,7 @@ const DonationsForm = ({monthlyDonation}) => {
             
         </div>
         <div className="donations__submit">
-          <Button>{getButtonTextFormatted(donationAmount, formText.button)}</Button>
+          <Button handleClick={handleDonateButton}>{getButtonTextFormatted(donationAmount, formText.button)}</Button>
           <p className="t-body--small">
             Great Barrier Reef Legacy uses our trusted partner Every.org, to power donation processing. 
             You will be directed to Every.org to complete your donation.
