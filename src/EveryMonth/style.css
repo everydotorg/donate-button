@@ -80,16 +80,9 @@
 */
 
 .widget {
-  width: 888px;
-  height: 773px;
   background: white;
   border-radius: 1.5rem;
   overflow: hidden;
-
-  display: grid;
-
-  grid-template-columns: repeat(2, 50%);
-  grid-template-rows: 1fr max-content;
 
   box-sizing: border-box;
   font-family: "Basis Grotesque Pro";
@@ -98,10 +91,27 @@
   transition: all 0.2s;
 }
 
+.widget--split {
+  width: 888px;
+  height: 773px;
+  display: grid;
+
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: 1fr max-content;
+}
+
+.widget--single {
+  width: 444px;
+}
+
 @media only screen and (max-width: 56.25em) {
-  .widget {
+  .widget--split {
     width: 600px;
     height: 625px;
+  }
+
+  .widget--single {
+    width: 300px;
   }
 }
 

@@ -6,6 +6,7 @@ import OptionsContext from '../contexts/optionsContext';
 import Description from './Description';
 import DonationsContext from '../contexts/donationsContext';
 import Images from './Images';
+import WIDGET_MODE from '../constants/widgetMode';
 
 function EveryMonth({ options, hide }) {
   const hideOnWrapperClick = e => e.target === e.currentTarget && hide()
@@ -26,14 +27,25 @@ function EveryMonth({ options, hide }) {
             setCustomDonation
           }}
         >
-        <div className="widget">
-          <Donations 
-            monthlyDonation={monthlyDonation}
-            setMonthlyDonation={setMonthlyDonation}
-          />
-          <Images />
-          <Description />
-        </div>
+          {options.mode === WIDGET_MODE.SPLIT_PANEL && 
+            <div className="widget widget--split">        
+              <Donations 
+                monthlyDonation={monthlyDonation}
+                setMonthlyDonation={setMonthlyDonation}
+              />
+              <Images />
+              <Description />   
+            </div>
+          }
+          { options.mode === WIDGET_MODE.SINGLE &&
+              <div className="widget widget--single">        
+              <Donations 
+                monthlyDonation={monthlyDonation}
+                setMonthlyDonation={setMonthlyDonation}
+              />
+            </div>
+          }
+
       </DonationsContext.Provider>
       </OptionsContext.Provider>
     </div>
