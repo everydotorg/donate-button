@@ -4,12 +4,23 @@
     padding: 1.875rem 2.5rem;
 
     display: grid;
-    grid-template-rows: repeat(5, max-content);
+    grid-template-rows: repeat(2, max-content) 1fr repeat(2, max-content);
     row-gap: 2rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .donations {
+        row-gap: 1rem;
+        padding: 1rem 1.625rem;
+    }
 }
 
 .donations__header *:not(:last-child) {
     margin-bottom: 0.5rem;
+}
+
+.donations__form {
+    align-self: center;
 }
 
 .donations__form--monthly > *:not(:last-child) {

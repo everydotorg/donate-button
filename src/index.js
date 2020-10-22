@@ -5,39 +5,132 @@ import * as serviceWorker from './serviceWorker'
 const everyMonthOptions = {
   monthly: {
     levels: [
-      { label: 'Sponge Supporter', amount: '25' },
-      { label: 'Friend of the reef', amount: '50' },
-      { label: 'Coral Champion', amount: '100' },
+      { amount: '25', bgColor: '#BCD9DD', img: "https://images.unsplash.com/photo-1454425064867-5ba516caf601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" },
+      { amount: '50', bgColor: '#F4BF86', img:  "https://images.unsplash.com/photo-1558241048-9cd68a14f4ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"},
+      { amount: '100', bgColor: '#A0CBFE', img:  "https://images.unsplash.com/photo-1567346325130-4c4167641eb9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"},
     ],
-    allowCustom: true
+    allowCustom: true,
   },
   oneTime: {
     levels: [5, 10, 20, 50, 100, 200],
-    allowCustom: true
+    allowCustom: true,
+    bgColor: '#BCD9DD',
+    img: 'https://images.unsplash.com/photo-1543904856-8257e34283d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80'
   },
   i18n: {
     en: {
+      company: {
+        logo: '',
+        name: 'Fungi Foundation',
+        location: 'Santiago, Chile',
+      },
       monthly: {
-        header: 'Support the Fungi',
-        info: 'Monthly donations help...',
-        levels: {
-          level1: 'Mushroom Meber'
+        logo: {
+          header: 'Monthly donation',
+          text: 'on <link>every.org</link>',
+          link: 'https://every.org',
         },
+        header: 'Support the Fungi!',
+        info: 'Monthy gifts help us focus on our mission and long-term impact.',
+        levels: [
+          {
+            amount: '25',
+            name: 'Mushroom Member',
+            description1: 'As a <bold>Mushroom Member:</bold> You will help us continue to teach and inspire thousands of people about the fantastic world of Fungi.',
+            description2: 'We explore wild places of earth to document Fungi for conservation, habitat protection & livelihoods of those who depend on them'
+          },
+          {
+            amount: '50',
+            name: 'Fungi Lover',
+            description1: 'As a <bold>Fungi Lover:</bold> You will help us explore and document hundreds of species of fungi in some of the oldest Patagonian Temperate Rainforests.',
+            description2: 'We explore wild places of earth to document Fungi for conservation, habitat protection & livelihoods of those who depend on them'
+          },
+            {
+            amount: '100',
+            name: 'Mycelium Expander',
+            description1: 'As a <bold>Mycelium Expander:</bold> you will help us develop the first dynamic map of known ancestral uses of fungi.',
+            description2: 'We explore wild places of earth to document Fungi for conservation, habitat protection & livelihoods of those who depend on them'
+          },
+        ],
         custom: {
           label: 'Custom',
-          placeholder: 'Enter amount'
+          placeholder: 'Enter amount',
         },
-        button: 'Donate {{amount, currency}}',
-        switch: 'Or make a <1>Monthly donation</1>'
+        button: 'Donate {{amount}} every month',
+        switch: 'Or make a <action>One Time Donation</action>'
       },
       oneTime: {
-        header: 'Every dollar helps!',
-        info: 'Message here',
+        logo: {
+          header: 'One time donation',
+          text: 'on <link>every.org</link>',
+          link: 'https://every.org',
+        },
+        name: 'One time donation',
+        header: 'Your support makes a difference!',
+        info: 'Thank you for supporting the mission of the foundation!',
         custom: {
           placeholder: 'Enter custom amount'
         },
-        button: 'Donate {{amount, currency}}',
-        switch: 'Or make a <1>One time donation</1>'
+        description: 'We explore wild places of earth to document Fungi for conservation, habitat protection & livelihoods of those who depend on them',
+        button: 'Donate {{amount}}',
+        switch: 'Or make a <action>Monthly donation</action>'
+      }
+    },
+    es: {
+      company: {
+        logo: '',
+        name: 'Fundación Fungi',
+        location: 'Santiago, Chile',
+      },
+      monthly: {
+        logo: {
+          header: 'Donación mensual',
+          text: 'en <link>every.org</link>',
+          link: 'https://every.org',
+        },
+        header: '¡Apoya los hongos!',
+        info: 'Las ayudas mensuales nos permiten centrarnos en nuestra misión y en el impacto a largo plazo',
+        levels: [
+          {
+            amount: '25',
+            name: 'Miembro hongo',
+            description1: 'Como <bold>Miembro Hongo:</bold> Nos ayudarás a seguir enseñando e inspirando a miles de personas sobre el fantástico mundo de los hongos.',
+            description2: 'Exploramos lugares salvajes de la tierra para documentar los hongos para su conservación, la protección de su hábitat y las formas de vida de las personas que dependen de ellos.'
+          },
+          {
+            amount: '50',
+            name: 'Amante Fungi',
+            description1: 'As a <bold>Fungi Lover:</bold> You will help us explore and document hundreds of species of fungi in some of the oldest Patagonian Temperate Rainforests.',
+            description2: 'Exploramos lugares salvajes de la tierra para documentar los hongos para su conservación, la protección de su hábitat y las formas de vida de las personas que dependen de ellos.'
+          },
+            {
+            amount: '100',
+            name: 'Expansor del micelio',
+            description1: 'Como <bold>Expansor/a del Micelio:</bold> Nos ayudarás a desarrollar el primer mapa dinámico de los usos ancestrales conocidos de los hongos.',
+            description2: 'Exploramos lugares salvajes de la tierra para documentar los hongos para su conservación, la protección de su hábitat y las formas de vida de las personas que dependen de ellos.'
+          },
+        ],
+        custom: {
+          label: 'Personalizado',
+          placeholder: 'Ingrese el monto',
+        },
+        button: 'Donar {{amount}} cada mes',
+        switch: 'O haga una <action>Donación única</action>'
+      },
+      oneTime: {
+        logo: {
+          header: 'Donación única',
+          text: 'en <link>every.org</link>',
+          link: 'https://every.org',
+        },
+        header: '¡Tu aporte hace la diferencia!',
+        info: '¡Gracias por apoyar la misión de la fundación!',
+        custom: {
+          placeholder: 'Introduzca la cantidad deseada'
+        },
+        description: 'Exploramos lugares salvajes de la tierra para documentar los hongos para su conservación, la protección de su hábitat y las formas de vida de las personas que dependen de ellos.',
+        button: 'Donar {{amount}}',
+        switch: 'O haga una <action>Donación mensual</action>'
       }
     }
   }
