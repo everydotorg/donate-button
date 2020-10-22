@@ -13,10 +13,10 @@ const getLinkFormatted = (logoText, link) => {
     return replaceTagWithComponent(logoText, tag, comp, props);
 }
 
-const Logo = ({monthlyDuration = true}) => {
+const Logo = ({monthlyDonation = true}) => {
     const lang = useI18n();
-    const logoText = monthlyDuration ? lang.monthly.logo : lang.oneTime.logo;
-    
+    const logoText = monthlyDonation ? lang.monthly.logo : lang.oneTime.logo;
+
     const logoTextFormatted = getLinkFormatted(logoText.text, logoText.link);
     
     return (
