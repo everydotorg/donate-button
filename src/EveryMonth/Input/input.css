@@ -43,13 +43,31 @@
     border: none;
     font-family: inherit;
     border-bottom: 1px solid transparent;
+    background-color: #f3f6f6;
 
     width: 100%;
     padding: 1rem 4.5rem 1rem 3rem;
     outline: none;
-    background-color: #f3f6f6;
 
     transition: all 0.4s;
+}
+
+.input__input::placeholder {
+    opacity: 0.4;
+}
+
+.input--filled .input__input,
+.input__input:focus {
+    background: #fff;
+}
+
+.input--filled {
+    border: 1px solid rgba(0, 0, 0);
+    background: #fff;
+}
+
+.no-line-height {
+    line-height: 1;
 }
 
 .input__prefix {
