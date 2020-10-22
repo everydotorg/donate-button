@@ -17,6 +17,14 @@ const everyMonthOptions = {
     bgColor: '#BCD9DD',
     img: 'https://images.unsplash.com/photo-1543904856-8257e34283d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80'
   },
+  onSubmit: {
+    charity: 'ffungi',
+    params: {
+      share_info: 1,
+    }
+  },
+  // Both ways supported
+  // onSubmit: ({amount, frequency}) => { console.log(amount, frequency)},
   i18n: {
     en: {
       company: {
