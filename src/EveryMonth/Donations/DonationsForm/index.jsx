@@ -26,7 +26,7 @@ const constructEveryUrl = (company, frequency, amount, extras) => {
 }
 
 const DonationsForm = ({monthlyDonation}) => {
-    const {donationAmount, setDonationAmount, customDonation, setCustomDonation} = useContext(DonationsContext)
+    const {donationAmount, setDonationAmount, setDonationAmountWithAnimation, customDonation, setCustomDonation} = useContext(DonationsContext)
 
     const { monthly, oneTime, onSubmit } = useContext(OptionsContext);
     const lang = useI18n();
@@ -34,7 +34,7 @@ const DonationsForm = ({monthlyDonation}) => {
 
   
     const handleRadioButtonClick = (amount) => {
-      setDonationAmount(amount);
+      setDonationAmountWithAnimation(amount);
       setCustomDonation('');
     }
 

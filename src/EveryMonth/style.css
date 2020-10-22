@@ -89,7 +89,7 @@
   display: grid;
 
   grid-template-columns: repeat(2, 50%);
-  grid-template-rows: 1fr max-content;
+  /* grid-template-rows: 1fr max-content; */
 
   box-sizing: border-box;
   font-family: "Basis Grotesque Pro";
@@ -102,6 +102,43 @@
   .widget {
     width: 600px;
     height: 625px;
+  }
+}
+
+.right-panel {
+  display: grid;
+  grid-template-rows: 1fr max-content;
+}
+
+.fadeInDown {
+  animation: fadeInDown 0.4s ease-in-out;
+}
+
+@keyframes fadeInDown {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(100%);
+    opacity: 1;
+  }
+  51% {
+    opacity: 0;
+  }
+  52% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  76% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
