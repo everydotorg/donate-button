@@ -60,7 +60,7 @@
   opacity: 0.6;
 }
 
-@media only screen and (max-width: 56.25em) {
+@media only screen and (max-width: 64em) {
   .t-heading-primary {
     font-size: 1.5rem;
   }
@@ -93,21 +93,44 @@
 
 .widget--split {
   width: 888px;
-  height: 773px;
+  height: 80%;
   display: grid;
 
   grid-template-columns: repeat(2, 50%);
   grid-template-rows: 1fr max-content;
+
+  box-sizing: border-box;
+  font-family: "Basis Grotesque Pro";
+  font-weight: normal;
+  line-height: 1.2;
+  transition: all 0.2s;
 }
 
-.widget--single {
-  width: 444px;
+@media only screen and (min-height: 62.5em) {
+  .widget--split {
+    height: 888px;
+  }
 }
 
-@media only screen and (max-width: 56.25em) {
+@media only screen and (max-height: 57.5em) {
+  .widget--split {
+    height: 90%;
+  }
+
+  .widget--single {
+    width: 300px;
+  }
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .widget--split {
+    height: 60%;
+  }
+}
+
+@media only screen and (max-width: 64em) {
   .widget--split {
     width: 600px;
-    height: 625px;
   }
 
   .widget--single {

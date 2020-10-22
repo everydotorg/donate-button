@@ -8,7 +8,7 @@
     row-gap: 2rem;
 }
 
-@media only screen and (max-width: 56.25em) {
+@media only screen and (max-width: 64em) {
     .donations {
         row-gap: 1rem;
         padding: 1rem 1.625rem;

@@ -28,7 +28,7 @@
     text-transform: uppercase;
 }
 
-@media only screen and (max-width: 56.25em) {
+@media only screen and (max-width: 64em) {
     .company {
         top: 1rem;
         left: 1.5rem;
