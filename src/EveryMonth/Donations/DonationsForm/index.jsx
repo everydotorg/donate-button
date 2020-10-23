@@ -25,8 +25,12 @@ const constructEveryUrl = (company, frequency, amount, extras) => {
   return `${baseUrl}${extraParams}`;
 }
 
+const getLevelOfAmount = (levels, amount) => {
+  return levels.findIndex(l => l.amount == amount);
+}
+
 const DonationsForm = ({monthlyDonation}) => {
-    const {donationAmount, setDonationAmount, setDonationAmountWithAnimation, customDonation, setCustomDonation} = useContext(DonationsContext)
+    const {donationAmount, setDonationAmount, customDonation, setCustomDonation, setTriggerAnimation} = useContext(DonationsContext)
 
     const { monthly, oneTime, onSubmit } = useContext(OptionsContext);
     const lang = useI18n();
@@ -34,7 +38,12 @@ const DonationsForm = ({monthlyDonation}) => {
 
   
     const handleRadioButtonClick = (amount) => {
-      setDonationAmountWithAnimation(amount);
+      const prevLevel = getLevelOfAmount(monthly.levels, donationAmount);
+      const currLevel = getLevelOfAmount(monthly.levels, amount);
+      if(monthlyDonation) {
+        setTriggerAnimation([prevLevel, currLevel])
+      }
+      setDonationAmount(amount);
       setCustomDonation('');
     }
 

@@ -30,7 +30,7 @@ const getDescriptionText = (lang, monthlyDonation, donationAmount) => {
     return <p className='t-heading-secondary'>{lang.oneTime.description}</p>
 }
 
-const Description = () => {
+const Description = ({bgColor}) => {
     const descrRef = useRef(null);
     const {donationAmount, monthlyDonation} = useContext(DonationsContext);
     const options = useContext(OptionsContext);
@@ -39,12 +39,13 @@ const Description = () => {
     useLayoutEffect(() => {
         if(descrRef.current){
             if(monthlyDonation) {
-                descrRef.current.style.background = getCustomDonationLevel(options.monthly.levels, donationAmount).bgColor;
+                // descrRef.current.style.background = getCustomDonationLevel(options.monthly.levels, donationAmount).bgColor;
+                descrRef.current.style.background = bgColor;
             } else {
                 descrRef.current.style.background = options.oneTime.bgColor;
             }
         }
-    }, [donationAmount, monthlyDonation, options]);
+    }, [donationAmount, monthlyDonation, options, bgColor]);
 
 
     console.log(descrRef.current);

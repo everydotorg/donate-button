@@ -12,19 +12,71 @@ function EveryMonth({ options, hide }) {
   const [monthlyDonation, setMonthlyDonation] = useState(true);
   const [donationAmount, setDonationAmount] = useState('25');
   const [customDonation, setCustomDonation] = useState('');
-  const [rightPanelClasses, setRightPanelClasses] = useState([])
 
-  const setDonationAmountWithAnimation = (value) => {
-    setRightPanelClasses(['fadeInDown']);
+  const [triggerAnimation, setTriggerAnimation] = useState([-1, 0]);
+  const [monthlyLevels, setMonthlyLevels] = useState(options.monthly.levels);
 
-    setTimeout(() => {
-      setRightPanelClasses([])
-    }, 400) // animation duration
+  useEffect(() => {
+    // fade in down - fade out down-> [0] > [1]
+    // fade in up - fade out up-> [0] < [1]
+    const [prevValue, currValue] = triggerAnimation;
 
-    setTimeout(() => {
-      setDonationAmount(value);
-    }, 200) // 50% animation (container is hidden)
-  }
+    if(prevValue > currValue) {
+      const levelClasses = monthlyLevels.map((level, i) => {
+        if(i === prevValue) {
+          return {
+            ...level,
+            classes: ['fadeOutDown']
+          }
+        } else if (i === currValue) {
+          return {
+            ...level,
+            classes: ['fadeInDown', 'right-panel__item--active']
+          }
+        }
+        return level
+      });
+      setMonthlyLevels(levelClasses);
+    }
+
+    if(prevValue < currValue) {
+      const levelClasses = monthlyLevels.map((level, i) => {
+        if(i === prevValue) {
+          return {
+            ...level,
+            classes: ['fadeOutUp']
+          }
+        } else if (i === currValue) {
+          return {
+            ...level,
+            classes: ['fadeInUp', 'right-panel__item--active']
+          }
+        }
+        return {...level, classes: ['right-panel__item--hidden']}
+      })
+      setMonthlyLevels(levelClasses);
+    }
+
+    const timeout = setTimeout(() => {
+      const levelClasses = monthlyLevels.map((level, i) => {
+        if(i === currValue){
+          return {
+            ...level,
+            classes: ['right-panel__item--active']
+          }
+        } else {
+          return {
+            ...level,
+            classes:['right-panel__item--hidden']
+          }
+        }
+      })
+
+      setMonthlyLevels(levelClasses);
+    }, 750)
+
+    return () => clearTimeout(timeout)
+  }, [triggerAnimation])
 
   return (
     <div className="wrapper" onClick={hideOnWrapperClick}>
@@ -35,9 +87,9 @@ function EveryMonth({ options, hide }) {
             setMonthlyDonation,
             donationAmount,
             setDonationAmount,
-            setDonationAmountWithAnimation,
             customDonation,
-            setCustomDonation
+            setCustomDonation,
+            setTriggerAnimation
           }}
         >
         <div className="widget">
@@ -45,9 +97,25 @@ function EveryMonth({ options, hide }) {
             monthlyDonation={monthlyDonation}
             setMonthlyDonation={setMonthlyDonation}
           />
-          <div className={['right-panel'].concat(rightPanelClasses).join(' ')}>
-            <Images />
-            <Description />
+          <div className="right-panel">
+            {monthlyLevels.map((level, i) => {
+
+              return (
+                <div className={['right-panel__item'].concat(level.classes).join(' ')}>
+                  <Images image={level.img}/>
+                  <Description bgColor={level.bgColor} />
+                </div>
+              )
+            })}
+{/*             
+            <div className="right-panel__item fadeInDown">
+              <Images />
+              <Description />
+            </div>
+            <div className="right-panel__item fadeOutDown">
+              <Images />
+              <Description />
+            </div> */}
           </div>
         </div>
       </DonationsContext.Provider>
