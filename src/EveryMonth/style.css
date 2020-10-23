@@ -108,6 +108,8 @@
 .right-panel {
   height: 100%;
   display: grid;
+
+  position: relative;
 }
 
 .right-panel__item {

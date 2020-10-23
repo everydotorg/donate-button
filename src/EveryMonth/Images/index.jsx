@@ -23,7 +23,7 @@ const Images = ({image}) => {
 
     return (
         <div className='images' style={{backgroundImage: `url(${imageBg})`}}>
-            <Company />
+            
         </div>
     )
 }

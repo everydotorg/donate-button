@@ -6,6 +6,7 @@ import OptionsContext from '../contexts/optionsContext';
 import Description from './Description';
 import DonationsContext from '../contexts/donationsContext';
 import Images from './Images';
+import Company from './Images/Company';
 
 function EveryMonth({ options, hide }) {
   const hideOnWrapperClick = e => e.target === e.currentTarget && hide()
@@ -98,6 +99,7 @@ function EveryMonth({ options, hide }) {
             setMonthlyDonation={setMonthlyDonation}
           />
           <div className="right-panel">
+            <Company />
             {monthlyLevels.map((level, i) => {
 
               return (
