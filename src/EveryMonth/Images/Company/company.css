@@ -8,6 +8,8 @@
     grid-template-rows: repeat(2, 1fr);
     align-items: center;
     column-gap: 1rem;
+
+    z-index: 999;
 }
 
 .company__img {

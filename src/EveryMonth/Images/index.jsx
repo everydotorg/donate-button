@@ -14,15 +14,16 @@ const getImage = (donationAmount, monthlyDonation, options) =>  {
     }
 }
 
-const Images = () => {
+const Images = ({image}) => {
     const options = useContext(OptionsContext);
     const {donationAmount, monthlyDonation} = useContext(DonationsContext);
 
-    <img className="images__img" src={getImage(donationAmount, monthlyDonation, options)} alt="Fungi"/>
+    const imageBg = monthlyDonation ? image : options.oneTime.img;
+    // <img className="images__img" src={getImage(donationAmount, monthlyDonation, options)} alt="Fungi"/>
 
     return (
-        <div className='images' style={{backgroundImage: `url(${getImage(donationAmount, monthlyDonation, options)})`}}>
-            <Company />
+        <div className='images' style={{backgroundImage: `url(${imageBg})`}}>
+            
         </div>
     )
 }
