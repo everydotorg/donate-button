@@ -92,7 +92,8 @@
   /* grid-template-rows: 1fr max-content; */
 
   box-sizing: border-box;
-  font-family: "Basis Grotesque Pro";
+  font-family: "Basis Grotesque Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell,
+    "Helvetica Neue", Roboto, sans-serif;
   font-weight: normal;
   line-height: 1.2;
   transition: all 0.2s;
