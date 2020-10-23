@@ -94,9 +94,8 @@ function EveryMonth({ options, hide }) {
             setTriggerAnimation
           }}
         >
-        
           {options.mode === WIDGET_MODE.SPLIT_PANEL && 
-            <div className="widget widget--split">
+            <div className="widget widget--split">        
               <Donations 
                 monthlyDonation={monthlyDonation}
                 setMonthlyDonation={setMonthlyDonation}
