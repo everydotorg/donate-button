@@ -7,6 +7,7 @@ import Description from './Description';
 import DonationsContext from '../contexts/donationsContext';
 import Images from './Images';
 import Company from './Images/Company';
+import WIDGET_MODE from '../constants/widgetMode';
 
 function EveryMonth({ options, hide }) {
   const hideOnWrapperClick = e => e.target === e.currentTarget && hide()
@@ -93,33 +94,37 @@ function EveryMonth({ options, hide }) {
             setTriggerAnimation
           }}
         >
-        <div className="widget">
-          <Donations 
-            monthlyDonation={monthlyDonation}
-            setMonthlyDonation={setMonthlyDonation}
-          />
-          <div className="right-panel">
-            <Company />
-            {monthlyLevels.map((level, i) => {
+        
+          {options.mode === WIDGET_MODE.SPLIT_PANEL && 
+            <div className="widget widget--split">
+              <Donations 
+                monthlyDonation={monthlyDonation}
+                setMonthlyDonation={setMonthlyDonation}
+              />
+              <div className="right-panel">
+                <Company />
+                {monthlyLevels.map((level, i) => {
 
-              return (
-                <div className={['right-panel__item'].concat(level.classes).join(' ')}>
-                  <Images image={level.img}/>
-                  <Description bgColor={level.bgColor} />
-                </div>
-              )
-            })}
-{/*             
-            <div className="right-panel__item fadeInDown">
-              <Images />
-              <Description />
+                  return (
+                    <div className={['right-panel__item'].concat(level.classes).join(' ')}>
+                      <Images image={level.img}/>
+                      <Description bgColor={level.bgColor} />
+                    </div>
+                  )
+                })}
+                
+              </div>
             </div>
-            <div className="right-panel__item fadeOutDown">
-              <Images />
-              <Description />
-            </div> */}
-          </div>
-        </div>
+          }
+          { options.mode === WIDGET_MODE.SINGLE &&
+              <div className="widget widget--single">        
+              <Donations 
+                monthlyDonation={monthlyDonation}
+                setMonthlyDonation={setMonthlyDonation}
+              />
+            </div>
+          }
+
       </DonationsContext.Provider>
       </OptionsContext.Provider>
     </div>
