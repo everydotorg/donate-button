@@ -73,7 +73,7 @@ function EveryMonth({ options, hide }) {
       })
 
       setMonthlyLevels(levelClasses);
-    }, 750)
+    }, 300)
 
     return () => clearTimeout(timeout)
   }, [triggerAnimation])

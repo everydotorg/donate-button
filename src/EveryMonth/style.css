@@ -126,24 +126,20 @@
   opacity: 0;
 }
 
-.fadeInDown {
-  animation: fadeInDown 0.4s ease-in-out;
-}
-
 .fadeOutDown {
-  animation: fadeOutDown 0.75s;
+  animation: fadeOutDown 0.3s;
 }
 
 .fadeInDown {
-  animation: fadeInDown 0.75s;
+  animation: fadeInDown 0.3s;
 }
 
 .fadeOutUp {
-  animation: fadeOutUp 0.75s;
+  animation: fadeOutUp 0.3s;
 }
 
 .fadeInUp {
-  animation: fadeInUp 0.75s;
+  animation: fadeInUp 0.3s;
 }
 
 @keyframes fadeOutDown {
