@@ -9,9 +9,9 @@ import { replaceKeys } from '../../../helpers/interpolation';
 import isFunction from '../../../helpers/is-function';
 import DonationsContext from '../../../contexts/donationsContext';
 
-const getButtonTextFormatted = (amount, text) => {
+const getButtonTextFormatted = (amount, text, currency) => {
   if(amount && !isNaN(amount)){
-    return replaceKeys({amount: `$${amount}`}, text);
+    return replaceKeys({amount: `$${amount} ${currency}`}, text);
   }
   return replaceKeys({amount: ''}, text);
 }
@@ -32,7 +32,7 @@ const getLevelOfAmount = (levels, amount) => {
 const DonationsForm = ({monthlyDonation}) => {
     const {donationAmount, setDonationAmount, customDonation, setCustomDonation, setTriggerAnimation} = useContext(DonationsContext)
 
-    const { monthly, oneTime, onSubmit } = useContext(OptionsContext);
+    const { monthly, oneTime, onSubmit, currency } = useContext(OptionsContext);
     const lang = useI18n();
     const formText = monthlyDonation ? lang.monthly : lang.oneTime;
 
@@ -114,7 +114,7 @@ const DonationsForm = ({monthlyDonation}) => {
             
         </div>
         <div className="donations__submit">
-          <Button handleClick={handleDonateButton}>{getButtonTextFormatted(donationAmount, formText.button)}</Button>
+          <Button handleClick={handleDonateButton}>{getButtonTextFormatted(donationAmount, formText.button, currency)}</Button>
           <p className="t-body--small">
             {lang.footer}
           </p>
