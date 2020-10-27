@@ -9,7 +9,7 @@ import DonationsForm from './DonationsForm';
 
 const Donations = ({monthlyDonation, setMonthlyDonation}) => {
     return (
-        <div className="donations">
+      <div className="donations">
         <Logo  monthlyDonation={monthlyDonation} />
         <div className="donations__header">
           <Header  monthlyDonation={monthlyDonation} />

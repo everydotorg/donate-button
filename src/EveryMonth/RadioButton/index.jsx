@@ -1,7 +1,7 @@
 import React from 'react';
 import './radio-button.css';
 
-const RadioButton = ({name, text, amount, selected, handleClick}) => {
+const RadioButton = ({name, text, amount, selected, handleClick, description, image, bgColor}) => {
     const groupClasses = ['radio-button'];
     if(selected) {
         groupClasses.push('radio-button--selected')
@@ -18,6 +18,10 @@ const RadioButton = ({name, text, amount, selected, handleClick}) => {
                 {text && <span className="t-title radio-button__text">{text}</span>}
                 <span className="t-title radio-button__amount">${amount}</span>
             </label>
+            {description && <div style={{backgroundColor: bgColor}} className="radio-button__extra">
+                <img className="radio-button__image" src={image} alt={text} />
+                <p className="t-body--small radio-button__description">{description}</p>
+            </div>}
         </div>
     )
 }

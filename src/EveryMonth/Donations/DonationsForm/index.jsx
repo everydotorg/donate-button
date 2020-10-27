@@ -81,6 +81,9 @@ const DonationsForm = ({monthlyDonation}) => {
               amount={option.amount}
               selected={donationAmount === option.amount}
               handleClick={() => handleRadioButtonClick(option.amount)} 
+              description={formText.levels.find(level  => level.amount === option.amount)?.description1}
+              image={option.img}
+              bgColor={option.bgColor}
             />
             ))}
             {monthly.allowCustom && <Input 
@@ -88,6 +91,7 @@ const DonationsForm = ({monthlyDonation}) => {
               placeholder={formText.custom.placeholder}
               value={customDonation}
               setValue={handleInputChange}
+              description={lang.oneTime.description}
             />}
           </>
           }

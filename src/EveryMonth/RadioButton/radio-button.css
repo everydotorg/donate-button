@@ -2,6 +2,7 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     transition: all 0.2s;
+    overflow: hidden;
 }
 
 .radio-button--selected {
@@ -18,4 +19,29 @@
 
     display: flex;
     align-items: center;
+}
+
+@media only screen and (max-width: 37.5em) {
+    .radio-button__input:checked ~ .radio-button__extra {
+        display: grid;
+    }
+}
+
+.radio-button__extra {
+    display: none;
+    padding: 1rem;
+    grid-template-columns: 1fr 60%;
+    gap: 1rem;
+}
+
+.radio-button__image {
+    height: 100%;
+    width: 100%;
+    grid-column: 1/2;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.radio-button__description {
+    grid-column: 2/3;
 }
