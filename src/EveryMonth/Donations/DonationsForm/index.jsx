@@ -116,8 +116,7 @@ const DonationsForm = ({monthlyDonation}) => {
         <div className="donations__submit">
           <Button handleClick={handleDonateButton}>{getButtonTextFormatted(donationAmount, formText.button)}</Button>
           <p className="t-body--small">
-            Great Barrier Reef Legacy uses our trusted partner Every.org, to power donation processing. 
-            You will be directed to Every.org to complete your donation.
+            {lang.footer}
           </p>
         </div>
       </>

@@ -84,7 +84,8 @@ const everyMonthOptions = {
         description: 'We explore wild places of earth to document Fungi for conservation, habitat protection & livelihoods of those who depend on them',
         button: 'Donate {{amount}}',
         switch: 'Or make a <action>Monthly donation</action>'
-      }
+      },
+      footer: 'Fungi Foundation uses our trusted partner Every.org, to power donation processing. You will be directed to Every.org to complete your donation.'
     },
     es: {
       company: {
@@ -141,7 +142,8 @@ const everyMonthOptions = {
         description: 'Exploramos lugares salvajes de la tierra para documentar los hongos para su conservación, la protección de su hábitat y las formas de vida de las personas que dependen de ellos.',
         button: 'Donar {{amount}}',
         switch: 'O haga una <action>Donación mensual</action>'
-      }
+      },
+      footer: 'La Fundacion Fungi usa Every.org como socio de confianza para procesar las donaciones. Serás redireccionado a Every.org para completar la donación.'
     }
   }
 }
