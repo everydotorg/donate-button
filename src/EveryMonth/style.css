@@ -110,7 +110,7 @@
 .widget--split {
   width: 888px;
   height: auto;
-  max-height: 90%;
+  max-height: 95%;
   display: grid;
 
   grid-template-columns: repeat(2, 50%);
