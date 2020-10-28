@@ -29,6 +29,44 @@
   color: var(--color-primary);
 }
 
+@media only screen and (max-width: 37.5em) {
+  .wrapper {
+    background: #fff;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1rem;
+  width: 1.5rem;
+  height: 2px;
+  background: #000;
+  transform: rotate(45deg);
+
+  transition: all 0.2s;
+  display: none;
+}
+
+.close::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  background: #000;
+  width: 1.5rem;
+  height: 2px;
+
+  transform: rotate(-90deg);
+  display: none;
+}
+
+@media only screen and (max-width: 37.5em) {
+  .close,
+  .close::after {
+    display: block;
+  }
+}
+
 /* 
 * Typography
 */
@@ -144,7 +182,7 @@
 @media only screen and (max-width: 37.5em) {
   .widget--split {
     grid-template-columns: 1fr;
-    width: 80%;
+    width: 100%;
     height: auto;
     overflow-y: auto;
   }
@@ -153,7 +191,7 @@
 @media only screen and (max-width: 22.5em) {
   .widget--split {
     grid-template-columns: 1fr;
-    width: 90%;
+    width: 100%;
     height: auto;
     overflow-y: auto;
   }
