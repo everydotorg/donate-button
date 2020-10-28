@@ -15,11 +15,11 @@ module.exports = {
       // During development style-loader is used
       if (webpackConfig.mode === 'development') {
         // Check the loader we're about to overwrite looks like what we expect
-        // if (!loader.loader.match(/style-loader/)) {
-        //   throw new Error(
-        //     'expected mini-css-extract-plugin at .module.rules[2].oneOf[3].use[0]'
-        //   )
-        // }
+        if (!loader.loader.match(/style-loader/)) {
+          throw new Error(
+            'expected mini-css-extract-plugin at .module.rules[2].oneOf[3].use[0]'
+          )
+        }
 
         // convert from string to object with options
         webpackConfig.module.rules[2].oneOf[3].use[0] = {
