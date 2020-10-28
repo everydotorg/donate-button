@@ -39,7 +39,6 @@
 }
 
 .radio-button__image {
-    height: 100%;
     width: 100%;
     grid-column: 1/2;
     object-fit: cover;
@@ -47,11 +46,11 @@
 }
 
 /* Only on iOS Devices */
-@supports (-webkit-touch-callout: none) {
+/* @supports (-webkit-touch-callout: none) {
     .radio-button__image {
         height: auto;
     }
-}
+} */
 
 .radio-button__description {
     grid-column: 2/3;

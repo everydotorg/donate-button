@@ -144,7 +144,7 @@
 @media only screen and (max-width: 37.5em) {
   .widget--split {
     grid-template-columns: 1fr;
-    width: 80%;
+    width: 100%;
     height: auto;
     overflow-y: auto;
   }
@@ -153,7 +153,7 @@
 @media only screen and (max-width: 22.5em) {
   .widget--split {
     grid-template-columns: 1fr;
-    width: 90%;
+    width: 100%;
     height: auto;
     overflow-y: auto;
   }
