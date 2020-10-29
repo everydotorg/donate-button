@@ -46,6 +46,12 @@ const DonationsForm = ({monthlyDonation}) => {
     const formText = monthlyDonation ? lang.monthly : lang.oneTime;
 
     const handleCustomInputFocus = () => {
+      const prevLevel = getLevelOfAmount(monthly.levels, donationAmount);
+      const currLevel = monthly.levels.length;
+      if(monthlyDonation) {
+        setTriggerAnimation([prevLevel, currLevel])
+      }
+      
       setDonationAmount('')
       setCustomInputFocus(true);
     }
@@ -55,8 +61,11 @@ const DonationsForm = ({monthlyDonation}) => {
     }
   
     const handleRadioButtonClick = (amount) => {
-      const prevLevel = getLevelOfAmount(monthly.levels, donationAmount);
+      // Custom donation is always the last control
+      // If we have a custom donation the previous level is the custom input.
+      const prevLevel = customDonation || !donationAmount ? monthly.levels.length : getLevelOfAmount(monthly.levels, donationAmount);
       const currLevel = getLevelOfAmount(monthly.levels, amount);
+      
       if(monthlyDonation) {
         setTriggerAnimation([prevLevel, currLevel])
       }
