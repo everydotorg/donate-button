@@ -33,16 +33,37 @@
 .radio-button__extra {
     visibility: hidden;
     height: 0;
-    grid-template-columns: 1fr 60%;
+    grid-template-columns: 1fr 65%;
     gap: 1rem;
     transition: all 0.2s;
 }
 
-.radio-button__image {
+.radio-button__img-container {
+    position: relative;
     width: 100%;
+    height: 100%;
     grid-column: 1/2;
-    object-fit: cover;
+    overflow: hidden;
     border-radius: 0.5rem;
+}
+
+.radio-button__img-container::after {
+    content: "";
+    display: block;
+    padding-bottom: 80%;
+}
+
+.radio-button__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
 }
 
 /* Only on iOS Devices */

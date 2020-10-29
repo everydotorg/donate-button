@@ -11,10 +11,6 @@ const RadioButton = ({name, text, amount, selected, handleClick, description, im
         text ? 'u-justify-content-space-between' : 'u-justify-content-center'
     ])
 
-    const isAppleDevice = () => {
-        return navigator.platform.indexOf('Mac') > -1 || navigator.userAgent.match(/iPhone|iPad|iPod/i);
-    }
-
     return (
         <div className={groupClasses.join(' ')}>
             <input onClick={handleClick} className="radio-button__input" type="radio" name={name} id={amount} />
@@ -23,7 +19,9 @@ const RadioButton = ({name, text, amount, selected, handleClick, description, im
                 <span className="t-title radio-button__amount">${amount}</span>
             </label>
             {description && <div style={{backgroundColor: bgColor}} className="radio-button__extra">
-                    <img style={{height: isAppleDevice() ? 'auto' : '100%'}} className="radio-button__image" src={image} alt={text} />
+                <div className="radio-button__img-container">
+                    <img  className="radio-button__image" src={image} alt={text} />
+                </div>
                 <p className="t-body--small radio-button__description">{description}</p>
             </div>}
         </div>
