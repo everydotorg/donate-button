@@ -21,6 +21,12 @@
     align-items: center;
 }
 
+@media only screen and (max-width: 64em) {
+    .radio-button__label {
+        padding: 0.75rem;
+    }
+}
+
 @media only screen and (max-width: 37.5em) {
     .radio-button--selected .radio-button__extra {
         display: grid;
