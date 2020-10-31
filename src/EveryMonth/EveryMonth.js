@@ -82,6 +82,7 @@ function EveryMonth({ options, hide }) {
 
   return (
     <div className="wrapper" onClick={hideOnWrapperClick}>
+      <div className="close" onClick={hideOnWrapperClick}></div>
       <OptionsContext.Provider value={options}>
         <DonationsContext.Provider 
           value={{

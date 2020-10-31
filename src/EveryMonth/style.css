@@ -29,6 +29,44 @@
   color: var(--color-primary);
 }
 
+@media only screen and (max-width: 37.5em) {
+  .wrapper {
+    background: #fff;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1rem;
+  width: 1.5rem;
+  height: 2px;
+  background: #000;
+  transform: rotate(45deg);
+
+  transition: all 0.2s;
+  display: none;
+}
+
+.close::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  background: #000;
+  width: 1.5rem;
+  height: 2px;
+
+  transform: rotate(-90deg);
+  display: none;
+}
+
+@media only screen and (max-width: 37.5em) {
+  .close,
+  .close::after {
+    display: block;
+  }
+}
+
 /* 
 * Typography
 */
@@ -60,7 +98,7 @@
   opacity: 0.6;
 }
 
-@media only screen and (max-width: 64em) {
+@media only screen and (max-width: 64em), (max-height: 46.875em) {
   .t-heading-primary {
     font-size: 1.5rem;
   }
@@ -71,7 +109,7 @@
   }
 
   .t-body--small {
-    font-size: 0.5rem;
+    font-size: 0.625rem;
   }
 }
 
@@ -94,7 +132,8 @@
 
 .widget--split {
   width: 888px;
-  height: 80%;
+  height: auto;
+  max-height: 95%;
   display: grid;
 
   grid-template-columns: repeat(2, 50%);
@@ -103,30 +142,18 @@
 
 .widget--single {
   width: 444px;
+  max-height: 95%;
+  overflow-y: auto;
+  height: auto;
 }
 
-@media only screen and (min-height: 62.5em) {
-  .widget--split {
-    height: 888px;
-  }
-}
-
-@media only screen and (max-height: 57.5em) {
-  .widget--split {
-    height: 90%;
-  }
-
+/* @media only screen and (max-height: 57.5em) {
   .widget--single {
     width: 300px;
   }
-}
+} */
 
-@media (max-aspect-ratio: 1/1) {
-  .widget--split {
-    height: 60%;
-  }
-}
-
+/* 1024px */
 @media only screen and (max-width: 64em) {
   .widget--split {
     width: 600px;
@@ -141,11 +168,33 @@
   }
 }
 
+/* 600px */
+@media only screen and (max-width: 37.5em) {
+  .widget--split {
+    grid-template-columns: 1fr;
+    width: 100%;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .widget--single {
+    grid-template-columns: 1fr;
+    width: 100%;
+    height: auto;
+  }
+}
+
 .right-panel {
   height: 100%;
   display: grid;
 
   position: relative;
+}
+
+@media only screen and (max-width: 37.5em) {
+  .right-panel {
+    display: none;
+  }
 }
 
 .right-panel__item {
