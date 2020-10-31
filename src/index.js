@@ -26,6 +26,7 @@ const everyMonthOptions = {
     charity: 'ffungi',
     params: {
       share_info: 1,
+      no_exit: 1,
     }
   },
   // Both ways supported
