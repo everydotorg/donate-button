@@ -9,9 +9,9 @@ import { replaceKeys, replaceTagWithComponent } from '../../../helpers/interpola
 import isFunction from '../../../helpers/is-function';
 import DonationsContext from '../../../contexts/donationsContext';
 
-const getButtonTextFormatted = (amount, text) => {
+const getButtonTextFormatted = (amount, text, currency) => {
   if(amount && !isNaN(amount)){
-    return replaceKeys({amount: `$${amount}`}, text);
+    return replaceKeys({amount: `$${amount} ${currency}`}, text);
   }
   return replaceKeys({amount: ''}, text);
 }
@@ -39,7 +39,8 @@ const getBoldFormatted = (text) => {
 
 const DonationsForm = ({monthlyDonation}) => {
     const {donationAmount, setDonationAmount, customDonation, setCustomDonation, setTriggerAnimation} = useContext(DonationsContext)
-    const { monthly, oneTime, onSubmit } = useContext(OptionsContext);
+
+    const { monthly, oneTime, onSubmit, currency } = useContext(OptionsContext);
     const [customInputFocus, setCustomInputFocus] = useState(false);
 
     const lang = useI18n();
@@ -150,7 +151,7 @@ const DonationsForm = ({monthlyDonation}) => {
             
         </div>
         <div className="donations__submit">
-          <Button handleClick={handleDonateButton}>{getButtonTextFormatted(donationAmount, formText.button)}</Button>
+          <Button handleClick={handleDonateButton}>{getButtonTextFormatted(donationAmount, formText.button, currency)}</Button>
           <p className="t-body--small">
             {lang.footer}
           </p>

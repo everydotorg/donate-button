@@ -5,6 +5,7 @@ import WIDGET_MODE from './constants/widgetMode'
 // This code would normally be in the host webpage
 const everyMonthOptions = {
   mode: WIDGET_MODE.SPLIT_PANEL,
+  currency: 'USD',
   language: 'en', // should be one of the defined keys inside i18n
   monthly: {
     levels: [
