@@ -16,8 +16,8 @@ function EveryMonth({ options, hide }) {
   const [customDonation, setCustomDonation] = useState('');
 
   const [triggerAnimation, setTriggerAnimation] = useState([-1, 0]);
-  const [monthlyLevels, setMonthlyLevels] = useState(options.monthly.levels);
-
+  const [monthlyLevels, setMonthlyLevels] = useState(options.monthly.levels.concat(options.monthly.allowCustom ? [options.monthly.custom] : []));
+  
   useEffect(() => {
     // fade in down - fade out down-> [0] > [1]
     // fade in up - fade out up-> [0] < [1]
@@ -82,6 +82,7 @@ function EveryMonth({ options, hide }) {
 
   return (
     <div className="wrapper" onClick={hideOnWrapperClick}>
+      <div className="close" onClick={hideOnWrapperClick}></div>
       <OptionsContext.Provider value={options}>
         <DonationsContext.Provider 
           value={{
@@ -105,7 +106,7 @@ function EveryMonth({ options, hide }) {
                 {monthlyLevels.map((level, i) => {
 
                   return (
-                    <div className={['right-panel__item'].concat(level.classes).join(' ')}>
+                    <div key={i} className={['right-panel__item'].concat(level.classes).join(' ')}>
                       <Images image={level.img}/>
                       <Description bgColor={level.bgColor} />
                     </div>

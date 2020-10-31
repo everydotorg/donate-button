@@ -6,6 +6,7 @@ import WIDGET_MODE from './constants/widgetMode'
 const everyMonthOptions = {
   mode: WIDGET_MODE.SPLIT_PANEL,
   currency: 'USD',
+  language: 'en', // should be one of the defined keys inside i18n
   monthly: {
     levels: [
       { amount: '25', bgColor: '#BCD9DD', img: "https://images.unsplash.com/photo-1454425064867-5ba516caf601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" },
@@ -13,6 +14,7 @@ const everyMonthOptions = {
       { amount: '100', bgColor: '#A0CBFE', img:  "https://images.unsplash.com/photo-1567346325130-4c4167641eb9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"},
     ],
     allowCustom: true,
+    custom: { bgColor: '#BCD9DD', img: 'https://user-images.githubusercontent.com/36522634/97372531-9b04b180-1892-11eb-9aed-40a8b049d424.jpg'}
   },
   oneTime: {
     levels: [5, 10, 20, 50, 100, 200],
@@ -56,7 +58,7 @@ const everyMonthOptions = {
             description1: 'As a <bold>Fungi Lover:</bold> You will help us explore and document hundreds of species of fungi in some of the oldest Patagonian Temperate Rainforests.',
             description2: 'We explore wild places of earth to document Fungi for conservation, habitat protection & livelihoods of those who depend on them'
           },
-            {
+          {
             amount: '100',
             name: 'Mycelium Expander',
             description1: 'As a <bold>Mycelium Expander:</bold> you will help us develop the first dynamic map of known ancestral uses of fungi.',
@@ -66,6 +68,8 @@ const everyMonthOptions = {
         custom: {
           label: 'Custom',
           placeholder: 'Enter amount',
+          description1: "With your support we will promote the 3F's globally to include fungi in language, it is flora, fauna & funga!",
+          description2: 'We explore wild places of earth to document Fungi for conservation, habitat protection & livelihoods of those who depend on them.'
         },
         button: 'Donate {{amount}} every month',
         switch: 'Or make a <action>One Time Donation</action>'
@@ -125,6 +129,8 @@ const everyMonthOptions = {
         custom: {
           label: 'Personalizado',
           placeholder: 'Ingrese el monto',
+          description1: 'Con tu aporte promoveremos las 3F a nivel global para incluir a los hongos en el lenguaje, ¡es flora, fauna y funga!',
+          description2: 'Exploramos lugares salvajes de la tierra para documentar los hongos para su conservación, la protección de su hábitat y las formas de vida de las personas que dependen de ellos.'
         },
         button: 'Donar {{amount}} cada mes',
         switch: 'O haga una <action>Donación única</action>'

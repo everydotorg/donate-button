@@ -15,10 +15,12 @@ const getBoldFormatted = (text, link) => {
     return replaceTagWithComponent(text, tag, comp, props);
 }
 
-const getDescriptionText = (lang, monthlyDonation, donationAmount) => {
+const getDescriptionText = (lang, monthlyDonation, donationAmount, customDonation) => {
     if(monthlyDonation) {
-        const level = getCustomDonationLevel(lang.monthly.levels, donationAmount);
-        console.log(level);
+        const level = !donationAmount || customDonation 
+            ? lang.monthly.custom
+            : getCustomDonationLevel(lang.monthly.levels, donationAmount);
+        
         return (
             <>
                 <p className='t-heading-secondary'>{level.description1 && getBoldFormatted(level.description1)}</p>
@@ -32,7 +34,7 @@ const getDescriptionText = (lang, monthlyDonation, donationAmount) => {
 
 const Description = ({bgColor}) => {
     const descrRef = useRef(null);
-    const {donationAmount, monthlyDonation} = useContext(DonationsContext);
+    const {donationAmount, monthlyDonation, customDonation} = useContext(DonationsContext);
     const options = useContext(OptionsContext);
     const lang = useI18n();
 
@@ -47,12 +49,9 @@ const Description = ({bgColor}) => {
         }
     }, [donationAmount, monthlyDonation, options, bgColor]);
 
-
-    console.log(descrRef.current);
-
     return (
         <div ref={descrRef} className="description">
-            {getDescriptionText(lang, monthlyDonation, donationAmount)}
+            {getDescriptionText(lang, monthlyDonation, donationAmount, customDonation)}
         </div>
     )
 }

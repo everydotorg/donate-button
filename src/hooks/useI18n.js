@@ -17,8 +17,13 @@ const getBrowserLanguage = () => {
 
 const useI18n = () => {
     const userI18n = getBrowserLanguage();
+    const { i18n, language } = useContext(OptionsContext);
 
-    const { i18n } = useContext(OptionsContext);
+    // Language given in config has priority over user browser lang
+    if(i18n[language]) {
+        return i18n[language];
+    }
+
     return i18n[userI18n] ? i18n[userI18n] : i18n[defaultI18n];
 }
 

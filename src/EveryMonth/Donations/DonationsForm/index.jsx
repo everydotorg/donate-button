@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import RadioButton from '../../RadioButton';
 import Input from '../../Input';
 import Button from '../../Button';
 import OptionsContext from '../../../contexts/optionsContext';
 import useI18n from '../../../hooks/useI18n';
-import { replaceKeys } from '../../../helpers/interpolation';
+import { replaceKeys, replaceTagWithComponent } from '../../../helpers/interpolation';
 import isFunction from '../../../helpers/is-function';
 import DonationsContext from '../../../contexts/donationsContext';
 
@@ -29,17 +29,44 @@ const getLevelOfAmount = (levels, amount) => {
   return levels.findIndex(l => l.amount == amount);
 }
 
+const getBoldFormatted = (text) => {
+  const comp = 'span';
+  const props = {};
+  const tag = 'bold';
+
+  return replaceTagWithComponent(text, tag, comp, props);
+}
+
 const DonationsForm = ({monthlyDonation}) => {
     const {donationAmount, setDonationAmount, customDonation, setCustomDonation, setTriggerAnimation} = useContext(DonationsContext)
 
     const { monthly, oneTime, onSubmit, currency } = useContext(OptionsContext);
+    const [customInputFocus, setCustomInputFocus] = useState(false);
+
     const lang = useI18n();
     const formText = monthlyDonation ? lang.monthly : lang.oneTime;
 
+    const handleCustomInputFocus = () => {
+      const prevLevel = getLevelOfAmount(monthly.levels, donationAmount);
+      const currLevel = monthly.levels.length;
+      if(monthlyDonation) {
+        setTriggerAnimation([prevLevel, currLevel])
+      }
+      
+      setDonationAmount('')
+      setCustomInputFocus(true);
+    }
+
+    const handleCustomInputBlur = () => {
+      setCustomInputFocus(false);
+    }
   
     const handleRadioButtonClick = (amount) => {
-      const prevLevel = getLevelOfAmount(monthly.levels, donationAmount);
+      // Custom donation is always the last control
+      // If we have a custom donation the previous level is the custom input.
+      const prevLevel = customDonation || !donationAmount ? monthly.levels.length : getLevelOfAmount(monthly.levels, donationAmount);
       const currLevel = getLevelOfAmount(monthly.levels, amount);
+      
       if(monthlyDonation) {
         setTriggerAnimation([prevLevel, currLevel])
       }
@@ -81,6 +108,9 @@ const DonationsForm = ({monthlyDonation}) => {
               amount={option.amount}
               selected={donationAmount === option.amount}
               handleClick={() => handleRadioButtonClick(option.amount)} 
+              description={getBoldFormatted(formText.levels.find(level  => level.amount === option.amount)?.description1)}
+              image={option.img}
+              bgColor={option.bgColor}
             />
             ))}
             {monthly.allowCustom && <Input 
@@ -88,6 +118,10 @@ const DonationsForm = ({monthlyDonation}) => {
               placeholder={formText.custom.placeholder}
               value={customDonation}
               setValue={handleInputChange}
+              description={lang.oneTime.description}
+              onFocus={handleCustomInputFocus}
+              onBlur={handleCustomInputBlur}
+              selected={customInputFocus}
             />}
           </>
           }
@@ -108,6 +142,9 @@ const DonationsForm = ({monthlyDonation}) => {
               value={customDonation}
               setValue={handleInputChange}
               extraClasses={["donations__input--one-time"]}
+              onFocus={handleCustomInputFocus}
+              onBlur={handleCustomInputBlur}
+              selected={customInputFocus}
             />}
           </>
           }
