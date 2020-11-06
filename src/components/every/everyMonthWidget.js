@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState }  from 'preact/hooks'
 import WIDGET_MODE from './constants/widgetMode'
 // import ReactDOM from 'react-dom'
@@ -8,7 +6,6 @@ import WIDGET_MODE from './constants/widgetMode'
 // be imported after attachShadow is called.
 
 // will be populated with methods for the host site to call
-// const everyMonthInterface = {}
 const everyMonthOptions = {
   mode: WIDGET_MODE.SPLIT_PANEL,
   currency: 'USD',
@@ -164,13 +161,6 @@ const everyMonthOptions = {
 
 export const Root = (props) => {
   const [EveryMonth, widgetLoaded] = useState()
-  // props.show = true
-  // const [options, setOptions] = useState({ show: props.show })
-
-  // popualte everyMonthInterface
-  // everyMonthInterface.init = setOptions
-  // everyMonthInterface.show = () => setOptions({ ...options, show: true })
-  // everyMonthInterface.hide = () => setOptions({ ...options, show: false })
 
   // when show is set to true and EveryMonth is not loaded, load it
   useEffect(() => {
@@ -182,7 +172,7 @@ export const Root = (props) => {
 
   if (!props.show || !EveryMonth) return null
 
-  return <EveryMonth options={props.options || everyMonthOptions} hide={!props.show} />
+  return <EveryMonth options={props.options || everyMonthOptions} hideFn={props.hideFn} hide={!props.show} />
 }
 
 export default Root
