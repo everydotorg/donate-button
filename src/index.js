@@ -58,7 +58,19 @@ class EveryMonthWidget extends HTMLElement {
       this.attachShadow({ mode: 'open' }).appendChild(this.mountPoint);
     }
     render(<Root { ...this.reactProps() } hideFn={() => this.show = false}/>, this.mountPoint);
+
+    this.setTogglebuton()
+  }
+
+  setTogglebuton() {
+    var everyMonthWidget = document.querySelector('every-month-widget');
+    if(everyMonthWidget){
+      var everyMonthDonate = function(){ everyMonthWidget.setAttribute('show', true); }
+      const buttonToTrigger = document.querySelector('#every-month-donate')
+      buttonToTrigger.addEventListener('click', everyMonthDonate)
+    }
   }
 }
 
 window.customElements.define('every-month-widget', EveryMonthWidget);
+
