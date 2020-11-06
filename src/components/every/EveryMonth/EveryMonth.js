@@ -13,8 +13,8 @@ import Images from './Images';
 import Company from './Images/Company';
 import WIDGET_MODE from '../constants/widgetMode';
 
-function EveryMonth({ options, hide }) {
-  const hideOnWrapperClick = e => e.target === e.currentTarget && hide()
+function EveryMonth({ options, hideFn }) {
+  const hideOnWrapperClick = e => e.target === e.currentTarget && hideFn()
   const [monthlyDonation, setMonthlyDonation] = useState(true);
   const [donationAmount, setDonationAmount] = useState('25');
   const [customDonation, setCustomDonation] = useState('');

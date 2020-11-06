@@ -3,7 +3,7 @@ import { render } from "preact";
 import Root from "./components/every/everyMonthWidget"
 
 
-class TopMenu extends HTMLElement {
+class EveryMonthWidget extends HTMLElement {
   mountPoint;
   componentAttributes = {};
   componentProperties = {};
@@ -36,6 +36,16 @@ class TopMenu extends HTMLElement {
     
     this.mountReactApp();
   }
+
+  get show() {
+    return this.componentProperties.show;
+  }
+  
+  set show(newValue) {
+    this.componentProperties.show = newValue;
+    
+    this.mountReactApp();
+  }
   
   reactProps() {
     return { ...this.componentAttributes, ...this.componentProperties };
@@ -44,11 +54,11 @@ class TopMenu extends HTMLElement {
   mountReactApp() {
     if (!this.mountPoint) {
       this.mountPoint = document.createElement('div');
+
       this.attachShadow({ mode: 'open' }).appendChild(this.mountPoint);
     }
-
-    render(<Root { ...this.reactProps() } />, this.mountPoint);
+    render(<Root { ...this.reactProps() } hideFn={() => this.show = false}/>, this.mountPoint);
   }
 }
 
-window.customElements.define('every-month-widget', TopMenu);
+window.customElements.define('every-month-widget', EveryMonthWidget);
