@@ -13,7 +13,7 @@ import Images from './Images';
 import Company from './Images/Company';
 import WIDGET_MODE from '../constants/widgetMode';
 
-function EveryMonth({ options, hideFn }) {
+function EveryMonth({ options, hideFn, language, mode }) {
   const hideOnWrapperClick = e => e.target === e.currentTarget && hideFn()
   const [monthlyDonation, setMonthlyDonation] = useState(true);
   const [donationAmount, setDonationAmount] = useState('25');
@@ -21,7 +21,13 @@ function EveryMonth({ options, hideFn }) {
 
   const [triggerAnimation, setTriggerAnimation] = useState([-1, 0]);
   const [monthlyLevels, setMonthlyLevels] = useState(options.monthly.levels.concat(options.monthly.allowCustom ? [options.monthly.custom] : []));
-  
+  console.log(mode.toUpperCase())
+  const widgetOptions = {
+    ...options,
+    mode: mode.toUpperCase(),
+    language
+  }
+
   useEffect(() => {
     // fade in down - fade out down-> [0] > [1]
     // fade in up - fade out up-> [0] < [1]
@@ -89,7 +95,7 @@ function EveryMonth({ options, hideFn }) {
       <div>
     <div className="wrapper" onClick={hideOnWrapperClick}>
       <div className="close" onClick={hideOnWrapperClick}></div>
-      <OptionsContext.Provider value={options}>
+      <OptionsContext.Provider value={widgetOptions}>
         <DonationsContext.Provider 
           value={{
             monthlyDonation,
@@ -101,7 +107,7 @@ function EveryMonth({ options, hideFn }) {
             setTriggerAnimation
           }}
         >
-          {options.mode === WIDGET_MODE.SPLIT_PANEL && 
+          {mode.toUpperCase() === WIDGET_MODE.SPLIT_PANEL && 
             <div className="widget widget--split">        
               <Donations 
                 monthlyDonation={monthlyDonation}
@@ -122,7 +128,7 @@ function EveryMonth({ options, hideFn }) {
               </div>
             </div>
           }
-          { options.mode === WIDGET_MODE.SINGLE &&
+          { mode.toUpperCase() === WIDGET_MODE.SINGLE &&
               <div className="widget widget--single">        
               <Donations 
                 monthlyDonation={monthlyDonation}

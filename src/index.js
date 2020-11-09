@@ -18,7 +18,7 @@ class EveryMonthWidget extends HTMLElement {
   }
   
   static get observedAttributes() {
-    return ['show', 'options'];
+    return ['show', 'options', 'mode', 'language'];
   }
   
   attributeChangedCallback(name, oldVal, newVal) {
@@ -43,6 +43,26 @@ class EveryMonthWidget extends HTMLElement {
   
   set show(newValue) {
     this.componentProperties.show = newValue;
+    
+    this.mountReactApp();
+  }
+  
+  get language() {
+    return this.componentProperties.language;
+  }
+  
+  set language(newValue) {
+    this.componentProperties.language = newValue;
+    
+    this.mountReactApp();
+  }
+  
+  get mode() {
+    return this.componentProperties.mode;
+  }
+  
+  set mode(newValue) {
+    this.componentProperties.mode = newValue;
     
     this.mountReactApp();
   }

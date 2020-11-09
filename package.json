@@ -10,7 +10,7 @@
     "test": "NODE_ENV=test jest",
     "build": "preact build --no-prerender --clean  --no-sw",
     "serve": "preact serve",
-    "dev": "preact watch --template src/index.ejs"
+    "dev": "preact watch -c ./preact.config.js --no-prerender --no-sw"
   },
   "keywords": [],
   "author": "Zouhir <zouhir@zouhir.org>",

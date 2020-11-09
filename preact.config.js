@@ -14,7 +14,7 @@ export default {
     delete config.entry.polyfills;
     config.output.filename = "[name].js";
   
-    if (env.production) {
+    // if (env.production) {
       config.output.libraryTarget = "umd";
 
       // Generate index.html directly instead of use a template
@@ -37,6 +37,6 @@ export default {
           },
         ],
       }
-    }
+    // }
 	},
 };
