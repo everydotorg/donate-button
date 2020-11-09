@@ -9,7 +9,6 @@ import WIDGET_MODE from './constants/widgetMode'
 const everyMonthOptions = {
   mode: WIDGET_MODE.SPLIT_PANEL,
   currency: 'USD',
-  language: 'en', // should be one of the defined keys inside i18n
   monthly: {
     levels: [
       { amount: '25', bgColor: '#BCD9DD', img: "https://images.unsplash.com/photo-1454425064867-5ba516caf601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" },
@@ -172,7 +171,7 @@ export const Root = (props) => {
 
   if (!props.show || !EveryMonth) return null
 
-  return <EveryMonth options={props.options || everyMonthOptions} hideFn={props.hideFn} hide={!props.show} />
+  return <EveryMonth mode={props.mode || WIDGET_MODE.SPLIT_PANEL} language={props.language} options={props.options || everyMonthOptions} hideFn={props.hideFn} hide={!props.show} />
 }
 
 export default Root
