@@ -21,7 +21,7 @@ function EveryMonth({ options, hideFn, language, mode }) {
 
   const [triggerAnimation, setTriggerAnimation] = useState([-1, 0]);
   const [monthlyLevels, setMonthlyLevels] = useState(options.monthly.levels.concat(options.monthly.allowCustom ? [options.monthly.custom] : []));
-  console.log(mode.toUpperCase())
+  
   const widgetOptions = {
     ...options,
     mode: mode.toUpperCase(),
