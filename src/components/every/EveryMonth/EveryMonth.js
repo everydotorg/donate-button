@@ -15,7 +15,7 @@ import WIDGET_MODE from '../constants/widgetMode';
 function EveryMonth({ options, hideFn, language, mode }) {
   const hideOnWrapperClick = e => e.target === e.currentTarget && hideFn()
   const [monthlyDonation, setMonthlyDonation] = useState(true);
-  const [donationAmount, setDonationAmount] = useState('25');
+  const [donationAmount, setDonationAmount] = useState('50');
   const [customDonation, setCustomDonation] = useState('');
 
   const [triggerAnimation, setTriggerAnimation] = useState([-1, 0]);
