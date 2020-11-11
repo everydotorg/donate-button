@@ -3,7 +3,7 @@
 ## Use
 Add this code at the bottom of your page, just before the `</body>`
 ```js
-<script src="https://everymonth...."/>
+<script src="https://assets.every.org/every-month/bundle.js"/>
 <every-month-widget/>
 <script>
    var everyMonthWidget = document.querySelector('every-month-widget');
@@ -11,6 +11,27 @@ Add this code at the bottom of your page, just before the `</body>`
      ...
    };
 </script>
+```
+
+As a React component
+
+```jsx
+const EveryMonth = () => {
+  const ref = useRef()
+  useEffect(() => {
+    if (ref) ref.current.options = {...}
+  }, [])
+
+  return (
+    <>
+      <script
+        type="text/javascript"
+        src="https://assets.every.org/every-month/bundle.jss"
+      ></script>
+      <every-month-widget ref={ref} />
+    </>
+  )
+}
 ```
 
 Add `id="every-month-donate"` to your donate button or link. Remove any other `onClick="..."` or `href="..."`  
