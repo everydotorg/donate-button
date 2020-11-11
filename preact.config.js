@@ -13,6 +13,7 @@ export default {
 	webpack(config, env, helpers, options) {
     delete config.entry.polyfills;
     config.output.filename = "[name].js";
+    config.output.publicPath =  'https://assets.every.org/every-month/'
   
     // if (env.production) {
       config.output.libraryTarget = "umd";
