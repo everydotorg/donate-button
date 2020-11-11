@@ -9,7 +9,8 @@ import logoStyles from './Donations/Logo/logo.css'
 import descriptionStyles from './Description/description.css'
 import buttonStyles from './Button/button.css'
 
-const appStyles = [styles,
+const appStyles = [
+    styles,
     radioButtonStyles,
     inputStyles,
     imagesStyles,

@@ -1,7 +1,6 @@
 // import React, { useState, useEffect } from 'react'
 ;
 import { useState, useEffect } from 'preact/hooks'
-import styles from './style.css'
 import appStyles from './styles'
 import { Styled } from '../../../core/Styled'
 
