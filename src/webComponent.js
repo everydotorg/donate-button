@@ -3,7 +3,6 @@ import EveryMonthLoader from './EveryMonthLoader'
 
 // <every-month-widget>
 
-
 class EveryMonthWidget extends HTMLElement {
   mountPoint
   options = {}
