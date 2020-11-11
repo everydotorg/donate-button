@@ -1,4 +1,5 @@
 node_modules
 .vscode
 build
-/.DS_Store
+.DS_Store
+/size-plugin.json
