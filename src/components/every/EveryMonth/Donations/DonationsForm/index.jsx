@@ -18,8 +18,8 @@ const getButtonTextFormatted = (amount, text, currency) => {
   return replaceKeys({amount: ''}, text);
 }
 
-const constructEveryUrl = (company, frequency, amount, extras) => {
-  const baseUrl = `https://www.every.org/${company}/donate?frequency=${frequency}&amount=${amount}`
+const constructEveryUrl = (company, frequency, amount, mode, extras) => {
+  const baseUrl = `https://www.every.org/${company}/donate?frequency=${frequency}&amount=${amount}&utm_campaign=single-or-split&utm_content=${mode.toLowerCase()}`
   const extraParams = Object.keys(extras).reduce((prev, key) => {
     return prev.concat(`&${key}=${extras[key]}`)
   }, '');
@@ -42,7 +42,7 @@ const getBoldFormatted = (text) => {
 const DonationsForm = ({monthlyDonation}) => {
     const {donationAmount, setDonationAmount, customDonation, setCustomDonation, setTriggerAnimation} = useContext(DonationsContext)
 
-    const { monthly, oneTime, onSubmit, currency } = useContext(OptionsContext);
+    const { monthly, oneTime, onSubmit, currency, mode } = useContext(OptionsContext);
     const [customInputFocus, setCustomInputFocus] = useState(false);
 
     const lang = useI18n();
@@ -81,14 +81,14 @@ const DonationsForm = ({monthlyDonation}) => {
       setCustomDonation(value);
     }
 
-    const handleDonateButton = () => {
+    const handleDonateButton = (mode) => {
       if(!isNaN(donationAmount)){
         const frequency = monthlyDonation ? 'MONTHLY' : 'ONCE';
 
         if(isFunction(onSubmit)) {
           onSubmit({amount: donationAmount, frequency })
         } else {
-          const url = constructEveryUrl(onSubmit.charity, frequency, donationAmount, onSubmit.params);
+          const url = constructEveryUrl(onSubmit.charity, frequency, donationAmount, mode, onSubmit.params);
           window.location.href = url;
         }
       }
@@ -153,7 +153,7 @@ const DonationsForm = ({monthlyDonation}) => {
             
         </div>
         <div className="donations__submit">
-          <Button handleClick={handleDonateButton}>{getButtonTextFormatted(donationAmount, formText.button, currency)}</Button>
+          <Button handleClick={() => handleDonateButton(mode)}>{getButtonTextFormatted(donationAmount, formText.button, currency)}</Button>
           <p className="t-body--small">
             {lang.footer}
           </p>
