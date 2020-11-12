@@ -160,10 +160,18 @@ const everyMonthOptions = {
 
 export const Root = (props) => {
   const [EveryMonth, widgetLoaded] = useState()
+  const [widgetMode, setWidgetMode] = useState(localStorage.getItem('every-month-widget-mode'))
 
-  const rnd = Math.random()
-  const widgetMode = rnd > 0.5 ? WIDGET_MODE.SPLIT_PANEL : WIDGET_MODE.SINGLE
-
+  if(!widgetMode){
+    const rnd = Math.random()
+    if(rnd > 0.5) {
+      setWidgetMode(WIDGET_MODE.SPLIT_PANEL)
+      localStorage.setItem('every-month-widget-mode', WIDGET_MODE.SPLIT_PANEL)
+    } else {
+      setWidgetMode(WIDGET_MODE.SINGLE)
+      localStorage.setItem('every-month-widget-mode', WIDGET_MODE.SINGLE)
+    }
+  }
   // when show is set to true and EveryMonth is not loaded, load it
   useEffect(() => {
     if (props.show && !EveryMonth)
