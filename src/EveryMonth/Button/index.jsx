@@ -1,9 +1,12 @@
 import React from 'react';
 import './button.css';
 
-const Button = ({handleClick, children}) => {
+const Button = ({handleClick, children, href}) => {
     return (
-        <button className="btn" onClick={handleClick}>{children}</button>
+        <a href={href} className="btn" onClick={e => {
+            e.preventDefault();
+            handleClick(e);
+        }}>{children}</a>
     )
 }
 

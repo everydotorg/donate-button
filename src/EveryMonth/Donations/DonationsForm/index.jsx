@@ -16,8 +16,11 @@ const getButtonTextFormatted = (amount, text, currency) => {
   return replaceKeys({amount: ''}, text);
 }
 
+const constructBaseEveryUrl = (company) =>
+  `https://www.every.org/${company}/donate`
+
 const constructEveryUrl = (company, frequency, amount, extras) => {
-  const baseUrl = `https://www.every.org/${company}/donate?frequency=${frequency}&amount=${amount}`
+  const baseUrl = `${constructBaseEveryUrl(company)}?frequency=${frequency}&amount=${amount}`
   const extraParams = Object.keys(extras).reduce((prev, key) => {
     return prev.concat(`&${key}=${extras[key]}`)
   }, '');
@@ -52,7 +55,7 @@ const DonationsForm = ({monthlyDonation}) => {
       if(monthlyDonation) {
         setTriggerAnimation([prevLevel, currLevel])
       }
-      
+
       setDonationAmount('')
       setCustomInputFocus(true);
     }
@@ -60,13 +63,13 @@ const DonationsForm = ({monthlyDonation}) => {
     const handleCustomInputBlur = () => {
       setCustomInputFocus(false);
     }
-  
+
     const handleRadioButtonClick = (amount) => {
       // Custom donation is always the last control
       // If we have a custom donation the previous level is the custom input.
       const prevLevel = customDonation || !donationAmount ? monthly.levels.length : getLevelOfAmount(monthly.levels, donationAmount);
       const currLevel = getLevelOfAmount(monthly.levels, amount);
-      
+
       if(monthlyDonation) {
         setTriggerAnimation([prevLevel, currLevel])
       }
@@ -101,19 +104,19 @@ const DonationsForm = ({monthlyDonation}) => {
           {monthlyDonation &&
           <>
           {monthly?.levels?.map((option, i) => (
-          <RadioButton 
+          <RadioButton
               key={i}
               name="amount"
               text={formText.levels.find(level  => level.amount === option.amount)?.name}
               amount={option.amount}
               selected={donationAmount === option.amount}
-              handleClick={() => handleRadioButtonClick(option.amount)} 
+              handleClick={() => handleRadioButtonClick(option.amount)}
               description={getBoldFormatted(formText.levels.find(level  => level.amount === option.amount)?.description1)}
               image={option.img}
               bgColor={option.bgColor}
             />
             ))}
-            {monthly.allowCustom && <Input 
+            {monthly.allowCustom && <Input
               label={formText.custom.label}
               placeholder={formText.custom.placeholder}
               value={customDonation}
@@ -129,16 +132,16 @@ const DonationsForm = ({monthlyDonation}) => {
           {!monthlyDonation &&
           <>
           {oneTime?.levels?.map((option) => (
-          <RadioButton 
+          <RadioButton
               key={option}
               name="amount"
               amount={option}
               selected={donationAmount === option}
-              handleClick={() => handleRadioButtonClick(option)} 
+              handleClick={() => handleRadioButtonClick(option)}
             />
             ))}
-            {oneTime.allowCustom && <Input 
-              placeholder={formText.custom.placeholder}              
+            {oneTime.allowCustom && <Input
+              placeholder={formText.custom.placeholder}
               value={customDonation}
               setValue={handleInputChange}
               extraClasses={["donations__input--one-time"]}
@@ -148,10 +151,10 @@ const DonationsForm = ({monthlyDonation}) => {
             />}
           </>
           }
-            
+
         </div>
         <div className="donations__submit">
-          <Button handleClick={handleDonateButton}>{getButtonTextFormatted(donationAmount, formText.button, currency)}</Button>
+          <Button href={constructBaseEveryUrl(company)} handleClick={handleDonateButton}>{getButtonTextFormatted(donationAmount, formText.button, currency)}</Button>
           <p className="t-body--small">
             {lang.footer}
           </p>
