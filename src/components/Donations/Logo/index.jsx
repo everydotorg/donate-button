@@ -23,7 +23,7 @@ const Logo = ({monthlyDonation = true}) => {
         <div className="logo">
             <img className="logo__img" src={logo} alt="logo" />
             <div className="t-title logo__title">{logoText.header}</div>
-            <p className="t-body--small">{logoTextFormatted}</p>
+            <p className="t-body--small logo__link">{logoTextFormatted}</p>
         </div>
     )
 }

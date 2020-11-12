@@ -8,6 +8,15 @@
 .logo__img {
     height: 2rem;
     grid-row: 1 / -1;
+    align-self: center;
+}
+
+.logo__title {
+    align-self: start;
+}
+
+.logo__link {
+    align-self: end;
 }
 
 .logo__link:link,
