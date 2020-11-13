@@ -1,27 +1,23 @@
-import everyMonth from './everyMonthWidget'
-import * as serviceWorker from './serviceWorker'
 import WIDGET_MODE from './constants/widgetMode'
 
-// This code would normally be in the host webpage
 const everyMonthOptions = {
-  currency: 'USD', // Currency to display
+  mode: WIDGET_MODE.SPLIT_PANEL,
+  currency: 'USD',
   monthly: {
-    levels: [ // Different choices in monthly donation
+    levels: [
       { amount: '25', bgColor: '#BCD9DD', img: "https://images.unsplash.com/photo-1454425064867-5ba516caf601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" },
       { amount: '50', bgColor: '#F4BF86', img:  "https://images.unsplash.com/photo-1558241048-9cd68a14f4ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"},
       { amount: '100', bgColor: '#A0CBFE', img:  "https://images.unsplash.com/photo-1567346325130-4c4167641eb9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"},
     ],
-    allowCustom: true, // Allow enter custom amount in monthly donation
+    allowCustom: true,
     custom: { bgColor: '#BCD9DD', img: 'https://user-images.githubusercontent.com/36522634/97372531-9b04b180-1892-11eb-9aed-40a8b049d424.jpg'}
   },
   oneTime: {
-    levels: [5, 10, 20, 50, 100, 200], // Different choices in one time donation
-    allowCustom: true, // Allow enter custom amount in one time donation
+    levels: [5, 10, 20, 50, 100, 200],
+    allowCustom: true,
     bgColor: '#BCD9DD',
     img: 'https://images.unsplash.com/photo-1543904856-8257e34283d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80'
   },
-  // Configure action when the user submit the donation in the widget.
-  // You can pass to us the following parameters to customize it or listen to the callback
   onSubmit: {
     charity: 'ffungi',
     params: {
@@ -32,9 +28,6 @@ const everyMonthOptions = {
   // Both ways supported
   // onSubmit: ({amount, frequency}) => { console.log(amount, frequency)},
   i18n: {
-    // Different languages of the widget.
-    // The keys used here (en, es) are the keys used to change the language via Attrs or Javascript.
-    // By default we use the key "en".
     en: {
       company: {
         logo: '',
@@ -159,20 +152,5 @@ const everyMonthOptions = {
   }
 }
 
-// init
-// everyMonth.init(everyMonthOptions)
+export default everyMonthOptions
 
-// init showing
-everyMonth.init({ ...everyMonthOptions, show: true })
-
-// Show/Hide
-// everyMonth.hide()
-// everyMonth.show()
-
-// for dev
-window.everyMonth = everyMonth
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister()

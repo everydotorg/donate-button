@@ -1,16 +1,14 @@
-// import React, { useState, useEffect } from 'react'
-;
 import { useState, useEffect } from 'preact/hooks'
 import appStyles from './styles'
-import { Styled } from '../../../core/Styled'
+import { Styled } from '../Styled/Styled'
 
-import Donations from './Donations';
-import OptionsContext from '../contexts/optionsContext';
-import Description from './Description';
-import DonationsContext from '../contexts/donationsContext';
-import Images from './Images';
-import Company from './Images/Company';
-import WIDGET_MODE from '../constants/widgetMode';
+import Donations from '../Donations';
+import OptionsContext from '../../contexts/optionsContext';
+import Description from '../Description';
+import DonationsContext from '../../contexts/donationsContext';
+import Images from '../Images';
+import Company from '../Images/Company';
+import WIDGET_MODE from '../../constants/widgetMode';
 
 function EveryMonth({ options, hideFn, language, mode }) {
   const hideOnWrapperClick = e => e.target === e.currentTarget && hideFn()

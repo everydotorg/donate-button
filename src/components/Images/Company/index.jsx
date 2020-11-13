@@ -2,7 +2,7 @@
 
 import './company.css';
 
-import logo from '../../logo.svg';
+import logo from '../../../assets/logo.svg';
 import useI18n from '../../../hooks/useI18n';
 
 const Company = () => {

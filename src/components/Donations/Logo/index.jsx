@@ -2,7 +2,7 @@
 import useI18n from '../../../hooks/useI18n';
 import { replaceTagWithComponent } from '../../../helpers/interpolation';
 
-import logo from '../../logo.svg';
+import logo from '../../../assets/logo.svg';
 import './logo.css';
 
 const getLinkFormatted = (logoText, link) => {
