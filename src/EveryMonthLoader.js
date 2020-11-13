@@ -1,43 +1,27 @@
 import { useEffect, useState } from 'preact/hooks'
-import WIDGET_MODE from './constants/widgetMode'
+import defaultOptions from './defaultOptions'
+import experiment from './experiment'
 
-import everyMonthOptions from './defaultOptions'
-
-export const Root = (props) => {
+export const EveryMonthLoader = ({ options = {}, hide }) => {
   const [EveryMonth, widgetLoaded] = useState()
-  const [widgetMode, setWidgetMode] = useState(
-    localStorage.getItem('every-month-widget-mode')
-  )
 
-  if (!widgetMode) {
-    const rnd = Math.random()
-    if (rnd > 0.5) {
-      setWidgetMode(WIDGET_MODE.SPLIT_PANEL)
-      localStorage.setItem('every-month-widget-mode', WIDGET_MODE.SPLIT_PANEL)
-    } else {
-      setWidgetMode(WIDGET_MODE.SINGLE)
-      localStorage.setItem('every-month-widget-mode', WIDGET_MODE.SINGLE)
-    }
-  }
   // when show is set to true and EveryMonth is not loaded, load it
   useEffect(() => {
-    if (props.show && !EveryMonth)
-      import('./components/EveryMonth').then((m) => widgetLoaded(() => m.default))
-  }, [props.show, EveryMonth])
+    if (options.show && !EveryMonth)
+      import('./components/EveryMonth').then((m) =>
+        widgetLoaded(() => m.default)
+      )
+  }, [options.show, EveryMonth])
 
-  if (props.show && !EveryMonth) return 'Loading...' // TODO - nicer loader
+  // Not showing
+  if (!options.show) return null
 
-  if (!props.show || !EveryMonth) return null
+  // Loading
+  if (options.show && !EveryMonth) return 'Loading...' // TODO - nicer loader
 
-  return (
-    <EveryMonth
-      mode={widgetMode}
-      language={props.language}
-      options={props.options || everyMonthOptions}
-      hideFn={props.hideFn}
-      hide={!props.show}
-    />
-  )
+  const finalOptions = { ...defaultOptions, ...experiment(), ...options }
+
+  return <EveryMonth options={finalOptions} hide={hide} />
 }
 
-export default Root
+export default EveryMonthLoader

@@ -1,98 +1,65 @@
+import { render } from 'preact'
+import EveryMonthLoader from './EveryMonthLoader'
 
-import { render } from "preact";
-import EveryMonthLoader from "./EveryMonthLoader"
-
-{/* <every-month-widget> */}
-
+// <every-month-widget>
 
 class EveryMonthWidget extends HTMLElement {
-  mountPoint;
-  componentAttributes = {};
-  componentProperties = {};
-  
+  mountPoint
+  options = {}
+
   connectedCallback() {
-    this.mountReactApp();
+    this.render()
   }
-  
+
   disconnectedCallback() {
-    
-    render(null, this.mountPoint);
+    render(null, this.mountPoint)
   }
-  
+
+  // TEMP while FFungi still uses language attr
   static get observedAttributes() {
-    return ['show', 'options', 'mode', 'language'];
+    return ['language']
   }
-  
   attributeChangedCallback(name, oldVal, newVal) {
-    this.componentAttributes[name] = newVal;
-
-    this.mountReactApp();
-  }
-  
-  get options() {
-    return this.componentProperties.options;
-  }
-  
-  set options(newValue) {
-    this.componentProperties.options = newValue;
-    
-    this.mountReactApp();
-  }
-
-  get show() {
-    return this.componentProperties.show;
-  }
-  
-  set show(newValue) {
-    this.componentProperties.show = newValue;
-    
-    this.mountReactApp();
-  }
-  
-  get language() {
-    return this.componentProperties.language;
-  }
-  
-  set language(newValue) {
-    this.componentProperties.language = newValue;
-    
-    this.mountReactApp();
-  }
-  
-  get mode() {
-    return this.componentProperties.mode;
-  }
-  
-  set mode(newValue) {
-    this.componentProperties.mode = newValue;
-    
-    this.mountReactApp();
-  }
-  
-  reactProps() {
-    return { ...this.componentAttributes, ...this.componentProperties };
-  }
-  
-  mountReactApp() {
-    if (!this.mountPoint) {
-      this.mountPoint = document.createElement('div');
-
-      this.attachShadow({ mode: 'open' }).appendChild(this.mountPoint);
+    if (name === 'language') {
+      this.setOptions({ language: newVal })
+      this.render()
     }
-    render(<EveryMonthLoader { ...this.reactProps() } hideFn={() => this.show = false}/>, this.mountPoint);
+  }
+
+  setOptions(newOptions) {
+    Object.assign(this.options, newOptions)
+    this.render()
+  }
+
+  show() {
+    this.setOptions({ show: true })
+  }
+
+  hide() {
+    this.setOptions({ show: false })
+  }
+
+  mount() {
+    this.mountPoint = document.createElement('div')
+    this.attachShadow({ mode: 'open' }).appendChild(this.mountPoint)
+  }
+
+  render() {
+    if (!this.mountPoint) this.mount()
+    render(
+      <EveryMonthLoader options={this.options} hide={()=>this.hide()} />,
+      this.mountPoint
+    )
 
     this.setTogglebuton()
   }
 
   setTogglebuton() {
-    var everyMonthWidget = document.querySelector('every-month-widget');
-    if(everyMonthWidget){
-      var everyMonthDonate = function(){ everyMonthWidget.setAttribute('show', true); }
-      const buttonToTrigger = document.querySelector('#every-month-donate')
-      buttonToTrigger.addEventListener('click', everyMonthDonate)
-    }
+    const button = document.querySelector('#every-month-donate')
+    if (!button) return
+
+    button.addEventListener('click', ()=>this.show())
   }
 }
 
-window.customElements.define('every-month-widget', EveryMonthWidget);
-
+window.customElements.define('every-month-widget', EveryMonthWidget)

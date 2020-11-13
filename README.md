@@ -7,9 +7,9 @@ Add this code at the bottom of your page, just before the `</body>`
 <every-month-widget/>
 <script>
    var everyMonthWidget = document.querySelector('every-month-widget');
-   everyMonthWidget.options = {
-     ...
-   };
+    component.setOptions({
+        ...
+    })
 </script>
 ```
 
@@ -19,7 +19,7 @@ As a React component
 const EveryMonth = () => {
   const ref = useRef()
   useEffect(() => {
-    if (ref) ref.current.options = {...}
+    if (ref) ref.current.setOptions({...})
   }, [])
 
   return (
@@ -38,36 +38,15 @@ Add `id="every-month-donate"` to your donate button or link. Remove any other `o
 e.g.
 `<a href="/donate">Donate</a>` -> `<a id="every-month-donate">Donate</a>`
 
-## Preferences
-
-You can pass attributes to the tag or set props via javascript to configure preferences in the widget
-
-`show: true | false`: modify this prop to show or hide the widget. This is done automatically if you provide us a button with the `id="every-month-donate"`
-
-`language`: set a language for the widget. By default we use the language of the user browser. 
-__IMPORTANT__: the value of this prop should be a key provided in the options object (See __Configure__ section)
-
-`mode: 'split_panel' | 'single'`: Set type of widget to display
-
-Example: 
-```
-  <every-month-widget mode="single" language="en"></every-month-widget>
-```
-  or
- ```js
-  <script>
-      const component = document.querySelector('every-month-widget')
-      component.language = 'es'
-      component.mode = 'split_mode'
-  </script>
-```
-
 ## Configure
 
 You have to pass a javascript object to configure what we should display in the widget:
 
 ```js
 {
+  show: false,
+  language: 'en',
+  mode: 'split_panel' | 'single' // Set type of widget to display
   currency: 'USD', // Currency to display
   monthly: {
     levels: [ // Different choices in monthly donation
@@ -228,10 +207,10 @@ You should pass this options previous initialization of the widget. Also you can
  ```js
     <script>
       const component = document.querySelector('every-month-widget')
-      component.options = {
+      component.setOptions({
           ...
-      }
-      component.show = true
+      })
+      component.show()
   </script>
 ```
 
