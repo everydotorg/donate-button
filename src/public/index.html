@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <title>FFungi with Every Month</title>
+  </head>
+
+  <body style="background-size: cover; background-repeat: no-repeat">
+    <!-- EVERY MONTH -->
+    <every-month-widget></every-month-widget>
+    <button id="every-month-donate">Show</button>
+
+    <button id="every-month-single">Show Single</button>
+    <button id="every-month-split">Show Split</button>
+    <script>
+      const widget = document.querySelector('every-month-widget')
+
+      document.querySelector('#every-month-single').addEventListener('click', () => {
+        widget.setOptions({
+          mode: 'SINGLE',
+          show: true,
+        })
+      })
+
+      document.querySelector('#every-month-split').addEventListener('click', () => {
+        widget.setOptions({
+          mode: 'SPLIT_PANEL',
+          show: true,
+        })
+      })
+    </script>
+    <!-- EVERY MONTH -->
+    
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>

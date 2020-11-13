@@ -1,5 +1,5 @@
-const { useContext } = require("react")
-const { default: OptionsContext } = require("../contexts/optionsContext")
+import { useContext } from 'preact/hooks'
+import { OptionsContext } from '../contexts/optionsContext'
 
 const defaultI18n = 'en';
 
