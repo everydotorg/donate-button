@@ -1,23 +1,24 @@
 import WIDGET_MODE from './constants/widgetMode'
 
 const everyMonthOptions = {
-  mode: WIDGET_MODE.SPLIT_PANEL,
-  currency: 'USD',
+  currency: 'USD', // Currency to display
   monthly: {
-    levels: [
-      { amount: '25', bgColor: '#BCD9DD', img: "https://images.unsplash.com/photo-1454425064867-5ba516caf601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" },
-      { amount: '50', bgColor: '#F4BF86', img:  "https://images.unsplash.com/photo-1558241048-9cd68a14f4ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"},
-      { amount: '100', bgColor: '#A0CBFE', img:  "https://images.unsplash.com/photo-1567346325130-4c4167641eb9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"},
+    levels: [ // Different choices in monthly donation
+      { amount: '25', bgColor: '#BCD9DD', img: "https://i.ibb.co/m4n7LDq/1.jpg" },
+      { amount: '50', bgColor: '#F4BF86', img:  "https://i.ibb.co/jJ18cFn/2.jpg"},
+      { amount: '100', bgColor: '#A0CBFE', img:  "https://i.ibb.co/qkjmDtC/3.jpg"},
     ],
-    allowCustom: true,
-    custom: { bgColor: '#BCD9DD', img: 'https://user-images.githubusercontent.com/36522634/97372531-9b04b180-1892-11eb-9aed-40a8b049d424.jpg'}
+    allowCustom: true, // Allow enter custom amount in monthly donation
+    custom: { bgColor: '#BCD9DD', img: 'https://i.ibb.co/xXKS8r7/4.jpg'}
   },
   oneTime: {
-    levels: [5, 10, 20, 50, 100, 200],
-    allowCustom: true,
+    levels: [10, 20, 30, 50, 100, 200], // Different choices in one time donation
+    allowCustom: true, // Allow enter custom amount in one time donation
     bgColor: '#BCD9DD',
-    img: 'https://images.unsplash.com/photo-1543904856-8257e34283d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=635&q=80'
+    img: 'https://i.ibb.co/KL1KX7P/5.jpg'
   },
+  // Configure action when the user submit the donation in the widget.
+  // You can pass to us the following parameters to customize it or listen to the callback
   onSubmit: {
     charity: 'ffungi',
     params: {
@@ -28,9 +29,12 @@ const everyMonthOptions = {
   // Both ways supported
   // onSubmit: ({amount, frequency}) => { console.log(amount, frequency)},
   i18n: {
+    // Different languages of the widget.
+    // The keys used here (en, es) are the keys used to change the language via Attrs or Javascript.
+    // By default we use the key "en".
     en: {
       company: {
-        logo: '',
+        logo: 'https://i.ibb.co/1bQwr6L/Logo-FFungi.jpg',
         name: 'Fungi Foundation',
         location: 'Santiago, Chile',
       },
@@ -91,7 +95,7 @@ const everyMonthOptions = {
     },
     es: {
       company: {
-        logo: '',
+        logo: 'https://i.ibb.co/1bQwr6L/Logo-FFungi.jpg',
         name: 'Fundación Fungi',
         location: 'Santiago, Chile',
       },
