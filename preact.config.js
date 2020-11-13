@@ -18,7 +18,9 @@ export default {
     config.output.filename = '[name].js'
 
     if (env.production) {
-      config.output.publicPath = 'https://assets.every.org/every-month/'
+      const vercel = process.env.VERCEL_URL
+      config.output.publicPath = vercel? `https://${vercel}/`: 'https://assets.every.org/every-month/'
+      console.log('Building for', config.output.publicPath)
 
       // Copy assets
       config.plugins.push(
