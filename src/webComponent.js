@@ -1,5 +1,6 @@
 import { render } from 'preact'
 import EveryMonthLoader from './EveryMonthLoader'
+import { loadFonts } from './loadFonts'
 
 // <every-month-widget>
 
@@ -62,4 +63,5 @@ class EveryMonthWidget extends HTMLElement {
   }
 }
 
+loadFonts();
 window.customElements.define('every-month-widget', EveryMonthWidget)
