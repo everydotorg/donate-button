@@ -4,12 +4,16 @@
 Add this code at the bottom of your page, just before the `</body>`
 ```js
 <script src="https://assets.every.org/every-month/bundle.js"/>
-<every-month-widget/>
+
 <script>
-   var everyMonthWidget = document.querySelector('every-month-widget');
-    component.setOptions({
+      // Global object
+      everyMonthWidget.setOptions({
         ...
-    })
+      })
+      everyMonthWidget.showOnClick('#yourSelector')
+
+      // You can set many selectors and override options for a specific one
+      everyMonthWidget.showOnClick('#anotherCoolSelector', { currency: 'ARS' })
 </script>
 ```
 
@@ -26,17 +30,13 @@ const EveryMonth = () => {
     <>
       <script
         type="text/javascript"
-        src="https://assets.every.org/every-month/bundle.jss"
+        src="https://assets.every.org/every-month/bundle.js"
       ></script>
-      <every-month-widget ref={ref} />
+      <div ref={ref} />
     </>
   )
 }
 ```
-
-Add `id="every-month-donate"` to your donate button or link. Remove any other `onClick="..."` or `href="..."`  
-e.g.
-`<a href="/donate">Donate</a>` -> `<a id="every-month-donate">Donate</a>`
 
 ## Configure
 
@@ -53,9 +53,8 @@ You have to pass a javascript object to configure what we should display in the 
       { amount: '25', bgColor: '#BCD9DD', img: "https://images.unsplash.com/photo-1454425064867-5ba516caf601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" },
       { amount: '50', bgColor: '#F4BF86', img:  "https://images.unsplash.com/photo-1558241048-9cd68a14f4ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"},
       { amount: '100', bgColor: '#A0CBFE', img:  "https://images.unsplash.com/photo-1567346325130-4c4167641eb9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"},
+      { amount: 'custom', bgColor: '#BCD9DD', img: 'https://i.ibb.co/xXKS8r7/4.jpg'} // Allow enter custom amount in monthly donation
     ],
-    allowCustom: true, // Allow enter custom amount in monthly donation
-    custom: { bgColor: '#BCD9DD', img: 'https://user-images.githubusercontent.com/36522634/97372531-9b04b180-1892-11eb-9aed-40a8b049d424.jpg'}
   },
   oneTime: {
     levels: [5, 10, 20, 50, 100, 200], // Different choices in one time donation
@@ -137,7 +136,7 @@ You have to pass a javascript object to configure what we should display in the 
         button: 'Donate {{amount}}',
         switch: 'Or make a <action>Monthly donation</action>'
       },
-      footer: 'Fungi Foundation uses our trusted partner Every.org, to power donation processing. You will be directed to Every.org to complete your donation.'
+      footer: 'You will be redirected to a secure page on Every.org to complete your donation.'
     },
     es: {
       company: {
@@ -197,7 +196,7 @@ You have to pass a javascript object to configure what we should display in the 
         button: 'Donar {{amount}}',
         switch: 'O haga una <action>Donación mensual</action>'
       },
-      footer: 'La Fundacion Fungi usa Every.org como socio de confianza para procesar las donaciones. Serás redireccionado a Every.org para completar la donación.'
+      footer: 'Serás redireccionado a Every.org para completar la donación.'
     }
   }
 }
@@ -206,12 +205,18 @@ You have to pass a javascript object to configure what we should display in the 
 You should pass this options previous initialization of the widget. Also you can change them in runtime. Example:
  ```js
     <script>
-      const component = document.querySelector('every-month-widget')
-      component.setOptions({
+      // Ensure that the script was fully loaded before do this 
+      everyMonthWidget.setOptions({
           ...
       })
-      component.show()
+      everyMonthWidget.show()
   </script>
 ```
 
+## API
 
+We expose three functions through the global `everyMonthWidget` object:
+
+ - setOptions({...options}): Function to set/override the configuration of the widget.
+ - showOnClick(selector, specificOptions?): Function to link a selector with the widget. As optional you can pass extra options that would be set only when the user open the widget with that button.
+ - show(): Open the widget with javascript code.

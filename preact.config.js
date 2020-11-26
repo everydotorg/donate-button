@@ -15,7 +15,7 @@ export default {
   webpack(config, env, helpers, options) {
     delete config.entry.polyfills
     config.output.path = path.resolve(__dirname, './docs/every-month')
-    config.output.filename = '[name].js'
+    config.output.filename = 'webComponent.js'
 
     if (env.production) {
       const vercel = process.env.VERCEL_URL
@@ -33,6 +33,7 @@ export default {
     config.plugins[plugHtml.index] = new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html',
+      inject: 'head',
     })
 
     // Remove css modules and add to string loader.
@@ -41,5 +42,5 @@ export default {
       test: /\.css$/,
       use: [{ loader: 'to-string-loader' }, { loader: 'css-loader' }],
     }
-  },
+  }
 }

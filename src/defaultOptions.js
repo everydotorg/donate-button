@@ -5,11 +5,10 @@ const everyMonthOptions = {
   monthly: {
     levels: [ // Different choices in monthly donation
       { amount: '25', bgColor: '#BCD9DD', img: "https://i.ibb.co/m4n7LDq/1.jpg" },
-      { amount: '50', bgColor: '#F4BF86', img:  "https://i.ibb.co/jJ18cFn/2.jpg"},
+      { amount: '50', bgColor: '#F4BF86', img:  "https://i.ibb.co/jJ18cFn/2.jpg", default: true},
       { amount: '100', bgColor: '#A0CBFE', img:  "https://i.ibb.co/qkjmDtC/3.jpg"},
+      { amount: 'custom', bgColor: '#BCD9DD', img: 'https://i.ibb.co/xXKS8r7/4.jpg'}
     ],
-    allowCustom: true, // Allow enter custom amount in monthly donation
-    custom: { bgColor: '#BCD9DD', img: 'https://i.ibb.co/xXKS8r7/4.jpg'}
   },
   oneTime: {
     levels: [10, 20, 30, 50, 100, 200], // Different choices in one time donation
@@ -91,7 +90,7 @@ const everyMonthOptions = {
         button: 'Donate {{amount}}',
         switch: 'Or make a <action>Monthly donation</action>'
       },
-      footer: 'Fungi Foundation uses our trusted partner Every.org, to power donation processing. You will be directed to Every.org to complete your donation.'
+      footer: 'You will be redirected to a secure page on Every.org to complete your donation.'
     },
     es: {
       company: {
@@ -151,7 +150,7 @@ const everyMonthOptions = {
         button: 'Donar {{amount}}',
         switch: 'O haga una <action>Donación mensual</action>'
       },
-      footer: 'La Fundacion Fungi usa Every.org como socio de confianza para procesar las donaciones. Serás redireccionado a Every.org para completar la donación.'
+      footer: 'Serás redireccionado a Every.org para completar la donación.'
     }
   }
 }

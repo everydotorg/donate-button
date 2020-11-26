@@ -1,7 +1,7 @@
 
 
 import { Fragment } from 'preact'
-import { useContext, useState } from 'preact/hooks'
+import { useContext, useState, useEffect } from 'preact/hooks'
 import RadioButton from '../../RadioButton';
 import Input from '../../Input';
 import Button from '../../Button';
@@ -19,7 +19,7 @@ const getButtonTextFormatted = (amount, text, currency) => {
 }
 
 const constructEveryUrl = (company, frequency, amount, mode, extras) => {
-  const baseUrl = `https://www.every.org/${company}/donate?frequency=${frequency}&amount=${amount}&utm_campaign=single-or-split&utm_content=${mode.toLowerCase()}`
+  const baseUrl = `https://www.every.org/${company}/donate?frequency=${frequency}&amount=${amount}&utm_campaign=single-or-split&utm_content=${mode.toLowerCase()}&utm_source=${company}&utm_medium=every-month`
   const extraParams = Object.keys(extras).reduce((prev, key) => {
     return prev.concat(`&${key}=${extras[key]}`)
   }, '');
@@ -48,14 +48,26 @@ const DonationsForm = ({monthlyDonation}) => {
     const lang = useI18n();
     const formText = monthlyDonation ? lang.monthly : lang.oneTime;
 
+    useEffect(() => {
+      const defaultLevel = monthly.levels.find(level => level.default)
+      if(defaultLevel) {
+        handleRadioButtonClick(monthly.levels[0].amount)
+        const defaultSelectionTimeout = setTimeout(() => {
+          handleRadioButtonClick(defaultLevel.amount)
+        })
+  
+        return () => clearTimeout(defaultSelectionTimeout)
+      }
+    }, [])
+
     const handleCustomInputFocus = () => {
       const prevLevel = getLevelOfAmount(monthly.levels, donationAmount);
-      const currLevel = monthly.levels.length;
+      const currLevel = monthly.levels.length - 1;
       if(monthlyDonation) {
         setTriggerAnimation([prevLevel, currLevel])
       }
       
-      setDonationAmount('')
+      setDonationAmount(customDonation)
       setCustomInputFocus(true);
     }
 
@@ -66,7 +78,7 @@ const DonationsForm = ({monthlyDonation}) => {
     const handleRadioButtonClick = (amount) => {
       // Custom donation is always the last control
       // If we have a custom donation the previous level is the custom input.
-      const prevLevel = customDonation || !donationAmount ? monthly.levels.length : getLevelOfAmount(monthly.levels, donationAmount);
+      const prevLevel = customDonation || !donationAmount ? monthly.levels.length - 1 : getLevelOfAmount(monthly.levels, donationAmount);
       const currLevel = getLevelOfAmount(monthly.levels, amount);
       
       if(monthlyDonation) {
@@ -97,12 +109,15 @@ const DonationsForm = ({monthlyDonation}) => {
     const formClasses = ["donations__form"]
       .concat([monthlyDonation ? "donations__form--monthly" : "donations__form--one-time"])
 
+    const fixedLevels = monthly.levels.filter(level => level.amount !== 'custom')
+    const customLevel = monthly.levels.find(level => level.amount === 'custom')
+
     return (
       <Fragment>
         <div className={formClasses.join(' ')}>
           {monthlyDonation &&
           <Fragment>
-          {monthly.levels.map((option, i) => (
+          {fixedLevels.map((option, i) => (
           <RadioButton 
               key={i}
               name="amount"
@@ -115,7 +130,7 @@ const DonationsForm = ({monthlyDonation}) => {
               bgColor={option.bgColor}
             />
             ))}
-            {monthly.allowCustom && <Input 
+            {customLevel && <Input 
               label={formText.custom.label}
               placeholder={formText.custom.placeholder}
               value={customDonation}

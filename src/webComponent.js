@@ -1,67 +1,63 @@
-import { render } from 'preact'
-import EveryMonthLoader from './EveryMonthLoader'
+import { render as prRender } from 'preact'
 import { loadFonts } from './loadFonts'
+import EveryMonthLoader from './EveryMonthLoader'
 
-// <every-month-widget>
+let defaultOptions = {
+  currency: 'USD'
+}
+let baseOptions = {}
+let instanceOptions = {}
 
-class EveryMonthWidget extends HTMLElement {
-  mountPoint
-  options = {}
+let mountPoint
 
-  connectedCallback() {
-    this.render()
+const setOptions = (newOptions) => {
+  Object.assign(baseOptions, newOptions)
+  render()
+}
+
+const show = () => {
+  setOptions({ show: true })
+}
+
+const hide = () => {
+  setOptions({ show: false })
+}
+
+const mount = () => {
+  // We don't attach directly to body because is hiding the elements inside the body for some reason.
+  const shadowRoot = document.createElement('div')
+  document.body.appendChild(shadowRoot)
+
+  mountPoint = document.createElement('div')
+  shadowRoot.attachShadow({ mode: 'open' }).appendChild(mountPoint)
+}
+
+const render = () => {
+  if (!mountPoint) mount()
+  const options = {
+    ...defaultOptions,
+    ...baseOptions,
+    ...instanceOptions
   }
+  prRender(
+    <EveryMonthLoader options={options} hide={() => hide()} />,
+    mountPoint
+  )
+}
 
-  disconnectedCallback() {
-    render(null, this.mountPoint)
-  }
+const setToggleButton = (selector, options) => {
+  const button = document.querySelector(selector)
+  if (!button) return
 
-  // TEMP while FFungi still uses language attr
-  static get observedAttributes() {
-    return ['language']
-  }
-  attributeChangedCallback(name, oldVal, newVal) {
-    if (name === 'language') {
-      this.setOptions({ language: newVal })
-      this.render()
-    }
-  }
-
-  setOptions(newOptions) {
-    Object.assign(this.options, newOptions)
-    this.render()
-  }
-
-  show() {
-    this.setOptions({ show: true })
-  }
-
-  hide() {
-    this.setOptions({ show: false })
-  }
-
-  mount() {
-    this.mountPoint = document.createElement('div')
-    this.attachShadow({ mode: 'open' }).appendChild(this.mountPoint)
-  }
-
-  render() {
-    if (!this.mountPoint) this.mount()
-    render(
-      <EveryMonthLoader options={this.options} hide={()=>this.hide()} />,
-      this.mountPoint
-    )
-
-    this.setTogglebuton()
-  }
-
-  setTogglebuton() {
-    const button = document.querySelector('#every-month-donate')
-    if (!button) return
-
-    button.addEventListener('click', ()=>this.show())
-  }
+  button.addEventListener('click', () => {
+    instanceOptions = { ...options }
+    show()
+  })
 }
 
 loadFonts();
-window.customElements.define('every-month-widget', EveryMonthWidget)
+window['everyMonthWidget'] = {
+  setOptions,
+  show,
+  showOnClick: setToggleButton
+}

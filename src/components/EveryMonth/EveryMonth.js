@@ -13,14 +13,19 @@ import WIDGET_MODE from '../../constants/widgetMode'
 function EveryMonth({ options, hide }) {
   const hideOnWrapperClick = (e) => e.target === e.currentTarget && hide()
   const [monthlyDonation, setMonthlyDonation] = useState(true)
-  const [donationAmount, setDonationAmount] = useState('50')
+  const [donationAmount, setDonationAmount] = useState()
   const [customDonation, setCustomDonation] = useState('')
 
   const [triggerAnimation, setTriggerAnimation] = useState([-1, 0])
   const [monthlyLevels, setMonthlyLevels] = useState(
-    options.monthly.levels.concat(
-      options.monthly.allowCustom ? [options.monthly.custom] : []
-    )
+    // custom must be the last level
+    options.monthly.levels.sort((a,b) => {
+      if(isNaN(a)) {
+        return 1
+      }
+  
+      return 0
+    })
   )
 
   useEffect(() => {

@@ -13,7 +13,7 @@
     "dev": "preact watch -c ./preact.config.js --no-prerender --no-sw"
   },
   "keywords": [],
-  "author": "Zouhir <zouhir@zouhir.org>",
+  "author": "P22 Studio",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.12.3",
