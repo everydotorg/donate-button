@@ -15,7 +15,6 @@
 
   <button id="every-month-single">Show Single</button>
   <button id="every-month-split">Show Split</button>
-
   <!-- EVERY MONTH -->
 
   <!--
@@ -40,8 +39,6 @@
           { amount: '100', bgColor: '#A0CBFE', img: "https://i.ibb.co/qkjmDtC/3.jpg" },
           { amount: 'custom', bgColor: '#BCD9DD', img: 'https://i.ibb.co/xXKS8r7/4.jpg' }
         ],
-        allowCustom: true, // Allow enter custom amount in monthly donation
-        custom: { bgColor: '#BCD9DD', img: 'https://i.ibb.co/xXKS8r7/4.jpg' }
       },
       oneTime: {
         levels: [10, 20, 30, 50, 100, 200], // Different choices in one time donation
@@ -188,10 +185,9 @@
       }
     })
 
-    everyMonthWidget.showOnClick('#every-month-single')
-
-    everyMonthWidget.showOnClick('#every-month-split', { currency: 'ARS' })
-
+    everyMonthWidget.showOnClick('#every-month-donate')
+    everyMonthWidget.showOnClick('#every-month-single', { mode: 'SINGLE' })
+    everyMonthWidget.showOnClick('#every-month-split', { mode: 'SPLIT_PANEL' })
   </script>
 </body>
 
