@@ -2,6 +2,7 @@
     grid-row: 1 / 2;
     position: relative;
     background-size: cover;
+    background-position: center;
 }
 
 .images__img {
