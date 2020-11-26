@@ -15,7 +15,7 @@ export default {
   webpack(config, env, helpers, options) {
     delete config.entry.polyfills
     config.output.path = path.resolve(__dirname, './docs/every-month')
-    config.output.filename = 'webComponent.js'
+    config.output.filename = 'every.js'
 
     if (env.production) {
       const vercel = process.env.VERCEL_URL
