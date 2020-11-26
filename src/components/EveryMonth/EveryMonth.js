@@ -9,6 +9,8 @@ import DonationsContext from '../../contexts/donationsContext'
 import Images from '../Images'
 import Company from '../Images/Company'
 import WIDGET_MODE from '../../constants/widgetMode'
+import Button from '../Button'
+import DonateButton from '../Donations/DonateButton'
 
 function EveryMonth({ options, hide }) {
   const hideOnWrapperClick = (e) => e.target === e.currentTarget && hide()
@@ -134,6 +136,9 @@ function EveryMonth({ options, hide }) {
                   />
                 </div>
               )}
+              <div className="u-hide-desktop btn-mobile">
+                <DonateButton monthlyDonation={monthlyDonation} extraClasses={['u-hide-desktop']} />
+              </div>
             </DonationsContext.Provider>
           </OptionsContext.Provider>
         </div>

@@ -1,9 +1,9 @@
 ;
 import './button.css';
 
-const Button = ({handleClick, children}) => {
+const Button = ({handleClick, extraClasses, children}) => {
     return (
-        <button className="btn" onClick={handleClick}>{children}</button>
+        <button className={["btn"].concat(extraClasses).join(' ')} onClick={handleClick}>{children}</button>
     )
 }
 

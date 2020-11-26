@@ -8,6 +8,7 @@ import useI18n from '../../../hooks/useI18n';
 import { replaceKeys, replaceTagWithComponent } from '../../../helpers/interpolation';
 import isFunction from '../../../helpers/is-function';
 import DonationsContext from '../../../contexts/donationsContext';
+import DonateButton from '../DonateButton';
 
 const getButtonTextFormatted = (amount, text, currency) => {
   if(amount && !isNaN(amount)){
@@ -166,7 +167,8 @@ const DonationsForm = ({monthlyDonation}) => {
             
         </div>
         <div className="donations__submit">
-          <Button handleClick={() => handleDonateButton(mode)}>{getButtonTextFormatted(donationAmount, formText.button, currency)}</Button>
+          {/* <Button extraClasses={['u-hide-mobile']} handleClick={() => handleDonateButton(mode)}>{getButtonTextFormatted(donationAmount, formText.button, currency)}</Button> */}
+          <DonateButton extraClasses={['u-hide-mobile']} />
           <p className="t-body--small">
             {lang.footer}
           </p>

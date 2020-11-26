@@ -1,6 +1,7 @@
 .btn {
     border: none;
     outline: none;
+    width: 100%;
 
     font-family: inherit;
     font-size: 1rem;
@@ -26,7 +27,7 @@
 
 @media only screen and (max-width: 64em) {
     .btn {
-        font-size: 0.75rem;
-        padding: 0.75rem 0;
+        font-size: 0.875rem;
+        padding: 1rem 0;
     }
 }

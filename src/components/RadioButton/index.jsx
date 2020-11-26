@@ -15,14 +15,14 @@ const RadioButton = ({name, text, amount, selected, handleClick, description, im
         <div className={groupClasses.join(' ')}>
             <input onClick={handleClick} className="radio-button__input" type="radio" name={name} id={amount} />
             <label className={labelClasses.join(' ')} htmlFor={amount}>
-                {text && <span className="t-title radio-button__text">{text}</span>}
-                <span className="t-title radio-button__amount">${amount}</span>
+                {text && <span className="t-input radio-button__text">{text}</span>}
+                <span className="t-input radio-button__amount">${amount}</span>
             </label>
             {description && <div style={{backgroundColor: bgColor}} className="radio-button__extra">
                 <div className="radio-button__img-container">
                     <img  className="radio-button__image" src={image} alt={text} />
                 </div>
-                <p className="t-body--small radio-button__description">{description}</p>
+                <p className="t-body radio-button__description">{description}</p>
             </div>}
         </div>
     )
