@@ -1,5 +1,5 @@
-import React from 'react'
+import {  createContext } from 'preact'
 
-export const OptionsContext = React.createContext({});
+export const OptionsContext = createContext({});
 
 export default OptionsContext;

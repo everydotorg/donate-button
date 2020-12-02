@@ -1,5 +1,6 @@
-import React from 'react'
+import {  createContext } from 'preact'
 
-export const DonationsContext = React.createContext();
+
+export const DonationsContext = createContext();
 
 export default DonationsContext;

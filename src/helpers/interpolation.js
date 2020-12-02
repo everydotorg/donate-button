@@ -1,6 +1,5 @@
 
-
-import React from 'react'
+import { Fragment } from 'preact'
 
 /**
  * We identify keys in text when them are between {{}}
@@ -30,8 +29,8 @@ export const replaceTagWithComponent = (text, tag, Component, props) => {
     const component = <Component {...props}>{betweenTags}</Component>
     
     return (
-        <>
+        <Fragment>
             {prevText}{component}{afterText}
-        </>
+        </Fragment>
     )
 }

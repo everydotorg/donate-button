@@ -1,0 +1,90 @@
+.input {
+    position: relative;
+    display: flex;
+    /* padding: 1rem; */
+}
+
+.input__container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.input--selected {
+    border-color: #000;
+}
+
+@media only screen and (max-width: 37.5em) {
+    .input--selected .input__description {
+        padding: 1rem;
+        height: auto;
+        visibility: visible;
+        border-top: 1px solid #000;
+    }
+}
+
+.input__description {
+    visibility: hidden;
+    height: 0;
+    transition: all 0.2s;
+}
+
+.no-line-height {
+    line-height: 1;
+}
+
+.input__input {
+    border: none;
+    font-family: inherit;
+    border-bottom: 1px solid transparent;
+    background-color: #f3f6f6;
+
+    width: 100%;
+    padding: 1rem 4.5rem 1rem 3rem;
+    outline: none;
+
+    transition: all 0.4s;
+}
+
+.input__input::placeholder {
+    opacity: 0.4;
+    font-weight: 500;
+}
+
+.input--filled .input__input,
+.input__input:focus {
+    background: #fff;
+}
+
+.input--filled {
+    border: 1px solid rgba(0, 0, 0);
+    background: #fff;
+}
+
+.no-line-height {
+    line-height: 1;
+}
+
+@media only screen and (max-width: 64em) {
+    .input__input {
+        padding: 0.75rem 4rem 0.75rem 2.5rem;
+    }
+}
+
+.input__prefix {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    opacity: 0.4;
+    font-weight: 500;
+    transform: translateY(-50%);
+}
+
+.input__suffix {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+}
