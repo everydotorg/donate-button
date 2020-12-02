@@ -7,7 +7,7 @@
   "module": "dist/index.m.js",
   "source": "components/hello-world/index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest",
+    "test": "NODE_ENV=test ava",
     "build": "preact build --no-prerender --clean  --no-sw",
     "serve": "preact serve",
     "dev": "preact watch -c ./preact.config.js --no-prerender --no-sw"
@@ -16,6 +16,7 @@
   "author": "P22 Studio",
   "license": "MIT",
   "devDependencies": {
+    "@ava/babel": "^1.0.1",
     "@babel/core": "^7.12.3",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-decorators": "^7.12.1",
@@ -25,13 +26,14 @@
     "@babel/plugin-transform-react-jsx": "^7.12.5",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-stage-1": "^7.8.3",
+    "@babel/register": "^7.12.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-plugin-jsx-pragmatic": "^1.0.2",
     "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "eslint": "^4.5.0",
+    "esm": "^3.2.25",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^21.2.1",
     "microbundle": "^0.6.0",
     "node-sass": "^4.5.3",
     "preact-cli": "^3.0.3",
@@ -41,6 +43,8 @@
     "to-string-loader": "^1.1.6"
   },
   "dependencies": {
+    "@testing-library/preact": "^2.0.1",
+    "ava": "^3.13.0",
     "preact": "^10.5.5",
     "react-lib-adler32": "^1.0.3"
   },
