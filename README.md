@@ -1,4 +1,7 @@
-# Every month widget
+# Every.org Donate Button
+For nonprofits — the simplest way to give your supporters a beautiful donation experience. This button opens a donation flow through [Every.org](https://www.every.org/nonprofits).
+
+See live example here: https://every-month.vercel.app/
 
 ## Use
 Add this code at the bottom of your page, just before the `</body>`
@@ -8,7 +11,7 @@ Add this code at the bottom of your page, just before the `</body>`
 <script>
       // Global object
       everyMonthWidget.setOptions({
-        ...
+        ... // See below for configuration options
       })
       everyMonthWidget.showOnClick('#yourSelector')
 
@@ -62,10 +65,10 @@ You have to pass a javascript object to configure what we should display in the 
         // Configure action when the user submit the donation in the widget.
         // You can pass to us the following parameters to customize it or listen to the callback
         onSubmit: {
-          charity: 'your-foundation',
+          charity: 'your-foundation', // Your Every.org URL slug
           params: {
-            share_info: 1,
-            no_exit: 1,
+            share_info: 1, // Share info with nonprofit checked by default
+            no_exit: 1, // Disallow exiting from donation flow to Every.org
           }
         },
         // Both ways supported
