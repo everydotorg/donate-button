@@ -1,4 +1,7 @@
-# Every month widget
+# Every.org Donate Button
+For nonprofits — the simplest way to give your supporters a beautiful donation experience. This button opens a donation flow through [Every.org](https://www.every.org/nonprofits).
+
+See live example here: https://every-month.vercel.app/
 
 ## Use
 Add this code at the bottom of your page, just before the `</body>`
