@@ -33,7 +33,6 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^21.2.1",
     "microbundle": "^0.6.0",
-    "node-sass": "^4.5.3",
     "preact-cli": "^3.0.3",
     "preact-render-to-string": "^5.1.11",
     "sass-loader": "^6.0.6",
