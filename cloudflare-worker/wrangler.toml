@@ -4,3 +4,7 @@ account_id = "e1933980857170d614172c9554ce9691"
 route = "assets.every.org/donate-button/*"
 zone_id = "93f57bb8cff131d9b046859139777d69"
 webpack_config = "webpack.config.js"
+
+kv_namespaces = [
+  { binding = "CLIENT_DATA_KV", id = "b0fa461036ec43fab109cadd61c27b72" }
+]
