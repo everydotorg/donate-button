@@ -6,5 +6,5 @@ declare global {
 }
 
 addEventListener("fetch", (event) => {
-  event.respondWith(handleRequest(event.request, CLIENT_DATA_KV, fetch));
+  event.respondWith(handleRequest(event.request, CLIENT_DATA_KV));
 });
