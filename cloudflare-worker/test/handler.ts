@@ -1,7 +1,8 @@
-import { CURRENT_VERSION_URL, handleRequest } from "../src/handler";
+import { LATEST_BASE_URL, handleRequest } from "../src/handler";
 import { NamespaceValue, namespaceValueCodec } from "../src/helpers/codecs";
-import test, { beforeEach } from "ava";
-import { expectation, fake } from "sinon";
+import test from "ava";
+import { fake } from "sinon";
+import { pathJoinToUrl } from "../src/helpers/url";
 
 const UNSUPPORTED_METHODS = [
   "HEAD",
@@ -24,7 +25,6 @@ UNSUPPORTED_METHODS.forEach((method) => {
   });
 });
 
-declare const global: WorkerGlobalScope;
 test("Saves and fetches CURRENT_VERSION if no client found", async (t) => {
   const mockKv = { get: fake.returns(null), put: fake() };
   const fetchReturn = new Response("yay", { status: 200 });
@@ -32,14 +32,16 @@ test("Saves and fetches CURRENT_VERSION if no client found", async (t) => {
 
   const clientId = "nonexistentClientId";
   const result = await handleRequest(
-    new Request(`/donate-button/${clientId}.js`, { method: "GET" }),
+    new Request(`/donate-button/${clientId}/bundle.js`, { method: "GET" }),
     (mockKv as unknown) as KVNamespace,
     mockFetch
   );
 
-  t.truthy(
-    mockKv.get.calledOnceWithExactly(clientId),
-    "Called KV with correct key"
+  t.truthy(mockKv.get.calledOnce, "Got value from KV with correct key");
+  t.deepEqual(
+    mockKv.get.firstCall.args,
+    [clientId],
+    "Got value for the correct client ID"
   );
 
   t.truthy(mockKv.put.calledOnce, "Called put once");
@@ -48,13 +50,16 @@ test("Saves and fetches CURRENT_VERSION if no client found", async (t) => {
   t.is(putArgs[0], clientId, "Called put for proper client ID");
   t.is(
     JSON.parse(putArgs[1]).bundleUrl,
-    CURRENT_VERSION_URL.toString(),
+    LATEST_BASE_URL.toString(),
     "kv put called with proper bundle URL"
   );
 
-  t.truthy(
-    mockFetch.calledOnceWithExactly(CURRENT_VERSION_URL.toString()),
-    "fetch called once with CURRENT_VERSION_URL"
+  const expectedUrl = pathJoinToUrl(LATEST_BASE_URL, "bundle.js");
+  t.truthy(mockFetch.calledOnce, "fetch called once");
+  t.deepEqual(
+    mockFetch.firstCall.args,
+    [expectedUrl.toString()],
+    "fetch called with proper url"
   );
   t.is(result, fetchReturn, "Returns whatever fetch returned");
 });
@@ -71,19 +76,25 @@ test("Fetches proper version from kv if client found", async (t) => {
 
   const clientId = "someClientId";
   const result = await handleRequest(
-    new Request(`/donate-button/${clientId}.js`, { method: "GET" }),
+    new Request(`/donate-button/${clientId}/bundle.js`, { method: "GET" }),
     (mockKv as unknown) as KVNamespace,
     mockFetch
   );
-  t.truthy(
-    mockKv.get.calledOnceWithExactly(clientId),
-    "Called KV with correct key"
+  t.truthy(mockKv.get.calledOnce, "Got config from KV oncewith correct key");
+  t.deepEqual(
+    mockKv.get.firstCall.args,
+    [clientId],
+    "Cot config from KV with the correct key"
   );
   t.truthy(mockKv.put.notCalled, "Did not call put");
 
-  t.truthy(
-    mockFetch.calledOnceWithExactly(clientBundleUrl.toString()),
-    "fetch called once with client bundle URL"
+  const expectedUrl = pathJoinToUrl(clientBundleUrl, "bundle.js");
+
+  t.truthy(mockFetch.calledOnce, "fetch called once with client bundle URL");
+  t.deepEqual(
+    mockFetch.firstCall.args,
+    [expectedUrl.toString()],
+    "fetch called once with the proper proxied url"
   );
   t.is(result, fetchReturn, "Returns whatever fetch returned");
 });
