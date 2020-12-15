@@ -3,10 +3,12 @@ import { namespaceValueCodec } from "./helpers/codecs";
 import { isLeft as couldNotDecode } from "fp-ts/Either";
 
 export const CURRENT_VERSION_URL = new URL(
-  "https://assets.every.org/every-month/bundle.js"
+  "https://assets.every.org/every-month"
 );
 
-const bundlePathRegexp = pathToRegexp("/donate-button/:clientId([a-z0-9]+).js");
+const bundlePathRegexp = pathToRegexp(
+  "/donate-button/:clientId([a-z0-9]+):pathRest*"
+);
 type Fetch = typeof fetch;
 
 export async function handleRequest(
@@ -18,19 +20,26 @@ export async function handleRequest(
   if (request.method !== "GET") {
     return resp404;
   }
-  const match = bundlePathRegexp.exec(new URL(request.url).pathname);
+  const requestUrl = new URL(request.url);
+  const match = bundlePathRegexp.exec(requestUrl.pathname);
   if (!match) {
     return resp404;
   }
-  const clientId = match[1];
+  const [clientId, pathRest] = match;
   const clientValueRaw = await kvNamespace.get(clientId);
   const clientValue =
     clientValueRaw && namespaceValueCodec.decode(clientValueRaw);
-  const urlToProxy = clientValue
-    ? couldNotDecode(clientValue)
-      ? CURRENT_VERSION_URL
-      : clientValue.right.bundleUrl
-    : CURRENT_VERSION_URL;
+  const urlToProxy = new URL(
+    `${
+      clientValue
+        ? couldNotDecode(clientValue)
+          ? CURRENT_VERSION_URL
+          : clientValue.right.bundleUrl
+        : CURRENT_VERSION_URL
+    }${pathRest || ""}`
+  );
+  urlToProxy.search = requestUrl.search;
+  urlToProxy.hash = requestUrl.hash;
 
   if (!clientValue) {
     kvNamespace.put(
