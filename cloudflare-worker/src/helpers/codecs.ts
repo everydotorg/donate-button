@@ -12,7 +12,8 @@ import {
 } from "io-ts";
 
 /**
- * Codec that takes an object to encode as JSON
+ * Codec that when decoded validates that an input is a JSON object encoded as a
+ * string, and when encoded flushes an object back down to a JSON string
  */
 export const jsonStringCodec = new Type<TypeOf<typeof UnknownRecord>, string>(
   "JSONString",
@@ -31,6 +32,9 @@ export const jsonStringCodec = new Type<TypeOf<typeof UnknownRecord>, string>(
   }
 );
 
+/**
+ * Codec that when decoded validates that a given string is a valid URL
+ */
 export const urlCodec = new Type<URL, string>(
   "URL",
   function isUrl(value): value is URL {
@@ -48,10 +52,17 @@ export const urlCodec = new Type<URL, string>(
   }
 );
 
+/**
+ * Codec that validates and decodes input values as stored in the client data
+ * namespace
+ */
 export const namespaceValueCodec = jsonStringCodec.pipe(
   intersection([
     type({ bundleUrl: urlCodec }),
     partial({ clientName: string, notes: string }),
   ])
 );
+/**
+ * Shape of values stored in the client data namespace
+ */
 export type NamespaceValue = TypeOf<typeof namespaceValueCodec>;
