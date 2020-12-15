@@ -1,0 +1,7 @@
+name = "cloudflare-worker"
+type = "webpack"
+account_id = "e1933980857170d614172c9554ce9691"
+workers_dev = true
+route = ""
+zone_id = "93f57bb8cff131d9b046859139777d69"
+webpack_config = "webpack.config.js"
