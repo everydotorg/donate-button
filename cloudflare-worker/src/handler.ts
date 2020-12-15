@@ -3,7 +3,7 @@ import { namespaceValueCodec } from "./helpers/codecs";
 import { isLeft as couldNotDecode } from "fp-ts/Either";
 
 export const CURRENT_VERSION_URL = new URL(
-  "https://assets.every.org/donate-button-v2.js"
+  "https://assets.every.org/every-month/bundle.js"
 );
 
 const bundlePathRegexp = pathToRegexp("/donate-button/:clientId([a-z0-9]+).js");
