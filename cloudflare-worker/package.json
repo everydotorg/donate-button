@@ -1,7 +1,7 @@
 {
-  "name": "pname",
+  "name": "donate-button-cloudflare-worker",
   "version": "1.0.0",
-  "description": "Cloudflare worker TypeScript template",
+  "description": "Cloudflare worker for serving the Every.org donate button at assets.every.org",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
