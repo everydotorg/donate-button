@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.base.json",
-  "compilerOptions": {},
+  "compilerOptions": {"noEmit": true},
   "include": ["./"],
   "references": [{ "path": "../tsconfig.json" }]
 }

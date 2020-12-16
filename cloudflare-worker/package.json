@@ -8,8 +8,7 @@
     "dev": "NODE_ENV=development npm run build",
     "lint": "xo",
     "lint:fix": "xo --fix",
-    "test": "ava",
-    "transpile": "tsc --project ./test"
+    "test": "ava"
   },
   "author": "author",
   "license": "MIT OR Apache-2.0",
