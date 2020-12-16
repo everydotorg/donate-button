@@ -8,7 +8,6 @@
     "dev": "NODE_ENV=development npm run build",
     "lint": "xo",
     "lint:fix": "xo --fix",
-    "test:clean": "rimraf ./transpiled/src ./transpiled/test",
     "test": "ava",
     "transpile": "tsc --project ./test"
   },
