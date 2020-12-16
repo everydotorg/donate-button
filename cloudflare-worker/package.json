@@ -1,6 +1,6 @@
 {
   "name": "donate-button-cloudflare-worker",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Cloudflare worker for serving the Every.org donate button at assets.every.org",
   "main": "index.js",
   "scripts": {
