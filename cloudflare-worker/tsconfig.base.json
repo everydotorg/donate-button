@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "lib": ["esnext", "webworker"],
+    "alwaysStrict": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["@cloudflare/workers-types"],
+    "baseUrl": "."
+  }
+}
