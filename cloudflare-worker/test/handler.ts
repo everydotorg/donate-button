@@ -1,8 +1,9 @@
-import { LATEST_BASE_URL, handleRequest } from "../src/handler";
-import { NamespaceValue, namespaceValueCodec } from "../src/helpers/codecs";
 import test from "ava";
 import { fake } from "sinon";
-import { pathJoinToUrl } from "../src/helpers/url";
+
+import { LATEST_BASE_URL, handleRequest } from "src/handler";
+import { NamespaceValue, namespaceValueCodec } from "src/helpers/codecs";
+import { pathJoinToUrl } from "src/helpers/url";
 
 const UNSUPPORTED_METHODS = [
   "HEAD",

@@ -1,4 +1,4 @@
-import { handleRequest } from "./handler";
+import { handleRequest } from "src/handler";
 
 declare global {
   // keys are client ids, values are of type described by namespaceValueCodec

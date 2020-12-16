@@ -1,8 +1,8 @@
 import { pathToRegexp } from "path-to-regexp";
 import { isLeft as couldNotDecode } from "fp-ts/Either";
 
-import { namespaceValueCodec } from "./helpers/codecs";
-import { pathJoinToUrl } from "./helpers/url";
+import { namespaceValueCodec } from "src/helpers/codecs";
+import { pathJoinToUrl } from "src/helpers/url";
 
 /**
  * Base URL of the most recent bundle's root; used as a default for clients that
