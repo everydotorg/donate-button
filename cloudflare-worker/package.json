@@ -36,6 +36,7 @@
     ],
     "require": [
       "ts-node/register",
+      "tsconfig-paths/register",
       "./test/_setup.ts"
     ]
   },
