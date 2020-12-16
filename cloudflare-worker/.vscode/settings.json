@@ -1,0 +1,22 @@
+{
+  "editor.formatOnSave": true,
+  "xo.enable": true,
+  "xo.format.enable": true,
+
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+
+  // formatting
+  "[typescript]": {
+    "editor.defaultFormatter": "samverschueren.linter-xo"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "samverschueren.linter-xo"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "samverschueren.linter-xo"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "samverschueren.linter-xo"
+  }
+}

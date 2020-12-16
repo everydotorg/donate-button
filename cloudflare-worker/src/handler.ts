@@ -1,14 +1,14 @@
-import { pathToRegexp } from "path-to-regexp";
-import { isLeft as couldNotDecode } from "fp-ts/Either";
+import {isLeft as couldNotDecode} from 'fp-ts/Either';
+import {pathToRegexp} from 'path-to-regexp';
 
-import { namespaceValueCodec } from "./helpers/codecs";
-import { pathJoinToUrl } from "./helpers/url";
+import {namespaceValueCodec} from 'src/helpers/codecs';
+import {pathJoinToUrl} from 'src/helpers/url';
 
 /**
  * Base URL of the most recent bundle's root; used as a default for clients that
  * do not yet have an assigned version for their bundle
  */
-export const LATEST_BASE_URL = new URL("https://assets.every.org/every-month");
+export const LATEST_BASE_URL = new URL('https://assets.every.org/every-month');
 
 /**
  * GET requests are expected to come to
@@ -22,7 +22,7 @@ export const LATEST_BASE_URL = new URL("https://assets.every.org/every-month");
  * version
  */
 const bundlePathRegexp = pathToRegexp(
-  "/donate-button/:clientId([a-z0-9]+)/:pathRest*"
+	'/donate-button/:clientId([a-z0-9]+)/:pathRest*'
 );
 type Fetch = typeof fetch;
 
@@ -37,50 +37,52 @@ declare const global: WorkerGlobalScope;
  * JavaScript bundle for the given client ID
  */
 export async function handleRequest(
-  request: Request,
-  kvNamespace: KVNamespace,
-  fetch: Fetch = global.fetch
+	request: Request,
+	kvNamespace: KVNamespace,
+	fetch: Fetch = global.fetch
 ): Promise<Response> {
-  const resp404 = new Response("Not found", { status: 404 });
-  if (request.method !== "GET") {
-    return resp404;
-  }
-  const requestUrl = new URL(request.url);
-  const match = bundlePathRegexp.exec(requestUrl.pathname);
-  if (!match) {
-    return resp404;
-  }
-  const [_, clientId, pathRest] = match;
-  const clientValueRaw = await kvNamespace.get(clientId);
-  const clientValue =
-    clientValueRaw && namespaceValueCodec.decode(clientValueRaw);
+	const resp404 = new Response('Not found', {status: 404});
+	if (request.method !== 'GET') {
+		return resp404;
+	}
 
-  const baseUrlToProxy = clientValue
-    ? couldNotDecode(clientValue)
-      ? LATEST_BASE_URL
-      : clientValue.right.bundleUrl
-    : LATEST_BASE_URL;
+	const requestUrl = new URL(request.url);
+	const match = bundlePathRegexp.exec(requestUrl.pathname);
+	if (!match) {
+		return resp404;
+	}
 
-  // construct final URL to proxy to
-  const searchParams = new URLSearchParams([
-    ...baseUrlToProxy.searchParams.entries(),
-    ...requestUrl.searchParams.entries(),
-  ]);
-  const hash = requestUrl.hash || baseUrlToProxy.hash;
-  const urlToProxy = pathJoinToUrl(baseUrlToProxy, pathRest);
-  urlToProxy.search = searchParams.toString();
-  urlToProxy.hash = hash;
+	const [_, clientId, pathRest] = match;
+	const clientValueRaw = await kvNamespace.get(clientId);
+	const clientValue =
+		clientValueRaw && namespaceValueCodec.decode(clientValueRaw);
 
-  if (!clientValue) {
-    kvNamespace.put(
-      clientId,
-      namespaceValueCodec.encode({ bundleUrl: baseUrlToProxy })
-    );
-  } else if (couldNotDecode(clientValue)) {
-    console.log(
-      "Client value was invalid, defaulting to current version but not overwriting previous value"
-    );
-  }
+	const baseUrlToProxy = clientValue
+		? couldNotDecode(clientValue)
+			? LATEST_BASE_URL
+			: clientValue.right.bundleUrl
+		: LATEST_BASE_URL;
 
-  return fetch(urlToProxy.toString());
+	// Construct final URL to proxy to
+	const searchParameters = new URLSearchParams([
+		...baseUrlToProxy.searchParams.entries(),
+		...requestUrl.searchParams.entries()
+	]);
+	const hash = requestUrl.hash || baseUrlToProxy.hash;
+	const urlToProxy = pathJoinToUrl(baseUrlToProxy, pathRest);
+	urlToProxy.search = searchParameters.toString();
+	urlToProxy.hash = hash;
+
+	if (!clientValue) {
+		await kvNamespace.put(
+			clientId,
+			namespaceValueCodec.encode({bundleUrl: baseUrlToProxy})
+		);
+	} else if (couldNotDecode(clientValue)) {
+		console.log(
+			'Client value was invalid, defaulting to current version but not overwriting previous value'
+		);
+	}
+
+	return fetch(urlToProxy.toString());
 }

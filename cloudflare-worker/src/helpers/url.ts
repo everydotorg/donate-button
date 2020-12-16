@@ -4,10 +4,13 @@
  * path string, compatible with URLs; empty segments are skipped
  */
 export function pathJoin(...pathParts: string[]): string {
-  return pathParts
-    .reduce<string[]>((memo, part) => [...memo, ...part.split("/")], [])
-    .filter(Boolean)
-    .join("/");
+	return (
+		pathParts
+			// eslint-disable-next-line unicorn/no-reduce
+			.reduce<string[]>((memo, part) => [...memo, ...part.split('/')], [])
+			.filter(Boolean)
+			.join('/')
+	);
 }
 
 /**
@@ -17,7 +20,7 @@ export function pathJoin(...pathParts: string[]): string {
  * the path segments from pathParts appended to its pathname
  */
 export function pathJoinToUrl(url: URL, ...pathParts: string[]): URL {
-  const newUrl = new URL(url.toString());
-  newUrl.pathname = pathJoin(url.pathname, ...pathParts);
-  return newUrl;
+	const newUrl = new URL(url.toString());
+	newUrl.pathname = pathJoin(url.pathname, ...pathParts);
+	return newUrl;
 }
