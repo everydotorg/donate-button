@@ -1,5 +1,5 @@
-import {pathToRegexp} from 'path-to-regexp';
 import {isLeft as couldNotDecode} from 'fp-ts/Either';
+import {pathToRegexp} from 'path-to-regexp';
 
 import {namespaceValueCodec} from 'src/helpers/codecs';
 import {pathJoinToUrl} from 'src/helpers/url';
