@@ -8,7 +8,7 @@ import {pathJoinToUrl} from 'src/helpers/url';
  * Base URL of the most recent bundle's root; used as a default for clients that
  * do not yet have an assigned version for their bundle
  */
-export const LATEST_BASE_URL = new URL('https://assets.every.org/every-month');
+export const LATEST_BASE_URL = new URL('https://assets.every.org/donate-button-v2');
 
 /**
  * GET requests are expected to come to
