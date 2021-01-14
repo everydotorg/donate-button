@@ -24,17 +24,17 @@
     align-self: center;
 }
 
-.donations__form--monthly > *:not(:last-child) {
+.donations__form--one-column > *:not(:last-child) {
     margin-bottom: 1rem;
 }
 
-.donations__form--one-time {
+.donations__form--two-column {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
 }
 
-.donations__input--one-time {
+.donations__input {
     grid-column: 1 / -1;
 }
 

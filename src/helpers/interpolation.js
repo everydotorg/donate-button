@@ -8,7 +8,7 @@ import { Fragment } from 'preact'
  */
 export const replaceKeys = (keysToReplace, text) => {
     const pattern = /{{(\w*)}}/g;
-    return text.replace(pattern, (_, key)=> {
+    return text.replace(pattern, (_, key) => {
         return keysToReplace[key] ? keysToReplace[key] : ''
     });
 }
@@ -23,14 +23,19 @@ export const replaceKeys = (keysToReplace, text) => {
  * @param props: props of the component
  */
 export const replaceTagWithComponent = (text, tag, Component, props) => {
-    const pattern = new RegExp(`<${tag}>(.*)</${tag}>`, 'g');
-    
-    let [prevText, betweenTags, afterText] = text.split(pattern);
-    const component = <Component {...props}>{betweenTags}</Component>
-    
-    return (
-        <Fragment>
-            {prevText}{component}{afterText}
-        </Fragment>
-    )
+    if (text) {
+        const pattern = new RegExp(`<${tag}>(.*)</${tag}>`, 'g');
+
+        let [prevText, betweenTags, afterText] = text.split(pattern);
+        const component = <Component {...props}>{betweenTags}</Component>
+
+        return (
+            <Fragment>
+                {prevText}{component}{afterText}
+            </Fragment>
+        )
+    }
+
+    return text;
+
 }

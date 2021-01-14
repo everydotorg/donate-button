@@ -1,6 +1,15 @@
 import { useEffect, useState } from 'preact/hooks'
 import defaultOptions from './defaultOptions'
 import experiment from './experiment'
+import WIDGET_MODE from './constants/widgetMode'
+
+
+const canUseSplitPanel = (options) => {
+  const allMonthlyLevelsHasImages = options.monthly.levels.every(level => !!level.img)
+  const oneTimeLevelHasImage = options.oneTime.img
+
+  return allMonthlyLevelsHasImages && oneTimeLevelHasImage
+}
 
 export const EveryMonthLoader = ({ options = {}, hide }) => {
   const [EveryMonth, widgetLoaded] = useState()
@@ -19,7 +28,9 @@ export const EveryMonthLoader = ({ options = {}, hide }) => {
   // Loading
   if (options.show && !EveryMonth) return 'Loading...' // TODO - nicer loader
 
-  const finalOptions = { ...defaultOptions, ...experiment(), ...options }
+  const finalOptions = canUseSplitPanel({ ...defaultOptions, ...options })
+    ? { ...defaultOptions, ...experiment(), ...options }
+    : { ...defaultOptions, ...options, mode: WIDGET_MODE.SINGLE }
 
   return <EveryMonth options={finalOptions} hide={hide} />
 }

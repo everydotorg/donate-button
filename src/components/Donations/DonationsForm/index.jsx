@@ -105,11 +105,15 @@ const DonationsForm = ({monthlyDonation}) => {
       }
     }
 
-    const formClasses = ["donations__form"]
-      .concat([monthlyDonation ? "donations__form--monthly" : "donations__form--one-time"])
-
     const fixedLevels = monthly.levels.filter(level => level.amount !== 'custom')
     const customLevel = monthly.levels.find(level => level.amount === 'custom')
+    
+    const showLabels =  monthlyDonation 
+      ? fixedLevels.every(level => formText?.levels?.find(langLevel  => langLevel.amount === level.amount)?.name)
+      : oneTime.levels.every(amount => formText?.levels?.find(langLevel  => langLevel.amount === amount)?.name)
+
+    const formClasses = ["donations__form"]
+      .concat([showLabels ? "donations__form--one-column" : "donations__form--two-column"])
 
     return (
       <Fragment>
@@ -120,11 +124,11 @@ const DonationsForm = ({monthlyDonation}) => {
           <RadioButton 
               key={i}
               name="amount"
-              text={formText.levels.find(level  => level.amount === option.amount).name}
               amount={option.amount}
               selected={donationAmount === option.amount}
               handleClick={() => handleRadioButtonClick(option.amount)} 
-              description={getBoldFormatted(formText.levels.find(level  => level.amount === option.amount).description1)}
+              text={showLabels ? formText.levels.find(level  => level.amount === option.amount)?.name : ''}
+              description={getBoldFormatted(formText.levels.find(level  => level.amount === option.amount)?.description1)}
               image={option.img}
               bgColor={option.bgColor}
             />
@@ -135,6 +139,7 @@ const DonationsForm = ({monthlyDonation}) => {
               value={customDonation}
               setValue={handleInputChange}
               description={lang.oneTime.description}
+              extraClasses={["donations__input"]}
               onFocus={handleCustomInputFocus}
               onBlur={handleCustomInputBlur}
               selected={customInputFocus}
@@ -150,14 +155,15 @@ const DonationsForm = ({monthlyDonation}) => {
               name="amount"
               amount={option}
               selected={donationAmount === option}
-              handleClick={() => handleRadioButtonClick(option)} 
+              handleClick={() => handleRadioButtonClick(option)}
+              text={showLabels ? formText?.levels?.find(level  => level?.amount === option)?.name : ''}
             />
             ))}
             {oneTime.allowCustom && <Input 
               placeholder={formText.custom.placeholder}              
               value={customDonation}
               setValue={handleInputChange}
-              extraClasses={["donations__input--one-time"]}
+              extraClasses={["donations__input"]}
               onFocus={handleCustomInputFocus}
               onBlur={handleCustomInputBlur}
               selected={customInputFocus}
