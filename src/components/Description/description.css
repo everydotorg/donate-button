@@ -5,10 +5,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2.5rem;
+    padding: 2rem;
 }
 
-@media only screen and (max-width: 64em), (max-height: 46.875em) {
+@media only screen and (max-width: 64em) {
     .description {
         padding: 1.5rem;
     }

@@ -14,7 +14,7 @@
 }
 
 .radio-button__label {
-    padding: 1rem;
+    padding: 1.25rem;
     cursor: pointer;
 
     display: flex;

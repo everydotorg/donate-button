@@ -13,14 +13,14 @@ const getLinkFormatted = (logoText, link) => {
     return replaceTagWithComponent(logoText, tag, comp, props);
 }
 
-const Logo = ({monthlyDonation = true}) => {
+const Logo = ({monthlyDonation = true, scrolled = false}) => {
     const lang = useI18n();
     const logoText = monthlyDonation ? lang.monthly.logo : lang.oneTime.logo;
 
     const logoTextFormatted = getLinkFormatted(logoText.text, logoText.link);
-    
+    const boxShadow = scrolled ? 'box-shadow: 0 3px 7px 0px rgba(0, 0, 0, 0.1)': '';
     return (
-        <div className="logo">
+        <div className="logo" style={boxShadow}>
             <img className="logo__img" src={logo} alt="logo" />
             <div className="t-title logo__title">{logoText.header}</div>
             <p className="t-body--small logo__link">{logoTextFormatted}</p>

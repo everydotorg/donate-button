@@ -38,6 +38,9 @@
   align-items: center;
   font-family: "Basis Grotesque Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell,
     "Helvetica Neue", Roboto, sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -116,7 +119,14 @@
   color: #2e3434;
 }
 
-@media only screen and (max-width: 64em), (max-height: 46.875em) {
+.t-label {
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1;
+  color: #2e3434;
+}
+
+@media only screen and (max-width: 64em) {
   .t-heading-primary {
     font-size: 1.5rem;
     line-height: 1.167;
@@ -163,7 +173,7 @@
 
 .widget--split {
   width: 888px;
-  height: auto;
+  height: max-content;
   max-height: 95%;
   display: grid;
 
@@ -174,7 +184,7 @@
 .widget--single {
   width: 444px;
   max-height: 95%;
-  overflow-y: auto;
+  display: grid;
   height: auto;
 }
 
