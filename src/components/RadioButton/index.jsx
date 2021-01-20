@@ -18,7 +18,7 @@ const RadioButton = ({name, text, amount, selected, handleClick, description, im
                 {text && <span className="t-input radio-button__text">{text}</span>}
                 <span className="t-input radio-button__amount">${amount}</span>
             </label>
-            {description && <div style={{backgroundColor: bgColor}} className="radio-button__extra">
+            {text && description && <div style={{backgroundColor: bgColor}} className="radio-button__extra">
                 <div className="radio-button__img-container">
                     <img  className="radio-button__image" src={image} alt={text} />
                 </div>
