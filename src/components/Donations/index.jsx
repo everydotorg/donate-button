@@ -5,14 +5,30 @@ import Logo from './Logo';
 import ToggleDonationType from './ToggleDonationType';
 import Header from './Header';
 import DonationsForm from './DonationsForm';
-import DonateButton from './DonateButton';
 import { Fragment } from 'preact';
+import { useRef, useEffect, useState } from 'preact/hooks';
 
 const Donations = ({monthlyDonation, setMonthlyDonation}) => {
+    const donationsRef = useRef(null)
+    const [scrolled, setScrolled] = useState(false)
+    useEffect(() => {
+      const isScrolled = () => {
+        if(donationsRef.current){
+          setScrolled(donationsRef.current.scrollTop > 0)
+        }
+      }
+
+      donationsRef.current.addEventListener('scroll', isScrolled)
+      isScrolled()
+      
+      return () => donationsRef.current.removeEventListener('scroll', isScrolled)
+    }, [])
+
+  
     return (
       <Fragment>
-      <div className="donations">
-        <Logo  monthlyDonation={monthlyDonation} />
+      <div ref={donationsRef} className="donations">
+        <Logo scrolled={scrolled} monthlyDonation={monthlyDonation} />
         <div className="donations__header">
           <Header  monthlyDonation={monthlyDonation} />
         </div>

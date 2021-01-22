@@ -2,7 +2,8 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
-const version_name = `donate-button-v2`
+const version = `0.2.1`
+
 
 export default {
   /**
@@ -16,8 +17,8 @@ export default {
    **/
   webpack(config, env, helpers, options) {
     delete config.entry.polyfills
-    config.output.path = path.resolve(__dirname, `./docs/${version_name}/`)
-    config.output.filename = `donate-button.js`
+    config.output.path = path.resolve(__dirname, `./docs/donate-button-v2/`)
+    config.output.filename = `donate-button-${version}.js`
 
     if (env.production) {
       // Copy assets

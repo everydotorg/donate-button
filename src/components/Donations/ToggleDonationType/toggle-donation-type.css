@@ -1,6 +1,7 @@
 .donation-type {
     font-weight: bold;
     color: var(--color-primary);
+    padding-bottom: 2rem;
 }
 
 .donation-type span {
@@ -11,6 +12,6 @@
 
 @media only screen and (max-width: 37.5em) {
     .donation-type {
-        padding-bottom: 0.5rem;
+        padding-bottom: 1.5rem;
     }
 }

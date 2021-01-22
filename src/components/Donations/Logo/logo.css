@@ -3,6 +3,21 @@
     grid-template-columns: min-content 1fr;
     grid-template-rows: repeat(2, 1fr);
     column-gap: 1rem;
+
+    /* Fix logo to the top and scroll the content beneath*/
+    position: sticky;
+    top: 0;
+    background: white;
+
+    margin: -1rem -2rem;
+    padding: 1.5rem 2rem;
+}
+
+@media only screen and (max-width: 64em) {
+    .logo {
+        margin: -1 -1.5rem;
+        padding: 1 1.5rem;
+    }
 }
 
 .logo__img {
