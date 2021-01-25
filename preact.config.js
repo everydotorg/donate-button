@@ -2,8 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
-const version = `0.2.1`
-
+const version_folder = 'donate-button-v2'
 
 export default {
   /**
@@ -17,10 +16,16 @@ export default {
    **/
   webpack(config, env, helpers, options) {
     delete config.entry.polyfills
-    config.output.path = path.resolve(__dirname, `./docs/donate-button-v2/`)
-    config.output.filename = `donate-button-${version}.js`
+    config.output.path = path.resolve(__dirname, `./docs/${version_folder}/`)
+    config.output.filename = `donate-button.js`
 
     if (env.production) {
+      const vercel = process.env.VERCEL_URL
+      config.output.publicPath = vercel
+        ? `https://${vercel}/docs/${version_folder}/`
+        : `https://assets.every.org/${version_folder}/`
+      console.log('Building for', config.output.publicPath)
+
       // Copy assets
       config.plugins.push(
         new CopyPlugin([{ from: 'public', to: config.output.path }])
@@ -41,5 +46,5 @@ export default {
       test: /\.css$/,
       use: [{ loader: 'to-string-loader' }, { loader: 'css-loader' }],
     }
-  }
+  },
 }
