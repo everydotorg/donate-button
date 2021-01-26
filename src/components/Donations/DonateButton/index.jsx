@@ -1,4 +1,3 @@
-import { memo } from 'preact/compat'
 import { replaceKeys } from '../../../helpers/interpolation';
 import { useContext } from 'preact/hooks';
 import DonationsContext from '../../../contexts/donationsContext';
