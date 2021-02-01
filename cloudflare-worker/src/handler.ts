@@ -4,52 +4,111 @@ import {pathToRegexp} from 'path-to-regexp';
 import {namespaceValueCodec} from 'src/helpers/codecs';
 import {pathJoinToUrl} from 'src/helpers/url';
 
-/**
- * Base URL of the most recent bundle's root; used as a default for clients that
- * do not yet have an assigned version for their bundle
- */
-export const LATEST_BASE_URL = new URL('https://assets.every.org/donate-button-v2');
+const CURRENT_MAJOR_VERSION = 2;
+const AVAILABLE_MAJOR_VERSIONS = new Set([2]);
+
+if (!AVAILABLE_MAJOR_VERSIONS.has(CURRENT_MAJOR_VERSION)) {
+	throw new Error(
+		"Available major versions doesn't include the current version"
+	);
+}
+
+const ASSETS_HOST = new URL('https://assets.every.org');
+
+function assetBaseUrlByVersion(majorVersion: number, assetsHost: URL) {
+	return pathJoinToUrl(assetsHost, `donate-button-v${majorVersion}`);
+}
+
+function assetPathByVersion(
+	majorVersion: number,
+	assetsHost: URL,
+	...pathRest: string[]
+) {
+	return pathJoinToUrl(
+		assetBaseUrlByVersion(majorVersion, assetsHost),
+		...pathRest
+	);
+}
+
+export const LATEST_BASE_URL = assetPathByVersion(
+	CURRENT_MAJOR_VERSION,
+	ASSETS_HOST
+);
 
 /**
- * GET requests are expected to come to
+ * In this scheme, GET requests are expected to come to
  * `https://assets.every.org/donate-button/:clientId/...`, where we keep track
  * of the root of the bundle to serve for a given client ID in order to provide
  * different versions for different clients
  *
  * When we make breaking changes, we bump the latest version (and new clients
- * will get it since we default to the current version;
- * @see LATEST_BASE_URL ), but existing clients can remain on the older
- * version
+ * will get it since we default to the current version)
  */
-const bundlePathRegexp = pathToRegexp(
+const customClientBundlePathRegexp = pathToRegexp(
 	'/donate-button/:clientId([a-z0-9]+)/:pathRest*'
 );
+
 type Fetch = typeof fetch;
 
 declare const global: WorkerGlobalScope;
+
+export const VERSION_SEARCH_PARAM = 'v';
 /**
- * @param request Input request to be routed; only responds if in the expected
- * URL format; @see bundlePathRegexp
- * @param kvNamespace KV namespace containing client data
- * @param fetch fetch function; exposed to allow for simpler mocking of fetch
- * during tests
- * @returns A response to send back to the client, proxying to the appropriate
- * JavaScript bundle for the given client ID
+ * Returns the major bundle version to serve to the client based on the version
+ * string provided
  */
-export async function handleRequest(
-	request: Request,
-	kvNamespace: KVNamespace,
-	fetch: Fetch = global.fetch
-): Promise<Response> {
-	const resp404 = new Response('Not found', {status: 404});
-	if (request.method !== 'GET') {
-		return resp404;
+function determineBundleVersion({
+	searchParams,
+	availableMajorVersions,
+	currentMajorVersion
+}: {
+	searchParams: URLSearchParams;
+	availableMajorVersions: Set<number>;
+	currentMajorVersion: number;
+}): number {
+	const searchVersion = searchParams.get(VERSION_SEARCH_PARAM);
+	if (!searchVersion) {
+		return currentMajorVersion;
 	}
 
+	const specifiedVersion = Number(searchVersion);
+	if (!availableMajorVersions.has(specifiedVersion)) {
+		return currentMajorVersion;
+	}
+
+	return specifiedVersion;
+}
+
+async function determineUrlToProxy(parameters: {
+	request: Request;
+	kvNamespace: KVNamespace;
+	availableMajorVersions: Set<number>;
+	currentMajorVersion: number;
+	assetsHost: URL;
+}): Promise<URL | null> {
+	const {
+		request,
+		kvNamespace,
+		availableMajorVersions,
+		currentMajorVersion,
+		assetsHost
+	} = parameters;
 	const requestUrl = new URL(request.url);
-	const match = bundlePathRegexp.exec(requestUrl.pathname);
+	if (requestUrl.pathname === '/donate-button.js') {
+		return assetPathByVersion(
+			determineBundleVersion({
+				searchParams: requestUrl.searchParams,
+				availableMajorVersions,
+				currentMajorVersion
+			}),
+			assetsHost,
+			requestUrl.pathname
+		);
+	}
+
+	const match = customClientBundlePathRegexp.exec(requestUrl.pathname);
 	if (!match) {
-		return resp404;
+		return null;
 	}
 
 	const [_, clientId, pathRest] = match;
@@ -63,15 +122,7 @@ export async function handleRequest(
 			: clientValue.right.bundleUrl
 		: LATEST_BASE_URL;
 
-	// Construct final URL to proxy to
-	const searchParameters = new URLSearchParams([
-		...baseUrlToProxy.searchParams.entries(),
-		...requestUrl.searchParams.entries()
-	]);
-	const hash = requestUrl.hash || baseUrlToProxy.hash;
 	const urlToProxy = pathJoinToUrl(baseUrlToProxy, pathRest);
-	urlToProxy.search = searchParameters.toString();
-	urlToProxy.hash = hash;
 
 	if (!clientValue) {
 		await kvNamespace.put(
@@ -82,6 +133,49 @@ export async function handleRequest(
 		console.log(
 			'Client value was invalid, defaulting to current version but not overwriting previous value'
 		);
+	}
+
+	return urlToProxy;
+}
+
+/**
+ * @param request Input request to be routed; only responds if in the expected
+ * URL format; @see customClientBundlePathRegexp
+ * @param kvNamespace KV namespace containing client data
+ * @param options mostly overridable values from defaults for ease of testing
+ * @returns A response to send back to the client, proxying to the appropriate
+ * JavaScript bundle for the given client ID
+ */
+export async function handleRequest(
+	request: Request,
+	kvNamespace: KVNamespace,
+	options: {
+		fetch?: Fetch;
+		availableMajorVersions?: Set<number>;
+		currentMajorVersion?: number;
+		assetsHost?: URL;
+	}
+): Promise<Response> {
+	const {
+		fetch = global.fetch,
+		availableMajorVersions = AVAILABLE_MAJOR_VERSIONS,
+		currentMajorVersion = CURRENT_MAJOR_VERSION,
+		assetsHost = ASSETS_HOST
+	} = options;
+	const resp404 = new Response('Not found', {status: 404});
+	if (request.method !== 'GET') {
+		return resp404;
+	}
+
+	const urlToProxy = await determineUrlToProxy({
+		request,
+		kvNamespace,
+		availableMajorVersions,
+		currentMajorVersion,
+		assetsHost
+	});
+	if (!urlToProxy) {
+		return resp404;
 	}
 
 	return fetch(urlToProxy.toString());
