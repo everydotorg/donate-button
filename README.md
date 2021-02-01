@@ -6,7 +6,7 @@ See live example here: https://every-month.vercel.app/
 ## Use
 Add this code at the bottom of your page, just before the `</body>`
 ```js
-<script src="https://assets.every.org/every-month/bundle.js"/>
+<script src="https://assets.every.org/donate-button.js"/>
 
 <script>
       // Global object
@@ -205,7 +205,7 @@ You have to pass a javascript object to configure what we should display in the 
 You should pass this options previous initialization of the widget. Also you can change them in runtime. Example:
  ```js
     <script>
-      // Ensure that the script was fully loaded before do this 
+      // Ensure that the script was fully loaded before do this
       everyMonthWidget.setOptions({
           ...
       })
