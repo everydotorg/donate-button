@@ -22,7 +22,7 @@ export default {
     if (env.production) {
       const vercel = process.env.VERCEL_URL
       config.output.publicPath = vercel
-        ? `https://${vercel}/docs/${version_folder}/`
+        ? `https://${vercel}/`
         : `https://assets.every.org/${version_folder}/`
       console.log('Building for', config.output.publicPath)
 
