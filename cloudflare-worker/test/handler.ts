@@ -1,7 +1,11 @@
 import test from 'ava';
 import {fake} from 'sinon';
 
-import {LATEST_BASE_URL, handleRequest} from 'src/handler';
+import {
+	LATEST_BASE_URL,
+	handleRequest,
+	VERSION_SEARCH_PARAM
+} from 'src/handler';
 import {NamespaceValue, namespaceValueCodec} from 'src/helpers/codecs';
 import {pathJoinToUrl} from 'src/helpers/url';
 
@@ -20,13 +24,98 @@ UNSUPPORTED_METHODS.forEach((method) => {
 		const result = await handleRequest(
 			new Request('/donate-button/someClientId.js', {method}),
 			{} as KVNamespace,
-			async () => Promise.resolve(new Response())
+			{fetch: async () => Promise.resolve(new Response())}
 		);
 		t.is(result.status, 404, 'Response returned 404 status');
 	});
 });
 
-test('Saves and fetches CURRENT_VERSION if no client found', async (t) => {
+const VERSION_SPEC_TEST_CASES: Array<{
+	name: string;
+	versionParam: string | null;
+	availableMajorVersions: number[];
+	currentMajorVersion: number;
+	expectedVersion: number;
+}> = [
+	{
+		name: 'returns latest version if not specified',
+		versionParam: null,
+		availableMajorVersions: [2, 3],
+		currentMajorVersion: 3,
+		expectedVersion: 3
+	},
+	{
+		name: 'returns latest version if not present version',
+		versionParam: '4',
+		availableMajorVersions: [2, 3],
+		currentMajorVersion: 3,
+		expectedVersion: 3
+	},
+	{
+		name: 'returns latest version if version not valid number',
+		versionParam: 'as3df',
+		availableMajorVersions: [2, 3],
+		currentMajorVersion: 3,
+		expectedVersion: 3
+	},
+	{
+		name: 'returns latest version if version is NaN',
+		versionParam: 'NaN',
+		availableMajorVersions: [2, 3],
+		currentMajorVersion: 3,
+		expectedVersion: 3
+	},
+	{
+		name: 'returns latest version if version is fractional',
+		versionParam: '2.5',
+		availableMajorVersions: [2, 3],
+		currentMajorVersion: 3,
+		expectedVersion: 3
+	},
+	{
+		name: 'returns specified version if valid',
+		versionParam: '2',
+		availableMajorVersions: [2, 3],
+		currentMajorVersion: 3,
+		expectedVersion: 2
+	}
+];
+for (const {
+	name,
+	versionParam,
+	currentMajorVersion,
+	availableMajorVersions,
+	expectedVersion
+} of VERSION_SPEC_TEST_CASES) {
+	test(`When fetching donate-button.js, ${name}`, async (t) => {
+		const mockFetch = fake();
+		const url = `/donate-button.js${
+			versionParam
+				? `?${new URLSearchParams({
+						[VERSION_SEARCH_PARAM]: versionParam
+				  }).toString()}`
+				: ''
+		}`;
+
+		await handleRequest(new Request(url, {method: 'GET'}), {} as KVNamespace, {
+			fetch: mockFetch,
+			availableMajorVersions: new Set(availableMajorVersions),
+			currentMajorVersion,
+			assetsHost: new URL('https://test-assets.every.org')
+		});
+
+		t.true(mockFetch.calledOnce, 'Called fetch');
+		t.deepEqual(
+			mockFetch.firstCall.args,
+			[
+				`https://test-assets.every.org/donate-button-v${expectedVersion}/donate-button.js`
+			],
+			'fetched latest donate button bundle code'
+		);
+	});
+}
+
+test('Saves and fetches latest version if no client found', async (t) => {
 	const mockKv = {get: fake.returns(null), put: fake()};
 	const fetchReturn = new Response('yay', {status: 200});
 	const mockFetch = fake.returns(fetchReturn);
@@ -35,7 +124,7 @@ test('Saves and fetches CURRENT_VERSION if no client found', async (t) => {
 	const result = await handleRequest(
 		new Request(`/donate-button/${clientId}/bundle.js`, {method: 'GET'}),
 		(mockKv as unknown) as KVNamespace,
-		mockFetch
+		{fetch: mockFetch}
 	);
 
 	t.true(mockKv.get.calledOnce, 'Got value from KV with correct key');
@@ -79,7 +168,7 @@ test('Fetches proper version from kv if client found', async (t) => {
 	const result = await handleRequest(
 		new Request(`/donate-button/${clientId}/bundle.js`, {method: 'GET'}),
 		(mockKv as unknown) as KVNamespace,
-		mockFetch
+		{fetch: mockFetch}
 	);
 	t.true(mockKv.get.calledOnce, 'Got config from KV oncewith correct key');
 	t.deepEqual(
