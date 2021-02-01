@@ -8,18 +8,32 @@ build tool, [Wrangler](https://github.com/cloudflare/wrangler).
 
 ### What it does
 
-As of 2020-01-28, we serve the actual built JavaScript bundles from
+We serve the actual built JavaScript bundles from urls like the following:
 `https://assets.every.org/donate-button-v2` (replace `v2` with whatever major
-version you wish to use), via Github Pages. This worker just lets requests like
-that pass through freely.
+version you wish to use), via Github Pages. This worker just lets requests to
+URLs like that to pass through freely.
 
-However, if a request goes to a url matching
-`https://assets.every.org/donate-button/:slug/*`, there is no version specified.
-If that slug has never been accessed before, it will proxy the latest version
-and associate the slug with that version in Cloudflare KV. Therefore, any future
-requests to any url under `/donate-button/:slug`, will always resolve to the
-same version of the bundle, but we reserve the ability to update individual
-clients on their behalf.
+We then serve the donate-button entrypoint without the need to specify the
+version from `https://assets.every.org/donate-button.js`. If you include that
+script as is, it will run the entrypoint for the latest version of the donate
+button library.
+
+It supports an optional search parameter to specify a major version, like so:
+`https://assets.every.org/donate-button.js?v=2`. That URL would pin the donate
+button version to major version 2. However, version-pinning is not on by
+default.
+
+#### Client-specific config
+
+If a request goes to a url matching
+`https://assets.every.org/donate-button/:slug/*`, then we can provide
+configuration specific to the provided slug (no relation with Every.org
+nonprofit slugs). If that slug has never been accessed before, it will proxy
+the latest version and associate the slug with that version in Cloudflare KV.
+Therefore, any future requests to any url under `/donate-button/:slug`, will
+always resolve to the same version of the bundle, but we reserve the ability
+to update individual clients on their behalf. In the future, this can serve as a
+basis for providing more client-specific config besides the version.
 
 ### 👩 💻 Developing
 
