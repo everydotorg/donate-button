@@ -1,24 +1,39 @@
-# ʕ •́؈•̀) `workers-typescript-template`
+# Donate Button Cloudflare Worker
 
-A batteries included template for kick starting a TypeScript Cloudflare worker project.
+Handles requests to `https://assets.every.org/donate-button/*`, to decide what
+version of the bundle to serve to library users.
 
-## 🔋 Getting Started
+Based on `workers-typescript-template`, and depoyed with Cloudflare Worker's
+build tool, [Wrangler](https://github.com/cloudflare/wrangler).
 
-This template is meant to be used with [Wrangler](https://github.com/cloudflare/wrangler). If you are not already familiar with the tool, we recommend that you install the tool and configure it to work with your [Cloudflare account](https://dash.cloudflare.com). Documentation can be found [here](https://developers.cloudflare.com/workers/tooling/wrangler/).
+### What it does
 
-To generate using Wrangler, run this command:
+As of 2020-01-28, we serve the actual built JavaScript bundles from
+`https://assets.every.org/donate-button-v2` (replace `v2` with whatever major
+version you wish to use), via Github Pages. This worker just lets requests like
+that pass through freely.
 
-```bash
-wrangler generate my-ts-project https://github.com/EverlastingBugstopper/worker-typescript-template
-```
+However, if a request goes to a url matching
+`https://assets.every.org/donate-button/:slug/*`, there is no version specified.
+If that slug has never been accessed before, it will proxy the latest version
+and associate the slug with that version in Cloudflare KV. Therefore, any future
+requests to any url under `/donate-button/:slug`, will always resolve to the
+same version of the bundle, but we reserve the ability to update individual
+clients on their behalf.
 
 ### 👩 💻 Developing
 
-[`src/index.js`](./src/index.ts) calls the request handler in [`src/handler.ts`](./src/handler.ts), and will return the [request method](https://developer.mozilla.org/en-US/docs/Web/API/Request/method) for the given request.
+The entry point for this Cloudflare Worker is
+[`src/index.ts`](./src/index.ts), and is written in TypeScript. We recommend
+developing with VSCode - it is configured to work well out of the box, and
+will suggest you useful extensions to aid in your development.
+
+Feel free to make pull requests that update how this code works.
 
 ### 🧪 Testing
 
-This template comes with mocha tests which simply test that the request handler can handle each request method. `npm test` will run your tests.
+Run `yarn test` to run the test suite. It mocks the service-worker context that
+Cloudflare emulates to allow testing locally.
 
 ### ✏️ Linting
 
@@ -32,11 +47,11 @@ yarn lint:fix  # auto-format
 
 ### 👀 Previewing and Publishing
 
-For information on how to preview and publish your worker, please see the [Wrangler docs](https://developers.cloudflare.com/workers/tooling/wrangler/commands/#publish).
+For information on how to preview and publish your worker, please see the
+[Wrangler docs](https://developers.cloudflare.com/workers/tooling/wrangler/commands/#publish).
 
-## 🤢 Issues
-
-If you run into issues with this specific project, please feel free to file an issue [here](https://github.com/cloudflare/workers-typescript-template/issues). If the problem is with Wrangler, please file an issue [here](https://github.com/cloudflare/wrangler/issues).
+To publish, you will need edit access to Cloudflare; please ask a maintainer for
+permission.
 
 ## ⚠️ Caveats
 
