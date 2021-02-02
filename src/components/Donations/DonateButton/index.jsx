@@ -1,4 +1,3 @@
-import React from 'react'
 import { replaceKeys } from '../../../helpers/interpolation';
 import { useContext } from 'preact/hooks';
 import DonationsContext from '../../../contexts/donationsContext';
@@ -24,9 +23,9 @@ const getButtonTextFormatted = (amount, text, currency) => {
 }
 
 const DonateButton = ({ monthlyDonation, extraClasses = [] }) => {
+    const lang = useI18n();
     const { donationAmount } = useContext(DonationsContext)
     const { onSubmit, currency, mode } = useContext(OptionsContext);
-    const lang = useI18n();
     const formText = monthlyDonation ? lang.monthly : lang.oneTime;
 
     const handleDonateButton = (mode) => {

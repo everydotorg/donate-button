@@ -1,4 +1,3 @@
-;
 import './button.css';
 
 const Button = ({handleClick, extraClasses, children}) => {

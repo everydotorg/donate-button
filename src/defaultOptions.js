@@ -69,7 +69,7 @@ const everyMonthOptions = {
           label: 'Custom',
           placeholder: 'Enter amount',
         },
-        button: 'Donate {{amount}} every month',
+        button: 'Donate {{amount}} Every Month',
         switch: 'Or make a <action>One Time Donation</action>',
       },
       oneTime: {
