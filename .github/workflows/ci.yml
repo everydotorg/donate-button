@@ -37,9 +37,16 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: yarn
       - run: yarn build
+      - name: Get changes
+        id: get-changes
+        run: |
+          if [ -z "$(git status --porcelain=v1 2>/dev/null)" ];
+            then echo "::set-output name=changes::false";
+            else echo "::set-output name=changes::true";
+          fi
       - name: Fail if build resulted in changes
         id: check-changes
-        if: ${{ test -n "$(git status --porcelain=v1 2>/dev/null)" }}
+        if: steps.get-changes.outputs.changes == 'true'
         run: |
           echo "Uncommitted build artifacts exist, please check them in."
           exit 1
