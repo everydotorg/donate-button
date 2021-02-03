@@ -1,5 +1,5 @@
 {
-  "name": "every-month-wg",
+  "name": "@everydotorg/donate-button",
   "version": "0.2.1",
   "description": "",
   "main": "dist/index.js",
