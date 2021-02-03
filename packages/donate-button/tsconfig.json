@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
+    "moduleResolution": "node",
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
     "noEmit": true,
