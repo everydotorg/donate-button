@@ -56,7 +56,7 @@ const everyMonthOptions = {
         },
         header: 'Become a regular supporter',
         info:
-          'Monthy gifts help us focus on our mission and long-term impact',
+          'Monthly gifts help us focus on our mission and long-term impact',
         levels: [
           { amount: '5' },
           { amount: '10' },
