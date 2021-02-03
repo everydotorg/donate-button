@@ -4,7 +4,11 @@ import adler32 from 'react-lib-adler32';
 
 const isDevEnv = process.env.NODE_ENV !== 'production';
 
-class Style extends Component {
+interface StyleProps {
+  scoped?: boolean
+}
+
+class Style extends Component<StyleProps> {
   scopeClassNameCache = {};
   scopedCSSTextCache = {};
   scoped = this.props.scoped !== undefined ? this.props.scoped : true;
@@ -40,7 +44,7 @@ class Style extends Component {
       if (isDevEnv) {
         if (rootElement.length > 1) {
           console.log(rootElement);
-          throw new Error(`Adjacent JSX elements must be wrapped in an enclosing tag 
+          throw new Error(`Adjacent JSX elements must be wrapped in an enclosing tag
           (${rootElement.length} root elements detected)`);
         }
 
@@ -48,9 +52,9 @@ class Style extends Component {
           typeof rootElement[0] !== 'undefined' &&
           this.isVoidElement((rootElement[0]).type)
         ) {
-          throw new Error(`Self-closing void elements like ${(rootElement).type} must be 
-          wrapped in an enclosing tag. Reactive Style must be able to nest a style element inside of the 
-          root element and void element content models never 
+          throw new Error(`Self-closing void elements like ${(rootElement).type} must be
+          wrapped in an enclosing tag. Reactive Style must be able to nest a style element inside of the
+          root element and void element content models never
           allow it to have contents under any circumstances.`);
         }
       }

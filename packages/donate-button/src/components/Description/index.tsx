@@ -2,11 +2,11 @@ import {Fragment} from 'preact';
 import {useContext, useLayoutEffect, useRef} from 'preact/hooks';
 
 import './description.css';
-import DonationsContext from '../../contexts/donationsContext';
-import OptionsContext from '../../contexts/optionsContext';
-import {getCustomDonationLevel} from '../../helpers/donation-level';
-import {replaceTagWithComponent} from '../../helpers/interpolation';
-import useI18n from '../../hooks/useI18n';
+import DonationsContext from 'src/contexts/donationsContext';
+import OptionsContext from 'src/contexts/optionsContext';
+import {getCustomDonationLevel} from 'src/helpers/donation-level';
+import {replaceTagWithComponent} from 'src/helpers/interpolation';
+import useI18n from 'src/hooks/useI18n';
 
 const getBoldFormatted = (text, link) => {
 	const comp = 'strong';

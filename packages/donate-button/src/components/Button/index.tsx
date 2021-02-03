@@ -1,6 +1,12 @@
+import { ComponentChildren } from 'preact';
 import './button.css';
 
-const Button = ({handleClick, extraClasses, children}) => {
+interface ButtonProps {
+	handleClick: () => void,
+	extraClasses?: string[]
+	children: ComponentChildren
+}
+function Button({handleClick, extraClasses = [], children}: ButtonProps) {
 	return (
 		<button
 			className={['btn'].concat(extraClasses).join(' ')}

@@ -1,5 +1,8 @@
 import {createContext} from 'preact';
 
-export const DonationsContext = createContext();
+interface DonationsContextValue {
+  donationAmount?: number;
+}
+export const DonationsContext = createContext<DonationsContextValue>({});
 
 export default DonationsContext;

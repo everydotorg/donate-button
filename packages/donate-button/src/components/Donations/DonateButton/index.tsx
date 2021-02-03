@@ -1,13 +1,13 @@
 import {useContext} from 'preact/hooks';
+import { DonationFrequency } from 'src/helpers/options-types';
 
-import DonationsContext from '../../../contexts/donationsContext';
-import OptionsContext from '../../../contexts/optionsContext';
-import {replaceKeys} from '../../../helpers/interpolation';
-import isFunction from '../../../helpers/is-function';
-import useI18n from '../../../hooks/useI18n';
-import Button from '../../Button';
+import DonationsContext from 'src/contexts/donationsContext';
+import OptionsContext from 'src/contexts/optionsContext';
+import {replaceKeys} from 'src/helpers/interpolation';
+import useI18n from 'src/hooks/useI18n';
+import Button from 'src/components/Button';
 
-const constructEveryUrl = (company, frequency, amount, mode, extras) => {
+const constructEveryUrl = (company: string, frequency: DonationFrequency, amount: number, mode: DonationMode, extras: Record<string, string>) => {
 	const baseUrl = `https://www.every.org/${company}/donate?frequency=${frequency}&amount=${amount}&utm_campaign=single-or-split&utm_content=${mode.toLowerCase()}&utm_source=${company}&utm_medium=every-month`;
 	const extraParameters = Object.keys(extras).reduce((previous, key) => {
 		return previous.concat(`&${key}=${extras[key]}`);
@@ -16,7 +16,7 @@ const constructEveryUrl = (company, frequency, amount, mode, extras) => {
 	return `${baseUrl}${extraParameters}`;
 };
 
-const getButtonTextFormatted = (amount, text, currency) => {
+const getButtonTextFormatted = (amount: number, text: string, currency: string) => {
 	if (amount && !isNaN(amount)) {
 		return replaceKeys({amount: `$${amount} ${currency}`}, text);
 	}
@@ -24,7 +24,11 @@ const getButtonTextFormatted = (amount, text, currency) => {
 	return replaceKeys({amount: ''}, text);
 };
 
-const DonateButton = ({monthlyDonation, extraClasses = []}) => {
+interface DonateButtonProps {
+	extraClasses?: string[]
+	monthlyDonation: boolean
+}
+const DonateButton = ({monthlyDonation, extraClasses = []}: DonateButtonProps) => {
 	const lang = useI18n();
 	const {donationAmount} = useContext(DonationsContext);
 	const {onSubmit, currency, mode} = useContext(OptionsContext);
@@ -34,7 +38,7 @@ const DonateButton = ({monthlyDonation, extraClasses = []}) => {
 		if (!isNaN(donationAmount)) {
 			const frequency = monthlyDonation ? 'MONTHLY' : 'ONCE';
 
-			if (isFunction(onSubmit)) {
+			if (typeof onSubmit === "function") {
 				onSubmit({amount: donationAmount, frequency});
 			} else {
 				const url = constructEveryUrl(

@@ -1,15 +1,16 @@
 import {Fragment} from 'preact';
 import {useContext, useState, useEffect} from 'preact/hooks';
 
-import DonationsContext from '../../../contexts/donationsContext';
-import OptionsContext from '../../../contexts/optionsContext';
-import {replaceTagWithComponent} from '../../../helpers/interpolation';
-import useI18n from '../../../hooks/useI18n';
-import Input from '../../Input';
-import RadioButton from '../../RadioButton';
-import DonateButton from '../DonateButton';
+import DonationsContext from 'src/contexts/donationsContext';
+import OptionsContext from 'src/contexts/optionsContext';
+import {replaceTagWithComponent} from 'src/helpers/interpolation';
+import useI18n from 'src/hooks/useI18n';
+import Input from 'src/components/Input';
+import RadioButton from 'src/components/RadioButton';
+import DonateButton from 'src/components/Donations/DonateButton';
+import { DonationLevel } from 'src/helpers/options-types';
 
-const getLevelOfAmount = (levels, amount) => {
+const getLevelOfAmount = (levels: DonationLevel[], amount: number) => {
 	return levels.findIndex((l) => l.amount == amount);
 };
 
