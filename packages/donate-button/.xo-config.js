@@ -1,10 +1,6 @@
 module.exports = {
     "prettier": true,
     "rules": {
-      "unicorn/filename-case": [
-        "error",
-        { "case": "kebabCase" }
-      ],
       "func-names": ["off"],
       "no-restricted-imports": [
         "error",
