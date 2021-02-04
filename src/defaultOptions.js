@@ -1,5 +1,3 @@
-import WIDGET_MODE from './constants/widgetMode'
-
 const everyMonthOptions = {
   // Configure action when the user submit the donation in the widget.
   // You can pass to us the following parameters to customize it or listen to the callback
@@ -10,6 +8,7 @@ const everyMonthOptions = {
       no_exit: 1,
     },
   },
+  defaultMode: 'monthly',
   // Also supported:
   // onSubmit: ({amount, frequency}) => { console.log(amount, frequency)},
   currency: 'USD', // Currency to display

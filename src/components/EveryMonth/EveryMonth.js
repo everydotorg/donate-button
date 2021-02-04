@@ -14,7 +14,9 @@ import DonateButton from '../Donations/DonateButton'
 
 function EveryMonth({ options, hide }) {
   const hideOnWrapperClick = (e) => e.target === e.currentTarget && hide()
-  const [monthlyDonation, setMonthlyDonation] = useState(true)
+  const isMonthlyDefault = options.defaultMode !== 'one-time'
+
+  const [monthlyDonation, setMonthlyDonation] = useState(isMonthlyDefault)
 
   const defaultLevel = options.monthly.levels.find(level => level.default)
   const [donationAmount, setDonationAmount] = useState(defaultLevel?.amount || options.monthly.levels?.[0]?.amount)
