@@ -30,6 +30,10 @@ const everyMonthOptions = {
         bgColor: '#A0CBFE',
       },
       {
+        amount: '500',
+        bgColor: '#A0CBFE',
+      },
+      {
         amount: 'custom',
         bgColor: '#BCD9DD',
       },
@@ -58,12 +62,10 @@ const everyMonthOptions = {
         info:
           'Monthly gifts help us focus on our mission and long-term impact',
         levels: [
-          { amount: '5' },
-          { amount: '10' },
-          { amount: '20' },
+          { amount: '25' },
           { amount: '50' },
           { amount: '100' },
-          { amount: '200' },
+          { amount: '500' },
         ],
         custom: {
           label: 'Custom',

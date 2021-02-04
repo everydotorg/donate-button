@@ -57,6 +57,7 @@
   height: 2px;
   background: #000;
   transform: rotate(45deg);
+  z-index: 5;
 
   transition: all 0.2s;
 }

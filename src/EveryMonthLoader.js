@@ -11,6 +11,32 @@ const canUseSplitPanel = (options) => {
   return allMonthlyLevelsHasImages && oneTimeLevelHasImage
 }
 
+let originalOverflow;
+const getOriginalOverflow = () => {
+  const body = document.querySelector('body')
+
+  if(!originalOverflow){
+    originalOverflow = body.style.overflow ? body.style.overflow : 'unset'
+  }
+
+  return originalOverflow
+}
+
+const addOverflowToBody = () => {
+  const body = document.querySelector('body')
+  if(body){
+    body.style.overflow = 'hidden';
+  }
+}
+
+const removeOverflowFromBody = () => {
+  const body = document.querySelector('body')
+  const overflow = getOriginalOverflow()
+  if(body){
+    body.style.overflow = overflow
+  }
+} 
+
 export const EveryMonthLoader = ({ options = {}, hide }) => {
   const [EveryMonth, widgetLoaded] = useState()
 
@@ -22,9 +48,11 @@ export const EveryMonthLoader = ({ options = {}, hide }) => {
       )
   }, [options.show, EveryMonth])
 
+  removeOverflowFromBody()
   // Not showing
   if (!options.show) return null
 
+  addOverflowToBody()
   // Loading
   if (options.show && !EveryMonth) return 'Loading...' // TODO - nicer loader
 
