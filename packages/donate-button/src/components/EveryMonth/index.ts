@@ -1,1 +1,1 @@
-export {default} from './EveryMonth';
+export {default} from 'src/components/EveryMonth/every-month';

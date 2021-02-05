@@ -1,5 +1,16 @@
-import './radio-button.css';
+import {JSX} from 'preact/jsx-runtime';
+import 'src/components/RadioButton/radio-button.css';
 
+interface RadioButtonProps {
+	name: string;
+	text?: string;
+	amount: string;
+	selected: boolean;
+	handleClick: () => void;
+	description?: string | JSX.Element;
+	image?: string;
+	bgColor?: string;
+}
 const RadioButton = ({
 	name,
 	text,
@@ -9,7 +20,7 @@ const RadioButton = ({
 	description,
 	image,
 	bgColor
-}) => {
+}: RadioButtonProps) => {
 	const groupClasses = ['radio-button'];
 	if (selected) {
 		groupClasses.push('radio-button--selected');

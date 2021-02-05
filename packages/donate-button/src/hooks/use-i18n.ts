@@ -1,6 +1,5 @@
 import {useContext} from 'preact/hooks';
-
-import {OptionsContext} from '../contexts/optionsContext';
+import {OptionsContext} from 'src/contexts/options-context';
 
 const defaultI18n = 'en';
 

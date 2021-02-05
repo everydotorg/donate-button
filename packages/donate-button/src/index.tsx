@@ -1,7 +1,7 @@
 import {render as prRender} from 'preact';
-
-import EveryMonthLoader from './EveryMonthLoader';
-import {loadFonts} from './loadFonts';
+import EveryMonthLoader from 'src/every-month-loader';
+import {DonateButtonOptions} from 'src/helpers/options-types';
+import {loadFonts} from 'src/load-fonts';
 
 const defaultOptions = {
 	currency: 'USD'
@@ -9,9 +9,9 @@ const defaultOptions = {
 const baseOptions = {};
 let instanceOptions = {};
 
-let mountPoint;
+let mountPoint: HTMLElement;
 
-const setOptions = (newOptions) => {
+const setOptions = (newOptions: Partial<DonateButtonOptions>) => {
 	Object.assign(baseOptions, newOptions);
 	render();
 };
@@ -34,26 +34,26 @@ const mount = () => {
 };
 
 const render = () => {
-	if (!mountPoint) mount();
+	if (!mountPoint) {
+		mount();
+	}
+
 	const options = {
 		...defaultOptions,
 		...baseOptions,
 		...instanceOptions
 	};
-	prRender(
-		<EveryMonthLoader
-			options={options}
-			hide={() => {
-				hide();
-			}}
-		/>,
-		mountPoint
-	);
+	prRender(<EveryMonthLoader options={options} hide={hide} />, mountPoint);
 };
 
-const setToggleButton = (selector, options) => {
+const setToggleButton = (
+	selector: string,
+	options: Partial<DonateButtonOptions>
+) => {
 	const button = document.querySelector(selector);
-	if (!button) return;
+	if (!button) {
+		return;
+	}
 
 	button.addEventListener('click', () => {
 		instanceOptions = {...options};
@@ -62,6 +62,15 @@ const setToggleButton = (selector, options) => {
 };
 
 loadFonts();
+
+interface EveryMonthWidget {
+	setOptions: typeof setOptions;
+	show: typeof show;
+	showOnClick: typeof setToggleButton;
+}
+declare const window: Window & {
+	everyMonthWidget?: EveryMonthWidget;
+};
 window.everyMonthWidget = {
 	setOptions,
 	show,

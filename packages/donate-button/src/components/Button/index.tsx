@@ -1,10 +1,10 @@
-import { ComponentChildren } from 'preact';
-import './button.css';
+import {ComponentChildren} from 'preact';
+import 'src/components/Button/index.css';
 
 interface ButtonProps {
-	handleClick: () => void,
-	extraClasses?: string[]
-	children: ComponentChildren
+	handleClick: () => void;
+	extraClasses?: string[];
+	children: ComponentChildren;
 }
 function Button({handleClick, extraClasses = [], children}: ButtonProps) {
 	return (
@@ -15,6 +15,6 @@ function Button({handleClick, extraClasses = [], children}: ButtonProps) {
 			{children}
 		</button>
 	);
-};
+}
 
 export default Button;

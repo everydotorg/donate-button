@@ -1,14 +1,13 @@
-import buttonStyles from '../Button/button.css';
-import descriptionStyles from '../Description/description.css';
-import logoStyles from '../Donations/Logo/logo.css';
-import toggleDonationTypeStyles from '../Donations/ToggleDonationType/toggle-donation-type.css';
-import donationsStyles from '../Donations/donations.css';
-import companyStyles from '../Images/Company/company.css';
-import imagesStyles from '../Images/images.css';
-import inputStyles from '../Input/input.css';
-import radioButtonStyles from '../RadioButton/radio-button.css';
-
-import styles from './style.css';
+import buttonStyles from 'src/components/Button/button.css';
+import descriptionStyles from 'src/components/Description/description.css';
+import logoStyles from 'src/components/Donations/Logo/logo.css';
+import toggleDonationTypeStyles from 'src/components/Donations/ToggleDonationType/toggle-donation-type.css';
+import donationsStyles from 'src/components/Donations/donations.css';
+import styles from 'src/components/EveryMonth/style.css';
+import companyStyles from 'src/components/Images/Company/company.css';
+import imagesStyles from 'src/components/Images/images.css';
+import inputStyles from 'src/components/Input/input.css';
+import radioButtonStyles from 'src/components/RadioButton/radio-button.css';
 
 const appStyles = [
 	styles,

@@ -1,10 +1,15 @@
-import WIDGET_MODE from './constants/widgetMode';
+import {DonationMode} from 'src/helpers/options-types';
 
 export const experiment = () => {
-	let mode = localStorage.getItem('every-month-widget-mode');
-	if (!mode) {
-		const rnd = Math.random();
-		mode = rnd > 0.5 ? WIDGET_MODE.SINGLE : WIDGET_MODE.SPLIT_PANEL;
+	const modeFromStorage = localStorage.getItem('every-month-widget-mode');
+	const mode: DonationMode =
+		modeFromStorage &&
+		(Object.values(DonationMode) as string[]).includes(modeFromStorage)
+			? (modeFromStorage as DonationMode)
+			: Math.random() > 0.5
+			? DonationMode.SINGLE
+			: DonationMode.SPLIT;
+	if (!modeFromStorage) {
 		localStorage.setItem('every-month-widget-mode', mode);
 	}
 

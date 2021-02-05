@@ -1,15 +1,20 @@
-import './donations.css';
-
 import {Fragment} from 'preact';
 import {useRef, useEffect, useState} from 'preact/hooks';
+import DonationsForm from 'src/components/Donations/DonationsForm';
+import Header from 'src/components/Donations/Header';
+import Logo from 'src/components/Donations/Logo';
+import ToggleDonationType from 'src/components/Donations/ToggleDonationType';
 
-import DonationsForm from './DonationsForm';
-import Header from './Header';
-import Logo from './Logo';
-import ToggleDonationType from './ToggleDonationType';
+import 'src/components/Donations/donations.css';
 
-const Donations = ({monthlyDonation, setMonthlyDonation}) => {
-	const donationsRef = useRef(null);
+const Donations = ({
+	monthlyDonation,
+	setMonthlyDonation
+}: {
+	monthlyDonation: boolean;
+	setMonthlyDonation(v: boolean): void;
+}) => {
+	const donationsRef = useRef<HTMLDivElement | null>(null);
 	const [scrolled, setScrolled] = useState(false);
 	useEffect(() => {
 		const isScrolled = () => {
@@ -18,10 +23,11 @@ const Donations = ({monthlyDonation, setMonthlyDonation}) => {
 			}
 		};
 
-		donationsRef.current.addEventListener('scroll', isScrolled);
+		donationsRef.current?.addEventListener('scroll', isScrolled);
 		isScrolled();
 
-		return () => donationsRef.current.removeEventListener('scroll', isScrolled);
+		return () =>
+			donationsRef.current?.removeEventListener('scroll', isScrolled);
 	}, []);
 
 	return (
@@ -33,7 +39,9 @@ const Donations = ({monthlyDonation, setMonthlyDonation}) => {
 				</div>
 				<DonationsForm monthlyDonation={monthlyDonation} />
 				<ToggleDonationType
-					handleClick={() => setMonthlyDonation(!monthlyDonation)}
+					handleClick={() => {
+						setMonthlyDonation(!monthlyDonation);
+					}}
 					monthlyDonation={monthlyDonation}
 				/>
 			</div>

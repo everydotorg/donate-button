@@ -1,5 +1,15 @@
-import './input.css';
+import {JSXInternal} from 'preact/src/jsx';
+import 'src/components/Input/input.css';
 
+interface InputProps extends JSXInternal.HTMLAttributes<HTMLInputElement> {
+	value: string;
+	setValue: (v: string) => void;
+	extraClasses: string[];
+	label?: string;
+	placeholder?: string;
+	description?: string;
+	selected: boolean;
+}
 const Input = ({
 	value,
 	setValue,
@@ -9,7 +19,7 @@ const Input = ({
 	description,
 	selected,
 	...otherProps
-}) => {
+}: InputProps) => {
 	const inputContainerClasses = ['input__container']
 		.concat(extraClasses)
 		.concat([selected ? 'input--selected' : ''])
@@ -24,7 +34,9 @@ const Input = ({
 					placeholder={placeholder}
 					type="text"
 					value={value}
-					onChange={(e) => setValue(e.target.value)}
+					onChange={(event) => {
+						setValue(event.currentTarget.value);
+					}}
 					{...otherProps}
 				/>
 				{label && (

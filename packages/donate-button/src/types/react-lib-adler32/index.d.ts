@@ -1,3 +1,3 @@
-declare module "react-lib-adler32" {
-  export = (input: string) => string
+declare module 'react-lib-adler32' {
+	export = (input: string) => string;
 }

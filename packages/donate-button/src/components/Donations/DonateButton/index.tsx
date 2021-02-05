@@ -1,23 +1,50 @@
 import {useContext} from 'preact/hooks';
-import { DonationFrequency } from 'src/helpers/options-types';
-
-import DonationsContext from 'src/contexts/donationsContext';
-import OptionsContext from 'src/contexts/optionsContext';
-import {replaceKeys} from 'src/helpers/interpolation';
-import useI18n from 'src/hooks/useI18n';
 import Button from 'src/components/Button';
+import DonationsContext from 'src/contexts/donations-context';
+import OptionsContext from 'src/contexts/options-context';
+import {replaceKeys} from 'src/helpers/interpolation';
+import {
+	DonationFrequency,
+	DonationMode,
+	OnSubmitObject
+} from 'src/helpers/options-types';
+import useI18n from 'src/hooks/use-i18n';
 
-const constructEveryUrl = (company: string, frequency: DonationFrequency, amount: number, mode: DonationMode, extras: Record<string, string>) => {
-	const baseUrl = `https://www.every.org/${company}/donate?frequency=${frequency}&amount=${amount}&utm_campaign=single-or-split&utm_content=${mode.toLowerCase()}&utm_source=${company}&utm_medium=every-month`;
-	const extraParameters = Object.keys(extras).reduce((previous, key) => {
-		return previous.concat(`&${key}=${extras[key]}`);
-	}, '');
+function constructEveryUrl({
+	company,
+	frequency,
+	amount,
+	mode,
+	extras
+}: {
+	company: string;
+	frequency: DonationFrequency;
+	amount: string;
+	mode: DonationMode;
+	extras: OnSubmitObject['params'];
+}) {
+	const baseUrl = `https://www.every.org/${company}/donate`;
+	const parameters = Object.entries({
+		frequency,
+		amount,
+		utm_campaign: 'single-or-split',
+		utm_content: mode.toLowerCase(),
+		utm_source: company,
+		utm_medium: 'every-month',
+		...extras
+	})
+		.map((entry) => entry.join('='))
+		.join('&');
 
-	return `${baseUrl}${extraParameters}`;
-};
+	return `${baseUrl}?${parameters}`;
+}
 
-const getButtonTextFormatted = (amount: number, text: string, currency: string) => {
-	if (amount && !isNaN(amount)) {
+const getButtonTextFormatted = (
+	text: string,
+	currency: string,
+	amount?: string
+) => {
+	if (amount && !Number.isNaN(Number(amount))) {
 		return replaceKeys({amount: `$${amount} ${currency}`}, text);
 	}
 
@@ -25,31 +52,37 @@ const getButtonTextFormatted = (amount: number, text: string, currency: string) 
 };
 
 interface DonateButtonProps {
-	extraClasses?: string[]
-	monthlyDonation: boolean
+	extraClasses?: string[];
+	monthlyDonation: boolean;
 }
-const DonateButton = ({monthlyDonation, extraClasses = []}: DonateButtonProps) => {
+const DonateButton = ({
+	monthlyDonation,
+	extraClasses = []
+}: DonateButtonProps) => {
 	const lang = useI18n();
-	const {donationAmount} = useContext(DonationsContext);
+	const donationsContextValue = useContext(DonationsContext);
 	const {onSubmit, currency, mode} = useContext(OptionsContext);
 	const formText = monthlyDonation ? lang.monthly : lang.oneTime;
+	const donationAmount = donationsContextValue?.donationAmount;
 
-	const handleDonateButton = (mode) => {
-		if (!isNaN(donationAmount)) {
-			const frequency = monthlyDonation ? 'MONTHLY' : 'ONCE';
+	const handleDonateButton = (mode: DonationMode) => {
+		if (!donationAmount || Number.isNaN(Number(donationAmount))) {
+			return;
+		}
 
-			if (typeof onSubmit === "function") {
-				onSubmit({amount: donationAmount, frequency});
-			} else {
-				const url = constructEveryUrl(
-					onSubmit.charity,
-					frequency,
-					donationAmount,
-					mode,
-					onSubmit.params
-				);
-				window.location.href = url;
-			}
+		const frequency = monthlyDonation ? 'MONTHLY' : 'ONCE';
+
+		if (typeof onSubmit === 'function') {
+			onSubmit({amount: donationAmount, frequency});
+		} else {
+			const url = constructEveryUrl({
+				company: onSubmit.charity,
+				frequency,
+				amount: donationAmount,
+				mode,
+				extras: onSubmit.params
+			});
+			window.location.href = url;
 		}
 	};
 
@@ -60,7 +93,7 @@ const DonateButton = ({monthlyDonation, extraClasses = []}: DonateButtonProps) =
 				handleDonateButton(mode);
 			}}
 		>
-			{getButtonTextFormatted(donationAmount, formText.button, currency)}
+			{getButtonTextFormatted(formText.button, currency, donationAmount)}
 		</Button>
 	);
 };

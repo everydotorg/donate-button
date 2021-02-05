@@ -1,16 +1,26 @@
-import './toggle-donation-type.css';
-import {replaceTagWithComponent} from '../../../helpers/interpolation';
-import useI18n from '../../../hooks/useI18n';
+import {replaceTagWithComponent} from 'src/helpers/interpolation';
+import useI18n from 'src/hooks/use-i18n';
+import 'src/components/Doantions/ToggleDonationType/toggle-donation-type.css';
 
-const getActionFormatted = (switchText, handleClick) => {
-	const comp = 'span';
+const getActionFormatted = (switchText: string, handleClick: () => void) => {
 	const props = {onClick: handleClick};
 	const tag = 'action';
 
-	return replaceTagWithComponent(switchText, tag, comp, props);
+	return replaceTagWithComponent(
+		switchText,
+		tag,
+		(props) => <span {...props} />,
+		props
+	);
 };
 
-const ToggleDonationType = ({handleClick, monthlyDonation}) => {
+const ToggleDonationType = ({
+	handleClick,
+	monthlyDonation
+}: {
+	monthlyDonation: boolean;
+	handleClick(): void;
+}) => {
 	const lang = useI18n();
 	const formText = monthlyDonation ? lang.monthly : lang.oneTime;
 

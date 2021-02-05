@@ -1,7 +1,7 @@
-import './company.css';
+import 'src/components/Images/Company/company.css';
 
-import logo from '../../../assets/logo.svg';
-import useI18n from '../../../hooks/useI18n';
+import logo from 'src/assets/logo.svg';
+import useI18n from 'src/hooks/use-i18n';
 
 const Company = () => {
 	const {company} = useI18n();

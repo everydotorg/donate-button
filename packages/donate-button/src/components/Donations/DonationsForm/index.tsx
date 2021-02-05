@@ -1,35 +1,32 @@
 import {Fragment} from 'preact';
 import {useContext, useState, useEffect} from 'preact/hooks';
-
-import DonationsContext from 'src/contexts/donationsContext';
-import OptionsContext from 'src/contexts/optionsContext';
-import {replaceTagWithComponent} from 'src/helpers/interpolation';
-import useI18n from 'src/hooks/useI18n';
+import DonateButton from 'src/components/Donations/DonateButton';
 import Input from 'src/components/Input';
 import RadioButton from 'src/components/RadioButton';
-import DonateButton from 'src/components/Donations/DonateButton';
-import { DonationLevel } from 'src/helpers/options-types';
+import DonationsContext from 'src/contexts/donations-context';
+import OptionsContext from 'src/contexts/options-context';
+import {replaceTagWithComponent} from 'src/helpers/interpolation';
+import {DonationLevel} from 'src/helpers/options-types';
+import useI18n from 'src/hooks/use-i18n';
 
-const getLevelOfAmount = (levels: DonationLevel[], amount: number) => {
-	return levels.findIndex((l) => l.amount == amount);
+const getLevelOfAmount = (levels: readonly DonationLevel[], amount: string) => {
+	return levels.findIndex((l) => l.amount === amount);
 };
 
-const getBoldFormatted = (text) => {
-	const comp = 'span';
+const getBoldFormatted = (text: string) => {
 	const props = {};
 	const tag = 'bold';
 
-	return replaceTagWithComponent(text, tag, comp, props);
+	return replaceTagWithComponent(
+		text,
+		tag,
+		(props) => <span {...props} />,
+		props
+	);
 };
 
-const DonationsForm = ({monthlyDonation}) => {
-	const {
-		donationAmount,
-		setDonationAmount,
-		customDonation,
-		setCustomDonation,
-		setTriggerAnimation
-	} = useContext(DonationsContext);
+const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
+	const donationsContextValue = useContext(DonationsContext);
 
 	const {monthly, oneTime, onSubmit, currency, mode} = useContext(
 		OptionsContext
@@ -52,15 +49,30 @@ const DonationsForm = ({monthlyDonation}) => {
 			};
 		}
 	}, []);
+	if (!donationsContextValue) {
+		return null;
+	}
 
+	const {
+		donationAmount,
+		setDonationAmount,
+		customDonation,
+		setCustomDonation,
+		setTriggerAnimation
+	} = donationsContextValue;
 	const handleCustomInputFocus = () => {
-		const previousLevel = getLevelOfAmount(monthly.levels, donationAmount);
-		const currLevel = monthly.levels.length - 1;
-		if (monthlyDonation) {
-			setTriggerAnimation([previousLevel, currLevel]);
+		const previousLevel = donationAmount
+			? getLevelOfAmount(monthly.levels, donationAmount)
+			: 0;
+		const maxLevel = monthly.levels.length - 1;
+		if (monthlyDonation && setTriggerAnimation) {
+			setTriggerAnimation([previousLevel, maxLevel]);
 		}
 
-		setDonationAmount(customDonation);
+		if (setDonationAmount) {
+			setDonationAmount(customDonation);
+		}
+
 		setCustomInputFocus(true);
 	};
 
@@ -68,8 +80,8 @@ const DonationsForm = ({monthlyDonation}) => {
 		setCustomInputFocus(false);
 	};
 
-	const handleRadioButtonClick = (amount) => {
-		// Custom donation is always the last control
+	const handleRadioButtonClick = (amount: string) => {
+		// Custo M donation is always the last control
 		// If we have a custom donation the previous level is the custom input.
 		const previousLevel =
 			customDonation || !donationAmount
@@ -77,7 +89,7 @@ const DonationsForm = ({monthlyDonation}) => {
 				: getLevelOfAmount(monthly.levels, donationAmount);
 		const currLevel = getLevelOfAmount(monthly.levels, amount);
 
-		if (monthlyDonation) {
+		if (monthlyDonation && setTriggerAnimation) {
 			setTriggerAnimation([previousLevel, currLevel]);
 		}
 
@@ -85,7 +97,7 @@ const DonationsForm = ({monthlyDonation}) => {
 		setCustomDonation('');
 	};
 
-	const handleInputChange = (value) => {
+	const handleInputChange = (value: string) => {
 		setDonationAmount(value);
 		setCustomDonation(value);
 	};
@@ -104,8 +116,9 @@ const DonationsForm = ({monthlyDonation}) => {
 		  )
 		: oneTime.levels.every(
 				(amount) =>
-					formText?.levels?.find((langLevel) => langLevel.amount === amount)
-						?.name
+					formText?.levels?.find(
+						(langLevel) => langLevel.amount === String(amount)
+					)?.name
 		  );
 
 	const formClasses = ['donations__form'].concat([
@@ -117,31 +130,32 @@ const DonationsForm = ({monthlyDonation}) => {
 			<div className={formClasses.join(' ')}>
 				{monthlyDonation && (
 					<Fragment>
-						{fixedLevels.map((option, i) => (
-							<RadioButton
-								key={i}
-								name="amount"
-								amount={option.amount}
-								selected={donationAmount === option.amount}
-								handleClick={() => {
-									handleRadioButtonClick(option.amount);
-								}}
-								text={
-									showLabels
-										? formText.levels.find(
-												(level) => level.amount === option.amount
-										  )?.name
-										: ''
-								}
-								description={getBoldFormatted(
-									formText.levels.find(
-										(level) => level.amount === option.amount
-									)?.description1
-								)}
-								image={option.img}
-								bgColor={option.bgColor}
-							/>
-						))}
+						{fixedLevels.map((option, i) => {
+							const description = formText.levels?.find(
+								(level) => level.amount === option.amount
+							)?.description1;
+							return (
+								<RadioButton
+									key={i}
+									name="amount"
+									amount={option.amount}
+									selected={donationAmount === option.amount}
+									handleClick={() => {
+										handleRadioButtonClick(option.amount);
+									}}
+									text={
+										showLabels
+											? formText.levels?.find(
+													(level) => level.amount === option.amount
+											  )?.name ?? ''
+											: ''
+									}
+									description={description && getBoldFormatted(description)}
+									image={option.img}
+									bgColor={option.bgColor}
+								/>
+							);
+						})}
 						{customLevel && (
 							<Input
 								label={formText.custom.label}
@@ -164,15 +178,15 @@ const DonationsForm = ({monthlyDonation}) => {
 							<RadioButton
 								key={option}
 								name="amount"
-								amount={option}
-								selected={donationAmount === option}
+								amount={String(option)}
+								selected={donationAmount === String(option)}
 								handleClick={() => {
-									handleRadioButtonClick(option);
+									handleRadioButtonClick(String(option));
 								}}
 								text={
 									showLabels
 										? formText?.levels?.find(
-												(level) => level?.amount === option
+												(level) => level?.amount === String(option)
 										  )?.name
 										: ''
 								}

@@ -1,13 +1,19 @@
-import './images.css';
 import {useContext} from 'preact/hooks';
+import DonationsContext from 'src/contexts/donations-context';
+import OptionsContext from 'src/contexts/options-context';
 
-import DonationsContext from '../../contexts/donationsContext';
-import OptionsContext from '../../contexts/optionsContext';
-const Images = ({image}) => {
+import 'src/components/Images/images.css';
+
+const Images = ({image}: {image: string}) => {
 	const options = useContext(OptionsContext);
-	const {monthlyDonation} = useContext(DonationsContext);
+	const donationsContextValue = useContext(DonationsContext);
+	const monthlyDonation = donationsContextValue?.monthlyDonation ?? true;
 
 	const imageBg = monthlyDonation ? image : options.oneTime.img;
+	if (!imageBg) {
+		return null;
+	}
+
 	return (
 		<div
 			className="images"

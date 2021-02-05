@@ -1,14 +1,19 @@
-import logo from '../../../assets/logo.svg';
-import {replaceTagWithComponent} from '../../../helpers/interpolation';
-import useI18n from '../../../hooks/useI18n';
-import './logo.css';
+import logo from 'src/assets/logo.svg';
+import {replaceTagWithComponent} from 'src/helpers/interpolation';
+import useI18n from 'src/hooks/use-i18n';
 
-const getLinkFormatted = (logoText, link) => {
-	const comp = 'a';
+import 'src/components/Donations/Logo/logo.css';
+
+const getLinkFormatted = (logoText: string, link: string) => {
 	const props = {className: 'logo__link', href: link};
 	const tag = 'link';
 
-	return replaceTagWithComponent(logoText, tag, comp, props);
+	return replaceTagWithComponent(
+		logoText,
+		tag,
+		(props) => <a {...props} />,
+		props
+	);
 };
 
 const Logo = ({monthlyDonation = true, scrolled = false}) => {

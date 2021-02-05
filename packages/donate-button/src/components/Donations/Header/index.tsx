@@ -1,8 +1,7 @@
 import {Fragment} from 'preact';
+import useI18n from 'src/hooks/use-i18n';
 
-import useI18n from '../../../hooks/useI18n';
-
-const Header = ({monthlyDonation}) => {
+const Header = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 	const lang = useI18n();
 	const headingText = monthlyDonation ? lang.monthly : lang.oneTime;
 
