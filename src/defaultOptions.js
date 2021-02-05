@@ -18,24 +18,19 @@ const everyMonthOptions = {
       // Different choices in monthly donation
       {
         amount: '25',
-        bgColor: '#BCD9DD',
       },
       {
         amount: '50',
-        bgColor: '#F4BF86',
         default: true,
       },
       {
         amount: '100',
-        bgColor: '#A0CBFE',
       },
       {
-        amount: '500',
-        bgColor: '#A0CBFE',
+        amount: '200',
       },
       {
         amount: 'custom',
-        bgColor: '#BCD9DD',
       },
     ],
   },
@@ -65,7 +60,7 @@ const everyMonthOptions = {
           { amount: '25' },
           { amount: '50' },
           { amount: '100' },
-          { amount: '500' },
+          { amount: '200' },
         ],
         custom: {
           label: 'Custom',
