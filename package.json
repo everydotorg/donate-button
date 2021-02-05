@@ -6,8 +6,5 @@
   "devDependencies": {
     "prettier": "^2.2.1",
     "xo": "^0.37.1"
-  },
-  "resolutions": {
-    "typescript": "^4.1.3"
   }
 }

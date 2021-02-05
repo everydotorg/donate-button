@@ -52,8 +52,5 @@
     "microbundle": "^0.13.0",
     "preact": "^10.5.12",
     "react-lib-adler32": "^1.0.3"
-  },
-  "resolutions": {
-    "typescript": "^4.1.3"
   }
 }
