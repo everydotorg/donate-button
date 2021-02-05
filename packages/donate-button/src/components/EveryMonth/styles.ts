@@ -1,4 +1,4 @@
-import buttonStyles from 'src/components/Button/button.css';
+import buttonStyles from 'src/components/Button/index.css';
 import descriptionStyles from 'src/components/Description/description.css';
 import logoStyles from 'src/components/Donations/Logo/logo.css';
 import toggleDonationTypeStyles from 'src/components/Donations/ToggleDonationType/toggle-donation-type.css';

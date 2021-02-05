@@ -1,6 +1,6 @@
 import {replaceTagWithComponent} from 'src/helpers/interpolation';
 import useI18n from 'src/hooks/use-i18n';
-import 'src/components/Doantions/ToggleDonationType/toggle-donation-type.css';
+import 'src/components/Donations/ToggleDonationType/toggle-donation-type.css';
 
 const getActionFormatted = (switchText: string, handleClick: () => void) => {
 	const props = {onClick: handleClick};
