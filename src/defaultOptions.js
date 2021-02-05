@@ -18,20 +18,19 @@ const everyMonthOptions = {
       // Different choices in monthly donation
       {
         amount: '25',
-        bgColor: '#BCD9DD',
       },
       {
         amount: '50',
-        bgColor: '#F4BF86',
         default: true,
       },
       {
         amount: '100',
-        bgColor: '#A0CBFE',
+      },
+      {
+        amount: '200',
       },
       {
         amount: 'custom',
-        bgColor: '#BCD9DD',
       },
     ],
   },
@@ -58,9 +57,7 @@ const everyMonthOptions = {
         info:
           'Monthly gifts help us focus on our mission and long-term impact',
         levels: [
-          { amount: '5' },
-          { amount: '10' },
-          { amount: '20' },
+          { amount: '25' },
           { amount: '50' },
           { amount: '100' },
           { amount: '200' },
