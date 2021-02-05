@@ -13,7 +13,7 @@
     padding: 1.5rem 2rem;
 }
 
-@media only screen and (max-width: 64em) {
+@media only screen and (max-width: 64em), (max-height: 46.3125em)  {
     .logo {
         margin: -1rem -1.5rem 0 -1.5rem;
         padding: 1.5rem 1.5rem;
