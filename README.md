@@ -1,44 +1,28 @@
 # Every.org Donate Button
+
 For nonprofits — the simplest way to give your supporters a beautiful donation experience. This button opens a donation flow through [Every.org](https://www.every.org/nonprofits).
 
-See live example here: https://every-month.vercel.app/
+See live example here: https://assets.every.org/donate-button-v2/
 
 ## Use
+
 Add this code at the bottom of your page, just before the `</body>`
+
 ```js
-<script src="https://assets.every.org/every-month/bundle.js"/>
+<script async defer id="edoDonateButton" src="https://assets.every.org/dist/donate-button/0.2/bundle.js"/>
 
 <script>
-      // Global object
-      everyMonthWidget.setOptions({
-        ... // See below for configuration options
-      })
-      everyMonthWidget.showOnClick('#yourSelector')
+  window.getElementById("edoDonateButton").addEventListener("load", function() {
+    // Global object
+    everyMonthWidget.setOptions({
+      ... // See below for configuration options
+    })
+    everyMonthWidget.showOnClick('#yourSelector')
 
-      // You can set many selectors and override options for a specific one
-      everyMonthWidget.showOnClick('#anotherCoolSelector', { currency: 'ARS' })
+    // You can set many selectors and override options for a specific one
+    everyMonthWidget.showOnClick('#anotherCoolSelector', { currency: 'ARS' })
+  })
 </script>
-```
-
-As a React component
-
-```jsx
-const EveryMonth = () => {
-  const ref = useRef()
-  useEffect(() => {
-    if (ref) ref.current.setOptions({...})
-  }, [])
-
-  return (
-    <>
-      <script
-        type="text/javascript"
-        src="https://assets.every.org/every-month/bundle.js"
-      ></script>
-      <div ref={ref} />
-    </>
-  )
-}
 ```
 
 ## Configure
@@ -47,6 +31,15 @@ You have to pass a javascript object to configure what we should display in the 
 
 ```js
       {
+        // Configure action when the user submit the donation in the widget.
+        // You can pass to us the following parameters to customize it or listen to the callback
+        onSubmit: {
+          charity: 'your-foundation', // Your Every.org URL slug
+          params: {
+            share_info: 1, // Share info with nonprofit checked by default
+            no_exit: 1, // Disallow exiting from donation flow to Every.org
+          }
+        },
         defaultMode: 'monthly' // Available values: 'monthly', 'one-time'. Default monthly
         currency: 'USD', // Currency to display
         monthly: {
@@ -62,15 +55,6 @@ You have to pass a javascript object to configure what we should display in the 
           allowCustom: true, // Allow enter custom amount in one time donation
           bgColor: '#BCD9DD',
           img: 'https://images.unsplash.com/photo-1602199926649-2e5e447bab97?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80'
-        },
-        // Configure action when the user submit the donation in the widget.
-        // You can pass to us the following parameters to customize it or listen to the callback
-        onSubmit: {
-          charity: 'your-foundation', // Your Every.org URL slug
-          params: {
-            share_info: 1, // Share info with nonprofit checked by default
-            no_exit: 1, // Disallow exiting from donation flow to Every.org
-          }
         },
         // Both ways supported
         // onSubmit: ({amount, frequency}) => { console.log(amount, frequency)},
@@ -91,7 +75,7 @@ You have to pass a javascript object to configure what we should display in the 
                 link: 'https://every.org',
               },
               header: 'This is a headline, which could be two lines long.',
-              info: 'Monthy gifts help nonprofits focus on their mission and long-term impact',
+              info: 'Monthly gifts help nonprofits focus on their mission and long-term impact',
               levels: [
                 {
                   amount: '25',
@@ -204,20 +188,21 @@ You have to pass a javascript object to configure what we should display in the 
 ```
 
 You should pass this options previous initialization of the widget. Also you can change them in runtime. Example:
- ```js
-    <script>
-      // Ensure that the script was fully loaded before do this 
-      everyMonthWidget.setOptions({
-          ...
-      })
-      everyMonthWidget.show()
-  </script>
+
+```js
+   <script>
+     // Ensure that the script was fully loaded before do this
+     everyMonthWidget.setOptions({
+         ...
+     })
+     everyMonthWidget.show()
+ </script>
 ```
 
 ## API
 
 We expose three functions through the global `everyMonthWidget` object:
 
- - setOptions({...options}): Function to set/override the configuration of the widget.
- - showOnClick(selector, specificOptions?): Function to link a selector with the widget. As optional you can pass extra options that would be set only when the user open the widget with that button.
- - show(): Open the widget with javascript code.
+- setOptions({...options}): Function to set/override the configuration of the widget.
+- showOnClick(selector, specificOptions?): Function to link a selector with the widget. As optional you can pass extra options that would be set only when the user open the widget with that button.
+- show(): Open the widget with javascript code.
