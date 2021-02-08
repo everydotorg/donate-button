@@ -8,7 +8,7 @@ import isFunction from '../../../helpers/is-function';
 
 const constructEveryUrl = (company, frequency, amount, mode, extras) => {
     const baseUrl = `https://www.every.org/${company}/donate?frequency=${frequency}&amount=${amount}&utm_campaign=single-or-split&utm_content=${mode.toLowerCase()}&utm_source=${company}&utm_medium=every-month`
-    const extraParams = Object.keys(extras).reduce((prev, key) => {
+    const extraParams = Object.keys(extras || {}).reduce((prev, key) => {
         return prev.concat(`&${key}=${extras[key]}`)
     }, '');
 
