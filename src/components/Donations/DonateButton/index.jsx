@@ -6,8 +6,9 @@ import Button from '../../Button';
 import useI18n from '../../../hooks/useI18n';
 import isFunction from '../../../helpers/is-function';
 
+const UTM_MEDIUM = "donate-button-0.2" // update this if the major version changes
 const constructEveryUrl = (company, frequency, amount, mode, extras) => {
-    const baseUrl = `https://www.every.org/${company}/donate?frequency=${frequency}&amount=${amount}&utm_campaign=single-or-split&utm_content=${mode.toLowerCase()}&utm_source=${company}&utm_medium=every-month`
+    const baseUrl = `https://www.every.org/${company}/donate?frequency=${frequency}&amount=${amount}&utm_campaign=single-or-split&utm_content=${mode.toLowerCase()}&utm_source=${company}&utm_medium=${UTM_MEDIUM}`
     const extraParams = Object.keys(extras || {}).reduce((prev, key) => {
         return prev.concat(`&${key}=${extras[key]}`)
     }, '');
