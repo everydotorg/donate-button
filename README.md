@@ -9,17 +9,19 @@ See live example here: https://assets.every.org/donate-button-v2/
 Add this code at the bottom of your page, just before the `</body>`
 
 ```js
-<script src="https://assets.every.org/dist/donate-button/0.2/bundle.js"/>
+<script async defer id="edoDonateButton" src="https://assets.every.org/dist/donate-button/0.2/bundle.js"/>
 
 <script>
-      // Global object
-      everyMonthWidget.setOptions({
-        ... // See below for configuration options
-      })
-      everyMonthWidget.showOnClick('#yourSelector')
+  window.getElementById("edoDonateButton").addEventListener("load", function() {
+    // Global object
+    everyMonthWidget.setOptions({
+      ... // See below for configuration options
+    })
+    everyMonthWidget.showOnClick('#yourSelector')
 
-      // You can set many selectors and override options for a specific one
-      everyMonthWidget.showOnClick('#anotherCoolSelector', { currency: 'ARS' })
+    // You can set many selectors and override options for a specific one
+    everyMonthWidget.showOnClick('#anotherCoolSelector', { currency: 'ARS' })
+  })
 </script>
 ```
 
