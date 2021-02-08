@@ -7,11 +7,10 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const packageJson = require('./package.json');
 
-const OUTPUT_FOLDER = path.join(__dirname, 'dist');
 const VERSION = semver.parse(packageJson.version);
 const VERSION_SLUG =
 	VERSION.major === 0 ? `${VERSION.major}.${VERSION.minor}` : VERSION.major;
-const VERSION_PATH = path.join('donate-button', VERSION_SLUG);
+const VERSION_PATH = path.join('dist', 'donate-button', VERSION_SLUG);
 
 const config = {
 	/**
@@ -26,7 +25,7 @@ const config = {
 	webpack(config, env, helpers, _options) {
 		config.resolve.plugins = [new TsconfigPathsPlugin()];
 		delete config.entry.polyfills;
-		config.output.path = path.resolve(OUTPUT_FOLDER, VERSION_PATH);
+		config.output.path = path.resolve(__dirname, VERSION_PATH);
 		config.output.filename = 'index.js';
 
 		if (env.production) {
