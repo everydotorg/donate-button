@@ -4,6 +4,7 @@
   "description": "Cloudflare worker for serving the Every.org donate button at assets.every.org",
   "main": "index.js",
   "scripts": {
+    "tsc": "tsc",
     "build": "webpack",
     "dev": "NODE_ENV=development npm run build",
     "lint": "xo",
