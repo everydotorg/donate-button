@@ -2,7 +2,8 @@
   "scripts": {
     "build": "yarn workspace @everydotorg/donate-button build && cp -r packages/donate-button/dist ./docs",
     "lint": "concurrently --names 'donate-button,cloudflare-worker' 'yarn workspace @everydotorg/donate-button lint' 'yarn workspace @everydotorg/donate-button-cloudflare-worker lint'",
-    "lint:fix": "concurrently --names 'donate-button,cloudflare-worker' 'yarn workspace @everydotorg/donate-button lint:fix' 'yarn workspace @everydotorg/donate-button-cloudflare-worker lint'"
+    "lint:fix": "concurrently --names 'donate-button,cloudflare-worker' 'yarn workspace @everydotorg/donate-button lint:fix' 'yarn workspace @everydotorg/donate-button-cloudflare-worker lint'",
+    "test": "concurrently --names 'donate-button,cloudflare-worker' 'yarn workspace @everydotorg/donate-button test' 'yarn workspace @everydotorg/donate-button-cloudflare-worker test'"
   },
   "private": true,
   "workspaces": [
