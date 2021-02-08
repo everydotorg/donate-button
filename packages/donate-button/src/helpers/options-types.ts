@@ -28,9 +28,9 @@ export type OnSubmitFunction = (parameters: {
 }) => void;
 export interface OnSubmitObject {
 	readonly charity: string;
-	readonly params: {
-		readonly share_info: 0 | 1;
-		readonly no_exit: 0 | 1;
+	readonly params?: {
+		readonly share_info?: 0 | 1;
+		readonly no_exit?: 0 | 1;
 	};
 }
 export type OnSubmit = OnSubmitFunction | OnSubmitObject;
@@ -42,7 +42,7 @@ export interface OneTimeOptions {
 	readonly img?: string;
 	readonly levels: number[];
 	readonly allowCustom: boolean;
-	readonly bgColor: string;
+	readonly bgColor?: string;
 }
 export interface I18NFrequencyOptions {
 	readonly logo: {
@@ -102,22 +102,21 @@ export const defaultOptions: DonateButtonOptions = {
 	monthly: {
 		levels: [
 			// Different choices in monthly donation
-			{
-				amount: '25',
-				bgColor: '#BCD9DD'
-			},
-			{
-				amount: '50',
-				bgColor: '#F4BF86',
-				default: true
-			},
-			{
-				amount: '100',
-				bgColor: '#A0CBFE'
-			},
+      {
+        amount: '25',
+      },
+      {
+        amount: '50',
+        default: true,
+      },
+      {
+        amount: '100',
+      },
+      {
+        amount: '200',
+      },
 			{
 				amount: 'custom',
-				bgColor: '#BCD9DD'
 			}
 		]
 	},

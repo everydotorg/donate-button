@@ -10,18 +10,19 @@ import {
 } from 'src/helpers/options-types';
 import useI18n from 'src/hooks/use-i18n';
 
+const UTM_MEDIUM = "donate-button-0.2" // update this if the major version changes
 function constructEveryUrl({
 	company,
 	frequency,
 	amount,
 	mode,
-	extras
+	extras = {}
 }: {
 	company: string;
 	frequency: DonationFrequency;
 	amount: string;
 	mode: DonationMode;
-	extras: OnSubmitObject['params'];
+	extras?: OnSubmitObject['params'];
 }) {
 	const baseUrl = `https://www.every.org/${company}/donate`;
 	const parameters = Object.entries({
@@ -30,7 +31,7 @@ function constructEveryUrl({
 		utm_campaign: 'single-or-split',
 		utm_content: mode.toLowerCase(),
 		utm_source: company,
-		utm_medium: 'every-month',
+		utm_medium: UTM_MEDIUM,
 		...extras
 	})
 		.map((entry) => entry.join('='))

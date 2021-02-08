@@ -1,6 +1,6 @@
 {
-  "name": "every-month-wg",
-  "version": "0.2.1",
+  "name": "@everydotorg/donate-button",
+  "version": "0.2.2",
   "description": "",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
@@ -9,6 +9,7 @@
   "scripts": {
     "test": "ava",
     "build": "preact build --no-prerender --clean  --no-sw",
+    "postbuild": "cp docs/dist/donate-button/0.2/index.js docs/dist/donate-button/0.2/donate-button.js",
     "serve": "preact serve",
     "dev": "preact watch -c ./preact.config.js --no-prerender --no-sw",
     "lint": "xo",

@@ -1,69 +1,66 @@
-import {useEffect, useState} from 'preact/hooks';
-import type EveryMonthComponent from 'src/components/EveryMonth';
-import experiment from 'src/experiment';
-import {
-	DonateButtonOptions,
-	DonationMode,
-	defaultOptions
-} from 'src/helpers/options-types';
+import { useEffect, useState } from 'preact/hooks'
+import defaultOptions from './defaultOptions'
+import experiment from './experiment'
+import WIDGET_MODE from './constants/widgetMode'
 
-const canUseSplitPanel = (options: DonateButtonOptions) => {
-	const allMonthlyLevelsHasImages = options.monthly.levels.every((level) =>
-		Boolean(level.img)
-	);
-	const oneTimeLevelHasImage = options.oneTime.img;
 
-	return allMonthlyLevelsHasImages && oneTimeLevelHasImage;
-};
+const canUseSplitPanel = (options) => {
+  const allMonthlyLevelsHasImages = options.monthly.levels.every(level => !!level.img)
+  const oneTimeLevelHasImage = options.oneTime.img
 
-interface EveryMonthLoaderProps {
-	options: Partial<DonateButtonOptions>;
-	hide: () => void;
+  return allMonthlyLevelsHasImages && oneTimeLevelHasImage
 }
-export const EveryMonthLoader = ({
-	options = {},
-	hide
-}: EveryMonthLoaderProps) => {
-	const [EveryMonth, widgetLoaded] = useState<
-		typeof EveryMonthComponent | undefined
-	>(undefined);
 
-	// When show is set to true and EveryMonth is not loaded, load it
-	useEffect(() => {
-		if (options.show && !EveryMonth) {
-			import('./components/EveryMonth')
-				.then((m) => {
-					widgetLoaded(() => m.default);
-				})
-				.catch((error) => {
-					console.log('Could not lazy load Every Month component', error);
-				});
-		}
-	}, [options.show, EveryMonth]);
+let originalOverflow;
+const getOriginalOverflow = () => {
+  const body = document.querySelector('body')
 
-	if (!EveryMonth) {
-		// Not yet loaded
-		return null;
-	}
+  if(!originalOverflow){
+    originalOverflow = body.style.overflow ? body.style.overflow : 'unset'
+  }
 
-	if (!options.show) {
-		// Not showing
-		return null;
-	}
+  return originalOverflow
+}
 
-	// Loading
-	if (options.show && !EveryMonth) {
-		return <>Loading...</>;
-	}
+const addOverflowToBody = () => {
+  const body = document.querySelector('body')
+  if(body){
+    body.style.overflow = 'hidden';
+  }
+}
 
-	const finalOptions: DonateButtonOptions = canUseSplitPanel({
-		...defaultOptions,
-		...options
-	})
-		? {...defaultOptions, ...experiment(), ...options}
-		: {...defaultOptions, ...options, mode: DonationMode.SINGLE};
+const removeOverflowFromBody = () => {
+  const body = document.querySelector('body')
+  const overflow = getOriginalOverflow()
+  if(body){
+    body.style.overflow = overflow
+  }
+} 
 
-	return <EveryMonth options={finalOptions} hide={hide} />;
-};
+export const EveryMonthLoader = ({ options = {}, hide }) => {
+  const [EveryMonth, widgetLoaded] = useState()
 
-export default EveryMonthLoader;
+  // when show is set to true and EveryMonth is not loaded, load it
+  useEffect(() => {
+    if (options.show && !EveryMonth)
+      import('./components/EveryMonth').then((m) =>
+        widgetLoaded(() => m.default)
+      )
+  }, [options.show, EveryMonth])
+
+  removeOverflowFromBody()
+  // Not showing
+  if (!options.show) return null
+
+  addOverflowToBody()
+  // Loading
+  if (options.show && !EveryMonth) return 'Loading...' // TODO - nicer loader
+
+  const finalOptions = canUseSplitPanel({ ...defaultOptions, ...options })
+    ? { ...defaultOptions, ...experiment(), ...options }
+    : { ...defaultOptions, ...options, mode: WIDGET_MODE.SINGLE }
+
+  return <EveryMonth options={finalOptions} hide={hide} />
+}
+
+export default EveryMonthLoader
