@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "build": "yarn workspace @everydotorg/donate-button build && cp -r packages/donate-button/dist ./docs"
+  },
   "private": true,
   "workspaces": [
     "packages/*"
