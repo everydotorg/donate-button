@@ -2,46 +2,27 @@
 
 For nonprofits — the simplest way to give your supporters a beautiful donation experience. This button opens a donation flow through [Every.org](https://www.every.org/nonprofits).
 
-See live example here: https://every-month.vercel.app/
+See live example here: https://assets.every.org/donate-button-v2/
 
 ## Use
 
 Add this code at the bottom of your page, just before the `</body>`
 
 ```js
-<script src="https://assets.every.org/dist/donate-button/0.2/bundle.js"/>
+<script async defer id="edoDonateButton" src="https://assets.every.org/dist/donate-button/0.2/bundle.js"/>
 
 <script>
-      // Global object
-      everyMonthWidget.setOptions({
-        ... // See below for configuration options
-      })
-      everyMonthWidget.showOnClick('#yourSelector')
+  window.getElementById("edoDonateButton").addEventListener("load", function() {
+    // Global object
+    everyMonthWidget.setOptions({
+      ... // See below for configuration options
+    })
+    everyMonthWidget.showOnClick('#yourSelector')
 
-      // You can set many selectors and override options for a specific one
-      everyMonthWidget.showOnClick('#anotherCoolSelector', { currency: 'ARS' })
+    // You can set many selectors and override options for a specific one
+    everyMonthWidget.showOnClick('#anotherCoolSelector', { currency: 'ARS' })
+  })
 </script>
-```
-
-As a React component
-
-```jsx
-const EveryMonth = () => {
-  const ref = useRef()
-  useEffect(() => {
-    if (ref) ref.current.setOptions({...})
-  }, [])
-
-  return (
-    <>
-      <script
-        type="text/javascript"
-        src="https://assets.every.org/every-month/bundle.js"
-      ></script>
-      <div ref={ref} />
-    </>
-  )
-}
 ```
 
 ## Configure
@@ -50,6 +31,15 @@ You have to pass a javascript object to configure what we should display in the 
 
 ```js
       {
+        // Configure action when the user submit the donation in the widget.
+        // You can pass to us the following parameters to customize it or listen to the callback
+        onSubmit: {
+          charity: 'your-foundation', // Your Every.org URL slug
+          params: {
+            share_info: 1, // Share info with nonprofit checked by default
+            no_exit: 1, // Disallow exiting from donation flow to Every.org
+          }
+        },
         currency: 'USD', // Currency to display
         monthly: {
           levels: [ // Different choices in monthly donation
@@ -64,15 +54,6 @@ You have to pass a javascript object to configure what we should display in the 
           allowCustom: true, // Allow enter custom amount in one time donation
           bgColor: '#BCD9DD',
           img: 'https://images.unsplash.com/photo-1602199926649-2e5e447bab97?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80'
-        },
-        // Configure action when the user submit the donation in the widget.
-        // You can pass to us the following parameters to customize it or listen to the callback
-        onSubmit: {
-          charity: 'your-foundation', // Your Every.org URL slug
-          params: {
-            share_info: 1, // Share info with nonprofit checked by default
-            no_exit: 1, // Disallow exiting from donation flow to Every.org
-          }
         },
         // Both ways supported
         // onSubmit: ({amount, frequency}) => { console.log(amount, frequency)},
