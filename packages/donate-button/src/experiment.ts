@@ -1,14 +1,14 @@
-import {DonationMode} from 'src/helpers/options-types';
+import {LayoutMode} from 'src/helpers/options-types';
 
 export const experiment = () => {
 	const modeFromStorage = localStorage.getItem('every-month-widget-mode');
-	const mode: DonationMode =
+	const mode: LayoutMode =
 		modeFromStorage &&
-		(Object.values(DonationMode) as string[]).includes(modeFromStorage)
-			? (modeFromStorage as DonationMode)
+		(Object.values(LayoutMode) as string[]).includes(modeFromStorage)
+			? (modeFromStorage as LayoutMode)
 			: Math.random() > 0.5
-			? DonationMode.SINGLE
-			: DonationMode.SPLIT;
+			? LayoutMode.SINGLE
+			: LayoutMode.SPLIT;
 	if (!modeFromStorage) {
 		localStorage.setItem('every-month-widget-mode', mode);
 	}

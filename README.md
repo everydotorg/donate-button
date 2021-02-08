@@ -40,6 +40,7 @@ You have to pass a javascript object to configure what we should display in the 
             no_exit: 1, // Disallow exiting from donation flow to Every.org
           }
         },
+        defaultMode: 'monthly' // Available values: 'monthly', 'one-time'. Default monthly
         currency: 'USD', // Currency to display
         monthly: {
           levels: [ // Different choices in monthly donation

@@ -9,7 +9,7 @@ import Company from 'src/components/Images/Company';
 import {Styled} from 'src/components/Styled';
 import DonationsContext, {AnimationValue} from 'src/contexts/donations-context';
 import OptionsContext from 'src/contexts/options-context';
-import {DonateButtonOptions} from 'src/helpers/options-types';
+import {DefaultFrequency, DonateButtonOptions} from 'src/helpers/options-types';
 
 interface EveryMonthProps {
 	options: DonateButtonOptions;
@@ -24,7 +24,8 @@ function EveryMonth({options, hide}: EveryMonthProps) {
 		}
 	};
 
-	const [monthlyDonation, setMonthlyDonation] = useState(true);
+	const isMonthlyDefault = options.defaultMode !== DefaultFrequency.ONE_TIME;
+	const [monthlyDonation, setMonthlyDonation] = useState(isMonthlyDefault);
 
 	const defaultLevel = options.monthly.levels.find((level) => level.default);
 	const [donationAmount, setDonationAmount] = useState(

@@ -3,7 +3,7 @@ import type EveryMonthComponent from 'src/components/EveryMonth';
 import experiment from 'src/experiment';
 import {
 	DonateButtonOptions,
-	DonationMode,
+	LayoutMode,
 	defaultOptions
 } from 'src/helpers/options-types';
 
@@ -90,7 +90,7 @@ export const EveryMonthLoader = ({
 		...options
 	})
 		? {...defaultOptions, ...experiment(), ...options}
-		: {...defaultOptions, ...options, mode: DonationMode.SINGLE};
+		: {...defaultOptions, ...options, mode: LayoutMode.SINGLE};
 
 	return <EveryMonth options={finalOptions} hide={hide} />;
 };

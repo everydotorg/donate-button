@@ -5,7 +5,7 @@ import OptionsContext from 'src/contexts/options-context';
 import {replaceKeys} from 'src/helpers/interpolation';
 import {
 	DonationFrequency,
-	DonationMode,
+	LayoutMode,
 	OnSubmitObject
 } from 'src/helpers/options-types';
 import useI18n from 'src/hooks/use-i18n';
@@ -21,7 +21,7 @@ function constructEveryUrl({
 	company: string;
 	frequency: DonationFrequency;
 	amount: string;
-	mode: DonationMode;
+	mode: LayoutMode;
 	extras?: OnSubmitObject['params'];
 }) {
 	const baseUrl = `https://www.every.org/${company}/donate`;
@@ -66,7 +66,7 @@ const DonateButton = ({
 	const formText = monthlyDonation ? lang.monthly : lang.oneTime;
 	const donationAmount = donationsContextValue?.donationAmount;
 
-	const handleDonateButton = (mode: DonationMode) => {
+	const handleDonateButton = (mode: LayoutMode) => {
 		if (!donationAmount || Number.isNaN(Number(donationAmount))) {
 			return;
 		}

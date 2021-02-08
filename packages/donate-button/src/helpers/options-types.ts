@@ -1,4 +1,4 @@
-export enum DonationMode {
+export enum LayoutMode {
 	SINGLE = 'SINGLE',
 	SPLIT = 'SPLIT'
 }
@@ -72,12 +72,17 @@ export interface I18NOptions {
 	readonly oneTime: I18NFrequencyOptions;
 	readonly footer: string;
 }
+export enum DefaultFrequency {
+	MONTHLY = 'monthly',
+	ONE_TIME = 'one-time'
+}
 export interface DonateButtonOptions<Languages extends string = string> {
 	readonly monthly: MonthlyOptions;
 	readonly oneTime: OneTimeOptions;
 	readonly onSubmit: OnSubmit;
+	readonly defaultMode: DefaultFrequency;
 	readonly currency: string;
-	readonly mode: DonationMode;
+	readonly mode: LayoutMode;
 	readonly show: boolean;
 	readonly i18n: Record<Languages, I18NOptions>;
 	language: Languages;
@@ -86,7 +91,7 @@ export interface DonateButtonOptions<Languages extends string = string> {
 export const defaultOptions: DonateButtonOptions = {
 	show: false,
 	language: 'en',
-	mode: DonationMode.SPLIT,
+	mode: LayoutMode.SPLIT,
 	// Configure action when the user submit the donation in the widget.
 	// You can pass to us the following parameters to customize it or listen to the callback
 	onSubmit: {
@@ -96,6 +101,7 @@ export const defaultOptions: DonateButtonOptions = {
 			no_exit: 1
 		}
 	},
+	defaultMode: DefaultFrequency.MONTHLY,
 	// Also supported:
 	// onSubmit: ({amount, frequency}) => { console.log(amount, frequency)},
 	currency: 'USD', // Currency to display
