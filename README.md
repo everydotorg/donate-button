@@ -1,12 +1,15 @@
 # Every.org Donate Button
+
 For nonprofits — the simplest way to give your supporters a beautiful donation experience. This button opens a donation flow through [Every.org](https://www.every.org/nonprofits).
 
 See live example here: https://every-month.vercel.app/
 
 ## Use
+
 Add this code at the bottom of your page, just before the `</body>`
+
 ```js
-<script src="https://assets.every.org/every-month/bundle.js"/>
+<script src="https://assets.every.org/dist/donate-button/0.2/bundle.js"/>
 
 <script>
       // Global object
@@ -90,7 +93,7 @@ You have to pass a javascript object to configure what we should display in the 
                 link: 'https://every.org',
               },
               header: 'This is a headline, which could be two lines long.',
-              info: 'Monthy gifts help nonprofits focus on their mission and long-term impact',
+              info: 'Monthly gifts help nonprofits focus on their mission and long-term impact',
               levels: [
                 {
                   amount: '25',
@@ -203,20 +206,21 @@ You have to pass a javascript object to configure what we should display in the 
 ```
 
 You should pass this options previous initialization of the widget. Also you can change them in runtime. Example:
- ```js
-    <script>
-      // Ensure that the script was fully loaded before do this 
-      everyMonthWidget.setOptions({
-          ...
-      })
-      everyMonthWidget.show()
-  </script>
+
+```js
+   <script>
+     // Ensure that the script was fully loaded before do this
+     everyMonthWidget.setOptions({
+         ...
+     })
+     everyMonthWidget.show()
+ </script>
 ```
 
 ## API
 
 We expose three functions through the global `everyMonthWidget` object:
 
- - setOptions({...options}): Function to set/override the configuration of the widget.
- - showOnClick(selector, specificOptions?): Function to link a selector with the widget. As optional you can pass extra options that would be set only when the user open the widget with that button.
- - show(): Open the widget with javascript code.
+- setOptions({...options}): Function to set/override the configuration of the widget.
+- showOnClick(selector, specificOptions?): Function to link a selector with the widget. As optional you can pass extra options that would be set only when the user open the widget with that button.
+- show(): Open the widget with javascript code.
