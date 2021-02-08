@@ -4,11 +4,12 @@ const CopyPlugin = require('copy-webpack-plugin')
 const semver = require('semver')
 const packageJson = require('./package.json')
 
-const version = semver.parse(packageJson.version);
-const version_slug = version.major === 0
-  ? `${version.major}.${version.minor}`
-  : version.major
-const version_folder = path.join("dist", "donate-button", version_slug)
+const OUTPUT_FOLDER = path.join(__dirname, "dist")
+const VERSION = semver.parse(packageJson.version);
+const VERSION_SLUG = VERSION.major === 0
+  ? `${VERSION.major}.${VERSION.minor}`
+  : VERSION.major
+const VERSION_PATH = path.join("donate-button", VERSION_SLUG)
 
 export default {
   /**
@@ -22,14 +23,14 @@ export default {
    **/
   webpack(config, env, helpers, options) {
     delete config.entry.polyfills
-    config.output.path = path.resolve(__dirname, "docs", version_folder)
+    config.output.path = path.resolve(OUTPUT_FOLDER, VERSION_PATH)
     config.output.filename = "index.js"
 
     if (env.production) {
       const vercelBaseUrl = process.env.VERCEL_URL
       config.output.publicPath = vercelBaseUrl
         ? `https://${vercelBaseUrl}/`
-        : `https://assets.every.org/${version_folder}/`
+        : `https://assets.every.org/${VERSION_PATH}/`
       console.log('Building for', config.output.publicPath)
 
       // Copy assets
