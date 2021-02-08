@@ -11,28 +11,40 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Use Node.js 14.3
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.3
       - run: yarn
       - run: yarn build
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Use Node.js 14.3
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.3
       - run: yarn
       - run: yarn test
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Use Node.js 14.3
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.3
       - run: yarn
       - run: yarn lint
   needs-docs-update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Use Node.js 14.3
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.3
       - run: yarn
       - run: yarn build
       - name: Get changes
