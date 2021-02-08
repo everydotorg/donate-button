@@ -9,6 +9,7 @@
   "scripts": {
     "test": "NODE_ENV=test jest",
     "build": "preact build --no-prerender --clean  --no-sw",
+    "postbuild": "cp docs/dist/donate-button/0.2/index.js docs/dist/donate-button/0.2/donate-button.js",
     "serve": "preact serve",
     "dev": "preact watch -c ./preact.config.js --no-prerender --no-sw"
   },
