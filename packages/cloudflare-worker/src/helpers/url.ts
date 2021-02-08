@@ -6,7 +6,7 @@
 export function pathJoin(...pathParts: string[]): string {
 	return (
 		pathParts
-			// eslint-disable-next-line unicorn/no-reduce
+			// eslint-disable-next-line unicorn/no-array-reduce
 			.reduce<string[]>((memo, part) => [...memo, ...part.split('/')], [])
 			.filter(Boolean)
 			.join('/')
