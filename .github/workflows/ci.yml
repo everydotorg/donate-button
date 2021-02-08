@@ -59,4 +59,5 @@ jobs:
         if: steps.get-changes.outputs.changes == 'true'
         run: |
           echo "Uncommitted build artifacts exist, please check them in."
+          git status
           exit 1
