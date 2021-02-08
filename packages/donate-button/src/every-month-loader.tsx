@@ -18,30 +18,29 @@ const canUseSplitPanel = (options: DonateButtonOptions) => {
 
 let originalOverflow: string;
 const getOriginalOverflow = () => {
-  const body = document.querySelector('body')
+	const body = document.querySelector('body');
 
-  if(!originalOverflow){
-    originalOverflow = body?.style.overflow ? body.style.overflow : 'unset'
-  }
+	if (!originalOverflow) {
+		originalOverflow = body?.style.overflow ? body.style.overflow : 'unset';
+	}
 
-  return originalOverflow
-}
+	return originalOverflow;
+};
 
 const addOverflowToBody = () => {
-  const body = document.querySelector('body')
-  if(body){
-    body.style.overflow = 'hidden';
-  }
-}
+	const body = document.querySelector('body');
+	if (body) {
+		body.style.overflow = 'hidden';
+	}
+};
 
 const removeOverflowFromBody = () => {
-  const body = document.querySelector('body')
-  const overflow = getOriginalOverflow()
-  if(body){
-    body.style.overflow = overflow
-  }
-}
-
+	const body = document.querySelector('body');
+	const overflow = getOriginalOverflow();
+	if (body) {
+		body.style.overflow = overflow;
+	}
+};
 
 interface EveryMonthLoaderProps {
 	options: Partial<DonateButtonOptions>;
@@ -73,12 +72,13 @@ export const EveryMonthLoader = ({
 		return null;
 	}
 
-  removeOverflowFromBody()
+	removeOverflowFromBody();
 	if (!options.show) {
 		// Not showing
 		return null;
 	}
-  addOverflowToBody()
+
+	addOverflowToBody();
 
 	// Loading
 	if (options.show && !EveryMonth) {

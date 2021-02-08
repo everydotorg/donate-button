@@ -13,7 +13,7 @@ const VERSION_SLUG =
 	VERSION.major === 0 ? `${VERSION.major}.${VERSION.minor}` : VERSION.major;
 const VERSION_PATH = path.join('donate-button', VERSION_SLUG);
 
-export default {
+const config = {
 	/**
 	 * Function that mutates the original webpack config.
 	 * Supports asynchronous changes when a promise is returned (or it's an async function).
@@ -59,3 +59,4 @@ export default {
 		};
 	}
 };
+export default config;

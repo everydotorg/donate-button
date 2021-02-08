@@ -6,7 +6,7 @@ import DonateButton from 'src/components/Donations/DonateButton';
 import appStyles from 'src/components/EveryMonth/styles';
 import Images from 'src/components/Images';
 import Company from 'src/components/Images/Company';
-import {Styled} from 'src/components/Styled/Styled';
+import {Styled} from 'src/components/Styled';
 import DonationsContext, {AnimationValue} from 'src/contexts/donations-context';
 import OptionsContext from 'src/contexts/options-context';
 import {DonateButtonOptions} from 'src/helpers/options-types';

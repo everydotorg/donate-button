@@ -10,7 +10,7 @@ import {
 } from 'src/helpers/options-types';
 import useI18n from 'src/hooks/use-i18n';
 
-const UTM_MEDIUM = "donate-button-0.2" // update this if the major version changes
+const UTM_MEDIUM = 'donate-button-0.2'; // Update this if the major version changes
 function constructEveryUrl({
 	company,
 	frequency,
