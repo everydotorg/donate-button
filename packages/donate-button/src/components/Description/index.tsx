@@ -57,7 +57,7 @@ const getDescriptionText = (
 	return <p className="t-heading-secondary">{lang.oneTime.description}</p>;
 };
 
-const Description = ({bgColor}: {bgColor: string}) => {
+const Description = ({monthlyBgColor}: {monthlyBgColor?: string}) => {
 	const descrRef = useRef<HTMLDivElement | null>(null);
 	const donationsContextValue = useContext(DonationsContext);
 	const options = useContext(OptionsContext);
@@ -69,13 +69,13 @@ const Description = ({bgColor}: {bgColor: string}) => {
 		}
 
 		const {monthlyDonation} = donationsContextValue;
-		if (monthlyDonation) {
+		if (monthlyDonation && monthlyBgColor) {
 			// DescrRef.current.style.background = getCustomDonationLevel(options.monthly.levels, donationAmount).bgColor;
-			descrRef.current.style.background = bgColor;
-		} else {
+			descrRef.current.style.background = monthlyBgColor;
+		} else if (options.oneTime.bgColor) {
 			descrRef.current.style.background = options.oneTime.bgColor;
 		}
-	}, [donationsContextValue, bgColor]);
+	}, [donationsContextValue, monthlyBgColor]);
 
 	if (!donationsContextValue) {
 		return null;

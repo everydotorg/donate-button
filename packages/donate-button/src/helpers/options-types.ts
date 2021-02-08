@@ -5,7 +5,7 @@ export enum DonationMode {
 export type DonationFrequency = 'ONCE' | 'MONTHLY';
 export interface DonationLevel {
 	amount: string;
-	bgColor: string;
+	bgColor?: string;
 	default?: boolean;
 	img?: string;
 	classes?: readonly string[];
@@ -102,21 +102,21 @@ export const defaultOptions: DonateButtonOptions = {
 	monthly: {
 		levels: [
 			// Different choices in monthly donation
-      {
-        amount: '25',
-      },
-      {
-        amount: '50',
-        default: true,
-      },
-      {
-        amount: '100',
-      },
-      {
-        amount: '200',
-      },
 			{
-				amount: 'custom',
+				amount: '25'
+			},
+			{
+				amount: '50',
+				default: true
+			},
+			{
+				amount: '100'
+			},
+			{
+				amount: '200'
+			},
+			{
+				amount: 'custom'
 			}
 		]
 	},
