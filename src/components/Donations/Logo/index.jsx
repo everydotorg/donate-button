@@ -22,8 +22,10 @@ const Logo = ({monthlyDonation = true, scrolled = false}) => {
     return (
         <div className="logo" style={boxShadow}>
             <img className="logo__img" src={logo} alt="logo" />
-            <div className="t-title logo__title">{logoText.header}</div>
-            <p className="t-body--small logo__link">{logoTextFormatted}</p>
+            <div className="logo__heading">
+                <h3 className="t-title logo__title">{logoText.header}</h3>
+                <p className="t-body--small logo__link">{logoTextFormatted}</p>
+            </div>
         </div>
     )
 }
