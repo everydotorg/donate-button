@@ -1,5 +1,5 @@
 {
-  "name": "donate-button-cloudflare-worker",
+  "name": "@everydotorg/donate-button-cloudflare-worker",
   "version": "0.0.1",
   "description": "Cloudflare worker for serving the Every.org donate button at assets.every.org",
   "main": "index.js",
@@ -17,7 +17,7 @@
     "@cloudflare/workers-types": "^2.1.0",
     "@types/service-worker-mock": "^2.0.1",
     "@types/sinon": "^9.0.9",
-    "ava": "^3.14.0",
+    "ava": "^3.15.0",
     "rimraf": "^3.0.2",
     "service-worker-mock": "^2.0.5",
     "sinon": "^9.2.2",
@@ -28,61 +28,7 @@
     "typescript": "^4.1.3",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
-    "xo": "^0.36.1"
-  },
-  "ava": {
-    "extensions": [
-      "ts"
-    ],
-    "require": [
-      "ts-node/register",
-      "tsconfig-paths/register",
-      "./test/_setup.ts"
-    ]
-  },
-  "xo": {
-    "prettier": true,
-    "rules": {
-      "func-names": ["off"],
-      "no-restricted-imports": [
-        "error",
-        {
-          "patterns": [
-            "../*",
-            "./*",
-            "fp-ts/lib/*",
-            "fp-ts/es6/*",
-            "io-ts/lib/*",
-            "io-ts/es6/*",
-            "io-ts-types/lib/*",
-            "io-ts-types/es6/*"
-          ]
-        }
-      ],
-      "import/order": [
-        "warn",
-        {
-          "pathGroups": [
-            {
-              "pattern": "test/**",
-              "group": "internal",
-              "position": "after"
-            },
-            {
-              "pattern": "src/**",
-              "group": "internal"
-            }
-          ],
-          "newlines-between": "always",
-          "alphabetize": { "order": "asc" }
-        }
-      ],
-      "no-else-return": "warn"
-    },
-    "overrides": [{
-      "files": "webpack.config.js",
-      "settings": { "import/resolver": { "node": {} } }
-    }]
+    "xo": "^0.37.1"
   },
   "dependencies": {
     "fp-ts": "^2.9.1",
