@@ -1,5 +1,5 @@
 import {Fragment} from 'preact';
-import {useContext, useState, useEffect} from 'preact/hooks';
+import {useContext, useState, useEffect, useCallback} from 'preact/hooks';
 import DonateButton from 'src/components/Donations/DonateButton';
 import Input from 'src/components/Input';
 import RadioButton from 'src/components/RadioButton';
@@ -36,6 +36,37 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 	const lang = useI18n();
 	const formText = monthlyDonation ? lang.monthly : lang.oneTime;
 
+	const handleRadioButtonClick = useCallback(
+		(amount: string) => {
+			if (!donationsContextValue) {
+				return;
+			}
+
+			const {
+				donationAmount,
+				setDonationAmount,
+				customDonation,
+				setCustomDonation,
+				setTriggerAnimation
+			} = donationsContextValue;
+			// Custom donation is always the last control
+			// If we have a custom donation the previous level is the custom input.
+			const previousLevel =
+				customDonation || !donationAmount
+					? monthly.levels.length - 1
+					: getLevelOfAmount(monthly.levels, donationAmount);
+			const currLevel = getLevelOfAmount(monthly.levels, amount);
+
+			if (monthlyDonation && setTriggerAnimation) {
+				setTriggerAnimation([previousLevel, currLevel]);
+			}
+
+			setDonationAmount(amount);
+			setCustomDonation('');
+		},
+		[monthly.levels, monthlyDonation, donationsContextValue]
+	);
+
 	useEffect(() => {
 		const defaultLevel = monthly.levels.find((level) => level.default);
 		if (defaultLevel) {
@@ -48,7 +79,8 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 				clearTimeout(defaultSelectionTimeout);
 			};
 		}
-	}, []);
+	}, [handleRadioButtonClick, monthly.levels]);
+
 	if (!donationsContextValue) {
 		return null;
 	}
@@ -60,6 +92,7 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 		setCustomDonation,
 		setTriggerAnimation
 	} = donationsContextValue;
+
 	const handleCustomInputFocus = () => {
 		const previousLevel = donationAmount
 			? getLevelOfAmount(monthly.levels, donationAmount)
@@ -78,23 +111,6 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 
 	const handleCustomInputBlur = () => {
 		setCustomInputFocus(false);
-	};
-
-	const handleRadioButtonClick = (amount: string) => {
-		// Custo M donation is always the last control
-		// If we have a custom donation the previous level is the custom input.
-		const previousLevel =
-			customDonation || !donationAmount
-				? monthly.levels.length - 1
-				: getLevelOfAmount(monthly.levels, donationAmount);
-		const currLevel = getLevelOfAmount(monthly.levels, amount);
-
-		if (monthlyDonation && setTriggerAnimation) {
-			setTriggerAnimation([previousLevel, currLevel]);
-		}
-
-		setDonationAmount(amount);
-		setCustomDonation('');
 	};
 
 	const handleInputChange = (value: string) => {
@@ -136,7 +152,7 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 							)?.description1;
 							return (
 								<RadioButton
-									key={i}
+									key={option.amount}
 									name="amount"
 									amount={option.amount}
 									selected={donationAmount === option.amount}
@@ -164,9 +180,9 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 								setValue={handleInputChange}
 								description={lang.oneTime.description}
 								extraClasses={['donations__input']}
+								selected={customInputFocus}
 								onFocus={handleCustomInputFocus}
 								onBlur={handleCustomInputBlur}
-								selected={customInputFocus}
 							/>
 						)}
 					</Fragment>
@@ -198,9 +214,9 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 								value={customDonation}
 								setValue={handleInputChange}
 								extraClasses={['donations__input']}
+								selected={customInputFocus}
 								onFocus={handleCustomInputFocus}
 								onBlur={handleCustomInputBlur}
-								selected={customInputFocus}
 							/>
 						)}
 					</Fragment>

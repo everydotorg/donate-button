@@ -20,7 +20,7 @@ const Images = ({image}: {image: string}) => {
 			style={{
 				backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 24.02%), url(${imageBg})`
 			}}
-		></div>
+		/>
 	);
 };
 
