@@ -55,10 +55,12 @@ const getButtonTextFormatted = (
 interface DonateButtonProps {
 	extraClasses?: string[];
 	monthlyDonation: boolean;
+	disabled: boolean
 }
 const DonateButton = ({
 	monthlyDonation,
-	extraClasses = []
+	extraClasses = [],
+	disabled
 }: DonateButtonProps) => {
 	const lang = useI18n();
 	const donationsContextValue = useContext(DonationsContext);
@@ -93,6 +95,7 @@ const DonateButton = ({
 			handleClick={() => {
 				handleDonateButton(mode);
 			}}
+			disabled={disabled}
 		>
 			{getButtonTextFormatted(formText.button, currency, donationAmount)}
 		</Button>

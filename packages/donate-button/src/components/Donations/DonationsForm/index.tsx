@@ -32,6 +32,7 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 		OptionsContext
 	);
 	const [customInputFocus, setCustomInputFocus] = useState(false);
+	const [customInputError, setCustomInputError] = useState('')
 
 	const lang = useI18n();
 	const formText = monthlyDonation ? lang.monthly : lang.oneTime;
@@ -67,6 +68,7 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 
 			if (amount !== donationAmount) {
 				setDonationAmount(amount);
+				setCustomInputError('')
 			}
 
 			if (customDonation) {
@@ -192,6 +194,8 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 								selected={customInputFocus}
 								onFocus={handleCustomInputFocus}
 								onBlur={handleCustomInputBlur}
+								error={customInputError}
+								setError={setCustomInputError}
 							/>
 						)}
 					</Fragment>
@@ -226,6 +230,8 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 								selected={customInputFocus}
 								onFocus={handleCustomInputFocus}
 								onBlur={handleCustomInputBlur}
+								error={customInputError}
+								setError={setCustomInputError}
 							/>
 						)}
 					</Fragment>
@@ -235,6 +241,7 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 				<DonateButton
 					monthlyDonation={monthlyDonation}
 					extraClasses={['u-hide-mobile']}
+					disabled={Boolean(customInputError)}
 				/>
 				<p className="t-body--small">{lang.footer}</p>
 			</div>

@@ -5,13 +5,15 @@ interface ButtonProps {
 	handleClick: () => void;
 	extraClasses?: string[];
 	children: ComponentChildren;
+	disabled?: boolean
 }
-const Button = ({handleClick, extraClasses = [], children}: ButtonProps) => {
+const Button = ({handleClick, extraClasses = [], disabled = false, children}: ButtonProps) => {
 	return (
 		<button
 			type="button"
-			className={['btn'].concat(extraClasses).join(' ')}
+			className={['btn'].concat(disabled ? ['btn--disabled'] : [] ).concat(extraClasses).join(' ')}
 			onClick={handleClick}
+			disabled={disabled}
 		>
 			{children}
 		</button>

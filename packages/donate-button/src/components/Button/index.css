@@ -17,6 +17,15 @@
     transition: all 0.2s;
 }
 
+.btn.btn--disabled,
+.btn:disabled {
+    background-color: #c2c2c2;
+}
+
+.btn.btn--disabled:hover {
+    background-color: #c2c2c2;
+}
+
 .btn:hover {
     background-color: rgb(0, 124, 97);
 }
