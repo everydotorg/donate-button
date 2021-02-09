@@ -110,22 +110,11 @@ export const defaultOptions: DonateButtonOptions = {
 	monthly: {
 		levels: [
 			// Different choices in monthly donation
-			{
-				amount: '25'
-			},
-			{
-				amount: '50',
-				default: true
-			},
-			{
-				amount: '100'
-			},
-			{
-				amount: '200'
-			},
-			{
-				amount: 'custom'
-			}
+			{amount: '25'},
+			{amount: '50', default: true},
+			{amount: '100'},
+			{amount: '200'},
+			{amount: 'custom'}
 		]
 	},
 	oneTime: {
@@ -194,7 +183,7 @@ const DEEP_MERGE_OPTIONS: DeepMergeOptions = {
 
 export function mergeOptionsWithDefault(
 	...toMerge: Array<Partial<DonateButtonOptions>>
-) {
+): DonateButtonOptions {
 	return deepMerge.all<DonateButtonOptions>(
 		[defaultOptions, ...toMerge],
 		DEEP_MERGE_OPTIONS
