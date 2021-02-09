@@ -28,9 +28,7 @@ const getBoldFormatted = (text: string) => {
 const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 	const donationsContextValue = useContext(DonationsContext);
 
-	const {monthly, oneTime } = useContext(
-		OptionsContext
-	);
+	const {monthly, oneTime} = useContext(OptionsContext);
 	const [customInputFocus, setCustomInputFocus] = useState(false);
 
 	const lang = useI18n();
@@ -68,7 +66,7 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 
 			if (amount !== donationAmount) {
 				setDonationAmount(amount);
-				setCustomInputError('')
+				setCustomInputError('');
 			}
 
 			if (customDonation) {
@@ -194,10 +192,10 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 								description={lang.oneTime.description}
 								extraClasses={['donations__input']}
 								selected={customInputFocus}
-								onFocus={handleCustomInputFocus}
-								onBlur={handleCustomInputBlur}
 								error={customInputError}
 								setError={setCustomInputError}
+								onFocus={handleCustomInputFocus}
+								onBlur={handleCustomInputBlur}
 							/>
 						)}
 					</Fragment>
@@ -230,10 +228,10 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 								setValue={handleInputChange}
 								extraClasses={['donations__input']}
 								selected={customInputFocus}
-								onFocus={handleCustomInputFocus}
-								onBlur={handleCustomInputBlur}
 								error={customInputError}
 								setError={setCustomInputError}
+								onFocus={handleCustomInputFocus}
+								onBlur={handleCustomInputBlur}
 							/>
 						)}
 					</Fragment>

@@ -32,7 +32,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 		defaultLevel?.amount ?? options.monthly.levels[0].amount
 	);
 	const [customDonation, setCustomDonation] = useState('');
-	const [customInputError, setCustomInputError] = useState('')
+	const [customInputError, setCustomInputError] = useState('');
 	const [triggerAnimation, setTriggerAnimation] = useState<AnimationValue>([
 		-1,
 		0
@@ -115,7 +115,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 	}, [triggerAnimation, monthlyLevels]);
 	const donationsContextValue = useMemo(
 		() => ({
-			customInputError, 
+			customInputError,
 			setCustomInputError,
 			monthlyDonation,
 			setMonthlyDonation,
@@ -126,7 +126,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 			setTriggerAnimation
 		}),
 		[
-			customInputError, 
+			customInputError,
 			setCustomInputError,
 			monthlyDonation,
 			setMonthlyDonation,

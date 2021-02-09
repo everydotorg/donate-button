@@ -55,7 +55,7 @@ const getButtonTextFormatted = (
 interface DonateButtonProps {
 	extraClasses?: string[];
 	monthlyDonation: boolean;
-	disabled: boolean
+	disabled: boolean;
 }
 const DonateButton = ({
 	monthlyDonation,
