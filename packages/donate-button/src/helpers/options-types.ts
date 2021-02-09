@@ -1,3 +1,5 @@
+import deepMerge, {Options as DeepMergeOptions} from 'deepmerge';
+
 export enum LayoutMode {
 	SINGLE = 'SINGLE',
 	SPLIT = 'SPLIT'
@@ -184,3 +186,17 @@ export const defaultOptions: DonateButtonOptions = {
 		}
 	}
 };
+
+const DEEP_MERGE_OPTIONS: DeepMergeOptions = {
+	// Don't merge arrays, just overwrite them
+	arrayMerge: (_destArray, sourceArray, _options) => sourceArray
+};
+
+export function mergeOptionsWithDefault(
+	...toMerge: Array<Partial<DonateButtonOptions>>
+) {
+	return deepMerge.all<DonateButtonOptions>(
+		[defaultOptions, ...toMerge],
+		DEEP_MERGE_OPTIONS
+	);
+}
