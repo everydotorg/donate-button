@@ -1,3 +1,5 @@
+import deepMerge, {Options as DeepMergeOptions} from 'deepmerge';
+
 export enum LayoutMode {
 	SINGLE = 'SINGLE',
 	SPLIT = 'SPLIT'
@@ -76,7 +78,7 @@ export enum DefaultFrequency {
 	MONTHLY = 'monthly',
 	ONE_TIME = 'one-time'
 }
-export interface DonateButtonOptions<Languages extends string = string> {
+export interface DonateButtonOptions {
 	readonly monthly: MonthlyOptions;
 	readonly oneTime: OneTimeOptions;
 	readonly onSubmit: OnSubmit;
@@ -84,8 +86,8 @@ export interface DonateButtonOptions<Languages extends string = string> {
 	readonly currency: string;
 	readonly mode: LayoutMode;
 	readonly show: boolean;
-	readonly i18n: Record<Languages, I18NOptions>;
-	language: Languages;
+	readonly i18n: Partial<Record<string, I18NOptions>>;
+	language: string;
 }
 
 export const defaultOptions: DonateButtonOptions = {
@@ -108,22 +110,11 @@ export const defaultOptions: DonateButtonOptions = {
 	monthly: {
 		levels: [
 			// Different choices in monthly donation
-			{
-				amount: '25'
-			},
-			{
-				amount: '50',
-				default: true
-			},
-			{
-				amount: '100'
-			},
-			{
-				amount: '200'
-			},
-			{
-				amount: 'custom'
-			}
+			{amount: '25'},
+			{amount: '50', default: true},
+			{amount: '100'},
+			{amount: '200'},
+			{amount: 'custom'}
 		]
 	},
 	oneTime: {
@@ -184,3 +175,17 @@ export const defaultOptions: DonateButtonOptions = {
 		}
 	}
 };
+
+const DEEP_MERGE_OPTIONS: DeepMergeOptions = {
+	// Don't merge arrays, just overwrite them
+	arrayMerge: (_destArray, sourceArray, _options) => sourceArray
+};
+
+export function mergeOptionsWithDefault(
+	...toMerge: Array<Partial<DonateButtonOptions>>
+): DonateButtonOptions {
+	return deepMerge.all<DonateButtonOptions>(
+		[defaultOptions, ...toMerge],
+		DEEP_MERGE_OPTIONS
+	);
+}

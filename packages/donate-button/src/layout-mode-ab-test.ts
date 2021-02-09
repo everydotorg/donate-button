@@ -1,6 +1,6 @@
 import {LayoutMode} from 'src/helpers/options-types';
 
-export const experiment = () => {
+export const layoutModeAbTest = () => {
 	const modeFromStorage = localStorage.getItem('every-month-widget-mode');
 	const mode: LayoutMode =
 		modeFromStorage &&
@@ -13,7 +13,7 @@ export const experiment = () => {
 		localStorage.setItem('every-month-widget-mode', mode);
 	}
 
-	return {mode};
+	return mode;
 };
 
-export default experiment;
+export default layoutModeAbTest;

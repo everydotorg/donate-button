@@ -1,7 +1,6 @@
 import {useContext} from 'preact/hooks';
 import {OptionsContext} from 'src/contexts/options-context';
-
-const defaultI18n = 'en';
+import {I18NOptions} from 'src/helpers/options-types';
 
 const getBrowserLanguage = () => {
 	const language = window.navigator.language;
@@ -15,16 +14,13 @@ const getBrowserLanguage = () => {
 	return language;
 };
 
-const useI18n = () => {
-	const userI18n = getBrowserLanguage();
-	const {i18n, language} = useContext(OptionsContext);
+const useI18n = (): I18NOptions => {
+	const browserLanguage = getBrowserLanguage();
+	const {i18n, language: configuredLanguage} = useContext(OptionsContext);
 
-	// Language given in config has priority over user browser lang
-	if (i18n[language]) {
-		return i18n[language];
-	}
-
-	return i18n[userI18n] ? i18n[userI18n] : i18n[defaultI18n];
+	// Language given in config has priority over user browser lang; default to en
+	// since that's always provided by default options
+	return i18n[configuredLanguage] ?? i18n[browserLanguage] ?? i18n.en!;
 };
 
 export default useI18n;

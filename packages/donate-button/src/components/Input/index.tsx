@@ -34,7 +34,7 @@ const Input = ({
 					placeholder={placeholder}
 					type="text"
 					value={value}
-					onChange={(event) => {
+					onInput={(event) => {
 						setValue(event.currentTarget.value);
 					}}
 					{...otherProps}

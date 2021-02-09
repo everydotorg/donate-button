@@ -57,29 +57,38 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 					: getLevelOfAmount(monthly.levels, donationAmount);
 			const currLevel = getLevelOfAmount(monthly.levels, amount);
 
-			if (monthlyDonation && setTriggerAnimation) {
+			if (
+				monthlyDonation &&
+				setTriggerAnimation &&
+				currLevel !== previousLevel
+			) {
 				setTriggerAnimation([previousLevel, currLevel]);
 			}
 
-			setDonationAmount(amount);
-			setCustomDonation('');
+			if (amount !== donationAmount) {
+				setDonationAmount(amount);
+			}
+
+			if (customDonation) {
+				setCustomDonation('');
+			}
 		},
 		[monthly.levels, monthlyDonation, donationsContextValue]
 	);
 
+	const [initialized, setInitialized] = useState(false);
 	useEffect(() => {
+		if (initialized) {
+			return;
+		}
+
 		const defaultLevel = monthly.levels.find((level) => level.default);
 		if (defaultLevel) {
-			handleRadioButtonClick(monthly.levels[0].amount);
-			const defaultSelectionTimeout = setTimeout(() => {
-				handleRadioButtonClick(defaultLevel.amount);
-			});
-
-			return () => {
-				clearTimeout(defaultSelectionTimeout);
-			};
+			handleRadioButtonClick(defaultLevel.amount);
 		}
-	}, [handleRadioButtonClick, monthly.levels]);
+
+		setInitialized(true);
+	}, [initialized, handleRadioButtonClick, monthly.levels]);
 
 	if (!donationsContextValue) {
 		return null;

@@ -22,11 +22,15 @@ const getBoldFormatted = (text: string) => {
 };
 
 const getDescriptionText = (
-	lang: I18NOptions,
+	lang: I18NOptions | undefined,
 	monthlyDonation: boolean,
 	donationAmount?: string,
 	customDonation?: string
 ) => {
+	if (!lang) {
+		return null;
+	}
+
 	if (monthlyDonation) {
 		const level = lang.monthly.levels
 			? !donationAmount || customDonation
@@ -61,7 +65,7 @@ const Description = ({monthlyBgColor}: {monthlyBgColor?: string}) => {
 	const descrRef = useRef<HTMLDivElement | null>(null);
 	const donationsContextValue = useContext(DonationsContext);
 	const options = useContext(OptionsContext);
-	const lang = useI18n();
+	const i18nOptions = useI18n();
 
 	useLayoutEffect(() => {
 		if (!descrRef.current || !donationsContextValue) {
@@ -90,7 +94,7 @@ const Description = ({monthlyBgColor}: {monthlyBgColor?: string}) => {
 	return (
 		<div ref={descrRef} className="description">
 			{getDescriptionText(
-				lang,
+				i18nOptions,
 				monthlyDonation,
 				donationAmount,
 				customDonation

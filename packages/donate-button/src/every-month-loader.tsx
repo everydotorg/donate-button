@@ -1,11 +1,12 @@
+import deepMerge, {Options as DeepMergeOptions} from 'deepmerge';
 import {useEffect, useState} from 'preact/hooks';
 import type EveryMonthComponent from 'src/components/EveryMonth';
-import experiment from 'src/experiment';
 import {
 	DonateButtonOptions,
 	LayoutMode,
-	defaultOptions
+	mergeOptionsWithDefault
 } from 'src/helpers/options-types';
+import layoutModeAbTest from 'src/layout-mode-ab-test';
 
 const canUseSplitPanel = (options: DonateButtonOptions) => {
 	const allMonthlyLevelsHasImages = options.monthly.levels.every((level) =>
@@ -46,6 +47,7 @@ interface EveryMonthLoaderProps {
 	options: Partial<DonateButtonOptions>;
 	hide: () => void;
 }
+
 export const EveryMonthLoader = ({
 	options = {},
 	hide
@@ -85,12 +87,11 @@ export const EveryMonthLoader = ({
 		return <>Loading...</>;
 	}
 
-	const finalOptions: DonateButtonOptions = canUseSplitPanel({
-		...defaultOptions,
-		...options
-	})
-		? {...defaultOptions, ...experiment(), ...options}
-		: {...defaultOptions, ...options, mode: LayoutMode.SINGLE};
+	const finalOptions: DonateButtonOptions = canUseSplitPanel(
+		mergeOptionsWithDefault(options)
+	)
+		? mergeOptionsWithDefault({mode: layoutModeAbTest()}, options)
+		: mergeOptionsWithDefault(options, {mode: LayoutMode.SINGLE});
 
 	return <EveryMonth options={finalOptions} hide={hide} />;
 };
