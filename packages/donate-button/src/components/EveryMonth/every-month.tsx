@@ -15,7 +15,7 @@ interface EveryMonthProps {
 	options: DonateButtonOptions;
 	hide: () => void;
 }
-function EveryMonth({options, hide}: EveryMonthProps) {
+const EveryMonth = ({options, hide}: EveryMonthProps) => {
 	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
 		event
 	) => {
@@ -111,13 +111,13 @@ function EveryMonth({options, hide}: EveryMonthProps) {
 		return () => {
 			clearTimeout(timeout);
 		};
-	}, [triggerAnimation]);
+	}, [triggerAnimation, monthlyLevels]);
 
 	return (
 		<Styled scoped={false} styles={appStyles}>
 			<div>
 				<div className="wrapper" onClick={hideOnWrapperClick}>
-					<div className="close" onClick={hideOnWrapperClick}></div>
+					<div className="close" onClick={hideOnWrapperClick} />
 					<OptionsContext.Provider value={options}>
 						<DonationsContext.Provider
 							value={{
@@ -138,10 +138,10 @@ function EveryMonth({options, hide}: EveryMonthProps) {
 									/>
 									<div className="right-panel">
 										<Company />
-										{monthlyLevels.map((level, i) => {
+										{monthlyLevels.map((level) => {
 											return (
 												<div
-													key={i}
+													key={level.amount}
 													className={['right-panel__item']
 														.concat(level.classes ?? [])
 														.join(' ')}
@@ -174,6 +174,6 @@ function EveryMonth({options, hide}: EveryMonthProps) {
 			</div>
 		</Styled>
 	);
-}
+};
 
 export default EveryMonth;

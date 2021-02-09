@@ -33,11 +33,11 @@ const RadioButton = ({
 	return (
 		<div className={groupClasses.join(' ')}>
 			<input
-				onClick={handleClick}
 				className="radio-button__input"
 				type="radio"
 				name={name}
 				id={amount}
+				onClick={handleClick}
 			/>
 			<label className={labelClasses.join(' ')} htmlFor={amount}>
 				{text && <span className="t-label radio-button__text">{text}</span>}
