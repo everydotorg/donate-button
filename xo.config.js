@@ -1,7 +1,6 @@
 module.exports = {
 	prettier: true,
 	rules: {
-		'unicorn/no-array-callback-reference': ['off'],
 		'func-names': ['off'],
 		'no-restricted-imports': [
 			'error',
