@@ -47,6 +47,8 @@ class Style extends Component<StyleProps> {
 
 	getRootElement = () => {
 		if (Array.isArray(this.props.children)) {
+			// Useful for preserving type guard
+			// eslint-disable-next-line unicorn/no-array-callback-reference
 			const rootElement = this.props.children.filter(isValidElement);
 
 			if (isDevEnv) {
@@ -284,11 +286,12 @@ class Style extends Component<StyleProps> {
 	createStyleElement = (cssText: string, scopeClassName: string) => {
 		return (
 			<style
+				key={scopeClassName}
+				// This component depends on it; plans to replace style injector
+				// eslint-disable-next-line react/no-danger
+				dangerouslySetInnerHTML={{__html: cssText || ''}}
 				id="direflow_styles"
 				type="text/css"
-				key={scopeClassName}
-				// Es Lint-disable-next-line react/no-danger
-				dangerouslySetInnerHTML={{__html: cssText || ''}}
 			/>
 		);
 	};

@@ -11,12 +11,12 @@ export interface StyledProps {
 	children: ComponentChildren;
 }
 const Styled = (props: StyledProps) => {
+	// This is not doing what we expect if CSS imports really are
+	// Record<string, string> instances as the default CSS module typings express
 	const styles =
 		typeof props.styles === 'string'
-			? props.styles.toString() // This is not doing what we expect if CSS imports really are
-			: // Record<string, string> instances as the default CSS module typings
-			  // suggest
-			  props.styles.join(' ');
+			? props.styles.toString()
+			: props.styles.join(' ');
 
 	return (
 		<Style scoped={props.scoped}>

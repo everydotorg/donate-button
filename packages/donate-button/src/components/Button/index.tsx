@@ -6,15 +6,16 @@ interface ButtonProps {
 	extraClasses?: string[];
 	children: ComponentChildren;
 }
-function Button({handleClick, extraClasses = [], children}: ButtonProps) {
+const Button = ({handleClick, extraClasses = [], children}: ButtonProps) => {
 	return (
 		<button
+			type="button"
 			className={['btn'].concat(extraClasses).join(' ')}
 			onClick={handleClick}
 		>
 			{children}
 		</button>
 	);
-}
+};
 
 export default Button;

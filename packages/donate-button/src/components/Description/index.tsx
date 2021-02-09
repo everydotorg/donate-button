@@ -75,7 +75,7 @@ const Description = ({monthlyBgColor}: {monthlyBgColor?: string}) => {
 		} else if (options.oneTime.bgColor) {
 			descrRef.current.style.background = options.oneTime.bgColor;
 		}
-	}, [donationsContextValue, monthlyBgColor]);
+	}, [options.oneTime.bgColor, donationsContextValue, monthlyBgColor]);
 
 	if (!donationsContextValue) {
 		return null;
