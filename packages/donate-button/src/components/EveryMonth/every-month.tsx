@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'preact/hooks';
+import {useState, useEffect, useMemo} from 'preact/hooks';
 import {JSXInternal} from 'preact/src/jsx';
 import Description from 'src/components/Description';
 import Donations from 'src/components/Donations';
@@ -112,6 +112,26 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 			clearTimeout(timeout);
 		};
 	}, [triggerAnimation, monthlyLevels]);
+	const donationsContextValue = useMemo(
+		() => ({
+			monthlyDonation,
+			setMonthlyDonation,
+			donationAmount,
+			setDonationAmount,
+			customDonation,
+			setCustomDonation,
+			setTriggerAnimation
+		}),
+		[
+			monthlyDonation,
+			setMonthlyDonation,
+			donationAmount,
+			setDonationAmount,
+			customDonation,
+			setCustomDonation,
+			setTriggerAnimation
+		]
+	);
 
 	return (
 		<Styled scoped={false} styles={appStyles}>
@@ -119,17 +139,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 				<div className="wrapper" onClick={hideOnWrapperClick}>
 					<div className="close" onClick={hideOnWrapperClick} />
 					<OptionsContext.Provider value={options}>
-						<DonationsContext.Provider
-							value={{
-								monthlyDonation,
-								setMonthlyDonation,
-								donationAmount,
-								setDonationAmount,
-								customDonation,
-								setCustomDonation,
-								setTriggerAnimation
-							}}
-						>
+						<DonationsContext.Provider value={donationsContextValue}>
 							{options.mode.toUpperCase() === 'SPLIT_PANEL' && (
 								<div className="widget widget--split">
 									<Donations
