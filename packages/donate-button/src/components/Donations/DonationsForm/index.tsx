@@ -28,11 +28,10 @@ const getBoldFormatted = (text: string) => {
 const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 	const donationsContextValue = useContext(DonationsContext);
 
-	const {monthly, oneTime, onSubmit, currency, mode} = useContext(
+	const {monthly, oneTime } = useContext(
 		OptionsContext
 	);
 	const [customInputFocus, setCustomInputFocus] = useState(false);
-	const [customInputError, setCustomInputError] = useState('')
 
 	const lang = useI18n();
 	const formText = monthlyDonation ? lang.monthly : lang.oneTime;
@@ -48,7 +47,8 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 				setDonationAmount,
 				customDonation,
 				setCustomDonation,
-				setTriggerAnimation
+				setTriggerAnimation,
+				setCustomInputError
 			} = donationsContextValue;
 			// Custom donation is always the last control
 			// If we have a custom donation the previous level is the custom input.
@@ -101,7 +101,9 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 		setDonationAmount,
 		customDonation,
 		setCustomDonation,
-		setTriggerAnimation
+		setTriggerAnimation,
+		customInputError,
+		setCustomInputError
 	} = donationsContextValue;
 
 	const handleCustomInputFocus = () => {

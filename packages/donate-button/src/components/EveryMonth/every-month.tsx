@@ -32,6 +32,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 		defaultLevel?.amount ?? options.monthly.levels[0].amount
 	);
 	const [customDonation, setCustomDonation] = useState('');
+	const [customInputError, setCustomInputError] = useState('')
 	const [triggerAnimation, setTriggerAnimation] = useState<AnimationValue>([
 		-1,
 		0
@@ -114,6 +115,8 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 	}, [triggerAnimation, monthlyLevels]);
 	const donationsContextValue = useMemo(
 		() => ({
+			customInputError, 
+			setCustomInputError,
 			monthlyDonation,
 			setMonthlyDonation,
 			donationAmount,
@@ -123,6 +126,8 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 			setTriggerAnimation
 		}),
 		[
+			customInputError, 
+			setCustomInputError,
 			monthlyDonation,
 			setMonthlyDonation,
 			donationAmount,
@@ -176,6 +181,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 								<DonateButton
 									monthlyDonation={monthlyDonation}
 									extraClasses={['u-hide-desktop']}
+									disabled={Boolean(customInputError)}
 								/>
 							</div>
 						</DonationsContext.Provider>
