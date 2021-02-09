@@ -76,7 +76,7 @@ export enum DefaultFrequency {
 	MONTHLY = 'monthly',
 	ONE_TIME = 'one-time'
 }
-export interface DonateButtonOptions<Languages extends string = string> {
+export interface DonateButtonOptions {
 	readonly monthly: MonthlyOptions;
 	readonly oneTime: OneTimeOptions;
 	readonly onSubmit: OnSubmit;
@@ -84,8 +84,8 @@ export interface DonateButtonOptions<Languages extends string = string> {
 	readonly currency: string;
 	readonly mode: LayoutMode;
 	readonly show: boolean;
-	readonly i18n: Record<Languages, I18NOptions>;
-	language: Languages;
+	readonly i18n: Partial<Record<string, I18NOptions>>;
+	language: string;
 }
 
 export const defaultOptions: DonateButtonOptions = {
