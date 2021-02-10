@@ -26,7 +26,6 @@ const Input = ({
 	value,
 	setValue,
 	error,
-	setError,
 	extraClasses,
 	label,
 	placeholder,
@@ -34,22 +33,6 @@ const Input = ({
 	selected,
 	...otherProps
 }: InputProps) => {
-	useEffect(() => {
-		const timeout = setTimeout(() => {
-			if (value && Number(value) < 10) {
-				setError('The minimum amount is 10');
-			}
-		}, 200);
-
-		if (Number(value) >= 10) {
-			setError('');
-		}
-
-		return () => {
-			clearTimeout(timeout);
-		};
-	}, [value, setError]);
-
 	const inputContainerClasses = ['input__container']
 		.concat(extraClasses)
 		.concat([selected ? 'input--selected' : ''])

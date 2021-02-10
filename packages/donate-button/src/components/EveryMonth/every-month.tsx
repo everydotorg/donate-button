@@ -178,7 +178,6 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 								<DonateButton
 									monthlyDonation={monthlyDonation}
 									extraClasses={['u-hide-desktop']}
-									disabled={Boolean(customInputError)}
 								/>
 							</div>
 						</DonationsContext.Provider>

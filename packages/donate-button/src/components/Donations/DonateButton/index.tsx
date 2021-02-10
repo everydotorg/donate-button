@@ -55,12 +55,10 @@ const getButtonTextFormatted = (
 interface DonateButtonProps {
 	extraClasses?: string[];
 	monthlyDonation: boolean;
-	disabled: boolean;
 }
 const DonateButton = ({
 	monthlyDonation,
 	extraClasses = [],
-	disabled
 }: DonateButtonProps) => {
 	const lang = useI18n();
 	const donationsContextValue = useContext(DonationsContext);
@@ -71,6 +69,16 @@ const DonateButton = ({
 	const handleDonateButton = (mode: LayoutMode) => {
 		if (!donationAmount || Number.isNaN(Number(donationAmount))) {
 			return;
+		}
+
+		if(Number(donationAmount) < 10) {
+			donationsContextValue?.setCustomInputError('The amount must be at least $10')
+			return
+		}
+
+		if(Number(donationAmount) > 1000000) {
+			donationsContextValue?.setCustomInputError('The amount must be at the most $1,000,000')
+			return
 		}
 
 		const frequency = monthlyDonation ? 'MONTHLY' : 'ONCE';
@@ -95,7 +103,6 @@ const DonateButton = ({
 			handleClick={() => {
 				handleDonateButton(mode);
 			}}
-			disabled={disabled}
 		>
 			{getButtonTextFormatted(formText.button, currency, donationAmount)}
 		</Button>
