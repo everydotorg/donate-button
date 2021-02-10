@@ -1,4 +1,4 @@
-import {useState, useEffect, useMemo} from 'preact/hooks';
+import {useState, useEffect, useMemo, useRef} from 'preact/hooks';
 import {JSXInternal} from 'preact/src/jsx';
 import Description from 'src/components/Description';
 import Donations from 'src/components/Donations';
@@ -36,82 +36,79 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 		-1,
 		0
 	]);
-	const [monthlyLevels, setMonthlyLevels] = useState(
-		// Custom must be the last level
-		[...options.monthly.levels].sort((a, b) =>
-			Number.isNaN(Number(b.amount)) ? -1 : 0
-		)
+	// Custom must be the last level
+	const monthlyLevels = [...options.monthly.levels].sort((a, b) =>
+		Number.isNaN(Number(b.amount)) ? -1 : 0
 	);
 
-	useEffect(() => {
-		// Fade in down - fade out down-> [0] > [1]
-		// fade in up - fade out up-> [0] < [1]
-		const [previousValue, currValue] = triggerAnimation;
-
-		if (previousValue > currValue) {
-			const levelClasses = monthlyLevels.map((level, i) => {
-				if (i === previousValue) {
-					return {
-						...level,
-						classes: ['fadeOutDown']
-					};
-				}
-
-				if (i === currValue) {
-					return {
-						...level,
-						classes: ['fadeInDown', 'right-panel__item--active']
-					};
-				}
-
-				return level;
-			});
-			setMonthlyLevels(levelClasses);
-		}
-
-		if (previousValue < currValue) {
-			const levelClasses = monthlyLevels.map((level, i) => {
-				if (i === previousValue) {
-					return {
-						...level,
-						classes: ['fadeOutUp']
-					};
-				}
-
-				if (i === currValue) {
-					return {
-						...level,
-						classes: ['fadeInUp', 'right-panel__item--active']
-					};
-				}
-
-				return {...level, classes: ['right-panel__item--hidden']};
-			});
-			setMonthlyLevels(levelClasses);
-		}
-
-		const timeout = setTimeout(() => {
-			const levelClasses = monthlyLevels.map((level, i) => {
-				if (i === currValue) {
-					return {
-						...level,
-						classes: ['right-panel__item--active']
-					};
-				}
-
+	const [_, currentLevel] = triggerAnimation;
+	const [previousLevel, setPreviousLevel] = useState(currentLevel);
+	let levelClasses;
+	if (previousLevel > currentLevel) {
+		levelClasses = monthlyLevels.map((level, i) => {
+			if (i === previousLevel) {
 				return {
 					...level,
-					classes: ['right-panel__item--hidden']
+					classes: ['fadeOutDown']
 				};
-			});
+			}
 
-			setMonthlyLevels(levelClasses);
-		}, 300);
+			if (i === currentLevel) {
+				return {
+					...level,
+					classes: ['fadeInDown', 'right-panel__item--active']
+				};
+			}
 
-		return () => {
-			clearTimeout(timeout);
-		};
-	}, [triggerAnimation, monthlyLevels]);
+			return level;
+		});
+	} else if (previousLevel < currentLevel) {
+		levelClasses = monthlyLevels.map((level, i) => {
+			if (i === previousLevel) {
+				return {
+					...level,
+					classes: ['fadeOutUp']
+				};
+			}
+
+			if (i === currentLevel) {
+				return {
+					...level,
+					classes: ['fadeInUp', 'right-panel__item--active']
+				};
+			}
+
+			return {...level, classes: ['right-panel__item--hidden']};
+		});
+	} else {
+		levelClasses = monthlyLevels.map((level, i) => {
+			if (i === currentLevel) {
+				return {
+					...level,
+					classes: ['right-panel__item--active']
+				};
+			}
+
+			return {
+				...level,
+				classes: ['right-panel__item--hidden']
+			};
+		});
+	}
+
+	// After the animation has completed, set previousLevel equal to current
+	useEffect(() => {
+		if (currentLevel !== previousLevel) {
+			const timeout = setTimeout(() => {
+				setPreviousLevel(currentLevel);
+			}, 300);
+
+			return () => {
+				clearTimeout(timeout);
+			};
+		}
+	}, [currentLevel, previousLevel]);
+
 	const donationsContextValue = useMemo(
 		() => ({
 			monthlyDonation,
@@ -148,7 +145,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 									/>
 									<div className="right-panel">
 										<Company />
-										{monthlyLevels.map((level) => {
+										{levelClasses.map((level) => {
 											return (
 												<div
 													key={level.amount}
