@@ -27,7 +27,9 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 	const isMonthlyDefault = options.defaultMode !== DefaultFrequency.ONE_TIME;
 	const [monthlyDonation, setMonthlyDonation] = useState(isMonthlyDefault);
 
-	const defaultLevel = options.monthly.levels.find((level) => level.default);
+	const defaultLevelIdx = options.monthly.levels.findIndex(level => level.default)
+	const defaultLevel = options.monthly.levels[defaultLevelIdx];
+
 	const [donationAmount, setDonationAmount] = useState(
 		defaultLevel?.amount ?? options.monthly.levels[0].amount
 	);
@@ -35,7 +37,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 	const [customInputError, setCustomInputError] = useState('');
 	const [triggerAnimation, setTriggerAnimation] = useState<AnimationValue>([
 		-1,
-		0
+	  defaultLevelIdx
 	]);
 	// Custom must be the last level
 	const monthlyLevels = [...options.monthly.levels].sort((a, b) =>
@@ -61,7 +63,10 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 				};
 			}
 
-			return level;
+			return {
+				...level, 
+				classes: ['right-panel__item--hidden']
+			};
 		});
 	} else if (previousLevel < currentLevel) {
 		levelClasses = monthlyLevels.map((level, i) => {
@@ -79,7 +84,10 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 				};
 			}
 
-			return {...level, classes: ['right-panel__item--hidden']};
+			return {
+				...level, 
+				classes: ['right-panel__item--hidden']
+			};
 		});
 	} else {
 		levelClasses = monthlyLevels.map((level, i) => {
