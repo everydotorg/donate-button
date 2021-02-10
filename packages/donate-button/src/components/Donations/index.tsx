@@ -1,5 +1,4 @@
 import {useEffect, useRef, useState} from 'preact/hooks';
-import { memo } from 'preact/compat'
 import DonationsForm from 'src/components/Donations/DonationsForm';
 import Header from 'src/components/Donations/Header';
 import Logo from 'src/components/Donations/Logo';
@@ -7,7 +6,7 @@ import ToggleDonationType from 'src/components/Donations/ToggleDonationType';
 
 import 'src/components/Donations/donations.css';
 
-const Donations = memo(({
+const Donations = ({
 	monthlyDonation,
 	setMonthlyDonation
 }: {
@@ -45,6 +44,6 @@ const Donations = memo(({
 			/>
 		</div>
 	);
-});
+};
 
 export default Donations;
