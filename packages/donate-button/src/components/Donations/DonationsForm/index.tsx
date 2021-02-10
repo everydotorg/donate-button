@@ -28,9 +28,7 @@ const getBoldFormatted = (text: string) => {
 const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 	const donationsContextValue = useContext(DonationsContext);
 
-	const {monthly, oneTime, onSubmit, currency, mode} = useContext(
-		OptionsContext
-	);
+	const {monthly, oneTime} = useContext(OptionsContext);
 	const [customInputFocus, setCustomInputFocus] = useState(false);
 
 	const lang = useI18n();
@@ -47,7 +45,8 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 				setDonationAmount,
 				customDonation,
 				setCustomDonation,
-				setTriggerAnimation
+				setTriggerAnimation,
+				setCustomInputError
 			} = donationsContextValue;
 			// Custom donation is always the last control
 			// If we have a custom donation the previous level is the custom input.
@@ -67,6 +66,7 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 
 			if (amount !== donationAmount) {
 				setDonationAmount(amount);
+				setCustomInputError('');
 			}
 
 			if (customDonation) {
@@ -99,7 +99,9 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 		setDonationAmount,
 		customDonation,
 		setCustomDonation,
-		setTriggerAnimation
+		setTriggerAnimation,
+		customInputError,
+		setCustomInputError
 	} = donationsContextValue;
 
 	const handleCustomInputFocus = () => {
@@ -190,6 +192,8 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 								description={lang.oneTime.description}
 								extraClasses={['donations__input']}
 								selected={customInputFocus}
+								error={customInputError}
+								setError={setCustomInputError}
 								onFocus={handleCustomInputFocus}
 								onBlur={handleCustomInputBlur}
 							/>
@@ -224,6 +228,8 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 								setValue={handleInputChange}
 								extraClasses={['donations__input']}
 								selected={customInputFocus}
+								error={customInputError}
+								setError={setCustomInputError}
 								onFocus={handleCustomInputFocus}
 								onBlur={handleCustomInputBlur}
 							/>
@@ -235,6 +241,7 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 				<DonateButton
 					monthlyDonation={monthlyDonation}
 					extraClasses={['u-hide-mobile']}
+					disabled={Boolean(customInputError)}
 				/>
 				<p className="t-body--small">{lang.footer}</p>
 			</div>

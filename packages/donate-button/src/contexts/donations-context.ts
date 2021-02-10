@@ -9,6 +9,8 @@ interface DonationsContextValue {
 	customDonation: string;
 	setCustomDonation: (v: string) => void;
 	setTriggerAnimation: (v: AnimationValue) => void;
+	customInputError: string;
+	setCustomInputError: (v: string) => void;
 }
 export const DonationsContext = createContext<DonationsContextValue | null>(
 	null

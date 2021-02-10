@@ -16,6 +16,10 @@
     border-color: #000;
 }
 
+.input--error {
+    border-color: red!important
+}
+
 @media only screen and (max-width: 37.5em) {
     .input--selected .input__description {
         padding: 1rem;
@@ -29,6 +33,10 @@
     visibility: hidden;
     height: 0;
     transition: all 0.2s;
+}
+
+.input__error {
+    grid-column: 1 / -1;
 }
 
 .no-line-height {
@@ -87,4 +95,13 @@
     top: 50%;
     right: 1rem;
     transform: translateY(-50%);
+}
+
+.input__input::-webkit-outer-spin-button,
+.input__input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.input__input {
+    -moz-appearance: textfield;
 }

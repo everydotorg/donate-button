@@ -1,9 +1,21 @@
+import {useEffect, useState} from 'preact/hooks';
+import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
 import 'src/components/Input/input.css';
+
+const preventDecimal = (
+	event: JSXInternal.TargetedEvent<HTMLInputElement, KeyboardEvent>
+) => {
+	if (event.key === '.') {
+		event.preventDefault();
+	}
+};
 
 interface InputProps extends JSXInternal.HTMLAttributes<HTMLInputElement> {
 	value: string;
 	setValue: (v: string) => void;
+	error: string;
+	setError: (v: string) => void;
 	extraClasses: string[];
 	label?: string;
 	placeholder?: string;
@@ -13,6 +25,8 @@ interface InputProps extends JSXInternal.HTMLAttributes<HTMLInputElement> {
 const Input = ({
 	value,
 	setValue,
+	error,
+	setError,
 	extraClasses,
 	label,
 	placeholder,
@@ -20,11 +34,30 @@ const Input = ({
 	selected,
 	...otherProps
 }: InputProps) => {
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			if (value && Number(value) < 10) {
+				setError('The minimum amount is 10');
+			}
+		}, 200);
+
+		if (Number(value) >= 10) {
+			setError('');
+		}
+
+		return () => {
+			clearTimeout(timeout);
+		};
+	}, [value, setError]);
+
 	const inputContainerClasses = ['input__container']
 		.concat(extraClasses)
 		.concat([selected ? 'input--selected' : ''])
-		.concat(value ? ['input--filled'] : []);
+		.concat(value ? ['input--filled'] : [])
+		.concat(error ? ['input--error'] : []);
+
 	const inputClasses = ['t-input', 'input__input'];
+
 	return (
 		<div className={inputContainerClasses.join(' ')}>
 			<div className="input">
@@ -32,8 +65,10 @@ const Input = ({
 				<input
 					className={inputClasses.join(' ')}
 					placeholder={placeholder}
-					type="text"
+					type="number"
+					min="10"
 					value={value}
+					onKeyDown={preventDecimal}
 					onInput={(event) => {
 						setValue(event.currentTarget.value);
 					}}
