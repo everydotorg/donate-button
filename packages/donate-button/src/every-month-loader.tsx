@@ -1,12 +1,10 @@
-import deepMerge, {Options as DeepMergeOptions} from 'deepmerge';
-import type EveryMonthComponent from 'src/components/EveryMonth';
+import EveryMonth from 'src/components/EveryMonth';
 import {
 	DonateButtonOptions,
 	LayoutMode,
 	mergeOptionsWithDefault
 } from 'src/helpers/options-types';
 import layoutModeAbTest from 'src/layout-mode-ab-test';
-import EveryMonth from './components/EveryMonth'
 
 const canUseSplitPanel = (options: DonateButtonOptions) => {
 	const allMonthlyLevelsHasImages = options.monthly.levels.every((level) =>
@@ -52,7 +50,6 @@ export const EveryMonthLoader = ({
 	options = {},
 	hide
 }: EveryMonthLoaderProps) => {
-
 	removeOverflowFromBody();
 	if (!options.show) {
 		// Not showing
