@@ -1,4 +1,4 @@
-import {useContext} from 'preact/hooks';
+import {useContext, useEffect} from 'preact/hooks';
 import Button from 'src/components/Button';
 import DonationsContext from 'src/contexts/donations-context';
 import OptionsContext from 'src/contexts/options-context';
@@ -65,6 +65,20 @@ const DonateButton = ({
 	const {onSubmit, currency, mode} = useContext(OptionsContext);
 	const formText = monthlyDonation ? lang.monthly : lang.oneTime;
 	const donationAmount = donationsContextValue?.donationAmount;
+
+	useEffect(() => {
+		const handler = (ev: KeyboardEvent) => {
+			if (ev.key === 'Enter') {
+				handleDonateButton(mode);
+			}
+		};
+
+		window.addEventListener('keydown', handler);
+
+		return () => {
+			window.removeEventListener('keydown', handler);
+		};
+	});
 
 	const handleDonateButton = (mode: LayoutMode) => {
 		if (!donationAmount || Number.isNaN(Number(donationAmount))) {

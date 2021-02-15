@@ -127,6 +127,10 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 	const handleInputChange = (value: string) => {
 		setDonationAmount(value);
 		setCustomDonation(value);
+
+		if (Number(value) >= 10 && Number(value) <= 1000000) {
+			setCustomInputError('');
+		}
 	};
 
 	const fixedLevels = monthly.levels.filter(
@@ -184,19 +188,24 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 							);
 						})}
 						{customLevel && (
-							<Input
-								label={formText.custom.label}
-								placeholder={formText.custom.placeholder}
-								value={customDonation}
-								setValue={handleInputChange}
-								description={lang.oneTime.description}
-								extraClasses={['donations__input']}
-								selected={customInputFocus}
-								error={customInputError}
-								setError={setCustomInputError}
-								onFocus={handleCustomInputFocus}
-								onBlur={handleCustomInputBlur}
-							/>
+							<div className="donations__input">
+								<Input
+									label={formText.custom.label}
+									placeholder={formText.custom.placeholder}
+									value={customDonation}
+									setValue={handleInputChange}
+									description={lang.oneTime.description}
+									extraClasses={['donations__input']}
+									selected={customInputFocus}
+									error={customInputError}
+									setError={setCustomInputError}
+									onFocus={handleCustomInputFocus}
+									onBlur={handleCustomInputBlur}
+								/>
+								<p className="t-error donations__error">
+									{customInputError}&nbsp;
+								</p>
+							</div>
 						)}
 					</Fragment>
 				)}
@@ -222,21 +231,25 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 							/>
 						))}
 						{oneTime.allowCustom && (
-							<Input
-								placeholder={formText.custom.placeholder}
-								value={customDonation}
-								setValue={handleInputChange}
-								extraClasses={['donations__input']}
-								selected={customInputFocus}
-								error={customInputError}
-								setError={setCustomInputError}
-								onFocus={handleCustomInputFocus}
-								onBlur={handleCustomInputBlur}
-							/>
+							<div className="donations__input">
+								<Input
+									placeholder={formText.custom.placeholder}
+									value={customDonation}
+									setValue={handleInputChange}
+									extraClasses={[]}
+									selected={customInputFocus}
+									error={customInputError}
+									setError={setCustomInputError}
+									onFocus={handleCustomInputFocus}
+									onBlur={handleCustomInputBlur}
+								/>
+								<p className="t-error donations__error">
+									{customInputError}&nbsp;
+								</p>
+							</div>
 						)}
 					</Fragment>
 				)}
-				<p className="t-error donations__error">{customInputError}</p>
 			</div>
 			<div className="donations__submit">
 				<DonateButton

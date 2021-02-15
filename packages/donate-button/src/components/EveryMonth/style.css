@@ -128,8 +128,8 @@
 }
 
 .t-error {
-  font-size: 1rem;
-  line-height: 1.25;
+  font-size: .75rem;
+  line-height: 1;
   color: orangered
 }
 
