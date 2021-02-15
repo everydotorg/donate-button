@@ -9,7 +9,11 @@ import Company from 'src/components/Images/Company';
 import {Styled} from 'src/components/Styled';
 import DonationsContext, {AnimationValue} from 'src/contexts/donations-context';
 import OptionsContext from 'src/contexts/options-context';
-import {DefaultFrequency, DonateButtonOptions, LayoutMode} from 'src/helpers/options-types';
+import {
+	DefaultFrequency,
+	DonateButtonOptions,
+	LayoutMode
+} from 'src/helpers/options-types';
 
 interface EveryMonthProps {
 	options: DonateButtonOptions;
