@@ -236,7 +236,7 @@ const DonationsForm = ({monthlyDonation}: {monthlyDonation: boolean}) => {
 						)}
 					</Fragment>
 				)}
-			<p className="t-error donations__error">{customInputError}</p>
+				<p className="t-error donations__error">{customInputError}</p>
 			</div>
 			<div className="donations__submit">
 				<DonateButton

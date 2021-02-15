@@ -58,7 +58,7 @@ interface DonateButtonProps {
 }
 const DonateButton = ({
 	monthlyDonation,
-	extraClasses = [],
+	extraClasses = []
 }: DonateButtonProps) => {
 	const lang = useI18n();
 	const donationsContextValue = useContext(DonationsContext);
@@ -71,14 +71,18 @@ const DonateButton = ({
 			return;
 		}
 
-		if(Number(donationAmount) < 10) {
-			donationsContextValue?.setCustomInputError('The amount must be at least $10')
-			return
+		if (Number(donationAmount) < 10) {
+			donationsContextValue?.setCustomInputError(
+				'The amount must be at least $10'
+			);
+			return;
 		}
 
-		if(Number(donationAmount) > 1000000) {
-			donationsContextValue?.setCustomInputError('The amount must be at the most $1,000,000')
-			return
+		if (Number(donationAmount) > 1000000) {
+			donationsContextValue?.setCustomInputError(
+				'The amount must be at the most $1,000,000'
+			);
+			return;
 		}
 
 		const frequency = monthlyDonation ? 'MONTHLY' : 'ONCE';
