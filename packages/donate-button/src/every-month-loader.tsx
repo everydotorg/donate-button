@@ -1,6 +1,4 @@
-import deepMerge, {Options as DeepMergeOptions} from 'deepmerge';
-import {useEffect, useState} from 'preact/hooks';
-import type EveryMonthComponent from 'src/components/EveryMonth';
+import EveryMonth from 'src/components/EveryMonth';
 import {
 	DonateButtonOptions,
 	LayoutMode,
@@ -52,28 +50,6 @@ export const EveryMonthLoader = ({
 	options = {},
 	hide
 }: EveryMonthLoaderProps) => {
-	const [EveryMonth, widgetLoaded] = useState<
-		typeof EveryMonthComponent | undefined
-	>(undefined);
-
-	// When show is set to true and EveryMonth is not loaded, load it
-	useEffect(() => {
-		if (options.show && !EveryMonth) {
-			import('./components/EveryMonth')
-				.then((m) => {
-					widgetLoaded(() => m.default);
-				})
-				.catch((error) => {
-					console.log('Could not lazy load Every Month component', error);
-				});
-		}
-	}, [options.show, EveryMonth]);
-
-	if (!EveryMonth) {
-		// Not yet loaded
-		return null;
-	}
-
 	removeOverflowFromBody();
 	if (!options.show) {
 		// Not showing
@@ -81,11 +57,6 @@ export const EveryMonthLoader = ({
 	}
 
 	addOverflowToBody();
-
-	// Loading
-	if (options.show && !EveryMonth) {
-		return <>Loading...</>;
-	}
 
 	const finalOptions: DonateButtonOptions = canUseSplitPanel(
 		mergeOptionsWithDefault(options)
