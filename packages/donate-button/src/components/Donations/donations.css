@@ -45,3 +45,7 @@
 .donations__submit > *:not(:last-child) {
     margin-bottom: 1rem;
 }
+
+.donations__error {
+    grid-column: 1 / -1;
+}

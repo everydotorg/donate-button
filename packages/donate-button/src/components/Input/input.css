@@ -17,7 +17,7 @@
 }
 
 .input--error {
-    border-color: red!important
+    border-color: orangered!important
 }
 
 @media only screen and (max-width: 37.5em) {

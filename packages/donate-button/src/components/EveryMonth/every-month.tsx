@@ -27,7 +27,9 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 	const isMonthlyDefault = options.defaultMode !== DefaultFrequency.ONE_TIME;
 	const [monthlyDonation, setMonthlyDonation] = useState(isMonthlyDefault);
 
-	const defaultLevelIdx = options.monthly.levels.findIndex(level => level.default)
+	const defaultLevelIdx = options.monthly.levels.findIndex(
+		(level) => level.default
+	);
 	const defaultLevel = options.monthly.levels[defaultLevelIdx];
 
 	const [donationAmount, setDonationAmount] = useState(
@@ -37,7 +39,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 	const [customInputError, setCustomInputError] = useState('');
 	const [triggerAnimation, setTriggerAnimation] = useState<AnimationValue>([
 		-1,
-	  defaultLevelIdx
+		defaultLevelIdx
 	]);
 	// Custom must be the last level
 	const monthlyLevels = [...options.monthly.levels].sort((a, b) =>
@@ -64,7 +66,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 			}
 
 			return {
-				...level, 
+				...level,
 				classes: ['right-panel__item--hidden']
 			};
 		});
@@ -85,7 +87,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 			}
 
 			return {
-				...level, 
+				...level,
 				classes: ['right-panel__item--hidden']
 			};
 		});
@@ -186,7 +188,6 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 								<DonateButton
 									monthlyDonation={monthlyDonation}
 									extraClasses={['u-hide-desktop']}
-									disabled={Boolean(customInputError)}
 								/>
 							</div>
 						</DonationsContext.Provider>
