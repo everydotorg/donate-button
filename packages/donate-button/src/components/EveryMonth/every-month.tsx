@@ -9,7 +9,11 @@ import Company from 'src/components/Images/Company';
 import {Styled} from 'src/components/Styled';
 import DonationsContext, {AnimationValue} from 'src/contexts/donations-context';
 import OptionsContext from 'src/contexts/options-context';
-import {DefaultFrequency, DonateButtonOptions} from 'src/helpers/options-types';
+import {
+	DefaultFrequency,
+	DonateButtonOptions,
+	LayoutMode
+} from 'src/helpers/options-types';
 
 interface EveryMonthProps {
 	options: DonateButtonOptions;
@@ -152,7 +156,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 					<div className="close" onClick={hideOnWrapperClick} />
 					<OptionsContext.Provider value={options}>
 						<DonationsContext.Provider value={donationsContextValue}>
-							{options.mode.toUpperCase() === 'SPLIT_PANEL' && (
+							{options.mode.toUpperCase() === LayoutMode.SPLIT && (
 								<div className="widget widget--split">
 									<Donations
 										monthlyDonation={monthlyDonation}
@@ -176,7 +180,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 									</div>
 								</div>
 							)}
-							{options.mode.toUpperCase() === 'SINGLE' && (
+							{options.mode.toUpperCase() === LayoutMode.SINGLE && (
 								<div className="widget widget--single">
 									<Donations
 										monthlyDonation={monthlyDonation}
