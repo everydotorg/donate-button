@@ -130,7 +130,7 @@
 .t-error {
   font-size: .75rem;
   line-height: 1;
-  color: orangered
+  color: #D95C35;
 }
 
 @media only screen and (max-width: 64em), (max-height: 46.3125em)  {
