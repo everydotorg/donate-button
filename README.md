@@ -102,6 +102,7 @@ This configuration will make a generic donate button that sends users to
           {
             amount: '25',
             name: 'Sponge Supporter',
+            // You can bold a part of this prop text wrapping it between <bold> tags
             description1: 'As a <bold>Sponge Supporter</bold>, you will be helping us with this and that and this and that and this.',
             description2: 'We deliver groundbreaking projects, innovative research and inspiring educational content to engage the public, support science and accelerate actions vital to the preservation of coral reefs.'
           },
@@ -124,12 +125,15 @@ This configuration will make a generic donate button that sends users to
           description1: "With your support we will promote do things like this and that",
           description2: 'We deliver groundbreaking projects, innovative research and inspiring educational content to engage the public, support science and accelerate actions vital to the preservation of coral reefs..'
         },
+        // The widget will automatically replace the {{amount}} on the button text with the current amount selected by the user.
         button: 'Donate {{amount}} every month',
+        // The widget will automatically highlight and use the text between <action> tags to change between modes
         switch: 'Or make a <action>One Time Donation</action>'
       },
       oneTime: {
         logo: {
           header: 'One time donation',
+          // The widget will automatically highlight the text between <link> tags and create a link to the website indicated on `link` prop
           text: 'on <link>every.org</link>',
           link: 'https://every.org',
         },
