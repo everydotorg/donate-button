@@ -37,6 +37,11 @@
     grid-column: 1 / -1;
 }
 
+.donations__input .t-error {
+    margin-top: 8px;
+    margin-bottom: -.75rem
+}
+
 .donations__submit {
     display: flex;
     flex-direction: column;

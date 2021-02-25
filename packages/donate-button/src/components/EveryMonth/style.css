@@ -128,9 +128,9 @@
 }
 
 .t-error {
-  font-size: 1rem;
-  line-height: 1.25;
-  color: orangered
+  font-size: .75rem;
+  line-height: 1;
+  color: #D95C35;
 }
 
 @media only screen and (max-width: 64em), (max-height: 46.3125em)  {
@@ -154,11 +154,6 @@
   .t-body--small {
     font-size: 0.75rem;
     line-height: 1.33;
-  }
-
-  .t-input {
-    font-size: 0.875rem;
-    line-height: 1.71;
   }
 }
 
