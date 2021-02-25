@@ -41,7 +41,6 @@
     height: 0;
     grid-template-columns: 1fr 65%;
     gap: 1rem;
-    transition: all 0.2s;
 }
 
 .radio-button__img-container {
@@ -74,13 +73,6 @@
     right: -9999px;
     margin: auto;
 }
-
-/* Only on iOS Devices */
-/* @supports (-webkit-touch-callout: none) {
-    .radio-button__image {
-        height: auto;
-    }
-} */
 
 .radio-button__description {
     grid-column: 2/3;
