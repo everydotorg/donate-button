@@ -37,6 +37,7 @@ const RadioButton = ({
 				type="radio"
 				name={name}
 				id={amount}
+				value={amount}
 				onClick={handleClick}
 			/>
 			<label className={labelClasses.join(' ')} htmlFor={amount}>
