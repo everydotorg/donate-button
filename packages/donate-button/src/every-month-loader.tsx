@@ -1,7 +1,5 @@
 import EveryMonth from 'src/components/EveryMonth';
-import {
-	DonateButtonOptions,
-} from 'src/helpers/options-types';
+import {DonateButtonOptions} from 'src/helpers/options-types';
 
 let originalOverflow: string;
 const getOriginalOverflow = () => {

@@ -9,20 +9,19 @@ import Company from 'src/components/Images/Company';
 import {Styled} from 'src/components/Styled';
 import DonationsContext, {AnimationValue} from 'src/contexts/donations-context';
 import OptionsContext from 'src/contexts/options-context';
+import {getFinalOptions} from 'src/helpers/final-options';
 import {
 	DefaultFrequency,
 	DonateButtonOptions,
-	LayoutMode,
+	LayoutMode
 } from 'src/helpers/options-types';
-import { getFinalOptions } from 'src/helpers/final-options'
-
 
 interface EveryMonthProps {
 	options: Partial<DonateButtonOptions>;
 	hide: () => void;
 }
 const EveryMonth = ({options, hide}: EveryMonthProps) => {
-	const finalOptions: DonateButtonOptions = getFinalOptions(options) 
+	const finalOptions: DonateButtonOptions = getFinalOptions(options);
 
 	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
 		event
@@ -32,7 +31,8 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 		}
 	};
 
-	const isMonthlyDefault = finalOptions.defaultMode !== DefaultFrequency.ONE_TIME;
+	const isMonthlyDefault =
+		finalOptions.defaultMode !== DefaultFrequency.ONE_TIME;
 	const [monthlyDonation, setMonthlyDonation] = useState(isMonthlyDefault);
 
 	const defaultLevelIdx = finalOptions.monthly.levels.findIndex(
