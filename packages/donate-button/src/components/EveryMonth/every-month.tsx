@@ -12,14 +12,18 @@ import OptionsContext from 'src/contexts/options-context';
 import {
 	DefaultFrequency,
 	DonateButtonOptions,
-	LayoutMode
+	LayoutMode,
 } from 'src/helpers/options-types';
+import { getFinalOptions } from 'src/helpers/final-options'
+
 
 interface EveryMonthProps {
-	options: DonateButtonOptions;
+	options: Partial<DonateButtonOptions>;
 	hide: () => void;
 }
 const EveryMonth = ({options, hide}: EveryMonthProps) => {
+	const finalOptions: DonateButtonOptions = getFinalOptions(options) 
+
 	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
 		event
 	) => {
@@ -28,16 +32,16 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 		}
 	};
 
-	const isMonthlyDefault = options.defaultMode !== DefaultFrequency.ONE_TIME;
+	const isMonthlyDefault = finalOptions.defaultMode !== DefaultFrequency.ONE_TIME;
 	const [monthlyDonation, setMonthlyDonation] = useState(isMonthlyDefault);
 
-	const defaultLevelIdx = options.monthly.levels.findIndex(
+	const defaultLevelIdx = finalOptions.monthly.levels.findIndex(
 		(level) => level.default
 	);
-	const defaultLevel = options.monthly.levels[defaultLevelIdx];
+	const defaultLevel = finalOptions.monthly.levels[defaultLevelIdx];
 
 	const [donationAmount, setDonationAmount] = useState(
-		defaultLevel?.amount ?? options.monthly.levels[0].amount
+		defaultLevel?.amount ?? finalOptions.monthly.levels[0].amount
 	);
 	const [customDonation, setCustomDonation] = useState('');
 	const [customInputError, setCustomInputError] = useState('');
@@ -46,7 +50,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 		defaultLevelIdx
 	]);
 	// Custom must be the last level
-	const monthlyLevels = [...options.monthly.levels].sort((a, b) =>
+	const monthlyLevels = [...finalOptions.monthly.levels].sort((a, b) =>
 		Number.isNaN(Number(b.amount)) ? -1 : 0
 	);
 
@@ -154,9 +158,9 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 			<div>
 				<div className="wrapper" onClick={hideOnWrapperClick}>
 					<div className="close" onClick={hideOnWrapperClick} />
-					<OptionsContext.Provider value={options}>
+					<OptionsContext.Provider value={finalOptions}>
 						<DonationsContext.Provider value={donationsContextValue}>
-							{options.mode.toUpperCase() === LayoutMode.SPLIT && (
+							{finalOptions.mode.toUpperCase() === LayoutMode.SPLIT && (
 								<div className="widget widget--split">
 									<Donations
 										monthlyDonation={monthlyDonation}
@@ -180,7 +184,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 									</div>
 								</div>
 							)}
-							{options.mode.toUpperCase() === LayoutMode.SINGLE && (
+							{finalOptions.mode.toUpperCase() === LayoutMode.SINGLE && (
 								<div className="widget widget--single">
 									<Donations
 										monthlyDonation={monthlyDonation}
