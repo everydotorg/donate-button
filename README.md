@@ -243,6 +243,8 @@ The button accepts an object with the following properties to configure the styl
     label?: string;
     // Css classes to add to the button
     classes: string | string[];
+    // Show the every icon inside the button
+    withIcon: boolean;
     // Useful styling props
     bgColor?: string;
     textColor?: string;
