@@ -94,12 +94,12 @@ export interface GenericButtonProps {
 	readonly label?: string;
 	readonly classes?: string | string[];
 	readonly withLogo?: boolean;
-  readonly bgColor?: string;
-  readonly textColor?: string;
-  readonly borderRadius?: string;
-  readonly fontSize?: string;
-  readonly padding?: string;
-	readonly onClick: Function;
+	readonly bgColor?: string;
+	readonly textColor?: string;
+	readonly borderRadius?: string;
+	readonly fontSize?: string;
+	readonly padding?: string;
+	readonly onClick: () => void;
 	readonly hrefUrl: string;
 }
 

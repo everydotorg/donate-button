@@ -1,7 +1,10 @@
 import {render as prRender} from 'preact';
 import EveryMonthLoader from 'src/every-month-loader';
-import {DonateButtonOptions, GenericButtonProps} from 'src/helpers/options-types';
-import genericButtonLoader from './generic-button-loader';
+import genericButtonLoader from 'src/generic-button-loader';
+import {
+	DonateButtonOptions,
+	GenericButtonProps
+} from 'src/helpers/options-types';
 import {loadFonts} from 'src/load-fonts';
 
 const defaultOptions = {
@@ -12,19 +15,28 @@ let instanceOptions = {};
 
 let mountPoint: HTMLElement;
 
-const createButton = (selector: string, options: Partial<GenericButtonProps>, widgetOptions: Partial<DonateButtonOptions>) => {
+const createButton = (
+	selector: string,
+	options: Partial<GenericButtonProps>,
+	widgetOptions: Partial<DonateButtonOptions>
+) => {
 	const showWidget = () => {
 		instanceOptions = {...widgetOptions};
 		show();
-	}
+	};
 
 	const mergedWidgetOptions = {
 		...defaultOptions,
 		...baseOptions,
 		...instanceOptions
-	}
-	genericButtonLoader({selector, options, onClick: showWidget, widgetOptions: mergedWidgetOptions});
-}
+	};
+	genericButtonLoader({
+		selector,
+		options,
+		onClick: showWidget,
+		widgetOptions: mergedWidgetOptions
+	});
+};
 
 const setOptions = (newOptions: Partial<DonateButtonOptions>) => {
 	Object.assign(baseOptions, newOptions);
