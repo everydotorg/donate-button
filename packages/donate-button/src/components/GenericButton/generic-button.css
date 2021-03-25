@@ -1,0 +1,13 @@
+.Every-GenericButton {
+  display: inline-block;
+  border: none;
+  outline: none;
+  font-family: "Basis Grotesque Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell,
+  "Helvetica Neue", Roboto, sans-serif;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+  backface-visibility: hidden;
+  transition: all 0.4s;
+}

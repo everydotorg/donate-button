@@ -90,6 +90,18 @@ export interface DonateButtonOptions {
 	language: string;
 }
 
+export interface GenericButtonProps {
+	readonly label?: string;
+	readonly classes?: string | string[];
+  readonly bgColor?: string;
+  readonly textColor?: string;
+  readonly borderRadius?: string;
+  readonly fontSize?: string;
+  readonly padding?: string;
+	readonly onClick: Function;
+	readonly hrefUrl: string;
+}
+
 export const defaultOptions: DonateButtonOptions = {
 	show: false,
 	language: 'en',

@@ -1,6 +1,7 @@
 import {render as prRender} from 'preact';
 import EveryMonthLoader from 'src/every-month-loader';
-import {DonateButtonOptions} from 'src/helpers/options-types';
+import {DonateButtonOptions, GenericButtonProps} from 'src/helpers/options-types';
+import genericButtonLoader from './generic-button-loader';
 import {loadFonts} from 'src/load-fonts';
 
 const defaultOptions = {
@@ -10,6 +11,19 @@ const baseOptions = {};
 let instanceOptions = {};
 
 let mountPoint: HTMLElement;
+
+const createButton = (selector: string, options: Partial<GenericButtonProps>, widgetOptions: Partial<DonateButtonOptions>) => {
+	const showWidget = () => {
+		instanceOptions = {...widgetOptions};
+		show();
+	}
+	// const charity = typeof widgetOptions?.onSubmit !== 'function' ? widgetOptions.onSubmit?.charity : ''
+
+	const charity = 'sss';
+	const hrefUrl = `https://www.every.org/${charity}/donate`;
+
+	genericButtonLoader({selector, options, onClick: showWidget, hrefUrl});
+}
 
 const setOptions = (newOptions: Partial<DonateButtonOptions>) => {
 	Object.assign(baseOptions, newOptions);
@@ -67,6 +81,7 @@ interface EveryMonthWidget {
 	setOptions: typeof setOptions;
 	show: typeof show;
 	showOnClick: typeof setToggleButton;
+	createButton: typeof createButton;
 }
 declare const window: Window & {
 	everyMonthWidget?: EveryMonthWidget;
@@ -74,5 +89,6 @@ declare const window: Window & {
 window.everyMonthWidget = {
 	setOptions,
 	show,
-	showOnClick: setToggleButton
+	showOnClick: setToggleButton,
+	createButton
 };
