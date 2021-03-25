@@ -1,19 +1,5 @@
 import EveryMonth from 'src/components/EveryMonth';
-import {
-	DonateButtonOptions,
-	LayoutMode,
-	mergeOptionsWithDefault
-} from 'src/helpers/options-types';
-import layoutModeAbTest from 'src/layout-mode-ab-test';
-
-const canUseSplitPanel = (options: DonateButtonOptions) => {
-	const allMonthlyLevelsHasImages = options.monthly.levels.every((level) =>
-		Boolean(level.img)
-	);
-	const oneTimeLevelHasImage = options.oneTime.img;
-
-	return allMonthlyLevelsHasImages && oneTimeLevelHasImage;
-};
+import {DonateButtonOptions} from 'src/helpers/options-types';
 
 let originalOverflow: string;
 const getOriginalOverflow = () => {
@@ -58,13 +44,7 @@ export const EveryMonthLoader = ({
 
 	addOverflowToBody();
 
-	const finalOptions: DonateButtonOptions = canUseSplitPanel(
-		mergeOptionsWithDefault(options)
-	)
-		? mergeOptionsWithDefault({mode: layoutModeAbTest()}, options)
-		: mergeOptionsWithDefault(options, {mode: LayoutMode.SINGLE});
-
-	return <EveryMonth options={finalOptions} hide={hide} />;
+	return <EveryMonth options={options} hide={hide} />;
 };
 
 export default EveryMonthLoader;
