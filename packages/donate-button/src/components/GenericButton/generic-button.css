@@ -10,4 +10,10 @@
   text-decoration: none;
   backface-visibility: hidden;
   transition: all 0.4s;
+
+  padding: 0.75rem 1.25rem;
+  color: #fff;
+  background-color: #00a380;
+  border-radius: 100px;
+  font-size: 1rem;
 }

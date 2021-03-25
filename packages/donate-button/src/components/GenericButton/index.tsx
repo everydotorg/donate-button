@@ -5,11 +5,11 @@ import genericButtonStyles from "./generic-button.css";
 
 const GenericButton = ({
   label = "Donate",
-  textColor = '#fff',
-  bgColor = "#00a380",
-  borderRadius = "100px",
-  fontSize = "1rem",
-  padding = "0.75rem 1.25rem",
+  textColor,
+  bgColor,
+  borderRadius,
+  fontSize,
+  padding,
   classes = [],
   onClick,
   hrefUrl,

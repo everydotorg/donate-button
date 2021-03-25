@@ -17,12 +17,13 @@ const createButton = (selector: string, options: Partial<GenericButtonProps>, wi
 		instanceOptions = {...widgetOptions};
 		show();
 	}
-	// const charity = typeof widgetOptions?.onSubmit !== 'function' ? widgetOptions.onSubmit?.charity : ''
 
-	const charity = 'sss';
-	const hrefUrl = `https://www.every.org/${charity}/donate`;
-
-	genericButtonLoader({selector, options, onClick: showWidget, hrefUrl});
+	const mergedWidgetOptions = {
+		...defaultOptions,
+		...baseOptions,
+		...instanceOptions
+	}
+	genericButtonLoader({selector, options, onClick: showWidget, widgetOptions: mergedWidgetOptions});
 }
 
 const setOptions = (newOptions: Partial<DonateButtonOptions>) => {

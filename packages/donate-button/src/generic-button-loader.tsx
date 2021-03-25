@@ -1,15 +1,18 @@
 import { render } from 'preact'
-import { GenericButtonProps } from "src/helpers/options-types"
+import { GenericButtonProps, DonateButtonOptions } from "src/helpers/options-types"
 
 interface GenericButtonLoader {
   selector: string;
   onClick: Function;
-  hrefUrl: string;
+  widgetOptions: Partial<DonateButtonOptions>;
   options: Partial<GenericButtonProps>;
 }
 
-const genericButtonLoader = ({selector, options = {}, onClick, hrefUrl}: GenericButtonLoader) => {
+const genericButtonLoader = ({selector, options = {}, onClick, widgetOptions}: GenericButtonLoader) => {
   const div = document.querySelector(selector);
+  
+	const charity = typeof widgetOptions?.onSubmit !== 'function' ? widgetOptions.onSubmit?.charity : ''
+	const hrefUrl = `https://www.every.org/${charity}/donate`;
 
   if(div){
     import('./components/GenericButton').then(C => {
