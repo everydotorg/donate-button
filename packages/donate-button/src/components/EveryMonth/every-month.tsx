@@ -10,6 +10,7 @@ import {Styled} from 'src/components/Styled';
 import DonationsContext, {AnimationValue} from 'src/contexts/donations-context';
 import OptionsContext from 'src/contexts/options-context';
 import constructEveryUrl from 'src/helpers/construct-every-url';
+import {getFinalOptions} from 'src/helpers/final-options';
 import {
 	DefaultFrequency,
 	DonateButtonOptions,
@@ -17,10 +18,12 @@ import {
 } from 'src/helpers/options-types';
 
 interface EveryMonthProps {
-	options: DonateButtonOptions;
+	options: Partial<DonateButtonOptions>;
 	hide: () => void;
 }
-const EveryMonth = ({options, hide}: EveryMonthProps) => {
+const EveryMonth = ({options: inputOptions, hide}: EveryMonthProps) => {
+	const options: DonateButtonOptions = getFinalOptions(inputOptions);
+
 	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
 		event
 	) => {
