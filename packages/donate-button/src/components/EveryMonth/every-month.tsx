@@ -9,8 +9,8 @@ import Company from 'src/components/Images/Company';
 import {Styled} from 'src/components/Styled';
 import DonationsContext, {AnimationValue} from 'src/contexts/donations-context';
 import OptionsContext from 'src/contexts/options-context';
-import {getFinalOptions} from 'src/helpers/final-options';
 import constructEveryUrl from 'src/helpers/construct-every-url';
+import {getFinalOptions} from 'src/helpers/final-options';
 import {
 	DefaultFrequency,
 	DonateButtonOptions,
@@ -32,8 +32,7 @@ const EveryMonth = ({options: inputOptions, hide}: EveryMonthProps) => {
 		}
 	};
 
-	const isMonthlyDefault =
-		options.defaultMode !== DefaultFrequency.ONE_TIME;
+	const isMonthlyDefault = options.defaultMode !== DefaultFrequency.ONE_TIME;
 	const [monthlyDonation, setMonthlyDonation] = useState(isMonthlyDefault);
 
 	const defaultLevelIdx = options.monthly.levels.findIndex(
