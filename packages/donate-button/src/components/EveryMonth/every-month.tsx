@@ -171,15 +171,15 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 
 		const frequency = monthlyDonation ? 'MONTHLY' : 'ONCE';
 
-		if (typeof options.onSubmit === 'function') {
-			options.onSubmit({amount: donationAmount, frequency});
+		if (typeof finalOptions.onSubmit === 'function') {
+			finalOptions.onSubmit({amount: donationAmount, frequency});
 		} else {
 			const url = constructEveryUrl({
-				company: options.onSubmit.charity,
+				company: finalOptions.onSubmit.charity,
 				frequency,
 				amount: donationAmount,
-				mode: options.mode,
-				extras: options.onSubmit.params
+				mode: finalOptions.mode,
+				extras: finalOptions.onSubmit.params
 			});
 			window.location.href = url;
 		}
