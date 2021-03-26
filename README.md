@@ -2,7 +2,9 @@
 
 For nonprofits — the simplest way to give your supporters a beautiful donation experience. This button opens a donation flow through [Every.org](https://www.every.org/nonprofits).
 
-See this in production helping raise funds at https://ffungi.org/eng/
+See a demo at https://embeds.every.org
+
+And see this in production helping raise funds at https://ffungi.org/eng/
 
 ## Use
 
