@@ -178,9 +178,12 @@ const EveryMonth = ({options: inputOptions, hide}: EveryMonthProps) => {
 				frequency,
 				amount: donationAmount,
 				mode: options.mode,
-				extras: options.onSubmit.params
+				extras: options.onSubmit.params,
 			});
-			window.location.href = url;
+
+			const target = options.linkTarget || '_self';
+
+			window.open(url, target);
 		}
 	};
 

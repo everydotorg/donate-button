@@ -5,6 +5,9 @@ export enum LayoutMode {
 	SPLIT = 'SPLIT'
 }
 export type DonationFrequency = 'ONCE' | 'MONTHLY';
+
+export type LinkTarget = '_blank' | '_parent' | '_self' | '_top'
+
 export interface DonationLevel {
 	amount: string;
 	bgColor?: string;
@@ -85,6 +88,7 @@ export interface DonateButtonOptions {
 	readonly defaultMode: DefaultFrequency;
 	readonly currency: string;
 	readonly mode: LayoutMode;
+	readonly linkTarget: LinkTarget; 
 	readonly show: boolean;
 	readonly i18n: Partial<Record<string, I18NOptions>>;
 	language: string;
@@ -94,6 +98,7 @@ export const defaultOptions: DonateButtonOptions = {
 	show: false,
 	language: 'en',
 	mode: LayoutMode.SPLIT,
+	linkTarget: '_self',
 	// Configure action when the user submit the donation in the widget.
 	// You can pass to us the following parameters to customize it or listen to the callback
 	onSubmit: {
