@@ -21,8 +21,8 @@ interface EveryMonthProps {
 	options: Partial<DonateButtonOptions>;
 	hide: () => void;
 }
-const EveryMonth = ({options, hide}: EveryMonthProps) => {
-	const finalOptions: DonateButtonOptions = getFinalOptions(options);
+const EveryMonth = ({options: inputOptions, hide}: EveryMonthProps) => {
+	const options: DonateButtonOptions = getFinalOptions(inputOptions);
 
 	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
 		event
@@ -32,17 +32,16 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 		}
 	};
 
-	const isMonthlyDefault =
-		finalOptions.defaultMode !== DefaultFrequency.ONE_TIME;
+	const isMonthlyDefault = options.defaultMode !== DefaultFrequency.ONE_TIME;
 	const [monthlyDonation, setMonthlyDonation] = useState(isMonthlyDefault);
 
-	const defaultLevelIdx = finalOptions.monthly.levels.findIndex(
+	const defaultLevelIdx = options.monthly.levels.findIndex(
 		(level) => level.default
 	);
-	const defaultLevel = finalOptions.monthly.levels[defaultLevelIdx];
+	const defaultLevel = options.monthly.levels[defaultLevelIdx];
 
 	const [donationAmount, setDonationAmount] = useState(
-		defaultLevel?.amount ?? finalOptions.monthly.levels[0].amount
+		defaultLevel?.amount ?? options.monthly.levels[0].amount
 	);
 	const [customDonation, setCustomDonation] = useState('');
 	const [customInputError, setCustomInputError] = useState('');
@@ -51,7 +50,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 		defaultLevelIdx
 	]);
 	// Custom must be the last level
-	const monthlyLevels = [...finalOptions.monthly.levels].sort((a, b) =>
+	const monthlyLevels = [...options.monthly.levels].sort((a, b) =>
 		Number.isNaN(Number(b.amount)) ? -1 : 0
 	);
 
@@ -171,15 +170,15 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 
 		const frequency = monthlyDonation ? 'MONTHLY' : 'ONCE';
 
-		if (typeof finalOptions.onSubmit === 'function') {
-			finalOptions.onSubmit({amount: donationAmount, frequency});
+		if (typeof options.onSubmit === 'function') {
+			options.onSubmit({amount: donationAmount, frequency});
 		} else {
 			const url = constructEveryUrl({
-				company: finalOptions.onSubmit.charity,
+				company: options.onSubmit.charity,
 				frequency,
 				amount: donationAmount,
-				mode: finalOptions.mode,
-				extras: finalOptions.onSubmit.params
+				mode: options.mode,
+				extras: options.onSubmit.params
 			});
 			window.location.href = url;
 		}
@@ -187,13 +186,13 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 
 	return (
 		<Styled scoped={false} styles={appStyles}>
-			<OptionsContext.Provider value={finalOptions}>
+			<OptionsContext.Provider value={options}>
 				<DonationsContext.Provider value={donationsContextValue}>
 					<form onSubmit={submitDonation}>
 						<div className="wrapper" onClick={hideOnWrapperClick}>
 							<div className="close" onClick={hideOnWrapperClick} />
 
-							{finalOptions.mode.toUpperCase() === LayoutMode.SPLIT && (
+							{options.mode.toUpperCase() === LayoutMode.SPLIT && (
 								<div className="widget widget--split">
 									<Donations
 										monthlyDonation={monthlyDonation}
@@ -217,7 +216,7 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 									</div>
 								</div>
 							)}
-							{finalOptions.mode.toUpperCase() === LayoutMode.SINGLE && (
+							{options.mode.toUpperCase() === LayoutMode.SINGLE && (
 								<div className="widget widget--single">
 									<Donations
 										monthlyDonation={monthlyDonation}
