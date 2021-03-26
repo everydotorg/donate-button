@@ -2,20 +2,22 @@ import {ComponentChildren} from 'preact';
 import 'src/components/Button/index.css';
 
 interface ButtonProps {
-	handleClick: () => void;
+	handleClick?: () => void;
 	extraClasses?: string[];
 	children: ComponentChildren;
 	disabled?: boolean;
+	typeSubmit?: boolean;
 }
 const Button = ({
 	handleClick,
 	extraClasses = [],
 	disabled = false,
+	typeSubmit,
 	children
 }: ButtonProps) => {
 	return (
 		<button
-			type="button"
+			type={typeSubmit ? 'submit' : 'button'}
 			className={['btn']
 				.concat(disabled ? ['btn--disabled'] : [])
 				.concat(extraClasses)

@@ -10,6 +10,7 @@ import {Styled} from 'src/components/Styled';
 import DonationsContext, {AnimationValue} from 'src/contexts/donations-context';
 import OptionsContext from 'src/contexts/options-context';
 import {getFinalOptions} from 'src/helpers/final-options';
+import constructEveryUrl from 'src/helpers/construct-every-url';
 import {
 	DefaultFrequency,
 	DonateButtonOptions,
@@ -152,14 +153,46 @@ const EveryMonth = ({options: inputOptions, hide}: EveryMonthProps) => {
 			setTriggerAnimation
 		]
 	);
+	const submitDonation = (event: JSXInternal.TargetedEvent) => {
+		event.preventDefault();
+		if (!donationAmount || Number.isNaN(Number(donationAmount))) {
+			return;
+		}
+
+		if (Number(donationAmount) < 10) {
+			setCustomInputError('The amount must be at least $10');
+			return;
+		}
+
+		if (Number(donationAmount) > 1000000) {
+			setCustomInputError('The amount must be at the most $1,000,000');
+			return;
+		}
+
+		const frequency = monthlyDonation ? 'MONTHLY' : 'ONCE';
+
+		if (typeof options.onSubmit === 'function') {
+			options.onSubmit({amount: donationAmount, frequency});
+		} else {
+			const url = constructEveryUrl({
+				company: options.onSubmit.charity,
+				frequency,
+				amount: donationAmount,
+				mode: options.mode,
+				extras: options.onSubmit.params
+			});
+			window.location.href = url;
+		}
+	};
 
 	return (
 		<Styled scoped={false} styles={appStyles}>
-			<div>
-				<div className="wrapper" onClick={hideOnWrapperClick}>
-					<div className="close" onClick={hideOnWrapperClick} />
-					<OptionsContext.Provider value={options}>
-						<DonationsContext.Provider value={donationsContextValue}>
+			<OptionsContext.Provider value={options}>
+				<DonationsContext.Provider value={donationsContextValue}>
+					<form onSubmit={submitDonation}>
+						<div className="wrapper" onClick={hideOnWrapperClick}>
+							<div className="close" onClick={hideOnWrapperClick} />
+
 							{options.mode.toUpperCase() === LayoutMode.SPLIT && (
 								<div className="widget widget--split">
 									<Donations
@@ -198,10 +231,10 @@ const EveryMonth = ({options: inputOptions, hide}: EveryMonthProps) => {
 									extraClasses={['u-hide-desktop']}
 								/>
 							</div>
-						</DonationsContext.Provider>
-					</OptionsContext.Provider>
-				</div>
-			</div>
+						</div>
+					</form>
+				</DonationsContext.Provider>
+			</OptionsContext.Provider>
 		</Styled>
 	);
 };
