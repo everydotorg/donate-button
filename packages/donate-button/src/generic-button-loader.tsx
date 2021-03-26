@@ -1,8 +1,12 @@
-import {render} from 'preact';
+import { render } from 'preact';
+import constructEveryUrl from 'src/helpers/construct-every-url';
 import {
 	GenericButtonProps,
 	DonateButtonOptions
 } from 'src/helpers/options-types';
+import { getCharityName } from 'src/helpers/charity-name';
+import { getSubmitParams } from 'src/helpers/submit-params';
+import GenericButton from './components/GenericButton'
 
 interface GenericButtonLoader {
 	selector: string;
@@ -11,19 +15,6 @@ interface GenericButtonLoader {
 	options: Partial<GenericButtonProps>;
 }
 
-const getCharityName = (
-	widgetOptions: Partial<DonateButtonOptions>
-): string => {
-	const genericFoundation = 'your-foundation';
-	if (typeof widgetOptions.onSubmit === 'function') {
-		return genericFoundation;
-	}
-
-	return widgetOptions.onSubmit?.charity
-		? widgetOptions.onSubmit?.charity
-		: genericFoundation;
-};
-
 const genericButtonLoader = ({
 	selector,
 	options = {},
@@ -31,23 +22,17 @@ const genericButtonLoader = ({
 	widgetOptions
 }: GenericButtonLoader) => {
 	const div = document.querySelector(selector);
-
-	const charity = getCharityName(widgetOptions);
-	const hrefUrl = `https://www.every.org/${charity}/donate`;
+	const url = constructEveryUrl({
+		company: getCharityName(widgetOptions),
+		extras: getSubmitParams(widgetOptions)
+	})
 
 	if (div) {
-		import('./components/GenericButton')
-			.then((C) => {
-				const Button = C.default;
+		const Button = (
+			<GenericButton {...options} hrefUrl={url} onClick={onClick} />
+		);
+		render(Button, div);
 
-				const GenericButton = (
-					<Button {...options} hrefUrl={hrefUrl} onClick={onClick} />
-				);
-				render(GenericButton, div);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
 	}
 };
 
