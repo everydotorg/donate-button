@@ -187,22 +187,13 @@ const EveryMonth = ({options, hide}: EveryMonthProps) => {
 
 	return (
 		<Styled scoped={false} styles={appStyles}>
-<<<<<<< HEAD
-			<OptionsContext.Provider value={options}>
+			<OptionsContext.Provider value={finalOptions}>
 				<DonationsContext.Provider value={donationsContextValue}>
 					<form onSubmit={submitDonation}>
 						<div className="wrapper" onClick={hideOnWrapperClick}>
 							<div className="close" onClick={hideOnWrapperClick} />
 
-							{options.mode.toUpperCase() === LayoutMode.SPLIT && (
-=======
-			<div>
-				<div className="wrapper" onClick={hideOnWrapperClick}>
-					<div className="close" onClick={hideOnWrapperClick} />
-					<OptionsContext.Provider value={finalOptions}>
-						<DonationsContext.Provider value={donationsContextValue}>
 							{finalOptions.mode.toUpperCase() === LayoutMode.SPLIT && (
->>>>>>> 92a7a45 (feat: merge options inside every month component)
 								<div className="widget widget--split">
 									<Donations
 										monthlyDonation={monthlyDonation}
