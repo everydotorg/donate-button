@@ -181,7 +181,7 @@ const EveryMonth = ({options: inputOptions, hide}: EveryMonthProps) => {
 				extras: options.onSubmit.params
 			});
 
-			const target = options.completeDonationInNewTab ? '_self' : '_blank';
+			const target = options.completeDonationInNewTab ? '_blank' : '_self';
 
 			window.open(url, target);
 		}
