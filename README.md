@@ -64,10 +64,11 @@ This configuration will make a generic donate button that sends users to
       no_exit: 1, // Disallow exiting from donation flow to Every.org
     }
   },
-  // Specifies the target attribute when the donate button is clicked.
-  // Available values: '_blank', '_self', '_parent', '_top'
-  // see 
-  linkTarget: '_self', 
+  /**
+   * If true, when the user continues to Every.org to complete their donation,
+   * Every.org will open in a new tab
+   */
+  completeDonationInNewTab: false,
   defaultMode: 'monthly' // Available values: 'monthly', 'one-time'. Default monthly
   currency: 'USD', // Currency to display
   monthly: {
