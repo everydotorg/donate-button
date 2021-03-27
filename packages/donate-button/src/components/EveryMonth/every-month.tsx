@@ -178,10 +178,10 @@ const EveryMonth = ({options: inputOptions, hide}: EveryMonthProps) => {
 				frequency,
 				amount: donationAmount,
 				mode: options.mode,
-				extras: options.onSubmit.params,
+				extras: options.onSubmit.params
 			});
 
-			const target = options.linkTarget || '_self';
+			const target = options.completeDonationInNewTab ? '_self' : '_blank';
 
 			window.open(url, target);
 		}
