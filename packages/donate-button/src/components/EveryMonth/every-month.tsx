@@ -180,7 +180,10 @@ const EveryMonth = ({options: inputOptions, hide}: EveryMonthProps) => {
 				mode: options.mode,
 				extras: options.onSubmit.params
 			});
-			window.location.href = url;
+
+			const target = options.completeDonationInNewTab ? '_blank' : '_self';
+
+			window.open(url, target);
 		}
 	};
 

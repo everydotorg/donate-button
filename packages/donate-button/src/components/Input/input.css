@@ -21,7 +21,7 @@
 }
 
 .input__container.input--error {
-    border: 1.5px solid #D95C35;
+    border: 1px solid #D95C35;
     box-shadow: 0px 0px 0px 2px rgba(217, 92, 53, 0.2);
 }
 
