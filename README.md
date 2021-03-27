@@ -232,6 +232,42 @@ You should pass this options previous initialization of the widget. Also you can
 </script>
 ```
 
+## Styled button
+If you don't want to create a button in your site, style it and link to the widget you can use our styled button that it's fully customizable.
+We are linking the button to the widget automatically!
+
+### Minimum configuration
+```js
+  <script>
+    everyMonthWidget.createButton('#yourElementToAttachTheButton')
+  </script>
+```
+### Customize the button
+The button accepts an object with the following properties to configure the styles:
+```ts
+  {
+    // Button text
+    label?: string;
+    // Css classes to add to the button
+    classes: string | string[];
+    // Show the every icon inside the button
+    withIcon: boolean;
+    // Useful styling props
+    bgColor?: string;
+    textColor?: string;
+    borderRadius?: string;
+    fontSize?: string;
+    padding?: string;
+  }
+```
+
+### Extra configuration
+You can configure that instance of the widget with the props that you need:
+```js
+  <script>
+    everyMonthWidget.createButton('#yourElementToAttachTheButton', buttonStylesProps, widgetInstanceProps)
+  </script>
+``` 
 ## API
 
 We expose three functions through the global `everyMonthWidget` object:
@@ -239,3 +275,4 @@ We expose three functions through the global `everyMonthWidget` object:
 - setOptions({...options}): Function to set/override the configuration of the widget.
 - showOnClick(selector, specificOptions?): Function to link a selector with the widget. As optional you can pass extra options that would be set only when the user open the widget with that button.
 - show(): Open the widget with javascript code.
+- createButton(selector, buttonOptions, widgetOptions): Function to generate a styled and customizable button inside the selector.
