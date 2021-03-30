@@ -367,3 +367,7 @@
     display: block;
   }
 }
+
+.u-center-font {
+  transform: translateY(0.055em)
+}
