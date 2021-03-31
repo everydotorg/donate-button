@@ -29,7 +29,7 @@ function constructEveryUrl({
 		utm_medium: UTM_MEDIUM,
 		...extras
 	})
-		.filter(([_ ,value]) => !!value)
+		.filter(([_, value]) => Boolean(value))
 		.map((entry) => entry.join('='))
 		.join('&');
 
