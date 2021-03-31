@@ -1,12 +1,12 @@
-import { render } from 'preact';
+import {render} from 'preact';
+import GenericButton from 'src/components/GenericButton';
+import {getCharityName} from 'src/helpers/charity-name';
 import constructEveryUrl from 'src/helpers/construct-every-url';
 import {
 	GenericButtonProps,
 	DonateButtonOptions
 } from 'src/helpers/options-types';
-import { getCharityName } from 'src/helpers/charity-name';
-import { getSubmitParams } from 'src/helpers/submit-params';
-import GenericButton from './components/GenericButton'
+import {getSubmitParameters} from 'src/helpers/submit-params';
 
 interface GenericButtonLoader {
 	selector: string;
@@ -24,15 +24,14 @@ const genericButtonLoader = ({
 	const div = document.querySelector(selector);
 	const url = constructEveryUrl({
 		company: getCharityName(widgetOptions),
-		extras: getSubmitParams(widgetOptions)
-	})
+		extras: getSubmitParameters(widgetOptions)
+	});
 
 	if (div) {
 		const Button = (
 			<GenericButton {...options} hrefUrl={url} onClick={onClick} />
 		);
 		render(Button, div);
-
 	}
 };
 
