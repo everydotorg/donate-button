@@ -15,8 +15,8 @@ export const getCustomDonationLevel = (
 		Math.max(
 			0,
 			sorted.findIndex(
-				(level) => Number(level.amount) > Number(donationAmount)
-			) - 1
+				(level) => Number(level.amount) >= Number(donationAmount)
+			)
 		)
 	];
 };
