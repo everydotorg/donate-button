@@ -367,3 +367,8 @@
     display: block;
   }
 }
+
+.u-center-font {
+  /* BasisGrotesque-specific fudge-factor to visually center text */
+  transform: translateY(0.07em)
+}
