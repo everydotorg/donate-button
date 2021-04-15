@@ -236,6 +236,8 @@ You should pass this options previous initialization of the widget. Also you can
 If you don't want to create a button in your site, style it and link to the widget you can use our styled button that it's fully customizable.
 We are linking the button to the widget automatically!
 
+![alt generic donate button](docs/assets/generic-button.png)
+
 ### Minimum configuration
 ```js
   <script>
