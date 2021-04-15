@@ -1,0 +1,17 @@
+.donation-type {
+    font-weight: bold;
+    color: var(--color-primary);
+    padding-bottom: 2rem;
+}
+
+.donation-type span {
+    color: #00a37f;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 37.5em) {
+    .donation-type {
+        padding-bottom: 1.5rem;
+    }
+}
