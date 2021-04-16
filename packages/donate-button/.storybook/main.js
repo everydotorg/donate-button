@@ -1,4 +1,5 @@
 const path = require('path')
+const { merge } = require('webpack-merge')
 
 module.exports = {
   "stories": [
@@ -10,12 +11,8 @@ module.exports = {
     "@storybook/addon-postcss",
     "@storybook/addon-essentials"
   ],
-  webpackFinal: async(config, {configType}) => {
-    config.resolve.modules = [
-      ...(config.resolve.modules || []),
-      path.resolve(__dirname, "../"),
-    ];
-
-    return config
-  }
+  webpackFinal: async (config) =>
+    merge(config, {
+      resolve: {alias: { src: path.resolve(__dirname, "../src")}}
+    }),
 }
