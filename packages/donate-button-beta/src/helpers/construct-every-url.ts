@@ -1,36 +1,22 @@
-import {
-	DonationFrequency,
-	LayoutMode,
-	OnSubmitObject
-} from 'src/helpers/options-types';
-
-const UTM_MEDIUM = 'donate-button-0.2'; // Update this if the major version changes
+const UTM_MEDIUM = 'donate-button-0.3'; // Update this if the major version changes
 
 function constructEveryUrl({
-	company = 'your-foundation',
-	frequency,
-	amount,
-	mode,
-	extras = {}
+	nonprofitSlug,
+	crypto
 }: {
-	company?: string;
-	frequency?: DonationFrequency;
-	amount?: string;
-	mode?: LayoutMode;
-	extras?: OnSubmitObject['params'];
+	nonprofitSlug: string;
+	crypto: boolean;
 }) {
-	const baseUrl = `https://www.every.org/${company}/donate`;
+	const baseUrl = `https://www.every.org/${nonprofitSlug}/donate${
+		crypto ? '/crypto' : ''
+	}`;
 	const parameters = Object.entries({
-		frequency,
-		amount,
-		utm_campaign: 'single-or-split',
-		utm_content: mode?.toLowerCase(),
-		utm_source: company,
-		utm_medium: UTM_MEDIUM,
-		...extras
+		utm_campaign: 'donate-button',
+		utm_source: nonprofitSlug,
+		utm_medium: UTM_MEDIUM
 	})
 		.filter(([_, value]) => Boolean(value))
-		.map((entry) => entry.join('='))
+		.map((entry) => entry.map((part) => encodeURIComponent(part)).join('='))
 		.join('&');
 
 	return `${baseUrl}?${parameters}`;
