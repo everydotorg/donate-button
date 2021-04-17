@@ -30,6 +30,8 @@
     "@babel/plugin-transform-react-jsx": "^7.12.5",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-stage-1": "^7.8.3",
+    "@babel/preset-typescript": "^7.13.0",
+    "@compiled/webpack-loader": "^0.6.15",
     "@testing-library/react": "^11.2.5",
     "ava": "^3.15.0",
     "babel-core": "^7.0.0-bridge.0",
@@ -56,8 +58,7 @@
     "xo": "^0.37.1"
   },
   "dependencies": {
-    "microbundle": "^0.13.0",
-    "preact": "^10.5.12",
-    "react-lib-adler32": "^1.0.3"
+    "@compiled/react": "^0.6.10",
+    "preact": "^10.5.12"
   }
 }
