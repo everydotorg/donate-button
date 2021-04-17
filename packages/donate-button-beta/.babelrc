@@ -17,7 +17,8 @@
           "@babel/plugin-transform-typeof-symbol"
         ]
       }
-    ]
+    ],
+    "@babel/preset-typescript"
   ],
   "plugins": [
     "@babel/plugin-syntax-dynamic-import",
