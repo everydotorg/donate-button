@@ -66,7 +66,6 @@
     "xo": "^0.37.1"
   },
   "dependencies": {
-    "microbundle": "^0.13.0",
     "preact": "^10.5.12",
     "react-lib-adler32": "^1.0.3"
   }
