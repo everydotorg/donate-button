@@ -29,7 +29,10 @@ const config = {
 			loader: undefined, // Disable the predefined babel-loader on the rule
 			use: [
 				{loader: 'babel-loader', options: babelOptions},
-				{loader: '@compiled/webpack-loader', options: {babelOptions}}
+				{
+					loader: '@compiled/webpack-loader',
+					options: {babelOptions, importReact: false}
+				}
 			]
 		};
 
@@ -59,16 +62,6 @@ const config = {
 			filename: 'index.html',
 			inject: 'head'
 		});
-
-		// Remove css modules and add to string loader.
-		const {ruleIndex: cssLoaderRuleIndex} = helpers.getLoadersByName(
-			config,
-			'css-loader'
-		)[0];
-		config.module.rules[cssLoaderRuleIndex] = {
-			test: /\.css$/,
-			use: [{loader: 'to-string-loader'}, {loader: 'css-loader'}]
-		};
 	}
 };
 export default config;
