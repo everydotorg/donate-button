@@ -23,19 +23,6 @@ const config = {
 	 * @param {object} _options - this is mainly relevant for plugins (will always be empty in the config), default to an empty object
 	 **/
 	webpack(config, env, helpers, _options) {
-		const {options: babelOptions, ...babelLoaderRule} = config.module.rules[0]; // Get the babel rule and options
-		config.module.rules[0] = {
-			...babelLoaderRule,
-			loader: undefined, // Disable the predefined babel-loader on the rule
-			use: [
-				{loader: 'babel-loader', options: babelOptions},
-				{
-					loader: '@compiled/webpack-loader',
-					options: {babelOptions, importReact: false}
-				}
-			]
-		};
-
 		config.resolve.plugins = [new TsconfigPathsPlugin()];
 		delete config.entry.polyfills;
 		config.output.path = path.resolve(__dirname, VERSION_PATH);
