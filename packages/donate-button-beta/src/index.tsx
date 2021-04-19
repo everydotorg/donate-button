@@ -57,7 +57,7 @@ function optionsFromEdoUrl(url: string): DonateButtonOptions | null {
 	}
 }
 
-const EDO_CLASS_NAME = 'edo-donate-button';
+const EDO_CLASS_NAME = 'edo-donate-btn';
 function initButtons() {
 	for (const buttonContainer of document.querySelectorAll(
 		`.${EDO_CLASS_NAME}`
