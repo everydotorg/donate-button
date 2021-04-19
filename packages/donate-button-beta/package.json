@@ -31,8 +31,8 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-stage-1": "^7.8.3",
     "@babel/preset-typescript": "^7.13.0",
-    "@compiled/webpack-loader": "^0.6.15",
     "@testing-library/react": "^11.2.5",
+    "@types/cxs": "^6.2.1",
     "ava": "^3.15.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-plugin-jsx-pragmatic": "^1.0.2",
@@ -58,7 +58,7 @@
     "xo": "^0.37.1"
   },
   "dependencies": {
-    "@compiled/react": "^0.6.10",
+    "cxs": "^6.2.0",
     "preact": "^10.5.12"
   }
 }
