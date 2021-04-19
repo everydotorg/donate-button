@@ -1,6 +1,10 @@
 import {render} from 'preact';
 import EmbedButton from 'src/components/EmbedButton';
-import {EmbedButtonOptions} from 'src/helpers/options-types';
+import constructEveryUrl from 'src/helpers/construct-every-url';
+import {
+	DonateButtonOptions,
+	EmbedButtonOptions
+} from 'src/helpers/options-types';
 import {loadFonts} from 'src/load-fonts';
 
 interface CreateButtonInSelectorProps extends EmbedButtonOptions {
@@ -27,8 +31,62 @@ export default createButtonInSelector;
 
 loadFonts();
 
+/**
+ * Extracts donate button options from an Every.org donate URL
+ *
+ * Expected format: http?://(www.)?every.org/:slug/donate(/crypto)?
+ * @returns extracted options, or null if url isn't a valid Every.org donate URL
+ */
+function optionsFromEdoUrl(url: string): DonateButtonOptions | null {
+	try {
+		const parsedUrl = new URL(url);
+		if (!['www.every.org', 'every.org'].includes(parsedUrl.host)) {
+			return null;
+		}
+
+		const pathParts = parsedUrl.pathname.split('/').filter(Boolean);
+		if (pathParts.length < 2 || pathParts[1] !== 'donate') {
+			return null;
+		}
+
+		const nonprofitSlug = pathParts[0];
+		const crypto = pathParts[2] === 'crypto';
+		return {nonprofitSlug, crypto};
+	} catch {
+		return null;
+	}
+}
+
+const EDO_CLASS_NAME = 'edo-donate-button';
+function initButtons() {
+	for (const buttonContainer of document.querySelectorAll(
+		`.${EDO_CLASS_NAME}`
+	)) {
+		// Search for an Every.org link inside the container
+		const buttonLink = buttonContainer.querySelector('a');
+		if (!buttonLink) {
+			return null;
+		}
+
+		const href = buttonLink.getAttribute('href');
+		if (!href) {
+			return null;
+		}
+
+		const options = optionsFromEdoUrl(href);
+		if (!options) {
+			continue;
+		}
+
+		const Button = <EmbedButton {...options} />;
+
+		render(Button, buttonContainer);
+	}
+}
+
 interface GlobalExport {
 	createButton: typeof createButtonInSelector;
+	initButtons: typeof initButtons;
 }
 
 declare const window: Window & {
@@ -36,5 +94,6 @@ declare const window: Window & {
 };
 
 window.everyDotOrgDonateButton = {
-	createButton: createButtonInSelector
+	createButton: createButtonInSelector,
+	initButtons
 };

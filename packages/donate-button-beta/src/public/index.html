@@ -14,7 +14,8 @@
   <body
     style="background-size: cover; background-repeat: no-repeat; overflow: auto"
   >
-  <div id="button-root" />
+    <h2>Manually setup button</h2>
+    <div id="button-root" />
     <script>
       window.addEventListener("load", function() {
         everyDotOrgDonateButton.createButton({
@@ -22,6 +23,19 @@
           nonprofitSlug: "everydotorg",
           crypto: true
         });
+      })
+    </script>
+
+    <h2>Automatically setup buttons</h2>
+    <div style="margin-bottom: 1rem;" class="edo-donate-button">
+      <a href="https://www.every.org/everydotorg/donate/crypto">Donate Crypto</a>
+    </div>
+    <div class="edo-donate-button">
+      <a href="https://www.every.org/givedirectly/donate/crypto">Donate Crypto</a>
+    </div>
+    <script>
+      window.addEventListener("load", function() {
+        everyDotOrgDonateButton.initButtons();
       })
     </script>
 
