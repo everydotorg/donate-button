@@ -17,13 +17,14 @@ const buttonCss = cxs({
 	cursor: 'pointer',
 	textDecoration: 'none',
 	backfaceVisibility: 'hidden',
-	transition: 'all 0.4s',
+	transition: 'background-color 0.25s',
 
 	padding: '0.75rem 1.25rem',
 	color: '#fff',
 	backgroundColor: '#00a380',
 	borderRadius: '100px',
-	fontSize: '1rem'
+	fontSize: '1rem',
+	'&:hover': {backgroundColor: '#2F806D'}
 });
 const logoCss = cxs({
 	width: '1rem',
