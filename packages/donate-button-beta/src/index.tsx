@@ -79,6 +79,7 @@ function initButtons() {
 
 		const Button = <EmbedButton {...options} />;
 
+		buttonContainer.innerHTML = '';
 		render(Button, buttonContainer);
 	}
 }
