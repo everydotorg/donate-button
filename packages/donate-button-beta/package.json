@@ -9,7 +9,9 @@
   "scripts": {
     "tsc": "tsc",
     "test": "ava",
-    "build": "preact build --no-prerender --clean  --no-sw",
+    "build:clean": "rm -rf dist",
+    "build": "yarn build:clean && yarn build:only",
+    "build:only": "preact build --no-prerender --no-sw",
     "postbuild": "cp dist/donate-button/0.3/index.js dist/donate-button/0.3/donate-button.js",
     "serve": "preact serve",
     "dev": "preact watch -c ./preact.config.js --no-prerender --no-sw",
