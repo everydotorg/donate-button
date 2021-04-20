@@ -36,6 +36,11 @@ const verticalCenterTextCss = cxs({
 	transform: 'translateY(0.08em)'
 });
 
+/**
+ * Used to identify if a link is a donate button
+ */
+export const DONATE_BTN_DATA_ATTRIBUTE = 'data-edo-donate-btn';
+
 const EmbedButton = ({
 	label,
 	withLogo = true,
@@ -51,6 +56,7 @@ const EmbedButton = ({
 	const url = constructEveryUrl(donateOptions);
 	return (
 		<a
+			{...{[DONATE_BTN_DATA_ATTRIBUTE]: true}}
 			href={url}
 			style={{
 				background: bgColor,

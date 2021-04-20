@@ -1,5 +1,7 @@
 import {render} from 'preact';
-import EmbedButton from 'src/components/embed-button';
+import EmbedButton, {
+	DONATE_BTN_DATA_ATTRIBUTE
+} from 'src/components/embed-button';
 import {
 	DonateButtonOptions,
 	EmbedButtonOptions
@@ -61,15 +63,21 @@ function initButtons() {
 	for (const buttonContainer of document.querySelectorAll(
 		`.${EDO_CLASS_NAME}`
 	)) {
+		if (buttonContainer.querySelector(`[${DONATE_BTN_DATA_ATTRIBUTE}]`)) {
+			// A prior run of `initButtons()` already included this donate button,
+			// refusing to replace it
+			continue;
+		}
+
 		// Search for an Every.org link inside the container
 		const buttonLink = buttonContainer.querySelector('a');
 		if (!buttonLink) {
-			return null;
+			continue;
 		}
 
 		const href = buttonLink.getAttribute('href');
 		if (!href) {
-			return null;
+			continue;
 		}
 
 		const options = optionsFromEdoUrl(href);
