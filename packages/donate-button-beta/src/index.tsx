@@ -1,6 +1,5 @@
 import {render} from 'preact';
-import EmbedButton from 'src/components/EmbedButton';
-import constructEveryUrl from 'src/helpers/construct-every-url';
+import EmbedButton from 'src/components/embed-button';
 import {
 	DonateButtonOptions,
 	EmbedButtonOptions
