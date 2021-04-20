@@ -2,7 +2,7 @@ import cxs from 'cxs';
 import constructEveryUrl from 'src/helpers/construct-every-url';
 import {EmbedButtonOptions} from 'src/helpers/options-types';
 
-cxs.prefix('edo-');
+cxs.prefix('edoBtn-');
 const buttonCss = cxs({
 	display: 'flex',
 	alignItems: 'center',
