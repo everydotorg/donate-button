@@ -72,12 +72,12 @@ function initButtons() {
 		// Search for an Every.org link inside the container
 		const buttonLink = buttonContainer.querySelector('a');
 		if (!buttonLink) {
-			return null;
+			continue;
 		}
 
 		const href = buttonLink.getAttribute('href');
 		if (!href) {
-			return null;
+			continue;
 		}
 
 		const options = optionsFromEdoUrl(href);
