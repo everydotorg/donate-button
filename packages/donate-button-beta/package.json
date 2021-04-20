@@ -1,6 +1,6 @@
 {
-  "name": "@everydotorg/donate-button",
-  "version": "0.2.2",
+  "name": "@everydotorg/donate-button-beta",
+  "version": "0.3.0",
   "description": "",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
@@ -10,13 +10,11 @@
     "tsc": "tsc",
     "test": "ava",
     "build": "preact build --no-prerender --clean  --no-sw",
-    "postbuild": "cp dist/donate-button/0.2/index.js dist/donate-button/0.2/donate-button.js",
+    "postbuild": "cp dist/donate-button/0.3/index.js dist/donate-button/0.3/donate-button.js",
     "serve": "preact serve",
     "dev": "preact watch -c ./preact.config.js --no-prerender --no-sw",
     "lint": "xo",
-    "lint:fix": "xo --fix",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "lint:fix": "xo --fix"
   },
   "keywords": [],
   "author": "P22 Studio",
@@ -32,25 +30,20 @@
     "@babel/plugin-transform-react-jsx": "^7.12.5",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-stage-1": "^7.8.3",
-    "@storybook/addon-actions": "^6.2.1",
-    "@storybook/addon-essentials": "^6.2.1",
-    "@storybook/addon-links": "^6.2.1",
-    "@storybook/preact": "^6.2.1",
+    "@babel/preset-typescript": "^7.13.0",
     "@testing-library/react": "^11.2.5",
+    "@types/cxs": "^6.2.1",
     "ava": "^3.15.0",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-loader": "^8.2.2",
     "babel-plugin-jsx-pragmatic": "^1.0.2",
     "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "core-js": "^3.10.0",
     "deepmerge": "^4.2.2",
     "eslint": "^7.14.0",
     "eslint-config-xo": "^0.34.0",
     "eslint-config-xo-react": "^0.23.0",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "html-webpack-plugin": "3.2.0",
     "identity-obj-proxy": "^3.0.0",
     "preact-cli": "3.0.3",
     "preact-render-to-string": "^5.1.12",
@@ -62,11 +55,10 @@
     "tsconfig-paths": "^3.9.0",
     "tsconfig-paths-webpack-plugin": "^3.3.0",
     "typescript": "^4.1.3",
-    "webpack-merge": "^5.7.3",
     "xo": "^0.37.1"
   },
   "dependencies": {
-    "preact": "^10.5.12",
-    "react-lib-adler32": "^1.0.3"
+    "cxs": "^6.2.0",
+    "preact": "^10.5.12"
   }
 }
