@@ -115,8 +115,7 @@ function initButtons() {
 
 			const Button = <EmbedButton {...options} />;
 
-			buttonContainer.innerHTML = ''; // Clear the container first
-			render(Button, buttonContainer);
+			render(Button, buttonContainer, buttonLink);
 			buttonContainer.setAttribute(INITIALIZED_ATTRIBUTE, '');
 		}
 	} finally {
