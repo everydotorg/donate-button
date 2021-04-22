@@ -58,6 +58,13 @@ function optionsFromEdoUrl(url: string): DonateButtonOptions | null {
 
 let initializingButtons = false;
 
+/**
+ * Helper function to debug donate button issues
+ */
+function log(...messages: unknown[]): void {
+	console.info('Every.org Donate Button:', ...messages);
+}
+
 const DONATE_BUTTON_CLASS = 'edo-donate-btn';
 const INITIALIZED_ATTRIBUTE = 'data-edo-init';
 function initButtons() {
@@ -75,22 +82,25 @@ function initButtons() {
 			// Search for an Every.org link inside the container
 			const buttonLink = buttonContainer.querySelector('a');
 			if (!buttonLink) {
+				log('no link in container', buttonContainer);
 				continue;
 			}
 
 			const href = buttonLink.getAttribute('href');
 			if (!href) {
+				log('link lacks href', buttonLink);
 				continue;
 			}
 
 			const options = optionsFromEdoUrl(href);
 			if (!options) {
+				log('could not extract options from link', buttonLink);
 				continue;
 			}
 
 			const Button = <EmbedButton {...options} />;
 
-			buttonContainer.innerHTML = '';
+			buttonContainer.innerHTML = ''; // Clear the container first
 			render(Button, buttonContainer);
 			buttonContainer.setAttribute(INITIALIZED_ATTRIBUTE, '');
 		}
