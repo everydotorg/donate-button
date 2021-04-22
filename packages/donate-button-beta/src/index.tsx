@@ -8,16 +8,25 @@ import {loadFonts} from 'src/load-fonts';
 
 interface CreateButtonInSelectorProps extends EmbedButtonOptions {
 	/**
-	 * Where to render the button in
+	 * Element to render button in; takes precedence over selector
 	 */
-	selector: string;
+	element?: Element;
+	/**
+	 * Selector to render button in
+	 */
+	selector?: string;
 }
 
 const createButtonInSelector = ({
+	element,
 	selector,
 	...options
 }: CreateButtonInSelectorProps) => {
-	const container = document.querySelector(selector);
+	if (!element && !selector) {
+		log('createButton():', 'must provide element or selector');
+	}
+
+	const container = element || (selector && document.querySelector(selector));
 	if (!container) {
 		return;
 	}
