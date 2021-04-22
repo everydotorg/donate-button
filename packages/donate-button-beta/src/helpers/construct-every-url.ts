@@ -13,7 +13,8 @@ function constructEveryUrl({
 	const parameters = Object.entries({
 		utm_campaign: 'donate-button',
 		utm_source: nonprofitSlug,
-		utm_medium: UTM_MEDIUM
+		utm_medium: UTM_MEDIUM,
+		no_exit: 1
 	})
 		.filter(([_, value]) => Boolean(value))
 		.map((entry) => entry.map((part) => encodeURIComponent(part)).join('='))
