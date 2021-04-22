@@ -49,6 +49,7 @@ const EmbedButton = ({
 	padding,
 	className,
 	onClick,
+	target = '_blank',
 	...donateOptions
 }: EmbedButtonOptions) => {
 	const url = constructEveryUrl(donateOptions);
@@ -63,6 +64,7 @@ const EmbedButton = ({
 				padding
 			}}
 			className={[buttonCss, className].filter(Boolean).join(' ')}
+			target={target}
 			onClick={
 				onClick
 					? (event) => {
