@@ -14,12 +14,24 @@
   <body
     style="background-size: cover; background-repeat: no-repeat; overflow: auto"
   >
-    <h2>Manually setup button</h2>
-    <div id="button-root" />
+    <h2>Manually setup button with selector</h2>
+    <div id="create-button-selector" />
     <script>
       window.addEventListener("load", function() {
         everyDotOrgDonateButton.createButton({
-          selector: "#button-root",
+          selector: "#create-button-selector",
+          nonprofitSlug: "everydotorg",
+          crypto: true
+        });
+      })
+    </script>
+
+    <h2>Manually setup button with element</h2>
+    <div id="create-button-element" />
+    <script>
+      window.addEventListener("load", function() {
+        everyDotOrgDonateButton.createButton({
+          element: document.getElementById("create-button-element"),
           nonprofitSlug: "everydotorg",
           crypto: true
         });
