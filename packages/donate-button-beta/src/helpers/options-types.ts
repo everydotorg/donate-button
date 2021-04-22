@@ -28,6 +28,7 @@ export interface EmbedButtonOptions extends DonateButtonOptions {
 	readonly borderRadius?: string;
 	readonly fontSize?: string;
 	readonly padding?: string;
+	readonly target?: string;
 	/**
 	 * If not present, just a link to hrefUrl
 	 */
