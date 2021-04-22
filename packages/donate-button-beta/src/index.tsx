@@ -59,7 +59,7 @@ function optionsFromEdoUrl(url: string): DonateButtonOptions | null {
 let initializingButtons = false;
 
 const DONATE_BUTTON_CLASS = 'edo-donate-btn';
-const INITIALIZED_ATTRIBUTE = 'data-init';
+const INITIALIZED_ATTRIBUTE = 'data-edo-init';
 function initButtons() {
 	if (initializingButtons) {
 		// Don't initialize multiple times at once to avoid race conditions
