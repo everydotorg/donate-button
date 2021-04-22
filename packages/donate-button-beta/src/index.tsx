@@ -1,7 +1,5 @@
 import {render} from 'preact';
-import EmbedButton, {
-	DONATE_BTN_DATA_ATTRIBUTE
-} from 'src/components/embed-button';
+import EmbedButton from 'src/components/embed-button';
 import {
 	DonateButtonOptions,
 	EmbedButtonOptions
@@ -58,37 +56,46 @@ function optionsFromEdoUrl(url: string): DonateButtonOptions | null {
 	}
 }
 
-const EDO_CLASS_NAME = 'edo-donate-btn';
+let initializingButtons = false;
+
+const DONATE_BUTTON_CLASS = 'edo-donate-btn';
+const INITIALIZED_ATTRIBUTE = 'data-init';
 function initButtons() {
-	for (const buttonContainer of document.querySelectorAll(
-		`.${EDO_CLASS_NAME}`
-	)) {
-		if (buttonContainer.querySelector(`[${DONATE_BTN_DATA_ATTRIBUTE}]`)) {
-			// A prior run of `initButtons()` already included this donate button,
-			// refusing to replace it
-			continue;
+	if (initializingButtons) {
+		// Don't initialize multiple times at once to avoid race conditions
+		return;
+	}
+
+	initializingButtons = true;
+	try {
+		for (const buttonContainer of document.querySelectorAll(
+			// Don't double-initialize an initialized container
+			`.${DONATE_BUTTON_CLASS}:not([${INITIALIZED_ATTRIBUTE}])`
+		)) {
+			// Search for an Every.org link inside the container
+			const buttonLink = buttonContainer.querySelector('a');
+			if (!buttonLink) {
+				continue;
+			}
+
+			const href = buttonLink.getAttribute('href');
+			if (!href) {
+				continue;
+			}
+
+			const options = optionsFromEdoUrl(href);
+			if (!options) {
+				continue;
+			}
+
+			const Button = <EmbedButton {...options} />;
+
+			buttonContainer.innerHTML = '';
+			render(Button, buttonContainer);
+			buttonContainer.setAttribute(INITIALIZED_ATTRIBUTE, '');
 		}
-
-		// Search for an Every.org link inside the container
-		const buttonLink = buttonContainer.querySelector('a');
-		if (!buttonLink) {
-			continue;
-		}
-
-		const href = buttonLink.getAttribute('href');
-		if (!href) {
-			continue;
-		}
-
-		const options = optionsFromEdoUrl(href);
-		if (!options) {
-			continue;
-		}
-
-		const Button = <EmbedButton {...options} />;
-
-		buttonContainer.innerHTML = '';
-		render(Button, buttonContainer);
+	} finally {
+		initializingButtons = false;
 	}
 }
 
