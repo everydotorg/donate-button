@@ -36,8 +36,9 @@
   color: var(--color-primary);
   justify-content: center;
   align-items: center;
-  font-family: "Basis Grotesque Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell,
-    "Helvetica Neue", Roboto, sans-serif;
+  font-family: "Basis Grotesque Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Roboto,
+    sans-serif;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -128,12 +129,12 @@
 }
 
 .t-error {
-  font-size: .75rem;
+  font-size: 0.75rem;
   line-height: 1;
-  color: #D95C35;
+  color: #d95c35;
 }
 
-@media only screen and (max-width: 64em), (max-height: 46.3125em)  {
+@media only screen and (max-width: 64em), (max-height: 46.3125em) {
   .t-heading-primary {
     font-size: 1.5rem;
     line-height: 1.167;
@@ -176,7 +177,7 @@
 .widget--split {
   width: 888px;
   height: max-content;
-  max-height: 95%;
+  max-height: 95vh;
   display: grid;
 
   grid-template-columns: repeat(2, 50%);
@@ -206,7 +207,7 @@
 } */
 
 /* 1024px */
-@media only screen and (max-width: 64em), (max-height: 46.3125em)  {
+@media only screen and (max-width: 64em), (max-height: 46.3125em) {
   .widget--split {
     width: 600px;
   }
@@ -243,7 +244,6 @@
 }
 
 .right-panel {
-  height: 100%;
   display: grid;
 
   position: relative;
@@ -370,5 +370,5 @@
 
 .u-center-font {
   /* BasisGrotesque-specific fudge-factor to visually center text */
-  transform: translateY(0.07em)
+  transform: translateY(0.07em);
 }
