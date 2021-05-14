@@ -14,7 +14,6 @@
 // 	@media (min-width: 1800px) { @content; }
 //   }
 
-
 export enum BREAKPOINTS {
 	PhoneOnly = '@media only screen and (max-width: 37.44em)',
 	TabletUp = '@media only screen and (min-width: 37.5em)',

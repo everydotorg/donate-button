@@ -26,11 +26,9 @@ const wrapperCss = cxs({
 });
 
 const widgetCss = cxs({
-
-
 	background: 'white',
 	overflow: 'hidden',
-	
+
 	display: 'grid',
 	gridTemplateRows: 'max-content 1fr max-content',
 	width: '100vw',
@@ -43,7 +41,7 @@ const widgetCss = cxs({
 		gridTemplateRows: '1fr max-content max-content',
 		height: '70vh',
 		width: '60vw',
-		borderRadius: '24px',
+		borderRadius: '24px'
 	}
 });
 
@@ -54,7 +52,7 @@ const formCss = cxs({
 	borderRight: 'none',
 
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
-		borderRight: `1px solid ${COLORS.LightGray}`,
+		borderRight: `1px solid ${COLORS.LightGray}`
 	}
 });
 
@@ -66,7 +64,7 @@ const nonProfitHeaderCss = cxs({
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
 		height: 'auto',
 		gridColumn: '2 / 3',
-		gridRow: '1 / 2',
+		gridRow: '1 / 2'
 	}
 });
 
@@ -81,7 +79,7 @@ const ctaCss = cxs({
 
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
 		gridColumn: '1 / 2',
-		gridRow: '3 / 4',
+		gridRow: '3 / 4'
 	}
 });
 
