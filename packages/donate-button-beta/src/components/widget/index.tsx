@@ -1,6 +1,7 @@
 import cxs from 'cxs';
 import {useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
+import {CountryCard} from 'src/components/widget/CountryCard';
 import {FormControl} from 'src/components/widget/FormControl';
 import {Frequency} from 'src/components/widget/Frequency';
 import Info from 'src/components/widget/Info';
@@ -161,6 +162,9 @@ const Widget = ({show}: {show: boolean}) => {
 											value={donationAmount}
 											setValue={setDonationAmount}
 										/>
+									</FormControl>
+									<FormControl label="Country for tax deduction">
+										<CountryCard />
 									</FormControl>
 								</div>
 								<NonprofitInfo classes={[nonProfitInfoCss]} />
