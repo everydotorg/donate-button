@@ -1,4 +1,5 @@
 import cxs from 'cxs';
+import {ComponentChildren} from 'preact';
 import {COLORS} from 'src/components/widget/theme/colors.enum';
 
 const labelCss = cxs({
@@ -11,7 +12,7 @@ const labelCss = cxs({
 
 interface FormControlProps {
 	label: string;
-	children: React.ReactNode;
+	children: ComponentChildren;
 }
 export const FormControl = ({label, children}: FormControlProps) => {
 	return (

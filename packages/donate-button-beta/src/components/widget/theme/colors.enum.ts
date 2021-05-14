@@ -2,6 +2,7 @@ export enum COLORS {
 	Primary = '#00A37F',
 	LightGray = '#EAEDED',
 	Gray = '#f3f6f6',
+	DarkGray = '#868A8A',
 	Text = '#2E3434',
 	TextGray = '#868383',
 	TextOpaque = 'rgba(46, 52, 52, 0.6)',
