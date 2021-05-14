@@ -1,9 +1,13 @@
 import cxs from 'cxs';
+import {useState} from 'preact/hooks';
+import {FormControl} from 'src/components/widget/FormControl';
 import {Frequency} from 'src/components/widget/Frequency';
+import {Input} from 'src/components/widget/Input';
 import {NonprofitHeader} from 'src/components/widget/NonprofitHeader';
 import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints.enum';
 import {COLORS} from 'src/components/widget/theme/colors.enum';
+import {Currency} from 'src/components/widget/types/currency';
 
 cxs.prefix('edoWidget-');
 
@@ -51,6 +55,10 @@ const formCss = cxs({
 	padding: '1.5rem',
 	borderRight: 'none',
 
+	display: 'grid',
+	gridTemplateColumns: '1fr',
+	gridAutoRows: 'max-content',
+	rowGap: '2rem',
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
 		borderRight: `1px solid ${COLORS.LightGray}`
 	}
@@ -97,12 +105,25 @@ const scrollableContent = cxs({
 });
 
 const Widget = ({show}: {show: boolean}) => {
+	const [donationAmount, setDonationAmount] = useState<number>(100);
+	const [currency, setCurrency] = useState<Currency>('GBP');
+
 	return show ? (
 		<div className={wrapperCss}>
 			<form className={widgetCss}>
 				<div className={scrollableContent}>
 					<div className={formCss}>
-						<Frequency />
+						<FormControl label="Frequency">
+							<Frequency />
+						</FormControl>
+						<FormControl label="Amount">
+							<Input
+								selectedCurrency={currency}
+								setCurrency={setCurrency}
+								value={donationAmount}
+								setValue={setDonationAmount}
+							/>
+						</FormControl>
 					</div>
 					<NonprofitInfo classes={[nonProfitInfoCss]} />
 				</div>

@@ -42,14 +42,6 @@ const inputCss = cxs({
 	display: 'none'
 });
 
-const titleCss = cxs({
-	margin: 0,
-	fontSize: '1rem',
-	lineHeight: 1.5,
-	marginBottom: '0.5rem',
-	color: COLORS.Text
-});
-
 export const Frequency = () => {
 	const [selected, setSelected] = useState('');
 
@@ -65,40 +57,37 @@ export const Frequency = () => {
 	);
 
 	return (
-		<Fragment>
-			<p className={titleCss}>Frequency</p>
-			<div className={frequencyContainerCss}>
-				<label
-					className={leftLabelClasses.concat(labelSeparatorClass).join(' ')}
-					htmlFor="monthly"
-					onClick={() => {
-						setSelected('monthly');
-					}}
-				>
-					<input
-						className={inputCss}
-						type="radio"
-						name="frequency"
-						value="monthly"
-					/>
-					Monthly
-				</label>
-				<label
-					className={rightLabelClasses.join(' ')}
-					htmlFor="one-time"
-					onClick={() => {
-						setSelected('one-time');
-					}}
-				>
-					<input
-						className={inputCss}
-						type="radio"
-						name="frequency"
-						value="one-time"
-					/>
-					One-time
-				</label>
-			</div>
-		</Fragment>
+		<div className={frequencyContainerCss}>
+			<label
+				className={leftLabelClasses.concat(labelSeparatorClass).join(' ')}
+				htmlFor="monthly"
+				onClick={() => {
+					setSelected('monthly');
+				}}
+			>
+				<input
+					className={inputCss}
+					type="radio"
+					name="frequency"
+					value="monthly"
+				/>
+				Monthly
+			</label>
+			<label
+				className={rightLabelClasses.join(' ')}
+				htmlFor="one-time"
+				onClick={() => {
+					setSelected('one-time');
+				}}
+			>
+				<input
+					className={inputCss}
+					type="radio"
+					name="frequency"
+					value="one-time"
+				/>
+				One-time
+			</label>
+		</div>
 	);
 };
