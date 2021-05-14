@@ -1,5 +1,6 @@
 import {render} from 'preact';
 import EmbedButton from 'src/components/embed-button';
+import Widget from 'src/components/widget';
 import {
 	DonateButtonOptions,
 	EmbedButtonOptions
@@ -120,9 +121,37 @@ function initButtons() {
 	}
 }
 
+let mountPoint: HTMLElement;
+const options = {
+	show: false
+};
+const showWidget = () => {
+	Object.assign(options, {show: true});
+
+	renderWidget();
+};
+
+const mount = () => {
+	// We don't attach directly to body because is hiding the elements inside the body for some reason.
+	const widgetWrapper = document.createElement('div');
+	document.body.append(widgetWrapper);
+
+	mountPoint = document.createElement('div');
+	widgetWrapper.append(mountPoint);
+};
+
+const renderWidget = () => {
+	if (!mountPoint) {
+		mount();
+	}
+
+	render(<Widget {...options} />, mountPoint);
+};
+
 interface GlobalExport {
 	createButton: typeof createButtonInSelector;
 	initButtons: typeof initButtons;
+	showWidget: typeof showWidget;
 }
 
 declare const window: Window & {
@@ -131,5 +160,6 @@ declare const window: Window & {
 
 window.everyDotOrgDonateButton = {
 	createButton: createButtonInSelector,
-	initButtons
+	initButtons,
+	showWidget
 };
