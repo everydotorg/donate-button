@@ -5,9 +5,12 @@ import {Frequency} from 'src/components/widget/Frequency';
 import {Input} from 'src/components/widget/Input';
 import {NonprofitHeader} from 'src/components/widget/NonprofitHeader';
 import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
+import {SubmitButton} from 'src/components/widget/SubmitButton';
+import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints.enum';
 import {COLORS} from 'src/components/widget/theme/colors.enum';
 import {Currency} from 'src/components/widget/types/currency';
+import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
 
 cxs.prefix('edoWidget-');
 
@@ -84,10 +87,12 @@ const nonProfitInfoCss = cxs({
 const ctaCss = cxs({
 	gridColumn: '1 / -1',
 	gridRow: '3 / 4',
-
+	padding: '0 0.5rem 0.5rem 0.5rem',
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
 		gridColumn: '1 / 2',
-		gridRow: '3 / 4'
+		gridRow: '3 / 4',
+		borderRight: `1px solid ${COLORS.LightGray}`,
+		padding: '1.5rem'
 	}
 });
 
@@ -104,9 +109,25 @@ const scrollableContent = cxs({
 	}
 });
 
+const getSubmitButtonText = (
+	donationAmount: number,
+	currency: Currency,
+	frequency: DonationFrequency
+) => {
+	if (frequency === '') {
+		return 'Select frequency';
+	}
+
+	const frequencyFormatted = frequency === 'monthly' ? 'Monthly' : 'One time';
+	const currencySymbol = supportedCurrencies[currency];
+
+	return `Donate ${currencySymbol}${donationAmount} ${frequencyFormatted}`;
+};
+
 const Widget = ({show}: {show: boolean}) => {
 	const [donationAmount, setDonationAmount] = useState<number>(100);
 	const [currency, setCurrency] = useState<Currency>('GBP');
+	const [frequency, setFrequency] = useState<DonationFrequency>('');
 
 	return show ? (
 		<div className={wrapperCss}>
@@ -114,7 +135,7 @@ const Widget = ({show}: {show: boolean}) => {
 				<div className={scrollableContent}>
 					<div className={formCss}>
 						<FormControl label="Frequency">
-							<Frequency />
+							<Frequency frequency={frequency} setFrequency={setFrequency} />
 						</FormControl>
 						<FormControl label="Amount">
 							<Input
@@ -127,9 +148,11 @@ const Widget = ({show}: {show: boolean}) => {
 					</div>
 					<NonprofitInfo classes={[nonProfitInfoCss]} />
 				</div>
-				<button className={ctaCss} type="submit">
-					Donate
-				</button>
+				<div className={ctaCss}>
+					<SubmitButton disabled={frequency === ''}>
+						{getSubmitButtonText(donationAmount, currency, frequency)}
+					</SubmitButton>
+				</div>
 				<NonprofitHeader classes={[nonProfitHeaderCss]} />
 			</form>
 		</div>

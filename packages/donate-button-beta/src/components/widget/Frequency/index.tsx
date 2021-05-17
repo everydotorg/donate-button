@@ -1,7 +1,8 @@
 import cxs from 'cxs';
-import {useState} from 'preact/hooks';
+import {StateUpdater, useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {COLORS} from 'src/components/widget/theme/colors.enum';
+import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
 
 const frequencyContainerCss = cxs({
 	display: 'flex'
@@ -42,18 +43,20 @@ const inputCss = cxs({
 	display: 'none'
 });
 
-export const Frequency = () => {
-	const [selected, setSelected] = useState('');
-
+interface FrequencyProps {
+	frequency: DonationFrequency;
+	setFrequency: StateUpdater<DonationFrequency>;
+}
+export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 	const labelSeparatorClass =
-		selected === 'monthly' || selected === 'one-time'
+		frequency === 'monthly' || frequency === 'one-time'
 			? [separatorBorderSelectedCss]
 			: [];
 	const leftLabelClasses = [labelCss, labelLeftCss].concat(
-		selected === 'monthly' ? [labelSelectedCss] : []
+		frequency === 'monthly' ? [labelSelectedCss] : []
 	);
 	const rightLabelClasses = [labelCss, labelRightCss].concat(
-		selected === 'one-time' ? [labelSelectedCss] : []
+		frequency === 'one-time' ? [labelSelectedCss] : []
 	);
 
 	return (
@@ -62,7 +65,7 @@ export const Frequency = () => {
 				className={leftLabelClasses.concat(labelSeparatorClass).join(' ')}
 				htmlFor="monthly"
 				onClick={() => {
-					setSelected('monthly');
+					setFrequency('monthly');
 				}}
 			>
 				<input
@@ -77,7 +80,7 @@ export const Frequency = () => {
 				className={rightLabelClasses.join(' ')}
 				htmlFor="one-time"
 				onClick={() => {
-					setSelected('one-time');
+					setFrequency('one-time');
 				}}
 			>
 				<input
