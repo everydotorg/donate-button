@@ -1,9 +1,11 @@
 import cxs from 'cxs';
-import {StateUpdater} from 'preact/hooks';
+import {StateUpdater, useRef} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
 import chevronDown from 'src/assets/chevron-down.svg';
+import { CurrencySuggestion } from 'src/components/widget/CurrencySuggestion';
 import {Link} from 'src/components/widget/Link';
+import {Popover} from 'src/components/widget/Popover';
 import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
 import {COLORS} from 'src/components/widget/theme/colors.enum';
 import {Currency} from 'src/components/widget/types/currency';
@@ -23,7 +25,6 @@ const inputContainerCss = cxs({
 	borderRadius: '8px',
 	border: '1px solid',
 	borderColor: COLORS.LightGray,
-	overflow: 'hidden',
 	':focus': {
 		outline: 'none'
 	},
@@ -135,6 +136,7 @@ export const Input = ({
 	setCurrency,
 	...otherProps
 }: InputProps) => {
+	const inputContainerRef = useRef<HTMLDivElement>(null);
 	const inputContainerClasses = [inputContainerCss].concat(
 		error ? [inputErrorCss] : []
 	);
@@ -143,7 +145,8 @@ export const Input = ({
 
 	return (
 		<Fragment>
-			<div className={inputContainerClasses.join(' ')}>
+			<div ref={inputContainerRef} className={inputContainerClasses.join(' ')}>
+				<CurrencySuggestion ref={inputContainerRef} />
 				<span className={inputPrefix}>
 					{supportedCurrencies[selectedCurrency]}
 				</span>

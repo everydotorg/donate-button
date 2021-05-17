@@ -36,9 +36,13 @@ const Arrow = ({left}: {left: string}) => {
 
 interface PopoverProps {
 	children: ComponentChildren;
+	arrowPosition?: string;
 }
 export const Popover = forwardRef(
-	({children}: PopoverProps, ref: Ref<HTMLDivElement>) => {
+	(
+		{children, arrowPosition = '25%'}: PopoverProps,
+		ref: Ref<HTMLDivElement>
+	) => {
 		const [top, setTop] = useState('0');
 
 		useEffect(() => {
@@ -51,7 +55,7 @@ export const Popover = forwardRef(
 
 		return (
 			<div className={containerCss} style={{top}}>
-				<Arrow left="25%" />
+				<Arrow left={arrowPosition} />
 				{children}
 			</div>
 		);
