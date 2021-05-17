@@ -50,7 +50,7 @@ interface FrequencyProps {
 }
 export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 	const frequencyPopover = useRef<HTMLDivElement>(null);
-	const [showPopover, setShowPopover] = useState(frequency === '');
+	const [showPopover, setShowPopover] = useState(true);
 
 	const labelSeparatorClass =
 		frequency === 'monthly' || frequency === 'one-time'
