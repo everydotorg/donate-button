@@ -1,7 +1,9 @@
 import cxs from 'cxs';
 import {useState} from 'preact/hooks';
+import {Fragment} from 'preact/jsx-runtime';
 import {FormControl} from 'src/components/widget/FormControl';
 import {Frequency} from 'src/components/widget/Frequency';
+import Info from 'src/components/widget/Info';
 import {Input} from 'src/components/widget/Input';
 import {NonprofitHeader} from 'src/components/widget/NonprofitHeader';
 import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
@@ -11,6 +13,8 @@ import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints.enum';
 import {COLORS} from 'src/components/widget/theme/colors.enum';
 import {Currency} from 'src/components/widget/types/currency';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
+import ShowFormContext from 'src/context/show-form-context';
+import {Routes} from 'src/helpers/options-types';
 
 cxs.prefix('edoWidget-');
 
@@ -125,37 +129,55 @@ const getSubmitButtonText = (
 };
 
 const Widget = ({show}: {show: boolean}) => {
+	const [route, setRoute] = useState<Routes>('donation-form');
+
 	const [donationAmount, setDonationAmount] = useState<number>(100);
 	const [currency, setCurrency] = useState<Currency>('GBP');
 	const [frequency, setFrequency] = useState<DonationFrequency>('');
 
 	return show ? (
-		<div className={wrapperCss}>
-			<form className={widgetCss}>
-				<div className={scrollableContent}>
-					<div className={formCss}>
-						<FormControl label="Frequency">
-							<Frequency frequency={frequency} setFrequency={setFrequency} />
-						</FormControl>
-						<FormControl label="Amount">
-							<Input
-								selectedCurrency={currency}
-								setCurrency={setCurrency}
-								value={donationAmount}
-								setValue={setDonationAmount}
-							/>
-						</FormControl>
-					</div>
-					<NonprofitInfo classes={[nonProfitInfoCss]} />
-				</div>
-				<div className={ctaCss}>
-					<SubmitButton disabled={frequency === ''}>
-						{getSubmitButtonText(donationAmount, currency, frequency)}
-					</SubmitButton>
-				</div>
-				<NonprofitHeader classes={[nonProfitHeaderCss]} />
-			</form>
-		</div>
+		<ShowFormContext.Provider
+			value={{
+				setRoute,
+				route
+			}}
+		>
+			<div className={wrapperCss}>
+				<form className={widgetCss}>
+					{route === 'donation-form' ? (
+						<Fragment>
+							<div className={scrollableContent}>
+								<div className={formCss}>
+									<FormControl label="Frequency">
+										<Frequency
+											frequency={frequency}
+											setFrequency={setFrequency}
+										/>
+									</FormControl>
+									<FormControl label="Amount">
+										<Input
+											selectedCurrency={currency}
+											setCurrency={setCurrency}
+											value={donationAmount}
+											setValue={setDonationAmount}
+										/>
+									</FormControl>
+								</div>
+								<NonprofitInfo classes={[nonProfitInfoCss]} />
+							</div>
+							<div className={ctaCss}>
+								<SubmitButton disabled={frequency === ''}>
+									{getSubmitButtonText(donationAmount, currency, frequency)}
+								</SubmitButton>
+							</div>
+							<NonprofitHeader classes={[nonProfitHeaderCss]} />
+						</Fragment>
+					) : (
+						<Info />
+					)}
+				</form>
+			</div>
+		</ShowFormContext.Provider>
 	) : null;
 };
 

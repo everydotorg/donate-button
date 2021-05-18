@@ -1,5 +1,6 @@
 import cxs from 'cxs';
 import {COLORS} from 'src/components/widget/theme/colors.enum';
+import useShowForm from 'src/hooks/use-show-form';
 
 const text = `We are a nonprofit and rely on donations and grants to keep us going.`;
 const body = `Reader donations are essential to our work, providing us with the stability and independence we need, so we can focus on showing the data and evidence we think everyone needs to know.`;
@@ -44,6 +45,8 @@ type NonprofitInfo = {
 	classes: string[];
 };
 export const NonprofitInfo = ({classes}: NonprofitInfo) => {
+	const {setRoute} = useShowForm();
+
 	return (
 		<div className={[containerCss].concat(classes).join(' ')}>
 			<p>{text}</p>
@@ -53,8 +56,20 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 				<span>{thanks}</span>
 			</p>
 			<div className={actionsContainer}>
-				<p>Donations Policy</p>
-				<p>FAQ</p>
+				<p
+					onClick={() => {
+						setRoute('donations-policy');
+					}}
+				>
+					Donations Policy
+				</p>
+				<p
+					onClick={() => {
+						setRoute('faq');
+					}}
+				>
+					FAQ
+				</p>
 			</div>
 		</div>
 	);
