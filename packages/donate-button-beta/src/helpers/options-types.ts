@@ -53,5 +53,3 @@ export function mergeOptionsWithDefault(
 		DEEP_MERGE_OPTIONS
 	);
 }
-
-export type Routes = 'donation-form' | 'faq' | 'donations-policy';

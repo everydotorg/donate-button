@@ -1,8 +1,9 @@
 import cxs from 'cxs';
+import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {smallText} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
-import useShowForm from 'src/hooks/use-show-form';
+import {Routes} from 'src/components/widget/types/routes';
 
 const text = `We are a nonprofit and rely on donations and grants to keep us going.`;
 const body = `Reader donations are essential to our work, providing us with the stability and independence we need, so we can focus on showing the data and evidence we think everyone needs to know.`;
@@ -45,7 +46,7 @@ type NonprofitInfo = {
 	classes: string[];
 };
 export const NonprofitInfo = ({classes}: NonprofitInfo) => {
-	const {setRoute} = useShowForm();
+	const {setRoute} = useWidgetContext();
 
 	return (
 		<div className={[containerCss].concat(classes).join(' ')}>
@@ -58,14 +59,14 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 			<div className={actionsContainer}>
 				<p
 					onClick={() => {
-						setRoute('donations-policy');
+						setRoute(Routes.DonationsPolicy);
 					}}
 				>
 					Donations Policy
 				</p>
 				<p
 					onClick={() => {
-						setRoute('faq');
+						setRoute(Routes.FAQ);
 					}}
 				>
 					FAQ

@@ -35,5 +35,6 @@ export enum Spacing {
 	Inline_S = '0 0.75rem 0 0',
 	Inline_M = '0 1rem 0 0',
 	Inline_L = '0 1.25rem 0 0',
-	Inline_XL = '0 1.5rem 0 0'
+	Inline_XL = '0 1.5rem 0 0',
+	Inline_XXL = '0 1.5rem 0 0'
 }

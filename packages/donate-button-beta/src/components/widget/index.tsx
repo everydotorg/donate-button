@@ -10,14 +10,14 @@ import {NonprofitHeader} from 'src/components/widget/NonprofitHeader';
 import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
 import {SubmitButton} from 'src/components/widget/SubmitButton';
 import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
+import {WidgetContext} from 'src/components/widget/context/widget-context';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {FontFamily} from 'src/components/widget/theme/font-family';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {Currency} from 'src/components/widget/types/currency';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
-import ShowFormContext from 'src/context/show-form-context';
-import {Routes} from 'src/helpers/options-types';
+import {Routes} from 'src/components/widget/types/routes';
 
 cxs.prefix('edoWidget-');
 
@@ -130,7 +130,7 @@ const getSubmitButtonText = (
 };
 
 const Widget = ({show}: {show: boolean}) => {
-	const [route, setRoute] = useState<Routes>('donation-form');
+	const [route, setRoute] = useState<Routes>(Routes.DonationForm);
 
 	const [donationAmount, setDonationAmount] = useState<number>(100);
 	const [currency, setCurrency] = useState<Currency>('GBP');
@@ -139,7 +139,7 @@ const Widget = ({show}: {show: boolean}) => {
 	);
 
 	return show ? (
-		<ShowFormContext.Provider
+		<WidgetContext.Provider
 			value={{
 				setRoute,
 				route
@@ -147,7 +147,7 @@ const Widget = ({show}: {show: boolean}) => {
 		>
 			<div className={wrapperCss}>
 				<form className={widgetCss}>
-					{route === 'donation-form' ? (
+					{route === Routes.DonationForm ? (
 						<Fragment>
 							<div className={scrollableContent}>
 								<div className={formCss}>
@@ -185,7 +185,7 @@ const Widget = ({show}: {show: boolean}) => {
 					)}
 				</form>
 			</div>
-		</ShowFormContext.Provider>
+		</WidgetContext.Provider>
 	) : null;
 };
 

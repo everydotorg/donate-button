@@ -1,14 +1,17 @@
 import cxs from 'cxs';
 import {Fragment} from 'preact/jsx-runtime';
 import LeftArrow from 'src/assets/left-arrow.svg';
-import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints.enum';
-import {COLORS} from 'src/components/widget/theme/colors.enum';
-import useShowForm from 'src/hooks/use-show-form';
+import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
+import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
+import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
+import {COLORS} from 'src/components/widget/theme/colors';
+import {Spacing} from 'src/components/widget/theme/spacing';
+import {Routes} from 'src/components/widget/types/routes';
 
 const header = cxs({
 	display: 'flex',
-	padding: '1rem 1.5rem',
-	borderBottom: `1px solid ${COLORS.LightGray}`,
+	padding: Spacing.InsetSquish_S,
+	borderBottom: getColoredBorder(Borders.Normal, COLORS.LightGray),
 
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
 		border: 'none'
@@ -16,9 +19,9 @@ const header = cxs({
 });
 
 const returnButton = cxs({
-	padding: 0,
-	margin: '0 2rem 0 0',
-	backgroundColor: 'transparent',
+	padding: Spacing.Empty,
+	margin: Spacing.Inline_XXL,
+	backgroundColor: COLORS.Transparent,
 	border: 'none',
 	outline: 'none',
 	cursor: 'pointer'
@@ -27,10 +30,10 @@ const returnButton = cxs({
 const pageList = cxs({
 	display: 'flex',
 	listStyleType: 'none',
-	padding: 0,
-	margin: 0,
+	padding: Spacing.Empty,
+	margin: Spacing.Empty,
 	'& > *:not(:last-child)': {
-		marginRight: '2rem'
+		marginRight: Spacing.XXL
 	}
 });
 
@@ -109,7 +112,7 @@ const PrivacyPolicy = () => {
 };
 
 const Info = () => {
-	const {route, setRoute} = useShowForm();
+	const {route, setRoute} = useWidgetContext();
 
 	return (
 		<div className={container}>
@@ -118,7 +121,7 @@ const Info = () => {
 					type="button"
 					className={returnButton}
 					onClick={() => {
-						setRoute('donation-form');
+						setRoute(Routes.DonationForm);
 					}}
 				>
 					<img src={LeftArrow} alt="Back button" />
@@ -126,20 +129,20 @@ const Info = () => {
 				<ul className={pageList}>
 					<li
 						className={[pageItem]
-							.concat(route === 'donations-policy' ? pageSelected : '')
+							.concat(route === Routes.DonationsPolicy ? pageSelected : '')
 							.join(' ')}
 						onClick={() => {
-							setRoute('donations-policy');
+							setRoute(Routes.DonationsPolicy);
 						}}
 					>
 						Donations Policy
 					</li>
 					<li
 						className={[pageItem]
-							.concat(route === 'faq' ? pageSelected : '')
+							.concat(route === Routes.FAQ ? pageSelected : '')
 							.join(' ')}
 						onClick={() => {
-							setRoute('faq');
+							setRoute(Routes.FAQ);
 						}}
 					>
 						FAQ
@@ -147,7 +150,7 @@ const Info = () => {
 				</ul>
 			</div>
 			<div className={content}>
-				{route === 'faq' ? <Faq /> : <PrivacyPolicy />}
+				{route === Routes.FAQ ? <Faq /> : <PrivacyPolicy />}
 			</div>
 		</div>
 	);
