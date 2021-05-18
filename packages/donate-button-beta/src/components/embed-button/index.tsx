@@ -1,4 +1,5 @@
 import cxs from 'cxs';
+import {FontFamily} from 'src/components/widget/theme/font-family';
 import constructEveryUrl from 'src/helpers/construct-every-url';
 import {EmbedButtonOptions} from 'src/helpers/options-types';
 
@@ -9,9 +10,7 @@ const buttonCss = cxs({
 	width: 'max-content',
 	border: 'none',
 	outline: 'none',
-	fontFamily: `'Basis Grotesque Pro', -apple-system, BlinkMacSystemFont,
-		'Segoe UI', Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Roboto,
-		sans-serif`,
+	fontFamily: FontFamily.BasisGrotesque,
 	fontWeight: 500,
 	lineHeight: 1,
 	cursor: 'pointer',

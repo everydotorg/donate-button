@@ -1,24 +1,27 @@
 import cxs from 'cxs';
 import {ComponentChildren} from 'preact';
-import {COLORS} from 'src/components/widget/theme/colors.enum';
+import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
+import {COLORS} from 'src/components/widget/theme/colors';
+import {linkText} from 'src/components/widget/theme/font-sizes';
+import {Radii} from 'src/components/widget/theme/radii';
+import {Spacing} from 'src/components/widget/theme/spacing';
 
 const btnCss = cxs({
-	border: '1px solid #fff',
+	...linkText,
+	border: getColoredBorder(Borders.Normal, COLORS.White),
 	outline: 'none',
 	width: '100%',
 
 	fontFamily: 'inherit',
-	fontSize: '1rem',
 	fontWeight: 500,
-	lineHeight: 1,
 
 	cursor: 'pointer',
-	borderRadius: '100px',
-	color: 'white',
-	padding: '1.25rem 0',
+	borderRadius: Radii.Big,
+	color: COLORS.White,
+	padding: `${Spacing.L} ${Spacing.Empty}`,
 	backgroundColor: COLORS.Primary,
 
-	transition: 'all .2s',
+	transition: 'backgroundColor .2s',
 	':hover': {
 		backgroundColor: 'rgb(0, 124, 97)'
 	},

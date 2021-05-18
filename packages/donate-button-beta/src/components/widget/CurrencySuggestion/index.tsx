@@ -2,19 +2,21 @@ import cxs from 'cxs';
 import {Ref} from 'preact';
 import {forwardRef} from 'preact/compat';
 import {Popover} from 'src/components/widget/Popover';
-import {COLORS} from 'src/components/widget/theme/colors.enum';
+import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
+import {COLORS} from 'src/components/widget/theme/colors';
+import {labelText} from 'src/components/widget/theme/font-sizes';
+import {Radii} from 'src/components/widget/theme/radii';
+import {Spacing} from 'src/components/widget/theme/spacing';
 
 const containerCss = cxs({
-	padding: '1rem'
+	padding: Spacing.Inset_M
 });
 
 const bodyCss = cxs({
-	fontSize: '1rem',
-	lineHeight: 1.5,
-	letterSpacing: '-0.01em',
+	...labelText,
 	color: COLORS.Text,
 	fontWeight: 'normal',
-	margin: '0 0 1rem 0'
+	margin: Spacing.Stack_M
 });
 
 const actionsCss = cxs({
@@ -22,21 +24,21 @@ const actionsCss = cxs({
 });
 
 const buttonPrimaryCss = cxs({
-	color: 'white',
+	color: COLORS.White,
 	background: COLORS.Primary,
-	padding: '0.5rem 1rem',
-	borderRadius: '100px',
-	border: '1px solid transparent',
-	marginRight: '0.75rem',
+	padding: Spacing.InsetSquish_XS,
+	borderRadius: Radii.Big,
+	border: getColoredBorder(Borders.Normal, COLORS.Transparent),
+	margin: Spacing.Inline_S,
 	cursor: 'pointer'
 });
 
 const buttonSecondaryCss = cxs({
 	color: COLORS.Primary,
-	background: '#fff',
-	padding: '0.5rem 1rem',
-	borderRadius: '100px',
-	border: `1px solid ${COLORS.LightGray}`,
+	background: COLORS.White,
+	padding: Spacing.InsetSquish_S,
+	borderRadius: Radii.Big,
+	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
 	cursor: 'pointer'
 });
 

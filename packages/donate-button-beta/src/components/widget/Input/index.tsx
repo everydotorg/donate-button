@@ -3,11 +3,14 @@ import {StateUpdater, useRef} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
 import chevronDown from 'src/assets/chevron-down.svg';
-import { CurrencySuggestion } from 'src/components/widget/CurrencySuggestion';
+import {CurrencySuggestion} from 'src/components/widget/CurrencySuggestion';
 import {Link} from 'src/components/widget/Link';
-import {Popover} from 'src/components/widget/Popover';
 import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
-import {COLORS} from 'src/components/widget/theme/colors.enum';
+import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
+import {COLORS} from 'src/components/widget/theme/colors';
+import {linkText} from 'src/components/widget/theme/font-sizes';
+import {Radii} from 'src/components/widget/theme/radii';
+import {Spacing} from 'src/components/widget/theme/spacing';
 import {Currency} from 'src/components/widget/types/currency';
 
 const preventDecimal = (
@@ -19,23 +22,21 @@ const preventDecimal = (
 };
 
 const inputContainerCss = cxs({
+	...linkText,
 	position: 'relative',
 	display: 'flex',
 	flexDirection: 'row',
-	borderRadius: '8px',
-	border: '1px solid',
-	borderColor: COLORS.LightGray,
+	borderRadius: Radii.Default,
+	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
 	':focus': {
 		outline: 'none'
 	},
-	fontSize: '1rem',
 	color: COLORS.Text,
 	fontWeight: 'bold'
 });
 
 const inputErrorCss = cxs({
-	border: '1px solid',
-	borderColor: COLORS.Error,
+	border: getColoredBorder(Borders.Normal, COLORS.Error),
 	boxShadow: `0px 0px 0px 2px ${COLORS.ErrorShadow}`
 });
 
@@ -43,15 +44,13 @@ const inputCss = cxs({
 	border: 'none',
 	margin: 0,
 	fontFamily: 'inherit',
-	borderTopLeftRadius: '8px',
-	borderTopRightRadius: '8px',
-	borderBottom: '1px solid transparent',
+	borderTopLeftRadius: Radii.Default,
+	borderTopRightRadius: Radii.Default,
+	borderBottom: getColoredBorder(Borders.Normal, COLORS.Transparent),
 	backgroundColor: COLORS.Gray,
 	width: '100%',
 	padding: '1rem 4.5rem 1rem 2.5rem',
 	outline: 'none',
-
-	transition: 'all .4s',
 	'::placeholder': {
 		opacity: '0.4',
 		fontWeight: 500
@@ -81,7 +80,7 @@ const inputPrefix = cxs({
 const selectCurrencyCss = cxs({
 	position: 'absolute',
 	top: '50%',
-	right: '1rem',
+	right: Spacing.M,
 	transform: 'translateY(-50%)',
 	lineHeight: 1,
 	color: COLORS.Primary,
@@ -91,7 +90,7 @@ const selectCurrencyCss = cxs({
 	'-webkit-appearance': 'none',
 	'-moz-appearance': 'none',
 	border: 'none',
-	background: 'transparent',
+	background: COLORS.Transparent,
 	fontFamily: 'inherit',
 	outline: 'none',
 	':focus': {
@@ -103,14 +102,14 @@ const selectCurrencyCss = cxs({
 	backgroundPositionY: 'center',
 	backgroundRepeat: 'no-repeat',
 
-	paddingRight: '1rem'
+	paddingRight: Spacing.M
 });
 
 const addAmountContainerCss = cxs({
 	display: 'flex',
-	marginTop: '1rem',
+	marginTop: Spacing.M,
 	'& > *:not(:last-child)': {
-		marginRight: '1rem'
+		marginRight: Spacing.M
 	}
 });
 

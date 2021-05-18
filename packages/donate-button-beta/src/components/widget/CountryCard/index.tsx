@@ -1,28 +1,30 @@
 import cxs from 'cxs';
 import chevronDown from 'src/assets/chevron-down.svg';
 import gbFlag from 'src/assets/flags/gb.svg';
-import {COLORS} from 'src/components/widget/theme/colors.enum';
+import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
+import {COLORS} from 'src/components/widget/theme/colors';
+import {bodyText, labelText} from 'src/components/widget/theme/font-sizes';
+import {Radii} from 'src/components/widget/theme/radii';
+import {Spacing} from 'src/components/widget/theme/spacing';
 
 const cardCss = cxs({
-	padding: '0.75rem',
-	border: `1px solid ${COLORS.LightGray}`,
-	borderRadius: '8px'
+	padding: Spacing.S,
+	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
+	borderRadius: Radii.Default
 });
 
 const countrySelectorCss = cxs({
 	display: 'flex',
 	flexDirection: 'row',
-	marginBottom: '1rem',
+	margin: Spacing.Stack_M,
 	alignItems: 'center',
 	position: 'relative',
 	cursor: 'pointer'
 });
 
 const countrySelectedCss = cxs({
-	fontSize: '1rem',
-	lineHeight: 1.5,
+	...labelText,
 	color: COLORS.Primary,
-	letterSpacing: '-0.01em',
 	margin: 0,
 	transform: 'translateY(0.07em)'
 });
@@ -33,12 +35,11 @@ const countryFlagCss = cxs({
 	borderRadius: '100%',
 	objectFit: 'cover',
 	objectPosition: 'center',
-	marginRight: '1rem'
+	margin: Spacing.Inline_M
 });
 
 const arrowCss = cxs({
-	fontSize: '1rem',
-	lineHeight: 1.5,
+	...labelText,
 	color: COLORS.Primary,
 	position: 'absolute',
 	top: '50%',
@@ -47,9 +48,8 @@ const arrowCss = cxs({
 });
 
 const bodyCss = cxs({
+	...bodyText,
 	color: COLORS.TextOpaque,
-	fontSize: '0.75rem',
-	lineHeight: 1.5,
 	margin: 0
 });
 

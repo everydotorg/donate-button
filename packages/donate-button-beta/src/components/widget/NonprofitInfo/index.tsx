@@ -1,5 +1,7 @@
 import cxs from 'cxs';
-import {COLORS} from 'src/components/widget/theme/colors.enum';
+import {COLORS} from 'src/components/widget/theme/colors';
+import {smallText} from 'src/components/widget/theme/font-sizes';
+import {Spacing} from 'src/components/widget/theme/spacing';
 import useShowForm from 'src/hooks/use-show-form';
 
 const text = `We are a nonprofit and rely on donations and grants to keep us going.`;
@@ -7,19 +9,17 @@ const body = `Reader donations are essential to our work, providing us with the 
 const thanks = `Global Change Data Lab and the Our World in Data team`;
 
 const containerCss = cxs({
+	...smallText,
 	display: 'flex',
 	flexDirection: 'column',
-	padding: '1.5rem',
+	padding: Spacing.Inset_XL,
 	' > *:not(:last-child)': {
-		marginBottom: '20px'
+		marginBottom: Spacing.S
 	},
-	fontSize: '14px',
-	lineHeight: '20px',
-	letterSpacing: '-0.05em',
 	color: COLORS.Text,
 	' > p': {
-		margin: 0,
-		padding: 0
+		margin: Spacing.Empty,
+		padding: Spacing.Empty
 	}
 });
 
@@ -34,7 +34,7 @@ const actionsContainer = cxs({
 	color: COLORS.Primary,
 	display: 'flex',
 	'& > *:not(:last-child)': {
-		marginRight: '1.5rem'
+		marginRight: Spacing.XL
 	},
 	' > p': {
 		margin: 0,

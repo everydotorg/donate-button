@@ -2,7 +2,10 @@ import cxs from 'cxs';
 import {StateUpdater, useRef, useState} from 'preact/hooks';
 import {FrequencyPopoverContent} from 'src/components/widget/Frequency/blocks/FrequencyPopoverContent';
 import {Popover} from 'src/components/widget/Popover';
-import {COLORS} from 'src/components/widget/theme/colors.enum';
+import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
+import {COLORS} from 'src/components/widget/theme/colors';
+import {labelText} from 'src/components/widget/theme/font-sizes';
+import {Spacing} from 'src/components/widget/theme/spacing';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
 
 const frequencyContainerCss = cxs({
@@ -10,21 +13,18 @@ const frequencyContainerCss = cxs({
 });
 
 const labelCss = cxs({
+	...labelText,
 	color: COLORS.Primary,
-	fontSize: '1rem',
-	lineHeight: 1.5,
 	fontWeight: 400,
-	letterSpacing: '-0.01em',
-	padding: '8px 0px',
+	padding: `${Spacing.XS} ${Spacing.Empty}`,
 	flex: 1,
 	textAlign: 'center',
-	border: '1px solid',
-	borderColor: COLORS.LightGray,
-	transition: 'all .2s'
+	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
+	transition: 'border .2s'
 });
 
 const labelSelectedCss = cxs({
-	borderColor: COLORS.Primary
+	border: getColoredBorder(Borders.Normal, COLORS.Primary)
 });
 
 const separatorBorderSelectedCss = cxs({
@@ -32,11 +32,11 @@ const separatorBorderSelectedCss = cxs({
 });
 
 const labelLeftCss = cxs({
-	borderRadius: '0.5rem 0 0 0.5rem'
+	borderRadius: '8px 0 0 8px'
 });
 
 const labelRightCss = cxs({
-	borderRadius: '0 0.5rem 0.5rem 0',
+	borderRadius: '0 8px 8px 0',
 	borderLeft: 'none'
 });
 
@@ -53,14 +53,15 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 	const [showPopover, setShowPopover] = useState(true);
 
 	const labelSeparatorClass =
-		frequency === 'monthly' || frequency === 'one-time'
+		frequency === DonationFrequency.Monthly ||
+		frequency === DonationFrequency.OneTime
 			? [separatorBorderSelectedCss]
 			: [];
 	const leftLabelClasses = [labelCss, labelLeftCss].concat(
-		frequency === 'monthly' ? [labelSelectedCss] : []
+		frequency === DonationFrequency.Monthly ? [labelSelectedCss] : []
 	);
 	const rightLabelClasses = [labelCss, labelRightCss].concat(
-		frequency === 'one-time' ? [labelSelectedCss] : []
+		frequency === DonationFrequency.OneTime ? [labelSelectedCss] : []
 	);
 
 	return (
@@ -69,14 +70,14 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 				className={leftLabelClasses.concat(labelSeparatorClass).join(' ')}
 				htmlFor="monthly"
 				onClick={() => {
-					setFrequency('monthly');
+					setFrequency(DonationFrequency.Monthly);
 				}}
 			>
 				<input
 					className={inputCss}
 					type="radio"
 					name="frequency"
-					value="monthly"
+					value={DonationFrequency.Monthly}
 				/>
 				Monthly
 			</label>
@@ -84,14 +85,14 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 				className={rightLabelClasses.join(' ')}
 				htmlFor="one-time"
 				onClick={() => {
-					setFrequency('one-time');
+					setFrequency(DonationFrequency.OneTime);
 				}}
 			>
 				<input
 					className={inputCss}
 					type="radio"
 					name="frequency"
-					value="one-time"
+					value={DonationFrequency.OneTime}
 				/>
 				One-time
 			</label>

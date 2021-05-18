@@ -1,6 +1,9 @@
 import cxs from 'cxs';
 import preact from 'preact';
 import {forwardRef} from 'preact/compat';
+import {headingText} from 'src/components/widget/theme/font-sizes';
+import {Radii} from 'src/components/widget/theme/radii';
+import {Spacing} from 'src/components/widget/theme/spacing';
 
 const containerCss = cxs({
 	background:
@@ -11,26 +14,24 @@ const containerCss = cxs({
 });
 
 const nonprofitNameCss = cxs({
+	...headingText,
 	position: 'absolute',
-	bottom: '1rem',
+	bottom: Spacing.M,
 	left: '0',
 	padding: 0,
-	margin: '0 1.5rem',
-	fontSize: '28px',
-	lineHeight: '36px',
-	letterSpacing: '-0.015em',
+	margin: `${Spacing.Empty} ${Spacing.XL}`,
 	fontWeight: 'bold',
 	color: 'white'
 });
 
 const logoContainerCss = cxs({
-	borderRadius: '100%',
+	borderRadius: Radii.Circle,
 	border: '4px solid rgba(255,255,255,0.2)',
 	width: '4rem',
 	height: '4rem',
 	position: 'absolute',
-	top: '1.5rem',
-	right: '1.5rem',
+	top: Spacing.XL,
+	right: Spacing.XL,
 	overflow: 'hidden'
 });
 
