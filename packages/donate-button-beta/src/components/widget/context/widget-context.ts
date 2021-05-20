@@ -8,8 +8,8 @@ import {Routes} from 'src/components/widget/types/routes';
 interface WidgetContextProps {
 	showFrequencyPopover: boolean;
 	dismissPopover: () => void;
-	setRoute: StateUpdater<Routes>;
-	route: Routes;
+	setRoute: StateUpdater<string>;
+	route: string;
 	frequency: DonationFrequency;
 	country: Country;
 	setCountry: StateUpdater<Country>;
