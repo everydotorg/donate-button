@@ -1,12 +1,12 @@
 import cxs from 'cxs';
 import {ComponentChildren} from 'preact';
-import {COLORS} from 'src/components/widget/theme/colors.enum';
+import {COLORS} from 'src/components/widget/theme/colors';
+import {labelText} from 'src/components/widget/theme/font-sizes';
+import {Spacing} from 'src/components/widget/theme/spacing';
 
 const labelCss = cxs({
-	margin: 0,
-	fontSize: '1rem',
-	lineHeight: 1.5,
-	marginBottom: '0.5rem',
+	...labelText,
+	margin: Spacing.Stack_XS,
 	color: COLORS.Text
 });
 

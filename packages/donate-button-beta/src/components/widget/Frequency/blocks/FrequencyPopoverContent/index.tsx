@@ -1,12 +1,15 @@
 import cxs from 'cxs';
 import closeSvg from 'src/assets/close.svg';
-import {COLORS} from 'src/components/widget/theme/colors.enum';
+import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
+import {COLORS} from 'src/components/widget/theme/colors';
+import {Radii} from 'src/components/widget/theme/radii';
+import {Spacing} from 'src/components/widget/theme/spacing';
 import constructEveryUrl from 'src/helpers/construct-every-url';
 
 const containerCss = cxs({
 	display: 'flex',
 	flexDirection: 'column',
-	padding: '1rem',
+	padding: Spacing.Inset_M,
 	zIndex: 1
 });
 
@@ -17,14 +20,13 @@ const headerCss = cxs({
 
 const titleCss = cxs({
 	flex: 1,
-	marginRight: '1rem',
-	margin: 0
+	margin: Spacing.Inline_M
 });
 
 const closeButtonCss = cxs({
 	background: 'transparent',
-	padding: 0,
-	margin: 0,
+	padding: Spacing.Empty,
+	margin: Spacing.Empty,
 	border: 'none',
 	outline: 'none',
 	cursor: 'pointer'
@@ -33,14 +35,14 @@ const closeButtonCss = cxs({
 const dividerCss = cxs({
 	height: '1px',
 	background: COLORS.LightGray,
-	margin: '1rem -1rem 1rem -1rem'
+	margin: `${Spacing.M} -${Spacing.M} ${Spacing.M} -${Spacing.M}`
 });
 
 const actionLink = cxs({
-	border: `1px solid ${COLORS.LightGray}`,
-	borderRadius: '8px',
+	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
+	borderRadius: Radii.Default,
 	color: COLORS.Primary,
-	padding: '0.5rem 1rem',
+	padding: Spacing.InsetSquish_XS,
 	background: 'transparent',
 	cursor: 'pointer',
 	textDecoration: 'none',

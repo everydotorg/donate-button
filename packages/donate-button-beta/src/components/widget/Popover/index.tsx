@@ -2,14 +2,16 @@ import cxs from 'cxs';
 import {ComponentChildren} from 'preact';
 import {forwardRef} from 'preact/compat';
 import {Ref, useEffect, useState} from 'preact/hooks';
-import {COLORS} from 'src/components/widget/theme/colors.enum';
+import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
+import {COLORS} from 'src/components/widget/theme/colors';
+import {Radii} from 'src/components/widget/theme/radii';
 
 const containerCss = cxs({
 	position: 'absolute',
-	borderRadius: '8px',
+	borderRadius: Radii.Default,
 	boxShadow: '0px 8px 8px rgba(0, 0, 0, 0.05)',
-	border: `1px solid ${COLORS.LightGray}`,
-	background: '#fff',
+	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
+	background: COLORS.White,
 	display: 'flex',
 	flexDirection: 'column',
 	zIndex: 2,
@@ -19,9 +21,9 @@ const containerCss = cxs({
 const arrowCss = cxs({
 	width: '1rem',
 	height: '1rem',
-	borderRadius: '1px',
-	borderTop: `1px solid ${COLORS.LightGray}`,
-	borderLeft: `1px solid ${COLORS.LightGray}`,
+	borderRadius: Radii.Small,
+	borderTop: getColoredBorder(Borders.Normal, COLORS.LightGray),
+	borderLeft: getColoredBorder(Borders.Normal, COLORS.LightGray),
 	transform: 'translate(-50%, -50%) rotate(45deg)',
 	transformOrigin: 'center',
 	position: 'absolute',
@@ -36,9 +38,13 @@ const Arrow = ({left}: {left: string}) => {
 
 interface PopoverProps {
 	children: ComponentChildren;
+	arrowPosition?: string;
 }
 export const Popover = forwardRef(
-	({children}: PopoverProps, ref: Ref<HTMLDivElement>) => {
+	(
+		{children, arrowPosition = '25%'}: PopoverProps,
+		ref: Ref<HTMLDivElement>
+	) => {
 		const [top, setTop] = useState('0');
 
 		useEffect(() => {
@@ -51,7 +57,7 @@ export const Popover = forwardRef(
 
 		return (
 			<div className={containerCss} style={{top}}>
-				<Arrow left="25%" />
+				<Arrow left={arrowPosition} />
 				{children}
 			</div>
 		);

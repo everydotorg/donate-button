@@ -1,10 +1,10 @@
 import cxs from 'cxs';
-import {COLORS} from 'src/components/widget/theme/colors.enum';
+import {COLORS} from 'src/components/widget/theme/colors';
+import {linkText} from 'src/components/widget/theme/font-sizes';
 
 const linkCss = cxs({
+	...linkText,
 	color: COLORS.Primary,
-	fontSize: '1rem',
-	lineHeight: 1,
 	cursor: 'pointer'
 });
 
