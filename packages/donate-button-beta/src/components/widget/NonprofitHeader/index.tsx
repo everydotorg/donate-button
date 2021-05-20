@@ -1,6 +1,7 @@
 import cxs from 'cxs';
 import preact from 'preact';
 import {forwardRef} from 'preact/compat';
+import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {headingText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
@@ -52,11 +53,14 @@ const logoImageCss = cxs({
 type NonprofitHeader = {
 	classes: string[];
 };
+
 export const NonprofitHeader = forwardRef(
 	({classes}: NonprofitHeader, ref: preact.Ref<HTMLDivElement>) => {
+		const {name} = useConfigContext();
+
 		return (
 			<div ref={ref} className={[containerCss].concat(classes).join(' ')}>
-				<p className={nonprofitNameCss}>Our world in data</p>
+				<p className={nonprofitNameCss}>{name}</p>
 				<div className={logoContainerCss}>
 					<div alt="nonprofit logo" className={logoImageCss} />
 				</div>
