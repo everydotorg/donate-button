@@ -1,4 +1,7 @@
 import deepMerge, {Options as DeepMergeOptions} from 'deepmerge';
+import {en} from 'src/components/widget/constants/lang/en';
+import {es} from 'src/components/widget/constants/lang/es';
+import {WidgetConfig} from 'src/components/widget/types/widget-config';
 
 export interface DonateButtonOptions {
 	/**
@@ -35,9 +38,15 @@ export interface EmbedButtonOptions extends DonateButtonOptions {
 	readonly onClick?: () => void;
 }
 
-const defaultOptions: DonateButtonOptions = {
-	nonprofitSlug: 'your-foundation',
-	crypto: false
+const defaults: Partial<WidgetConfig> = {
+	show: false,
+	name: 'Every Org',
+	crypto: false,
+	forceLanguage: false,
+	i18n: {
+		en,
+		es
+	}
 };
 
 const DEEP_MERGE_OPTIONS: DeepMergeOptions = {
@@ -45,11 +54,6 @@ const DEEP_MERGE_OPTIONS: DeepMergeOptions = {
 	arrayMerge: (_destArray, sourceArray, _options) => sourceArray
 };
 
-export function mergeOptionsWithDefault(
-	...toMerge: Array<Partial<DonateButtonOptions>>
-): DonateButtonOptions {
-	return deepMerge.all<DonateButtonOptions>(
-		[defaultOptions, ...toMerge],
-		DEEP_MERGE_OPTIONS
-	);
-}
+export const mergeConfig = (options: Partial<WidgetConfig>): WidgetConfig => {
+	return deepMerge.all<WidgetConfig>([defaults, options], DEEP_MERGE_OPTIONS);
+};

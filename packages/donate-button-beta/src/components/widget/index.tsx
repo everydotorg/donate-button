@@ -22,6 +22,7 @@ import {Currency} from 'src/components/widget/types/currency';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
 import {Routes} from 'src/components/widget/types/routes';
 import {WidgetConfig} from 'src/components/widget/types/widget-config';
+import {mergeConfig} from 'src/helpers/options-types';
 
 cxs.prefix('edoWidget-');
 
@@ -142,9 +143,13 @@ const getSubmitButtonText = (
 	return text;
 };
 
-type WidgetProps = WidgetConfig & {show: boolean};
+interface WidgetProps {
+	options: Partial<WidgetConfig>;
+}
 
-const Widget = ({show, ...config}: WidgetProps) => {
+const Widget = ({options}: WidgetProps) => {
+	const config = mergeConfig(options);
+
 	const [route, setRoute] = useState<string>(Routes.DonationForm);
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
 		true
@@ -156,7 +161,7 @@ const Widget = ({show, ...config}: WidgetProps) => {
 	);
 	const [country, setCountry] = useState<Country>('GB');
 
-	return show ? (
+	return config.show ? (
 		<ConfigContext.Provider value={config}>
 			<WidgetContext.Provider
 				value={{

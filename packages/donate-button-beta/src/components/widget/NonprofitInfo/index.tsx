@@ -1,5 +1,6 @@
 import cxs from 'cxs';
 import {pageConfig} from 'src/components/widget/Info';
+import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {smallText} from 'src/components/widget/theme/font-sizes';
@@ -43,11 +44,14 @@ const actionsContainer = cxs({
 		cursor: 'pointer'
 	}
 });
+
 type NonprofitInfo = {
 	classes: string[];
 };
+
 export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 	const {setRoute} = useWidgetContext();
+	const {infoPages} = useConfigContext();
 
 	return (
 		<div className={[containerCss].concat(classes).join(' ')}>

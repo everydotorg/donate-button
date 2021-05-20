@@ -5,6 +5,7 @@ import {
 import {Language} from 'src/components/widget/types/language';
 
 export type WidgetConfig = {
+	show: boolean;
 	nonProfitSlug: string;
 	name: string;
 	logo: string;
