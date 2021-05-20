@@ -1,14 +1,10 @@
 import cxs from 'cxs';
 import {useEffect, useState} from 'preact/hooks';
-import LeftArrow from 'src/assets/left-arrow.svg';
 import {Markdown} from 'src/components/widget/Markdown';
 import {SectionContainer} from 'src/components/widget/SectionContainer';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
-import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
-import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {Spacing} from 'src/components/widget/theme/spacing';
-import {Routes} from 'src/components/widget/types/routes';
 
 export const pageConfig: InfoPage[] = [
 	{
@@ -25,17 +21,7 @@ export const pageConfig: InfoPage[] = [
 	}
 ];
 
-const header = cxs({
-	display: 'flex',
-	padding: Spacing.InsetSquish_S,
-	borderBottom: getColoredBorder(Borders.Normal, COLORS.LightGray),
-
-	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
-		border: 'none'
-	}
-});
-
-const pageList = cxs({
+const pageListCss = cxs({
 	display: 'flex',
 	listStyleType: 'none',
 	padding: Spacing.Empty,
@@ -45,34 +31,21 @@ const pageList = cxs({
 	}
 });
 
-const pageItem = cxs({
+const pageItemCss = cxs({
 	color: COLORS.Primary,
 	cursor: 'pointer'
 });
 
-const pageSelected = cxs({
+const pageSelectedCss = cxs({
 	color: COLORS.Black
 });
 
-const content = cxs({
-	overflow: 'auto',
-	height: '100%',
-	padding: '0 1.5rem'
-});
-
-const container = cxs({
-	display: 'flex',
-	flexDirection: 'column',
-	gridColumn: '1 / -1',
-	gridRow: '1 / -1'
-});
-
-const findPage = (config: any, route: string): InfoPage =>
+const findPage = (config: InfoPage[], route: string) =>
 	config.find((page: InfoPage) => page.key === route);
 
 const Info = () => {
 	const {route, setRoute} = useWidgetContext();
-	const [selectedPage, setSelectedPage] = useState<InfoPage>(
+	const [selectedPage, setSelectedPage] = useState<InfoPage | undefined>(
 		findPage(pageConfig, route)
 	);
 
@@ -83,12 +56,12 @@ const Info = () => {
 	return (
 		<SectionContainer
 			renderHeader={
-				<ul className={pageList}>
+				<ul className={pageListCss}>
 					{pageConfig.map((page) => (
 						<li
 							key={page.key}
-							className={[pageItem]
-								.concat(page.key === route ? pageSelected : '')
+							className={[pageItemCss]
+								.concat(page.key === route ? pageSelectedCss : '')
 								.join(' ')}
 							onClick={() => {
 								setRoute(page.key);
@@ -99,7 +72,7 @@ const Info = () => {
 					))}
 				</ul>
 			}
-			renderBody={<Markdown source={selectedPage.source} />}
+			renderBody={selectedPage && <Markdown source={selectedPage.source} />}
 		/>
 	);
 };
