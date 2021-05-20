@@ -1,5 +1,7 @@
 import cxs from 'cxs';
 import {Fragment} from 'preact/jsx-runtime';
+import LeftArrow from 'src/assets/left-arrow.svg';
+import {Markdown} from 'src/components/widget/Markdown';
 import {SectionContainer} from 'src/components/widget/SectionContainer';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
@@ -7,6 +9,12 @@ import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {Routes} from 'src/components/widget/types/routes';
+
+const url =
+	'https://raw.githubusercontent.com/julianpoma/stream-parser/master/README.md';
+
+const md =
+	'# This is a title\nThis **is a** paragraph\nThis is _another_ paragraph. And this is a [Link](https://google.com)';
 
 const header = cxs({
 	display: 'flex',
