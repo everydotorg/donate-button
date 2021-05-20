@@ -125,11 +125,19 @@ const getSubmitButtonText = (
 		return 'Select frequency';
 	}
 
-	const frequencyFormatted =
-		frequency === DonationFrequency.Monthly ? 'Monthly' : 'One time';
+	if (Number.isNaN(donationAmount)) {
+		return 'Enter an amount to donate';
+	}
+
 	const currencySymbol = supportedCurrencies[currency];
 
-	return `Donate ${currencySymbol}${donationAmount} ${frequencyFormatted}`;
+	let text = `Donate ${currencySymbol}${donationAmount}`;
+
+	if (frequency === DonationFrequency.Monthly) {
+		text = text.concat(' Monthly');
+	}
+
+	return text;
 };
 
 const Widget = ({show}: {show: boolean}) => {
@@ -188,7 +196,10 @@ const Widget = ({show}: {show: boolean}) => {
 							</div>
 							<div className={ctaCss}>
 								<SubmitButton
-									disabled={frequency === DonationFrequency.Unselected}
+									disabled={
+										frequency === DonationFrequency.Unselected ||
+										Number.isNaN(donationAmount)
+									}
 								>
 									{getSubmitButtonText(donationAmount, currency, frequency)}
 								</SubmitButton>
