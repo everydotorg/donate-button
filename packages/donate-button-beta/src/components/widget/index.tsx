@@ -12,6 +12,7 @@ import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
 import {SubmitButton} from 'src/components/widget/SubmitButton';
 import {Country} from 'src/components/widget/constants/supported-countries';
 import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
+import {ConfigContext} from 'src/components/widget/context/config-context';
 import {WidgetContext} from 'src/components/widget/context/widget-context';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
@@ -20,6 +21,7 @@ import {Spacing} from 'src/components/widget/theme/spacing';
 import {Currency} from 'src/components/widget/types/currency';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
 import {Routes} from 'src/components/widget/types/routes';
+import {WidgetConfig} from 'src/components/widget/types/widget-config';
 
 cxs.prefix('edoWidget-');
 
@@ -140,7 +142,9 @@ const getSubmitButtonText = (
 	return text;
 };
 
-const Widget = ({show}: {show: boolean}) => {
+type WidgetProps = WidgetConfig & {show: boolean};
+
+const Widget = ({show, ...config}: WidgetProps) => {
 	const [route, setRoute] = useState<string>(Routes.DonationForm);
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
 		true
@@ -151,69 +155,72 @@ const Widget = ({show}: {show: boolean}) => {
 		DonationFrequency.Unselected
 	);
 	const [country, setCountry] = useState<Country>('GB');
+
 	return show ? (
-		<WidgetContext.Provider
-			value={{
-				showFrequencyPopover,
-				dismissPopover: () => {
-					setShowFrequencyPopover(false);
-				},
-				setRoute,
-				route,
-				frequency,
-				country,
-				setCountry,
-				currency,
-				setCurrency,
-				donationAmount
-			}}
-		>
-			<div className={wrapperCss}>
-				<form className={widgetCss}>
-					{route === Routes.DonationForm ? (
-						<Fragment>
-							<div className={scrollableContent}>
-								<div className={formCss}>
-									<FormControl label="Frequency">
-										<Frequency
-											frequency={frequency}
-											setFrequency={setFrequency}
-										/>
-									</FormControl>
-									<FormControl label="Amount">
-										<Input
-											selectedCurrency={currency}
-											setCurrency={setCurrency}
-											value={donationAmount}
-											setValue={setDonationAmount}
-										/>
-									</FormControl>
-									<FormControl label="Country for tax deduction">
-										<CountryCard />
-									</FormControl>
+		<ConfigContext.Provider value={config}>
+			<WidgetContext.Provider
+				value={{
+					showFrequencyPopover,
+					dismissPopover: () => {
+						setShowFrequencyPopover(false);
+					},
+					setRoute,
+					route,
+					frequency,
+					country,
+					setCountry,
+					currency,
+					setCurrency,
+					donationAmount
+				}}
+			>
+				<div className={wrapperCss}>
+					<form className={widgetCss}>
+						{route === Routes.DonationForm ? (
+							<Fragment>
+								<div className={scrollableContent}>
+									<div className={formCss}>
+										<FormControl label="Frequency">
+											<Frequency
+												frequency={frequency}
+												setFrequency={setFrequency}
+											/>
+										</FormControl>
+										<FormControl label="Amount">
+											<Input
+												selectedCurrency={currency}
+												setCurrency={setCurrency}
+												value={donationAmount}
+												setValue={setDonationAmount}
+											/>
+										</FormControl>
+										<FormControl label="Country for tax deduction">
+											<CountryCard />
+										</FormControl>
+									</div>
+									<NonprofitInfo classes={[nonProfitInfoCss]} />
 								</div>
-								<NonprofitInfo classes={[nonProfitInfoCss]} />
-							</div>
-							<div className={ctaCss}>
-								<SubmitButton
-									disabled={
-										frequency === DonationFrequency.Unselected ||
-										Number.isNaN(donationAmount)
-									}
-								>
-									{getSubmitButtonText(donationAmount, currency, frequency)}
-								</SubmitButton>
-							</div>
-							<NonprofitHeader classes={[nonProfitHeaderCss]} />
-						</Fragment>
-					) : route === Routes.SelectCountry ? (
-						<CountrySelector />
-					) : (
-						<Info />
-					)}
-				</form>
-			</div>
-		</WidgetContext.Provider>
+								<div className={ctaCss}>
+									<SubmitButton
+										disabled={
+											frequency === DonationFrequency.Unselected ||
+											Number.isNaN(donationAmount)
+										}
+									>
+										{getSubmitButtonText(donationAmount, currency, frequency)}
+									</SubmitButton>
+								</div>
+								<NonprofitHeader classes={[nonProfitHeaderCss]} />
+							</Fragment>
+						) : route === Routes.SelectCountry ? (
+							<CountrySelector />
+						) : (
+							<Info />
+						)}
+					</form>
+				</div>
+			</WidgetContext.Provider>
+		</ConfigContext.Provider>
 	) : null;
 };
 
