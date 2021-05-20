@@ -2,6 +2,7 @@ import cxs from 'cxs';
 import {StateUpdater, useRef, useState} from 'preact/hooks';
 import {FrequencyPopoverContent} from 'src/components/widget/Frequency/blocks/FrequencyPopoverContent';
 import {Popover} from 'src/components/widget/Popover';
+import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {labelText} from 'src/components/widget/theme/font-sizes';
@@ -49,8 +50,8 @@ interface FrequencyProps {
 	setFrequency: StateUpdater<DonationFrequency>;
 }
 export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
+	const {showFrequencyPopover, dismissPopover} = useWidgetContext();
 	const frequencyPopover = useRef<HTMLDivElement>(null);
-	const [showPopover, setShowPopover] = useState(true);
 
 	const labelSeparatorClass =
 		frequency === DonationFrequency.Monthly ||
@@ -96,13 +97,11 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 				/>
 				One-time
 			</label>
-			{showPopover ? (
+			{showFrequencyPopover ? (
 				<Popover ref={frequencyPopover}>
 					<FrequencyPopoverContent
 						nonprofitSlug="test"
-						onClose={() => {
-							setShowPopover(false);
-						}}
+						onClose={dismissPopover}
 					/>
 				</Popover>
 			) : null}

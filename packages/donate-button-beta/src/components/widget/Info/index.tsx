@@ -1,6 +1,6 @@
 import cxs from 'cxs';
 import {Fragment} from 'preact/jsx-runtime';
-import LeftArrow from 'src/assets/left-arrow.svg';
+import {SectionContainer} from 'src/components/widget/SectionContainer';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
@@ -16,15 +16,6 @@ const header = cxs({
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
 		border: 'none'
 	}
-});
-
-const returnButton = cxs({
-	padding: Spacing.Empty,
-	margin: Spacing.Inline_XXL,
-	backgroundColor: COLORS.Transparent,
-	border: 'none',
-	outline: 'none',
-	cursor: 'pointer'
 });
 
 const pageList = cxs({
@@ -44,19 +35,6 @@ const pageItem = cxs({
 
 const pageSelected = cxs({
 	color: COLORS.Black
-});
-
-const content = cxs({
-	overflow: 'auto',
-	height: '100%',
-	padding: '0 1.5rem'
-});
-
-const container = cxs({
-	display: 'flex',
-	flexDirection: 'column',
-	gridColumn: '1 / -1',
-	gridRow: '1 / -1'
 });
 
 const Faq = () => {
@@ -115,17 +93,8 @@ const Info = () => {
 	const {route, setRoute} = useWidgetContext();
 
 	return (
-		<div className={container}>
-			<div className={header}>
-				<button
-					type="button"
-					className={returnButton}
-					onClick={() => {
-						setRoute(Routes.DonationForm);
-					}}
-				>
-					<img src={LeftArrow} alt="Back button" />
-				</button>
+		<SectionContainer
+			renderHeader={
 				<ul className={pageList}>
 					<li
 						className={[pageItem]
@@ -148,11 +117,9 @@ const Info = () => {
 						FAQ
 					</li>
 				</ul>
-			</div>
-			<div className={content}>
-				{route === Routes.FAQ ? <Faq /> : <PrivacyPolicy />}
-			</div>
-		</div>
+			}
+			renderBody={route === Routes.FAQ ? <Faq /> : <PrivacyPolicy />}
+		/>
 	);
 };
 

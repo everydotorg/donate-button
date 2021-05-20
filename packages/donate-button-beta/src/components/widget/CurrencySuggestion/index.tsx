@@ -1,7 +1,9 @@
 import cxs from 'cxs';
 import {Ref} from 'preact';
-import {forwardRef} from 'preact/compat';
+import {forwardRef, useEffect, useState} from 'preact/compat';
 import {Popover} from 'src/components/widget/Popover';
+import {supportedCountries} from 'src/components/widget/constants/supported-countries';
+import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {labelText} from 'src/components/widget/theme/font-sizes';
@@ -44,24 +46,56 @@ const buttonSecondaryCss = cxs({
 
 export const CurrencySuggestion = forwardRef(
 	(_props, ref: Ref<HTMLDivElement>) => {
-		return (
+		const [showSuggestion, setShowSuggestion] = useState<boolean>(false);
+		const {country, currency, setCurrency, donationAmount} = useWidgetContext();
+
+		useEffect(() => {
+			setShowSuggestion(supportedCountries?.[country]?.currency !== currency);
+		}, [country, currency]);
+
+		const dismiss = () => {
+			setShowSuggestion(false);
+		};
+
+		const updateCurrency = () => {
+			setCurrency(supportedCountries[country].currency);
+		};
+
+		const suggestedCurrency = supportedCountries?.[country]?.currency;
+
+		return showSuggestion ? (
 			<Popover ref={ref} arrowPosition="85%">
 				<div className={containerCss}>
 					<p className={bodyCss}>
-						It’s recommended to donate <strong>USD</strong> if you are getting a
-						US tax receipt, would you like to switch from{' '}
-						<strong>160 GBP</strong> to <strong>160 USD</strong>
+						It’s recommended to donate <strong>{suggestedCurrency}</strong> if
+						you are getting a {country} tax receipt, would you like to switch
+						from{' '}
+						<strong>
+							{donationAmount} {currency}
+						</strong>{' '}
+						to{' '}
+						<strong>
+							{donationAmount} {suggestedCurrency}
+						</strong>
 					</p>
 					<div className={actionsCss}>
-						<button type="button" className={buttonPrimaryCss}>
-							Change to USD
+						<button
+							type="button"
+							className={buttonPrimaryCss}
+							onClick={updateCurrency}
+						>
+							Change to {suggestedCurrency}
 						</button>
-						<button type="button" className={buttonSecondaryCss}>
+						<button
+							type="button"
+							className={buttonSecondaryCss}
+							onClick={dismiss}
+						>
 							No thanks
 						</button>
 					</div>
 				</div>
 			</Popover>
-		);
+		) : null;
 	}
 );

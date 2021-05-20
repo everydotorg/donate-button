@@ -2,6 +2,7 @@ import cxs from 'cxs';
 import {useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {CountryCard} from 'src/components/widget/CountryCard';
+import {CountrySelector} from 'src/components/widget/CountrySelector';
 import {FormControl} from 'src/components/widget/FormControl';
 import {Frequency} from 'src/components/widget/Frequency';
 import Info from 'src/components/widget/Info';
@@ -9,6 +10,7 @@ import {Input} from 'src/components/widget/Input';
 import {NonprofitHeader} from 'src/components/widget/NonprofitHeader';
 import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
 import {SubmitButton} from 'src/components/widget/SubmitButton';
+import {Country} from 'src/components/widget/constants/supported-countries';
 import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
 import {WidgetContext} from 'src/components/widget/context/widget-context';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
@@ -51,8 +53,8 @@ const widgetCss = cxs({
 		// Temporary until we have more content inside the widget
 		gridTemplateColumns: '60% 40%',
 		gridTemplateRows: '1fr max-content max-content',
-		height: '70vh',
-		width: '60vw',
+		height: '80vh',
+		width: '70vw',
 		borderRadius: '24px'
 	}
 });
@@ -123,7 +125,8 @@ const getSubmitButtonText = (
 		return 'Select frequency';
 	}
 
-	const frequencyFormatted = frequency === 'monthly' ? 'Monthly' : 'One time';
+	const frequencyFormatted =
+		frequency === DonationFrequency.Monthly ? 'Monthly' : 'One time';
 	const currencySymbol = supportedCurrencies[currency];
 
 	return `Donate ${currencySymbol}${donationAmount} ${frequencyFormatted}`;
@@ -131,18 +134,30 @@ const getSubmitButtonText = (
 
 const Widget = ({show}: {show: boolean}) => {
 	const [route, setRoute] = useState<Routes>(Routes.DonationForm);
-
+	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
+		true
+	);
 	const [donationAmount, setDonationAmount] = useState<number>(100);
 	const [currency, setCurrency] = useState<Currency>('GBP');
 	const [frequency, setFrequency] = useState<DonationFrequency>(
 		DonationFrequency.Unselected
 	);
-
+	const [country, setCountry] = useState<Country>('GB');
 	return show ? (
 		<WidgetContext.Provider
 			value={{
+				showFrequencyPopover,
+				dismissPopover: () => {
+					setShowFrequencyPopover(false);
+				},
 				setRoute,
-				route
+				route,
+				frequency,
+				country,
+				setCountry,
+				currency,
+				setCurrency,
+				donationAmount
 			}}
 		>
 			<div className={wrapperCss}>
@@ -180,6 +195,8 @@ const Widget = ({show}: {show: boolean}) => {
 							</div>
 							<NonprofitHeader classes={[nonProfitHeaderCss]} />
 						</Fragment>
+					) : route === Routes.SelectCountry ? (
+						<CountrySelector />
 					) : (
 						<Info />
 					)}

@@ -1,11 +1,15 @@
 import cxs from 'cxs';
 import chevronDown from 'src/assets/chevron-down.svg';
 import gbFlag from 'src/assets/flags/gb.svg';
+import {CountryTitle} from 'src/components/widget/CountryTitle';
+import {supportedCountries} from 'src/components/widget/constants/supported-countries';
+import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {bodyText, labelText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import {Routes} from 'src/components/widget/types/routes';
 
 const cardCss = cxs({
 	padding: Spacing.S,
@@ -54,12 +58,18 @@ const bodyCss = cxs({
 });
 
 export const CountryCard = () => {
+	const {country, setRoute} = useWidgetContext();
+
 	return (
 		<div className={cardCss}>
 			<div className={countrySelectorCss}>
-				<img className={countryFlagCss} src={gbFlag} alt="country flag" />
-				<p className={countrySelectedCss}>Great Bretain</p>
-				<span className={arrowCss}>
+				<CountryTitle country={country} />
+				<span
+					className={arrowCss}
+					onClick={() => {
+						setRoute(Routes.SelectCountry);
+					}}
+				>
 					<img src={chevronDown} />
 				</span>
 			</div>
