@@ -12,14 +12,12 @@ const containerCss = cxs({
 	display: 'flex',
 	flexDirection: 'column',
 	gridColumn: '1 / -1',
-	gridRow: '1 / -1',
-	padding: Spacing.Inset_XL
+	gridRow: '1 / -1'
 });
 
 const headerCss = cxs({
 	display: 'flex',
-	padding: Spacing.InsetSquish_S,
-	margin: Spacing.Stack_XXL,
+	padding: Spacing.InsetSquish_M,
 	borderBottom: getColoredBorder(Borders.Normal, COLORS.LightGray),
 	alignItems: 'center',
 

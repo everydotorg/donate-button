@@ -133,7 +133,7 @@ const getSubmitButtonText = (
 };
 
 const Widget = ({show}: {show: boolean}) => {
-	const [route, setRoute] = useState<Routes>(Routes.DonationForm);
+	const [route, setRoute] = useState<string>(Routes.DonationForm);
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
 		true
 	);

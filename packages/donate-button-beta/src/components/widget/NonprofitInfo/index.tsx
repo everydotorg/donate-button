@@ -1,4 +1,5 @@
 import cxs from 'cxs';
+import {pageConfig} from 'src/components/widget/Info';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {smallText} from 'src/components/widget/theme/font-sizes';
@@ -57,20 +58,16 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 				<span>{thanks}</span>
 			</p>
 			<div className={actionsContainer}>
-				<p
-					onClick={() => {
-						setRoute(Routes.DonationsPolicy);
-					}}
-				>
-					Donations Policy
-				</p>
-				<p
-					onClick={() => {
-						setRoute(Routes.FAQ);
-					}}
-				>
-					FAQ
-				</p>
+				{pageConfig.map((page) => (
+					<p
+						key={page.key}
+						onClick={() => {
+							setRoute(page.key);
+						}}
+					>
+						{page.name}
+					</p>
+				))}
 			</div>
 		</div>
 	);

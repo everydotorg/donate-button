@@ -1,8 +1,6 @@
 import cxs from 'cxs';
 import chevronDown from 'src/assets/chevron-down.svg';
-import gbFlag from 'src/assets/flags/gb.svg';
 import {CountryTitle} from 'src/components/widget/CountryTitle';
-import {supportedCountries} from 'src/components/widget/constants/supported-countries';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
@@ -31,15 +29,6 @@ const countrySelectedCss = cxs({
 	color: COLORS.Primary,
 	margin: 0,
 	transform: 'translateY(0.07em)'
-});
-
-const countryFlagCss = cxs({
-	height: '1rem',
-	width: '1rem',
-	borderRadius: '100%',
-	objectFit: 'cover',
-	objectPosition: 'center',
-	margin: Spacing.Inline_M
 });
 
 const arrowCss = cxs({
