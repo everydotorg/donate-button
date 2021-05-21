@@ -18,10 +18,8 @@ export const getTranslations = (
 	return i18n[lang] ?? i18n.en!;
 };
 
-const useI18n = (): Language => {
+export const useI18n = (): Language => {
 	const {i18n, forceLanguage} = useConfigContext();
 
 	return getTranslations(i18n, forceLanguage);
 };
-
-export default useI18n;

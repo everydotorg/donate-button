@@ -1,6 +1,6 @@
 import cxs from 'cxs';
 import closeSvg from 'src/assets/close.svg';
-import useI18n from 'src/components/widget/hooks/use-i18n';
+import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {Radii} from 'src/components/widget/theme/radii';

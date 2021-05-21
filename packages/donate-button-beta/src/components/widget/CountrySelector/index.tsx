@@ -6,7 +6,7 @@ import {
 	Country,
 	supportedCountries
 } from 'src/components/widget/constants/supported-countries';
-import useI18n from 'src/components/widget/hooks/use-i18n';
+import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';

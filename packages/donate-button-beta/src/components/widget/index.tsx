@@ -1,5 +1,5 @@
 import cxs from 'cxs';
-import {useEffect, useState} from 'preact/hooks';
+import {useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
 import {CountryCard} from 'src/components/widget/CountryCard';
@@ -15,7 +15,7 @@ import {Country} from 'src/components/widget/constants/supported-countries';
 import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
 import {ConfigContext} from 'src/components/widget/context/config-context';
 import {WidgetContext} from 'src/components/widget/context/widget-context';
-import useI18n, {getTranslations} from 'src/components/widget/hooks/use-i18n';
+import {useI18n, getTranslations} from 'src/components/widget/hooks/use-i18n';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {FontFamily} from 'src/components/widget/theme/font-family';
