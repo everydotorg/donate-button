@@ -1,24 +1,18 @@
 import cxs from 'cxs';
 import {Ref} from 'preact';
-import {forwardRef, useEffect, useState} from 'preact/compat';
+import {forwardRef, useEffect, useMemo, useState} from 'preact/compat';
 import {Popover} from 'src/components/widget/Popover';
 import {supportedCountries} from 'src/components/widget/constants/supported-countries';
+import useI18n from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {labelText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import {replaceKeys, getBoldFormatted} from 'src/helpers/interpolation';
 
 const containerCss = cxs({
 	padding: Spacing.Inset_M
-});
-
-const bodyCss = cxs({
-	...labelText,
-	color: COLORS.Text,
-	fontWeight: 'normal',
-	margin: Spacing.Stack_M
 });
 
 const actionsCss = cxs({
@@ -63,35 +57,53 @@ export const CurrencySuggestion = forwardRef(
 
 		const suggestedCurrency = supportedCountries?.[country]?.currency;
 
+		const i18n = useI18n();
+
+		const popoverText = useMemo(
+			() =>
+				getBoldFormatted(
+					replaceKeys(
+						{
+							suggestedCurrency,
+							country,
+							fromCurrency: `${donationAmount} ${currency}`,
+							toCurrency: `${donationAmount} ${suggestedCurrency}`
+						},
+						i18n.currencyPopover
+					)
+				),
+			[i18n, currency, suggestedCurrency, country, donationAmount]
+		);
+
+		const changeButtonText = useMemo(
+			() =>
+				replaceKeys(
+					{
+						suggestedCurrency
+					},
+					i18n.switchCurrency
+				),
+			[i18n, suggestedCurrency]
+		);
+
 		return showSuggestion ? (
 			<Popover ref={ref} arrowPosition="85%">
 				<div className={containerCss}>
-					<p className={bodyCss}>
-						It’s recommended to donate <strong>{suggestedCurrency}</strong> if
-						you are getting a {country} tax receipt, would you like to switch
-						from{' '}
-						<strong>
-							{donationAmount} {currency}
-						</strong>{' '}
-						to{' '}
-						<strong>
-							{donationAmount} {suggestedCurrency}
-						</strong>
-					</p>
+					{popoverText}
 					<div className={actionsCss}>
 						<button
 							type="button"
 							className={buttonPrimaryCss}
 							onClick={updateCurrency}
 						>
-							Change to {suggestedCurrency}
+							{changeButtonText}
 						</button>
 						<button
 							type="button"
 							className={buttonSecondaryCss}
 							onClick={dismiss}
 						>
-							No thanks
+							{i18n.noThanks}
 						</button>
 					</div>
 				</div>

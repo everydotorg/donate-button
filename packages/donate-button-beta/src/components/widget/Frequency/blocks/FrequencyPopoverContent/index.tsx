@@ -1,5 +1,6 @@
 import cxs from 'cxs';
 import closeSvg from 'src/assets/close.svg';
+import useI18n from 'src/components/widget/hooks/use-i18n';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {Radii} from 'src/components/widget/theme/radii';
@@ -53,26 +54,26 @@ interface FrequencyPopoverContentProps {
 	onClose: () => void;
 	nonprofitSlug: string;
 }
+
 export const FrequencyPopoverContent = ({
 	onClose,
 	nonprofitSlug
 }: FrequencyPopoverContentProps) => {
 	const donateWithCryptoUrl = constructEveryUrl({nonprofitSlug, crypto: true});
 
+	const i18n = useI18n();
+
 	return (
 		<div className={containerCss}>
 			<div className={headerCss}>
-				<p className={titleCss}>
-					Monthly gifts help nonprofits focus on their mission and long-term
-					impact, not fundraising.
-				</p>
+				<p className={titleCss}>{i18n.frequencyPopover}</p>
 				<button className={closeButtonCss} type="button" onClick={onClose}>
 					<img src={closeSvg} />
 				</button>
 			</div>
 			<div className={dividerCss} />
 			<a type="button" className={actionLink} href={donateWithCryptoUrl}>
-				Donate with Crypto, Stocks or DAF
+				{i18n.donateWithCrypto}
 			</a>
 		</div>
 	);

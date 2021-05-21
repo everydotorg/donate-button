@@ -6,6 +6,7 @@ import {
 	Country,
 	supportedCountries
 } from 'src/components/widget/constants/supported-countries';
+import useI18n from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
@@ -85,6 +86,7 @@ const CountryOption = ({
 
 export const CountrySelector = () => {
 	const {setRoute, setCountry} = useWidgetContext();
+	const i18n = useI18n();
 
 	const selectCountry = (country: Country) => {
 		setCountry(country);
@@ -94,7 +96,7 @@ export const CountrySelector = () => {
 	return (
 		<SectionContainer
 			renderHeader={
-				<span className={sectionTitleCss}>Select your preferred countries</span>
+				<span className={sectionTitleCss}>{i18n.countrySelection}</span>
 			}
 			renderBody={
 				<div className={countriesListCss}>

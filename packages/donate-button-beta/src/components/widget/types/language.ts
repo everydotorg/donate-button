@@ -9,5 +9,7 @@ export type Language = {
 	noThanks: string;
 	donateWithCrypto: string;
 	countryTitle: string;
+	countrySelection: string;
 	donate: string;
+	donationRedirectNotice: string;
 };
