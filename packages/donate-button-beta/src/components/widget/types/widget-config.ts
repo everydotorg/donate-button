@@ -3,6 +3,7 @@ import {
 	CountryInfo
 } from 'src/components/widget/constants/supported-countries';
 import {Language} from 'src/components/widget/types/language';
+import {InfoPage} from 'src/components/widget/types/pages';
 
 export type WidgetConfig = {
 	show: boolean;

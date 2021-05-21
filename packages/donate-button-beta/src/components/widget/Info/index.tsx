@@ -6,6 +6,7 @@ import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import {InfoPage} from 'src/components/widget/types/pages';
 
 const pageListCss = cxs({
 	display: 'flex',
@@ -29,7 +30,7 @@ const pageSelectedCss = cxs({
 const findPage = (config: InfoPage[], route: string) =>
 	config.find((page: InfoPage) => page.key === route);
 
-const Info = () => {
+export const Info = () => {
 	const {infoPages} = useConfigContext();
 
 	const {route, setRoute} = useWidgetContext();
@@ -64,5 +65,3 @@ const Info = () => {
 		/>
 	);
 };
-
-export default Info;
