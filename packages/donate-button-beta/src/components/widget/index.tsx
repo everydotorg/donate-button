@@ -10,6 +10,7 @@ import {Info} from 'src/components/widget/Info';
 import {Input} from 'src/components/widget/Input';
 import {NonprofitHeader} from 'src/components/widget/NonprofitHeader';
 import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
+import {RedirectNotice} from 'src/components/widget/RedirectNotice';
 import {SubmitButton} from 'src/components/widget/SubmitButton';
 import {Country} from 'src/components/widget/constants/supported-countries';
 import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
@@ -246,9 +247,13 @@ const Widget = ({options, hide}: WidgetProps) => {
 												setValue={setDonationAmount}
 											/>
 										</FormControl>
-										<FormControl label={i18n.countryTitle}>
-											<CountryCard />
-										</FormControl>
+										{config.countrySelection ? (
+											<FormControl label={i18n.countryTitle}>
+												<CountryCard />
+											</FormControl>
+										) : (
+											<RedirectNotice />
+										)}
 									</div>
 									<NonprofitInfo classes={[nonProfitInfoCss]} />
 								</div>

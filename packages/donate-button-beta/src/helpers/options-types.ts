@@ -43,7 +43,7 @@ const defaults: Partial<WidgetConfig> = {
 	name: 'Every Org',
 	crypto: false,
 	forceLanguage: false,
-	countrySelection: true,
+	countrySelection: false,
 	defaultDonationAmounts: {
 		monthly: 5,
 		oneTime: 100
