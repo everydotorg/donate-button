@@ -17,41 +17,56 @@
     <h2>Manually setup button with selector</h2>
     <div id="create-button-selector" />
     <script>
-      window.addEventListener("load", function() {
+      window.addEventListener("load", function () {
         everyDotOrgDonateButton.createButton({
           selector: "#create-button-selector",
           nonprofitSlug: "everydotorg",
-          crypto: true
+          crypto: true,
         });
-      })
+      });
     </script>
 
     <h2>Manually setup button with element</h2>
     <div id="create-button-element" />
     <script>
-      window.addEventListener("load", function() {
+      window.addEventListener("load", function () {
         everyDotOrgDonateButton.createButton({
           element: document.getElementById("create-button-element"),
           nonprofitSlug: "everydotorg",
-          crypto: true
+          crypto: true,
         });
-      })
+      });
     </script>
 
     <h2>Automatically setup buttons</h2>
-    <div style="margin-bottom: 1rem;" class="edo-donate-btn">
-      <a href="https://www.every.org/everydotorg/donate/crypto">Donate Crypto</a>
+    <div style="margin-bottom: 1rem" class="edo-donate-btn">
+      <a href="https://www.every.org/everydotorg/donate/crypto"
+        >Donate Crypto</a
+      >
     </div>
     <div class="edo-donate-btn">
-      <a href="https://www.every.org/givedirectly/donate/crypto">Donate Crypto</a>
+      <a href="https://www.every.org/givedirectly/donate/crypto"
+        >Donate Crypto</a
+      >
     </div>
     <script>
-      window.addEventListener("load", function() {
+      window.addEventListener("load", function () {
         everyDotOrgDonateButton.initButtons();
-      })
+      });
     </script>
 
     <div style="margin-top: 40px" id="generic-button"></div>
+
+    <h2>Manually setup widget with selector</h2>
+    <button id="create-widget-selector">Open widget</button>
+    <script>
+      window.addEventListener("load", function () {
+        everyDotOrgDonateButton.createWidget({
+          selector: "#create-widget-selector",
+          nonprofitSlug: "everydotorg",
+        });
+      });
+    </script>
     <!-- EVERY MONTH -->
 
     <!--
