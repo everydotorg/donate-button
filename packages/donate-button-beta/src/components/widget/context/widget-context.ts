@@ -15,6 +15,7 @@ interface WidgetContextProps {
 	currency: Currency;
 	setCurrency: StateUpdater<Currency>;
 	donationAmount: number;
+	setDonationAmount: StateUpdater<number>;
 }
 
 export const WidgetContext = createContext<WidgetContextProps>(

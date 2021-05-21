@@ -176,7 +176,9 @@ const Widget = ({options, hide}: WidgetProps) => {
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
 		true
 	);
-	const [donationAmount, setDonationAmount] = useState<number>(100);
+	const [donationAmount, setDonationAmount] = useState<number>(
+		config.defaultDonationAmounts.monthly
+	);
 	const [currency, setCurrency] = useState<Currency>('GBP');
 	const [frequency, setFrequency] = useState<DonationFrequency>(
 		DonationFrequency.Unselected
@@ -217,7 +219,8 @@ const Widget = ({options, hide}: WidgetProps) => {
 					setCountry,
 					currency,
 					setCurrency,
-					donationAmount
+					donationAmount,
+					setDonationAmount
 				}}
 			>
 				<div className={wrapperCss} onClick={hideOnWrapperClick}>
