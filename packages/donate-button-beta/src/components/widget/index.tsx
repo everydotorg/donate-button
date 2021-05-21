@@ -172,8 +172,6 @@ interface WidgetProps {
 const Widget = ({options, hide}: WidgetProps) => {
 	const config = mergeConfig(options);
 
-	console.log('config =>', config);
-
 	const [route, setRoute] = useState<string>(Routes.DonationForm);
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
 		true
