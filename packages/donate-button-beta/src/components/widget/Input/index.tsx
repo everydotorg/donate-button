@@ -44,6 +44,7 @@ const inputCss = cxs({
 	border: 'none',
 	margin: 0,
 	fontFamily: 'inherit',
+	fontSize: 'inherit',
 	borderTopLeftRadius: Radii.Default,
 	borderTopRightRadius: Radii.Default,
 	borderBottom: getColoredBorder(Borders.Normal, COLORS.Transparent),

@@ -140,7 +140,6 @@ const hideWidget = () => {
 };
 
 const mount = () => {
-	// We don't attach directly to body because is hiding the elements inside the body for some reason.
 	const widgetWrapper = document.createElement('div');
 	document.body.append(widgetWrapper);
 
