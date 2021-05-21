@@ -1,8 +1,11 @@
 export type Language = {
 	frequency: string;
 	monthly: string;
-	oneTime: string;
+	monthlyDonation: string;
+	oneTimeDonation: string;
 	amount: string;
+	amountError: string;
+	frequencySelect: string;
 	frequencyPopover: string;
 	currencyPopover: string;
 	switchCurrency: string;

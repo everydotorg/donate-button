@@ -2,9 +2,12 @@ import {Language} from 'src/components/widget/types/language';
 
 export const es: Language = {
 	frequency: 'Frecuencia',
-	monthly: 'Donación mensual',
-	oneTime: 'Donación única',
+	monthly: 'Mensualmente',
+	monthlyDonation: 'Donación mensual',
+	oneTimeDonation: 'Donación única',
 	amount: 'Monto',
+	amountError: 'Ingrese un monto para donar',
+	frequencySelect: 'Seleccione el tipo de donación',
 	frequencyPopover:
 		'Las donaciones mensuales nos ayudan en nuestra misión e impacto a largo plazo',
 	currencyPopover:

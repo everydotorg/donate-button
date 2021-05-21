@@ -3,8 +3,11 @@ import {Language} from 'src/components/widget/types/language';
 export const en: Language = {
 	frequency: 'Frequency',
 	monthly: 'Monthly',
-	oneTime: 'One time',
+	monthlyDonation: 'Monthly',
+	oneTimeDonation: 'One time',
 	amount: 'Amount',
+	amountError: 'Enter an amount to donate',
+	frequencySelect: 'Select frequency',
 	frequencyPopover:
 		'Monthly gifts help nonprofits focus on their mission and long-term impact',
 	currencyPopover:

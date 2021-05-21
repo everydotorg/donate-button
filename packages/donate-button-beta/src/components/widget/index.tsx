@@ -15,6 +15,7 @@ import {Country} from 'src/components/widget/constants/supported-countries';
 import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
 import {ConfigContext} from 'src/components/widget/context/config-context';
 import {WidgetContext} from 'src/components/widget/context/widget-context';
+import useI18n, {getTranslations} from 'src/components/widget/hooks/use-i18n';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {FontFamily} from 'src/components/widget/theme/font-family';
@@ -22,6 +23,7 @@ import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {Currency} from 'src/components/widget/types/currency';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
+import {Language} from 'src/components/widget/types/language';
 import {Routes} from 'src/components/widget/types/routes';
 import {WidgetConfig} from 'src/components/widget/types/widget-config';
 import {mergeConfig} from 'src/helpers/options-types';
@@ -142,20 +144,21 @@ const closeWidgetCss = cxs({
 const getSubmitButtonText = (
 	donationAmount: number,
 	currency: Currency,
-	frequency: DonationFrequency
+	frequency: DonationFrequency,
+	i18n: Language
 ) => {
 	if (frequency === '') {
-		return 'Select frequency';
+		return i18n.frequencySelect;
 	}
 
 	if (Number.isNaN(donationAmount)) {
-		return 'Enter an amount to donate';
+		return i18n.amountError;
 	}
 
 	const currencySymbol = supportedCurrencies[currency];
-	let text = `Donate ${currencySymbol}${donationAmount}`;
+	let text = `${i18n.donate} ${currencySymbol}${donationAmount}`;
 	if (frequency === DonationFrequency.Monthly) {
-		text = text.concat(' Monthly');
+		text = text.concat(` ${i18n.monthly}`);
 	}
 
 	return text;
@@ -165,8 +168,12 @@ interface WidgetProps {
 	options: Partial<WidgetConfig>;
 	hide: () => void;
 }
+
 const Widget = ({options, hide}: WidgetProps) => {
 	const config = mergeConfig(options);
+
+	console.log('config =>', config);
+
 	const [route, setRoute] = useState<string>(Routes.DonationForm);
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
 		true
@@ -185,6 +192,8 @@ const Widget = ({options, hide}: WidgetProps) => {
 			hide();
 		}
 	};
+
+	const i18n = getTranslations(config.i18n, config.forceLanguage);
 
 	// UseEffect(() => {
 	// 	const fetchInfo = async () => {
@@ -222,13 +231,13 @@ const Widget = ({options, hide}: WidgetProps) => {
 							<Fragment>
 								<div className={scrollableContent}>
 									<div className={formCss}>
-										<FormControl label="Frequency">
+										<FormControl label={i18n.frequency}>
 											<Frequency
 												frequency={frequency}
 												setFrequency={setFrequency}
 											/>
 										</FormControl>
-										<FormControl label="Amount">
+										<FormControl label={i18n.amount}>
 											<Input
 												selectedCurrency={currency}
 												setCurrency={setCurrency}
@@ -236,7 +245,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 												setValue={setDonationAmount}
 											/>
 										</FormControl>
-										<FormControl label="Country for tax deduction">
+										<FormControl label={i18n.countryTitle}>
 											<CountryCard />
 										</FormControl>
 									</div>
@@ -249,7 +258,12 @@ const Widget = ({options, hide}: WidgetProps) => {
 											Number.isNaN(donationAmount)
 										}
 									>
-										{getSubmitButtonText(donationAmount, currency, frequency)}
+										{getSubmitButtonText(
+											donationAmount,
+											currency,
+											frequency,
+											i18n
+										)}
 									</SubmitButton>
 								</div>
 								<NonprofitHeader classes={[nonProfitHeaderCss]} />

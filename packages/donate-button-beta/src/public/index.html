@@ -64,6 +64,14 @@
         everyDotOrgDonateButton.createWidget({
           selector: "#create-widget-selector",
           nonprofitSlug: "everydotorg",
+          options: {
+            forceLanguage: 'es',
+            infoPages: [{
+              key: 'faq',
+              name: 'FAQ',
+              source: '# This is the faq'
+            }]
+          }
         });
       });
     </script>

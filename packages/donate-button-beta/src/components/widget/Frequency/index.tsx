@@ -83,7 +83,7 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 					name="frequency"
 					value={DonationFrequency.Monthly}
 				/>
-				{i18n.monthly}
+				{i18n.monthlyDonation}
 			</label>
 			<label
 				className={rightLabelClasses.join(' ')}
@@ -98,7 +98,7 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 					name="frequency"
 					value={DonationFrequency.OneTime}
 				/>
-				{i18n.monthly}
+				{i18n.oneTimeDonation}
 			</label>
 			{showFrequencyPopover ? (
 				<Popover ref={frequencyPopover}>
