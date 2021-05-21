@@ -65,16 +65,23 @@
           selector: "#create-widget-selector",
           nonprofitSlug: "everydotorg",
           options: {
-            infoPages: [{
-              key: 'faq',
-              name: 'FAQ',
-              source: '# This is the faq'
-            }, {
-              key: 'donation-policy',
-              name: 'Donation Policy',
-              source: '# Donation Policy\n1. Scope\n**lorem ipsum**'
-            }]
-          }
+            infoPages: [
+              {
+                key: "faq",
+                name: "FAQ",
+                source: `## This is the faq\n# Every.org Donate Button
+      For nonprofits — the simplest way to give your supporters a beautiful donation experience. This button opens a donation flow through [Every.org](https://www.every.org/nonprofits).\n
+      ### Use
+      Add this code at the bottom of your page, just before the
+      `,
+              },
+              {
+                key: "donation-policy",
+                name: "Donation Policy",
+                source: "# Donation Policy\n1. Scope\n**lorem ipsum**",
+              },
+            ],
+          },
         });
       });
     </script>

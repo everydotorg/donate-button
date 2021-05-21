@@ -19,5 +19,7 @@ export const es: Language = {
 	countrySelection: 'Selecciona tu país',
 	donate: 'Donar',
 	donationRedirectNotice:
-		'Vas a ser redireccionado a Every.org para completar tu donación de {{currency}} a una ONG registrada en {{country}}.'
+		'Vas a ser redireccionado a Every.org para completar tu donación de {{currency}} a una ONG registrada en {{country}}.',
+	nonprofitDescription: `Nosotros dependemos de donaciones y subsidios para seguir adelante\nLas donaciones de los lectores son esenciales para nuestro trabajo, nos proveen la estabilidad y la independencia que necesitamos, de esta manera podejmos concentrarnos en seguir mostrando la informacion y evidencia que creemos que todo el mundo debe conocer`,
+	thanksDonation: `Muchas gracias,\nGlobal Change Data Lab y el equipo de Our World in Data`
 };

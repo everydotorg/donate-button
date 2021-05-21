@@ -27,3 +27,15 @@ export const headingText: cxs.CSSObject = {
 	lineHeight: '2rem',
 	letterSpacing: '-0.015'
 };
+
+export const heading2Text: cxs.CSSObject = {
+	fontSize: '1.5rem',
+	lineHeight: '1.75rem',
+	letterSpacing: '-0.015'
+};
+
+export const heading3Text: cxs.CSSObject = {
+	fontSize: '1.25rem',
+	lineHeight: '1.5rem',
+	letterSpacing: '-0.015'
+};

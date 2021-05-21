@@ -5,6 +5,13 @@ import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
+import {
+	headingText,
+	heading2Text,
+	heading3Text,
+	labelText,
+	linkText
+} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {Routes} from 'src/components/widget/types/routes';
 
@@ -38,7 +45,29 @@ const returnButtonCss = cxs({
 const contentCss = cxs({
 	overflow: 'auto',
 	height: '100%',
-	padding: `${Spacing.Empty} ${Spacing.XL}`
+	padding: `${Spacing.Empty} ${Spacing.XL}`,
+	'& > h1': {
+		...headingText,
+		fontWeight: 'bold'
+	},
+	'& > h2': {
+		...heading2Text,
+		fontWeight: 'bold'
+	},
+	'& > h3': {
+		...heading3Text,
+		fontWeight: 'bold'
+	},
+	'& > p': {
+		...labelText
+	},
+	'& a': {
+		...linkText,
+		color: `${COLORS.Primary}`,
+		':visited': {
+			color: `${COLORS.Primary}`
+		}
+	}
 });
 
 interface SectionContainerProps {
