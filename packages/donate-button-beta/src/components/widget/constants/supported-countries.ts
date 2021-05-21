@@ -3,7 +3,7 @@ import {PaymentMethod} from 'src/components/widget/types/payment-method';
 
 export type Country = 'GB' | 'USA' | 'OTHER';
 
-type CountryInfo = {
+export type CountryInfo = {
 	displayName: string;
 	currency: Currency;
 	description: string;

@@ -1,6 +1,7 @@
 import cxs from 'cxs';
-import {useState} from 'preact/hooks';
+import {useEffect, useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
+import {JSXInternal} from 'preact/src/jsx';
 import {CountryCard} from 'src/components/widget/CountryCard';
 import {CountrySelector} from 'src/components/widget/CountrySelector';
 import {FormControl} from 'src/components/widget/FormControl';
@@ -12,17 +13,19 @@ import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
 import {SubmitButton} from 'src/components/widget/SubmitButton';
 import {Country} from 'src/components/widget/constants/supported-countries';
 import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
+import {ConfigContext} from 'src/components/widget/context/config-context';
 import {WidgetContext} from 'src/components/widget/context/widget-context';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {FontFamily} from 'src/components/widget/theme/font-family';
+import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {Currency} from 'src/components/widget/types/currency';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
 import {Routes} from 'src/components/widget/types/routes';
-
+import {WidgetConfig} from 'src/components/widget/types/widget-config';
+import {mergeConfig} from 'src/helpers/options-types';
 cxs.prefix('edoWidget-');
-
 const wrapperCss = cxs({
 	position: 'absolute',
 	height: '100vh',
@@ -38,33 +41,28 @@ const wrapperCss = cxs({
 	alignItems: 'center',
 	fontFamily: FontFamily.BasisGrotesque
 });
-
 const widgetCss = cxs({
 	background: 'white',
-	overflow: 'hidden',
-
 	display: 'grid',
 	gridTemplateRows: 'max-content 1fr max-content',
 	width: '100vw',
 	height: '100vh',
 	borderRadius: 'unset',
-
-	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
+	position: 'relative',
+	[BREAKPOINTS.TabletLandscapeUp]: {
 		// Temporary until we have more content inside the widget
 		gridTemplateColumns: '60% 40%',
 		gridTemplateRows: '1fr max-content max-content',
 		height: '80vh',
 		width: '70vw',
-		borderRadius: '24px'
+		borderRadius: Radii.Medium
 	}
 });
-
 const formCss = cxs({
 	gridColumn: '1 / 2',
 	gridRow: '1 / 3',
 	padding: Spacing.Inset_XL,
 	borderRight: 'none',
-
 	display: 'grid',
 	gridTemplateColumns: '1fr',
 	gridAutoRows: 'max-content',
@@ -73,46 +71,71 @@ const formCss = cxs({
 		borderRight: `1px solid ${COLORS.LightGray}`
 	}
 });
-
 const nonProfitHeaderCss = cxs({
 	height: '190px',
 	gridColumn: '1 / -1',
 	gridRow: '1 / 2',
-
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
 		height: 'auto',
 		gridColumn: '2 / 3',
 		gridRow: '1 / 2'
 	}
 });
-
 const nonProfitInfoCss = cxs({
 	gridColumn: '2 / 3',
 	gridRow: '2 / 4'
 });
-
 const ctaCss = cxs({
 	gridColumn: '1 / -1',
 	gridRow: '3 / 4',
 	padding: `${Spacing.Empty} ${Spacing.XS} ${Spacing.XS} ${Spacing.XS}`,
-	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
+	[BREAKPOINTS.TabletLandscapeUp]: {
 		gridColumn: '1 / 2',
 		gridRow: '3 / 4',
 		borderRight: `1px solid ${COLORS.LightGray}`,
 		padding: '1.5rem'
 	}
 });
-
 const scrollableContent = cxs({
 	display: 'flex',
 	flexDirection: 'column',
 	overflow: 'auto',
 	gridColumn: '1 / -1',
 	gridRow: '2 / 3',
-
-	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
+	[BREAKPOINTS.TabletLandscapeUp]: {
 		display: 'contents',
 		overflow: 'initial'
+	}
+});
+
+const closeBoxCss = cxs({
+	position: 'absolute',
+	zIndex: 1,
+	top: Spacing.XS,
+	right: Spacing.Empty,
+	padding: Spacing.Inset_XS,
+	cursor: 'pointer',
+	[BREAKPOINTS.TabletLandscapeUp]: {
+		top: `-${Spacing.M}`,
+		right: `-${Spacing.XXL}`
+	}
+});
+
+const closeWidgetCss = cxs({
+	width: '1rem',
+	height: '2px',
+	background: COLORS.White,
+	transform: 'rotate(45deg)',
+	position: 'relative',
+	'&:after': {
+		content: '""',
+		position: 'absolute',
+		left: 0,
+		background: COLORS.White,
+		width: '1rem',
+		height: '2px',
+
+		transform: 'rotate(-90deg)'
 	}
 });
 
@@ -130,9 +153,7 @@ const getSubmitButtonText = (
 	}
 
 	const currencySymbol = supportedCurrencies[currency];
-
 	let text = `Donate ${currencySymbol}${donationAmount}`;
-
 	if (frequency === DonationFrequency.Monthly) {
 		text = text.concat(' Monthly');
 	}
@@ -140,7 +161,12 @@ const getSubmitButtonText = (
 	return text;
 };
 
-const Widget = ({show}: {show: boolean}) => {
+interface WidgetProps {
+	options: Partial<WidgetConfig>;
+	hide: () => void;
+}
+const Widget = ({options, hide}: WidgetProps) => {
+	const config = mergeConfig(options);
 	const [route, setRoute] = useState<string>(Routes.DonationForm);
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
 		true
@@ -151,69 +177,92 @@ const Widget = ({show}: {show: boolean}) => {
 		DonationFrequency.Unselected
 	);
 	const [country, setCountry] = useState<Country>('GB');
-	return show ? (
-		<WidgetContext.Provider
-			value={{
-				showFrequencyPopover,
-				dismissPopover: () => {
-					setShowFrequencyPopover(false);
-				},
-				setRoute,
-				route,
-				frequency,
-				country,
-				setCountry,
-				currency,
-				setCurrency,
-				donationAmount
-			}}
-		>
-			<div className={wrapperCss}>
-				<form className={widgetCss}>
-					{route === Routes.DonationForm ? (
-						<Fragment>
-							<div className={scrollableContent}>
-								<div className={formCss}>
-									<FormControl label="Frequency">
-										<Frequency
-											frequency={frequency}
-											setFrequency={setFrequency}
-										/>
-									</FormControl>
-									<FormControl label="Amount">
-										<Input
-											selectedCurrency={currency}
-											setCurrency={setCurrency}
-											value={donationAmount}
-											setValue={setDonationAmount}
-										/>
-									</FormControl>
-									<FormControl label="Country for tax deduction">
-										<CountryCard />
-									</FormControl>
+
+	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
+		event
+	) => {
+		if (event.target === event.currentTarget) {
+			hide();
+		}
+	};
+
+	// UseEffect(() => {
+	// 	const fetchInfo = async () => {
+	// 		const info = await getNonprofitInfo('owid');
+	// 		console.log(info);
+	// 	};
+
+	// 	void fetchInfo();
+	// }, []);
+
+	return config.show ? (
+		<ConfigContext.Provider value={config}>
+			<WidgetContext.Provider
+				value={{
+					showFrequencyPopover,
+					dismissPopover: () => {
+						setShowFrequencyPopover(false);
+					},
+					setRoute,
+					route,
+					frequency,
+					country,
+					setCountry,
+					currency,
+					setCurrency,
+					donationAmount
+				}}
+			>
+				<div className={wrapperCss} onClick={hideOnWrapperClick}>
+					<form className={widgetCss}>
+						<div className={closeBoxCss} onClick={hide}>
+							<div role="button" className={closeWidgetCss} />
+						</div>
+						{route === Routes.DonationForm ? (
+							<Fragment>
+								<div className={scrollableContent}>
+									<div className={formCss}>
+										<FormControl label="Frequency">
+											<Frequency
+												frequency={frequency}
+												setFrequency={setFrequency}
+											/>
+										</FormControl>
+										<FormControl label="Amount">
+											<Input
+												selectedCurrency={currency}
+												setCurrency={setCurrency}
+												value={donationAmount}
+												setValue={setDonationAmount}
+											/>
+										</FormControl>
+										<FormControl label="Country for tax deduction">
+											<CountryCard />
+										</FormControl>
+									</div>
+									<NonprofitInfo classes={[nonProfitInfoCss]} />
 								</div>
-								<NonprofitInfo classes={[nonProfitInfoCss]} />
-							</div>
-							<div className={ctaCss}>
-								<SubmitButton
-									disabled={
-										frequency === DonationFrequency.Unselected ||
-										Number.isNaN(donationAmount)
-									}
-								>
-									{getSubmitButtonText(donationAmount, currency, frequency)}
-								</SubmitButton>
-							</div>
-							<NonprofitHeader classes={[nonProfitHeaderCss]} />
-						</Fragment>
-					) : route === Routes.SelectCountry ? (
-						<CountrySelector />
-					) : (
-						<Info />
-					)}
-				</form>
-			</div>
-		</WidgetContext.Provider>
+								<div className={ctaCss}>
+									<SubmitButton
+										disabled={
+											frequency === DonationFrequency.Unselected ||
+											Number.isNaN(donationAmount)
+										}
+									>
+										{getSubmitButtonText(donationAmount, currency, frequency)}
+									</SubmitButton>
+								</div>
+								<NonprofitHeader classes={[nonProfitHeaderCss]} />
+							</Fragment>
+						) : route === Routes.SelectCountry ? (
+							<CountrySelector />
+						) : (
+							<Info />
+						)}
+					</form>
+				</div>
+			</WidgetContext.Provider>
+		</ConfigContext.Provider>
 	) : null;
 };
 

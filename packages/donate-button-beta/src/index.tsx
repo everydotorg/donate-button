@@ -1,11 +1,12 @@
 import {render} from 'preact';
 import EmbedButton from 'src/components/embed-button';
-import Widget from 'src/components/widget';
+import {WidgetConfig} from 'src/components/widget/types/widget-config';
 import {
 	DonateButtonOptions,
 	EmbedButtonOptions
 } from 'src/helpers/options-types';
 import {loadFonts} from 'src/load-fonts';
+import {WidgetLoader} from 'src/loaders/widget-loader';
 
 interface CreateButtonInSelectorProps extends EmbedButtonOptions {
 	/**
@@ -125,8 +126,15 @@ let mountPoint: HTMLElement;
 const options = {
 	show: false
 };
+let instanceOptions = {};
 const showWidget = () => {
 	Object.assign(options, {show: true});
+
+	renderWidget();
+};
+
+const hideWidget = () => {
+	Object.assign(options, {show: false});
 
 	renderWidget();
 };
@@ -145,13 +153,37 @@ const renderWidget = () => {
 		mount();
 	}
 
-	render(<Widget {...options} />, mountPoint);
+	const finalOptions: Partial<WidgetConfig> = {
+		...options,
+		...instanceOptions
+	};
+
+	render(<WidgetLoader options={finalOptions} hide={hideWidget} />, mountPoint);
+};
+
+const createWidgetInSelector = ({element, selector, options}: any) => {
+	if (!element && !selector) {
+		log('createWidget():', 'must provide element or selector');
+	}
+
+	const container = element || (selector && document.querySelector(selector));
+	if (!container) {
+		return;
+	}
+
+	container.addEventListener('click', () => {
+		instanceOptions = {...options};
+		showWidget();
+	});
+
+	renderWidget();
 };
 
 interface GlobalExport {
 	createButton: typeof createButtonInSelector;
 	initButtons: typeof initButtons;
 	showWidget: typeof showWidget;
+	createWidget: typeof createWidgetInSelector;
 }
 
 declare const window: Window & {
@@ -161,5 +193,6 @@ declare const window: Window & {
 window.everyDotOrgDonateButton = {
 	createButton: createButtonInSelector,
 	initButtons,
-	showWidget
+	showWidget,
+	createWidget: createWidgetInSelector
 };
