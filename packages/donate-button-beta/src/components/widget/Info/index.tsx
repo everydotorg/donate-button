@@ -2,24 +2,11 @@ import cxs from 'cxs';
 import {useEffect, useState} from 'preact/hooks';
 import {Markdown} from 'src/components/widget/Markdown';
 import {SectionContainer} from 'src/components/widget/SectionContainer';
+import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {Spacing} from 'src/components/widget/theme/spacing';
-
-export const pageConfig: InfoPage[] = [
-	{
-		key: 'faq',
-		name: 'FAQ',
-		source:
-			'https://raw.githubusercontent.com/julianpoma/stream-parser/master/README.md'
-	},
-	{
-		key: 'donation-policy',
-		name: 'Donation Policy',
-		source:
-			'# Donation Policy\nThis **is a** paragraph\nThis is _another_ paragraph. And this is a [Link](https://google.com)'
-	}
-];
+import {InfoPage} from 'src/components/widget/types/pages';
 
 const pageListCss = cxs({
 	display: 'flex',
@@ -43,21 +30,23 @@ const pageSelectedCss = cxs({
 const findPage = (config: InfoPage[], route: string) =>
 	config.find((page: InfoPage) => page.key === route);
 
-const Info = () => {
+export const Info = () => {
+	const {infoPages} = useConfigContext();
+
 	const {route, setRoute} = useWidgetContext();
 	const [selectedPage, setSelectedPage] = useState<InfoPage | undefined>(
-		findPage(pageConfig, route)
+		findPage(infoPages, route)
 	);
 
 	useEffect(() => {
-		setSelectedPage(findPage(pageConfig, route));
-	}, [route]);
+		setSelectedPage(findPage(infoPages, route));
+	}, [infoPages, route]);
 
 	return (
 		<SectionContainer
 			renderHeader={
 				<ul className={pageListCss}>
-					{pageConfig.map((page) => (
+					{infoPages.map((page) => (
 						<li
 							key={page.key}
 							className={[pageItemCss]
@@ -76,5 +65,3 @@ const Info = () => {
 		/>
 	);
 };
-
-export default Info;

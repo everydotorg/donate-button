@@ -11,11 +11,6 @@ import {COLORS} from 'src/components/widget/theme/colors';
 import {labelText} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
 
-const countryTitle = cxs({
-	display: 'flex',
-	alignItems: 'center'
-});
-
 const countrySelectedCss = cxs({
 	...labelText,
 	color: COLORS.Primary,

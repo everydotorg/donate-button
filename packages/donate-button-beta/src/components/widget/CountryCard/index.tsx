@@ -1,6 +1,8 @@
 import cxs from 'cxs';
+import {useMemo} from 'preact/hooks';
 import chevronDown from 'src/assets/chevron-down.svg';
 import {CountryTitle} from 'src/components/widget/CountryTitle';
+import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
@@ -8,6 +10,7 @@ import {bodyText, labelText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {Routes} from 'src/components/widget/types/routes';
+import {replaceKeys} from 'src/helpers/interpolation';
 
 const cardCss = cxs({
 	padding: Spacing.S,
@@ -47,7 +50,20 @@ const bodyCss = cxs({
 });
 
 export const CountryCard = () => {
-	const {country, setRoute} = useWidgetContext();
+	const {country, currency, setRoute} = useWidgetContext();
+	const i18n = useI18n();
+
+	const redirectNoticeText = useMemo(
+		() =>
+			replaceKeys(
+				{
+					country,
+					currency
+				},
+				i18n.donationRedirectNotice
+			),
+		[country, currency, i18n]
+	);
 
 	return (
 		<div className={cardCss}>
@@ -63,10 +79,7 @@ export const CountryCard = () => {
 				</span>
 			</div>
 			<div>
-				<p className={bodyCss}>
-					You will be redirected to Every.org to complete your GBP donation to a
-					UK registered charity eligible for GiftAid.
-				</p>
+				<p className={bodyCss}>{redirectNoticeText}</p>
 			</div>
 		</div>
 	);

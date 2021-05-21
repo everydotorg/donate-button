@@ -2,6 +2,7 @@ import cxs from 'cxs';
 import {StateUpdater, useRef, useState} from 'preact/hooks';
 import {FrequencyPopoverContent} from 'src/components/widget/Frequency/blocks/FrequencyPopoverContent';
 import {Popover} from 'src/components/widget/Popover';
+import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
@@ -51,6 +52,8 @@ interface FrequencyProps {
 }
 export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 	const {showFrequencyPopover, dismissPopover} = useWidgetContext();
+	const i18n = useI18n();
+
 	const frequencyPopover = useRef<HTMLDivElement>(null);
 
 	const labelSeparatorClass =
@@ -80,7 +83,7 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 					name="frequency"
 					value={DonationFrequency.Monthly}
 				/>
-				Monthly
+				{i18n.monthlyDonation}
 			</label>
 			<label
 				className={rightLabelClasses.join(' ')}
@@ -95,7 +98,7 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 					name="frequency"
 					value={DonationFrequency.OneTime}
 				/>
-				One-time
+				{i18n.oneTimeDonation}
 			</label>
 			{showFrequencyPopover ? (
 				<Popover ref={frequencyPopover}>
