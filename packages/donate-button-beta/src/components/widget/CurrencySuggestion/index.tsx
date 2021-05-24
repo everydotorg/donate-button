@@ -7,16 +7,23 @@ import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
+import {labelText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
-import {replaceKeys, getBoldFormatted} from 'src/helpers/interpolation';
+import {getBoldFormatted, replaceKeys} from 'src/helpers/interpolation';
 
 const containerCss = cxs({
 	padding: Spacing.Inset_M
 });
 
+const textCss = cxs({
+	...labelText,
+	fontWeight: 'normal'
+});
+
 const actionsCss = cxs({
-	display: 'flex'
+	display: 'flex',
+	marginTop: Spacing.M
 });
 
 const buttonPrimaryCss = cxs({
@@ -61,16 +68,14 @@ export const CurrencySuggestion = forwardRef(
 
 		const popoverText = useMemo(
 			() =>
-				getBoldFormatted(
-					replaceKeys(
-						{
-							suggestedCurrency,
-							country,
-							fromCurrency: `${donationAmount} ${currency}`,
-							toCurrency: `${donationAmount} ${suggestedCurrency}`
-						},
-						i18n.currencyPopover
-					)
+				replaceKeys(
+					{
+						suggestedCurrency,
+						country,
+						fromCurrency: `${donationAmount} ${currency}`,
+						toCurrency: `${donationAmount} ${suggestedCurrency}`
+					},
+					i18n.currencyPopover
 				),
 			[i18n, currency, suggestedCurrency, country, donationAmount]
 		);
@@ -89,7 +94,7 @@ export const CurrencySuggestion = forwardRef(
 		return showSuggestion ? (
 			<Popover ref={ref} arrowPosition="85%">
 				<div className={containerCss}>
-					{popoverText}
+					<span className={textCss}>{getBoldFormatted(popoverText)}</span>
 					<div className={actionsCss}>
 						<button
 							type="button"

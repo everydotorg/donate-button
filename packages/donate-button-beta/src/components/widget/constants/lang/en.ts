@@ -11,7 +11,7 @@ export const en: Language = {
 	frequencyPopover:
 		'Monthly gifts help nonprofits focus on their mission and long-term impact',
 	currencyPopover:
-		'It’s recommended to donate </strong>{{suggestedCurrency}}</strong> if you are getting a {{country}} tax receipt, would you like to switch from <strong>{{fromCurrency}}</strong> to <strong>{{toCurrency}}</strong>',
+		'It’s recommended to donate {{suggestedCurrency}} if you are getting a {{country}} tax receipt, would you like to switch from <bold>{{fromCurrency}} to {{toCurrency}}</bold>',
 	switchCurrency: 'Change to {{suggestedCurrency}}',
 	noThanks: 'No thanks',
 	donateWithCrypto: 'Donate with Crypto, Stocks or DAF',

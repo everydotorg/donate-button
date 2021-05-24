@@ -27,13 +27,6 @@ const countrySelectorCss = cxs({
 	cursor: 'pointer'
 });
 
-const countrySelectedCss = cxs({
-	...labelText,
-	color: COLORS.Primary,
-	margin: 0,
-	transform: 'translateY(0.07em)'
-});
-
 const arrowCss = cxs({
 	...labelText,
 	color: COLORS.Primary,

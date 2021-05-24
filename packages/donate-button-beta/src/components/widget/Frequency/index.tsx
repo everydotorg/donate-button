@@ -2,6 +2,7 @@ import cxs from 'cxs';
 import {StateUpdater, useRef, useState} from 'preact/hooks';
 import {FrequencyPopoverContent} from 'src/components/widget/Frequency/blocks/FrequencyPopoverContent';
 import {Popover} from 'src/components/widget/Popover';
+import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
@@ -50,8 +51,14 @@ interface FrequencyProps {
 	frequency: DonationFrequency;
 	setFrequency: StateUpdater<DonationFrequency>;
 }
+
 export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
-	const {showFrequencyPopover, dismissPopover} = useWidgetContext();
+	const {
+		showFrequencyPopover,
+		dismissPopover,
+		setDonationAmount
+	} = useWidgetContext();
+	const {defaultDonationAmounts} = useConfigContext();
 	const i18n = useI18n();
 
 	const frequencyPopover = useRef<HTMLDivElement>(null);
@@ -61,9 +68,11 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 		frequency === DonationFrequency.OneTime
 			? [separatorBorderSelectedCss]
 			: [];
+
 	const leftLabelClasses = [labelCss, labelLeftCss].concat(
 		frequency === DonationFrequency.Monthly ? [labelSelectedCss] : []
 	);
+
 	const rightLabelClasses = [labelCss, labelRightCss].concat(
 		frequency === DonationFrequency.OneTime ? [labelSelectedCss] : []
 	);
@@ -75,6 +84,7 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 				htmlFor="monthly"
 				onClick={() => {
 					setFrequency(DonationFrequency.Monthly);
+					setDonationAmount(defaultDonationAmounts.monthly);
 				}}
 			>
 				<input
@@ -90,6 +100,7 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 				htmlFor="one-time"
 				onClick={() => {
 					setFrequency(DonationFrequency.OneTime);
+					setDonationAmount(defaultDonationAmounts.oneTime);
 				}}
 			>
 				<input
