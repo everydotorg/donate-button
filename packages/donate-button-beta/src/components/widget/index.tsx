@@ -30,7 +30,7 @@ import {mergeConfig} from 'src/helpers/options-types';
 cxs.prefix('edoWidget-');
 const wrapperCss = cxs({
 	position: 'absolute',
-	height: '100vh',
+	height: 'auto',
 	width: '100vw',
 	zIndex: 999,
 	top: 0,
@@ -48,7 +48,7 @@ const widgetCss = cxs({
 	display: 'grid',
 	gridTemplateRows: 'max-content 1fr max-content',
 	width: '100vw',
-	height: '100vh',
+	height: '100%',
 	borderRadius: 'unset',
 	position: 'relative',
 	[BREAKPOINTS.TabletLandscapeUp]: {

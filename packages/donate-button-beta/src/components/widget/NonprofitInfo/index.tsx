@@ -1,13 +1,11 @@
 import cxs from 'cxs';
+import {Markdown} from 'src/components/widget/Markdown';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
+import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {smallText} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
-
-const text = `We are a nonprofit and rely on donations and grants to keep us going.`;
-const body = `Reader donations are essential to our work, providing us with the stability and independence we need, so we can focus on showing the data and evidence we think everyone needs to know.`;
-const thanks = `Global Change Data Lab and the Our World in Data team`;
 
 const containerCss = cxs({
 	...smallText,
@@ -26,8 +24,9 @@ const containerCss = cxs({
 
 const lastParagraph = cxs({
 	color: COLORS.TextOpaque,
-	' > span': {
-		display: 'block'
+	' > p': {
+		display: 'block',
+		margin: 0
 	}
 });
 
@@ -49,16 +48,15 @@ type NonprofitInfo = {
 
 export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 	const {setRoute} = useWidgetContext();
-	const {description, infoPages} = useConfigContext();
+	const {infoPages} = useConfigContext();
+	const {nonprofitDescription, thanksDonation} = useI18n();
 
 	return (
 		<div className={[containerCss].concat(classes).join(' ')}>
-			<p>{text}</p>
-			<p>{description}</p>
-			<p className={lastParagraph}>
-				<span>Thank you,</span>
-				<span>{thanks}</span>
-			</p>
+			<Markdown source={nonprofitDescription} />
+			<div className={lastParagraph}>
+				<Markdown source={thanksDonation} />
+			</div>
 			<div className={actionsContainer}>
 				{infoPages.map((page) => (
 					<p
