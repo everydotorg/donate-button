@@ -177,14 +177,14 @@ const Widget = ({options, hide}: WidgetProps) => {
 
 	const [route, setRoute] = useState<string>(Routes.DonationForm);
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
-		true
+		config.showInitialMessage
 	);
 	const [donationAmount, setDonationAmount] = useState<number>(
 		config.defaultDonationAmounts.monthly
 	);
 	const [currency, setCurrency] = useState<Currency>('GBP');
 	const [frequency, setFrequency] = useState<DonationFrequency>(
-		DonationFrequency.Unselected
+		config.defaultFrequency
 	);
 	const [country, setCountry] = useState<Country>('GB');
 

@@ -58,7 +58,7 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 				<Markdown source={thanksDonation} />
 			</div>
 			<div className={actionsContainer}>
-				{infoPages.map((page) => (
+				{infoPages?.map((page) => (
 					<p
 						key={page.key}
 						onClick={() => {
