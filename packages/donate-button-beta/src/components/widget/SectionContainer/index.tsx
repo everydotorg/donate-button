@@ -24,7 +24,7 @@ const containerCss = cxs({
 
 const headerCss = cxs({
 	display: 'flex',
-	padding: Spacing.InsetSquish_M,
+	padding: Spacing.Inset_XL,
 	borderBottom: getColoredBorder(Borders.Normal, COLORS.LightGray),
 	alignItems: 'center',
 

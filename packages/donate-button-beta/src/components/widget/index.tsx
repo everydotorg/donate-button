@@ -53,12 +53,14 @@ const widgetCss = cxs({
 	borderRadius: 'unset',
 	position: 'relative',
 	[BREAKPOINTS.TabletLandscapeUp]: {
-		// Temporary until we have more content inside the widget
+		// Fix te size of the widget to match the desings.
+		// We can add a new breakpoints for large devices is this is too small
+		height: '32.31rem',
+		width: '44.81rem',
+
+		borderRadius: Radii.Medium,
 		gridTemplateColumns: '60% 40%',
-		gridTemplateRows: '1fr max-content max-content',
-		height: '80vh',
-		width: '70vw',
-		borderRadius: Radii.Medium
+		gridTemplateRows: '1fr max-content max-content'
 	}
 });
 const formCss = cxs({

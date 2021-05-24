@@ -18,7 +18,7 @@ import {Routes} from 'src/components/widget/types/routes';
 const countriesListCss = cxs({
 	display: 'flex',
 	flexDirection: 'column',
-	'& > *:not(:last-child)': {
+	'& > *': {
 		margin: Spacing.Stack_M
 	}
 });
