@@ -14,6 +14,7 @@ export type WidgetConfig = {
 	description: string;
 	crypto: boolean;
 	countrySelection: boolean;
+	primaryColor: string;
 	forceLanguage: string | false;
 	defaultDonationAmounts: {
 		monthly: number;

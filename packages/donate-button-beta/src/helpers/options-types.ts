@@ -51,6 +51,7 @@ const defaults: Partial<WidgetConfig> = {
 	},
 	defaultFrequency: DonationFrequency.Unselected,
 	showInitialMessage: true,
+	primaryColor: '#00A37F',
 	i18n: {
 		en,
 		es

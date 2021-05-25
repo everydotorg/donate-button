@@ -1,7 +1,8 @@
 import cxs from 'cxs';
-import {useState} from 'preact/hooks';
+import {useEffect, useLayoutEffect, useRef, useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
+import {CloseButton} from 'src/components/widget/CloseButton';
 import {CountryCard} from 'src/components/widget/CountryCard';
 import {CountrySelector} from 'src/components/widget/CountrySelector';
 import {FormControl} from 'src/components/widget/FormControl';
@@ -47,7 +48,7 @@ const wrapperCss = cxs({
 const widgetCss = cxs({
 	background: 'white',
 	display: 'grid',
-	gridTemplateRows: 'max-content 1fr max-content',
+	gridTemplateRows: '1fr max-content',
 	width: '100vw',
 	height: '100%',
 	borderRadius: 'unset',
@@ -77,9 +78,9 @@ const formCss = cxs({
 	}
 });
 const nonProfitHeaderCss = cxs({
-	height: '190px',
 	gridColumn: '1 / -1',
 	gridRow: '1 / 2',
+
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
 		height: 'auto',
 		gridColumn: '2 / 3',
@@ -106,7 +107,7 @@ const scrollableContent = cxs({
 	flexDirection: 'column',
 	overflow: 'auto',
 	gridColumn: '1 / -1',
-	gridRow: '2 / 3',
+	gridRow: '1 / 2',
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		display: 'contents',
 		overflow: 'initial'
@@ -118,29 +119,9 @@ const closeBoxCss = cxs({
 	zIndex: 1,
 	top: Spacing.XS,
 	right: Spacing.Empty,
-	padding: Spacing.Inset_XS,
-	cursor: 'pointer',
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		top: `-${Spacing.M}`,
 		right: `-${Spacing.XXL}`
-	}
-});
-
-const closeWidgetCss = cxs({
-	width: '1rem',
-	height: '2px',
-	background: COLORS.White,
-	transform: 'rotate(45deg)',
-	position: 'relative',
-	'&:after': {
-		content: '""',
-		position: 'absolute',
-		left: 0,
-		background: COLORS.White,
-		width: '1rem',
-		height: '2px',
-
-		transform: 'rotate(-90deg)'
 	}
 });
 
@@ -174,7 +155,6 @@ interface WidgetProps {
 
 const Widget = ({options, hide}: WidgetProps) => {
 	const config = mergeConfig(options);
-
 	const [route, setRoute] = useState<string>(Routes.DonationForm);
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
 		config.showInitialMessage
@@ -186,6 +166,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 	const [frequency, setFrequency] = useState<DonationFrequency>(
 		config.defaultFrequency
 	);
+	const [showScrolledHeader, setShowScrolledHeader] = useState(false);
 	const [country, setCountry] = useState<Country>('GB');
 
 	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
@@ -197,6 +178,28 @@ const Widget = ({options, hide}: WidgetProps) => {
 	};
 
 	const i18n = getTranslations(config.i18n, config.forceLanguage);
+	const scrollableContainerRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (scrollableContainerRef.current) {
+			const scrollableRef = scrollableContainerRef.current;
+			const modifyHeaderHeight = () => {
+				const {scrollTop} = scrollableRef;
+				if (
+					!window.matchMedia(BREAKPOINTS.TabletLandscapeUp).matches &&
+					!showScrolledHeader
+				) {
+					setShowScrolledHeader(scrollTop > 90);
+				}
+			};
+
+			scrollableRef.addEventListener('scroll', modifyHeaderHeight);
+
+			return () => {
+				scrollableRef.removeEventListener('scroll', modifyHeaderHeight);
+			};
+		}
+	}, [showScrolledHeader]);
 
 	// UseEffect(() => {
 	// 	const fetchInfo = async () => {
@@ -223,17 +226,22 @@ const Widget = ({options, hide}: WidgetProps) => {
 					currency,
 					setCurrency,
 					donationAmount,
-					setDonationAmount
+					setDonationAmount,
+					hideWidget: hide
 				}}
 			>
 				<div className={wrapperCss} onClick={hideOnWrapperClick}>
 					<form className={widgetCss}>
-						<div className={closeBoxCss} onClick={hide}>
-							<div role="button" className={closeWidgetCss} />
-						</div>
+						{!showScrolledHeader && (
+							<CloseButton positionCss={closeBoxCss} color={COLORS.White} />
+						)}
 						{route === Routes.DonationForm ? (
 							<Fragment>
-								<div className={scrollableContent}>
+								<div ref={scrollableContainerRef} className={scrollableContent}>
+									<NonprofitHeader
+										showScrolled={showScrolledHeader}
+										classes={[nonProfitHeaderCss]}
+									/>
 									<div className={formCss}>
 										<FormControl label={i18n.frequency}>
 											<Frequency
@@ -259,6 +267,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 									</div>
 									<NonprofitInfo classes={[nonProfitInfoCss]} />
 								</div>
+
 								<div className={ctaCss}>
 									<SubmitButton
 										disabled={
@@ -274,7 +283,6 @@ const Widget = ({options, hide}: WidgetProps) => {
 										)}
 									</SubmitButton>
 								</div>
-								<NonprofitHeader classes={[nonProfitHeaderCss]} />
 							</Fragment>
 						) : route === Routes.SelectCountry ? (
 							<CountrySelector />

@@ -1,5 +1,6 @@
 import cxs from 'cxs';
 import {ComponentChildren} from 'preact';
+import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {linkText} from 'src/components/widget/theme/font-sizes';
@@ -19,24 +20,28 @@ const btnCss = cxs({
 	borderRadius: Radii.Big,
 	color: COLORS.White,
 	padding: `${Spacing.L} ${Spacing.Empty}`,
-	backgroundColor: COLORS.Primary,
 
-	transition: 'backgroundColor .2s',
+	transition: 'opacity .2s',
 	':hover': {
-		backgroundColor: 'rgb(0, 124, 97)'
+		opacity: '0.7'
 	},
 	':active': {
-		backgroundColor: 'rgb(0, 139, 109)'
+		opacity: '0.9'
 	}
 });
 
+const btnActiveColor = (primaryColor: string) =>
+	cxs({
+		backgroundColor: primaryColor
+	});
+
 const btnDisabledCss = cxs({
 	backgroundColor: COLORS.DarkGray,
+	':hover': {
+		opacity: '1'
+	},
 	'& > span': {
 		opacity: '0.6'
-	},
-	':hover': {
-		backgroundColor: COLORS.DarkGray
 	}
 });
 
@@ -52,11 +57,13 @@ export const SubmitButton = ({
 	className,
 	children
 }: ButtonProps) => {
+	const {primaryColor} = useConfigContext();
+
 	return (
 		<button
 			type="submit"
 			className={[btnCss]
-				.concat(disabled ? [btnDisabledCss] : [])
+				.concat(disabled ? [btnDisabledCss] : [btnActiveColor(primaryColor)])
 				.concat([className ? className : ''])
 				.join(' ')}
 			disabled={disabled}

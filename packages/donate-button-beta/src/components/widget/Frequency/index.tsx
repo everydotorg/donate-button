@@ -15,24 +15,27 @@ const frequencyContainerCss = cxs({
 	display: 'flex'
 });
 
-const labelCss = cxs({
-	...labelText,
-	color: COLORS.Primary,
-	fontWeight: 400,
-	padding: `${Spacing.XS} ${Spacing.Empty}`,
-	flex: 1,
-	textAlign: 'center',
-	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
-	transition: 'border .2s'
-});
+const labelCss = (primaryColor: string) =>
+	cxs({
+		...labelText,
+		color: primaryColor,
+		fontWeight: 400,
+		padding: `${Spacing.XS} ${Spacing.Empty}`,
+		flex: 1,
+		textAlign: 'center',
+		border: getColoredBorder(Borders.Normal, COLORS.LightGray),
+		transition: 'border .2s'
+	});
 
-const labelSelectedCss = cxs({
-	border: getColoredBorder(Borders.Normal, COLORS.Primary)
-});
+const labelSelectedCss = (primaryColor: string) =>
+	cxs({
+		border: getColoredBorder(Borders.Normal, primaryColor)
+	});
 
-const separatorBorderSelectedCss = cxs({
-	borderRightColor: COLORS.Primary
-});
+const separatorBorderSelectedCss = (primaryColor: string) =>
+	cxs({
+		borderRightColor: primaryColor
+	});
 
 const labelLeftCss = cxs({
 	borderRadius: '8px 0 0 8px'
@@ -58,7 +61,7 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 		dismissPopover,
 		setDonationAmount
 	} = useWidgetContext();
-	const {defaultDonationAmounts} = useConfigContext();
+	const {defaultDonationAmounts, primaryColor} = useConfigContext();
 	const i18n = useI18n();
 
 	const frequencyPopover = useRef<HTMLDivElement>(null);
@@ -66,15 +69,17 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 	const labelSeparatorClass =
 		frequency === DonationFrequency.Monthly ||
 		frequency === DonationFrequency.OneTime
-			? [separatorBorderSelectedCss]
+			? [separatorBorderSelectedCss(primaryColor)]
 			: [];
-
-	const leftLabelClasses = [labelCss, labelLeftCss].concat(
-		frequency === DonationFrequency.Monthly ? [labelSelectedCss] : []
+	const leftLabelClasses = [labelCss(primaryColor), labelLeftCss].concat(
+		frequency === DonationFrequency.Monthly
+			? [labelSelectedCss(primaryColor)]
+			: []
 	);
-
-	const rightLabelClasses = [labelCss, labelRightCss].concat(
-		frequency === DonationFrequency.OneTime ? [labelSelectedCss] : []
+	const rightLabelClasses = [labelCss(primaryColor), labelRightCss].concat(
+		frequency === DonationFrequency.OneTime
+			? [labelSelectedCss(primaryColor)]
+			: []
 	);
 
 	return (

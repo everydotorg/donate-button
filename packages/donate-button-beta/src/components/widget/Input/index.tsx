@@ -6,6 +6,8 @@ import chevronDown from 'src/assets/chevron-down.svg';
 import {CurrencySuggestion} from 'src/components/widget/CurrencySuggestion';
 import {Link} from 'src/components/widget/Link';
 import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
+import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
+import {ChevronDown} from 'src/components/widget/svg/ChevronDown';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {linkText} from 'src/components/widget/theme/font-sizes';
@@ -78,32 +80,39 @@ const inputPrefix = cxs({
 	color: COLORS.TextGray
 });
 
-const selectCurrencyCss = cxs({
+const selectCurrencyContainerCss = cxs({
 	position: 'absolute',
 	top: '50%',
 	right: Spacing.M,
 	transform: 'translateY(-50%)',
-	lineHeight: 1,
-	color: COLORS.Primary,
+	display: 'flex',
+	alignItems: 'center',
+	cursor: 'pointer'
+});
 
-	// Select
-	appearance: 'none',
-	'-webkit-appearance': 'none',
-	'-moz-appearance': 'none',
-	border: 'none',
-	background: COLORS.Transparent,
-	fontFamily: 'inherit',
-	outline: 'none',
-	':focus': {
-		outline: 'none'
-	},
+const selectCurrencyCss = (primaryColor: string) =>
+	cxs({
+		lineHeight: 1,
+		color: primaryColor,
 
-	backgroundImage: `url(${chevronDown})`,
-	backgroundPositionX: 'right',
-	backgroundPositionY: 'center',
-	backgroundRepeat: 'no-repeat',
+		// Select
+		appearance: 'none',
+		'-webkit-appearance': 'none',
+		'-moz-appearance': 'none',
+		border: 'none',
+		background: COLORS.Transparent,
+		fontFamily: 'inherit',
+		outline: 'none',
+		':focus': {
+			outline: 'none'
+		},
 
-	paddingRight: Spacing.M
+		paddingRight: Spacing.L
+	});
+
+const selectArrowCss = cxs({
+	marginLeft: `-${Spacing.M}`,
+	pointerEvents: 'none'
 });
 
 const addAmountContainerCss = cxs({
@@ -136,6 +145,7 @@ export const Input = ({
 	setCurrency,
 	...otherProps
 }: InputProps) => {
+	const {primaryColor} = useConfigContext();
 	const inputContainerRef = useRef<HTMLDivElement>(null);
 	const inputContainerClasses = [inputContainerCss].concat(
 		error ? [inputErrorCss] : []
@@ -162,22 +172,25 @@ export const Input = ({
 					}}
 					{...otherProps}
 				/>
-				<select
-					className={selectCurrencyCss}
-					onChange={(event) => {
-						setCurrency(event.currentTarget.value as Currency);
-					}}
-				>
-					{Object.keys(supportedCurrencies).map((currency) => (
-						<option
-							key={currency}
-							value={currency}
-							selected={selectedCurrency === currency}
-						>
-							{currency}
-						</option>
-					))}
-				</select>
+				<div className={selectCurrencyContainerCss}>
+					<select
+						className={selectCurrencyCss(primaryColor)}
+						onChange={(event) => {
+							setCurrency(event.currentTarget.value as Currency);
+						}}
+					>
+						{Object.keys(supportedCurrencies).map((currency) => (
+							<option
+								key={currency}
+								value={currency}
+								selected={selectedCurrency === currency}
+							>
+								{currency}
+							</option>
+						))}
+					</select>
+					<ChevronDown className={selectArrowCss} color={primaryColor} />
+				</div>
 			</div>
 			<div className={addAmountContainerCss}>
 				{addAmounts.map((amount) => (

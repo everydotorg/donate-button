@@ -1,9 +1,10 @@
 import cxs from 'cxs';
 import {useMemo} from 'preact/hooks';
-import chevronDown from 'src/assets/chevron-down.svg';
 import {CountryTitle} from 'src/components/widget/CountryTitle';
+import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
+import {ChevronDown} from 'src/components/widget/svg/ChevronDown';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {bodyText, labelText} from 'src/components/widget/theme/font-sizes';
@@ -27,14 +28,15 @@ const countrySelectorCss = cxs({
 	cursor: 'pointer'
 });
 
-const arrowCss = cxs({
-	...labelText,
-	color: COLORS.Primary,
-	position: 'absolute',
-	top: '50%',
-	right: 0,
-	transform: 'translateY(-50%)'
-});
+const arrowCss = (primaryColor: string) =>
+	cxs({
+		...labelText,
+		color: primaryColor,
+		position: 'absolute',
+		top: '50%',
+		right: 0,
+		transform: 'translateY(-50%)'
+	});
 
 const bodyCss = cxs({
 	...bodyText,
@@ -44,6 +46,7 @@ const bodyCss = cxs({
 
 export const CountryCard = () => {
 	const {country, currency, setRoute} = useWidgetContext();
+	const {primaryColor} = useConfigContext();
 	const i18n = useI18n();
 
 	const redirectNoticeText = useMemo(
@@ -63,12 +66,12 @@ export const CountryCard = () => {
 			<div className={countrySelectorCss}>
 				<CountryTitle country={country} />
 				<span
-					className={arrowCss}
+					className={arrowCss(primaryColor)}
 					onClick={() => {
 						setRoute(Routes.SelectCountry);
 					}}
 				>
-					<img src={chevronDown} />
+					<ChevronDown color={primaryColor} />
 				</span>
 			</div>
 			<div>

@@ -18,20 +18,17 @@ const pageListCss = cxs({
 	}
 });
 
-const pageItemCss = cxs({
-	color: COLORS.Primary,
-	cursor: 'pointer'
-});
-
-const pageSelectedCss = cxs({
-	color: COLORS.Black
-});
+const pageItemCss = (primaryColor: string, selected: boolean) =>
+	cxs({
+		color: selected ? COLORS.Black : primaryColor,
+		cursor: 'pointer'
+	});
 
 const findPage = (config: InfoPage[], route: string) =>
 	config.find((page: InfoPage) => page.key === route);
 
 export const Info = () => {
-	const {infoPages} = useConfigContext();
+	const {infoPages, primaryColor} = useConfigContext();
 
 	const {route, setRoute} = useWidgetContext();
 	const [selectedPage, setSelectedPage] = useState<InfoPage | undefined>(
@@ -49,9 +46,7 @@ export const Info = () => {
 					{infoPages.map((page) => (
 						<li
 							key={page.key}
-							className={[pageItemCss]
-								.concat(page.key === route ? pageSelectedCss : '')
-								.join(' ')}
+							className={pageItemCss(primaryColor, page.key === route)}
 							onClick={() => {
 								setRoute(page.key);
 							}}

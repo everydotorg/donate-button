@@ -1,13 +1,16 @@
 import cxs from 'cxs';
 import preact from 'preact';
 import {forwardRef} from 'preact/compat';
+import {CloseButton} from 'src/components/widget/CloseButton';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
+import {COLORS} from 'src/components/widget/theme/colors';
 import {headingText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 
 const containerCss = cxs({
+	minHeight: '190px',
 	background:
 		'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%), url(https://s3-alpha-sig.figma.com/img/d7aa/78a4/b6a15610c281667759af6bcd489fe8ed?Expires=1621814400&Signature=ZdVP7JbZkjh9PoJjmlfaldO09jPgXukSe757JyeGDvM76SghgE4UjdEnLRzWo9coetjHBZsKYdJPhagd2U2f8427UttzQQg0~5J5s1DghtmDSEiR0FvPkHPNf~GlRyPiCOxqlA25DKYWQnAaqNqq4UmSDunltUAwJZLzdFL0VMhsLIe9EclokuAQDFFurgbXr7Pe3z~XAKuV4u~XynBVEGtHEtVPpC8kQQgFde8~c4bHiVSuMk-ZrCqt46hnVA6hFfjVVsguMKSR89RM7NbFyHqcGI2nYXHGos-0FLL1S0UY9-eEbn7WWq5RJJ~y85yLayQIPA6Cd284EU~ugrIH~Q__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA)',
 	backgroundPosition: 'center',
@@ -50,15 +53,46 @@ const logoImageCss = cxs({
 	backgroundSize: 'contain'
 });
 
+const scrolledHeaderContainerCss = cxs({
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'space-between',
+	padding: `${Spacing.M} ${Spacing.XL}`,
+	background: 'white',
+	position: 'sticky',
+	top: 0,
+	left: 0,
+	zIndex: 10,
+	'& > p': {
+		margin: 0
+	},
+	borderBottom: `1px solid ${COLORS.LightGray}`,
+	transition: 'all .4s'
+});
+
+const closeWidgetButton = cxs({
+	paddingRight: Spacing.Empty
+});
+
 type NonprofitHeader = {
 	classes: string[];
+	showScrolled: boolean;
 };
 
 export const NonprofitHeader = forwardRef(
-	({classes}: NonprofitHeader, ref: preact.Ref<HTMLDivElement>) => {
-		const {name} = useConfigContext();
-
-		return (
+	(
+		{classes, showScrolled}: NonprofitHeader,
+		ref: preact.Ref<HTMLDivElement>
+	) => {
+		const {name, primaryColor} = useConfigContext();
+		return showScrolled ? (
+			<div className={[scrolledHeaderContainerCss].concat(classes).join(' ')}>
+				<p>
+					Donate to <strong>{name}</strong>
+				</p>
+				<CloseButton positionCss={closeWidgetButton} color={primaryColor} />
+			</div>
+		) : (
 			<div ref={ref} className={[containerCss].concat(classes).join(' ')}>
 				<p className={nonprofitNameCss}>{name}</p>
 				<div className={logoContainerCss}>
