@@ -30,17 +30,18 @@ const lastParagraph = cxs({
 	}
 });
 
-const actionsContainer = cxs({
-	color: COLORS.Primary,
-	display: 'flex',
-	'& > *:not(:last-child)': {
-		marginRight: Spacing.XL
-	},
-	' > p': {
-		margin: 0,
-		cursor: 'pointer'
-	}
-});
+const actionsContainer = (primaryColor: string) =>
+	cxs({
+		color: primaryColor,
+		display: 'flex',
+		'& > *:not(:last-child)': {
+			marginRight: Spacing.XL
+		},
+		' > p': {
+			margin: 0,
+			cursor: 'pointer'
+		}
+	});
 
 type NonprofitInfo = {
 	classes: string[];
@@ -48,7 +49,7 @@ type NonprofitInfo = {
 
 export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 	const {setRoute} = useWidgetContext();
-	const {infoPages} = useConfigContext();
+	const {infoPages, primaryColor} = useConfigContext();
 	const {nonprofitDescription, thanksDonation} = useI18n();
 
 	return (
@@ -57,8 +58,8 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 			<div className={lastParagraph}>
 				<Markdown source={thanksDonation} />
 			</div>
-			<div className={actionsContainer}>
-				{infoPages.map((page) => (
+			<div className={actionsContainer(primaryColor)}>
+				{infoPages?.map((page) => (
 					<p
 						key={page.key}
 						onClick={() => {

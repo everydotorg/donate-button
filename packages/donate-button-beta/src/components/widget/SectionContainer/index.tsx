@@ -1,7 +1,8 @@
 import cxs from 'cxs';
 import {ComponentChildren} from 'preact';
-import LeftArrow from 'src/assets/left-arrow.svg';
+import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
+import {LeftArrow} from 'src/components/widget/svg/LeftArrow';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
@@ -24,7 +25,7 @@ const containerCss = cxs({
 
 const headerCss = cxs({
 	display: 'flex',
-	padding: Spacing.InsetSquish_M,
+	padding: Spacing.Inset_XL,
 	borderBottom: getColoredBorder(Borders.Normal, COLORS.LightGray),
 	alignItems: 'center',
 
@@ -42,33 +43,34 @@ const returnButtonCss = cxs({
 	cursor: 'pointer'
 });
 
-const contentCss = cxs({
-	overflow: 'auto',
-	height: '100%',
-	padding: `${Spacing.Empty} ${Spacing.XL}`,
-	'& > h1': {
-		...headingText,
-		fontWeight: 'bold'
-	},
-	'& > h2': {
-		...heading2Text,
-		fontWeight: 'bold'
-	},
-	'& > h3': {
-		...heading3Text,
-		fontWeight: 'bold'
-	},
-	'& > p': {
-		...labelText
-	},
-	'& a': {
-		...linkText,
-		color: `${COLORS.Primary}`,
-		':visited': {
-			color: `${COLORS.Primary}`
+const contentCss = (primaryColor: string) =>
+	cxs({
+		overflow: 'auto',
+		height: '100%',
+		padding: `${Spacing.Empty} ${Spacing.XL}`,
+		'& > h1': {
+			...headingText,
+			fontWeight: 'bold'
+		},
+		'& > h2': {
+			...heading2Text,
+			fontWeight: 'bold'
+		},
+		'& > h3': {
+			...heading3Text,
+			fontWeight: 'bold'
+		},
+		'& > p': {
+			...labelText
+		},
+		'& a': {
+			...linkText,
+			color: primaryColor,
+			':visited': {
+				color: primaryColor
+			}
 		}
-	}
-});
+	});
 
 interface SectionContainerProps {
 	renderHeader: ComponentChildren;
@@ -78,6 +80,7 @@ export const SectionContainer = ({
 	renderBody,
 	renderHeader
 }: SectionContainerProps) => {
+	const {primaryColor} = useConfigContext();
 	const {setRoute} = useWidgetContext();
 
 	return (
@@ -90,11 +93,11 @@ export const SectionContainer = ({
 						setRoute(Routes.DonationForm);
 					}}
 				>
-					<img src={LeftArrow} alt="Back button" />
+					<LeftArrow color={primaryColor} />
 				</button>
 				{renderHeader}
 			</div>
-			<div className={contentCss}>{renderBody}</div>
+			<div className={contentCss(primaryColor)}>{renderBody}</div>
 		</div>
 	);
 };

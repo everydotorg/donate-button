@@ -7,16 +7,18 @@ import {
 	Country,
 	supportedCountries
 } from 'src/components/widget/constants/supported-countries';
+import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {labelText} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
 
-const countrySelectedCss = cxs({
-	...labelText,
-	color: COLORS.Primary,
-	margin: Spacing.Empty,
-	transform: 'translateY(0.09em)'
-});
+const countrySelectedCss = (primaryColor: string) =>
+	cxs({
+		...labelText,
+		color: primaryColor,
+		margin: Spacing.Empty,
+		transform: 'translateY(0.09em)'
+	});
 
 const countryFlagCss = cxs({
 	height: '1rem',
@@ -34,11 +36,14 @@ const flags: Record<Country, string> = {
 };
 
 export const CountryTitle = ({country}: {country: Country}) => {
+	const {primaryColor} = useConfigContext();
 	const countryInfo = supportedCountries[country];
 	return (
 		<Fragment>
 			<img className={countryFlagCss} src={flags[country]} alt="country flag" />
-			<p className={countrySelectedCss}>{countryInfo.displayName}</p>
+			<p className={countrySelectedCss(primaryColor)}>
+				{countryInfo.displayName}
+			</p>
 		</Fragment>
 	);
 };

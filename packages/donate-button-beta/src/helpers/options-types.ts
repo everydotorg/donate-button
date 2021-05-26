@@ -1,6 +1,7 @@
 import deepMerge, {Options as DeepMergeOptions} from 'deepmerge';
 import {en} from 'src/components/widget/constants/lang/en';
 import {es} from 'src/components/widget/constants/lang/es';
+import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
 import {WidgetConfig} from 'src/components/widget/types/widget-config';
 
 export interface DonateButtonOptions {
@@ -43,11 +44,14 @@ const defaults: Partial<WidgetConfig> = {
 	name: 'Every Org',
 	crypto: false,
 	forceLanguage: false,
-	countrySelection: false,
+	countrySelection: true,
 	defaultDonationAmounts: {
 		monthly: 5,
 		oneTime: 100
 	},
+	defaultFrequency: DonationFrequency.Unselected,
+	showInitialMessage: true,
+	primaryColor: '#00A37F',
 	i18n: {
 		en,
 		es

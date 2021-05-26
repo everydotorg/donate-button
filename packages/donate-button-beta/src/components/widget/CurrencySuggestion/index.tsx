@@ -3,6 +3,7 @@ import {Ref} from 'preact';
 import {forwardRef, useEffect, useMemo, useState} from 'preact/compat';
 import {Popover} from 'src/components/widget/Popover';
 import {supportedCountries} from 'src/components/widget/constants/supported-countries';
+import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
@@ -26,29 +27,32 @@ const actionsCss = cxs({
 	marginTop: Spacing.M
 });
 
-const buttonPrimaryCss = cxs({
-	color: COLORS.White,
-	background: COLORS.Primary,
-	padding: Spacing.InsetSquish_XS,
-	borderRadius: Radii.Big,
-	border: getColoredBorder(Borders.Normal, COLORS.Transparent),
-	margin: Spacing.Inline_S,
-	cursor: 'pointer'
-});
+const buttonPrimaryCss = (primaryColor: string) =>
+	cxs({
+		color: COLORS.White,
+		background: primaryColor,
+		padding: Spacing.InsetSquish_XS,
+		borderRadius: Radii.Big,
+		border: getColoredBorder(Borders.Normal, COLORS.Transparent),
+		margin: Spacing.Inline_S,
+		cursor: 'pointer'
+	});
 
-const buttonSecondaryCss = cxs({
-	color: COLORS.Primary,
-	background: COLORS.White,
-	padding: Spacing.InsetSquish_S,
-	borderRadius: Radii.Big,
-	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
-	cursor: 'pointer'
-});
+const buttonSecondaryCss = (primaryColor: string) =>
+	cxs({
+		color: primaryColor,
+		background: COLORS.White,
+		padding: Spacing.InsetSquish_S,
+		borderRadius: Radii.Big,
+		border: getColoredBorder(Borders.Normal, COLORS.LightGray),
+		cursor: 'pointer'
+	});
 
 export const CurrencySuggestion = forwardRef(
 	(_props, ref: Ref<HTMLDivElement>) => {
 		const [showSuggestion, setShowSuggestion] = useState<boolean>(false);
 		const {country, currency, setCurrency, donationAmount} = useWidgetContext();
+		const {primaryColor} = useConfigContext();
 
 		useEffect(() => {
 			setShowSuggestion(supportedCountries?.[country]?.currency !== currency);
@@ -98,14 +102,14 @@ export const CurrencySuggestion = forwardRef(
 					<div className={actionsCss}>
 						<button
 							type="button"
-							className={buttonPrimaryCss}
+							className={buttonPrimaryCss(primaryColor)}
 							onClick={updateCurrency}
 						>
 							{changeButtonText}
 						</button>
 						<button
 							type="button"
-							className={buttonSecondaryCss}
+							className={buttonSecondaryCss(primaryColor)}
 							onClick={dismiss}
 						>
 							{i18n.noThanks}
