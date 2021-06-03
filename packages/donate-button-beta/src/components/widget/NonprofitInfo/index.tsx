@@ -3,6 +3,7 @@ import {Markdown} from 'src/components/widget/Markdown';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
+import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {smallText} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
@@ -11,6 +12,7 @@ const containerCss = cxs({
 	...smallText,
 	display: 'flex',
 	flexDirection: 'column',
+	overflow: 'initial',
 	padding: Spacing.Inset_XL,
 	' > *:not(:last-child)': {
 		marginBottom: Spacing.S
@@ -19,6 +21,9 @@ const containerCss = cxs({
 	' > p': {
 		margin: Spacing.Empty,
 		padding: Spacing.Empty
+	},
+	[BREAKPOINTS.TabletLandscapeUp]: {
+		overflow: 'auto'
 	}
 });
 
