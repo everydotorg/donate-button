@@ -8,10 +8,12 @@ import {InfoPage} from 'src/components/widget/types/pages';
 
 export type WidgetConfig = {
 	show: boolean;
-	nonProfitSlug: string;
+	nonprofitSlug: string;
 	name: string;
-	logo: string;
 	description: string;
+	descriptionLong: string;
+	logo: string;
+	backgroundImage: string;
 	crypto: boolean;
 	countrySelection: boolean;
 	primaryColor: string;

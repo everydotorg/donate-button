@@ -13,6 +13,7 @@ import {NonprofitHeader} from 'src/components/widget/NonprofitHeader';
 import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
 import {RedirectNotice} from 'src/components/widget/RedirectNotice';
 import {SubmitButton} from 'src/components/widget/SubmitButton';
+import {getNonprofitInfo} from 'src/components/widget/api/get-nonprofit-info';
 import {Country} from 'src/components/widget/constants/supported-countries';
 import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
 import {ConfigContext} from 'src/components/widget/context/config-context';
@@ -61,7 +62,7 @@ const widgetCss = cxs({
 
 		borderRadius: Radii.Medium,
 		gridTemplateColumns: '60% 40%',
-		gridTemplateRows: '1fr max-content max-content'
+		gridTemplateRows: '1fr 1fr max-content'
 	}
 });
 const formCss = cxs({
@@ -154,7 +155,7 @@ interface WidgetProps {
 }
 
 const Widget = ({options, hide}: WidgetProps) => {
-	const config = mergeConfig(options);
+	const [config, setConfig] = useState(mergeConfig(options));
 	const [route, setRoute] = useState<string>(Routes.DonationForm);
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
 		config.showInitialMessage
@@ -201,14 +202,21 @@ const Widget = ({options, hide}: WidgetProps) => {
 		}
 	}, [showScrolledHeader]);
 
-	// UseEffect(() => {
-	// 	const fetchInfo = async () => {
-	// 		const info = await getNonprofitInfo('owid');
-	// 		console.log(info);
-	// 	};
+	useEffect(() => {
+		const fetchInfo = async () => {
+			const info = await getNonprofitInfo(
+				options.nonprofitSlug ?? 'everydotorg'
+			);
+			setConfig(
+				mergeConfig({
+					...info,
+					...options
+				})
+			);
+		};
 
-	// 	void fetchInfo();
-	// }, []);
+		void fetchInfo();
+	}, [options]);
 
 	return config.show ? (
 		<ConfigContext.Provider value={config}>
