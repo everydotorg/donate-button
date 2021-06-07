@@ -1,5 +1,5 @@
 import cxs from 'cxs';
-import {useEffect, useLayoutEffect, useRef, useState} from 'preact/hooks';
+import {useEffect, useRef, useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
 import {CloseButton} from 'src/components/widget/CloseButton';
@@ -30,6 +30,7 @@ import {Language} from 'src/components/widget/types/language';
 import {Routes} from 'src/components/widget/types/routes';
 import {WidgetConfig} from 'src/components/widget/types/widget-config';
 import {mergeConfig} from 'src/helpers/options-types';
+
 cxs.prefix('edoWidget-');
 const wrapperCss = cxs({
 	position: 'absolute',
@@ -57,7 +58,7 @@ const widgetCss = cxs({
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		// Fix te size of the widget to match the desings.
 		// We can add a new breakpoints for large devices is this is too small
-		height: '32.31rem',
+		height: '33rem',
 		width: '44.81rem',
 
 		borderRadius: Radii.Medium,
@@ -163,12 +164,13 @@ const Widget = ({options, hide}: WidgetProps) => {
 	const [donationAmount, setDonationAmount] = useState<number>(
 		config.defaultDonationAmounts.monthly
 	);
-	const [currency, setCurrency] = useState<Currency>('GBP');
+	const [currency, setCurrency] = useState<Currency>('USD');
 	const [frequency, setFrequency] = useState<DonationFrequency>(
 		config.defaultFrequency
 	);
 	const [showScrolledHeader, setShowScrolledHeader] = useState(false);
-	const [country, setCountry] = useState<Country>('GB');
+	const [country, setCountry] = useState<Country>('USA');
+	const [submitError, setSubmitError] = useState<string | null>(null);
 
 	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
 		event
@@ -218,6 +220,17 @@ const Widget = ({options, hide}: WidgetProps) => {
 		void fetchInfo();
 	}, [options]);
 
+	const handleSubmit = (event: JSXInternal.TargetedEvent) => {
+		event.preventDefault();
+
+		if (donationAmount < 10) {
+			setSubmitError(`Minimum donation amount is ${currency} 10`);
+			return;
+		}
+
+		console.log('you donated!');
+	};
+
 	return config.show ? (
 		<ConfigContext.Provider value={config}>
 			<WidgetContext.Provider
@@ -239,10 +252,11 @@ const Widget = ({options, hide}: WidgetProps) => {
 				}}
 			>
 				<div className={wrapperCss} onClick={hideOnWrapperClick}>
-					<form className={widgetCss}>
+					<form className={widgetCss} onSubmit={handleSubmit}>
 						{!showScrolledHeader && (
 							<CloseButton positionCss={closeBoxCss} color={COLORS.White} />
 						)}
+
 						{route === Routes.DonationForm ? (
 							<Fragment>
 								<div ref={scrollableContainerRef} className={scrollableContent}>
@@ -263,6 +277,8 @@ const Widget = ({options, hide}: WidgetProps) => {
 												setCurrency={setCurrency}
 												value={donationAmount}
 												setValue={setDonationAmount}
+												error={submitError}
+												setError={setSubmitError}
 											/>
 										</FormControl>
 										{config.countrySelection ? (

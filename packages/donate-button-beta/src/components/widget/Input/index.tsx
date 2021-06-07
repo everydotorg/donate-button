@@ -2,7 +2,6 @@ import cxs from 'cxs';
 import {StateUpdater, useRef} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
-import chevronDown from 'src/assets/chevron-down.svg';
 import {CurrencySuggestion} from 'src/components/widget/CurrencySuggestion';
 import {Link} from 'src/components/widget/Link';
 import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
@@ -10,7 +9,7 @@ import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {ChevronDown} from 'src/components/widget/svg/ChevronDown';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {linkText} from 'src/components/widget/theme/font-sizes';
+import {linkText, smallText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {Currency} from 'src/components/widget/types/currency';
@@ -47,8 +46,7 @@ const inputCss = cxs({
 	margin: 0,
 	fontFamily: 'inherit',
 	fontSize: 'inherit',
-	borderTopLeftRadius: Radii.Default,
-	borderTopRightRadius: Radii.Default,
+	borderRadius: Radii.Default,
 	borderBottom: getColoredBorder(Borders.Normal, COLORS.Transparent),
 	backgroundColor: COLORS.Gray,
 	width: '100%',
@@ -117,10 +115,20 @@ const selectArrowCss = cxs({
 
 const addAmountContainerCss = cxs({
 	display: 'flex',
-	marginTop: Spacing.M,
+	marginTop: Spacing.XS,
 	'& > *:not(:last-child)': {
 		marginRight: Spacing.M
 	}
+});
+
+const errorLabelCss = cxs({
+	...smallText,
+	lineHeight: 1,
+	fontSize: '0.75rem',
+	opacity: 0.8,
+	color: COLORS.Error,
+	marginTop: Spacing.XS,
+	marginBottom: 0
 });
 
 const addAmounts = [10, 25, 50, 100];
@@ -129,16 +137,18 @@ interface InputProps extends JSXInternal.HTMLAttributes<HTMLInputElement> {
 	value: number;
 	setValue: StateUpdater<number>;
 	setCurrency: StateUpdater<Currency>;
-	error?: string;
-	setError?: (v: string) => void;
+	error: string | null;
+	setError: StateUpdater<string | null>;
 	label?: string;
 	placeholder?: string;
 	selectedCurrency: Currency;
 }
+
 export const Input = ({
 	value,
 	setValue,
 	error,
+	setError,
 	label,
 	placeholder,
 	selectedCurrency,
@@ -153,6 +163,18 @@ export const Input = ({
 
 	const inputClasses = [inputCss];
 
+	const handleInputChange = (
+		event: JSXInternal.TargetedEvent<HTMLInputElement>
+	) => {
+		const value = Number.parseInt(event.currentTarget.value, 10);
+
+		setValue(value);
+
+		if (value >= 10) {
+			setError(null);
+		}
+	};
+
 	return (
 		<Fragment>
 			<div ref={inputContainerRef} className={inputContainerClasses.join(' ')}>
@@ -164,12 +186,9 @@ export const Input = ({
 					className={inputClasses.join(' ')}
 					placeholder={placeholder}
 					type="number"
-					min="10"
 					value={value}
 					onKeyDown={preventDecimal}
-					onInput={(event) => {
-						setValue(Number.parseInt(event.currentTarget.value, 10));
-					}}
+					onInput={handleInputChange}
 					{...otherProps}
 				/>
 				<div className={selectCurrencyContainerCss}>
@@ -192,6 +211,7 @@ export const Input = ({
 					<ChevronDown className={selectArrowCss} color={primaryColor} />
 				</div>
 			</div>
+			<p className={errorLabelCss}>{error}&nbsp;</p>
 			<div className={addAmountContainerCss}>
 				{addAmounts.map((amount) => (
 					<Link
