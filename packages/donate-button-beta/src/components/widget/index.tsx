@@ -224,11 +224,8 @@ const Widget = ({options, hide}: WidgetProps) => {
 		event.preventDefault();
 
 		if (donationAmount < 10) {
-			setSubmitError(`Minimum donation amount is ${currency} 10`);
-			return;
+			setSubmitError(`${i18n.minDonationAmount} ${currency} 10`);
 		}
-
-		console.log('you donated!');
 	};
 
 	return config.show ? (

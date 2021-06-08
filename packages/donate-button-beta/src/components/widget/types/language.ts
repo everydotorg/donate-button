@@ -11,6 +11,7 @@ export type Language = {
 	switchCurrency: string;
 	noThanks: string;
 	donateWithCrypto: string;
+	minDonationAmount: string;
 	countryTitle: string;
 	countrySelection: string;
 	donate: string;
