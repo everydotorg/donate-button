@@ -21,5 +21,6 @@ export const en: Language = {
 	donationRedirectNotice:
 		'You will be redirected to Every.org to complete your {{currency}} donation to a {{country}} registered charity eligible for GiftAid.',
 	nonprofitDescription: `We are a nonprofit and rely on donations and grants to keep us going.\nReader donations are essential to our work, providing us with the stability and independence we need, so we can focus on showing the data and evidence we think everyone needs to know.`,
-	thanksDonation: `Thank you,\nGlobal Change Data Lab and the Our World in Data team`
+	thanksDonation: `Thank you,\nGlobal Change Data Lab and the Our World in Data team`,
+	minDonationAmount: 'The minimum donation amount is'
 };
