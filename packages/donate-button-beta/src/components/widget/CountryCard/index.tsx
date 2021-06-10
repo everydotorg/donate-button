@@ -53,7 +53,7 @@ export const CountryCard = () => {
 		() =>
 			replaceKeys(
 				{
-					country,
+					country: country?.countryCode,
 					currency
 				},
 				i18n.donationRedirectNotice

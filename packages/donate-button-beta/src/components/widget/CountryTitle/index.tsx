@@ -3,14 +3,10 @@ import {Fragment} from 'preact/jsx-runtime';
 import gbFlag from 'src/assets/flags/gb.svg';
 import globalFlag from 'src/assets/flags/global.svg';
 import usFlag from 'src/assets/flags/us.svg';
-import {
-	Country,
-	supportedCountries
-} from 'src/components/widget/constants/supported-countries';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
-import {COLORS} from 'src/components/widget/theme/colors';
 import {labelText} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import {DonationRecipient} from 'src/components/widget/types/donation-recipient';
 
 const countrySelectedCss = (primaryColor: string) =>
 	cxs({
@@ -29,21 +25,29 @@ const countryFlagCss = cxs({
 	margin: Spacing.Inline_XS
 });
 
-const flags: Record<Country, string> = {
+const flags: Record<string, string> = {
 	GB: gbFlag,
-	USA: usFlag,
+	US: usFlag,
 	OTHER: globalFlag
 };
 
-export const CountryTitle = ({country}: {country: Country}) => {
+const getFlag = (countryCode: string) => {
+	const flag = flags[countryCode];
+
+	return flag ? flag : flags.OTHER;
+};
+
+export const CountryTitle = ({country}: {country: DonationRecipient}) => {
 	const {primaryColor} = useConfigContext();
-	const countryInfo = supportedCountries[country];
+
 	return (
 		<Fragment>
-			<img className={countryFlagCss} src={flags[country]} alt="country flag" />
-			<p className={countrySelectedCss(primaryColor)}>
-				{countryInfo.displayName}
-			</p>
+			<img
+				className={countryFlagCss}
+				src={getFlag(country?.countryCode)}
+				alt="country flag"
+			/>
+			<p className={countrySelectedCss(primaryColor)}>{country?.name}</p>
 		</Fragment>
 	);
 };

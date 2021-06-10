@@ -14,7 +14,6 @@ import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
 import {RedirectNotice} from 'src/components/widget/RedirectNotice';
 import {SubmitButton} from 'src/components/widget/SubmitButton';
 import {getNonprofitInfo} from 'src/components/widget/api/get-nonprofit-info';
-import {Country} from 'src/components/widget/constants/supported-countries';
 import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
 import {ConfigContext} from 'src/components/widget/context/config-context';
 import {WidgetContext} from 'src/components/widget/context/widget-context';
@@ -26,9 +25,11 @@ import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {Currency} from 'src/components/widget/types/currency';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
+import {DonationRecipient} from 'src/components/widget/types/donation-recipient';
 import {Language} from 'src/components/widget/types/language';
 import {Routes} from 'src/components/widget/types/routes';
 import {WidgetConfig} from 'src/components/widget/types/widget-config';
+import constructEveryUrl from 'src/helpers/construct-every-url';
 import {mergeConfig} from 'src/helpers/options-types';
 
 cxs.prefix('edoWidget-');
@@ -169,8 +170,12 @@ const Widget = ({options, hide}: WidgetProps) => {
 		config.defaultFrequency
 	);
 	const [showScrolledHeader, setShowScrolledHeader] = useState(false);
+<<<<<<< Updated upstream
 	const [country, setCountry] = useState<Country>('USA');
 	const [submitError, setSubmitError] = useState<string | null>(null);
+=======
+	const [country, setCountry] = useState<DonationRecipient>(null as any);
+>>>>>>> Stashed changes
 
 	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
 		event
@@ -215,17 +220,27 @@ const Widget = ({options, hide}: WidgetProps) => {
 					...options
 				})
 			);
+			setCountry(info.countries?.[0]);
 		};
 
 		void fetchInfo();
 	}, [options]);
 
-	const handleSubmit = (event: JSXInternal.TargetedEvent) => {
-		event.preventDefault();
-
+	const submitDonation = () => {
 		if (donationAmount < 10) {
 			setSubmitError(`${i18n.minDonationAmount} ${currency} 10`);
+			return
 		}
+		const url = constructEveryUrl({
+			nonprofitSlug: country.id,
+			frequency,
+			amount: donationAmount,
+			crypto: false
+		});
+
+		const target = '_blank';
+
+		window.open(url, target);
 	};
 
 	return config.show ? (
@@ -249,7 +264,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 				}}
 			>
 				<div className={wrapperCss} onClick={hideOnWrapperClick}>
-					<form className={widgetCss} onSubmit={handleSubmit}>
+					<form className={widgetCss} onSubmit={submitDonation}>
 						{!showScrolledHeader && (
 							<CloseButton positionCss={closeBoxCss} color={COLORS.White} />
 						)}

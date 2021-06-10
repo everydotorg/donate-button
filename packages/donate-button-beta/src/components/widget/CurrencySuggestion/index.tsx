@@ -2,7 +2,6 @@ import cxs from 'cxs';
 import {Ref} from 'preact';
 import {forwardRef, useEffect, useMemo, useState} from 'preact/compat';
 import {Popover} from 'src/components/widget/Popover';
-import {supportedCountries} from 'src/components/widget/constants/supported-countries';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
@@ -55,7 +54,7 @@ export const CurrencySuggestion = forwardRef(
 		const {primaryColor} = useConfigContext();
 
 		useEffect(() => {
-			setShowSuggestion(supportedCountries?.[country]?.currency !== currency);
+			setShowSuggestion(country?.currency !== currency);
 		}, [country, currency]);
 
 		const dismiss = () => {
@@ -63,10 +62,10 @@ export const CurrencySuggestion = forwardRef(
 		};
 
 		const updateCurrency = () => {
-			setCurrency(supportedCountries[country].currency);
+			setCurrency(country?.currency);
 		};
 
-		const suggestedCurrency = supportedCountries?.[country]?.currency;
+		const suggestedCurrency = country?.currency;
 
 		const i18n = useI18n();
 
@@ -75,7 +74,7 @@ export const CurrencySuggestion = forwardRef(
 				replaceKeys(
 					{
 						suggestedCurrency,
-						country,
+						country: country?.countryCode,
 						fromCurrency: `${donationAmount} ${currency}`,
 						toCurrency: `${donationAmount} ${suggestedCurrency}`
 					},
