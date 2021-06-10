@@ -34,12 +34,6 @@ const closeButtonCss = cxs({
 	cursor: 'pointer'
 });
 
-const dividerCss = cxs({
-	height: '1px',
-	background: COLORS.LightGray,
-	margin: `${Spacing.M} -${Spacing.M} ${Spacing.M} -${Spacing.M}`
-});
-
 const actionLink = (primaryColor: string) =>
 	cxs({
 		border: getColoredBorder(Borders.Normal, COLORS.LightGray),
@@ -74,14 +68,6 @@ export const FrequencyPopoverContent = ({
 					<Close color={primaryColor} />
 				</button>
 			</div>
-			<div className={dividerCss} />
-			<a
-				type="button"
-				className={actionLink(primaryColor)}
-				href={donateWithCryptoUrl}
-			>
-				{i18n.donateWithCrypto}
-			</a>
 		</div>
 	);
 };
