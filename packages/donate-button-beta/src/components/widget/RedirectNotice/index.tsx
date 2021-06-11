@@ -16,7 +16,11 @@ export const RedirectNotice = () => {
 	const {currency, country} = useWidgetContext();
 
 	const redirectNotice = useMemo(
-		() => replaceKeys({currency, country}, donationRedirectNotice),
+		() =>
+			replaceKeys(
+				{currency, country: country?.countryCode},
+				donationRedirectNotice
+			),
 		[donationRedirectNotice, currency, country]
 	);
 
