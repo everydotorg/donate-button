@@ -170,12 +170,8 @@ const Widget = ({options, hide}: WidgetProps) => {
 		config.defaultFrequency
 	);
 	const [showScrolledHeader, setShowScrolledHeader] = useState(false);
-<<<<<<< Updated upstream
-	const [country, setCountry] = useState<Country>('USA');
-	const [submitError, setSubmitError] = useState<string | null>(null);
-=======
 	const [country, setCountry] = useState<DonationRecipient>(null as any);
->>>>>>> Stashed changes
+	const [submitError, setSubmitError] = useState<string | null>(null);
 
 	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
 		event
@@ -229,8 +225,9 @@ const Widget = ({options, hide}: WidgetProps) => {
 	const submitDonation = () => {
 		if (donationAmount < 10) {
 			setSubmitError(`${i18n.minDonationAmount} ${currency} 10`);
-			return
+			return;
 		}
+
 		const url = constructEveryUrl({
 			nonprofitSlug: country.id,
 			frequency,

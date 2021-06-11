@@ -99,7 +99,7 @@ export const CountrySelector = () => {
 				<div className={countriesListCss}>
 					{countries.map((country) => (
 						<CountryOption
-							key={country?.id}
+							key={country.id}
 							country={country}
 							onClick={selectCountry}
 						/>
