@@ -102,8 +102,13 @@ const nonProfitInfoCss = cxs({
 });
 
 const cryptoContainerCss = cxs({
-	gridRow: '4 / 4',
-	gridColumn: '2 / 2'
+	gridRow: '4 / 5',
+	gridColumn: '1 / -1',
+
+	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
+		gridRow: '4 / 5',
+		gridColumn: '2 / 3'
+	}
 });
 
 const donateButtonContainer = cxs({
