@@ -43,7 +43,8 @@ const labelLeftCss = cxs({
 
 const labelRightCss = cxs({
 	borderRadius: '0 8px 8px 0',
-	borderLeft: 'none'
+	// The border applied on `labelCss` has more especificity than this one so we have to add important to make it work
+	borderLeft: 'none!important'
 });
 
 const inputCss = cxs({
