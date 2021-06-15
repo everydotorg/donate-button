@@ -45,10 +45,7 @@ const defaults: Partial<WidgetConfig> = {
 	crypto: false,
 	forceLanguage: false,
 	countrySelection: true,
-	defaultDonationAmounts: {
-		monthly: 5,
-		oneTime: 100
-	},
+	defaultDonationAmount: 25,
 	currencies: [
 		{countriesCode: ['AU'], name: 'AUD', symbol: '$', minimumAmount: 10},
 		{countriesCode: ['US'], name: 'USD', symbol: '$', minimumAmount: 10},

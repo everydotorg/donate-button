@@ -181,7 +181,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 		config.showInitialMessage
 	);
 	const [donationAmount, setDonationAmount] = useState<number>(
-		config.defaultDonationAmounts.monthly
+		config.defaultDonationAmount
 	);
 	const [currency, setCurrency] = useState<CurrencyOption>(
 		mergedConfig.currencies[0]
