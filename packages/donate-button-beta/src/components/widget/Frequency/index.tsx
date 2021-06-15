@@ -57,13 +57,8 @@ interface FrequencyProps {
 }
 
 export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
-	const {
-		showFrequencyPopover,
-		dismissPopover,
-		setDonationAmount
-	} = useWidgetContext();
-
-	const {defaultDonationAmounts, primaryColor} = useConfigContext();
+	const {showFrequencyPopover, dismissPopover} = useWidgetContext();
+	const {primaryColor} = useConfigContext();
 	const i18n = useI18n();
 
 	const frequencyPopover = useRef<HTMLDivElement>(null);
@@ -94,7 +89,6 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 				onClick={() => {
 					if (showFrequencyPopover) dismissPopover();
 					setFrequency(DonationFrequency.Monthly);
-					setDonationAmount(defaultDonationAmounts.monthly);
 				}}
 			>
 				<input
@@ -111,7 +105,6 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 				onClick={() => {
 					if (showFrequencyPopover) dismissPopover();
 					setFrequency(DonationFrequency.OneTime);
-					setDonationAmount(defaultDonationAmounts.oneTime);
 				}}
 			>
 				<input
