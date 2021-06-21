@@ -1,6 +1,12 @@
 import cxs from 'cxs';
 import {Ref} from 'preact';
-import {forwardRef, useEffect, useMemo, useState} from 'preact/compat';
+import {
+	forwardRef,
+	useCallback,
+	useEffect,
+	useMemo,
+	useState
+} from 'preact/compat';
 import {Popover} from 'src/components/widget/Popover';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useI18n} from 'src/components/widget/hooks/use-i18n';
@@ -51,21 +57,35 @@ export const CurrencySuggestion = forwardRef(
 	(_props, ref: Ref<HTMLDivElement>) => {
 		const [showSuggestion, setShowSuggestion] = useState<boolean>(false);
 		const {country, currency, setCurrency, donationAmount} = useWidgetContext();
-		const {primaryColor} = useConfigContext();
+		const {primaryColor, currencies} = useConfigContext();
 
 		useEffect(() => {
-			setShowSuggestion(country?.currency !== currency);
+			setShowSuggestion(
+				!currency.countriesCode?.includes(country?.countryCode)
+			);
 		}, [country, currency]);
 
 		const dismiss = () => {
 			setShowSuggestion(false);
 		};
 
+		const getCountryCurrency = useCallback(
+			(countryCode: string) => {
+				return currencies.find((curr) =>
+					curr.countriesCode.includes(countryCode)
+				);
+			},
+			[currencies]
+		);
+
 		const updateCurrency = () => {
-			setCurrency(country?.currency);
+			const countryCurrency = getCountryCurrency(country?.countryCode);
+			if (countryCurrency) {
+				setCurrency(countryCurrency);
+			}
 		};
 
-		const suggestedCurrency = country?.currency;
+		const suggestedCurrency = getCountryCurrency(country?.countryCode);
 
 		const i18n = useI18n();
 
@@ -73,10 +93,10 @@ export const CurrencySuggestion = forwardRef(
 			() =>
 				replaceKeys(
 					{
-						suggestedCurrency,
+						suggestedCurrency: suggestedCurrency?.name ?? '',
 						country: country?.countryCode,
-						fromCurrency: `${donationAmount} ${currency}`,
-						toCurrency: `${donationAmount} ${suggestedCurrency}`
+						fromCurrency: `${donationAmount} ${currency.name}`,
+						toCurrency: `${donationAmount} ${suggestedCurrency?.name ?? ''}`
 					},
 					i18n.currencyPopover
 				),
@@ -87,7 +107,7 @@ export const CurrencySuggestion = forwardRef(
 			() =>
 				replaceKeys(
 					{
-						suggestedCurrency
+						suggestedCurrency: suggestedCurrency?.name ?? ''
 					},
 					i18n.switchCurrency
 				),

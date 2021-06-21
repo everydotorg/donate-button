@@ -1,6 +1,6 @@
 import {createContext} from 'preact';
 import {StateUpdater} from 'preact/hooks';
-import {Currency} from 'src/components/widget/types/currency';
+import {CurrencyOption} from 'src/components/widget/types/currency-option';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
 import {DonationRecipient} from 'src/components/widget/types/donation-recipient';
 
@@ -12,8 +12,8 @@ interface WidgetContextProps {
 	frequency: DonationFrequency;
 	country: DonationRecipient;
 	setCountry: StateUpdater<DonationRecipient>;
-	currency: Currency;
-	setCurrency: StateUpdater<Currency>;
+	currency: CurrencyOption;
+	setCurrency: StateUpdater<CurrencyOption>;
 	donationAmount: number;
 	setDonationAmount: StateUpdater<number>;
 	hideWidget: () => void;

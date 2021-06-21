@@ -1,3 +1,4 @@
+import {CurrencyOption} from 'src/components/widget/types/currency-option';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
 import {DonationRecipient} from 'src/components/widget/types/donation-recipient';
 import {Language} from 'src/components/widget/types/language';
@@ -19,6 +20,7 @@ export type WidgetConfig = {
 		monthly: number;
 		oneTime: number;
 	};
+	currencies: CurrencyOption[];
 	defaultFrequency: DonationFrequency;
 	showInitialMessage: boolean;
 	countries: DonationRecipient[];

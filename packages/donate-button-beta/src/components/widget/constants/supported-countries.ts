@@ -1,11 +1,9 @@
-import {Currency} from 'src/components/widget/types/currency';
 import {PaymentMethod} from 'src/components/widget/types/payment-method';
 
 export type Country = 'GB' | 'USA' | 'OTHER';
 
 export type CountryInfo = {
 	displayName: string;
-	currency: Currency;
 	description: string;
 	paymentMethods: PaymentMethod[];
 };
@@ -13,7 +11,6 @@ export type CountryInfo = {
 export const supportedCountries: Record<Country, CountryInfo> = {
 	GB: {
 		displayName: 'Great Bretain',
-		currency: 'GBP',
 		description: `Support Our World in Data with a donation to Global Change Data Lab 
 		(Charity Number 1186433) which qualifies as a charitable donation for UK tax purposes and is 
 		eligible for GiftAid.`,
@@ -25,7 +22,6 @@ export const supportedCountries: Record<Country, CountryInfo> = {
 	},
 	USA: {
 		displayName: 'United States',
-		currency: 'USD',
 		description: `Support Our World in Data with a donation to Every.org (EIN 61-1913297) 
 		which qualifies as a charitable donation for US tax purposes.`,
 		paymentMethods: [
@@ -42,7 +38,6 @@ export const supportedCountries: Record<Country, CountryInfo> = {
 	},
 	OTHER: {
 		displayName: 'Other',
-		currency: 'EUR',
 		description: `Support Our World in Data from anywhere in the world.`,
 		paymentMethods: [
 			PaymentMethod.Card,

@@ -14,7 +14,6 @@ import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
 import {RedirectNotice} from 'src/components/widget/RedirectNotice';
 import {SubmitButton} from 'src/components/widget/SubmitButton';
 import {getNonprofitInfo} from 'src/components/widget/api/get-nonprofit-info';
-import {supportedCurrencies} from 'src/components/widget/constants/supported-currencies';
 import {ConfigContext} from 'src/components/widget/context/config-context';
 import {WidgetContext} from 'src/components/widget/context/widget-context';
 import {getTranslations} from 'src/components/widget/hooks/use-i18n';
@@ -23,7 +22,7 @@ import {COLORS} from 'src/components/widget/theme/colors';
 import {FontFamily} from 'src/components/widget/theme/font-family';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
-import {Currency} from 'src/components/widget/types/currency';
+import {CurrencyOption} from 'src/components/widget/types/currency-option';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
 import {DonationRecipient} from 'src/components/widget/types/donation-recipient';
 import {Language} from 'src/components/widget/types/language';
@@ -130,7 +129,7 @@ const closeBoxCss = cxs({
 
 const getSubmitButtonText = (
 	donationAmount: number,
-	currency: Currency,
+	currency: CurrencyOption,
 	frequency: DonationFrequency,
 	i18n: Language
 ) => {
@@ -142,8 +141,7 @@ const getSubmitButtonText = (
 		return i18n.amountError;
 	}
 
-	const currencySymbol = supportedCurrencies[currency];
-	let text = `${i18n.donate} ${currencySymbol}${donationAmount}`;
+	let text = `${i18n.donate} ${currency.symbol}${donationAmount}`;
 	if (frequency === DonationFrequency.Monthly) {
 		text = text.concat(` ${i18n.monthly}`);
 	}
@@ -157,7 +155,9 @@ interface WidgetProps {
 }
 
 const Widget = ({options, hide}: WidgetProps) => {
-	const [config, setConfig] = useState(mergeConfig(options));
+	const mergedConfig = mergeConfig(options);
+
+	const [config, setConfig] = useState(mergedConfig);
 	const [route, setRoute] = useState<string>(Routes.DonationForm);
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
 		config.showInitialMessage
@@ -165,7 +165,9 @@ const Widget = ({options, hide}: WidgetProps) => {
 	const [donationAmount, setDonationAmount] = useState<number>(
 		config.defaultDonationAmounts.monthly
 	);
-	const [currency, setCurrency] = useState<Currency>('USD');
+	const [currency, setCurrency] = useState<CurrencyOption>(
+		mergedConfig.currencies[0]
+	);
 	const [frequency, setFrequency] = useState<DonationFrequency>(
 		config.defaultFrequency
 	);
@@ -183,6 +185,10 @@ const Widget = ({options, hide}: WidgetProps) => {
 
 	const i18n = getTranslations(config.i18n, config.forceLanguage);
 	const scrollableContainerRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		setSubmitError(null);
+	}, [country, currency]);
 
 	useEffect(() => {
 		if (scrollableContainerRef.current) {
@@ -222,9 +228,14 @@ const Widget = ({options, hide}: WidgetProps) => {
 		void fetchInfo();
 	}, [options]);
 
-	const submitDonation = () => {
-		if (donationAmount < 10) {
-			setSubmitError(`${i18n.minDonationAmount} ${currency} 10`);
+	const submitDonation = (
+		event: JSXInternal.TargetedEvent<HTMLFormElement>
+	) => {
+		event.preventDefault();
+		if (donationAmount < currency.minimumAmount) {
+			setSubmitError(
+				`${i18n.minDonationAmount} ${currency.name} ${currency.minimumAmount}`
+			);
 			return;
 		}
 
