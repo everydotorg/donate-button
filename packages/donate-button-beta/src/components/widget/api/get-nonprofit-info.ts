@@ -20,12 +20,11 @@ interface EveryResponse {
 const countriesMock: DonationRecipient[] = [
 	{
 		id: 'abcdef',
-		name: 'Give2Asia UK',
+		name: 'Give2Asia AU',
 		description: `Support Our World in Data with a donation to Global Change Data Lab 
 		(Charity Number 1186433) which qualifies as a charitable donation for UK tax purposes and is 
 		eligible for GiftAid.`,
-		countryCode: 'GB',
-		currency: 'GBP',
+		countryCode: 'AU',
 		paymentMethods: [
 			PaymentMethod.Card,
 			PaymentMethod.ApplePay,
@@ -38,7 +37,6 @@ const countriesMock: DonationRecipient[] = [
 		description: `Support Our World in Data with a donation to Every.org (EIN 61-1913297) 
 		which qualifies as a charitable donation for US tax purposes.`,
 		countryCode: 'US',
-		currency: 'USD',
 		paymentMethods: [
 			PaymentMethod.Card,
 			PaymentMethod.ApplePay,
@@ -56,7 +54,6 @@ const countriesMock: DonationRecipient[] = [
 		name: 'Give2Asia HK',
 		description: `Support Our World in Data from anywhere in the world.`,
 		countryCode: 'HK',
-		currency: 'EUR',
 		paymentMethods: [
 			PaymentMethod.Card,
 			PaymentMethod.ApplePay,

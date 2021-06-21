@@ -18,7 +18,7 @@ export const RedirectNotice = () => {
 	const redirectNotice = useMemo(
 		() =>
 			replaceKeys(
-				{currency, country: country?.countryCode},
+				{currency: currency?.name, country: country?.countryCode},
 				donationRedirectNotice
 			),
 		[donationRedirectNotice, currency, country]

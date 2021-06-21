@@ -1,4 +1,3 @@
-import {Currency} from 'src/components/widget/types/currency';
 import {PaymentMethod} from 'src/components/widget/types/payment-method';
 
 export interface DonationRecipient {
@@ -9,6 +8,5 @@ export interface DonationRecipient {
 
 	// Not sure if this props will be present
 	description?: string;
-	currency: Currency;
 	paymentMethods: PaymentMethod[];
 }
