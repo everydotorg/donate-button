@@ -5,6 +5,7 @@ import {JSXInternal} from 'preact/src/jsx';
 import {CloseButton} from 'src/components/widget/CloseButton';
 import {CountryCard} from 'src/components/widget/CountryCard';
 import {CountrySelector} from 'src/components/widget/CountrySelector';
+import {Crypto} from 'src/components/widget/Crypto';
 import {FormControl} from 'src/components/widget/FormControl';
 import {Frequency} from 'src/components/widget/Frequency';
 import {Info} from 'src/components/widget/Info';
@@ -32,6 +33,7 @@ import constructEveryUrl from 'src/helpers/construct-every-url';
 import {mergeConfig} from 'src/helpers/options-types';
 
 cxs.prefix('edoWidget-');
+
 const wrapperCss = cxs({
 	position: 'absolute',
 	height: 'auto',
@@ -47,6 +49,7 @@ const wrapperCss = cxs({
 	alignItems: 'center',
 	fontFamily: FontFamily.BasisGrotesque
 });
+
 const widgetCss = cxs({
 	background: 'white',
 	display: 'grid',
@@ -58,14 +61,15 @@ const widgetCss = cxs({
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		// Fix te size of the widget to match the desings.
 		// We can add a new breakpoints for large devices is this is too small
-		height: '33rem',
+		height: '34.4rem',
 		width: '44.81rem',
 
 		borderRadius: Radii.Medium,
 		gridTemplateColumns: '60% 40%',
-		gridTemplateRows: '1fr 1fr max-content'
+		gridTemplateRows: '1fr 1fr max-content max-content'
 	}
 });
+
 const formCss = cxs({
 	gridColumn: '1 / 2',
 	gridRow: '1 / 3',
@@ -79,6 +83,7 @@ const formCss = cxs({
 		borderRight: `1px solid ${COLORS.LightGray}`
 	}
 });
+
 const nonProfitHeaderCss = cxs({
 	gridColumn: '1 / -1',
 	gridRow: '1 / 2',
@@ -89,21 +94,34 @@ const nonProfitHeaderCss = cxs({
 		gridRow: '1 / 2'
 	}
 });
+
 const nonProfitInfoCss = cxs({
 	gridColumn: '2 / 3',
 	gridRow: '2 / 4'
 });
-const ctaCss = cxs({
+
+const cryptoContainerCss = cxs({
+	gridRow: '4 / 5',
+	gridColumn: '1 / -1',
+
+	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
+		gridRow: '4 / 5',
+		gridColumn: '2 / 3'
+	}
+});
+
+const donateButtonContainer = cxs({
 	gridColumn: '1 / -1',
 	gridRow: '3 / 4',
-	padding: `${Spacing.Empty} ${Spacing.XS} ${Spacing.XS} ${Spacing.XS}`,
+	padding: `${Spacing.XS} ${Spacing.XS}`,
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		gridColumn: '1 / 2',
-		gridRow: '3 / 4',
+		gridRow: '3 / -1',
 		borderRight: `1px solid ${COLORS.LightGray}`,
 		padding: '1.5rem'
 	}
 });
+
 const scrollableContent = cxs({
 	display: 'flex',
 	flexDirection: 'column',
@@ -309,10 +327,13 @@ const Widget = ({options, hide}: WidgetProps) => {
 											<RedirectNotice />
 										)}
 									</div>
+
 									<NonprofitInfo classes={[nonProfitInfoCss]} />
+
+									<Crypto classes={[cryptoContainerCss]} />
 								</div>
 
-								<div className={ctaCss}>
+								<div className={donateButtonContainer}>
 									<SubmitButton
 										disabled={
 											frequency === DonationFrequency.Unselected ||

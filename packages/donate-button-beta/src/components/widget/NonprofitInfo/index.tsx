@@ -13,7 +13,7 @@ const containerCss = cxs({
 	display: 'flex',
 	flexDirection: 'column',
 	overflow: 'initial',
-	padding: Spacing.Inset_XL,
+	padding: Spacing.InsetSquish_S,
 	' > *:not(:last-child)': {
 		marginBottom: Spacing.S
 	},

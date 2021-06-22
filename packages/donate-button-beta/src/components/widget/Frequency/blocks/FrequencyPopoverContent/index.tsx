@@ -34,12 +34,6 @@ const closeButtonCss = cxs({
 	cursor: 'pointer'
 });
 
-const dividerCss = cxs({
-	height: '1px',
-	background: COLORS.LightGray,
-	margin: `${Spacing.M} -${Spacing.M} ${Spacing.M} -${Spacing.M}`
-});
-
 const actionLink = (primaryColor: string) =>
 	cxs({
 		border: getColoredBorder(Borders.Normal, COLORS.LightGray),
@@ -54,15 +48,12 @@ const actionLink = (primaryColor: string) =>
 
 interface FrequencyPopoverContentProps {
 	onClose: () => void;
-	nonprofitSlug: string;
 }
 
 export const FrequencyPopoverContent = ({
-	onClose,
-	nonprofitSlug
+	onClose
 }: FrequencyPopoverContentProps) => {
 	const {primaryColor} = useConfigContext();
-	const donateWithCryptoUrl = constructEveryUrl({nonprofitSlug, crypto: true});
 
 	const i18n = useI18n();
 
@@ -74,14 +65,6 @@ export const FrequencyPopoverContent = ({
 					<Close color={primaryColor} />
 				</button>
 			</div>
-			<div className={dividerCss} />
-			<a
-				type="button"
-				className={actionLink(primaryColor)}
-				href={donateWithCryptoUrl}
-			>
-				{i18n.donateWithCrypto}
-			</a>
 		</div>
 	);
 };

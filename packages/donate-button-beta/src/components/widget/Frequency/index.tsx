@@ -1,5 +1,5 @@
 import cxs from 'cxs';
-import {StateUpdater, useRef, useState} from 'preact/hooks';
+import {StateUpdater, useRef} from 'preact/hooks';
 import {FrequencyPopoverContent} from 'src/components/widget/Frequency/blocks/FrequencyPopoverContent';
 import {Popover} from 'src/components/widget/Popover';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
@@ -62,6 +62,7 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 		dismissPopover,
 		setDonationAmount
 	} = useWidgetContext();
+
 	const {defaultDonationAmounts, primaryColor} = useConfigContext();
 	const i18n = useI18n();
 
@@ -72,11 +73,13 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 		frequency === DonationFrequency.OneTime
 			? [separatorBorderSelectedCss(primaryColor)]
 			: [];
+
 	const leftLabelClasses = [labelCss(primaryColor), labelLeftCss].concat(
 		frequency === DonationFrequency.Monthly
 			? [labelSelectedCss(primaryColor)]
 			: []
 	);
+
 	const rightLabelClasses = [labelCss(primaryColor), labelRightCss].concat(
 		frequency === DonationFrequency.OneTime
 			? [labelSelectedCss(primaryColor)]
@@ -89,6 +92,7 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 				className={leftLabelClasses.concat(labelSeparatorClass).join(' ')}
 				htmlFor="monthly"
 				onClick={() => {
+					if (showFrequencyPopover) dismissPopover();
 					setFrequency(DonationFrequency.Monthly);
 					setDonationAmount(defaultDonationAmounts.monthly);
 				}}
@@ -105,6 +109,7 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 				className={rightLabelClasses.join(' ')}
 				htmlFor="one-time"
 				onClick={() => {
+					if (showFrequencyPopover) dismissPopover();
 					setFrequency(DonationFrequency.OneTime);
 					setDonationAmount(defaultDonationAmounts.oneTime);
 				}}
@@ -119,10 +124,7 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 			</label>
 			{showFrequencyPopover ? (
 				<Popover ref={frequencyPopover}>
-					<FrequencyPopoverContent
-						nonprofitSlug="test"
-						onClose={dismissPopover}
-					/>
+					<FrequencyPopoverContent onClose={dismissPopover} />
 				</Popover>
 			) : null}
 		</div>
