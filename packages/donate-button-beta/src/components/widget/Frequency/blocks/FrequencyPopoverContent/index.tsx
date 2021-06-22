@@ -48,15 +48,12 @@ const actionLink = (primaryColor: string) =>
 
 interface FrequencyPopoverContentProps {
 	onClose: () => void;
-	nonprofitSlug: string;
 }
 
 export const FrequencyPopoverContent = ({
-	onClose,
-	nonprofitSlug
+	onClose
 }: FrequencyPopoverContentProps) => {
 	const {primaryColor} = useConfigContext();
-	const donateWithCryptoUrl = constructEveryUrl({nonprofitSlug, crypto: true});
 
 	const i18n = useI18n();
 
