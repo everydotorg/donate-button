@@ -47,9 +47,12 @@ const defaults: Partial<WidgetConfig> = {
 	countrySelection: true,
 	defaultDonationAmount: 25,
 	currencies: [
-		{countriesCode: ['AU'], name: 'AUD', symbol: '$', minimumAmount: 10},
-		{countriesCode: ['US'], name: 'USD', symbol: '$', minimumAmount: 10},
-		{countriesCode: ['HK'], name: 'HKD', symbol: '$', minimumAmount: 50}
+		{
+			countriesCode: ['US', 'AU', 'GLOBAL', 'HK'],
+			name: 'USD',
+			symbol: '$',
+			minimumAmount: 10
+		}
 	],
 	defaultFrequency: DonationFrequency.Unselected,
 	showInitialMessage: true,

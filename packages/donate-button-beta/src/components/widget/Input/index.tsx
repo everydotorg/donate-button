@@ -77,15 +77,24 @@ const inputPrefix = cxs({
 	color: COLORS.TextGray
 });
 
-const selectCurrencyContainerCss = cxs({
-	position: 'absolute',
-	top: '50%',
-	right: Spacing.M,
-	transform: 'translateY(-50%)',
-	display: 'flex',
-	alignItems: 'center',
-	cursor: 'pointer'
-});
+const selectCurrencyContainerCss = (clickable: boolean) =>
+	cxs({
+		position: 'absolute',
+		top: '50%',
+		right: Spacing.M,
+		transform: 'translateY(-50%)',
+		display: 'flex',
+		alignItems: 'center',
+		cursor: clickable ? 'pointer' : 'default'
+	});
+
+const currencySelected = (primaryColor: string) =>
+	cxs({
+		lineHeight: 1,
+		color: primaryColor,
+		margin: 0,
+		fontWeight: 400
+	});
 
 const selectCurrencyCss = (primaryColor: string) =>
 	cxs({
@@ -188,26 +197,36 @@ export const Input = ({
 					onInput={handleInputChange}
 					{...otherProps}
 				/>
-				<div className={selectCurrencyContainerCss}>
-					<select
-						className={selectCurrencyCss(primaryColor)}
-						onChange={(event) => {
-							setCurrency(
-								currencies.find((c) => c.name === event.currentTarget.value)!
-							);
-						}}
-					>
-						{currencies.map((currency) => (
-							<option
-								key={currency}
-								value={currency.name}
-								selected={selectedCurrency?.name === currency.name}
+				<div className={selectCurrencyContainerCss(currencies.length > 1)}>
+					{currencies.length > 1 ? (
+						<Fragment>
+							<select
+								className={selectCurrencyCss(primaryColor)}
+								onChange={(event) => {
+									setCurrency(
+										currencies.find(
+											(c) => c.name === event.currentTarget.value
+										)!
+									);
+								}}
 							>
-								{currency.name}
-							</option>
-						))}
-					</select>
-					<ChevronDown className={selectArrowCss} color={primaryColor} />
+								{currencies.map((currency) => (
+									<option
+										key={currency}
+										value={currency.name}
+										selected={selectedCurrency?.name === currency.name}
+									>
+										{currency.name}
+									</option>
+								))}
+							</select>
+							<ChevronDown className={selectArrowCss} color={primaryColor} />
+						</Fragment>
+					) : (
+						<p className={currencySelected(primaryColor)}>
+							{selectedCurrency.name}
+						</p>
+					)}
 				</div>
 			</div>
 			<p className={errorLabelCss}>{error}&nbsp;</p>
