@@ -41,29 +41,30 @@ const countriesMock: DonationRecipient[] = [
 			PaymentMethod.Card,
 			PaymentMethod.ApplePay,
 			PaymentMethod.GooglePay,
-			PaymentMethod.Bank,
-			PaymentMethod.Crypto,
-			PaymentMethod.DAF,
-			PaymentMethod.Paypal,
-			PaymentMethod.Stock,
-			PaymentMethod.Wire
+			PaymentMethod.Bank
 		]
 	},
 	{
 		id: 'poiuy',
 		name: 'Give2Asia HK',
-		description: `Support Our World in Data from anywhere in the world.`,
+		description: `Support Our World in Data with a donation to Every.org (EIN 11-1111111) 
+		which qualifies as a charitable donation for HK tax purposes.`,
 		countryCode: 'HK',
 		paymentMethods: [
 			PaymentMethod.Card,
 			PaymentMethod.ApplePay,
-			PaymentMethod.GooglePay,
-			PaymentMethod.Bank,
-			PaymentMethod.Crypto,
-			PaymentMethod.DAF,
-			PaymentMethod.Paypal,
-			PaymentMethod.Stock,
-			PaymentMethod.Wire
+			PaymentMethod.GooglePay
+		]
+	},
+	{
+		id: 'poiuy',
+		name: 'Give2Asia',
+		description: `Support Our World in Data from anywhere in the world.`,
+		countryCode: 'GLOBAL',
+		paymentMethods: [
+			PaymentMethod.Card,
+			PaymentMethod.ApplePay,
+			PaymentMethod.GooglePay
 		]
 	}
 ];

@@ -1,7 +1,9 @@
 import cxs from 'cxs';
 import {Fragment} from 'preact/jsx-runtime';
+import auFlag from 'src/assets/flags/au.svg';
 import gbFlag from 'src/assets/flags/gb.svg';
 import globalFlag from 'src/assets/flags/global.svg';
+import hkFlag from 'src/assets/flags/hk.svg';
 import usFlag from 'src/assets/flags/us.svg';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {labelText} from 'src/components/widget/theme/font-sizes';
@@ -28,6 +30,8 @@ const countryFlagCss = cxs({
 const flags: Record<string, string> = {
 	GB: gbFlag,
 	US: usFlag,
+	HK: hkFlag,
+	AU: auFlag,
 	OTHER: globalFlag
 };
 
