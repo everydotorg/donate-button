@@ -269,7 +269,7 @@ You can configure that instance of the widget with the props that you need:
   <script>
     everyMonthWidget.createButton('#yourElementToAttachTheButton', buttonStylesProps, widgetInstanceProps)
   </script>
-``` 
+```
 ## API
 
 We expose three functions through the global `everyMonthWidget` object:

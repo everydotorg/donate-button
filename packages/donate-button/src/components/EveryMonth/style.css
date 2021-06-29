@@ -1,4 +1,4 @@
-/* 
+/*
 * Reset stylesheet
 */
 
@@ -18,13 +18,13 @@
   box-sizing: inherit;
 }
 
-/* 
+/*
 * Base styles
 */
 
 .wrapper {
   --color-primary: #2e3434;
-  z-index: 999;
+  z-index: 2147483647;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -74,7 +74,7 @@
   transform: rotate(-90deg);
 }
 
-/* 
+/*
 * Typography
 */
 
@@ -158,7 +158,7 @@
   }
 }
 
-/* 
+/*
 * Components
 */
 
@@ -342,7 +342,7 @@
   }
 }
 
-/* 
+/*
 * Utils
 */
 
