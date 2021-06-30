@@ -2,7 +2,7 @@
   "scripts": {
     "build:donateButton": "yarn workspace @everydotorg/donate-button build && cp -r packages/donate-button/dist ./docs",
     "build:donateButtonBeta": "yarn workspace @everydotorg/donate-button-beta build && cp -r packages/donate-button-beta/dist ./docs",
-    "build": "concurrently --names 'btn, btn-beta' 'yarn build:donateButton' 'yarn build:donateButtonBeta'",
+    "build": "concurrently --names 'btn,btn-beta' 'yarn build:donateButton' 'yarn build:donateButtonBeta'",
     "lint": "yarn workspaces run lint",
     "lint:fix": "yarn workspaces run lint:fix",
     "test": "yarn workspaces run test"
