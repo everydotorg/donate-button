@@ -233,19 +233,22 @@ You should pass this options previous initialization of the widget. Also you can
 ```
 
 ## Styled button
+
 If you don't want to create a button in your site, style it and link to the widget you can use our styled button that it's fully customizable.
 We are linking the button to the widget automatically!
 
 ![alt generic donate button](docs/assets/generic-button.png)
 
 ### Minimum configuration
+
 ```js
-  <script>
-    everyMonthWidget.createButton('#yourElementToAttachTheButton')
-  </script>
+<script>everyMonthWidget.createButton('#yourElementToAttachTheButton')</script>
 ```
+
 ### Customize the button
+
 The button accepts an object with the following properties to configure the styles:
+
 ```ts
   {
     // Button text
@@ -264,12 +267,16 @@ The button accepts an object with the following properties to configure the styl
 ```
 
 ### Extra configuration
+
 You can configure that instance of the widget with the props that you need:
+
 ```js
-  <script>
-    everyMonthWidget.createButton('#yourElementToAttachTheButton', buttonStylesProps, widgetInstanceProps)
-  </script>
+<script>
+  everyMonthWidget.createButton('#yourElementToAttachTheButton',
+  buttonStylesProps, widgetInstanceProps)
+</script>
 ```
+
 ## API
 
 We expose three functions through the global `everyMonthWidget` object:
@@ -278,3 +285,11 @@ We expose three functions through the global `everyMonthWidget` object:
 - showOnClick(selector, specificOptions?): Function to link a selector with the widget. As optional you can pass extra options that would be set only when the user open the widget with that button.
 - show(): Open the widget with javascript code.
 - createButton(selector, buttonOptions, widgetOptions): Function to generate a styled and customizable button inside the selector.
+
+## Demo site hosting details
+
+- Vercel hosts `embeds.every.org` as a static site from
+  `docs/dist/donate-button/` - the root URL is the `index.html` page in that
+  folder (which was written by hand, not generated)
+- Github Pages hosts `assets.every.org` as a static site from the `docs/`
+  folder; Github Pages hosts our embeddable JS bundle from there.
