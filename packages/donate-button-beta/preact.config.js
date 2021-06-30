@@ -31,7 +31,7 @@ const config = {
 		if (env.production) {
 			const vercelBaseUrl = process.env.VERCEL_URL;
 			config.output.publicPath = vercelBaseUrl
-				? `https://${vercelBaseUrl}/${VERSION_PATH}/`
+				? `https://${vercelBaseUrl}/${VERSION_SLUG}/`
 				: `https://assets.every.org/${VERSION_PATH}/`;
 			console.log('Building for', config.output.publicPath);
 
