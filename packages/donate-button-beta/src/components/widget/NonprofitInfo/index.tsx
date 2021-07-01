@@ -20,7 +20,8 @@ const containerCss = cxs({
 	color: COLORS.Text,
 	' > p': {
 		margin: Spacing.Empty,
-		padding: Spacing.Empty
+		padding: Spacing.Empty,
+		letterSpacing: '-0.005em'
 	},
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		overflow: 'auto'

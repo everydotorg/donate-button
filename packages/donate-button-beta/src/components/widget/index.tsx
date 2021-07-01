@@ -65,7 +65,7 @@ const widgetCss = cxs({
 		width: '44.81rem',
 
 		borderRadius: Radii.Medium,
-		gridTemplateColumns: '60% 40%',
+		gridTemplateColumns: '55% 45%',
 		gridTemplateRows: '1fr 1fr max-content max-content'
 	}
 });
