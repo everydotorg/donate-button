@@ -16,7 +16,8 @@ import {replaceKeys} from 'src/helpers/interpolation';
 const cardCss = cxs({
 	padding: Spacing.S,
 	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
-	borderRadius: Radii.Default
+	borderRadius: Radii.Default,
+	cursor: 'pointer'
 });
 
 const countrySelectorCss = cxs({
@@ -62,15 +63,15 @@ export const CountryCard = () => {
 	);
 
 	return (
-		<div className={cardCss}>
+		<div
+			className={cardCss}
+			onClick={() => {
+				setRoute(Routes.SelectCountry);
+			}}
+		>
 			<div className={countrySelectorCss}>
 				<CountryTitle country={country} />
-				<span
-					className={arrowCss(primaryColor)}
-					onClick={() => {
-						setRoute(Routes.SelectCountry);
-					}}
-				>
+				<span className={arrowCss(primaryColor)}>
 					<ChevronDown color={primaryColor} />
 				</span>
 			</div>
