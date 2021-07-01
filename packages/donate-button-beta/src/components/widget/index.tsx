@@ -258,9 +258,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 		}
 
 		const url = constructEveryUrl({
-			// NonprofitSlug: country.id
-			// Hardcode this for the demo
-			nonprofitSlug: 'owid',
+			nonprofitSlug: country.id,
 			frequency,
 			amount: donationAmount,
 			crypto: false

@@ -20,7 +20,7 @@ export const en: Language = {
 	donate: 'Donate',
 	donationRedirectNotice:
 		'You will be redirected to Every.org to complete your {{currency}} donation to a {{country}} registered charity eligible for GiftAid.',
-	nonprofitDescription: `We are a nonprofit and rely on donations and grants to keep us going.\nReader donations are essential to our work, providing us with the stability and independence we need, so we can focus on showing the data and evidence we think everyone needs to know.`,
-	thanksDonation: `Thank you,\nGlobal Change Data Lab and the Our World in Data team`,
+	nonprofitDescription: `We are a nonprofit and rely on donations and grants to keep us going.\nGive2Asia is a trusted partner for international philanthropy and the leader in donor-advised grantmaking to the Asia-Pacific. Our mission is to strengthen communities in Asia by making overseas giving easier and more effective.\n`,
+	thanksDonation: `Thank you,\nGive2Asia`,
 	minDonationAmount: 'The minimum donation amount is'
 };

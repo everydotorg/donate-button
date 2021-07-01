@@ -14,7 +14,7 @@ const containerCss = (backgroundUrl: string) =>
 		minHeight: '190px',
 		backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%), url(${backgroundUrl})`,
 		backgroundPosition: 'center',
-		backgroundSize: 'contain',
+		backgroundSize: 'cover',
 		position: 'relative',
 		borderTopRightRadius: 'none',
 		[BREAKPOINTS.TabletLandscapeUp]: {
