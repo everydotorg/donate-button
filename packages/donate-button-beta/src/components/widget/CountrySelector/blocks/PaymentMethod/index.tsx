@@ -40,7 +40,8 @@ const logoCss = cxs({
 const labelCss = cxs({
 	...smallText,
 	color: COLORS.TextGray,
-	transform: 'translateY(0.07em)'
+	transform: 'translateY(0.07em)',
+	whiteSpace: 'nowrap'
 });
 
 export const PaymentMethod = ({
