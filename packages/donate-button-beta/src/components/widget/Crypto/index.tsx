@@ -12,7 +12,8 @@ const containerCss = cxs({
 	padding: Spacing.InsetSquish_S,
 	borderTop: '1px solid',
 	borderBottom: '1px solid',
-	borderColor: COLORS.LightGray,
+	// BorderColor: COLORS.LightGray,
+	borderColor: 'transparent',
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		borderBottom: 'none'
 	}
@@ -37,9 +38,10 @@ export const Crypto = ({classes}: CryptoProps) => {
 
 	return (
 		<div className={[containerCss].concat(classes).join(' ')}>
-			<a className={actionLink(primaryColor)} href={donateWithCryptoUrl}>
+			{/* <a className={actionLink(primaryColor)} href={donateWithCryptoUrl}>
 				Donate with Crypto or stocks
-			</a>
+			</a> */}
+			<span>&nbsp;</span>
 		</div>
 	);
 };
