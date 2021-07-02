@@ -21,9 +21,7 @@ const countriesMock: DonationRecipient[] = [
 	{
 		id: 'covid.19.relief.india ',
 		name: 'Give2Asia AU',
-		description: `Support Our World in Data with a donation to Global Change Data Lab 
-		(Charity Number 1186433) which qualifies as a charitable donation for UK tax purposes and is 
-		eligible for GiftAid.`,
+		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia [AU]`,
 		countryCode: 'AU',
 		paymentMethods: [
 			PaymentMethod.Card,
@@ -34,8 +32,7 @@ const countriesMock: DonationRecipient[] = [
 	{
 		id: 'covid.19.relief.india',
 		name: 'Give2Asia US',
-		description: `Support Our World in Data with a donation to Every.org (EIN 61-1913297) 
-		which qualifies as a charitable donation for US tax purposes.`,
+		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia [US]`,
 		countryCode: 'US',
 		paymentMethods: [
 			PaymentMethod.Card,
@@ -47,26 +44,25 @@ const countriesMock: DonationRecipient[] = [
 	{
 		id: 'covid.19.relief.india',
 		name: 'Give2Asia HK',
-		description: `Support Our World in Data with a donation to Every.org (EIN 11-1111111) 
-		which qualifies as a charitable donation for HK tax purposes.`,
+		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia [HK]`,
 		countryCode: 'HK',
 		paymentMethods: [
 			PaymentMethod.Card,
 			PaymentMethod.ApplePay,
 			PaymentMethod.GooglePay
 		]
-	},
-	{
-		id: 'covid.19.relief.india',
-		name: 'Give2Asia',
-		description: `Support Our World in Data from anywhere in the world.`,
-		countryCode: 'GLOBAL',
-		paymentMethods: [
-			PaymentMethod.Card,
-			PaymentMethod.ApplePay,
-			PaymentMethod.GooglePay
-		]
 	}
+	// {
+	// 	id: 'covid.19.relief.india',
+	// 	name: 'Give2Asia',
+	// 	description: `Support Our World in Data from anywhere in the world.`,
+	// 	countryCode: 'GLOBAL',
+	// 	paymentMethods: [
+	// 		PaymentMethod.Card,
+	// 		PaymentMethod.ApplePay,
+	// 		PaymentMethod.GooglePay
+	// 	]
+	// }
 ];
 
 interface EveryNonprofit {

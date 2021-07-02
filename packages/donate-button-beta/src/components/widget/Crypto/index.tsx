@@ -1,10 +1,8 @@
 import cxs from 'cxs';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
-import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {smallText} from 'src/components/widget/theme/font-sizes';
-import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import constructEveryUrl from 'src/helpers/construct-every-url';
 
