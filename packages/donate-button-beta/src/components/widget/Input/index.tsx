@@ -41,15 +41,15 @@ const inputErrorCss = cxs({
 });
 
 const inputCss = cxs({
+	fontSize: '1.5rem',
 	border: 'none',
 	margin: 0,
 	fontFamily: 'inherit',
-	fontSize: 'inherit',
 	borderRadius: Radii.Default,
 	borderBottom: getColoredBorder(Borders.Normal, COLORS.Transparent),
 	backgroundColor: COLORS.Gray,
 	width: '100%',
-	padding: '1rem 4.5rem 1rem 2.5rem',
+	padding: '0.75rem 4.5rem 0.75rem 2.5rem',
 	outline: 'none',
 	'::placeholder': {
 		opacity: '0.4',
@@ -67,6 +67,7 @@ const inputCss = cxs({
 });
 
 const inputPrefix = cxs({
+	fontSize: '1.5rem',
 	position: 'absolute',
 	top: '50%',
 	left: '0.75rem',
