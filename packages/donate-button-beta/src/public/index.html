@@ -12,64 +12,80 @@
   </head>
 
   <body
-    style="background-size: cover; background-repeat: no-repeat; overflow: auto"
+    style="
+      background-size: cover;
+      background-repeat: no-repeat;
+      overflow: auto;
+      background-image: url('https://i.imgur.com/UmIlPqh.jpg');
+      height: 100vh;
+      background-position: center;
+    "
   >
-    <h2>Manually setup button with selector</h2>
-    <div id="create-button-selector" />
-    <script>
-      window.addEventListener("load", function () {
-        everyDotOrgDonateButton.createButton({
-          selector: "#create-button-selector",
-          nonprofitSlug: "everydotorg",
-          crypto: true,
+    <div id="actions">
+      <h2>Manually setup button with selector</h2>
+      <div id="create-button-selector" />
+      <script>
+        window.addEventListener("load", function () {
+          everyDotOrgDonateButton.createButton({
+            selector: "#create-button-selector",
+            nonprofitSlug: "everydotorg",
+            crypto: true,
+          });
         });
-      });
-    </script>
+      </script>
 
-    <h2>Manually setup button with element</h2>
-    <div id="create-button-element" />
-    <script>
-      window.addEventListener("load", function () {
-        everyDotOrgDonateButton.createButton({
-          element: document.getElementById("create-button-element"),
-          nonprofitSlug: "everydotorg",
-          crypto: true,
+      <h2>Manually setup button with element</h2>
+      <div id="create-button-element" />
+      <script>
+        window.addEventListener("load", function () {
+          everyDotOrgDonateButton.createButton({
+            element: document.getElementById("create-button-element"),
+            nonprofitSlug: "everydotorg",
+            crypto: true,
+          });
         });
-      });
-    </script>
+      </script>
 
-    <h2>Automatically setup buttons</h2>
-    <div style="margin-bottom: 1rem" class="edo-donate-btn">
-      <a href="https://www.every.org/everydotorg/donate/crypto"
-        >Donate Crypto</a
-      >
-    </div>
-    <div class="edo-donate-btn">
-      <a href="https://www.every.org/givedirectly/donate/crypto"
-        >Donate Crypto</a
-      >
-    </div>
-    <script>
-      window.addEventListener("load", function () {
-        everyDotOrgDonateButton.initButtons();
-      });
-    </script>
+      <h2>Automatically setup buttons</h2>
+      <div style="margin-bottom: 1rem" class="edo-donate-btn">
+        <a href="https://www.every.org/everydotorg/donate/crypto"
+          >Donate Crypto</a
+        >
+      </div>
+      <div class="edo-donate-btn">
+        <a href="https://www.every.org/givedirectly/donate/crypto"
+          >Donate Crypto</a
+        >
+      </div>
+      <script>
+        window.addEventListener("load", function () {
+          everyDotOrgDonateButton.initButtons();
+        });
+      </script>
 
-    <div style="margin-top: 40px" id="generic-button"></div>
+      <div style="margin-top: 40px" id="generic-button"></div>
 
-    <h2>Manually setup widget with selector</h2>
-    <button id="create-widget-selector">Open widget</button>
-    <script>
-      window.addEventListener("load", function () {
-        everyDotOrgDonateButton.createWidget({
-          selector: "#create-widget-selector",
-          options: {
-            nonprofitSlug: "owid",
-            infoPages: [
-              {
-                key: "faq",
-                name: "FAQ",
-                source: `## Why should I use Every.org to donate?
+      <h2>Manually setup widget with selector</h2>
+      <script>
+        function hideUI() {
+          const actions = document.getElementById("actions");
+          actions.style.display = "none";
+        }
+      </script>
+      <button onclick="hideUI()" id="create-widget-selector">
+        Open widget
+      </button>
+      <script>
+        window.addEventListener("load", function () {
+          everyDotOrgDonateButton.createWidget({
+            selector: "#create-widget-selector",
+            options: {
+              nonprofitSlug: "give2asia",
+              infoPages: [
+                {
+                  key: "faq",
+                  name: "FAQ",
+                  source: `## Why should I use Every.org to donate?
 
 - It's easy — Manage all your giving in one place, get one tax receipt at the end of the year, and never forget about a recurring donation. In fact, you can pause and cancel those with one click.
 
@@ -97,11 +113,11 @@ Otherwise, it can take around 1~8 weeks for the donation to reach the nonprofit.
 
 If you have a contact at the nonprofit, you can let them know to connect their bank account so that donations reach them faster.
       `,
-              },
-              {
-                key: "donation-policy",
-                name: "Donation Policy",
-                source: `## Donation policy
+                },
+                {
+                  key: "donation-policy",
+                  name: "Donation Policy",
+                  source: `## Donation policy
 We have selected a wide variety of nonprofits to make it easy for generous souls like you to support your favorite causes. Using the Site, you can make gifts of support to all (or nearly all) of the nonprofits listed.
 
 When you make a gift of support to a Nonprofit through the Site, your Donation goes directly to Every.org first, which has exclusive legal control over the Donation, and we issue you a receipt for your charitable contribution as a US 501(c)(3) nonprofit. At the time you make a Donation to Every.org, you also tell us which Nonprofit you’re hoping to support with that Donation. On a regular basis, Every.org approves your recommendation and disburses funds collected through Donations to recipient Nonprofits (either directly, or through a third-party nonprofit partner). We strive to ensure that your Donation goes to the Nonprofit that you preferred for your gift of support. This process ensures your eligibility for a tax-deduction and consolidated records of your giving, and reduces the administrative burden of the Nonprofits to process multiple small donations from hundreds of donors.
@@ -111,12 +127,14 @@ If circumstances make Giver to that particular Nonprofit impossible or inappropr
 When you Donate through the Site, you may do so by either making a Recurring Donation or by making a One-Time Donation. You must provide a valid payment method to make a Donation using the Site. By providing your Payment Provider information, you agree that Every.org (through its third party payment service providers) is authorized to charge your Payment Provider for the full amount of any Donations you agree to make using the Site and that no additional notice or consent is required for such charges. You agree to notify us of any change in your billing address or payment account information used for payment hereunder.
 
 If you would like to cancel a Recurring Donation, you may do so at any time by updating your settings on the Site. If the details of your Recurring Donation change, for example if we remove a nonprofit from our system, we will notify you and obtain your instructions prior to charging your next Recurring Donation payment.`,
-              },
-            ],
-          },
+                },
+              ],
+            },
+          });
         });
-      });
-    </script>
+      </script>
+    </div>
+
     <!-- EVERY MONTH -->
 
     <!--

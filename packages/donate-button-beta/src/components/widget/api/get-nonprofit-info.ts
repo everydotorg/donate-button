@@ -19,7 +19,7 @@ interface EveryResponse {
 
 const countriesMock: DonationRecipient[] = [
 	{
-		id: 'abcdef',
+		id: 'covid.19.relief.india ',
 		name: 'Give2Asia AU',
 		description: `Support Our World in Data with a donation to Global Change Data Lab 
 		(Charity Number 1186433) which qualifies as a charitable donation for UK tax purposes and is 
@@ -32,7 +32,7 @@ const countriesMock: DonationRecipient[] = [
 		]
 	},
 	{
-		id: 'qwerty',
+		id: 'covid.19.relief.india',
 		name: 'Give2Asia US',
 		description: `Support Our World in Data with a donation to Every.org (EIN 61-1913297) 
 		which qualifies as a charitable donation for US tax purposes.`,
@@ -45,7 +45,7 @@ const countriesMock: DonationRecipient[] = [
 		]
 	},
 	{
-		id: 'poiuy',
+		id: 'covid.19.relief.india',
 		name: 'Give2Asia HK',
 		description: `Support Our World in Data with a donation to Every.org (EIN 11-1111111) 
 		which qualifies as a charitable donation for HK tax purposes.`,
@@ -57,7 +57,7 @@ const countriesMock: DonationRecipient[] = [
 		]
 	},
 	{
-		id: 'poiuy',
+		id: 'covid.19.relief.india',
 		name: 'Give2Asia',
 		description: `Support Our World in Data from anywhere in the world.`,
 		countryCode: 'GLOBAL',
