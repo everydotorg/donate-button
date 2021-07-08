@@ -19,20 +19,9 @@ interface EveryResponse {
 
 const countriesMock: DonationRecipient[] = [
 	{
-		id: 'covid.19.relief.india ',
-		name: 'Give2Asia AU',
-		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia [AU]`,
-		countryCode: 'AU',
-		paymentMethods: [
-			PaymentMethod.Card,
-			PaymentMethod.ApplePay,
-			PaymentMethod.GooglePay
-		]
-	},
-	{
 		id: 'covid.19.relief.india',
-		name: 'Give2Asia US',
-		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia [US]`,
+		name: 'United States',
+		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia based in United States.`,
 		countryCode: 'US',
 		paymentMethods: [
 			PaymentMethod.Card,
@@ -42,9 +31,20 @@ const countriesMock: DonationRecipient[] = [
 		]
 	},
 	{
+		id: 'covid.19.relief.india ',
+		name: 'Australia',
+		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia Australia.`,
+		countryCode: 'AU',
+		paymentMethods: [
+			PaymentMethod.Card,
+			PaymentMethod.ApplePay,
+			PaymentMethod.GooglePay
+		]
+	},
+	{
 		id: 'covid.19.relief.india',
-		name: 'Give2Asia HK',
-		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia [HK]`,
+		name: 'Hong Kong',
+		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia Foundation Limited based in Hong Kong.`,
 		countryCode: 'HK',
 		paymentMethods: [
 			PaymentMethod.Card,

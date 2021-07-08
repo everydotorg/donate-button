@@ -57,11 +57,12 @@ export const CurrencySuggestion = forwardRef(
 	(_props, ref: Ref<HTMLDivElement>) => {
 		const [showSuggestion, setShowSuggestion] = useState<boolean>(false);
 		const {country, currency, setCurrency, donationAmount} = useWidgetContext();
+		console.log("showSuggestion", showSuggestion, "currency", currency, "country", country);
 		const {primaryColor, currencies} = useConfigContext();
 
 		useEffect(() => {
 			setShowSuggestion(
-				!currency.countriesCode?.includes(country?.countryCode)
+				!!country?.countryCode && !currency.countriesCode?.includes(country?.countryCode)
 			);
 		}, [country, currency]);
 

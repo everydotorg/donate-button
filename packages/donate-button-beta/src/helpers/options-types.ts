@@ -48,8 +48,20 @@ const defaults: Partial<WidgetConfig> = {
 	defaultDonationAmount: 25,
 	currencies: [
 		{
-			countriesCode: ['US', 'AU', 'GLOBAL', 'HK'],
+			countriesCode: ['US', 'GLOBAL'],
 			name: 'USD',
+			symbol: '$',
+			minimumAmount: 10
+		},
+		{
+			countriesCode: ['HK', 'GLOBAL'],
+			name: 'HKD',
+			symbol: '$',
+			minimumAmount: 10
+		},
+		{
+			countriesCode: ['AU', 'GLOBAL'],
+			name: 'AUD',
 			symbol: '$',
 			minimumAmount: 10
 		}
