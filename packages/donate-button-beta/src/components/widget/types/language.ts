@@ -16,6 +16,8 @@ export type Language = {
 	countrySelection: string;
 	donate: string;
 	donationRedirectNotice: string;
-	nonprofitDescription: string;
 	thanksDonation: string;
+	countryDescription: string;
+	chooseAnAmount: string;
+	enterAnAmount: string;
 };

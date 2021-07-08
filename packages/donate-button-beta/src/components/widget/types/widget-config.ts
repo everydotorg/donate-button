@@ -16,7 +16,7 @@ export type WidgetConfig = {
 	countrySelection: boolean;
 	primaryColor: string;
 	forceLanguage: string | false;
-	defaultDonationAmount: number;
+	defaultDonationAmount?: number;
 	currencies: CurrencyOption[];
 	defaultFrequency: DonationFrequency;
 	showInitialMessage: boolean;

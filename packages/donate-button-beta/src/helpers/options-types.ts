@@ -42,10 +42,10 @@ export interface EmbedButtonOptions extends DonateButtonOptions {
 const defaults: Partial<WidgetConfig> = {
 	show: false,
 	name: 'Every Org',
+	description: 'Donate today!',
 	crypto: false,
 	forceLanguage: false,
 	countrySelection: true,
-	defaultDonationAmount: 25,
 	currencies: [
 		{
 			countriesCode: ['US', 'GLOBAL'],

@@ -21,7 +21,7 @@ const countriesMock: DonationRecipient[] = [
 	{
 		id: 'covid.19.relief.india',
 		name: 'United States',
-		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia based in United States.`,
+		nameAndRegistration: 'Give2Asia (US 501(c)(3) EIN 94-3373670)',
 		countryCode: 'US',
 		paymentMethods: [
 			PaymentMethod.Card,
@@ -33,7 +33,7 @@ const countriesMock: DonationRecipient[] = [
 	{
 		id: 'covid.19.relief.india ',
 		name: 'Australia',
-		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia Australia.`,
+		nameAndRegistration: 'Give2Asia Australia Ltd (AU DGR ABN 20 640 318 636)',
 		countryCode: 'AU',
 		paymentMethods: [
 			PaymentMethod.Card,
@@ -44,7 +44,7 @@ const countriesMock: DonationRecipient[] = [
 	{
 		id: 'covid.19.relief.india',
 		name: 'Hong Kong',
-		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia Foundation Limited based in Hong Kong.`,
+		nameAndRegistration: 'Give2Asia Foundation Limited (HK Section 88)',
 		countryCode: 'HK',
 		paymentMethods: [
 			PaymentMethod.Card,
@@ -69,12 +69,14 @@ interface EveryNonprofit {
 	name: string;
 	logoCloudinaryId: string;
 	coverImageCloudinaryId: string;
+	description: string;
 	eligibleDonationRecipientNonprofits?: DonationRecipient[];
 }
 
 const mapNonprofitInfo = (nonprofitRawData: EveryNonprofit): NonprofitInfo => {
 	return {
 		name: nonprofitRawData.name,
+		description: nonprofitRawData.description,
 		logo: getCloudinaryUrl(nonprofitRawData.logoCloudinaryId),
 		backgroundImage: getCloudinaryUrl(nonprofitRawData.coverImageCloudinaryId),
 		countries:

@@ -12,6 +12,7 @@ import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {DonationRecipient} from 'src/components/widget/types/donation-recipient';
 import {Routes} from 'src/components/widget/types/routes';
+import {replaceKeys} from 'src/helpers/interpolation';
 
 const countriesListCss = cxs({
 	display: 'flex',
@@ -60,6 +61,9 @@ const CountryOption = ({
 	country: DonationRecipient;
 	onClick: (country: DonationRecipient) => void;
 }) => {
+	const {name} = useConfigContext();
+	const {nameAndRegistration} = country;
+	const i18n = useI18n();
 	return (
 		<div
 			className={countryOptionContainerCss}
@@ -70,7 +74,12 @@ const CountryOption = ({
 			<div className={countryHeaderCss}>
 				<CountryTitle country={country} />
 			</div>
-			<p className={descriptionCss}>{country?.description}</p>
+			<p className={descriptionCss}>
+				{replaceKeys(
+					{projectName: name, nameAndRegistration},
+					i18n.countryDescription
+				)}
+			</p>
 			<div className={paymentMethodsCss}>
 				{country?.paymentMethods.map((pm) => (
 					<PaymentMethod key={pm} paymentMethod={pm} />

@@ -15,12 +15,15 @@ export const en: Language = {
 	switchCurrency: 'Change to {{suggestedCurrency}}',
 	noThanks: 'No thanks',
 	donateWithCrypto: 'Donate with Crypto, Stocks or DAF',
-	countryTitle: 'Country for tax deduction',
+	countryTitle: 'Tax deductible in',
 	countrySelection: 'Select your preferred country',
 	donate: 'Donate',
+	countryDescription:
+		'Support {{projectName}} with a donation to {{nameAndRegistration}}.',
 	donationRedirectNotice:
-		'You will be redirected to Every.org to complete your {{currency}} donation to a {{country}} registered charity.',
-	nonprofitDescription: `Give2Asia is a trusted partner for international philanthropy and the leader in donor-advised grantmaking to the Asia-Pacific. Our mission is to strengthen communities in Asia by making overseas giving easier and more effective.\n`,
+		'You will be redirected to Every.org to complete your {{currency}} donation to {{nameAndRegistration}}.',
 	thanksDonation: ``,
-	minDonationAmount: 'The minimum donation amount is'
+	minDonationAmount: 'The minimum donation amount is',
+	chooseAnAmount: 'Choose an amount',
+	enterAnAmount: 'Enter an amount'
 };
