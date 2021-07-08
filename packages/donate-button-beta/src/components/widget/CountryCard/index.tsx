@@ -23,20 +23,23 @@ const cardCss = cxs({
 const countrySelectorCss = cxs({
 	display: 'flex',
 	flexDirection: 'row',
-	margin: Spacing.Stack_M,
+	margin: Spacing.Stack_S,
 	alignItems: 'center',
 	position: 'relative',
-	cursor: 'pointer'
+	cursor: 'pointer',
+	justifyContent: 'space-between'
+});
+
+const countryTitleCss = cxs({
+	display: 'flex',
+	alignItems: 'center'
 });
 
 const arrowCss = (primaryColor: string) =>
 	cxs({
 		...labelText,
 		color: primaryColor,
-		position: 'absolute',
-		top: '50%',
-		right: 0,
-		transform: 'translateY(-50%)'
+		lineHeight: 0
 	});
 
 const bodyCss = cxs({
@@ -70,7 +73,9 @@ export const CountryCard = () => {
 			}}
 		>
 			<div className={countrySelectorCss}>
-				<CountryTitle country={country} />
+				<div className={countryTitleCss}>
+					<CountryTitle country={country} />
+				</div>
 				<span className={arrowCss(primaryColor)}>
 					<ChevronDown color={primaryColor} />
 				</span>
