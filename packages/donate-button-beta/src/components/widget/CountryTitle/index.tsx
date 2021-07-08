@@ -13,6 +13,7 @@ import {DonationRecipient} from 'src/components/widget/types/donation-recipient'
 const countrySelectedCss = (primaryColor: string) =>
 	cxs({
 		...labelText,
+		lineHeight: 1.25,
 		color: primaryColor,
 		margin: Spacing.Empty,
 		transform: 'translateY(0.09em)'

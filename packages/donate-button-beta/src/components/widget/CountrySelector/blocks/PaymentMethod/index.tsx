@@ -7,7 +7,7 @@ import genericLogo from 'src/assets/payments/generic.svg';
 import googlePayLogo from 'src/assets/payments/google-pay.png';
 import paypalLogo from 'src/assets/payments/paypal.svg';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {smallText} from 'src/components/widget/theme/font-sizes';
+import {bodyText} from 'src/components/widget/theme/font-sizes';
 import {PaymentMethod as PaymentMethodType} from 'src/components/widget/types/payment-method';
 
 type PaymentDisplayInfo = {logo: string; label: string};
@@ -32,13 +32,13 @@ const containerCss = cxs({
 });
 
 const logoCss = cxs({
-	height: '1rem',
+	height: '0.75rem',
 	width: 'auto',
 	marginRight: '0.25rem'
 });
 
 const labelCss = cxs({
-	...smallText,
+	...bodyText,
 	color: COLORS.TextGray,
 	transform: 'translateY(0.07em)',
 	whiteSpace: 'nowrap'

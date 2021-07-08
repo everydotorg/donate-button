@@ -6,6 +6,7 @@ import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
+import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {labelText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
@@ -18,6 +19,11 @@ const countriesListCss = cxs({
 	flexDirection: 'column',
 	'& > *': {
 		margin: Spacing.Stack_M
+	},
+	marginTop: Spacing.XL,
+
+	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
+		marginTop: Spacing.Empty
 	}
 });
 
@@ -38,7 +44,8 @@ const countryHeaderCss = cxs({
 
 const descriptionCss = cxs({
 	...labelText,
-	margin: Spacing.Stack_M
+	margin: Spacing.Stack_M,
+	color: COLORS.Text
 });
 
 const sectionTitleCss = cxs({
