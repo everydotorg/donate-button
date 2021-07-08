@@ -146,7 +146,7 @@ const closeBoxCss = cxs({
 });
 
 const getSubmitButtonText = (
-	donationAmount: number,
+	donationAmount: number | undefined,
 	currency: CurrencyOption,
 	frequency: DonationFrequency,
 	i18n: Language
@@ -256,6 +256,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 		event.preventDefault();
 		if (!donationAmount) {
 			setSubmitError(i18n.chooseAnAmount);
+			return;
 		}
 
 		if (donationAmount < currency.minimumAmount) {

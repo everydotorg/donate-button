@@ -8,14 +8,21 @@ const getBrowserLanguage = () => {
 };
 
 export const getTranslations = (
-	i18n: Record<string, Language>,
+	i18n: Record<string, Partial<Language>>,
 	forceLanguage: string | false
-) => {
+): Language => {
 	const lang = forceLanguage ? forceLanguage : getBrowserLanguage();
 
 	// Language given in config has priority over user browser lang; default to en
 	// since that's always provided by default options
-	return i18n[lang] ?? i18n.en!;
+
+	if (!i18n[lang] || lang === 'en') {
+		return i18n.en as Language;
+	}
+
+	// English always has all translations, then overwrite with whatever is available in preferred language
+	// eslin
+	return {...i18n.en, ...i18n[lang]} as Language;
 };
 
 export const useI18n = (): Language => {
