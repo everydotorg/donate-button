@@ -21,7 +21,7 @@ export const es: Partial<Language> = {
 	donationRedirectNotice:
 		'Vas a ser redireccionado a Every.org para completar tu donación de {{currency}} a una ONG registrada en {{country}}.',
 	countryDescription:
-		'Apoyo {{projectName}} con una donación a {{nameAndRegistration}}.',
+		'Apoya a {{projectName}} con una donación a {{nameAndRegistration}}.',
 	thanksDonation: '',
 	minDonationAmount: 'El monto de donación mínimo es'
 };
