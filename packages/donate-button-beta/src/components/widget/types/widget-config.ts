@@ -22,5 +22,5 @@ export type WidgetConfig = {
 	showInitialMessage: boolean;
 	countries: DonationRecipient[];
 	infoPages: InfoPage[];
-	i18n: Record<string, Partial<Language>>; // ISO Alpha-2 format
+	i18n: {en: Language} & Record<string, Partial<Language>>;
 };

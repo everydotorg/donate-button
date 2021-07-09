@@ -14,18 +14,13 @@ const redirectTextCss = cxs({
 export const RedirectNotice = () => {
 	const {donationRedirectNotice} = useI18n();
 	const {currency, country} = useWidgetContext();
-	console.log('country', country);
 
-	const redirectNotice = useMemo(
-		() =>
-			replaceKeys(
-				{
-					currency: currency?.name,
-					nameAndRegistration: country?.nameAndRegistration
-				},
-				donationRedirectNotice
-			),
-		[donationRedirectNotice, currency, country]
+	const redirectNotice = replaceKeys(
+		{
+			currency: currency?.name,
+			nameAndRegistration: country?.nameAndRegistration
+		},
+		donationRedirectNotice
 	);
 
 	return <p className={redirectTextCss}>{redirectNotice}</p>;

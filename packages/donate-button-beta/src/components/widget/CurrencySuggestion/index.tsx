@@ -62,7 +62,7 @@ export const CurrencySuggestion = forwardRef(
 		useEffect(() => {
 			setShowSuggestion(
 				Boolean(country?.countryCode) &&
-					!currency.countriesCode?.includes(country?.countryCode)
+					!currency.countryCodes?.includes(country?.countryCode)
 			);
 		}, [country, currency]);
 
@@ -73,7 +73,7 @@ export const CurrencySuggestion = forwardRef(
 		const getCountryCurrency = useCallback(
 			(countryCode: string) => {
 				return currencies.find((curr) =>
-					curr.countriesCode.includes(countryCode)
+					curr.countryCodes.includes(countryCode)
 				);
 			},
 			[currencies]
@@ -90,29 +90,21 @@ export const CurrencySuggestion = forwardRef(
 
 		const i18n = useI18n();
 
-		const popoverText = useMemo(
-			() =>
-				replaceKeys(
-					{
-						suggestedCurrency: suggestedCurrency?.name ?? '',
-						country: country?.countryCode,
-						fromCurrency: `${donationAmount} ${currency.name}`,
-						toCurrency: `${donationAmount} ${suggestedCurrency?.name ?? ''}`
-					},
-					i18n.currencyPopover
-				),
-			[i18n, currency, suggestedCurrency, country, donationAmount]
+		const popoverText = replaceKeys(
+			{
+				suggestedCurrency: suggestedCurrency?.name ?? '',
+				country: country?.countryCode,
+				fromCurrency: `${donationAmount ?? ''} ${currency.name}`,
+				toCurrency: `${donationAmount ?? ''} ${suggestedCurrency?.name ?? ''}`
+			},
+			i18n.currencyPopover
 		);
 
-		const changeButtonText = useMemo(
-			() =>
-				replaceKeys(
-					{
-						suggestedCurrency: suggestedCurrency?.name ?? ''
-					},
-					i18n.switchCurrency
-				),
-			[i18n, suggestedCurrency]
+		const changeButtonText = replaceKeys(
+			{
+				suggestedCurrency: suggestedCurrency?.name ?? ''
+			},
+			i18n.switchCurrency
 		);
 
 		return showSuggestion ? (

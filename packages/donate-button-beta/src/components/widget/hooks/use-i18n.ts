@@ -21,7 +21,7 @@ export const getTranslations = (
 	}
 
 	// English always has all translations, then overwrite with whatever is available in preferred language
-	// eslin
+	// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
 	return {...i18n.en, ...i18n[lang]} as Language;
 };
 

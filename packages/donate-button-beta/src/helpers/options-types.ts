@@ -48,19 +48,19 @@ const defaults: Partial<WidgetConfig> = {
 	countrySelection: true,
 	currencies: [
 		{
-			countriesCode: ['US', 'GLOBAL'],
+			countryCodes: ['US', 'GLOBAL'],
 			name: 'USD',
 			symbol: '$',
 			minimumAmount: 10
 		},
 		{
-			countriesCode: ['HK', 'GLOBAL'],
+			countryCodes: ['HK', 'GLOBAL'],
 			name: 'HKD',
 			symbol: '$',
 			minimumAmount: 10
 		},
 		{
-			countriesCode: ['AU', 'GLOBAL'],
+			countryCodes: ['AU', 'GLOBAL'],
 			name: 'AUD',
 			symbol: '$',
 			minimumAmount: 10
