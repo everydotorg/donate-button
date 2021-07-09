@@ -14,8 +14,8 @@ interface WidgetContextProps {
 	setCountry: StateUpdater<DonationRecipient>;
 	currency: CurrencyOption;
 	setCurrency: StateUpdater<CurrencyOption>;
-	donationAmount: number;
-	setDonationAmount: StateUpdater<number>;
+	donationAmount?: number;
+	setDonationAmount: StateUpdater<number | undefined>;
 	hideWidget: () => void;
 }
 

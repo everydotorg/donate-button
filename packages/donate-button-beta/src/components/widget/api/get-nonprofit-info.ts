@@ -19,20 +19,9 @@ interface EveryResponse {
 
 const countriesMock: DonationRecipient[] = [
 	{
-		id: 'covid.19.relief.india ',
-		name: 'Give2Asia AU',
-		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia [AU]`,
-		countryCode: 'AU',
-		paymentMethods: [
-			PaymentMethod.Card,
-			PaymentMethod.ApplePay,
-			PaymentMethod.GooglePay
-		]
-	},
-	{
 		id: 'covid.19.relief.india',
-		name: 'Give2Asia US',
-		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia [US]`,
+		name: 'United States',
+		nameAndRegistration: 'Give2Asia (US 501(c)(3) EIN 94-3373670)',
 		countryCode: 'US',
 		paymentMethods: [
 			PaymentMethod.Card,
@@ -42,9 +31,20 @@ const countriesMock: DonationRecipient[] = [
 		]
 	},
 	{
+		id: 'covid.19.relief.india ',
+		name: 'Australia',
+		nameAndRegistration: 'Give2Asia Australia Ltd (AU DGR ABN 20 640 318 636)',
+		countryCode: 'AU',
+		paymentMethods: [
+			PaymentMethod.Card,
+			PaymentMethod.ApplePay,
+			PaymentMethod.GooglePay
+		]
+	},
+	{
 		id: 'covid.19.relief.india',
-		name: 'Give2Asia HK',
-		description: `Support COVID-19 Relief Fund: India with a donation to Give2Asia [HK]`,
+		name: 'Hong Kong',
+		nameAndRegistration: 'Give2Asia Foundation Limited (HK Section 88)',
 		countryCode: 'HK',
 		paymentMethods: [
 			PaymentMethod.Card,
@@ -69,12 +69,14 @@ interface EveryNonprofit {
 	name: string;
 	logoCloudinaryId: string;
 	coverImageCloudinaryId: string;
+	description: string;
 	eligibleDonationRecipientNonprofits?: DonationRecipient[];
 }
 
 const mapNonprofitInfo = (nonprofitRawData: EveryNonprofit): NonprofitInfo => {
 	return {
 		name: nonprofitRawData.name,
+		description: nonprofitRawData.description,
 		logo: getCloudinaryUrl(nonprofitRawData.logoCloudinaryId),
 		backgroundImage: getCloudinaryUrl(nonprofitRawData.coverImageCloudinaryId),
 		countries:

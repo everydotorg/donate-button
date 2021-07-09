@@ -55,12 +55,12 @@ type NonprofitInfo = {
 
 export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 	const {setRoute} = useWidgetContext();
-	const {infoPages, primaryColor} = useConfigContext();
-	const {nonprofitDescription, thanksDonation} = useI18n();
+	const {infoPages, primaryColor, description} = useConfigContext();
+	const {thanksDonation} = useI18n();
 
 	return (
 		<div className={[containerCss].concat(classes).join(' ')}>
-			<Markdown source={nonprofitDescription} />
+			<Markdown source={description} />
 			<div className={lastParagraph}>
 				<Markdown source={thanksDonation} />
 			</div>

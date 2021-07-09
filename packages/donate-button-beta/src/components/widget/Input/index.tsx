@@ -5,6 +5,7 @@ import {JSXInternal} from 'preact/src/jsx';
 import {CurrencySuggestion} from 'src/components/widget/CurrencySuggestion';
 import {Link} from 'src/components/widget/Link';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
+import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {ChevronDown} from 'src/components/widget/svg/ChevronDown';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
@@ -140,16 +141,17 @@ const errorLabelCss = cxs({
 	marginBottom: 0
 });
 
-const addAmounts = [10, 25, 50, 100];
+// The minimum donation amount for HKD is 50 - until we support dynamic
+// suggested amounts depending on the currency, start at 50 for all.
+const addAmounts = [50, 100, 200, 500];
 
 interface InputProps extends JSXInternal.HTMLAttributes<HTMLInputElement> {
-	value: number;
-	setValue: StateUpdater<number>;
+	value?: number;
+	setValue: StateUpdater<number | undefined>;
 	setCurrency: StateUpdater<CurrencyOption>;
 	error: string | null;
 	setError: StateUpdater<string | null>;
 	label?: string;
-	placeholder?: string;
 	selectedCurrency: CurrencyOption;
 }
 
@@ -159,7 +161,6 @@ export const Input = ({
 	error,
 	setError,
 	label,
-	placeholder,
 	selectedCurrency,
 	setCurrency,
 	...otherProps
@@ -169,6 +170,7 @@ export const Input = ({
 	const inputContainerClasses = [inputContainerCss].concat(
 		error ? [inputErrorCss] : []
 	);
+	const i18n = useI18n();
 
 	const inputClasses = [inputCss];
 
@@ -191,7 +193,7 @@ export const Input = ({
 				<span className={inputPrefix}>{selectedCurrency?.symbol}</span>
 				<input
 					className={inputClasses.join(' ')}
-					placeholder={placeholder}
+					placeholder={i18n.enterAnAmount}
 					type="number"
 					value={value}
 					onKeyDown={preventDecimal}
@@ -237,7 +239,7 @@ export const Input = ({
 						key={amount}
 						label={`+${amount}`}
 						onClick={() => {
-							setValue((previous) => previous + amount);
+							setValue((previous) => (previous ?? 0) + amount);
 						}}
 					/>
 				))}

@@ -4,5 +4,6 @@ export interface NonprofitInfo {
 	name: string;
 	logo: string;
 	backgroundImage: string;
+	description: string;
 	countries: DonationRecipient[];
 }

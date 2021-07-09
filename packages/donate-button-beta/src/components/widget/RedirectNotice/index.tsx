@@ -15,13 +15,12 @@ export const RedirectNotice = () => {
 	const {donationRedirectNotice} = useI18n();
 	const {currency, country} = useWidgetContext();
 
-	const redirectNotice = useMemo(
-		() =>
-			replaceKeys(
-				{currency: currency?.name, country: country?.countryCode},
-				donationRedirectNotice
-			),
-		[donationRedirectNotice, currency, country]
+	const redirectNotice = replaceKeys(
+		{
+			currency: currency?.name,
+			nameAndRegistration: country?.nameAndRegistration
+		},
+		donationRedirectNotice
 	);
 
 	return <p className={redirectTextCss}>{redirectNotice}</p>;

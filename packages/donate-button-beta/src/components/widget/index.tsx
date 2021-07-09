@@ -146,13 +146,17 @@ const closeBoxCss = cxs({
 });
 
 const getSubmitButtonText = (
-	donationAmount: number,
+	donationAmount: number | undefined,
 	currency: CurrencyOption,
 	frequency: DonationFrequency,
 	i18n: Language
 ) => {
 	if (frequency === '') {
 		return i18n.frequencySelect;
+	}
+
+	if (!donationAmount) {
+		return i18n.chooseAnAmount;
 	}
 
 	if (Number.isNaN(donationAmount)) {
@@ -180,7 +184,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
 		config.showInitialMessage
 	);
-	const [donationAmount, setDonationAmount] = useState<number>(
+	const [donationAmount, setDonationAmount] = useState<number | undefined>(
 		config.defaultDonationAmount
 	);
 	const [currency, setCurrency] = useState<CurrencyOption>(
@@ -250,6 +254,11 @@ const Widget = ({options, hide}: WidgetProps) => {
 		event: JSXInternal.TargetedEvent<HTMLFormElement>
 	) => {
 		event.preventDefault();
+		if (!donationAmount) {
+			setSubmitError(i18n.chooseAnAmount);
+			return;
+		}
+
 		if (donationAmount < currency.minimumAmount) {
 			setSubmitError(
 				`${i18n.minDonationAmount} ${currency.name} ${currency.minimumAmount}`
@@ -337,6 +346,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 									<SubmitButton
 										disabled={
 											frequency === DonationFrequency.Unselected ||
+											!donationAmount ||
 											Number.isNaN(donationAmount)
 										}
 									>

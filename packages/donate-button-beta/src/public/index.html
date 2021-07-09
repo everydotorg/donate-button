@@ -65,22 +65,23 @@
 
       <div style="margin-top: 40px" id="generic-button"></div>
 
-      <h2 style="color: white">Manually setup widget with selector</h2>
+      <h1 style="color: white">COVID-19 Pandemic Response: India</h1>
       <script>
         function hideUI() {
           const actions = document.getElementById("actions");
           actions.style.display = "none";
         }
       </script>
-      <button onclick="hideUI()" id="create-widget-selector">
-        Open widget
+      <button id="create-widget-selector">
+        DONATE TO COVID-19 PANDEMIC RESPONSE: INDIA
       </button>
       <script>
         window.addEventListener("load", function () {
           everyDotOrgDonateButton.createWidget({
             selector: "#create-widget-selector",
             options: {
-              nonprofitSlug: "give2asia",
+              showInitialMessage: false,
+              nonprofitSlug: "covid.19.relief.india",
               infoPages: [
                 {
                   key: "faq",
