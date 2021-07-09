@@ -141,7 +141,9 @@ const errorLabelCss = cxs({
 	marginBottom: 0
 });
 
-const addAmounts = [40, 80, 200, 500];
+// The minimum donation amount for HKD is 50 - until we support dynamic
+// suggested amounts depending on the currency, start at 50 for all.
+const addAmounts = [50, 100, 200, 500];
 
 interface InputProps extends JSXInternal.HTMLAttributes<HTMLInputElement> {
 	value?: number;
