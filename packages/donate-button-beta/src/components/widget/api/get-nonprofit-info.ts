@@ -43,8 +43,8 @@ const countriesMock: DonationRecipient[] = [
 	},
 	{
 		id: 'covid.19.relief.india',
-		name: 'Hong Kong',
-		nameAndRegistration: 'Give2Asia Foundation Limited (HK Section 88)',
+		name: 'Hong Kong SAR of the PRC',
+		nameAndRegistration: 'Give2Asia Foundation Limited (HKSAR Section 88)',
 		countryCode: 'HK',
 		paymentMethods: [
 			PaymentMethod.Card,
@@ -52,17 +52,6 @@ const countriesMock: DonationRecipient[] = [
 			PaymentMethod.GooglePay
 		]
 	}
-	// {
-	// 	id: 'covid.19.relief.india',
-	// 	name: 'Give2Asia',
-	// 	description: `Support Our World in Data from anywhere in the world.`,
-	// 	countryCode: 'GLOBAL',
-	// 	paymentMethods: [
-	// 		PaymentMethod.Card,
-	// 		PaymentMethod.ApplePay,
-	// 		PaymentMethod.GooglePay
-	// 	]
-	// }
 ];
 
 interface EveryNonprofit {
