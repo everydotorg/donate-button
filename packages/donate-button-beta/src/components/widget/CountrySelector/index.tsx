@@ -97,13 +97,20 @@ const CountryOption = ({
 };
 
 export const CountrySelector = () => {
-	const {setRoute, setCountry} = useWidgetContext();
-	const {countries} = useConfigContext();
+	const {setRoute, setCountry, setCurrency} = useWidgetContext();
+	const {countries, currencies} = useConfigContext();
 	const i18n = useI18n();
 
 	const selectCountry = (country: DonationRecipient) => {
+		const countryCurrency = currencies.find((c) =>
+			c.countryCodes.includes(country.countryCode)
+		);
+
 		setCountry(country);
 		setRoute(Routes.DonationForm);
+		if (countryCurrency) {
+			setCurrency(countryCurrency);
+		}
 	};
 
 	return (
