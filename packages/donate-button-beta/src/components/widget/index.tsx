@@ -273,7 +273,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 			crypto: false
 		});
 
-		const target = '_blank';
+		const target = '_self';
 
 		window.open(url, target);
 	};
