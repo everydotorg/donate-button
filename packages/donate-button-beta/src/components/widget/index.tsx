@@ -326,6 +326,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 												setValue={setDonationAmount}
 												error={submitError}
 												setError={setSubmitError}
+												setCountry={setCountry}
 											/>
 										</FormControl>
 										{config.countrySelection ? (
