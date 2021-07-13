@@ -19,6 +19,9 @@
 
     <button id="every-month-single">Show Configured Single Column</button>
     <button id="every-month-split">Show Configured Split Layout</button>
+    <button id="every-month-monthly-single-img">
+      Show split with single monthly image
+    </button>
     <script>
       window.addEventListener("load", () => {
         // Default options - set your every.org ID only
@@ -230,6 +233,17 @@
         };
 
         everyMonthWidget.showOnClick("#every-month-donate");
+        everyMonthWidget.showOnClick("#every-month-monthly-single-img", {
+          mode: "SPLIT",
+          monthly: {
+            img:
+              "https://images.unsplash.com/photo-1602199926649-2e5e447bab97?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+          },
+          oneTime: {
+            img:
+              "https://images.unsplash.com/photo-1602199926649-2e5e447bab97?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+          },
+        });
         everyMonthWidget.showOnClick("#every-month-single", {
           ...options,
           mode: "SINGLE",
