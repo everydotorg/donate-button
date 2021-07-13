@@ -11,25 +11,27 @@ import {labelText} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
 
-const frequencyContainerCss = cxs({
-	display: 'flex'
-});
-
-const labelCss = (primaryColor: string) =>
+const frequencyContainerCss = (primaryColor: string) =>
 	cxs({
-		...labelText,
-		color: primaryColor,
-		fontWeight: 400,
-		padding: `${Spacing.XS} ${Spacing.Empty}`,
-		flex: 1,
-		textAlign: 'center',
-		border: getColoredBorder(Borders.Normal, COLORS.LightGray),
-		transition: 'border .2s'
+		display: 'flex',
+		color: primaryColor
 	});
+
+const labelCss = cxs({
+	...labelText,
+	fontWeight: 400,
+	padding: `${Spacing.XS} ${Spacing.Empty}`,
+	flex: 1,
+	textAlign: 'center',
+	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
+	transition: 'border .2s'
+});
 
 const labelSelectedCss = (primaryColor: string) =>
 	cxs({
-		border: getColoredBorder(Borders.Normal, primaryColor)
+		border: getColoredBorder(Borders.Normal, primaryColor),
+		backgroundColor: primaryColor,
+		color: COLORS.White
 	});
 
 const separatorBorderSelectedCss = (primaryColor: string) =>
@@ -69,20 +71,20 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 			? [separatorBorderSelectedCss(primaryColor)]
 			: [];
 
-	const leftLabelClasses = [labelCss(primaryColor), labelLeftCss].concat(
+	const leftLabelClasses = [labelCss, labelLeftCss].concat(
 		frequency === DonationFrequency.Monthly
 			? [labelSelectedCss(primaryColor)]
 			: []
 	);
 
-	const rightLabelClasses = [labelCss(primaryColor), labelRightCss].concat(
+	const rightLabelClasses = [labelCss, labelRightCss].concat(
 		frequency === DonationFrequency.OneTime
 			? [labelSelectedCss(primaryColor)]
 			: []
 	);
 
 	return (
-		<div ref={frequencyPopover} className={frequencyContainerCss}>
+		<div ref={frequencyPopover} className={frequencyContainerCss(primaryColor)}>
 			<label
 				className={leftLabelClasses.concat(labelSeparatorClass).join(' ')}
 				htmlFor="monthly"
