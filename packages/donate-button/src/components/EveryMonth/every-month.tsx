@@ -59,6 +59,10 @@ const EveryMonth = ({options: inputOptions, hide}: EveryMonthProps) => {
 	let levelClasses;
 	if (previousLevel > currentLevel) {
 		levelClasses = monthlyLevels.map((level, i) => {
+			if (options.monthly.img) {
+				return {...level, img: options.monthly.img};
+			}
+
 			if (i === previousLevel) {
 				return {
 					...level,
@@ -80,6 +84,10 @@ const EveryMonth = ({options: inputOptions, hide}: EveryMonthProps) => {
 		});
 	} else if (previousLevel < currentLevel) {
 		levelClasses = monthlyLevels.map((level, i) => {
+			if (options.monthly.img) {
+				return {...level, img: options.monthly.img};
+			}
+
 			if (i === previousLevel) {
 				return {
 					...level,
@@ -101,6 +109,10 @@ const EveryMonth = ({options: inputOptions, hide}: EveryMonthProps) => {
 		});
 	} else {
 		levelClasses = monthlyLevels.map((level, i) => {
+			if (options.monthly.img) {
+				return {...level, img: options.monthly.img};
+			}
+
 			if (i === currentLevel) {
 				return {
 					...level,
