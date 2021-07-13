@@ -9,9 +9,13 @@ const canUseSplitPanel = (options: DonateButtonOptions) => {
 	const allMonthlyLevelsHasImages = options.monthly.levels.every((level) =>
 		Boolean(level.img)
 	);
+	const globalMonthlyLevelImage = Boolean(options.monthly.img);
 	const oneTimeLevelHasImage = options.oneTime.img;
 
-	return allMonthlyLevelsHasImages && oneTimeLevelHasImage;
+	return (
+		(allMonthlyLevelsHasImages || globalMonthlyLevelImage) &&
+		oneTimeLevelHasImage
+	);
 };
 
 export const getFinalOptions = (

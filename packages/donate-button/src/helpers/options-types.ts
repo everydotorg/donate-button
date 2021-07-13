@@ -39,6 +39,7 @@ export interface OnSubmitObject {
 export type OnSubmit = OnSubmitFunction | OnSubmitObject;
 
 export interface MonthlyOptions {
+	img?: string;
 	readonly levels: readonly DonationLevel[];
 }
 export interface OneTimeOptions {
