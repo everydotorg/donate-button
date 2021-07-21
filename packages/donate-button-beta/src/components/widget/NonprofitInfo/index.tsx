@@ -39,6 +39,8 @@ const lastParagraph = cxs({
 const actionsContainer = (primaryColor: string) =>
 	cxs({
 		color: primaryColor,
+		flex: 1,
+		alignItems: 'flex-end',
 		display: 'flex',
 		'& > *:not(:last-child)': {
 			marginRight: Spacing.XL
