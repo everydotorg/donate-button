@@ -8,7 +8,9 @@ import {replaceKeys} from 'src/helpers/interpolation';
 
 const redirectTextCss = cxs({
 	...labelText,
-	color: COLORS.TextOpaque
+	color: COLORS.TextOpaque,
+	alignSelf: 'end',
+	marginBottom: 0
 });
 
 export const RedirectNotice = () => {

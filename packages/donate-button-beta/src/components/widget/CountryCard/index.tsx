@@ -13,12 +13,13 @@ import {Spacing} from 'src/components/widget/theme/spacing';
 import {Routes} from 'src/components/widget/types/routes';
 import {replaceKeys} from 'src/helpers/interpolation';
 
-const cardCss = cxs({
-	padding: Spacing.S,
-	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
-	borderRadius: Radii.Default,
-	cursor: 'pointer'
-});
+const cardCss = (clickable: boolean) =>
+	cxs({
+		padding: Spacing.S,
+		border: getColoredBorder(Borders.Normal, COLORS.LightGray),
+		borderRadius: Radii.Default,
+		cursor: clickable ? 'pointer' : 'default'
+	});
 
 const countrySelectorCss = cxs({
 	display: 'flex',
@@ -50,7 +51,7 @@ const bodyCss = cxs({
 
 export const CountryCard = () => {
 	const {country, currency, setRoute} = useWidgetContext();
-	const {primaryColor} = useConfigContext();
+	const {primaryColor, countries} = useConfigContext();
 	const i18n = useI18n();
 
 	const redirectNoticeText = useMemo(
@@ -67,18 +68,22 @@ export const CountryCard = () => {
 
 	return (
 		<div
-			className={cardCss}
+			className={cardCss(countries?.length > 1)}
 			onClick={() => {
-				setRoute(Routes.SelectCountry);
+				if (countries?.length > 1) {
+					setRoute(Routes.SelectCountry);
+				}
 			}}
 		>
 			<div className={countrySelectorCss}>
 				<div className={countryTitleCss}>
 					<CountryTitle country={country} />
 				</div>
-				<span className={arrowCss(primaryColor)}>
-					<ChevronDown color={primaryColor} />
-				</span>
+				{countries?.length > 1 ? (
+					<span className={arrowCss(primaryColor)}>
+						<ChevronDown color={primaryColor} />
+					</span>
+				) : null}
 			</div>
 			<div>
 				<p className={bodyCss}>{redirectNoticeText}</p>
