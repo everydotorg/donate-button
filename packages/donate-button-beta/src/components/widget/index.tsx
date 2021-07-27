@@ -77,7 +77,7 @@ const formCss = cxs({
 	borderRight: 'none',
 	display: 'grid',
 	gridTemplateColumns: '1fr',
-	gridAutoRows: 'max-content',
+	gridTemplateRows: 'max-content max-content 1fr',
 	rowGap: Spacing.XXL,
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
 		borderRight: `1px solid ${COLORS.LightGray}`
@@ -118,7 +118,7 @@ const donateButtonContainer = cxs({
 		gridColumn: '1 / 2',
 		gridRow: '3 / -1',
 		borderRight: `1px solid ${COLORS.LightGray}`,
-		padding: '1.5rem'
+		padding: `${Spacing.Empty} ${Spacing.XL} ${Spacing.XL} ${Spacing.XL}`
 	}
 });
 
@@ -244,7 +244,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 					...options
 				})
 			);
-			setCountry(info.countries?.[0]);
+			setCountry(options.countries?.[0] ?? info.countries?.[0]);
 		};
 
 		void fetchInfo();
