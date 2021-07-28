@@ -65,7 +65,7 @@ const widgetCss = cxs({
 		width: '44.81rem',
 
 		borderRadius: Radii.Medium,
-		gridTemplateColumns: '55% 45%',
+		gridTemplateColumns: '55.5% 44.5%',
 		gridTemplateRows: '1fr 1fr max-content max-content'
 	}
 });
@@ -77,7 +77,7 @@ const formCss = cxs({
 	borderRight: 'none',
 	display: 'grid',
 	gridTemplateColumns: '1fr',
-	gridAutoRows: 'max-content',
+	gridTemplateRows: 'max-content max-content 1fr',
 	rowGap: Spacing.XXL,
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
 		borderRight: `1px solid ${COLORS.LightGray}`
@@ -118,7 +118,7 @@ const donateButtonContainer = cxs({
 		gridColumn: '1 / 2',
 		gridRow: '3 / -1',
 		borderRight: `1px solid ${COLORS.LightGray}`,
-		padding: '1.5rem'
+		padding: `${Spacing.Empty} ${Spacing.XL} ${Spacing.XL} ${Spacing.XL}`
 	}
 });
 
@@ -146,13 +146,17 @@ const closeBoxCss = cxs({
 });
 
 const getSubmitButtonText = (
-	donationAmount: number,
+	donationAmount: number | undefined,
 	currency: CurrencyOption,
 	frequency: DonationFrequency,
 	i18n: Language
 ) => {
 	if (frequency === '') {
 		return i18n.frequencySelect;
+	}
+
+	if (!donationAmount) {
+		return i18n.chooseAnAmount;
 	}
 
 	if (Number.isNaN(donationAmount)) {
@@ -180,7 +184,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
 		config.showInitialMessage
 	);
-	const [donationAmount, setDonationAmount] = useState<number>(
+	const [donationAmount, setDonationAmount] = useState<number | undefined>(
 		config.defaultDonationAmount
 	);
 	const [currency, setCurrency] = useState<CurrencyOption>(
@@ -240,7 +244,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 					...options
 				})
 			);
-			setCountry(info.countries?.[0]);
+			setCountry(options.countries?.[0] ?? info.countries?.[0]);
 		};
 
 		void fetchInfo();
@@ -250,6 +254,11 @@ const Widget = ({options, hide}: WidgetProps) => {
 		event: JSXInternal.TargetedEvent<HTMLFormElement>
 	) => {
 		event.preventDefault();
+		if (!donationAmount) {
+			setSubmitError(i18n.chooseAnAmount);
+			return;
+		}
+
 		if (donationAmount < currency.minimumAmount) {
 			setSubmitError(
 				`${i18n.minDonationAmount} ${currency.name} ${currency.minimumAmount}`
@@ -264,7 +273,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 			crypto: false
 		});
 
-		const target = '_blank';
+		const target = '_self';
 
 		window.open(url, target);
 	};
@@ -317,6 +326,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 												setValue={setDonationAmount}
 												error={submitError}
 												setError={setSubmitError}
+												setCountry={setCountry}
 											/>
 										</FormControl>
 										{config.countrySelection ? (
@@ -337,6 +347,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 									<SubmitButton
 										disabled={
 											frequency === DonationFrequency.Unselected ||
+											!donationAmount ||
 											Number.isNaN(donationAmount)
 										}
 									>

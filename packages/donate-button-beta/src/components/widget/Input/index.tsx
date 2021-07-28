@@ -2,9 +2,9 @@ import cxs from 'cxs';
 import {StateUpdater, useRef} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
-import {CurrencySuggestion} from 'src/components/widget/CurrencySuggestion';
 import {Link} from 'src/components/widget/Link';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
+import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {ChevronDown} from 'src/components/widget/svg/ChevronDown';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
@@ -12,6 +12,7 @@ import {linkText, smallText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {CurrencyOption} from 'src/components/widget/types/currency-option';
+import {DonationRecipient} from 'src/components/widget/types/donation-recipient';
 
 const preventDecimal = (
 	event: JSXInternal.TargetedEvent<HTMLInputElement, KeyboardEvent>
@@ -140,16 +141,18 @@ const errorLabelCss = cxs({
 	marginBottom: 0
 });
 
-const addAmounts = [10, 25, 50, 100];
+// The minimum donation amount for HKD is 50 - until we support dynamic
+// suggested amounts depending on the currency, start at 50 for all.
+const addAmounts = [50, 100, 200, 500];
 
 interface InputProps extends JSXInternal.HTMLAttributes<HTMLInputElement> {
-	value: number;
-	setValue: StateUpdater<number>;
+	value?: number;
+	setValue: StateUpdater<number | undefined>;
 	setCurrency: StateUpdater<CurrencyOption>;
+	setCountry: StateUpdater<DonationRecipient>;
 	error: string | null;
 	setError: StateUpdater<string | null>;
 	label?: string;
-	placeholder?: string;
 	selectedCurrency: CurrencyOption;
 }
 
@@ -159,16 +162,17 @@ export const Input = ({
 	error,
 	setError,
 	label,
-	placeholder,
 	selectedCurrency,
 	setCurrency,
+	setCountry,
 	...otherProps
 }: InputProps) => {
-	const {primaryColor, currencies} = useConfigContext();
+	const {primaryColor, currencies, countries} = useConfigContext();
 	const inputContainerRef = useRef<HTMLDivElement>(null);
 	const inputContainerClasses = [inputContainerCss].concat(
 		error ? [inputErrorCss] : []
 	);
+	const i18n = useI18n();
 
 	const inputClasses = [inputCss];
 
@@ -184,14 +188,32 @@ export const Input = ({
 		}
 	};
 
+	const selectCurrency = (
+		event: JSXInternal.TargetedEvent<HTMLSelectElement>
+	) => {
+		const currency = currencies.find(
+			(c) => c.name === event.currentTarget.value
+		);
+		if (currency) {
+			const country = countries.find((country) =>
+				currency.countryCodes.includes(country.countryCode)
+			);
+
+			if (country) {
+				setCountry(country);
+			}
+
+			setCurrency(currency);
+		}
+	};
+
 	return (
 		<Fragment>
 			<div ref={inputContainerRef} className={inputContainerClasses.join(' ')}>
-				<CurrencySuggestion ref={inputContainerRef} />
 				<span className={inputPrefix}>{selectedCurrency?.symbol}</span>
 				<input
 					className={inputClasses.join(' ')}
-					placeholder={placeholder}
+					placeholder={i18n.enterAnAmount}
 					type="number"
 					value={value}
 					onKeyDown={preventDecimal}
@@ -203,13 +225,7 @@ export const Input = ({
 						<Fragment>
 							<select
 								className={selectCurrencyCss(primaryColor)}
-								onChange={(event) => {
-									setCurrency(
-										currencies.find(
-											(c) => c.name === event.currentTarget.value
-										)!
-									);
-								}}
+								onChange={selectCurrency}
 							>
 								{currencies.map((currency) => (
 									<option
@@ -237,7 +253,7 @@ export const Input = ({
 						key={amount}
 						label={`+${amount}`}
 						onClick={() => {
-							setValue((previous) => previous + amount);
+							setValue((previous) => (previous ?? 0) + amount);
 						}}
 					/>
 				))}

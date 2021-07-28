@@ -39,6 +39,8 @@ const lastParagraph = cxs({
 const actionsContainer = (primaryColor: string) =>
 	cxs({
 		color: primaryColor,
+		flex: 1,
+		alignItems: 'flex-end',
 		display: 'flex',
 		'& > *:not(:last-child)': {
 			marginRight: Spacing.XL
@@ -55,12 +57,12 @@ type NonprofitInfo = {
 
 export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 	const {setRoute} = useWidgetContext();
-	const {infoPages, primaryColor} = useConfigContext();
-	const {nonprofitDescription, thanksDonation} = useI18n();
+	const {infoPages, primaryColor, description} = useConfigContext();
+	const {thanksDonation} = useI18n();
 
 	return (
 		<div className={[containerCss].concat(classes).join(' ')}>
-			<Markdown source={nonprofitDescription} />
+			<Markdown source={description} />
 			<div className={lastParagraph}>
 				<Markdown source={thanksDonation} />
 			</div>

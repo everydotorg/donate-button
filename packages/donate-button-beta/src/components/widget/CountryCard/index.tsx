@@ -13,30 +13,34 @@ import {Spacing} from 'src/components/widget/theme/spacing';
 import {Routes} from 'src/components/widget/types/routes';
 import {replaceKeys} from 'src/helpers/interpolation';
 
-const cardCss = cxs({
-	padding: Spacing.S,
-	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
-	borderRadius: Radii.Default,
-	cursor: 'pointer'
-});
+const cardCss = (clickable: boolean) =>
+	cxs({
+		padding: Spacing.S,
+		border: getColoredBorder(Borders.Normal, COLORS.LightGray),
+		borderRadius: Radii.Default,
+		cursor: clickable ? 'pointer' : 'default'
+	});
 
 const countrySelectorCss = cxs({
 	display: 'flex',
 	flexDirection: 'row',
-	margin: Spacing.Stack_M,
+	margin: Spacing.Stack_S,
 	alignItems: 'center',
 	position: 'relative',
-	cursor: 'pointer'
+	cursor: 'pointer',
+	justifyContent: 'space-between'
+});
+
+const countryTitleCss = cxs({
+	display: 'flex',
+	alignItems: 'center'
 });
 
 const arrowCss = (primaryColor: string) =>
 	cxs({
 		...labelText,
 		color: primaryColor,
-		position: 'absolute',
-		top: '50%',
-		right: 0,
-		transform: 'translateY(-50%)'
+		lineHeight: 0
 	});
 
 const bodyCss = cxs({
@@ -47,14 +51,14 @@ const bodyCss = cxs({
 
 export const CountryCard = () => {
 	const {country, currency, setRoute} = useWidgetContext();
-	const {primaryColor} = useConfigContext();
+	const {primaryColor, countries} = useConfigContext();
 	const i18n = useI18n();
 
 	const redirectNoticeText = useMemo(
 		() =>
 			replaceKeys(
 				{
-					country: country?.countryCode,
+					nameAndRegistration: country?.nameAndRegistration,
 					currency: currency?.name
 				},
 				i18n.donationRedirectNotice
@@ -64,16 +68,22 @@ export const CountryCard = () => {
 
 	return (
 		<div
-			className={cardCss}
+			className={cardCss(countries?.length > 1)}
 			onClick={() => {
-				setRoute(Routes.SelectCountry);
+				if (countries?.length > 1) {
+					setRoute(Routes.SelectCountry);
+				}
 			}}
 		>
 			<div className={countrySelectorCss}>
-				<CountryTitle country={country} />
-				<span className={arrowCss(primaryColor)}>
-					<ChevronDown color={primaryColor} />
-				</span>
+				<div className={countryTitleCss}>
+					<CountryTitle country={country} />
+				</div>
+				{countries?.length > 1 ? (
+					<span className={arrowCss(primaryColor)}>
+						<ChevronDown color={primaryColor} />
+					</span>
+				) : null}
 			</div>
 			<div>
 				<p className={bodyCss}>{redirectNoticeText}</p>
