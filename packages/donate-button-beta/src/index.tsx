@@ -139,6 +139,12 @@ const hideWidget = () => {
 	renderWidget();
 };
 
+const setOptions = (newOptions: Partial<WidgetConfig>) => {
+	Object.assign(instanceOptions, newOptions);
+
+	renderWidget();
+};
+
 const mount = () => {
 	const widgetWrapper = document.createElement('div');
 	document.body.append(widgetWrapper);
@@ -183,6 +189,7 @@ interface GlobalExport {
 	initButtons: typeof initButtons;
 	showWidget: typeof showWidget;
 	createWidget: typeof createWidgetInSelector;
+	setOptions: typeof setOptions;
 }
 
 declare const window: Window & {
@@ -193,5 +200,6 @@ window.everyDotOrgDonateButton = {
 	createButton: createButtonInSelector,
 	initButtons,
 	showWidget,
+	setOptions,
 	createWidget: createWidgetInSelector
 };
