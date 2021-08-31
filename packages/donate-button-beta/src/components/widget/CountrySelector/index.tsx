@@ -57,7 +57,7 @@ const paymentMethodsCss = cxs({
 	display: 'flex',
 	flexWrap: 'wrap',
 	'& > *:not(:last-child)': {
-		marginRight: '0.875rem'
+		marginRight: '14px'
 	}
 });
 

@@ -42,7 +42,7 @@ const inputErrorCss = cxs({
 });
 
 const inputCss = cxs({
-	fontSize: '1.5rem',
+	fontSize: '24px',
 	border: 'none',
 	margin: 0,
 	fontFamily: 'inherit',
@@ -50,7 +50,7 @@ const inputCss = cxs({
 	borderBottom: getColoredBorder(Borders.Normal, COLORS.Transparent),
 	backgroundColor: COLORS.Gray,
 	width: '100%',
-	padding: '0.75rem 4.5rem 0.75rem 2.5rem',
+	padding: '12px 72px 12px 40px',
 	outline: 'none',
 	'::placeholder': {
 		opacity: '0.4',
@@ -68,10 +68,10 @@ const inputCss = cxs({
 });
 
 const inputPrefix = cxs({
-	fontSize: '1.5rem',
+	fontSize: '24px',
 	position: 'absolute',
 	top: '50%',
-	left: '0.75rem',
+	left: '12px',
 	opacity: '0.4',
 	fontWeight: 500,
 	transform: 'translateY(-50%)',
@@ -134,7 +134,7 @@ const addAmountContainerCss = cxs({
 const errorLabelCss = cxs({
 	...smallText,
 	lineHeight: 1,
-	fontSize: '0.75rem',
+	fontSize: '12px',
 	opacity: 0.8,
 	color: COLORS.Error,
 	marginTop: Spacing.XS,

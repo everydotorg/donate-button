@@ -10,7 +10,7 @@ const closeBoxCss = cxs({
 
 const closeWidgetCss = (color: string) =>
 	cxs({
-		width: '1rem',
+		width: '16px',
 		height: '2px',
 		background: color,
 		transform: 'rotate(45deg)',
@@ -20,7 +20,7 @@ const closeWidgetCss = (color: string) =>
 			position: 'absolute',
 			left: 0,
 			background: color,
-			width: '1rem',
+			width: '16px',
 			height: '2px',
 
 			transform: 'rotate(-90deg)'
