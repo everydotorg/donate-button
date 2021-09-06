@@ -27,11 +27,11 @@ import {CurrencyOption} from 'src/components/widget/types/currency-option';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
 import {DonationRecipient} from 'src/components/widget/types/donation-recipient';
 import {Language} from 'src/components/widget/types/language';
+import {PaymentMethod} from 'src/components/widget/types/payment-method';
 import {Routes} from 'src/components/widget/types/routes';
 import {WidgetConfig} from 'src/components/widget/types/widget-config';
 import constructEveryUrl from 'src/helpers/construct-every-url';
 import {mergeConfig} from 'src/helpers/options-types';
-import { PaymentMethod } from 'src/components/widget/types/payment-method';
 
 cxs.prefix('edoWidget-');
 
