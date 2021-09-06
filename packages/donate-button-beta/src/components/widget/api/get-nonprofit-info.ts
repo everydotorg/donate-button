@@ -17,42 +17,7 @@ interface EveryResponse {
 	};
 }
 
-const countriesMock: DonationRecipient[] = [
-	{
-		id: 'covid.19.relief.india',
-		name: 'United States',
-		nameAndRegistration: 'Give2Asia (US 501(c)(3) EIN 94-3373670)',
-		countryCode: 'US',
-		paymentMethods: [
-			PaymentMethod.Card,
-			PaymentMethod.ApplePay,
-			PaymentMethod.GooglePay,
-			PaymentMethod.Bank
-		]
-	},
-	{
-		id: 'covid.19.relief.india ',
-		name: 'Australia',
-		nameAndRegistration: 'Give2Asia Australia Ltd (AU DGR ABN 20 640 318 636)',
-		countryCode: 'AU',
-		paymentMethods: [
-			PaymentMethod.Card,
-			PaymentMethod.ApplePay,
-			PaymentMethod.GooglePay
-		]
-	},
-	{
-		id: 'covid.19.relief.india',
-		name: 'Hong Kong SAR of the PRC',
-		nameAndRegistration: 'Give2Asia Foundation Limited (HKSAR Section 88)',
-		countryCode: 'HK',
-		paymentMethods: [
-			PaymentMethod.Card,
-			PaymentMethod.ApplePay,
-			PaymentMethod.GooglePay
-		]
-	}
-];
+const countriesMock: DonationRecipient[] = [];
 
 interface EveryNonprofit {
 	name: string;

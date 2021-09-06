@@ -18,6 +18,8 @@ export const es: Partial<Language> = {
 	countryTitle: 'País para deducción de impuestos',
 	countrySelection: 'Selecciona tu país',
 	donate: 'Donar',
+	simpleRedirectNotice:
+		'Vas a ser redireccionado a Every.org para completar tu donación.',
 	donationRedirectNotice:
 		'Vas a ser redireccionado a Every.org para completar tu donación de {{currency}} a una ONG registrada en {{country}}.',
 	countryDescription:

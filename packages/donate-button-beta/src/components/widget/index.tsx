@@ -31,6 +31,7 @@ import {Routes} from 'src/components/widget/types/routes';
 import {WidgetConfig} from 'src/components/widget/types/widget-config';
 import constructEveryUrl from 'src/helpers/construct-every-url';
 import {mergeConfig} from 'src/helpers/options-types';
+import { PaymentMethod } from 'src/components/widget/types/payment-method';
 
 cxs.prefix('edoWidget-');
 
@@ -244,7 +245,21 @@ const Widget = ({options, hide}: WidgetProps) => {
 					...options
 				})
 			);
-			setCountry(options.countries?.[0] ?? info.countries?.[0]);
+			setCountry(
+				options.countries?.[0] ??
+					info.countries?.[0] ?? {
+						id: options.nonprofitSlug,
+						name: 'United States',
+						nameAndRegistration: info.name,
+						countryCode: 'US',
+						paymentMethods: [
+							PaymentMethod.Card,
+							PaymentMethod.ApplePay,
+							PaymentMethod.GooglePay,
+							PaymentMethod.Bank
+						]
+					}
+			);
 		};
 
 		void fetchInfo();
