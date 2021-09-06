@@ -7,6 +7,7 @@ import {Spacing} from 'src/components/widget/theme/spacing';
 import constructEveryUrl from 'src/helpers/construct-every-url';
 
 const containerCss = cxs({
+	...smallText,
 	padding: Spacing.InsetSquish_S,
 	borderTop: '1px solid',
 	borderBottom: '1px solid',
@@ -31,12 +32,30 @@ interface CryptoProps {
 export const Crypto = ({classes}: CryptoProps) => {
 	const {nonprofitSlug, primaryColor} = useConfigContext();
 
-	const donateWithCryptoUrl = constructEveryUrl({nonprofitSlug, crypto: true});
+	const donateWithCryptoUrl = constructEveryUrl({
+		nonprofitSlug,
+		crypto: true
+	});
 
 	return (
 		<div className={[containerCss].concat(classes).join(' ')}>
+			Alternate methods:&nbsp;&nbsp;
 			<a className={actionLink(primaryColor)} href={donateWithCryptoUrl}>
-				Donate with Crypto or stocks
+				Crypto
+			</a>
+			&nbsp;&nbsp;
+			<a
+				className={actionLink(primaryColor)}
+				href="https://www.every.org/donate-stock"
+			>
+				Stock
+			</a>
+			&nbsp;&nbsp;
+			<a
+				className={actionLink(primaryColor)}
+				href="https://support.every.org/hc/en-us/articles/360059998953-How-can-I-donate-using-a-Donor-Advised-Fund-DAF-"
+			>
+				DAF
 			</a>
 		</div>
 	);

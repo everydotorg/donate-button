@@ -20,6 +20,8 @@ export const en: Language = {
 	donate: 'Donate',
 	countryDescription:
 		'Support {{projectName}} with a donation to {{nameAndRegistration}}.',
+	simpleRedirectNotice:
+		'You will be redirected to Every.org to complete your donation.',
 	donationRedirectNotice:
 		'You will be redirected to Every.org to complete your {{currency}} donation to {{nameAndRegistration}}.',
 	thanksDonation: ``,
