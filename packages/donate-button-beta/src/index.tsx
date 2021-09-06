@@ -176,7 +176,8 @@ const createWidgetInSelector = ({element, selector, options}: any) => {
 		return;
 	}
 
-	container.addEventListener('click', () => {
+	container.addEventListener('click', (event: any) => {
+		event.preventDefault();
 		instanceOptions = {...options};
 		showWidget();
 	});
