@@ -27,14 +27,16 @@ const actionLink = (primaryColor: string) =>
 
 interface CryptoProps {
 	classes: string[];
+	noExit?: boolean;
 }
 
-export const Crypto = ({classes}: CryptoProps) => {
+export const Crypto = ({classes, noExit}: CryptoProps) => {
 	const {nonprofitSlug, primaryColor} = useConfigContext();
 
 	const donateWithCryptoUrl = constructEveryUrl({
 		nonprofitSlug,
-		crypto: true
+		crypto: true,
+		noExit
 	});
 
 	return (

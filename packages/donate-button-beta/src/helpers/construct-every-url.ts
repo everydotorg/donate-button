@@ -6,12 +6,14 @@ function constructEveryUrl({
 	nonprofitSlug,
 	crypto,
 	frequency,
+	noExit,
 	amount
 }: {
 	nonprofitSlug: string;
 	crypto: boolean;
 	frequency?: DonationFrequency;
 	amount?: number;
+	noExit?: boolean;
 }) {
 	const baseUrl = `https://www.every.org/${nonprofitSlug}/donate${
 		crypto ? '/crypto' : ''
@@ -22,7 +24,7 @@ function constructEveryUrl({
 		utm_campaign: 'donate-button',
 		utm_source: nonprofitSlug,
 		utm_medium: UTM_MEDIUM,
-		no_exit: 1
+		no_exit: noExit ?? 1
 	})
 		.filter(([_, value]) => Boolean(value))
 		.map((entry) => entry.map((part) => encodeURIComponent(part!)).join('='))

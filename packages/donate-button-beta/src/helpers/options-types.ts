@@ -21,6 +21,12 @@ export interface DonateButtonOptions {
 	 * For now, only crypto is supported
 	 */
 	readonly crypto: boolean; // For now only this is supported
+	/**
+	 * If present, do not show the normal www.every.org background,
+	 * only show the donation modal and do not allow people to exit
+	 * the modal. Defaults to true.
+	 */
+	readonly noExit?: boolean;
 }
 
 export interface EmbedButtonOptions extends DonateButtonOptions {
