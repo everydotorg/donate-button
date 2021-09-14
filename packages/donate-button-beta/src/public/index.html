@@ -66,6 +66,9 @@
       <div id="livebetter-donate-button"><a href="https://www.every.org/livebetter-corp/donate">Donate Live Better</a></div>
       <br />
       <br />
+      <div id="incomemovement-donate-button"><a href="https://www.every.org/incomemovement/donate">Donate Income Movement</a></div>
+      <br />
+      <br />
       <div class="edo-donate-btn"><a href="https://www.every.org/livebetter-corp/donate/crypto">Donate Crypto</a></div>
       <!-- <br />
       <br />
@@ -209,7 +212,6 @@
           });
         }); -->
       <script>
-
         everyDotOrgDonateButton.createWidget({
           selector: "#livebetter-donate-button",
           options: {
@@ -233,6 +235,45 @@
 
         We do not provide legal or tax advise to individuals, but generally speaking in the US if you itemize your tax return, then tax deductible donations can reduce taxable income.
         ## How long does it take for my donation to reach LiveBetter?
+        Your donation information will be sent instantly and funds are disbursed weekly.
+              `,
+              },
+            ],
+            currencies: [
+              {
+                countryCodes: ["US"],
+                name: "USD",
+                symbol: "$",
+                minimumAmount: 10,
+              },
+            ],
+          },
+        });
+
+        everyDotOrgDonateButton.createWidget({
+          selector: "#incomemovement-donate-button",
+          options: {
+            nonprofitSlug: "incomemovement",
+            primaryColor: "#1AAFA7",
+            showInitialMessage: false,
+            defaultFrequency: "once",
+            countrySelection: undefined,
+            noExit: false,
+            infoPages: [
+              {
+                key: "faq",
+                name: "FAQ",
+                source: `## How does this donate button work?
+
+        This button is powered by Every.org, a tax-exempt US 501(c)(3) nonprofit building accessible giving infrastructure to help every person and organization do more good.
+
+        You will be directed to www.every.org to securely complete your donation. You can donate cash via Bank, Card, Google Pay, Apple Pay, or PayPal. You can also elect to donate Crypto, Stock, or via a DAF.
+
+        ## Is my donation tax-deductible?
+        Yes, your donation will be made to Every.org, a US 501(c)(3) tax-exempt organization with EIN 61-1913297, and you will instantly get a receipt emailed to you.
+
+        We do not provide legal or tax advise to individuals, but generally speaking in the US if you itemize your tax return, then tax deductible donations can reduce taxable income.
+        ## How long does it take for my donation to reach Income Movement?
         Your donation information will be sent instantly and funds are disbursed weekly.
               `,
               },

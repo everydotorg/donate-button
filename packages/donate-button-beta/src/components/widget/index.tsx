@@ -285,7 +285,8 @@ const Widget = ({options, hide}: WidgetProps) => {
 			nonprofitSlug: country.id,
 			frequency,
 			amount: donationAmount,
-			crypto: false
+			crypto: false,
+			noExit: mergedConfig.noExit
 		});
 
 		const target = '_self';

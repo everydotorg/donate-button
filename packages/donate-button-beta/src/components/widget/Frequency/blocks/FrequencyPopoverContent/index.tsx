@@ -6,7 +6,6 @@ import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
-import constructEveryUrl from 'src/helpers/construct-every-url';
 
 const containerCss = cxs({
 	display: 'flex',
