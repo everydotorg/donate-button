@@ -32,9 +32,9 @@ const containerCss = cxs({
 });
 
 const logoCss = cxs({
-	height: '0.75rem',
+	height: '12px',
 	width: 'auto',
-	marginRight: '0.25rem'
+	marginRight: '4px'
 });
 
 const labelCss = cxs({

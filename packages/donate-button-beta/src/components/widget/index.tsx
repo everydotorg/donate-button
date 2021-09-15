@@ -62,8 +62,8 @@ const widgetCss = cxs({
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		// Fix te size of the widget to match the desings.
 		// We can add a new breakpoints for large devices is this is too small
-		height: '34.4rem',
-		width: '44.81rem',
+		height: '550.4px',
+		width: '716.96px',
 
 		borderRadius: Radii.Medium,
 		gridTemplateColumns: '55.5% 44.5%',

@@ -19,8 +19,8 @@ const containerCss = cxs({
 });
 
 const arrowCss = cxs({
-	width: '1rem',
-	height: '1rem',
+	width: '16px',
+	height: '16px',
 	borderRadius: Radii.Small,
 	borderTop: getColoredBorder(Borders.Normal, COLORS.LightGray),
 	borderLeft: getColoredBorder(Borders.Normal, COLORS.LightGray),

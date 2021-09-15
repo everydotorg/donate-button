@@ -36,8 +36,8 @@ const nonprofitNameCss = cxs({
 const logoContainerCss = cxs({
 	borderRadius: Radii.Circle,
 	border: '4px solid rgba(255,255,255,0.2)',
-	width: '4rem',
-	height: '4rem',
+	width: '64px',
+	height: '64px',
 	position: 'absolute',
 	top: Spacing.XL,
 	right: Spacing.XL,

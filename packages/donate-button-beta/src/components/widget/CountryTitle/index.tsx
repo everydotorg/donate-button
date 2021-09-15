@@ -20,8 +20,8 @@ const countrySelectedCss = (primaryColor: string) =>
 	});
 
 const countryFlagCss = cxs({
-	height: '1rem',
-	width: '1rem',
+	height: '16px',
+	width: '16px',
 	borderRadius: '100%',
 	objectFit: 'cover',
 	objectPosition: 'center',
