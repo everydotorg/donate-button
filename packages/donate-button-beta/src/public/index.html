@@ -63,6 +63,9 @@
           actions.style.display = "none";
         }
       </script>
+      <div id="ourworldindata"><a href="https://www.every.org/ourworldindata/donate">Donate Our World in Data</a></div>
+      <br />
+      <br />
       <div id="livebetter-donate-button"><a href="https://www.every.org/livebetter-corp/donate">Donate Live Better</a></div>
       <br />
       <br />
@@ -212,6 +215,155 @@
           });
         }); -->
       <script>
+
+          everyDotOrgDonateButton.createWidget({
+            selector: "#ourworldindata",
+            options: {
+              showInitialMessage: false,
+              defaultFrequency: "once",
+              nonprofitSlug: "ourworldindata",
+              currencies: [
+                {
+                  countryCodes: ["US"],
+                  name: "USD",
+                  symbol: "$",
+                  minimumAmount: 10,
+                },
+                {
+                  countryCodes: ["GB"],
+                  name: "GBP",
+                  symbol: "£",
+                  minimumAmount: 10,
+                },
+                {
+                  countryCodes: ["US"],
+                  name: "EUR",
+                  symbol: "€",
+                  minimumAmount: 10,
+                },
+              ],
+              countries: [
+                {
+                  id: 'ourworldindata',
+                  name: 'United States',
+                  nameAndRegistration: 'Every.org (US 501(c)(3) EIN 61-1913297)',
+                  countryCode: 'US',
+                  paymentMethods: [
+                    'card',
+                    'applePay',
+                    'googlePay',
+                    'bank',
+                    'paypal',
+                    'crypto',
+                    'stock',
+                    'daf',
+                  ]
+                },
+                {
+                  id: 'gcdl',
+                  name: 'United Kingdom',
+                  nameAndRegistration: 'Global Change Data Lab (UK Charity 1186433)',
+                  countryCode: 'GB',
+                  paymentMethods: [
+                    'card',
+                    'applePay',
+                    'googlePay',
+                  ]
+                }
+              ],
+              infoPages: [
+                {
+                  key: "faq",
+                  name: "FAQ",
+                  source: `## How does this donate button work?
+
+        This button is powered by Every.org, a tax-exempt US 501(c)(3) nonprofit building accessible giving infrastructure to help every person and organization do more good.
+
+        You will be directed to www.every.org to securely complete your donation. If you select UK then you can donate cash via Card, Google Pay, or Apple Pay. If you select US then you can also donate via Crypto, Stock, or via a DAF.
+
+        ## Is my donation tax-deductible?
+        If you select UK, you donation will be made to Global Change Data Lab (UK Charity 1186433) and is tax-deductible and eligible for GiftAid in the UK. If you select US, your donation will be made to Every.org, a US 501(c)(3) tax-exempt organization with EIN 61-1913297, and you will instantly get a receipt emailed to you.
+
+        We do not provide legal or tax advise to individuals, but generally speaking in the US if you itemize your tax return, then tax deductible donations can reduce taxable income.
+        ## How long does it take for my donation to reach Our World in Data?
+        Your donation information will be sent instantly and funds are disbursed weekly if you donated to Every.org in US, or instantly if you donated to Global Change Data Lab in UK.
+              `,
+                },
+                {
+                  key: "donation-policy",
+                  name: "Donation Policy",
+                  source: `## Donation policy
+        *Approved by the Board of Trustees on 28 July, 2020*
+
+        ### Scope
+        Our World in Data is a collaborative effort between researchers of the Oxford Martin
+        Programme on Global Development at the University of Oxford, who are the scientific
+        contributors of the website content; and the non-profit organization Global Change Data
+        Lab, who publishes and maintains the website and the underlying data engine. Gifts made
+        to Our World in Data through the donations page, go to the Global Change Data Lab
+        (GCDL).
+        GCDL is a company limited by guarantee registered with the Companies House
+        (company number 11725483), as well as a charity registered with the Charity
+        Commission for England and Wales (charity number 1186433).
+        This document specifies the rules that define the legal and ethical basis for GCDL’s
+        cooperation with benefactors and are intended to ensure that the interests and integrity of
+        the parties involved are safeguarded.
+
+        ### General Principle
+        Global Change Data Lab (GCDL) is an educational charity with a focus on large global
+        problems and international development. GCDL’s flagship project is the web publication
+        Our World in Data, where we focus on communicating data and research to make progress
+        against the world’s largest problems.
+        GCDL’s objects are stated as: “The advancement of public education in the field of how
+        global living conditions and the earth’s environment are changing, in particular, but not
+        exclusively, through the production and maintenance of public online resources,
+        presenting objective, impartial research and rigorous factual analysis, full, accurate and
+        relevant information to assist such public understanding and to inform and improve the
+        quality of public debate.”
+        GCDL’s purpose constitutes the basis on which a decision is taken whether a donation
+        can be accepted or not: All donations must be compatible with, and contribute to,
+        promoting the accomplishment of GCDL’s charitable purpose.
+
+        ### Forms of donations
+        It is GCDL’s policy to accept donations from any donor as long as the acceptance does
+        not impair GCDL’s independence to pursue its mission, nor endanger its integrity and
+        good reputation.
+        GCDL’s acceptance of a donation does not imply any endorsement of the donor’s
+        opinions, policies or records, regardless of the donor being a private individual, business
+        or other organisation.
+        Donations may be given as an unspecified donation, or for a specific cause within the
+        purpose of GCDL. Such specific donations shall not result in undue influence over
+        GCDL’s priorities and execution within the project.
+        GCDL does not accept donations as payment or compensation for lectures, promotion or
+        any other counter-performance whatsoever.
+
+        ### Donor privacy
+        Information about donors is handled in accordance with the United Kingdom Data
+        Protection Act and GDPR requirements.
+        GCDL does not share the information about donations, unless agreed separately with the
+        donors.
+        GCDL encourages donors of amounts exceeding £10,000 to let GCDL disclose the
+        donation and the donor in its Annual Report, and to make the information available
+        through the GCDL website for the purpose of transparency
+
+        ### Gift Aid and tax-deductible donations
+        GCDL is recognised as a charity for tax purposes in the United Kingdom. This means
+        donations to GCDL qualify for tax relief and are eligible for ‘Gift Aid’ in the UK.
+        Gift Aid is a tax incentive that enables tax-effective giving by individuals to charities in the
+        UK. Through this scheme GCDL can claim an additional 25p for every £1 donated
+        (further details here: https://www.gov.uk/donating-to-charity)
+
+        ### Procedure
+        The use of received funds shall be decided by GCDL’s executive committee, in
+        accordance with the routines and procedures approved by the Board of Trustees.
+        Acceptance of donations larger than £10,000 requires a decision of acceptance by
+        GCDL’s Board of Trustees.
+        `,
+                },
+              ],
+            },
+          });
+
         everyDotOrgDonateButton.createWidget({
           selector: "#livebetter-donate-button",
           options: {
