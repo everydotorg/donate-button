@@ -14,12 +14,12 @@ type PaymentDisplayInfo = {logo: string; label: string};
 const paymentMethodsLogos: Record<PaymentMethodType, PaymentDisplayInfo> = {
 	[PaymentMethodType.ApplePay]: {
 		logo: applePayLogo,
-		label: 'Apple pay'
+		label: ''
 	},
 	[PaymentMethodType.Bank]: {logo: bankLogo, label: 'Bank'},
 	[PaymentMethodType.Card]: {logo: cardLogo, label: 'Card'},
 	[PaymentMethodType.Crypto]: {logo: cryptoLogo, label: 'Crypto'},
-	[PaymentMethodType.GooglePay]: {logo: googlePayLogo, label: 'Google Pay'},
+	[PaymentMethodType.GooglePay]: {logo: googlePayLogo, label: ''},
 	[PaymentMethodType.Paypal]: {logo: paypalLogo, label: 'Paypal'},
 	[PaymentMethodType.DAF]: {logo: genericLogo, label: 'DAF'},
 	[PaymentMethodType.Stock]: {logo: genericLogo, label: 'Stock'},
