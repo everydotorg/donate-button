@@ -18,18 +18,18 @@ const buttonCss = cxs({
 	backfaceVisibility: 'hidden',
 	transition: 'background-color 0.25s',
 
-	padding: '0.75rem 1.25rem',
+	padding: '12px 20px',
 	color: '#fff',
 	backgroundColor: '#00a380',
 	borderRadius: '100px',
-	fontSize: '1rem',
+	fontSize: '16px',
 	'&:hover': {backgroundColor: '#2F806D'}
 });
 const logoCss = cxs({
-	width: '1rem',
-	height: '1rem',
+	width: '16px',
+	height: '16px',
 	fill: '#fff',
-	marginRight: '0.5rem'
+	marginRight: '8px'
 });
 const verticalCenterTextCss = cxs({
 	transform: 'translateY(0.08em)'

@@ -88,7 +88,7 @@ function optionsFromEdoUrl(
 
 const DONATE_BUTTON_CLASS = 'edo-donate-btn';
 const INITIALIZED_ATTRIBUTE = 'data-edo-init';
-function initButtons() {
+function initButtons(instanceOptions: Partial<EmbedButtonOptions> = {}) {
 	for (const buttonContainer of document.querySelectorAll(
 		// Don't double-initialize an initialized container
 		`.${DONATE_BUTTON_CLASS}:not([${INITIALIZED_ATTRIBUTE}])`
@@ -115,7 +115,14 @@ function initButtons() {
 			continue;
 		}
 
-		const Button = <EmbedButton {...options} />;
+		// `options` has the crypto & slug extracted from the url
+		// We preserve it over any custom config passed
+		const finalOptions = {
+			...instanceOptions,
+			...options
+		};
+
+		const Button = <EmbedButton {...finalOptions} />;
 
 		render(Button, buttonContainer, buttonLink);
 		buttonContainer.setAttribute(INITIALIZED_ATTRIBUTE, '');
