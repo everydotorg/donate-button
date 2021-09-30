@@ -5,7 +5,6 @@ import {CloseButton} from 'src/components/widget/CloseButton';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {headingText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 

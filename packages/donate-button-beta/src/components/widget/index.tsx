@@ -9,6 +9,7 @@ import {Crypto} from 'src/components/widget/Crypto';
 import {FormControl} from 'src/components/widget/FormControl';
 import {Frequency} from 'src/components/widget/Frequency';
 import {Info} from 'src/components/widget/Info';
+import {InfoPagesNav} from 'src/components/widget/InfoPagesNav';
 import {Input} from 'src/components/widget/Input';
 import {NonprofitHeader} from 'src/components/widget/NonprofitHeader';
 import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
@@ -62,8 +63,7 @@ const widgetCss = cxs({
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		// Fix te size of the widget to match the desings.
 		// We can add a new breakpoints for large devices is this is too small
-		// height: '550.4px',
-		height: 'unset',
+		height: '550px',
 		width: '720px',
 
 		borderRadius: Radii.Medium,
@@ -135,6 +135,21 @@ const closeBoxCss = cxs({
 		top: `-${Spacing.M}`,
 		right: `-${Spacing.XXL}`
 	}
+});
+
+const navbarCss = cxs({
+	gridColumn: '1 / 2',
+	gridRow: '3 / 4',
+	padding: Spacing.XL,
+	borderTop: `1px solid ${COLORS.LightGray}`
+});
+
+const cryptoCss = cxs({
+	gridColumn: '2 / 3',
+	gridRow: '3 / 4',
+	padding: Spacing.XL,
+	borderTop: `1px solid ${COLORS.LightGray}`,
+	borderLeft: `1px solid ${COLORS.LightGray}`
 });
 
 const getSubmitButtonText = (
@@ -338,6 +353,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 												setCountry={setCountry}
 											/>
 										</FormControl>
+
 										{config.countrySelection ? (
 											<FormControl label={i18n.countryTitle}>
 												<CountryCard />
@@ -350,7 +366,11 @@ const Widget = ({options, hide}: WidgetProps) => {
 									<NonprofitInfo classes={[nonProfitInfoCss]} />
 								</div>
 
-								<div className={donateButtonContainer}>
+								<InfoPagesNav classes={[navbarCss]} />
+
+								<Crypto classes={[cryptoCss]} />
+
+								{/* <div className={donateButtonContainer}>
 									<SubmitButton
 										disabled={
 											frequency === DonationFrequency.Unselected ||
@@ -365,7 +385,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 											i18n
 										)}
 									</SubmitButton>
-								</div>
+								</div> */}
 							</Fragment>
 						) : route === Routes.SelectCountry ? (
 							<CountrySelector />

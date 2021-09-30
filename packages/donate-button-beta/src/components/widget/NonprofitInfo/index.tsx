@@ -1,21 +1,23 @@
 import cxs from 'cxs';
 import {Markdown} from 'src/components/widget/Markdown';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
-import {useI18n} from 'src/components/widget/hooks/use-i18n';
-import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {smallText} from 'src/components/widget/theme/font-sizes';
+import {
+	bodyText,
+	headingText,
+	smallText
+} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
 
 const containerCss = cxs({
-	...smallText,
+	...bodyText,
 	display: 'flex',
 	flexDirection: 'column',
 	overflow: 'initial',
-	padding: Spacing.InsetSquish_S,
+	margin: Spacing.InsetSquish_S,
 	' > *:not(:last-child)': {
-		marginBottom: Spacing.S
+		marginBottom: Spacing.XL
 	},
 	color: COLORS.Text,
 	' > p': {
@@ -24,60 +26,54 @@ const containerCss = cxs({
 		letterSpacing: '-0.005em'
 	},
 	[BREAKPOINTS.TabletLandscapeUp]: {
+		margin: Spacing.Inset_XL,
+		marginBottom: Spacing.XXL,
 		overflow: 'auto'
 	}
 });
 
-const lastParagraph = cxs({
-	color: COLORS.TextOpaque,
-	' > p': {
-		display: 'block',
-		margin: 0
-	}
+// const lastParagraph = cxs({
+// 	color: COLORS.TextOpaque,
+// 	' > p': {
+// 		display: 'block',
+// 		margin: 0
+// 	}
+// });
+
+const nonprofitNameCss = cxs({
+	...headingText,
+	margin: `0 0 ${Spacing.XXS} 0`
 });
 
-const actionsContainer = (primaryColor: string) =>
-	cxs({
-		color: primaryColor,
-		flex: 1,
-		alignItems: 'flex-end',
-		display: 'flex',
-		'& > *:not(:last-child)': {
-			marginRight: Spacing.XL
-		},
-		' > p': {
-			margin: 0,
-			cursor: 'pointer'
-		}
-	});
+const locationAddressCss = cxs({
+	...smallText,
+	margin: 0,
+	textTransform: 'uppercase',
+	color: COLORS.TextOpaque
+});
 
 type NonprofitInfo = {
 	classes: string[];
 };
 
 export const NonprofitInfo = ({classes}: NonprofitInfo) => {
-	const {setRoute} = useWidgetContext();
-	const {infoPages, primaryColor, description} = useConfigContext();
-	const {thanksDonation} = useI18n();
+	const {name, locationAddress, description} = useConfigContext();
+
+	// @todo: check if we should keep this option, or remove
+	// const {thanksDonation} = useI18n();
 
 	return (
 		<div className={[containerCss].concat(classes).join(' ')}>
+			<div>
+				<h1 className={nonprofitNameCss}>{name}</h1>
+				<h2 className={locationAddressCss}>{locationAddress}&nbsp;</h2>
+			</div>
+
 			<Markdown source={description} />
-			<div className={lastParagraph}>
+
+			{/* <div className={lastParagraph}>
 				<Markdown source={thanksDonation} />
-			</div>
-			<div className={actionsContainer(primaryColor)}>
-				{infoPages?.map((page) => (
-					<p
-						key={page.key}
-						onClick={() => {
-							setRoute(page.key);
-						}}
-					>
-						{page.name}
-					</p>
-				))}
-			</div>
+			</div> */}
 		</div>
 	);
 };

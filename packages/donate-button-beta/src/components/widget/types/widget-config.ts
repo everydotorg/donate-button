@@ -8,6 +8,7 @@ export type WidgetConfig = {
 	show: boolean;
 	nonprofitSlug: string;
 	name: string;
+	locationAddress: string | null;
 	description: string;
 	descriptionLong: string;
 	logo: string;
