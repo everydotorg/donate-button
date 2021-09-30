@@ -11,27 +11,15 @@ import {Spacing} from 'src/components/widget/theme/spacing';
 
 const containerCss = (backgroundUrl: string) =>
 	cxs({
-		minHeight: '190px',
+		height: '190px',
 		backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%), url(${backgroundUrl})`,
 		backgroundPosition: 'center',
 		backgroundSize: 'cover',
 		position: 'relative',
-		borderTopRightRadius: 'none',
 		[BREAKPOINTS.TabletLandscapeUp]: {
-			borderTopRightRadius: Radii.Medium
+			borderTopLeftRadius: Radii.Medium
 		}
 	});
-
-const nonprofitNameCss = cxs({
-	...headingText,
-	position: 'absolute',
-	bottom: Spacing.M,
-	left: '0',
-	padding: 0,
-	margin: `${Spacing.Empty} ${Spacing.XL}`,
-	fontWeight: 'bold',
-	color: 'white'
-});
 
 const logoContainerCss = cxs({
 	borderRadius: Radii.Circle,
@@ -40,7 +28,7 @@ const logoContainerCss = cxs({
 	height: '64px',
 	position: 'absolute',
 	top: Spacing.XL,
-	right: Spacing.XL,
+	left: Spacing.XL,
 	overflow: 'hidden'
 });
 
@@ -97,7 +85,6 @@ export const NonprofitHeader = forwardRef(
 				ref={ref}
 				className={[containerCss(backgroundImage)].concat(classes).join(' ')}
 			>
-				<p className={nonprofitNameCss}>{name}</p>
 				<div className={logoContainerCss}>
 					<div alt="nonprofit logo" className={logoImageCss(logo)} />
 				</div>

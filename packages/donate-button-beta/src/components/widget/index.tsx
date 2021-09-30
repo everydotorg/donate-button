@@ -38,7 +38,7 @@ cxs.prefix('edoWidget-');
 const wrapperCss = cxs({
 	position: 'absolute',
 	height: 'auto',
-	width: '100vw',
+	width: '100%',
 	zIndex: 999,
 	top: 0,
 	bottom: 0,
@@ -55,24 +55,25 @@ const widgetCss = cxs({
 	background: 'white',
 	display: 'grid',
 	gridTemplateRows: '1fr max-content',
-	width: '100vw',
+	width: '100%',
 	height: '100%',
 	borderRadius: 'unset',
 	position: 'relative',
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		// Fix te size of the widget to match the desings.
 		// We can add a new breakpoints for large devices is this is too small
-		height: '550.4px',
-		width: '716.96px',
+		// height: '550.4px',
+		height: 'unset',
+		width: '720px',
 
 		borderRadius: Radii.Medium,
-		gridTemplateColumns: '55.5% 44.5%',
-		gridTemplateRows: '1fr 1fr max-content max-content'
+		gridTemplateColumns: '44.5% 55.5%',
+		gridTemplateRows: 'max-content 1fr max-content'
 	}
 });
 
 const formCss = cxs({
-	gridColumn: '1 / 2',
+	gridColumn: '2 / 3',
 	gridRow: '1 / 3',
 	padding: Spacing.Inset_XL,
 	borderRight: 'none',
@@ -81,7 +82,7 @@ const formCss = cxs({
 	gridTemplateRows: 'max-content max-content 1fr',
 	rowGap: Spacing.XXL,
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
-		borderRight: `1px solid ${COLORS.LightGray}`
+		borderLeft: `1px solid ${COLORS.LightGray}`
 	}
 });
 
@@ -91,24 +92,14 @@ const nonProfitHeaderCss = cxs({
 
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
 		height: 'auto',
-		gridColumn: '2 / 3',
+		gridColumn: '1 / 2',
 		gridRow: '1 / 2'
 	}
 });
 
 const nonProfitInfoCss = cxs({
-	gridColumn: '2 / 3',
+	gridColumn: '1 / 2',
 	gridRow: '2 / 4'
-});
-
-const cryptoContainerCss = cxs({
-	gridRow: '4 / 5',
-	gridColumn: '1 / -1',
-
-	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
-		gridRow: '4 / 5',
-		gridColumn: '2 / 3'
-	}
 });
 
 const donateButtonContainer = cxs({
@@ -116,9 +107,9 @@ const donateButtonContainer = cxs({
 	gridRow: '3 / 4',
 	padding: `${Spacing.XS} ${Spacing.XS}`,
 	[BREAKPOINTS.TabletLandscapeUp]: {
-		gridColumn: '1 / 2',
-		gridRow: '3 / -1',
-		borderRight: `1px solid ${COLORS.LightGray}`,
+		gridColumn: '2 / 3',
+		gridRow: '3 / 4',
+		borderLeft: `1px solid ${COLORS.LightGray}`,
 		padding: `${Spacing.Empty} ${Spacing.XL} ${Spacing.XL} ${Spacing.XL}`
 	}
 });
@@ -327,6 +318,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 										showScrolled={showScrolledHeader}
 										classes={[nonProfitHeaderCss]}
 									/>
+
 									<div className={formCss}>
 										<FormControl label={i18n.frequency}>
 											<Frequency
@@ -334,6 +326,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 												setFrequency={setFrequency}
 											/>
 										</FormControl>
+
 										<FormControl label={i18n.amount}>
 											<Input
 												selectedCurrency={currency}
@@ -355,8 +348,6 @@ const Widget = ({options, hide}: WidgetProps) => {
 									</div>
 
 									<NonprofitInfo classes={[nonProfitInfoCss]} />
-
-									<Crypto classes={[cryptoContainerCss]} />
 								</div>
 
 								<div className={donateButtonContainer}>
