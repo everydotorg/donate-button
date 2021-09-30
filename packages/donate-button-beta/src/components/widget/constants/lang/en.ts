@@ -14,7 +14,7 @@ export const en: Language = {
 		'It’s recommended to donate {{suggestedCurrency}} if you are getting a {{country}} tax receipt, would you like to switch from <bold>{{fromCurrency}} to {{toCurrency}}</bold>?',
 	switchCurrency: 'Change to {{suggestedCurrency}}',
 	noThanks: 'No thanks',
-	donateWithCrypto: 'Donate with Crypto, Stocks or DAF',
+	orDonateCrypto: 'or donate with:',
 	countryTitle: 'Tax deductible in',
 	countrySelection: 'Select your preferred jurisdiction',
 	donate: 'Donate',

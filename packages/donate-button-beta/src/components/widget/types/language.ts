@@ -10,7 +10,7 @@ export type Language = {
 	currencyPopover: string;
 	switchCurrency: string;
 	noThanks: string;
-	donateWithCrypto: string;
+	orDonateCrypto: string;
 	minDonationAmount: string;
 	countryTitle: string;
 	countrySelection: string;

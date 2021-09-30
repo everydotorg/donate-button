@@ -14,7 +14,7 @@ export const es: Partial<Language> = {
 		'Es recomendado donar en {{suggestedCurrency}} si tributas en {{country}}. ¿Te gustaría cambiar de {{fromCurrency}} a {{toCurrency}}?',
 	switchCurrency: 'Cambiar a {{suggestedCurrency}}',
 	noThanks: 'No, gracias',
-	donateWithCrypto: 'Donar con Crypto, Stocks o DAF',
+	orDonateCrypto: 'o doná con:',
 	countryTitle: 'País para deducción de impuestos',
 	countrySelection: 'Selecciona tu país',
 	donate: 'Donar',
