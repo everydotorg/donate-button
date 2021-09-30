@@ -18,6 +18,11 @@ export const headingText: cxs.CSSObject = {
 	letterSpacing: '-0.015em'
 };
 
+export const inputText: cxs.CSSObject = {
+	fontSize: '16px',
+	lineHeight: '16px'
+};
+
 // @todo: blow check that those are being used
 
 export const linkText: cxs.CSSObject = {

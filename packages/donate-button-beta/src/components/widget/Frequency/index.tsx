@@ -5,49 +5,61 @@ import {Popover} from 'src/components/widget/Popover';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
-import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {labelText} from 'src/components/widget/theme/font-sizes';
+import {bodyText} from 'src/components/widget/theme/font-sizes';
+import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
 
-const frequencyContainerCss = (primaryColor: string) =>
-	cxs({
-		display: 'flex',
-		color: primaryColor
-	});
+const frequencyContainerCss = cxs({
+	display: 'flex',
+	alignItems: 'center',
+	border: `1px solid ${COLORS.LightGray}`,
+	borderRadius: Radii.Default,
+	height: '56px',
+	padding: Spacing.XXS,
+	'& > #monthly:not(:checked) + label': {
+		'&::before': {
+			transform: 'translateX(100%)'
+		}
+	},
+	'& > input:is(:checked) + label': {
+		color: 'white'
+	}
+});
 
 const labelCss = cxs({
-	...labelText,
-	fontWeight: 400,
-	padding: `${Spacing.XS} ${Spacing.Empty}`,
-	flex: 1,
+	...bodyText,
+	color: COLORS.Text,
+	width: '100%',
+	height: '100%',
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'center',
 	textAlign: 'center',
-	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
-	transition: 'border .2s'
+	cursor: 'pointer',
+	transition: 'background .3s, color .3s',
+	'& > span': {
+		zIndex: 999
+	}
 });
 
-const labelSelectedCss = (primaryColor: string) =>
+const selectedBlockCss = (primaryColor: string) =>
 	cxs({
-		border: getColoredBorder(Borders.Normal, primaryColor),
-		backgroundColor: primaryColor,
-		color: COLORS.White
+		position: 'relative',
+		'&::before': {
+			content: '""',
+			width: '100%',
+			height: '100%',
+			position: 'absolute',
+			top: 0,
+			left: 0,
+			transition: 'transform .25s cubic-bezier(.55,.08,0,1)',
+			borderRadius: Radii.Default,
+			backgroundColor: primaryColor,
+			color: COLORS.White
+		}
 	});
-
-const separatorBorderSelectedCss = (primaryColor: string) =>
-	cxs({
-		borderRightColor: primaryColor
-	});
-
-const labelLeftCss = cxs({
-	borderRadius: '8px 0 0 8px'
-});
-
-const labelRightCss = cxs({
-	borderRadius: '0 8px 8px 0',
-	// The border applied on `labelCss` has more especificity than this one so we have to add important to make it work
-	borderLeft: 'none!important'
-});
 
 const inputCss = cxs({
 	display: 'none'
@@ -65,58 +77,50 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 
 	const frequencyPopover = useRef<HTMLDivElement>(null);
 
-	const labelSeparatorClass =
-		frequency === DonationFrequency.Monthly ||
-		frequency === DonationFrequency.OneTime
-			? [separatorBorderSelectedCss(primaryColor)]
-			: [];
-
-	const leftLabelClasses = [labelCss, labelLeftCss].concat(
-		frequency === DonationFrequency.Monthly
-			? [labelSelectedCss(primaryColor)]
-			: []
-	);
-
-	const rightLabelClasses = [labelCss, labelRightCss].concat(
-		frequency === DonationFrequency.OneTime
-			? [labelSelectedCss(primaryColor)]
-			: []
-	);
-
 	return (
-		<div ref={frequencyPopover} className={frequencyContainerCss(primaryColor)}>
+		<div ref={frequencyPopover} className={frequencyContainerCss}>
+			<input
+				type="radio"
+				name="frequency"
+				id="monthly"
+				className={inputCss}
+				// @ts-expect-error
+				defaultChecked={frequency === DonationFrequency.Monthly}
+				value={DonationFrequency.Monthly}
+			/>
 			<label
-				className={leftLabelClasses.concat(labelSeparatorClass).join(' ')}
+				className={[labelCss, selectedBlockCss(primaryColor)].join(' ')}
+				id="frequency-monthly"
 				htmlFor="monthly"
 				onClick={() => {
 					if (showFrequencyPopover) dismissPopover();
 					setFrequency(DonationFrequency.Monthly);
 				}}
 			>
-				<input
-					className={inputCss}
-					type="radio"
-					name="frequency"
-					value={DonationFrequency.Monthly}
-				/>
-				{i18n.monthlyDonation}
+				<span>{i18n.monthlyDonation}</span>
 			</label>
+
+			<input
+				className={inputCss}
+				type="radio"
+				name="frequency"
+				id="one-time"
+				// @ts-expect-error
+				defaultChecked={frequency === DonationFrequency.OneTime}
+				value={DonationFrequency.OneTime}
+			/>
 			<label
-				className={rightLabelClasses.join(' ')}
+				id="frequency-one-time"
+				className={labelCss}
 				htmlFor="one-time"
 				onClick={() => {
 					if (showFrequencyPopover) dismissPopover();
 					setFrequency(DonationFrequency.OneTime);
 				}}
 			>
-				<input
-					className={inputCss}
-					type="radio"
-					name="frequency"
-					value={DonationFrequency.OneTime}
-				/>
-				{i18n.oneTimeDonation}
+				<span>{i18n.oneTimeDonation}</span>
 			</label>
+
 			{showFrequencyPopover ? (
 				<Popover ref={frequencyPopover}>
 					<FrequencyPopoverContent onClose={dismissPopover} />

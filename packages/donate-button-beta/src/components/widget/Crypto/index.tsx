@@ -1,9 +1,9 @@
 import cxs from 'cxs';
+import {useI18n} from 'src/components/widget//hooks/use-i18n';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import constructEveryUrl from 'src/helpers/construct-every-url';
-import {useI18n} from '../hooks/use-i18n';
 
 const containerCss = cxs({
 	display: 'flex',

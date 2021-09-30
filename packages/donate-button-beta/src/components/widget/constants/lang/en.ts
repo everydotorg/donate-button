@@ -4,7 +4,7 @@ export const en: Language = {
 	frequency: 'Frequency',
 	monthly: 'Monthly',
 	monthlyDonation: 'Monthly',
-	oneTimeDonation: 'One time',
+	oneTimeDonation: 'One-time',
 	amount: 'Amount',
 	amountError: 'Enter an amount to donate',
 	frequencySelect: 'Select frequency',

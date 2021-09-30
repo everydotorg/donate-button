@@ -2,13 +2,12 @@ import cxs from 'cxs';
 import {StateUpdater, useRef} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
-import {Link} from 'src/components/widget/Link';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {ChevronDown} from 'src/components/widget/svg/ChevronDown';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {linkText, smallText} from 'src/components/widget/theme/font-sizes';
+import {bodyText, inputText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {CurrencyOption} from 'src/components/widget/types/currency-option';
@@ -22,39 +21,36 @@ const preventDecimal = (
 	}
 };
 
-const inputContainerCss = cxs({
-	...linkText,
-	position: 'relative',
-	display: 'flex',
-	flexDirection: 'row',
-	borderRadius: Radii.Default,
-	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
-	':focus': {
-		outline: 'none'
-	},
-	color: COLORS.Text,
-	fontWeight: 'bold'
-});
+const inputContainerCss = (color: string) =>
+	cxs({
+		position: 'relative',
+		height: '56px',
+		padding: Spacing.XXS,
+		width: '100%',
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		borderRadius: Radii.Default,
+		color: COLORS.Text,
+		border: getColoredBorder(Borders.Normal, COLORS.LightGray),
+		':focus-within': {
+			borderColor: color
+		}
+	});
 
-const inputErrorCss = cxs({
-	border: getColoredBorder(Borders.Normal, COLORS.Error),
-	boxShadow: `0px 0px 0px 2px ${COLORS.ErrorShadow}`
+const inputContainerErrorCss = cxs({
+	border: getColoredBorder(Borders.Normal, COLORS.Error)
 });
 
 const inputCss = cxs({
-	fontSize: '24px',
-	border: 'none',
-	margin: 0,
+	...inputText,
 	fontFamily: 'inherit',
-	borderRadius: Radii.Default,
-	borderBottom: getColoredBorder(Borders.Normal, COLORS.Transparent),
-	backgroundColor: COLORS.Gray,
-	width: '100%',
-	padding: '12px 72px 12px 40px',
+	fontWeight: 700,
+	border: 'none',
+	marginLeft: Spacing.XXL,
 	outline: 'none',
 	'::placeholder': {
-		opacity: '0.4',
-		fontWeight: 500
+		fontWeight: 400
 	},
 	'::-webkit-outer-spin-button': {
 		'-webkit-appearance': 'none',
@@ -67,41 +63,37 @@ const inputCss = cxs({
 	'-moz-appearance': 'textfield'
 });
 
-const inputPrefix = cxs({
-	fontSize: '24px',
+const inputPrefixContainerCss = cxs({
+	...inputText,
+	fontFamily: 'inherit',
+	display: 'flex',
+	alignItems: 'center',
 	position: 'absolute',
-	top: '50%',
-	left: '12px',
-	opacity: '0.4',
-	fontWeight: 500,
-	transform: 'translateY(-50%)',
-	lineHeight: 1,
-	color: COLORS.TextGray
+	top: 0,
+	bottom: 0,
+	pointerEvents: 'none',
+	color: COLORS.TextGray,
+	fontWeight: 400,
+	marginLeft: Spacing.S
 });
 
 const selectCurrencyContainerCss = (clickable: boolean) =>
 	cxs({
-		position: 'absolute',
-		top: '50%',
-		right: Spacing.M,
-		transform: 'translateY(-50%)',
 		display: 'flex',
 		alignItems: 'center',
-		cursor: clickable ? 'pointer' : 'default'
+		marginRight: Spacing.S,
+		cursor: clickable ? 'pointer' : 'unset'
 	});
 
-const currencySelected = (primaryColor: string) =>
-	cxs({
-		lineHeight: 1,
-		color: primaryColor,
-		margin: 0,
-		fontWeight: 400
-	});
+const currencySelected = cxs({
+	...bodyText
+});
 
 const selectCurrencyCss = (primaryColor: string) =>
 	cxs({
-		lineHeight: 1,
-		color: primaryColor,
+		...bodyText,
+		paddingRight: Spacing.L,
+		cursor: 'pointer',
 
 		// Select
 		appearance: 'none',
@@ -113,13 +105,12 @@ const selectCurrencyCss = (primaryColor: string) =>
 		outline: 'none',
 		':focus': {
 			outline: 'none'
-		},
-
-		paddingRight: Spacing.L
+		}
 	});
 
 const selectArrowCss = cxs({
-	marginLeft: `-${Spacing.M}`,
+	right: Spacing.M,
+	position: 'absolute',
 	pointerEvents: 'none'
 });
 
@@ -131,15 +122,20 @@ const addAmountContainerCss = cxs({
 	}
 });
 
-const errorLabelCss = cxs({
-	...smallText,
-	lineHeight: 1,
-	fontSize: '12px',
-	opacity: 0.8,
-	color: COLORS.Error,
-	marginTop: Spacing.XS,
-	marginBottom: 0
-});
+const addAmountButtonCss = (color: string) =>
+	cxs({
+		border: 'none',
+		backgroundColor: COLORS.Gray,
+		borderRadius: Radii.Default,
+		padding: Spacing.S,
+		fontFamily: 'inherit',
+		cursor: 'pointer',
+		transition: 'background .3s, color .3s',
+		':hover': {
+			backgroundColor: color,
+			color: COLORS.White
+		}
+	});
 
 // The minimum donation amount for HKD is 50 - until we support dynamic
 // suggested amounts depending on the currency, start at 50 for all.
@@ -168,25 +164,14 @@ export const Input = ({
 	...otherProps
 }: InputProps) => {
 	const {primaryColor, currencies, countries} = useConfigContext();
+
 	const inputContainerRef = useRef<HTMLDivElement>(null);
-	const inputContainerClasses = [inputContainerCss].concat(
-		error ? [inputErrorCss] : []
-	);
+
+	const inputContainerClasses = [inputContainerCss(primaryColor)]
+		.concat(error ? [inputContainerErrorCss] : [])
+		.join(' ');
+
 	const i18n = useI18n();
-
-	const inputClasses = [inputCss];
-
-	const handleInputChange = (
-		event: JSXInternal.TargetedEvent<HTMLInputElement>
-	) => {
-		const value = Number.parseInt(event.currentTarget.value, 10);
-
-		setValue(value);
-
-		if (value >= 10) {
-			setError(null);
-		}
-	};
 
 	const selectCurrency = (
 		event: JSXInternal.TargetedEvent<HTMLSelectElement>
@@ -209,17 +194,29 @@ export const Input = ({
 
 	return (
 		<Fragment>
-			<div ref={inputContainerRef} className={inputContainerClasses.join(' ')}>
-				<span className={inputPrefix}>{selectedCurrency?.symbol}</span>
+			<div ref={inputContainerRef} className={inputContainerClasses}>
+				<div className={inputPrefixContainerCss}>
+					<span>{selectedCurrency?.symbol}</span>
+				</div>
+
 				<input
-					className={inputClasses.join(' ')}
+					id="donation-input"
+					className={inputCss}
 					placeholder={i18n.enterAnAmount}
 					type="number"
-					value={value}
+					pattern="[0-9]*"
+					inputMode="numeric"
+					min={0}
+					step={1}
+					value={value ? value : undefined}
 					onKeyDown={preventDecimal}
-					onInput={handleInputChange}
+					onInput={(event) => {
+						setValue(Number(event.currentTarget.value));
+						setError(null);
+					}}
 					{...otherProps}
 				/>
+
 				<div className={selectCurrencyContainerCss(currencies.length > 1)}>
 					{currencies.length > 1 ? (
 						<Fragment>
@@ -237,25 +234,31 @@ export const Input = ({
 									</option>
 								))}
 							</select>
+
 							<ChevronDown className={selectArrowCss} color={primaryColor} />
 						</Fragment>
 					) : (
-						<p className={currencySelected(primaryColor)}>
-							{selectedCurrency.name}
-						</p>
+						<p className={currencySelected}>{selectedCurrency.name}</p>
 					)}
 				</div>
 			</div>
-			<p className={errorLabelCss}>{error}&nbsp;</p>
+
 			<div className={addAmountContainerCss}>
 				{addAmounts.map((amount) => (
-					<Link
+					<button
 						key={amount}
-						label={`+${amount}`}
+						className={addAmountButtonCss(primaryColor)}
+						type="button"
 						onClick={() => {
-							setValue((previous) => (previous ?? 0) + amount);
+							setValue((previous) => {
+								return typeof previous === 'number'
+									? previous + amount
+									: amount;
+							});
 						}}
-					/>
+					>
+						+{amount}
+					</button>
 				))}
 			</div>
 		</Fragment>
