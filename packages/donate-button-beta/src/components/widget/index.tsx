@@ -36,7 +36,7 @@ import {mergeConfig} from 'src/helpers/options-types';
 cxs.prefix('edoWidget-');
 
 const wrapperCss = cxs({
-	position: 'absolute',
+	position: 'fixed',
 	height: 'auto',
 	width: '100vw',
 	zIndex: 999,
