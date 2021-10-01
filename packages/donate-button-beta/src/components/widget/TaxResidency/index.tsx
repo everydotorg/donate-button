@@ -42,7 +42,7 @@ const changeBtnCss = (color: string) =>
 		fontFamily: 'inherit'
 	});
 
-export const CountryCard = () => {
+export const TaxResidency = () => {
 	const {country, setRoute} = useWidgetContext();
 	const {primaryColor, countries} = useConfigContext();
 	const {tax, change} = useI18n();

@@ -4,7 +4,6 @@ import {useEffect, useRef, useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
 import {CloseButton} from 'src/components/widget/CloseButton';
-import {CountryCard} from 'src/components/widget/CountryCard';
 import {CountrySelector} from 'src/components/widget/CountrySelector';
 import {Crypto} from 'src/components/widget/Crypto';
 import {FormControl} from 'src/components/widget/FormControl';
@@ -16,6 +15,7 @@ import {NonprofitHeader} from 'src/components/widget/NonprofitHeader';
 import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
 import {RedirectNotice} from 'src/components/widget/RedirectNotice';
 import {SubmitButton} from 'src/components/widget/SubmitButton';
+import {TaxResidency} from 'src/components/widget/TaxResidency';
 import {getNonprofitInfo} from 'src/components/widget/api/get-nonprofit-info';
 import {ConfigContext} from 'src/components/widget/context/config-context';
 import {WidgetContext} from 'src/components/widget/context/widget-context';
@@ -56,17 +56,18 @@ const wrapperCss = cxs({
 const widgetCss = cxs({
 	background: 'white',
 	display: 'grid',
-	gridTemplateRows: '1fr max-content',
+	gridTemplateColumns: '1fr',
 	width: '100%',
 	height: '100%',
 	borderRadius: 'unset',
 	position: 'relative',
+	overflow: 'auto',
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		// Fix te size of the widget to match the desings.
 		// We can add a new breakpoints for large devices is this is too small
 		height: '550px',
 		width: '720px',
-
+		overflow: 'unset',
 		borderRadius: Radii.Medium,
 		gridTemplateColumns: '44.5% 55.5%',
 		gridTemplateRows: 'max-content 1fr max-content'
@@ -74,16 +75,17 @@ const widgetCss = cxs({
 });
 
 const formCss = cxs({
-	gridColumn: '2 / 3',
-	gridRow: '1 / 3',
+	gridColumn: '1 / -1',
+	gridRow: '3 / 4',
 	padding: Spacing.Inset_XL,
 	borderRight: 'none',
 	display: 'grid',
-	gridTemplateColumns: '1fr',
 	gridTemplateRows: 'max-content max-content 1fr',
 	rowGap: Spacing.XXL,
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
-		borderLeft: `1px solid ${COLORS.LightGray}`
+		borderLeft: `1px solid ${COLORS.LightGray}`,
+		gridColumn: '2 / 3',
+		gridRow: '1 / 3'
 	}
 });
 
@@ -99,8 +101,12 @@ const nonProfitHeaderCss = cxs({
 });
 
 const nonProfitInfoCss = cxs({
-	gridColumn: '1 / 2',
-	gridRow: '2 / 4'
+	gridColumn: '1 / -1',
+	gridRow: '2 / 3',
+	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
+		gridColumn: '1 / 2',
+		gridRow: '2 / 3'
+	}
 });
 
 const donateButtonContainer = cxs({
@@ -139,18 +145,26 @@ const closeBoxCss = cxs({
 });
 
 const navbarCss = cxs({
-	gridColumn: '1 / 2',
-	gridRow: '3 / 4',
+	display: 'none',
 	padding: Spacing.XL,
-	borderTop: `1px solid ${COLORS.LightGray}`
+	borderTop: `1px solid ${COLORS.LightGray}`,
+	[BREAKPOINTS.TabletLandscapeUp]: {
+		display: 'unset',
+		gridColumn: '1 / 2',
+		gridRow: '3 / 4'
+	}
 });
 
 const cryptoCss = cxs({
-	gridColumn: '2 / 3',
-	gridRow: '3 / 4',
+	gridColumn: '1 / -1',
+	gridRow: '4 / 5',
 	padding: Spacing.XL,
 	borderTop: `1px solid ${COLORS.LightGray}`,
-	borderLeft: `1px solid ${COLORS.LightGray}`
+	borderLeft: `1px solid ${COLORS.LightGray}`,
+	[BREAKPOINTS.TabletLandscapeUp]: {
+		gridColumn: '2 / 3',
+		gridRow: '3 / 4 !important'
+	}
 });
 
 const getSubmitButtonText = (
@@ -329,52 +343,50 @@ const Widget = ({options, hide}: WidgetProps) => {
 
 						{route === Routes.DonationForm ? (
 							<Fragment>
-								<div ref={scrollableContainerRef} className={scrollableContent}>
-									<NonprofitHeader
-										showScrolled={showScrolledHeader}
-										classes={[nonProfitHeaderCss]}
-									/>
+								<NonprofitHeader
+									showScrolled={showScrolledHeader}
+									classes={[nonProfitHeaderCss]}
+								/>
 
-									<div className={formCss}>
-										<FormControl label={i18n.frequency}>
-											<Frequency
-												frequency={frequency}
-												setFrequency={setFrequency}
-											/>
-										</FormControl>
+								<div className={formCss}>
+									<FormControl label={i18n.frequency}>
+										<Frequency
+											frequency={frequency}
+											setFrequency={setFrequency}
+										/>
+									</FormControl>
 
-										<FormControl label={i18n.amount}>
-											<Input
-												selectedCurrency={currency}
-												setCurrency={setCurrency}
-												value={donationAmount}
-												setValue={setDonationAmount}
-												error={submitError}
-												setError={setSubmitError}
-												setCountry={setCountry}
-											/>
-										</FormControl>
+									<FormControl label={i18n.amount}>
+										<Input
+											selectedCurrency={currency}
+											setCurrency={setCurrency}
+											value={donationAmount}
+											setValue={setDonationAmount}
+											error={submitError}
+											setError={setSubmitError}
+											setCountry={setCountry}
+										/>
+									</FormControl>
 
-										{true && <CountryCard />}
+									{true && <TaxResidency />}
 
-										<SubmitButton
-											disabled={
-												frequency === DonationFrequency.Unselected ||
-												!donationAmount ||
-												Number.isNaN(donationAmount)
-											}
-										>
-											{getSubmitButtonText(
-												donationAmount,
-												currency,
-												frequency,
-												i18n
-											)}
-										</SubmitButton>
-									</div>
-
-									<NonprofitInfo classes={[nonProfitInfoCss]} />
+									<SubmitButton
+										disabled={
+											frequency === DonationFrequency.Unselected ||
+											!donationAmount ||
+											Number.isNaN(donationAmount)
+										}
+									>
+										{getSubmitButtonText(
+											donationAmount,
+											currency,
+											frequency,
+											i18n
+										)}
+									</SubmitButton>
 								</div>
+
+								<NonprofitInfo classes={[nonProfitInfoCss]} />
 
 								<InfoPagesNav classes={[navbarCss]} />
 
