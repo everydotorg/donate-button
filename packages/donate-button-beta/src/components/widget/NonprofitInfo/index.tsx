@@ -1,6 +1,9 @@
 import cxs from 'cxs';
+import {useEffect, useRef, useState} from 'preact/hooks';
+import {InfoPagesNav} from 'src/components/widget/InfoPagesNav';
 import {Markdown} from 'src/components/widget/Markdown';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
+import {ChevronDown} from 'src/components/widget/svg/ChevronDown';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {
@@ -15,30 +18,14 @@ const containerCss = cxs({
 	display: 'flex',
 	flexDirection: 'column',
 	overflow: 'initial',
-	margin: Spacing.InsetSquish_S,
-	' > *:not(:last-child)': {
-		marginBottom: Spacing.XL
-	},
+	borderBottom: `1px solid ${COLORS.LightGray}`,
+	padding: Spacing.Inset_XL,
 	color: COLORS.Text,
-	' > p': {
-		margin: Spacing.Empty,
-		padding: Spacing.Empty,
-		letterSpacing: '-0.005em'
-	},
 	[BREAKPOINTS.TabletLandscapeUp]: {
-		margin: Spacing.Inset_XL,
-		marginBottom: Spacing.XXL,
+		borderBottom: 'none',
 		overflow: 'auto'
 	}
 });
-
-// const lastParagraph = cxs({
-// 	color: COLORS.TextOpaque,
-// 	' > p': {
-// 		display: 'block',
-// 		margin: 0
-// 	}
-// });
 
 const nonprofitNameCss = cxs({
 	...headingText,
@@ -52,28 +39,99 @@ const locationAddressCss = cxs({
 	color: COLORS.TextOpaque
 });
 
+const expandableCss = cxs({
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'space-between'
+});
+
+const arrowCss = cxs({
+	cursor: 'pointer',
+	transition: 'transform .3s',
+	[BREAKPOINTS.TabletLandscapeUp]: {
+		display: 'none'
+	}
+});
+
+const arrowRotateCss = cxs({
+	transform: 'rotate(180deg)'
+});
+
+const pagesNavCss = cxs({
+	[BREAKPOINTS.TabletLandscapeUp]: {
+		display: 'none'
+	}
+});
+
+const expandableContentCss = (height: number) =>
+	cxs({
+		maxHeight: `${height}px`,
+		transition: 'max-height 0.3s ease, margin 0.3s ease',
+		overflow: 'hidden',
+		marginTop: height ? Spacing.XXL : 0,
+		' > p': {
+			margin: 0,
+			padding: 0,
+			color: COLORS.Text,
+			...bodyText
+		},
+		'& > :not(:last-child)': {
+			marginBottom: Spacing.XL
+		},
+		[BREAKPOINTS.TabletLandscapeUp]: {
+			overflow: 'auto',
+			maxHeight: 'unset',
+			marginTop: Spacing.XXL
+		}
+	});
+
 type NonprofitInfo = {
 	classes: string[];
 };
 
 export const NonprofitInfo = ({classes}: NonprofitInfo) => {
-	const {name, locationAddress, description} = useConfigContext();
+	const {name, locationAddress, description, primaryColor} = useConfigContext();
 
-	// @todo: check if we should keep this option, or remove
-	// const {thanksDonation} = useI18n();
+	const [expanded, setExpanded] = useState(false);
+	const [height, setHeight] = useState(0);
+
+	const expandableContentRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		setHeight(expanded ? expandableContentRef.current?.scrollHeight ?? 0 : 0);
+	}, [expanded]);
+
+	const arrowClasses = [arrowCss]
+		.concat(expanded ? [arrowRotateCss] : [])
+		.join(' ');
 
 	return (
 		<div className={[containerCss].concat(classes).join(' ')}>
-			<div>
-				<h1 className={nonprofitNameCss}>{name}</h1>
-				<h2 className={locationAddressCss}>{locationAddress}&nbsp;</h2>
+			<div className={expandableCss}>
+				<div>
+					<h1 className={nonprofitNameCss}>{name}</h1>
+					<h2 className={locationAddressCss}>{locationAddress}&nbsp;</h2>
+				</div>
+
+				<ChevronDown
+					color={primaryColor}
+					size={16}
+					className={arrowClasses}
+					onClick={() => {
+						setExpanded((previous) => !previous);
+					}}
+				/>
 			</div>
 
-			<Markdown source={description} />
+			<div
+				ref={expandableContentRef}
+				id="expandable-content"
+				className={expandableContentCss(height)}
+			>
+				<Markdown source={description} />
 
-			{/* <div className={lastParagraph}>
-				<Markdown source={thanksDonation} />
-			</div> */}
+				<InfoPagesNav classes={[pagesNavCss]} />
+			</div>
 		</div>
 	);
 };
