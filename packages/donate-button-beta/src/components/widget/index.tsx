@@ -13,7 +13,6 @@ import {InfoPagesNav} from 'src/components/widget/InfoPagesNav';
 import {Input} from 'src/components/widget/Input';
 import {NonprofitHeader} from 'src/components/widget/NonprofitHeader';
 import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
-import {RedirectNotice} from 'src/components/widget/RedirectNotice';
 import {SubmitButton} from 'src/components/widget/SubmitButton';
 import {TaxResidency} from 'src/components/widget/TaxResidency';
 import {getNonprofitInfo} from 'src/components/widget/api/get-nonprofit-info';
@@ -133,14 +132,24 @@ const scrollableContent = cxs({
 	}
 });
 
-const closeBoxCss = cxs({
+const closeButtonCss = cxs({
 	position: 'absolute',
 	zIndex: 1,
-	top: Spacing.XS,
-	right: Spacing.Empty,
+	top: Spacing.XL,
+	right: Spacing.XL
+});
+
+const desktopCloseBtnCss = cxs({
+	display: 'none',
 	[BREAKPOINTS.TabletLandscapeUp]: {
-		top: `-${Spacing.M}`,
-		right: `-${Spacing.XXL}`
+		display: 'block'
+	}
+});
+
+const mobileCloseBtnCss = cxs({
+	display: 'block',
+	[BREAKPOINTS.TabletLandscapeUp]: {
+		display: 'none !important'
 	}
 });
 
@@ -336,11 +345,14 @@ const Widget = ({options, hide}: WidgetProps) => {
 				}}
 			>
 				<div className={wrapperCss} onClick={hideOnWrapperClick}>
-					<form className={widgetCss} onSubmit={submitDonation}>
-						{!showScrolledHeader && (
-							<CloseButton positionCss={closeBoxCss} color={COLORS.White} />
-						)}
+					<CloseButton
+						positionCss={[closeButtonCss, desktopCloseBtnCss].join(' ')}
+					/>
 
+					<form className={widgetCss} onSubmit={submitDonation}>
+						<CloseButton
+							positionCss={[closeButtonCss, mobileCloseBtnCss].join(' ')}
+						/>
 						{route === Routes.DonationForm ? (
 							<Fragment>
 								<NonprofitHeader

@@ -46,6 +46,7 @@ const expandableCss = cxs({
 });
 
 const arrowCss = cxs({
+	height: '100%',
 	cursor: 'pointer',
 	transition: 'transform .3s',
 	[BREAKPOINTS.TabletLandscapeUp]: {

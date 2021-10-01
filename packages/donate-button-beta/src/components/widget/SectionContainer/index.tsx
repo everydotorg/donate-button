@@ -11,10 +11,12 @@ import {
 	heading2Text,
 	heading3Text,
 	labelText,
-	linkText
+	linkText,
+	bodyText
 } from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {Routes} from 'src/components/widget/types/routes';
+import {Radii} from '../theme/radii';
 
 const containerCss = cxs({
 	display: 'flex',
@@ -27,18 +29,20 @@ const headerCss = cxs({
 	display: 'flex',
 	padding: Spacing.Inset_XL,
 	borderBottom: getColoredBorder(Borders.Normal, COLORS.LightGray),
-	alignItems: 'center',
-
-	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
-		border: 'none'
-	}
+	alignItems: 'center'
 });
 
 const returnButtonCss = cxs({
+	height: '32px',
+	width: '32px',
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
 	padding: Spacing.Empty,
-	margin: Spacing.Inline_XXL,
-	backgroundColor: COLORS.Transparent,
+	marginRight: Spacing.XXL,
+	backgroundColor: COLORS.Gray,
 	border: 'none',
+	borderRadius: Radii.Default,
 	outline: 'none',
 	cursor: 'pointer'
 });
@@ -61,10 +65,10 @@ const contentCss = (primaryColor: string) =>
 			fontWeight: 'bold'
 		},
 		'& > p': {
-			...labelText
+			...bodyText
 		},
 		'& a': {
-			...linkText,
+			...bodyText,
 			color: primaryColor,
 			':visited': {
 				color: primaryColor
@@ -76,6 +80,7 @@ interface SectionContainerProps {
 	renderHeader: ComponentChildren;
 	renderBody: ComponentChildren;
 }
+
 export const SectionContainer = ({
 	renderBody,
 	renderHeader

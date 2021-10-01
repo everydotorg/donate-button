@@ -1,23 +1,19 @@
 import cxs from 'cxs';
-import {useMemo} from 'preact/hooks';
 import {CountryTitle} from 'src/components/widget/CountryTitle';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
-import {ChevronDown} from 'src/components/widget/svg/ChevronDown';
-import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {bodyText, labelText} from 'src/components/widget/theme/font-sizes';
-import {Radii} from 'src/components/widget/theme/radii';
+import {bodyText} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {Routes} from 'src/components/widget/types/routes';
-import {replaceKeys} from 'src/helpers/interpolation';
 
 const countryCss = cxs({
 	...bodyText,
 	color: COLORS.Text,
 	fontFamily: 'inherit',
 	display: 'flex',
+	flexWrap: 'wrap',
 	alignItems: 'center',
 	justifyContent: 'space-between'
 });

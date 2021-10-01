@@ -40,27 +40,6 @@ const logoImageCss = (logoUrl: string) =>
 		backgroundSize: 'contain'
 	});
 
-const scrolledHeaderContainerCss = cxs({
-	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'space-between',
-	padding: `${Spacing.M} ${Spacing.XL}`,
-	background: 'white',
-	position: 'sticky',
-	top: 0,
-	left: 0,
-	zIndex: 10,
-	'& > p': {
-		margin: 0
-	},
-	borderBottom: `1px solid ${COLORS.LightGray}`,
-	transition: 'all .4s'
-});
-
-const closeWidgetButton = cxs({
-	paddingRight: Spacing.Empty
-});
-
 type NonprofitHeader = {
 	classes: string[];
 	showScrolled: boolean;
@@ -71,15 +50,9 @@ export const NonprofitHeader = forwardRef(
 		{classes, showScrolled}: NonprofitHeader,
 		ref: preact.Ref<HTMLDivElement>
 	) => {
-		const {name, primaryColor, logo, backgroundImage} = useConfigContext();
-		return showScrolled ? (
-			<div className={[scrolledHeaderContainerCss].concat(classes).join(' ')}>
-				<p>
-					Donate to <strong>{name}</strong>
-				</p>
-				<CloseButton positionCss={closeWidgetButton} color={primaryColor} />
-			</div>
-		) : (
+		const {logo, backgroundImage} = useConfigContext();
+
+		return (
 			<div
 				ref={ref}
 				className={[containerCss(backgroundImage)].concat(classes).join(' ')}

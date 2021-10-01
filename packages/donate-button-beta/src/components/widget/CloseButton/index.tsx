@@ -1,46 +1,38 @@
 import cxs from 'cxs';
+import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
+import {Close} from 'src/components/widget/svg/Close';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {Spacing} from 'src/components/widget/theme/spacing';
+import {Radii} from 'src/components/widget/theme/radii';
 
-const closeBoxCss = cxs({
-	padding: Spacing.Inset_XS,
-	cursor: 'pointer'
+const buttonCss = cxs({
+	cursor: 'pointer',
+	height: '32px',
+	width: '32px',
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'center',
+	padding: 0,
+	border: 'none',
+	backgroundColor: COLORS.White,
+	borderRadius: Radii.Default
 });
-
-const closeWidgetCss = (color: string) =>
-	cxs({
-		width: '16px',
-		height: '2px',
-		background: color,
-		transform: 'rotate(45deg)',
-		position: 'relative',
-		'&:after': {
-			content: '""',
-			position: 'absolute',
-			left: 0,
-			background: color,
-			width: '16px',
-			height: '2px',
-
-			transform: 'rotate(-90deg)'
-		}
-	});
 
 interface CloseButtonProps {
 	positionCss: string;
-	color: string;
 }
 
-export const CloseButton = ({positionCss, color}: CloseButtonProps) => {
+export const CloseButton = ({positionCss}: CloseButtonProps) => {
+	const {primaryColor} = useConfigContext();
 	const {hideWidget} = useWidgetContext();
-	const closeWidgetCssColored = closeWidgetCss(color);
+
 	return (
-		<div
-			className={[closeBoxCss].concat(positionCss).join(' ')}
+		<button
+			type="button"
+			className={[buttonCss, positionCss].join(' ')}
 			onClick={hideWidget}
 		>
-			<div role="button" className={closeWidgetCssColored} />
-		</div>
+			<Close size={20} color={primaryColor} />
+		</button>
 	);
 };
