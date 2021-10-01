@@ -1,4 +1,5 @@
 import cxs from 'cxs';
+import 'src/components/widget/theme/global.css';
 import {useEffect, useRef, useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
@@ -360,7 +361,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 											</FormControl>
 										) : (
 											<RedirectNotice />
-										)}
+										)}˝
 									</div>
 
 									<NonprofitInfo classes={[nonProfitInfoCss]} />

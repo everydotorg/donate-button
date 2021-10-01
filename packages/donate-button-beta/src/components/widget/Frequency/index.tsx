@@ -1,6 +1,7 @@
 import cxs from 'cxs';
 import {StateUpdater, useRef} from 'preact/hooks';
-import {FrequencyPopoverContent} from 'src/components/widget/Frequency/blocks/FrequencyPopoverContent';
+import {Fragment} from 'preact/jsx-runtime';
+import {FrequencyPopoverContent} from 'src/components/widget/Frequency/FrequencyPopoverContent';
 import {Popover} from 'src/components/widget/Popover';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useI18n} from 'src/components/widget/hooks/use-i18n';
@@ -18,6 +19,7 @@ const frequencyContainerCss = cxs({
 	borderRadius: Radii.Default,
 	height: '56px',
 	padding: Spacing.XXS,
+	margin: 0,
 	'& > #monthly:not(:checked) + label': {
 		'&::before': {
 			transform: 'translateX(100%)'
@@ -40,7 +42,7 @@ const labelCss = cxs({
 	cursor: 'pointer',
 	transition: 'background .3s, color .3s',
 	'& > span': {
-		zIndex: 999
+		zIndex: 10
 	}
 });
 
@@ -65,6 +67,11 @@ const inputCss = cxs({
 	display: 'none'
 });
 
+const popoverAnchorCss = cxs({
+	position: 'relative',
+	width: '100%'
+});
+
 interface FrequencyProps {
 	frequency: DonationFrequency;
 	setFrequency: StateUpdater<DonationFrequency>;
@@ -75,57 +82,61 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 	const {primaryColor} = useConfigContext();
 	const i18n = useI18n();
 
-	const frequencyPopover = useRef<HTMLDivElement>(null);
+	const popoverAnchorRef = useRef<HTMLDivElement>(null);
 
 	return (
-		<div ref={frequencyPopover} className={frequencyContainerCss}>
-			<input
-				type="radio"
-				name="frequency"
-				id="monthly"
-				className={inputCss}
-				// @ts-expect-error
-				defaultChecked={frequency === DonationFrequency.Monthly}
-				value={DonationFrequency.Monthly}
-			/>
-			<label
-				className={[labelCss, selectedBlockCss(primaryColor)].join(' ')}
-				id="frequency-monthly"
-				htmlFor="monthly"
-				onClick={() => {
-					if (showFrequencyPopover) dismissPopover();
-					setFrequency(DonationFrequency.Monthly);
-				}}
-			>
-				<span>{i18n.monthlyDonation}</span>
-			</label>
+		<Fragment>
+			<div className={frequencyContainerCss}>
+				<input
+					type="radio"
+					name="frequency"
+					id="monthly"
+					className={inputCss}
+					// @ts-expect-error
+					defaultChecked={frequency === DonationFrequency.Monthly}
+					value={DonationFrequency.Monthly}
+				/>
+				<label
+					className={[labelCss, selectedBlockCss(primaryColor)].join(' ')}
+					id="frequency-monthly"
+					htmlFor="monthly"
+					onClick={() => {
+						if (showFrequencyPopover) dismissPopover();
+						setFrequency(DonationFrequency.Monthly);
+					}}
+				>
+					<span>{i18n.monthlyDonation}</span>
+				</label>
 
-			<input
-				className={inputCss}
-				type="radio"
-				name="frequency"
-				id="one-time"
-				// @ts-expect-error
-				defaultChecked={frequency === DonationFrequency.OneTime}
-				value={DonationFrequency.OneTime}
-			/>
-			<label
-				id="frequency-one-time"
-				className={labelCss}
-				htmlFor="one-time"
-				onClick={() => {
-					if (showFrequencyPopover) dismissPopover();
-					setFrequency(DonationFrequency.OneTime);
-				}}
-			>
-				<span>{i18n.oneTimeDonation}</span>
-			</label>
+				<input
+					className={inputCss}
+					type="radio"
+					name="frequency"
+					id="one-time"
+					// @ts-expect-error
+					defaultChecked={frequency === DonationFrequency.OneTime}
+					value={DonationFrequency.OneTime}
+				/>
+				<label
+					id="frequency-one-time"
+					className={labelCss}
+					htmlFor="one-time"
+					onClick={() => {
+						if (showFrequencyPopover) dismissPopover();
+						setFrequency(DonationFrequency.OneTime);
+					}}
+				>
+					<span>{i18n.oneTimeDonation}</span>
+				</label>
+			</div>
 
-			{showFrequencyPopover ? (
-				<Popover ref={frequencyPopover}>
-					<FrequencyPopoverContent onClose={dismissPopover} />
-				</Popover>
-			) : null}
-		</div>
+			<div ref={popoverAnchorRef} className={popoverAnchorCss}>
+				{showFrequencyPopover && (
+					<Popover ref={popoverAnchorRef}>
+						<FrequencyPopoverContent onClose={dismissPopover} />
+					</Popover>
+				)}
+			</div>
+		</Fragment>
 	);
 };
