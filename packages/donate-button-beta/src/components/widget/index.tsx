@@ -355,13 +355,22 @@ const Widget = ({options, hide}: WidgetProps) => {
 											/>
 										</FormControl>
 
-										{config.countrySelection ? (
-											<FormControl label={i18n.countryTitle}>
-												<CountryCard />
-											</FormControl>
-										) : (
-											<RedirectNotice />
-										)}˝
+										{true && <CountryCard />}
+
+										<SubmitButton
+											disabled={
+												frequency === DonationFrequency.Unselected ||
+												!donationAmount ||
+												Number.isNaN(donationAmount)
+											}
+										>
+											{getSubmitButtonText(
+												donationAmount,
+												currency,
+												frequency,
+												i18n
+											)}
+										</SubmitButton>
 									</div>
 
 									<NonprofitInfo classes={[nonProfitInfoCss]} />
@@ -370,23 +379,6 @@ const Widget = ({options, hide}: WidgetProps) => {
 								<InfoPagesNav classes={[navbarCss]} />
 
 								<Crypto classes={[cryptoCss]} />
-
-								{/* <div className={donateButtonContainer}>
-									<SubmitButton
-										disabled={
-											frequency === DonationFrequency.Unselected ||
-											!donationAmount ||
-											Number.isNaN(donationAmount)
-										}
-									>
-										{getSubmitButtonText(
-											donationAmount,
-											currency,
-											frequency,
-											i18n
-										)}
-									</SubmitButton>
-								</div> */}
 							</Fragment>
 						) : route === Routes.SelectCountry ? (
 							<CountrySelector />

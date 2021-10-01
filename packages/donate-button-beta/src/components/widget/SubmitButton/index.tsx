@@ -1,45 +1,39 @@
 import cxs from 'cxs';
 import {ComponentChildren} from 'preact';
+import {RedirectNotice} from 'src/components/widget/RedirectNotice';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
-import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {linkText} from 'src/components/widget/theme/font-sizes';
+import {bodyText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 
 const btnCss = cxs({
-	...linkText,
-	border: getColoredBorder(Borders.Normal, COLORS.White),
+	...bodyText,
 	outline: 'none',
+	marginBottom: Spacing.M,
 	width: '100%',
-
+	border: 'none',
 	fontFamily: 'inherit',
-	fontWeight: 500,
-
 	cursor: 'pointer',
-	borderRadius: Radii.Big,
-	color: COLORS.White,
-	padding: `${Spacing.L} ${Spacing.Empty}`,
-
-	transition: 'opacity .2s',
-	':hover': {
-		opacity: '0.7'
-	},
-	':active': {
-		opacity: '0.9'
-	}
+	borderRadius: Radii.Default,
+	height: '52px',
+	padding: Spacing.XXS,
+	transition: 'opacity .3s'
 });
 
-const btnActiveColor = (primaryColor: string) =>
+const btnActiveColor = (color: string) =>
 	cxs({
-		backgroundColor: primaryColor
+		color: COLORS.White,
+		backgroundColor: color,
+		':hover': {
+			opacity: 0.9
+		}
 	});
 
 const btnDisabledCss = cxs({
+	color: COLORS.White,
 	backgroundColor: COLORS.DarkGray,
-	':hover': {
-		opacity: '1'
-	},
+	cursor: 'default',
 	'& > span': {
 		opacity: '0.6'
 	}
@@ -49,27 +43,31 @@ interface ButtonProps {
 	handleClick?: () => void;
 	children: ComponentChildren;
 	disabled?: boolean;
-	className?: string;
+	classes?: string[];
 }
+
 export const SubmitButton = ({
 	handleClick,
 	disabled,
-	className,
+	classes,
 	children
 }: ButtonProps) => {
 	const {primaryColor} = useConfigContext();
 
 	return (
-		<button
-			type="submit"
-			className={[btnCss]
-				.concat(disabled ? [btnDisabledCss] : [btnActiveColor(primaryColor)])
-				.concat([className ? className : ''])
-				.join(' ')}
-			disabled={disabled}
-			onClick={handleClick}
-		>
-			<span>{children}</span>
-		</button>
+		<div className={classes ? classes.join(' ') : undefined}>
+			<button
+				type="submit"
+				className={[btnCss]
+					.concat(disabled ? [btnDisabledCss] : [btnActiveColor(primaryColor)])
+					.join(' ')}
+				disabled={disabled}
+				onClick={handleClick}
+			>
+				<span>{children}</span>
+			</button>
+
+			<RedirectNotice />
+		</div>
 	);
 };

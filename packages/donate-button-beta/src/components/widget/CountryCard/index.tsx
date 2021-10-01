@@ -13,81 +13,57 @@ import {Spacing} from 'src/components/widget/theme/spacing';
 import {Routes} from 'src/components/widget/types/routes';
 import {replaceKeys} from 'src/helpers/interpolation';
 
-const cardCss = (clickable: boolean) =>
-	cxs({
-		padding: Spacing.S,
-		border: getColoredBorder(Borders.Normal, COLORS.LightGray),
-		borderRadius: Radii.Default,
-		cursor: clickable ? 'pointer' : 'default'
-	});
-
-const countrySelectorCss = cxs({
+const countryCss = cxs({
+	...bodyText,
+	color: COLORS.Text,
+	fontFamily: 'inherit',
 	display: 'flex',
-	flexDirection: 'row',
-	margin: Spacing.Stack_S,
 	alignItems: 'center',
-	position: 'relative',
-	cursor: 'pointer',
 	justifyContent: 'space-between'
 });
 
-const countryTitleCss = cxs({
+const taxCss = cxs({
 	display: 'flex',
-	alignItems: 'center'
+	alignItems: 'center',
+	'& > :not(:last-child)': {
+		marginRight: Spacing.XS
+	}
 });
 
-const arrowCss = (primaryColor: string) =>
+const changeBtnCss = (color: string) =>
 	cxs({
-		...labelText,
-		color: primaryColor,
-		lineHeight: 0
+		...bodyText,
+		color,
+		cursor: 'pointer',
+		padding: 0,
+		margin: 0,
+		border: 'none',
+		backgroundColor: 'transparent',
+		fontFamily: 'inherit'
 	});
 
-const bodyCss = cxs({
-	...bodyText,
-	color: COLORS.TextOpaque,
-	margin: 0
-});
-
 export const CountryCard = () => {
-	const {country, currency, setRoute} = useWidgetContext();
+	const {country, setRoute} = useWidgetContext();
 	const {primaryColor, countries} = useConfigContext();
-	const i18n = useI18n();
-
-	const redirectNoticeText = useMemo(
-		() =>
-			replaceKeys(
-				{
-					nameAndRegistration: country?.nameAndRegistration,
-					currency: currency?.name
-				},
-				i18n.donationRedirectNotice
-			),
-		[country, currency, i18n]
-	);
+	const {tax, change} = useI18n();
 
 	return (
-		<div
-			className={cardCss(countries?.length > 1)}
-			onClick={() => {
-				if (countries?.length > 1) {
-					setRoute(Routes.SelectCountry);
-				}
-			}}
-		>
-			<div className={countrySelectorCss}>
-				<div className={countryTitleCss}>
-					<CountryTitle country={country} />
-				</div>
-				{countries?.length > 1 ? (
-					<span className={arrowCss(primaryColor)}>
-						<ChevronDown color={primaryColor} />
-					</span>
-				) : null}
+		<div className={countryCss}>
+			<div className={taxCss}>
+				<span>{tax}</span>
+				<CountryTitle country={country} />
 			</div>
-			<div>
-				<p className={bodyCss}>{redirectNoticeText}</p>
-			</div>
+			<button
+				type="button"
+				className={changeBtnCss(primaryColor)}
+				onClick={() => {
+					if (countries?.length > 1) {
+						setRoute(Routes.SelectCountry);
+					}
+				}}
+			>
+				{change}
+			</button>
 		</div>
 	);
 };

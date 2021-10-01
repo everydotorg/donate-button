@@ -17,8 +17,11 @@ export type Language = {
 	donate: string;
 	donationRedirectNotice: string;
 	simpleRedirectNotice: string;
+	learnMore: string;
 	thanksDonation: string;
 	countryDescription: string;
 	chooseAnAmount: string;
 	enterAnAmount: string;
+	change: string;
+	tax: string;
 };

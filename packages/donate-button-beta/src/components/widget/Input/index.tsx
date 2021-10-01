@@ -125,9 +125,10 @@ const addAmountContainerCss = cxs({
 const addAmountButtonCss = (color: string) =>
 	cxs({
 		border: 'none',
+		height: '32px',
 		backgroundColor: COLORS.Gray,
 		borderRadius: Radii.Default,
-		padding: Spacing.S,
+		padding: `${Spacing.XXS} ${Spacing.S}`,
 		fontFamily: 'inherit',
 		cursor: 'pointer',
 		transition: 'background .3s, color .3s',
