@@ -94,6 +94,7 @@ const selectCurrencyCss = (primaryColor: string) =>
 		...bodyText,
 		paddingRight: Spacing.L,
 		cursor: 'pointer',
+		height: '100%',
 
 		// Select
 		appearance: 'none',
