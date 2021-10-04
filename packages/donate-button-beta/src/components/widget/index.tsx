@@ -1,6 +1,6 @@
 import cxs from 'cxs';
 import 'src/components/widget/theme/global.css';
-import {useEffect, useState} from 'preact/hooks';
+import {useEffect, useRef, useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
 import {CloseButton} from 'src/components/widget/CloseButton';
@@ -52,29 +52,28 @@ const wrapperCss = cxs({
 	fontFamily: FontFamily.BasisGrotesque
 });
 
-const widgetCss = cxs({
-	background: 'white',
-	display: 'grid',
-	gridTemplateColumns: '1fr',
-	width: '100%',
-	height: '100%',
-	borderRadius: 'unset',
-	position: 'relative',
-	overflow: 'auto',
+const widgetCss = (height: number | null) =>
+	cxs({
+		background: 'white',
+		display: 'grid',
+		gridTemplateColumns: '1fr',
+		width: '100%',
+		height: '100%',
+		borderRadius: 'unset',
+		position: 'relative',
+		overflow: 'auto',
 
-	[BREAKPOINTS.TabletLandscapeUp]: {
-		// Fix te size of the widget to match the desings.
-		// We can add a new breakpoints for large devices is this is too small
-		height: 'unset',
-		minHeight: '450px',
-		maxHeight: '550px',
-		width: '720px',
-		overflow: 'unset',
-		borderRadius: Radii.Medium,
-		gridTemplateColumns: '44.5% 55.5%',
-		gridTemplateRows: 'max-content 1fr max-content'
-	}
-});
+		[BREAKPOINTS.TabletLandscapeUp]: {
+			height: height ? `${height}px` : 'unset',
+			minHeight: '450px',
+			maxHeight: '550px',
+			width: '720px',
+			overflow: 'unset',
+			borderRadius: Radii.Medium,
+			gridTemplateColumns: '44.5% 55.5%',
+			gridTemplateRows: 'max-content 1fr max-content'
+		}
+	});
 
 const formCss = cxs({
 	gridColumn: '1 / -1',
@@ -194,9 +193,11 @@ interface WidgetProps {
 const Widget = ({options, hide}: WidgetProps) => {
 	const mergedConfig = mergeConfig(options);
 
+	const widgetRef = useRef<HTMLDivElement>(null);
+
 	const [config, setConfig] = useState(mergedConfig);
 
-	const [route, setRoute] = useState<string>(Routes.DonationForm);
+	const [route, _setRoute] = useState<Routes>(Routes.DonationForm);
 
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
 		config.defaultFrequency === 'once' && Boolean(config.showInitialMessage)
@@ -217,6 +218,8 @@ const Widget = ({options, hide}: WidgetProps) => {
 	const [country, setCountry] = useState<DonationRecipient>(null as any);
 
 	const [submitError, setSubmitError] = useState<string | null>(null);
+
+	const [widgetHeight, setWidgetHeight] = useState<number | null>(null);
 
 	const i18n = getTranslations(config.i18n, config.forceLanguage);
 
@@ -254,6 +257,18 @@ const Widget = ({options, hide}: WidgetProps) => {
 
 		void fetchInfo();
 	}, [options]);
+
+	/**
+	 * The first time we navigate to another route, fix the height of the widget
+	 * otherwise the height will adjust to the content of the new route.
+	 */
+	const setRoute = (route: Routes) => {
+		if (route !== Routes.DonationForm && !widgetHeight) {
+			setWidgetHeight(widgetRef.current.clientHeight);
+		}
+
+		_setRoute(route);
+	};
 
 	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
 		event
@@ -311,7 +326,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 						positionCss={[closeButtonCss, desktopCloseBtnCss].join(' ')}
 					/>
 
-					<div className={widgetCss}>
+					<div ref={widgetRef} className={widgetCss(widgetHeight)}>
 						<CloseButton
 							positionCss={[closeButtonCss, mobileCloseBtnCss].join(' ')}
 						/>
