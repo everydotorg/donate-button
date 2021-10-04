@@ -1,6 +1,6 @@
 import cxs from 'cxs';
 import 'src/components/widget/theme/global.css';
-import {useEffect, useRef, useState} from 'preact/hooks';
+import {useEffect, useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
 import {CloseButton} from 'src/components/widget/CloseButton';
@@ -61,10 +61,13 @@ const widgetCss = cxs({
 	borderRadius: 'unset',
 	position: 'relative',
 	overflow: 'auto',
+
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		// Fix te size of the widget to match the desings.
 		// We can add a new breakpoints for large devices is this is too small
-		height: '550px',
+		height: 'unset',
+		minHeight: '450px',
+		maxHeight: '550px',
 		width: '720px',
 		overflow: 'unset',
 		borderRadius: Radii.Medium,
@@ -86,6 +89,10 @@ const formCss = cxs({
 		gridColumn: '2 / 3',
 		gridRow: '1 / 3'
 	}
+});
+
+const submitButtonCss = cxs({
+	alignSelf: 'flex-end'
 });
 
 const nonProfitHeaderCss = cxs({
@@ -304,7 +311,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 						positionCss={[closeButtonCss, desktopCloseBtnCss].join(' ')}
 					/>
 
-					<form className={widgetCss} onSubmit={submitDonation}>
+					<div className={widgetCss}>
 						<CloseButton
 							positionCss={[closeButtonCss, mobileCloseBtnCss].join(' ')}
 						/>
@@ -313,7 +320,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 							<Fragment>
 								<NonprofitHeader classes={[nonProfitHeaderCss]} />
 
-								<div className={formCss}>
+								<form className={formCss} onSubmit={submitDonation}>
 									<FormControl label={i18n.frequency}>
 										<Frequency
 											frequency={frequency}
@@ -331,11 +338,12 @@ const Widget = ({options, hide}: WidgetProps) => {
 										setCountry={setCountry}
 									/>
 
-									{config.showTaxResidency && config.countries.length > 0 && (
+									{config.showTaxResidency && config.countries?.length > 0 && (
 										<TaxResidency />
 									)}
 
 									<SubmitButton
+										classes={[submitButtonCss]}
 										disabled={
 											frequency === DonationFrequency.Unselected ||
 											!donationAmount ||
@@ -349,7 +357,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 											i18n
 										)}
 									</SubmitButton>
-								</div>
+								</form>
 
 								<NonprofitInfo classes={[nonProfitInfoCss]} />
 
@@ -362,7 +370,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 						) : (
 							<Info />
 						)}
-					</form>
+					</div>
 				</div>
 			</WidgetContext.Provider>
 		</ConfigContext.Provider>

@@ -59,6 +59,7 @@ const arrowRotateCss = cxs({
 });
 
 const pagesNavCss = cxs({
+	marginTop: Spacing.XL,
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		display: 'none'
 	}
@@ -69,20 +70,18 @@ const expandableContentCss = (height: number) =>
 		maxHeight: `${height}px`,
 		transition: 'max-height 0.3s ease, margin 0.3s ease',
 		overflow: 'hidden',
-		marginTop: height ? Spacing.XXL : 0,
+		marginTop: height ? Spacing.XL : 0,
 		' > p': {
 			margin: 0,
 			padding: 0,
 			color: COLORS.Text,
 			...bodyText
 		},
-		'& > :not(:last-child)': {
-			marginBottom: Spacing.XL
-		},
 		[BREAKPOINTS.TabletLandscapeUp]: {
 			overflow: 'auto',
+			marginTop: Spacing.XL,
 			maxHeight: 'unset',
-			marginTop: Spacing.XXL
+			marginBottom: Spacing.XS
 		}
 	});
 
