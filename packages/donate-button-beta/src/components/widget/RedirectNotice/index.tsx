@@ -1,8 +1,8 @@
 import cxs from 'cxs';
+import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {smallText} from 'src/components/widget/theme/font-sizes';
-import {useConfigContext} from '../hooks/use-config-context';
 
 const containerCss = cxs({
 	width: '100%',
@@ -32,6 +32,7 @@ export const RedirectNotice = () => {
 				<a
 					href="https://www.every.org/about-us"
 					target="_blank"
+					rel="noreferrer"
 					className={linkCss(primaryColor)}
 				>
 					{learnMore}

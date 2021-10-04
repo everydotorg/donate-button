@@ -4,19 +4,16 @@ import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {LeftArrow} from 'src/components/widget/svg/LeftArrow';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
-import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {
 	headingText,
 	heading2Text,
 	heading3Text,
-	labelText,
-	linkText,
 	bodyText
 } from 'src/components/widget/theme/font-sizes';
+import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {Routes} from 'src/components/widget/types/routes';
-import {Radii} from '../theme/radii';
 
 const containerCss = cxs({
 	display: 'flex',
