@@ -1,10 +1,6 @@
 import cxs from 'cxs';
-import preact from 'preact';
-import {forwardRef} from 'preact/compat';
-import {CloseButton} from 'src/components/widget/CloseButton';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
-import {COLORS} from 'src/components/widget/theme/colors';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 
@@ -42,25 +38,16 @@ const logoImageCss = (logoUrl: string) =>
 
 type NonprofitHeader = {
 	classes: string[];
-	showScrolled: boolean;
 };
 
-export const NonprofitHeader = forwardRef(
-	(
-		{classes, showScrolled}: NonprofitHeader,
-		ref: preact.Ref<HTMLDivElement>
-	) => {
-		const {logo, backgroundImage} = useConfigContext();
+export const NonprofitHeader = ({classes}: NonprofitHeader) => {
+	const {logo, backgroundImage} = useConfigContext();
 
-		return (
-			<div
-				ref={ref}
-				className={[containerCss(backgroundImage)].concat(classes).join(' ')}
-			>
-				<div className={logoContainerCss}>
-					<div alt="nonprofit logo" className={logoImageCss(logo)} />
-				</div>
+	return (
+		<div className={[containerCss(backgroundImage)].concat(classes).join(' ')}>
+			<div className={logoContainerCss}>
+				<div alt="nonprofit logo" className={logoImageCss(logo)} />
 			</div>
-		);
-	}
-);
+		</div>
+	);
+};

@@ -224,7 +224,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 	const [frequency, setFrequency] = useState<DonationFrequency>(
 		config.defaultFrequency
 	);
-	const [showScrolledHeader, setShowScrolledHeader] = useState(false);
+
 	const [country, setCountry] = useState<DonationRecipient>(null as any);
 	const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -237,32 +237,10 @@ const Widget = ({options, hide}: WidgetProps) => {
 	};
 
 	const i18n = getTranslations(config.i18n, config.forceLanguage);
-	const scrollableContainerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		setSubmitError(null);
 	}, [country, currency]);
-
-	useEffect(() => {
-		if (scrollableContainerRef.current) {
-			const scrollableRef = scrollableContainerRef.current;
-			const modifyHeaderHeight = () => {
-				const {scrollTop} = scrollableRef;
-				if (
-					!window.matchMedia(BREAKPOINTS.TabletLandscapeUp).matches &&
-					!showScrolledHeader
-				) {
-					setShowScrolledHeader(scrollTop > 90);
-				}
-			};
-
-			scrollableRef.addEventListener('scroll', modifyHeaderHeight);
-
-			return () => {
-				scrollableRef.removeEventListener('scroll', modifyHeaderHeight);
-			};
-		}
-	}, [showScrolledHeader]);
 
 	useEffect(() => {
 		const fetchInfo = async () => {
@@ -353,12 +331,10 @@ const Widget = ({options, hide}: WidgetProps) => {
 						<CloseButton
 							positionCss={[closeButtonCss, mobileCloseBtnCss].join(' ')}
 						/>
+
 						{route === Routes.DonationForm ? (
 							<Fragment>
-								<NonprofitHeader
-									showScrolled={showScrolledHeader}
-									classes={[nonProfitHeaderCss]}
-								/>
+								<NonprofitHeader classes={[nonProfitHeaderCss]} />
 
 								<div className={formCss}>
 									<FormControl label={i18n.frequency}>
