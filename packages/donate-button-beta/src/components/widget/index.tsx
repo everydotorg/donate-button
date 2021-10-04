@@ -211,20 +211,27 @@ const Widget = ({options, hide}: WidgetProps) => {
 	const mergedConfig = mergeConfig(options);
 
 	const [config, setConfig] = useState(mergedConfig);
+
 	const [route, setRoute] = useState<string>(Routes.DonationForm);
+
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
-		config.showInitialMessage
+		config.defaultFrequency === 'once' && config.showInitialMessage
 	);
+
 	const [donationAmount, setDonationAmount] = useState<number | undefined>(
 		config.defaultDonationAmount
 	);
+
 	const [currency, setCurrency] = useState<CurrencyOption>(
 		mergedConfig.currencies[0]
 	);
+
 	const [frequency, setFrequency] = useState<DonationFrequency>(
 		config.defaultFrequency
 	);
+
 	const [country, setCountry] = useState<DonationRecipient>(null as any);
+
 	const [submitError, setSubmitError] = useState<string | null>(null);
 
 	const i18n = getTranslations(config.i18n, config.forceLanguage);

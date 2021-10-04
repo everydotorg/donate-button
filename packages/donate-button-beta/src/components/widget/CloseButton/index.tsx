@@ -18,6 +18,10 @@ const buttonCss = cxs({
 	borderRadius: Radii.Default
 });
 
+const iconCss = cxs({
+	height: '100%'
+});
+
 interface CloseButtonProps {
 	positionCss: string;
 }
@@ -32,7 +36,7 @@ export const CloseButton = ({positionCss}: CloseButtonProps) => {
 			className={[buttonCss, positionCss].join(' ')}
 			onClick={hideWidget}
 		>
-			<Close size={20} color={primaryColor} />
+			<Close className={iconCss} size={20} color={primaryColor} />
 		</button>
 	);
 };

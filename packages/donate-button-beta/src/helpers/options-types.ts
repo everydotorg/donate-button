@@ -72,7 +72,7 @@ const defaults: Partial<WidgetConfig> = {
 			minimumAmount: 10
 		}
 	],
-	defaultFrequency: DonationFrequency.Unselected,
+	defaultFrequency: DonationFrequency.OneTime,
 	showInitialMessage: true,
 	primaryColor: '#00A37F',
 	i18n: {
