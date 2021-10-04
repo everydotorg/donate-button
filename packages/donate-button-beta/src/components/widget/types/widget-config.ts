@@ -21,7 +21,9 @@ export type WidgetConfig = {
 	noExit?: boolean;
 	currencies: CurrencyOption[];
 	defaultFrequency: DonationFrequency;
-	showInitialMessage: boolean;
+	showInitialMessage?: boolean;
+	showInputButtons?: boolean;
+	showTaxResidency?: boolean;
 	countries: DonationRecipient[];
 	infoPages: InfoPage[];
 	i18n: {en: Language} & Record<string, Partial<Language>>;

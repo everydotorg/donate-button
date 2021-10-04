@@ -108,30 +108,6 @@ const nonProfitInfoCss = cxs({
 	}
 });
 
-const donateButtonContainer = cxs({
-	gridColumn: '1 / -1',
-	gridRow: '3 / 4',
-	padding: `${Spacing.XS} ${Spacing.XS}`,
-	[BREAKPOINTS.TabletLandscapeUp]: {
-		gridColumn: '2 / 3',
-		gridRow: '3 / 4',
-		borderLeft: `1px solid ${COLORS.LightGray}`,
-		padding: `${Spacing.Empty} ${Spacing.XL} ${Spacing.XL} ${Spacing.XL}`
-	}
-});
-
-const scrollableContent = cxs({
-	display: 'flex',
-	flexDirection: 'column',
-	overflow: 'auto',
-	gridColumn: '1 / -1',
-	gridRow: '1 / 2',
-	[BREAKPOINTS.TabletLandscapeUp]: {
-		display: 'contents',
-		overflow: 'initial'
-	}
-});
-
 const closeButtonCss = cxs({
 	position: 'absolute',
 	zIndex: 1,
@@ -195,6 +171,7 @@ const getSubmitButtonText = (
 	}
 
 	let text = `${i18n.donate} ${currency.symbol}${donationAmount}`;
+
 	if (frequency === DonationFrequency.Monthly) {
 		text = text.concat(` ${i18n.monthly}`);
 	}
@@ -215,7 +192,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 	const [route, setRoute] = useState<string>(Routes.DonationForm);
 
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
-		config.defaultFrequency === 'once' && config.showInitialMessage
+		config.defaultFrequency === 'once' && Boolean(config.showInitialMessage)
 	);
 
 	const [donationAmount, setDonationAmount] = useState<number | undefined>(
@@ -354,7 +331,9 @@ const Widget = ({options, hide}: WidgetProps) => {
 										setCountry={setCountry}
 									/>
 
-									{true && <TaxResidency />}
+									{config.showTaxResidency && config.countries.length > 0 && (
+										<TaxResidency />
+									)}
 
 									<SubmitButton
 										disabled={

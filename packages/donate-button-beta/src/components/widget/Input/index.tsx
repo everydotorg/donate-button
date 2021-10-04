@@ -164,7 +164,12 @@ export const Input = ({
 	setCountry,
 	...otherProps
 }: InputProps) => {
-	const {primaryColor, currencies, countries} = useConfigContext();
+	const {
+		primaryColor,
+		currencies,
+		countries,
+		showInputButtons
+	} = useConfigContext();
 	const i18n = useI18n();
 
 	const inputContainerClasses = [inputContainerCss(primaryColor)]
@@ -241,24 +246,26 @@ export const Input = ({
 				</div>
 			</div>
 
-			<div className={addAmountContainerCss}>
-				{addAmounts.map((amount) => (
-					<button
-						key={amount}
-						className={addAmountButtonCss(primaryColor)}
-						type="button"
-						onClick={() => {
-							setValue((previous) => {
-								return typeof previous === 'number'
-									? previous + amount
-									: amount;
-							});
-						}}
-					>
-						+{amount}
-					</button>
-				))}
-			</div>
+			{showInputButtons && (
+				<div className={addAmountContainerCss}>
+					{addAmounts.map((amount) => (
+						<button
+							key={amount}
+							className={addAmountButtonCss(primaryColor)}
+							type="button"
+							onClick={() => {
+								setValue((previous) => {
+									return typeof previous === 'number'
+										? previous + amount
+										: amount;
+								});
+							}}
+						>
+							+{amount}
+						</button>
+					))}
+				</div>
+			)}
 		</FormControl>
 	);
 };
