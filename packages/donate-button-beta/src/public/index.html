@@ -179,7 +179,6 @@
               nonprofitSlug: "lilbubsbigfund",
               primaryColor: "#D55684",
               showInitialMessage: false,
-              countrySelection: undefined,
               defaultFrequency: "once",
               infoPages: [
                 {
@@ -219,7 +218,6 @@
             primaryColor: "#48739c",
             showInitialMessage: false,
             defaultFrequency: "once",
-            countrySelection: undefined,
             infoPages: [
               {
                 key: "faq",
@@ -261,6 +259,34 @@
             defaultFrequency: "once",
             crypto: true,
             noExit: false,
+            countries: [
+              {
+                id: 'us',
+                name: 'United States',
+                nameAndRegistration: 'Income Movement United States',
+                countryCode: 'US',
+                paymentMethods: [
+                  'card',
+                  'applePay',
+                  'googlePay',
+                  'bank'
+                ]
+              },
+              {
+                id: 'uk',
+                name: 'United Kingdom',
+                nameAndRegistration: 'UK Income Movement',
+                countryCode: 'UK',
+                paymentMethods: [
+                  'card',
+                  'applePay',
+                  'googlePay',
+                  'crypto',
+                  'stock',
+                  'daf'
+                ]
+              }
+            ],
             infoPages: [
               {
                 key: "faq",
@@ -295,7 +321,7 @@
               {
                 countryCodes: ["UK"],
                 name: "GBP",
-                symbol: "E",
+                symbol: "£",
                 minimumAmount: 10,
               },
             ],

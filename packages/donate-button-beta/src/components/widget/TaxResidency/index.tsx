@@ -40,7 +40,7 @@ const changeBtnCss = (color: string) =>
 
 export const TaxResidency = () => {
 	const {country, setRoute} = useWidgetContext();
-	const {primaryColor, countries} = useConfigContext();
+	const {primaryColor} = useConfigContext();
 	const {tax, change} = useI18n();
 
 	return (
@@ -49,13 +49,12 @@ export const TaxResidency = () => {
 				<span>{tax}</span>
 				<CountryTitle country={country} />
 			</div>
+
 			<button
 				type="button"
 				className={changeBtnCss(primaryColor)}
 				onClick={() => {
-					if (countries?.length > 1) {
-						setRoute(Routes.SelectCountry);
-					}
+					setRoute(Routes.SelectCountry);
 				}}
 			>
 				{change}

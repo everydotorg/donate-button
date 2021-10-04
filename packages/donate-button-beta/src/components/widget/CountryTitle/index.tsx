@@ -29,7 +29,7 @@ const countryFlagCss = cxs({
 });
 
 const flags: Record<string, string> = {
-	GB: gbFlag,
+	UK: gbFlag,
 	US: usFlag,
 	HK: hkFlag,
 	AU: auFlag,
