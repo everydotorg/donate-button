@@ -2,6 +2,7 @@ import cxs from 'cxs';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import {Routes} from 'src/components/widget/types/routes';
 
 type InfoPagesNavProps = {
 	classes: string[];
