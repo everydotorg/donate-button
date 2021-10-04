@@ -224,17 +224,8 @@ const Widget = ({options, hide}: WidgetProps) => {
 	const [frequency, setFrequency] = useState<DonationFrequency>(
 		config.defaultFrequency
 	);
-
 	const [country, setCountry] = useState<DonationRecipient>(null as any);
 	const [submitError, setSubmitError] = useState<string | null>(null);
-
-	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
-		event
-	) => {
-		if (event.target === event.currentTarget) {
-			hide();
-		}
-	};
 
 	const i18n = getTranslations(config.i18n, config.forceLanguage);
 
@@ -273,33 +264,35 @@ const Widget = ({options, hide}: WidgetProps) => {
 		void fetchInfo();
 	}, [options]);
 
+	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
+		event
+	) => {
+		if (event.target === event.currentTarget) {
+			hide();
+		}
+	};
+
 	const submitDonation = (
 		event: JSXInternal.TargetedEvent<HTMLFormElement>
 	) => {
 		event.preventDefault();
-		if (!donationAmount) {
-			setSubmitError(i18n.chooseAnAmount);
-			return;
-		}
 
-		if (donationAmount < currency.minimumAmount) {
+		if (!donationAmount || donationAmount < currency.minimumAmount) {
 			setSubmitError(
-				`${i18n.minDonationAmount} ${currency.name} ${currency.minimumAmount}`
+				`${i18n.minDonationAmount} ${currency.symbol}${currency.minimumAmount}`
 			);
 			return;
 		}
 
 		const url = constructEveryUrl({
-			nonprofitSlug: country.id,
-			frequency,
 			amount: donationAmount,
 			crypto: false,
+			frequency,
+			nonprofitSlug: country.id,
 			noExit: mergedConfig.noExit
 		});
 
-		const target = '_self';
-
-		window.open(url, target);
+		window.open(url, '_self');
 	};
 
 	return config.show ? (
@@ -344,17 +337,15 @@ const Widget = ({options, hide}: WidgetProps) => {
 										/>
 									</FormControl>
 
-									<FormControl label={i18n.amount}>
-										<Input
-											selectedCurrency={currency}
-											setCurrency={setCurrency}
-											value={donationAmount}
-											setValue={setDonationAmount}
-											error={submitError}
-											setError={setSubmitError}
-											setCountry={setCountry}
-										/>
-									</FormControl>
+									<Input
+										selectedCurrency={currency}
+										setCurrency={setCurrency}
+										value={donationAmount}
+										setValue={setDonationAmount}
+										error={submitError}
+										setError={setSubmitError}
+										setCountry={setCountry}
+									/>
 
 									{true && <TaxResidency />}
 

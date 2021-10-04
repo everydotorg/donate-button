@@ -2,6 +2,7 @@ import cxs from 'cxs';
 import {StateUpdater, useRef} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
+import {FormControl} from 'src/components/widget/FormControl';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {ChevronDown} from 'src/components/widget/svg/ChevronDown';
@@ -150,7 +151,6 @@ interface InputProps extends JSXInternal.HTMLAttributes<HTMLInputElement> {
 	setCountry: StateUpdater<DonationRecipient>;
 	error: string | null;
 	setError: StateUpdater<string | null>;
-	label?: string;
 	selectedCurrency: CurrencyOption;
 }
 
@@ -159,21 +159,17 @@ export const Input = ({
 	setValue,
 	error,
 	setError,
-	label,
 	selectedCurrency,
 	setCurrency,
 	setCountry,
 	...otherProps
 }: InputProps) => {
 	const {primaryColor, currencies, countries} = useConfigContext();
-
-	const inputContainerRef = useRef<HTMLDivElement>(null);
+	const i18n = useI18n();
 
 	const inputContainerClasses = [inputContainerCss(primaryColor)]
 		.concat(error ? [inputContainerErrorCss] : [])
 		.join(' ');
-
-	const i18n = useI18n();
 
 	const selectCurrency = (
 		event: JSXInternal.TargetedEvent<HTMLSelectElement>
@@ -195,8 +191,8 @@ export const Input = ({
 	};
 
 	return (
-		<Fragment>
-			<div ref={inputContainerRef} className={inputContainerClasses}>
+		<FormControl label={error ?? i18n.amount} error={Boolean(error)}>
+			<div className={inputContainerClasses}>
 				<div className={inputPrefixContainerCss}>
 					<span>{selectedCurrency?.symbol}</span>
 				</div>
@@ -263,6 +259,6 @@ export const Input = ({
 					</button>
 				))}
 			</div>
-		</Fragment>
+		</FormControl>
 	);
 };
