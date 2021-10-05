@@ -28,7 +28,9 @@ const createButtonInSelector = ({
 		log('createButton():', 'must provide element or selector');
 	}
 
-	const nodes = !!element ? [element] : (selector && document.querySelectorAll(selector));
+	const nodes = element
+		? [element]
+		: selector && document.querySelectorAll(selector);
 	if (!nodes) {
 		return;
 	}
