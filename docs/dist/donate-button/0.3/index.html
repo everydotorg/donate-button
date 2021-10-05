@@ -58,7 +58,7 @@
           actions.style.display = "none";
         }
       </script>
-      <div style="position: absolute; top: 150vh; left: 0" id="livebetter-donate-button">
+      <div id="livebetter-donate-button">
         <a href="https://www.every.org/livebetter-corp/donate">Donate Live Better</a>
       </div>
       <br>
@@ -213,19 +213,17 @@
           });
         }); -->
       <script>
-        everyDotOrgDonateButton.createWidget({
-          selector: "#livebetter-donate-button",
-          options: {
-            nonprofitSlug: "livebetter-corp",
-            primaryColor: "#48739c",
-            showInitialMessage: false,
-            defaultFrequency: "once",
-            countrySelection: undefined,
-            infoPages: [
-              {
-                key: "faq",
-                name: "FAQ",
-                source: `## How does this donate button work?
+        everyDotOrgDonateButton.setOptions({
+          nonprofitSlug: "livebetter-corp",
+          primaryColor: "#48739c",
+          showInitialMessage: false,
+          defaultFrequency: "once",
+          countrySelection: undefined,
+          infoPages: [
+            {
+              key: "faq",
+              name: "FAQ",
+              source: `## How does this donate button work?
 
         This button is powered by Every.org, a tax-exempt US 501(c)(3) nonprofit building accessible giving infrastructure to help every person and organization do more good.
 
@@ -238,17 +236,22 @@
         ## How long does it take for my donation to reach LiveBetter?
         Your donation information will be sent instantly and funds are disbursed weekly.
               `,
-              },
-            ],
-            currencies: [
-              {
-                countryCodes: ["US"],
-                name: "USD",
-                symbol: "$",
-                minimumAmount: 10,
-              },
-            ],
-          },
+            },
+          ],
+          currencies: [
+            {
+              countryCodes: ["US"],
+              name: "USD",
+              symbol: "$",
+              minimumAmount: 10,
+            },
+          ],
+        });
+        everyDotOrgDonateButton.createWidget({
+          selector: "#livebetter-donate-button",
+        });
+        everyDotOrgDonateButton.createWidget({
+          selector: "#livebetter-donate-button2",
         });
 
         everyDotOrgDonateButton.createWidget({

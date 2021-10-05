@@ -133,6 +133,7 @@ let mountPoint: HTMLElement;
 const options = {
 	show: false
 };
+const baseOptions = {};
 let instanceOptions = {};
 const showWidget = () => {
 	Object.assign(options, {show: true});
@@ -147,7 +148,7 @@ const hideWidget = () => {
 };
 
 const setOptions = (newOptions: Partial<WidgetConfig>) => {
-	Object.assign(instanceOptions, newOptions);
+	Object.assign(baseOptions, newOptions);
 
 	renderWidget();
 };
@@ -167,13 +168,14 @@ const renderWidget = () => {
 
 	const finalOptions: Partial<WidgetConfig> = {
 		...options,
+		...baseOptions,
 		...instanceOptions
 	};
 
 	render(<WidgetLoader options={finalOptions} hide={hideWidget} />, mountPoint);
 };
 
-const createWidgetInSelector = ({element, selector, options}: any) => {
+const createWidgetInSelector = ({element, selector, options = {}}: any) => {
 	if (!element && !selector) {
 		log('createWidget():', 'must provide element or selector');
 	}
