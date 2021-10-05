@@ -19,6 +19,9 @@ interface CreateButtonInSelectorProps extends EmbedButtonOptions {
 	selector?: string;
 }
 
+const getNodeList = (element?: Element, selector?: string) =>
+	element ? [element] : selector && document.querySelectorAll(selector);
+
 const createButtonInSelector = ({
 	element,
 	selector,
@@ -28,9 +31,7 @@ const createButtonInSelector = ({
 		log('createButton():', 'must provide element or selector');
 	}
 
-	const nodes = element
-		? [element]
-		: selector && document.querySelectorAll(selector);
+	const nodes = getNodeList(element, selector);
 	if (!nodes) {
 		return;
 	}
@@ -192,9 +193,7 @@ const createWidgetInSelector = ({element, selector, options = {}}: any) => {
 		log('createWidget():', 'must provide element or selector');
 	}
 
-	const nodes = element
-		? [element]
-		: selector && document.querySelectorAll(selector);
+	const nodes = getNodeList(element, selector);
 	if (!nodes) {
 		return;
 	}
