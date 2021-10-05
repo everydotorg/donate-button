@@ -60,16 +60,16 @@
           actions.style.display = "none";
         }
       </script>
-      <div id="livebetter-donate-button">
-        <a href="https://www.every.org/livebetter-corp/donate"
-          >Donate Live Better</a
+      <div id="incomemovement-donate-button">
+        <a href="https://www.every.org/incomemovement/donate"
+          >Donate Income Movement</a
         >
       </div>
       <br />
       <br />
-      <div id="incomemovement-donate-button">
-        <a href="https://www.every.org/incomemovement/donate"
-          >Donate Income Movement</a
+      <div id="livebetter-donate-button">
+        <a href="https://www.every.org/livebetter-corp/donate"
+          >Donate Live Better</a
         >
       </div>
       <br />
@@ -221,8 +221,19 @@
           });
         }); -->
       <script>
-        everyDotOrgDonateButton.setOptions({
+        everyDotOrgDonateButton.createButton({
+          selector: "#livebetter-donate-button",
           nonprofitSlug: "livebetter-corp",
+          primaryColor: "#48739c",
+          showInitialMessage: false,
+          defaultFrequency: "once",
+          countrySelection: undefined,
+          withIcon: true,
+          bgColor: '#48739c',
+        });
+        everyDotOrgDonateButton.createWidget({
+          selector: "#livebetter-donate-button",
+          options: {nonprofitSlug: "livebetter-corp",
           primaryColor: "#48739c",
           showInitialMessage: false,
           defaultFrequency: "once",
@@ -254,13 +265,7 @@
               minimumAmount: 10,
             },
           ],
-        });
-        everyDotOrgDonateButton.createWidget({
-          selector: "#livebetter-donate-button",
-        });
-        everyDotOrgDonateButton.createWidget({
-          selector: "#livebetter-donate-button2",
-        });
+        }});
 
         everyDotOrgDonateButton.createWidget({
           selector: "#incomemovement-donate-button",
