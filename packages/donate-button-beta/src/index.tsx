@@ -178,21 +178,30 @@ const renderWidget = () => {
 	render(<WidgetLoader options={finalOptions} hide={hideWidget} />, mountPoint);
 };
 
+function updateOptionsAndShowCb(options: WidgetConfig) {
+	const optionsCopy = {...options};
+	return (event: any) => {
+		event.preventDefault();
+		instanceOptions = optionsCopy;
+		showWidget();
+	};
+}
+
 const createWidgetInSelector = ({element, selector, options = {}}: any) => {
 	if (!element && !selector) {
 		log('createWidget():', 'must provide element or selector');
 	}
 
-	const container = element || (selector && document.querySelector(selector));
-	if (!container) {
+	const nodes = element
+		? [element]
+		: selector && document.querySelectorAll(selector);
+	if (!nodes) {
 		return;
 	}
 
-	container.addEventListener('click', (event: any) => {
-		event.preventDefault();
-		instanceOptions = {...options};
-		showWidget();
-	});
+	for (const node of nodes) {
+		node.addEventListener('click', updateOptionsAndShowCb(options));
+	}
 
 	renderWidget();
 };
