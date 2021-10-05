@@ -19,6 +19,9 @@ interface CreateButtonInSelectorProps extends EmbedButtonOptions {
 	selector?: string;
 }
 
+const getNodeList = (element?: Element, selector?: string) =>
+	element ? [element] : selector && document.querySelectorAll(selector);
+
 const createButtonInSelector = ({
 	element,
 	selector,
@@ -28,13 +31,14 @@ const createButtonInSelector = ({
 		log('createButton():', 'must provide element or selector');
 	}
 
-	const container = element || (selector && document.querySelector(selector));
-	if (!container) {
+	const nodes = getNodeList(element, selector);
+	if (!nodes) {
 		return;
 	}
 
-	const Button = <EmbedButton {...options} />;
-	render(Button, container);
+	for (const node of nodes) {
+		render(<EmbedButton {...options} />, node);
+	}
 };
 
 export default createButtonInSelector;
@@ -175,21 +179,28 @@ const renderWidget = () => {
 	render(<WidgetLoader options={finalOptions} hide={hideWidget} />, mountPoint);
 };
 
+function updateOptionsAndShowCb(options: WidgetConfig) {
+	const optionsCopy = {...options};
+	return (event: any) => {
+		event.preventDefault();
+		instanceOptions = optionsCopy;
+		showWidget();
+	};
+}
+
 const createWidgetInSelector = ({element, selector, options = {}}: any) => {
 	if (!element && !selector) {
 		log('createWidget():', 'must provide element or selector');
 	}
 
-	const container = element || (selector && document.querySelector(selector));
-	if (!container) {
+	const nodes = getNodeList(element, selector);
+	if (!nodes) {
 		return;
 	}
 
-	container.addEventListener('click', (event: any) => {
-		event.preventDefault();
-		instanceOptions = {...options};
-		showWidget();
-	});
+	for (const node of nodes) {
+		node.addEventListener('click', updateOptionsAndShowCb(options));
+	}
 
 	renderWidget();
 };
