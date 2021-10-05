@@ -120,7 +120,7 @@ const addAmountContainerCss = cxs({
 	display: 'flex',
 	marginTop: Spacing.XS,
 	'& > *:not(:last-child)': {
-		marginRight: Spacing.M
+		marginRight: Spacing.XXS
 	}
 });
 

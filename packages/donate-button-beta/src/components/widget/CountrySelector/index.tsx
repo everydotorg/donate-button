@@ -8,7 +8,7 @@ import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {labelText} from 'src/components/widget/theme/font-sizes';
+import {bodyText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {DonationRecipient} from 'src/components/widget/types/donation-recipient';
@@ -44,13 +44,13 @@ const countryHeaderCss = cxs({
 });
 
 const descriptionCss = cxs({
-	...labelText,
+	...bodyText,
 	margin: Spacing.Stack_M,
 	color: COLORS.Text
 });
 
 const sectionTitleCss = cxs({
-	...labelText
+	...bodyText
 });
 
 const paymentMethodsCss = cxs({
