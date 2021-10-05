@@ -1,19 +1,19 @@
 interface ChevronDownProps {
 	color: string;
-	className?: string;
+	classes: string[];
 	size?: number;
 	onClick?: (event: MouseEvent) => void;
 }
 
 export const ChevronDown = ({
 	color,
-	className,
+	classes,
 	size = 12,
 	onClick
 }: ChevronDownProps) => {
 	return (
 		<svg
-			className={className}
+			className={classes ? classes.join(' ') : undefined}
 			width={size}
 			height={size}
 			viewBox="0 0 10 5"

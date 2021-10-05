@@ -87,28 +87,29 @@ const selectCurrencyContainerCss = (clickable: boolean) =>
 	});
 
 const currencySelected = cxs({
-	...bodyText
+	...bodyText,
+	color: COLORS.Text
 });
 
-const selectCurrencyCss = (primaryColor: string) =>
-	cxs({
-		...bodyText,
-		paddingRight: Spacing.L,
-		cursor: 'pointer',
-		height: '100%',
+const selectCurrencyCss = cxs({
+	...bodyText,
+	paddingRight: Spacing.L,
+	cursor: 'pointer',
+	height: '100%',
+	color: COLORS.Text,
 
-		// Select
-		appearance: 'none',
-		'-webkit-appearance': 'none',
-		'-moz-appearance': 'none',
-		border: 'none',
-		background: COLORS.Transparent,
-		fontFamily: 'inherit',
-		outline: 'none',
-		':focus': {
-			outline: 'none'
-		}
-	});
+	// Select
+	appearance: 'none',
+	'-webkit-appearance': 'none',
+	'-moz-appearance': 'none',
+	border: 'none',
+	background: COLORS.Transparent,
+	fontFamily: 'inherit',
+	outline: 'none',
+	':focus': {
+		outline: 'none'
+	}
+});
 
 const selectArrowCss = cxs({
 	right: Spacing.M,
@@ -129,6 +130,7 @@ const addAmountButtonCss = (color: string) =>
 		border: 'none',
 		height: '32px',
 		backgroundColor: COLORS.Gray,
+		color: COLORS.Text,
 		borderRadius: Radii.Default,
 		padding: `0 ${Spacing.S}`,
 		fontFamily: 'inherit',
@@ -223,10 +225,7 @@ export const Input = ({
 				<div className={selectCurrencyContainerCss(currencies.length > 1)}>
 					{currencies.length > 1 ? (
 						<Fragment>
-							<select
-								className={selectCurrencyCss(primaryColor)}
-								onChange={selectCurrency}
-							>
+							<select className={selectCurrencyCss} onChange={selectCurrency}>
 								{currencies.map((currency) => (
 									<option
 										key={currency}
@@ -238,7 +237,7 @@ export const Input = ({
 								))}
 							</select>
 
-							<ChevronDown className={selectArrowCss} color={primaryColor} />
+							<ChevronDown classes={[selectArrowCss]} color={primaryColor} />
 						</Fragment>
 					) : (
 						<p className={currencySelected}>{selectedCurrency.name}</p>

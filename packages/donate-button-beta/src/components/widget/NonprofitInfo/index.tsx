@@ -45,13 +45,19 @@ const expandableCss = cxs({
 	justifyContent: 'space-between'
 });
 
-const arrowCss = cxs({
+const arrowContainerCss = cxs({
 	height: '100%',
 	cursor: 'pointer',
-	transition: 'transform .3s',
+	padding: `0 ${Spacing.XS}`,
+	marginRight: `-${Spacing.XS}`,
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		display: 'none'
 	}
+});
+
+const arrowCss = cxs({
+	height: '100%',
+	transition: 'transform .3s'
 });
 
 const arrowRotateCss = cxs({
@@ -107,10 +113,6 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 		setHeight(expanded ? expandableContentRef.current?.scrollHeight ?? 0 : 0);
 	}, [expanded]);
 
-	const arrowClasses = [arrowCss]
-		.concat(expanded ? [arrowRotateCss] : [])
-		.join(' ');
-
 	return (
 		<div className={[containerCss].concat(classes).join(' ')}>
 			<div className={expandableCss}>
@@ -119,14 +121,18 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 					<h2 className={locationAddressCss}>{locationAddress}&nbsp;</h2>
 				</div>
 
-				<ChevronDown
-					color={primaryColor}
-					size={16}
-					className={arrowClasses}
+				<div
+					className={arrowContainerCss}
 					onClick={() => {
 						setExpanded((previous) => !previous);
 					}}
-				/>
+				>
+					<ChevronDown
+						classes={[arrowCss].concat(expanded ? [arrowRotateCss] : [])}
+						color={primaryColor}
+						size={16}
+					/>
+				</div>
 			</div>
 
 			<div
