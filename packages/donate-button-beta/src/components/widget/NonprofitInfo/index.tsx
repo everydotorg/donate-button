@@ -1,7 +1,6 @@
 import cxs from 'cxs';
 import {useEffect, useRef, useState} from 'preact/hooks';
 import {InfoPagesNav} from 'src/components/widget/InfoPagesNav';
-import {Markdown} from 'src/components/widget/Markdown';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {ChevronDown} from 'src/components/widget/svg/ChevronDown';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
@@ -12,6 +11,7 @@ import {
 	smallText
 } from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import {useLayoutEffect} from 'react';
 
 const containerCss = cxs({
 	...bodyText,
@@ -65,23 +65,22 @@ const pagesNavCss = cxs({
 	}
 });
 
-const expandableContentCss = (height: number) =>
+const expandableContentCss = (height: number, fontSize: number) =>
 	cxs({
+		...bodyText,
 		maxHeight: `${height}px`,
 		transition: 'max-height 0.3s ease, margin 0.3s ease',
 		overflow: 'hidden',
 		marginTop: height ? Spacing.XL : 0,
-		' > p': {
-			margin: 0,
-			padding: 0,
-			color: COLORS.Text,
-			...bodyText
-		},
+		color: COLORS.Text,
 		[BREAKPOINTS.TabletLandscapeUp]: {
 			overflow: 'auto',
 			marginTop: Spacing.XL,
 			maxHeight: 'unset',
-			marginBottom: Spacing.XS
+			marginBottom: Spacing.XS,
+			'& > span': {
+				fontSize: `${fontSize}px`
+			}
 		}
 	});
 
@@ -100,12 +99,20 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 
 	const [expanded, setExpanded] = useState(false);
 	const [height, setHeight] = useState(0);
+	const [fontSize, setFontSize] = useState(16);
 
 	const expandableContentRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		setHeight(expanded ? expandableContentRef.current?.scrollHeight ?? 0 : 0);
 	}, [expanded]);
+
+	// Fix the font size if the description overflows its container
+	useLayoutEffect(() => {
+		const current = expandableContentRef.current;
+
+		if (current && current.scrollHeight > current.clientHeight) setFontSize(14);
+	}, [description]);
 
 	return (
 		<div className={[containerCss].concat(classes).join(' ')}>
@@ -130,9 +137,9 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 			<div
 				ref={expandableContentRef}
 				id="expandable-content"
-				className={expandableContentCss(height)}
+				className={expandableContentCss(height, fontSize)}
 			>
-				<Markdown source={description} />
+				<span>{description}</span>
 
 				{infoPages?.length > 0 && <InfoPagesNav classes={[pagesNavCss]} />}
 			</div>
