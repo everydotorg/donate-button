@@ -10,14 +10,18 @@ import {Spacing} from 'src/components/widget/theme/spacing';
 import {DonationRecipient} from 'src/components/widget/types/donation-recipient';
 import {replaceKeys} from 'src/helpers/interpolation';
 
-const containerCss = cxs({
-	display: 'flex',
-	flexDirection: 'column',
-	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
-	padding: Spacing.Inset_S,
-	borderRadius: Radii.Default,
-	cursor: 'pointer'
-});
+const containerCss = (selected: boolean, color: string) =>
+	cxs({
+		display: 'flex',
+		flexDirection: 'column',
+		border: getColoredBorder(
+			Borders.Normal,
+			selected ? color : COLORS.LightGray
+		),
+		padding: Spacing.Inset_S,
+		borderRadius: Radii.Default,
+		cursor: 'pointer'
+	});
 
 const countryHeaderCss = cxs({
 	display: 'flex',
@@ -46,18 +50,23 @@ const paymentMethodCss = cxs({
 });
 
 type CountryOptionProps = {
+	selected: boolean;
 	country: DonationRecipient;
 	selectCountry: (country: DonationRecipient) => void;
 };
 
-export const CountryOption = ({country, selectCountry}: CountryOptionProps) => {
-	const {name} = useConfigContext();
+export const CountryOption = ({
+	country,
+	selectCountry,
+	selected
+}: CountryOptionProps) => {
+	const {name, primaryColor} = useConfigContext();
 	const {nameAndRegistration} = country;
 	const i18n = useI18n();
 
 	return (
 		<div
-			className={containerCss}
+			className={containerCss(selected, primaryColor)}
 			onClick={() => {
 				selectCountry(country);
 			}}

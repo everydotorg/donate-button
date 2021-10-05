@@ -13,7 +13,6 @@ import {DonationRecipient} from 'src/components/widget/types/donation-recipient'
 const countrySelectedCss = (primaryColor: string) =>
 	cxs({
 		...bodyText,
-		lineHeight: 1.25,
 		color: primaryColor,
 		margin: Spacing.Empty,
 		transform: 'translateY(0.09em)'
@@ -52,6 +51,7 @@ export const CountryTitle = ({country}: {country: DonationRecipient}) => {
 				src={getFlag(country?.countryCode)}
 				alt="country flag"
 			/>
+
 			<p className={countrySelectedCss(primaryColor)}>{country?.name}</p>
 		</Fragment>
 	);

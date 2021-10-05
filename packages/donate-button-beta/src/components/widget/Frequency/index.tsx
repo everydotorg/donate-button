@@ -6,6 +6,7 @@ import {Popover} from 'src/components/widget/Popover';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
+import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {bodyText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
@@ -15,7 +16,7 @@ import {DonationFrequency} from 'src/components/widget/types/donation-frequency'
 const frequencyContainerCss = cxs({
 	display: 'flex',
 	alignItems: 'center',
-	border: `1px solid ${COLORS.LightGray}`,
+	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
 	borderRadius: Radii.Default,
 	height: '56px',
 	padding: Spacing.XXS,

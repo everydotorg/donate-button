@@ -23,7 +23,12 @@ const sectionTitleCss = cxs({
 });
 
 export const CountrySelector = () => {
-	const {setRoute, setCountry, setCurrency} = useWidgetContext();
+	const {
+		setRoute,
+		country: selectedCountry,
+		setCountry,
+		setCurrency
+	} = useWidgetContext();
 	const {countries, currencies} = useConfigContext();
 	const i18n = useI18n();
 
@@ -49,6 +54,7 @@ export const CountrySelector = () => {
 					{countries.map((country) => (
 						<CountryOption
 							key={`${country.id}-${country.name}`}
+							selected={selectedCountry === country}
 							country={country}
 							selectCountry={selectCountry}
 						/>

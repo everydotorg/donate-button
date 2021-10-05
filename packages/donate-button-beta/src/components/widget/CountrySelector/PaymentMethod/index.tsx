@@ -6,6 +6,7 @@ import cryptoLogo from 'src/assets/payments/crypto.svg';
 import genericLogo from 'src/assets/payments/generic.svg';
 import googlePayLogo from 'src/assets/payments/google-pay.png';
 import paypalLogo from 'src/assets/payments/paypal.svg';
+import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {smallText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
@@ -32,7 +33,7 @@ const paymentMethodsLogos: Record<PaymentMethodType, PaymentDisplayInfo> = {
 const containerCss = cxs({
 	display: 'flex',
 	alignItems: 'center',
-	border: `1px solid ${COLORS.LightGray}`,
+	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
 	borderRadius: Radii.Small,
 	padding: Spacing.XXS
 });
