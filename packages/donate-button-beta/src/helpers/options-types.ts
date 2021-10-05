@@ -62,7 +62,7 @@ const defaults: Partial<WidgetConfig> = {
 	],
 	defaultFrequency: DonationFrequency.OneTime,
 	showInitialMessage: false,
-	showInputButtons: false,
+	showInputButtons: true,
 	showTaxResidency: false,
 	primaryColor: '#00A37F',
 	i18n: {
