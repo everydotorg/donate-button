@@ -49,17 +49,15 @@ const contentCss = (primaryColor: string) =>
 		overflow: 'auto',
 		height: '100%',
 		padding: `${Spacing.Empty} ${Spacing.XL}`,
+		color: COLORS.Text,
 		'& > h1': {
-			...headingText,
-			fontWeight: 'bold'
+			...headingText
 		},
 		'& > h2': {
-			...heading2Text,
-			fontWeight: 'bold'
+			...heading2Text
 		},
 		'& > h3': {
-			...heading3Text,
-			fontWeight: 'bold'
+			...heading3Text
 		},
 		'& > p': {
 			...bodyText
