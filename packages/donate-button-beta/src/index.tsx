@@ -28,13 +28,14 @@ const createButtonInSelector = ({
 		log('createButton():', 'must provide element or selector');
 	}
 
-	const container = element || (selector && document.querySelector(selector));
-	if (!container) {
+	const nodes = !!element ? [element] : (selector && document.querySelectorAll(selector));
+	if (!nodes) {
 		return;
 	}
 
-	const Button = <EmbedButton {...options} />;
-	render(Button, container);
+	for (const node of nodes) {
+		render(<EmbedButton {...options} />, node);
+	}
 };
 
 export default createButtonInSelector;
