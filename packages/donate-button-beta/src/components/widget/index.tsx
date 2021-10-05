@@ -65,7 +65,7 @@ const widgetCss = (height: number | null) =>
 
 		[BREAKPOINTS.TabletLandscapeUp]: {
 			height: height ? `${height}px` : 'unset',
-			minHeight: '450px',
+			minHeight: '378px',
 			maxHeight: '550px',
 			width: '720px',
 			overflow: 'unset',
