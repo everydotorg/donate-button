@@ -130,7 +130,7 @@ const addAmountButtonCss = (color: string) =>
 		height: '32px',
 		backgroundColor: COLORS.Gray,
 		borderRadius: Radii.Default,
-		padding: `${Spacing.XXS} ${Spacing.S}`,
+		padding: `0 ${Spacing.S}`,
 		fontFamily: 'inherit',
 		cursor: 'pointer',
 		transition: 'background .3s, color .3s',

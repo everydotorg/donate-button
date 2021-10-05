@@ -90,7 +90,13 @@ type NonprofitInfo = {
 };
 
 export const NonprofitInfo = ({classes}: NonprofitInfo) => {
-	const {name, locationAddress, description, primaryColor} = useConfigContext();
+	const {
+		name,
+		locationAddress,
+		description,
+		primaryColor,
+		infoPages
+	} = useConfigContext();
 
 	const [expanded, setExpanded] = useState(false);
 	const [height, setHeight] = useState(0);
@@ -130,7 +136,7 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 			>
 				<Markdown source={description} />
 
-				<InfoPagesNav classes={[pagesNavCss]} />
+				{infoPages?.length > 0 && <InfoPagesNav classes={[pagesNavCss]} />}
 			</div>
 		</div>
 	);

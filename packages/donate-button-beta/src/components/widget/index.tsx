@@ -75,20 +75,21 @@ const widgetCss = (height: number | null) =>
 		}
 	});
 
-const formCss = cxs({
-	gridColumn: '1 / -1',
-	gridRow: '3 / 4',
-	padding: Spacing.Inset_XL,
-	borderRight: 'none',
-	display: 'grid',
-	gridTemplateRows: 'max-content max-content 1fr',
-	rowGap: Spacing.XXL,
-	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
-		borderLeft: `1px solid ${COLORS.LightGray}`,
-		gridColumn: '2 / 3',
-		gridRow: '1 / 3'
-	}
-});
+const formCss = (config: WidgetConfig) =>
+	cxs({
+		gridColumn: '1 / -1',
+		gridRow: '3 / 4',
+		padding: Spacing.Inset_XL,
+		borderRight: 'none',
+		display: 'grid',
+		gridTemplateRows: 'max-content max-content 1fr',
+		rowGap: Spacing.XXL,
+		[`${BREAKPOINTS.TabletLandscapeUp}`]: {
+			borderLeft: `1px solid ${COLORS.LightGray}`,
+			gridColumn: '2 / 3',
+			gridRow: config.crypto ? '1 / 3' : '1 / 4'
+		}
+	});
 
 const submitButtonCss = cxs({
 	alignSelf: 'flex-end'
@@ -105,14 +106,15 @@ const nonProfitHeaderCss = cxs({
 	}
 });
 
-const nonProfitInfoCss = cxs({
-	gridColumn: '1 / -1',
-	gridRow: '2 / 3',
-	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
-		gridColumn: '1 / 2',
-		gridRow: '2 / 3'
-	}
-});
+const nonProfitInfoCss = (config: WidgetConfig) =>
+	cxs({
+		gridColumn: '1 / -1',
+		gridRow: '2 / 3',
+		[`${BREAKPOINTS.TabletLandscapeUp}`]: {
+			gridColumn: '1 / 2',
+			gridRow: config.infoPages?.length > 0 ? '2 / 3' : '2 / -1'
+		}
+	});
 
 const closeButtonCss = cxs({
 	position: 'absolute',
@@ -335,7 +337,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 							<Fragment>
 								<NonprofitHeader classes={[nonProfitHeaderCss]} />
 
-								<form className={formCss} onSubmit={submitDonation}>
+								<form className={formCss(config)} onSubmit={submitDonation}>
 									<FormControl label={i18n.frequency}>
 										<Frequency
 											frequency={frequency}
@@ -374,11 +376,13 @@ const Widget = ({options, hide}: WidgetProps) => {
 									</SubmitButton>
 								</form>
 
-								<NonprofitInfo classes={[nonProfitInfoCss]} />
+								<NonprofitInfo classes={[nonProfitInfoCss(config)]} />
 
-								<InfoPagesNav classes={[navbarCss]} />
+								{config?.infoPages?.length > 0 && (
+									<InfoPagesNav classes={[navbarCss]} />
+								)}
 
-								<Crypto classes={[cryptoCss]} />
+								{config.crypto && <Crypto classes={[cryptoCss]} />}
 							</Fragment>
 						) : route === Routes.SelectCountry ? (
 							<CountrySelector />
