@@ -49,9 +49,8 @@ const defaults: Partial<WidgetConfig> = {
 	show: false,
 	name: '',
 	description: '',
-	crypto: false,
 	forceLanguage: false,
-	countrySelection: false,
+	countrySelection: false, // @check: this is not used anywhere
 	currencies: [
 		{
 			countryCodes: ['GLOBAL'],
@@ -64,6 +63,7 @@ const defaults: Partial<WidgetConfig> = {
 	showInitialMessage: false,
 	showInputButtons: true,
 	showTaxResidency: false,
+	showAlternatePayments: true,
 	primaryColor: '#00A37F',
 	i18n: {
 		en,

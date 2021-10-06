@@ -34,7 +34,7 @@ interface CryptoProps {
 	noExit?: boolean;
 }
 
-export const Crypto = ({classes, noExit}: CryptoProps) => {
+export const AlternatePayments = ({classes, noExit}: CryptoProps) => {
 	const {nonprofitSlug, primaryColor} = useConfigContext();
 	const i18n = useI18n();
 

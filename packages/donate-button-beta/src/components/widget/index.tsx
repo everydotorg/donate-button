@@ -3,9 +3,9 @@ import 'src/components/widget/theme/global.css';
 import {useEffect, useRef, useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
+import {AlternatePayments} from 'src/components/widget/AlternatePayments';
 import {CloseButton} from 'src/components/widget/CloseButton';
 import {CountrySelector} from 'src/components/widget/CountrySelector';
-import {Crypto} from 'src/components/widget/Crypto';
 import {FormControl} from 'src/components/widget/FormControl';
 import {Frequency} from 'src/components/widget/Frequency';
 import {Info} from 'src/components/widget/Info';
@@ -87,7 +87,7 @@ const formCss = (config: WidgetConfig) =>
 		[`${BREAKPOINTS.TabletLandscapeUp}`]: {
 			borderLeft: `1px solid ${COLORS.LightGray}`,
 			gridColumn: '2 / 3',
-			gridRow: config.crypto ? '1 / 3' : '1 / 4'
+			gridRow: config.showAlternatePayments ? '1 / 3' : '1 / 4'
 		}
 	});
 
@@ -148,7 +148,7 @@ const navbarCss = cxs({
 	}
 });
 
-const cryptoCss = cxs({
+const alternatePaymentsCss = cxs({
 	gridColumn: '1 / -1',
 	gridRow: '4 / 5',
 	padding: Spacing.XL,
@@ -303,6 +303,8 @@ const Widget = ({options, hide}: WidgetProps) => {
 		window.open(url, '_self');
 	};
 
+	console.log({config});
+
 	return config.show ? (
 		<ConfigContext.Provider value={config}>
 			<WidgetContext.Provider
@@ -382,7 +384,9 @@ const Widget = ({options, hide}: WidgetProps) => {
 									<InfoPagesNav classes={[navbarCss]} />
 								)}
 
-								{config.crypto && <Crypto classes={[cryptoCss]} />}
+								{config.showAlternatePayments && (
+									<AlternatePayments classes={[alternatePaymentsCss]} />
+								)}
 							</Fragment>
 						) : route === Routes.SelectCountry ? (
 							<CountrySelector />

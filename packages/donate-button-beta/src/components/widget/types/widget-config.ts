@@ -13,8 +13,8 @@ export type WidgetConfig = {
 	descriptionLong: string;
 	logo: string;
 	backgroundImage: string;
-	crypto: boolean;
-	countrySelection: boolean;
+	crypto: boolean; // @check: this is not used
+	countrySelection: boolean; // @check: this is not used
 	primaryColor: string;
 	forceLanguage: string | false;
 	defaultDonationAmount?: number;
@@ -24,6 +24,7 @@ export type WidgetConfig = {
 	showInitialMessage?: boolean;
 	showInputButtons?: boolean;
 	showTaxResidency?: boolean;
+	showAlternatePayments?: boolean;
 	countries: DonationRecipient[];
 	infoPages: InfoPage[];
 	i18n: {en: Language} & Record<string, Partial<Language>>;
