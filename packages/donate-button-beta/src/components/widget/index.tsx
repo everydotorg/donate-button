@@ -303,8 +303,6 @@ const Widget = ({options, hide}: WidgetProps) => {
 		window.open(url, '_self');
 	};
 
-	console.log({config});
-
 	return config.show ? (
 		<ConfigContext.Provider value={config}>
 			<WidgetContext.Provider
