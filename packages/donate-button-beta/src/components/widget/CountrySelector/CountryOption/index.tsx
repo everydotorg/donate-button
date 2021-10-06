@@ -23,11 +23,19 @@ const containerCss = (selected: boolean, color: string) =>
 		cursor: 'pointer'
 	});
 
-const countryHeaderCss = cxs({
-	display: 'flex',
-	alignItems: 'center',
-	margin: Spacing.Stack_XS
-});
+const countryHeaderCss = (color: string) =>
+	cxs({
+		display: 'flex',
+		alignItems: 'center',
+		margin: Spacing.Stack_XS,
+		color,
+		' span': {
+			transform: 'translateY(0.09em)'
+		},
+		'& > :not(:last-child)': {
+			marginRight: Spacing.M
+		}
+	});
 
 const descriptionCss = cxs({
 	fontSize: '14px',
@@ -71,7 +79,7 @@ export const CountryOption = ({
 				selectCountry(country);
 			}}
 		>
-			<div className={countryHeaderCss}>
+			<div className={countryHeaderCss(primaryColor)}>
 				<CountryTitle country={country} />
 			</div>
 

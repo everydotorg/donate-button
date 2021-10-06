@@ -15,7 +15,10 @@ const countryCss = cxs({
 	display: 'flex',
 	flexWrap: 'wrap',
 	alignItems: 'center',
-	justifyContent: 'space-between'
+	justifyContent: 'space-between',
+	' span, button': {
+		transform: 'translateY(0.09em)'
+	}
 });
 
 const taxCss = cxs({
