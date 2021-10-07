@@ -139,8 +139,6 @@ const mobileCloseBtnCss = cxs({
 
 const navbarCss = cxs({
 	display: 'none',
-	padding: Spacing.XL,
-	borderTop: `1px solid ${COLORS.LightGray}`,
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		display: 'unset',
 		gridColumn: '1 / 2',
@@ -151,9 +149,6 @@ const navbarCss = cxs({
 const alternatePaymentsCss = cxs({
 	gridColumn: '1 / -1',
 	gridRow: '4 / 5',
-	padding: Spacing.XL,
-	borderTop: `1px solid ${COLORS.LightGray}`,
-	borderLeft: `1px solid ${COLORS.LightGray}`,
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		gridColumn: '2 / 3',
 		gridRow: '3 / 4 !important'

@@ -1,5 +1,5 @@
 import cxs from 'cxs';
-import {useEffect, useRef, useState} from 'preact/hooks';
+import {useEffect, useLayoutEffect, useRef, useState} from 'preact/hooks';
 import {InfoPagesNav} from 'src/components/widget/InfoPagesNav';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {ChevronDown} from 'src/components/widget/svg/ChevronDown';
@@ -11,7 +11,6 @@ import {
 	smallText
 } from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
-import {useLayoutEffect} from 'react';
 
 const containerCss = cxs({
 	...bodyText,
