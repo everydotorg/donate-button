@@ -16,7 +16,7 @@ export const en: Language = {
 	noThanks: 'No thanks',
 	orDonateCrypto: 'or donate with:',
 	countryTitle: 'Tax deductible in',
-	countrySelection: 'Select your preferred jurisdiction',
+	countrySelection: 'Select your preferred country',
 	donate: 'Donate',
 	countryDescription:
 		'Support {{projectName}} with a donation to {{nameAndRegistration}}.',

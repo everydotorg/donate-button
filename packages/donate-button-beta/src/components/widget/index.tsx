@@ -234,12 +234,14 @@ const Widget = ({options, hide}: WidgetProps) => {
 			const info = await getNonprofitInfo(
 				options.nonprofitSlug ?? 'everydotorg'
 			);
+
 			setConfig(
 				mergeConfig({
 					...info,
 					...options
 				})
 			);
+
 			setCountry(
 				options.countries?.[0] ??
 					info.countries?.[0] ?? {
