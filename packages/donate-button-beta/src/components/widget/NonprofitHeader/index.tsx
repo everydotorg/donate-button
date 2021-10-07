@@ -99,7 +99,7 @@ export const NonprofitHeader = forwardRef(
 			>
 				<p className={nonprofitNameCss}>{name}</p>
 				<div className={logoContainerCss}>
-					<div alt="nonprofit logo" className={logoImageCss(logo)} />
+					{logo && <div alt="nonprofit logo" className={logoImageCss(logo)} />}
 				</div>
 			</div>
 		);
