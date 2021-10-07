@@ -76,9 +76,9 @@ const expandableContentCss = (height: number, fontSize: number) =>
 			overflow: 'auto',
 			marginTop: Spacing.XL,
 			maxHeight: 'unset',
-			marginBottom: Spacing.XS,
 			'& > span': {
-				fontSize: `${fontSize}px`
+				fontSize: `${fontSize}px`,
+				lineHeight: fontSize === 14 ? '22px' : '24px'
 			}
 		}
 	});
@@ -93,12 +93,13 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 		locationAddress,
 		description,
 		primaryColor,
-		infoPages
+		infoPages,
+		showInputButtons
 	} = useConfigContext();
 
 	const [expanded, setExpanded] = useState(false);
 	const [height, setHeight] = useState(0);
-	const [fontSize, setFontSize] = useState(16);
+	const [fontSize, setFontSize] = useState(showInputButtons ? 16 : 14);
 
 	const expandableContentRef = useRef<HTMLDivElement>(null);
 
