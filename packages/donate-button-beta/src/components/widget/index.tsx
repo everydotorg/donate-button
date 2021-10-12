@@ -1,19 +1,20 @@
 import cxs from 'cxs';
+import 'src/components/widget/theme/global.css';
 import {useEffect, useRef, useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
+import {AlternatePayments} from 'src/components/widget/AlternatePayments';
 import {CloseButton} from 'src/components/widget/CloseButton';
-import {CountryCard} from 'src/components/widget/CountryCard';
 import {CountrySelector} from 'src/components/widget/CountrySelector';
-import {Crypto} from 'src/components/widget/Crypto';
 import {FormControl} from 'src/components/widget/FormControl';
 import {Frequency} from 'src/components/widget/Frequency';
 import {Info} from 'src/components/widget/Info';
+import {InfoPagesNav} from 'src/components/widget/InfoPagesNav';
 import {Input} from 'src/components/widget/Input';
 import {NonprofitHeader} from 'src/components/widget/NonprofitHeader';
 import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
-import {RedirectNotice} from 'src/components/widget/RedirectNotice';
 import {SubmitButton} from 'src/components/widget/SubmitButton';
+import {TaxResidency} from 'src/components/widget/TaxResidency';
 import {getNonprofitInfo} from 'src/components/widget/api/get-nonprofit-info';
 import {ConfigContext} from 'src/components/widget/context/config-context';
 import {WidgetContext} from 'src/components/widget/context/widget-context';
@@ -38,7 +39,7 @@ cxs.prefix('edoWidget-');
 const wrapperCss = cxs({
 	position: 'fixed',
 	height: 'auto',
-	width: '100vw',
+	width: '100%',
 	zIndex: 999,
 	top: 0,
 	bottom: 0,
@@ -51,38 +52,47 @@ const wrapperCss = cxs({
 	fontFamily: FontFamily.BasisGrotesque
 });
 
-const widgetCss = cxs({
-	background: 'white',
-	display: 'grid',
-	gridTemplateRows: '1fr max-content',
-	width: '100vw',
-	height: '100%',
-	borderRadius: 'unset',
-	position: 'relative',
-	[BREAKPOINTS.TabletLandscapeUp]: {
-		// Fix te size of the widget to match the desings.
-		// We can add a new breakpoints for large devices is this is too small
-		height: '550.4px',
-		width: '716.96px',
+const widgetCss = (height: number | null) =>
+	cxs({
+		background: 'white',
+		display: 'grid',
+		gridTemplateColumns: '1fr',
+		width: '100%',
+		height: '100%',
+		borderRadius: 'unset',
+		position: 'relative',
+		overflow: 'auto',
 
-		borderRadius: Radii.Medium,
-		gridTemplateColumns: '55.5% 44.5%',
-		gridTemplateRows: '1fr 1fr max-content max-content'
-	}
-});
+		[BREAKPOINTS.TabletLandscapeUp]: {
+			height: height ? `${height}px` : 'unset',
+			minHeight: '378px',
+			maxHeight: '550px',
+			width: '720px',
+			overflow: 'unset',
+			borderRadius: Radii.Medium,
+			gridTemplateColumns: '44.5% 55.5%',
+			gridTemplateRows: 'max-content 1fr max-content'
+		}
+	});
 
-const formCss = cxs({
-	gridColumn: '1 / 2',
-	gridRow: '1 / 3',
-	padding: Spacing.Inset_XL,
-	borderRight: 'none',
-	display: 'grid',
-	gridTemplateColumns: '1fr',
-	gridTemplateRows: 'max-content max-content 1fr',
-	rowGap: Spacing.XXL,
-	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
-		borderRight: `1px solid ${COLORS.LightGray}`
-	}
+const formCss = (config: WidgetConfig) =>
+	cxs({
+		gridColumn: '1 / -1',
+		gridRow: '3 / 4',
+		padding: Spacing.Inset_XL,
+		borderRight: 'none',
+		display: 'grid',
+		gridTemplateRows: 'max-content max-content 1fr',
+		rowGap: Spacing.XXL,
+		[`${BREAKPOINTS.TabletLandscapeUp}`]: {
+			borderLeft: `1px solid ${COLORS.LightGray}`,
+			gridColumn: '2 / 3',
+			gridRow: config.showAlternatePayments ? '1 / 3' : '1 / 4'
+		}
+	});
+
+const submitButtonCss = cxs({
+	alignSelf: 'flex-end'
 });
 
 const nonProfitHeaderCss = cxs({
@@ -91,58 +101,57 @@ const nonProfitHeaderCss = cxs({
 
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
 		height: 'auto',
-		gridColumn: '2 / 3',
+		gridColumn: '1 / 2',
 		gridRow: '1 / 2'
 	}
 });
 
-const nonProfitInfoCss = cxs({
-	gridColumn: '2 / 3',
-	gridRow: '2 / 4'
-});
+const nonProfitInfoCss = (config: WidgetConfig) =>
+	cxs({
+		gridColumn: '1 / -1',
+		gridRow: '2 / 3',
+		[`${BREAKPOINTS.TabletLandscapeUp}`]: {
+			gridColumn: '1 / 2',
+			gridRow: config.infoPages?.length > 0 ? '2 / 3' : '2 / -1'
+		}
+	});
 
-const cryptoContainerCss = cxs({
-	gridRow: '4 / 5',
-	gridColumn: '1 / -1',
-
-	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
-		gridRow: '4 / 5',
-		gridColumn: '2 / 3'
-	}
-});
-
-const donateButtonContainer = cxs({
-	gridColumn: '1 / -1',
-	gridRow: '3 / 4',
-	padding: `${Spacing.XS} ${Spacing.XS}`,
-	[BREAKPOINTS.TabletLandscapeUp]: {
-		gridColumn: '1 / 2',
-		gridRow: '3 / -1',
-		borderRight: `1px solid ${COLORS.LightGray}`,
-		padding: `${Spacing.Empty} ${Spacing.XL} ${Spacing.XL} ${Spacing.XL}`
-	}
-});
-
-const scrollableContent = cxs({
-	display: 'flex',
-	flexDirection: 'column',
-	overflow: 'auto',
-	gridColumn: '1 / -1',
-	gridRow: '1 / 2',
-	[BREAKPOINTS.TabletLandscapeUp]: {
-		display: 'contents',
-		overflow: 'initial'
-	}
-});
-
-const closeBoxCss = cxs({
+const closeButtonCss = cxs({
 	position: 'absolute',
 	zIndex: 1,
-	top: Spacing.XS,
-	right: Spacing.Empty,
+	top: Spacing.XL,
+	right: Spacing.XL
+});
+
+const desktopCloseBtnCss = cxs({
+	display: 'none',
 	[BREAKPOINTS.TabletLandscapeUp]: {
-		top: `-${Spacing.M}`,
-		right: `-${Spacing.XXL}`
+		display: 'block'
+	}
+});
+
+const mobileCloseBtnCss = cxs({
+	display: 'block',
+	[BREAKPOINTS.TabletLandscapeUp]: {
+		display: 'none !important'
+	}
+});
+
+const navbarCss = cxs({
+	display: 'none',
+	[BREAKPOINTS.TabletLandscapeUp]: {
+		display: 'unset',
+		gridColumn: '1 / 2',
+		gridRow: '3 / 4'
+	}
+});
+
+const alternatePaymentsCss = cxs({
+	gridColumn: '1 / -1',
+	gridRow: '4 / 5',
+	[BREAKPOINTS.TabletLandscapeUp]: {
+		gridColumn: '2 / 3',
+		gridRow: '3 / 4 !important'
 	}
 });
 
@@ -165,6 +174,7 @@ const getSubmitButtonText = (
 	}
 
 	let text = `${i18n.donate} ${currency.symbol}${donationAmount}`;
+
 	if (frequency === DonationFrequency.Monthly) {
 		text = text.concat(` ${i18n.monthly}`);
 	}
@@ -180,71 +190,53 @@ interface WidgetProps {
 const Widget = ({options, hide}: WidgetProps) => {
 	const mergedConfig = mergeConfig(options);
 
+	const widgetRef = useRef<HTMLDivElement>(null);
+
 	const [config, setConfig] = useState(mergedConfig);
-	const [route, setRoute] = useState<string>(Routes.DonationForm);
+
+	const [route, _setRoute] = useState<Routes>(Routes.DonationForm);
+
 	const [showFrequencyPopover, setShowFrequencyPopover] = useState<boolean>(
-		config.showInitialMessage
+		config.defaultFrequency === 'once' && Boolean(config.showInitialMessage)
 	);
+
 	const [donationAmount, setDonationAmount] = useState<number | undefined>(
 		config.defaultDonationAmount
 	);
+
 	const [currency, setCurrency] = useState<CurrencyOption>(
 		mergedConfig.currencies[0]
 	);
+
 	const [frequency, setFrequency] = useState<DonationFrequency>(
 		config.defaultFrequency
 	);
-	const [showScrolledHeader, setShowScrolledHeader] = useState(false);
+
 	const [country, setCountry] = useState<DonationRecipient>(null as any);
+
 	const [submitError, setSubmitError] = useState<string | null>(null);
 
-	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
-		event
-	) => {
-		if (event.target === event.currentTarget) {
-			hide();
-		}
-	};
+	const [widgetHeight, setWidgetHeight] = useState<number | null>(null);
 
 	const i18n = getTranslations(config.i18n, config.forceLanguage);
-	const scrollableContainerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		setSubmitError(null);
 	}, [country, currency]);
 
 	useEffect(() => {
-		if (scrollableContainerRef.current) {
-			const scrollableRef = scrollableContainerRef.current;
-			const modifyHeaderHeight = () => {
-				const {scrollTop} = scrollableRef;
-				if (
-					!window.matchMedia(BREAKPOINTS.TabletLandscapeUp).matches &&
-					!showScrolledHeader
-				) {
-					setShowScrolledHeader(scrollTop > 90);
-				}
-			};
-
-			scrollableRef.addEventListener('scroll', modifyHeaderHeight);
-
-			return () => {
-				scrollableRef.removeEventListener('scroll', modifyHeaderHeight);
-			};
-		}
-	}, [showScrolledHeader]);
-
-	useEffect(() => {
 		const fetchInfo = async () => {
 			const info = await getNonprofitInfo(
 				options.nonprofitSlug ?? 'everydotorg'
 			);
+
 			setConfig(
 				mergeConfig({
 					...info,
 					...options
 				})
 			);
+
 			setCountry(
 				options.countries?.[0] ??
 					info.countries?.[0] ?? {
@@ -265,33 +257,47 @@ const Widget = ({options, hide}: WidgetProps) => {
 		void fetchInfo();
 	}, [options]);
 
+	/**
+	 * The first time we navigate to another route, fix the height of the widget
+	 * otherwise the height will adjust to the content of the new route.
+	 */
+	const setRoute = (route: Routes) => {
+		if (route !== Routes.DonationForm && !widgetHeight) {
+			setWidgetHeight(widgetRef.current.clientHeight);
+		}
+
+		_setRoute(route);
+	};
+
+	const hideOnWrapperClick: JSXInternal.MouseEventHandler<Element> = (
+		event
+	) => {
+		if (event.target === event.currentTarget) {
+			hide();
+		}
+	};
+
 	const submitDonation = (
 		event: JSXInternal.TargetedEvent<HTMLFormElement>
 	) => {
 		event.preventDefault();
-		if (!donationAmount) {
-			setSubmitError(i18n.chooseAnAmount);
-			return;
-		}
 
-		if (donationAmount < currency.minimumAmount) {
+		if (!donationAmount || donationAmount < currency.minimumAmount) {
 			setSubmitError(
-				`${i18n.minDonationAmount} ${currency.name} ${currency.minimumAmount}`
+				`${i18n.minDonationAmount} ${currency.symbol}${currency.minimumAmount}`
 			);
 			return;
 		}
 
 		const url = constructEveryUrl({
-			nonprofitSlug: country.id,
-			frequency,
 			amount: donationAmount,
 			crypto: false,
+			frequency,
+			nonprofitSlug: country.id,
 			noExit: mergedConfig.noExit
 		});
 
-		const target = '_self';
-
-		window.open(url, target);
+		window.open(url, '_self');
 	};
 
 	return config.show ? (
@@ -315,52 +321,43 @@ const Widget = ({options, hide}: WidgetProps) => {
 				}}
 			>
 				<div className={wrapperCss} onClick={hideOnWrapperClick}>
-					<form className={widgetCss} onSubmit={submitDonation}>
-						{!showScrolledHeader && (
-							<CloseButton positionCss={closeBoxCss} color={COLORS.White} />
-						)}
+					<CloseButton
+						positionCss={[closeButtonCss, desktopCloseBtnCss].join(' ')}
+					/>
+
+					<div ref={widgetRef} className={widgetCss(widgetHeight)}>
+						<CloseButton
+							positionCss={[closeButtonCss, mobileCloseBtnCss].join(' ')}
+						/>
 
 						{route === Routes.DonationForm ? (
 							<Fragment>
-								<div ref={scrollableContainerRef} className={scrollableContent}>
-									<NonprofitHeader
-										showScrolled={showScrolledHeader}
-										classes={[nonProfitHeaderCss]}
+								<NonprofitHeader classes={[nonProfitHeaderCss]} />
+
+								<form className={formCss(config)} onSubmit={submitDonation}>
+									<FormControl label={i18n.frequency}>
+										<Frequency
+											frequency={frequency}
+											setFrequency={setFrequency}
+										/>
+									</FormControl>
+
+									<Input
+										selectedCurrency={currency}
+										setCurrency={setCurrency}
+										value={donationAmount}
+										setValue={setDonationAmount}
+										error={submitError}
+										setError={setSubmitError}
+										setCountry={setCountry}
 									/>
-									<div className={formCss}>
-										<FormControl label={i18n.frequency}>
-											<Frequency
-												frequency={frequency}
-												setFrequency={setFrequency}
-											/>
-										</FormControl>
-										<FormControl label={i18n.amount}>
-											<Input
-												selectedCurrency={currency}
-												setCurrency={setCurrency}
-												value={donationAmount}
-												setValue={setDonationAmount}
-												error={submitError}
-												setError={setSubmitError}
-												setCountry={setCountry}
-											/>
-										</FormControl>
-										{config.countrySelection ? (
-											<FormControl label={i18n.countryTitle}>
-												<CountryCard />
-											</FormControl>
-										) : (
-											<RedirectNotice />
-										)}
-									</div>
 
-									<NonprofitInfo classes={[nonProfitInfoCss]} />
+									{config.showTaxResidency && config.countries?.length > 0 && (
+										<TaxResidency />
+									)}
 
-									<Crypto classes={[cryptoContainerCss]} />
-								</div>
-
-								<div className={donateButtonContainer}>
 									<SubmitButton
+										classes={[submitButtonCss]}
 										disabled={
 											frequency === DonationFrequency.Unselected ||
 											!donationAmount ||
@@ -374,14 +371,24 @@ const Widget = ({options, hide}: WidgetProps) => {
 											i18n
 										)}
 									</SubmitButton>
-								</div>
+								</form>
+
+								<NonprofitInfo classes={[nonProfitInfoCss(config)]} />
+
+								{config?.infoPages?.length > 0 && (
+									<InfoPagesNav classes={[navbarCss]} />
+								)}
+
+								{config.showAlternatePayments && (
+									<AlternatePayments classes={[alternatePaymentsCss]} />
+								)}
 							</Fragment>
 						) : route === Routes.SelectCountry ? (
 							<CountrySelector />
 						) : (
 							<Info />
 						)}
-					</form>
+					</div>
 				</div>
 			</WidgetContext.Provider>
 		</ConfigContext.Provider>

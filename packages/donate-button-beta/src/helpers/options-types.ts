@@ -47,33 +47,23 @@ export interface EmbedButtonOptions extends DonateButtonOptions {
 
 const defaults: Partial<WidgetConfig> = {
 	show: false,
-	name: 'Every Org',
-	description: 'Donate today!',
-	crypto: false,
+	name: '',
+	description: '',
 	forceLanguage: false,
-	countrySelection: true,
+	countrySelection: false, // @check: this is not used anywhere
 	currencies: [
 		{
-			countryCodes: ['US', 'GLOBAL'],
+			countryCodes: ['GLOBAL'],
 			name: 'USD',
-			symbol: '$',
-			minimumAmount: 10
-		},
-		{
-			countryCodes: ['HK', 'GLOBAL'],
-			name: 'HKD',
-			symbol: '$',
-			minimumAmount: 10
-		},
-		{
-			countryCodes: ['AU', 'GLOBAL'],
-			name: 'AUD',
 			symbol: '$',
 			minimumAmount: 10
 		}
 	],
-	defaultFrequency: DonationFrequency.Unselected,
-	showInitialMessage: true,
+	defaultFrequency: DonationFrequency.OneTime,
+	showInitialMessage: false,
+	showInputButtons: true,
+	showTaxResidency: false,
+	showAlternatePayments: true,
 	primaryColor: '#00A37F',
 	i18n: {
 		en,

@@ -4,15 +4,14 @@ import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {LeftArrow} from 'src/components/widget/svg/LeftArrow';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
-import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {
 	headingText,
 	heading2Text,
 	heading3Text,
-	labelText,
-	linkText
+	bodyText
 } from 'src/components/widget/theme/font-sizes';
+import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {Routes} from 'src/components/widget/types/routes';
 
@@ -27,18 +26,20 @@ const headerCss = cxs({
 	display: 'flex',
 	padding: Spacing.Inset_XL,
 	borderBottom: getColoredBorder(Borders.Normal, COLORS.LightGray),
-	alignItems: 'center',
-
-	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
-		border: 'none'
-	}
+	alignItems: 'center'
 });
 
 const returnButtonCss = cxs({
+	height: '32px',
+	width: '32px',
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
 	padding: Spacing.Empty,
-	margin: Spacing.Inline_XXL,
-	backgroundColor: COLORS.Transparent,
+	marginRight: Spacing.XXL,
+	backgroundColor: COLORS.Gray,
 	border: 'none',
+	borderRadius: Radii.Default,
 	outline: 'none',
 	cursor: 'pointer'
 });
@@ -48,23 +49,21 @@ const contentCss = (primaryColor: string) =>
 		overflow: 'auto',
 		height: '100%',
 		padding: `${Spacing.Empty} ${Spacing.XL}`,
+		color: COLORS.Text,
 		'& > h1': {
-			...headingText,
-			fontWeight: 'bold'
+			...headingText
 		},
 		'& > h2': {
-			...heading2Text,
-			fontWeight: 'bold'
+			...heading2Text
 		},
 		'& > h3': {
-			...heading3Text,
-			fontWeight: 'bold'
+			...heading3Text
 		},
 		'& > p': {
-			...labelText
+			...bodyText
 		},
 		'& a': {
-			...linkText,
+			...bodyText,
 			color: primaryColor,
 			':visited': {
 				color: primaryColor
@@ -76,6 +75,7 @@ interface SectionContainerProps {
 	renderHeader: ComponentChildren;
 	renderBody: ComponentChildren;
 }
+
 export const SectionContainer = ({
 	renderBody,
 	renderHeader

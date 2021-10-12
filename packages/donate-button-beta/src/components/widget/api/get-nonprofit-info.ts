@@ -25,11 +25,13 @@ interface EveryNonprofit {
 	coverImageCloudinaryId: string;
 	description: string;
 	eligibleDonationRecipientNonprofits?: DonationRecipient[];
+	locationAddress: string | null;
 }
 
 const mapNonprofitInfo = (nonprofitRawData: EveryNonprofit): NonprofitInfo => {
 	return {
 		name: nonprofitRawData.name,
+		locationAddress: nonprofitRawData.locationAddress,
 		description: nonprofitRawData.description,
 		logo: getCloudinaryUrl(nonprofitRawData.logoCloudinaryId),
 		backgroundImage: getCloudinaryUrl(nonprofitRawData.coverImageCloudinaryId),

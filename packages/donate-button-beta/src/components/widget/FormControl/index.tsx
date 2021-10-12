@@ -1,23 +1,30 @@
 import cxs from 'cxs';
 import {ComponentChildren} from 'preact';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {labelText} from 'src/components/widget/theme/font-sizes';
+import {bodyText} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
 
-const labelCss = cxs({
-	...labelText,
-	margin: Spacing.Stack_XS,
-	color: COLORS.Text
-});
+const labelCss = (error: boolean) =>
+	cxs({
+		...bodyText,
+		margin: Spacing.Stack_XS,
+		color: error ? COLORS.Error : COLORS.Text
+	});
 
-interface FormControlProps {
+type FormControlProps = {
 	label: string;
 	children: ComponentChildren;
-}
-export const FormControl = ({label, children}: FormControlProps) => {
+	error?: boolean;
+};
+
+export const FormControl = ({
+	label,
+	children,
+	error = false
+}: FormControlProps) => {
 	return (
 		<div>
-			<p className={labelCss}>{label}</p>
+			<p className={labelCss(error)}>{label}</p>
 			{children}
 		</div>
 	);
