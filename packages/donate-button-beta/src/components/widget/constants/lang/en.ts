@@ -4,7 +4,7 @@ export const en: Language = {
 	frequency: 'Frequency',
 	monthly: 'Monthly',
 	monthlyDonation: 'Monthly',
-	oneTimeDonation: 'One time',
+	oneTimeDonation: 'One-time',
 	amount: 'Amount',
 	amountError: 'Enter an amount to donate',
 	frequencySelect: 'Select frequency',
@@ -14,18 +14,20 @@ export const en: Language = {
 		'It’s recommended to donate {{suggestedCurrency}} if you are getting a {{country}} tax receipt, would you like to switch from <bold>{{fromCurrency}} to {{toCurrency}}</bold>?',
 	switchCurrency: 'Change to {{suggestedCurrency}}',
 	noThanks: 'No thanks',
-	donateWithCrypto: 'Donate with Crypto, Stocks or DAF',
+	orDonateCrypto: 'or donate with:',
 	countryTitle: 'Tax deductible in',
-	countrySelection: 'Select your preferred jurisdiction',
+	countrySelection: 'Select your preferred country',
 	donate: 'Donate',
 	countryDescription:
 		'Support {{projectName}} with a donation to {{nameAndRegistration}}.',
-	simpleRedirectNotice:
-		'You will be redirected to Every.org to complete your donation.',
+	simpleRedirectNotice: 'Every.org will process your donation.',
+	learnMore: 'Learn More',
 	donationRedirectNotice:
 		'You will be redirected to Every.org to complete your {{currency}} donation to {{nameAndRegistration}}.',
 	thanksDonation: ``,
 	minDonationAmount: 'The minimum donation amount is',
 	chooseAnAmount: 'Choose an amount',
-	enterAnAmount: 'Enter an amount'
+	enterAnAmount: 'Enter an amount',
+	change: 'Change',
+	tax: 'Tax deductible in:'
 };

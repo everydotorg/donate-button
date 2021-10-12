@@ -15,6 +15,9 @@ const pageListCss = cxs({
 	margin: Spacing.Empty,
 	'& > *:not(:last-child)': {
 		marginRight: Spacing.XXL
+	},
+	'& > li': {
+		transform: 'translateY(0.09em)'
 	}
 });
 

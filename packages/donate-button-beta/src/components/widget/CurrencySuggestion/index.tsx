@@ -13,7 +13,7 @@ import {useI18n} from 'src/components/widget/hooks/use-i18n';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
 import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {labelText} from 'src/components/widget/theme/font-sizes';
+import {bodyText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {getBoldFormatted, replaceKeys} from 'src/helpers/interpolation';
@@ -23,7 +23,7 @@ const containerCss = cxs({
 });
 
 const textCss = cxs({
-	...labelText,
+	...bodyText,
 	fontWeight: 'normal'
 });
 

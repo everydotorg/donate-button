@@ -14,16 +14,18 @@ export const es: Partial<Language> = {
 		'Es recomendado donar en {{suggestedCurrency}} si tributas en {{country}}. ¿Te gustaría cambiar de {{fromCurrency}} a {{toCurrency}}?',
 	switchCurrency: 'Cambiar a {{suggestedCurrency}}',
 	noThanks: 'No, gracias',
-	donateWithCrypto: 'Donar con Crypto, Stocks o DAF',
+	orDonateCrypto: 'o doná con:',
 	countryTitle: 'País para deducción de impuestos',
 	countrySelection: 'Selecciona tu país',
 	donate: 'Donar',
-	simpleRedirectNotice:
-		'Vas a ser redireccionado a Every.org para completar tu donación.',
+	simpleRedirectNotice: 'Tu donación será procesada por Every.org.',
+	learnMore: 'Ver más',
 	donationRedirectNotice:
 		'Vas a ser redireccionado a Every.org para completar tu donación de {{currency}} a una ONG registrada en {{country}}.',
 	countryDescription:
 		'Apoya a {{projectName}} con una donación a {{nameAndRegistration}}.',
 	thanksDonation: '',
-	minDonationAmount: 'El monto de donación mínimo es'
+	minDonationAmount: 'El monto de donación mínimo es',
+	change: 'Cambiar',
+	tax: 'Impuestos en:'
 };

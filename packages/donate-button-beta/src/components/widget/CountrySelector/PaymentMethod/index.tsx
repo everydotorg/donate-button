@@ -6,20 +6,24 @@ import cryptoLogo from 'src/assets/payments/crypto.svg';
 import genericLogo from 'src/assets/payments/generic.svg';
 import googlePayLogo from 'src/assets/payments/google-pay.png';
 import paypalLogo from 'src/assets/payments/paypal.svg';
+import {Borders, getColoredBorder} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {bodyText} from 'src/components/widget/theme/font-sizes';
+import {smallText} from 'src/components/widget/theme/font-sizes';
+import {Radii} from 'src/components/widget/theme/radii';
+import {Spacing} from 'src/components/widget/theme/spacing';
 import {PaymentMethod as PaymentMethodType} from 'src/components/widget/types/payment-method';
 
 type PaymentDisplayInfo = {logo: string; label: string};
+
 const paymentMethodsLogos: Record<PaymentMethodType, PaymentDisplayInfo> = {
 	[PaymentMethodType.ApplePay]: {
 		logo: applePayLogo,
-		label: 'Apple pay'
+		label: ''
 	},
 	[PaymentMethodType.Bank]: {logo: bankLogo, label: 'Bank'},
 	[PaymentMethodType.Card]: {logo: cardLogo, label: 'Card'},
 	[PaymentMethodType.Crypto]: {logo: cryptoLogo, label: 'Crypto'},
-	[PaymentMethodType.GooglePay]: {logo: googlePayLogo, label: 'Google Pay'},
+	[PaymentMethodType.GooglePay]: {logo: googlePayLogo, label: ''},
 	[PaymentMethodType.Paypal]: {logo: paypalLogo, label: 'Paypal'},
 	[PaymentMethodType.DAF]: {logo: genericLogo, label: 'DAF'},
 	[PaymentMethodType.Stock]: {logo: genericLogo, label: 'Stock'},
@@ -28,37 +32,43 @@ const paymentMethodsLogos: Record<PaymentMethodType, PaymentDisplayInfo> = {
 
 const containerCss = cxs({
 	display: 'flex',
-	alignItems: 'center'
+	alignItems: 'center',
+	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
+	borderRadius: Radii.Small,
+	padding: Spacing.XXS
 });
 
 const logoCss = cxs({
 	height: '12px',
-	width: 'auto',
-	marginRight: '4px'
+	width: 'auto'
 });
 
 const labelCss = cxs({
-	...bodyText,
-	color: COLORS.TextGray,
+	...smallText,
 	transform: 'translateY(0.07em)',
-	whiteSpace: 'nowrap'
+	whiteSpace: 'nowrap',
+	marginLeft: Spacing.XXS
 });
 
-export const PaymentMethod = ({
-	paymentMethod
-}: {
+type PaymentMethodProps = {
 	paymentMethod: PaymentMethodType;
-}) => {
+	classes: string[];
+};
+
+export const PaymentMethod = ({paymentMethod, classes}: PaymentMethodProps) => {
 	const paymentInfo = paymentMethodsLogos[paymentMethod];
 
 	return (
-		<div className={containerCss}>
+		<div className={[containerCss, ...classes].join(' ')}>
 			<img
 				src={paymentInfo.logo}
 				alt="Payment method logo"
 				className={logoCss}
 			/>
-			<span className={labelCss}>{paymentInfo.label}</span>
+
+			{paymentInfo.label && (
+				<span className={labelCss}>{paymentInfo.label}</span>
+			)}
 		</div>
 	);
 };
