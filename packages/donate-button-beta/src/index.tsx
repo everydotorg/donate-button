@@ -41,8 +41,6 @@ const createButtonInSelector = ({
 	}
 };
 
-export default createButtonInSelector;
-
 loadFonts();
 
 /**

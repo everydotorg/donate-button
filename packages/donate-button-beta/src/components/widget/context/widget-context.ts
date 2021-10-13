@@ -3,11 +3,12 @@ import {StateUpdater} from 'preact/hooks';
 import {CurrencyOption} from 'src/components/widget/types/currency-option';
 import {DonationFrequency} from 'src/components/widget/types/donation-frequency';
 import {DonationRecipient} from 'src/components/widget/types/donation-recipient';
+import {Routes} from 'src/components/widget/types/routes';
 
 interface WidgetContextProps {
 	showFrequencyPopover: boolean;
 	dismissPopover: () => void;
-	setRoute: StateUpdater<string>;
+	setRoute: (r: Routes) => void;
 	route: string;
 	frequency: DonationFrequency;
 	country: DonationRecipient;

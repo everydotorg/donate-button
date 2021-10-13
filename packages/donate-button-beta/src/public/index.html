@@ -97,6 +97,7 @@
           withIcon: true,
           bgColor: '#48739c',
         });
+
         everyDotOrgDonateButton.createWidget({
           selector: ".livebetter-widget",
           options: {
@@ -130,7 +131,7 @@
                 name: "USD",
                 symbol: "$",
                 minimumAmount: 10,
-              },
+              }
             ],
           }});
 
@@ -141,6 +142,7 @@
               primaryColor: "#1AAFA7",
               showInitialMessage: false,
               defaultFrequency: "once",
+              showTaxResidency: true,
               countrySelection: undefined,
               noExit: false,
               infoPages: [
@@ -162,11 +164,33 @@
                 `,
                 },
               ],
+              countries: [
+                {
+                  id: "US",
+                  countryCode: "US",
+                  name: "United States",
+                  nameAndRegistration: 'Income Movement USA',
+                  paymentMethods: ['card', 'applePay', 'googlePay', 'stock', 'crypto', 'daf']
+                },
+                {
+                  id: "UK",
+                  countryCode: 'UK',
+                  name: 'United Kingdom',
+                  nameAndRegistration: 'Income Movement UK',
+                  paymentMethods: ['card', 'applePay', 'googlePay']
+                }
+              ],
               currencies: [
                 {
                   countryCodes: ["US"],
                   name: "USD",
                   symbol: "$",
+                  minimumAmount: 10,
+                },
+                {
+                  countryCodes: ["UK"],
+                  name: "GBP",
+                  symbol: "£",
                   minimumAmount: 10,
                 },
               ],

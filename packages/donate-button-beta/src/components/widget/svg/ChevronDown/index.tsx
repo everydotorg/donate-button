@@ -1,16 +1,25 @@
 interface ChevronDownProps {
 	color: string;
-	className?: string;
+	classes: string[];
+	size?: number;
+	onClick?: (event: MouseEvent) => void;
 }
-export const ChevronDown = ({color, className}: ChevronDownProps) => {
+
+export const ChevronDown = ({
+	color,
+	classes,
+	size = 12,
+	onClick
+}: ChevronDownProps) => {
 	return (
 		<svg
-			className={className}
-			width="10"
-			height="5"
+			className={classes ? classes.join(' ') : undefined}
+			width={size}
+			height={size}
 			viewBox="0 0 10 5"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
+			onClick={onClick}
 		>
 			<path
 				d="M1 0.5L5 4.5L9 0.5"
