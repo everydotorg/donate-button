@@ -41,7 +41,7 @@ const labelCss = cxs({
 	justifyContent: 'center',
 	textAlign: 'center',
 	cursor: 'pointer',
-	transition: 'background .3s, color .3s',
+	// Transition: 'background .3s, color .3s',
 	'& > span': {
 		zIndex: 10
 	}
@@ -57,7 +57,7 @@ const selectedBlockCss = (primaryColor: string) =>
 			position: 'absolute',
 			top: 0,
 			left: 0,
-			transition: 'transform .25s cubic-bezier(.55,.08,0,1)',
+			// Transition: 'transform .3s cubic-bezier(.55,.08,0,1)',
 			borderRadius: Radii.Default,
 			backgroundColor: primaryColor,
 			color: COLORS.White
