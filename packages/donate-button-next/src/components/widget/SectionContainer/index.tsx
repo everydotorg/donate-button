@@ -51,16 +51,24 @@ const contentCss = (primaryColor: string) =>
 		padding: `${Spacing.Empty} ${Spacing.XL}`,
 		color: COLORS.Text,
 		'& > h1': {
-			...headingText
+			...headingText,
+			marginTop: Spacing.L,
+			marginBottom: Spacing.L
 		},
 		'& > h2': {
-			...heading2Text
+			...heading2Text,
+			marginTop: Spacing.L,
+			marginBottom: Spacing.L
 		},
 		'& > h3': {
-			...heading3Text
+			...heading3Text,
+			marginTop: Spacing.L,
+			marginBottom: Spacing.L
 		},
 		'& > p': {
-			...bodyText
+			...bodyText,
+			marginTop: Spacing.M,
+			marginBottom: Spacing.M
 		},
 		'& a': {
 			...bodyText,

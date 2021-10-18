@@ -35,6 +35,7 @@ const nonprofitNameCss = cxs({
 const locationAddressCss = cxs({
 	...smallText,
 	fontFamily: 'inherit',
+	fontWeight: 700,
 	margin: 0,
 	textTransform: 'uppercase',
 	color: COLORS.TextOpaque

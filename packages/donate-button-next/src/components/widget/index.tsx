@@ -64,10 +64,10 @@ const widgetCss = (height: number | null) =>
 		overflow: 'auto',
 
 		[BREAKPOINTS.TabletLandscapeUp]: {
-			height: height ? `${height}px` : 'unset',
+			height: height ? `${height}px` : 'auto',
 			minHeight: '378px',
 			maxHeight: '550px',
-			width: '720px',
+			width: '720px !important',
 			overflow: 'unset',
 			borderRadius: Radii.Medium,
 			gridTemplateColumns: '44.5% 55.5%',
@@ -100,7 +100,6 @@ const nonProfitHeaderCss = cxs({
 	gridRow: '1 / 2',
 
 	[`${BREAKPOINTS.TabletLandscapeUp}`]: {
-		height: 'auto',
 		gridColumn: '1 / 2',
 		gridRow: '1 / 2'
 	}
