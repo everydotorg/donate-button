@@ -28,11 +28,13 @@ const containerCss = cxs({
 
 const nonprofitNameCss = cxs({
 	...headingText,
+	fontFamily: 'inherit',
 	margin: `0 0 ${Spacing.XXS} 0`
 });
 
 const locationAddressCss = cxs({
 	...smallText,
+	fontFamily: 'inherit',
 	margin: 0,
 	textTransform: 'uppercase',
 	color: COLORS.TextOpaque
@@ -67,6 +69,7 @@ const pagesNavCss = cxs({
 const expandableContentCss = (height: number, fontSize: number) =>
 	cxs({
 		...bodyText,
+		fontFamily: 'inherit',
 		maxHeight: `${height}px`,
 		transition: 'max-height 0.3s ease, margin 0.3s ease',
 		overflow: 'hidden',
