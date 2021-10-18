@@ -3,6 +3,7 @@ import {useI18n} from 'src/components/widget//hooks/use-i18n';
 import {Divider} from 'src/components/widget/Divider';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {COLORS} from 'src/components/widget/theme/colors';
+import {bodyText} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import constructEveryUrl from 'src/helpers/construct-every-url';
 
@@ -25,6 +26,7 @@ const containerCss = cxs({
 
 const linksContainerCss = (primaryColor: string) =>
 	cxs({
+		...bodyText,
 		display: 'flex',
 		alignItems: 'center',
 		'& > :not(:last-child)': {

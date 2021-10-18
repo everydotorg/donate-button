@@ -23,8 +23,7 @@ const containerCss = cxs({
 });
 
 const textCss = cxs({
-	...bodyText,
-	fontWeight: 'normal'
+	...bodyText
 });
 
 const actionsCss = cxs({

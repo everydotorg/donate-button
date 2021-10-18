@@ -74,7 +74,6 @@ const inputPrefixContainerCss = cxs({
 	bottom: 0,
 	pointerEvents: 'none',
 	color: COLORS.TextGray,
-	fontWeight: 400,
 	marginLeft: Spacing.S
 });
 
@@ -137,6 +136,9 @@ const addAmountButtonCss = (color: string) =>
 		fontFamily: 'inherit',
 		cursor: 'pointer',
 		transition: 'background .3s, color .3s',
+		'& > span': {
+			transform: 'translateY(0.08em)'
+		},
 		':hover': {
 			backgroundColor: color,
 			color: COLORS.White
@@ -241,7 +243,7 @@ export const Input = ({
 							<ChevronDown classes={[selectArrowCss]} color={primaryColor} />
 						</Fragment>
 					) : (
-						<p className={currencySelected}>{selectedCurrency.name}</p>
+						<span className={currencySelected}>{selectedCurrency.name}</span>
 					)}
 				</div>
 			</div>
@@ -261,7 +263,7 @@ export const Input = ({
 								});
 							}}
 						>
-							+{amount}
+							<span>+{amount}</span>
 						</button>
 					))}
 				</div>
