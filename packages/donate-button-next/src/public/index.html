@@ -67,6 +67,13 @@
       </div>
       <br />
       <br />
+      <div id="lilbub-donate-button">
+        <a href="https://www.every.org/lilbub/donate"
+          >Donate Lilbub</a
+        >
+      </div>
+      <br />
+      <br />
       <div class="livebetter-widget">
         <a href="https://www.every.org/livebetter-corp/donate"
           >Donate Live Better</a
@@ -142,7 +149,6 @@
               primaryColor: "#1AAFA7",
               showInitialMessage: false,
               defaultFrequency: "once",
-              showTaxResidency: true,
               countrySelection: undefined,
               noExit: false,
               infoPages: [
@@ -195,6 +201,36 @@
                 },
               ],
             },
+          });
+
+          everyDotOrgDonateButton.createWidget({
+            // Selector to attach the widget to be opened on click
+            selector: "#lilbub-donate-button",
+            // Widget configuration
+            options: {
+              nonprofitSlug: "lilbubsbigfund",
+              primaryColor: "#D55684",
+              showInitialMessage: false,
+              defaultFrequency: "once",
+              countries: [
+                {
+                  id: "lilbubsbigfund",
+                  name: "United States",
+                  nameAndRegistration:
+                    "Lil BUB's Big Fund",
+                  countryCode: "US",
+                  paymentMethods: [],
+                },
+              ],
+              currencies: [
+                {
+                  countryCodes: ["US", "GLOBAL"],
+                  name: "USD",
+                  symbol: "$",
+                  minimumAmount: 10,
+                },
+              ],
+            }
           });
       </script>
     </div>
