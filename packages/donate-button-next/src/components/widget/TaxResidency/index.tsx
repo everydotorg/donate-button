@@ -43,7 +43,7 @@ const changeBtnCss = (color: string) =>
 
 export const TaxResidency = () => {
 	const {country, setRoute} = useWidgetContext();
-	const {primaryColor} = useConfigContext();
+	const {primaryColor, countries} = useConfigContext();
 	const {tax, change} = useI18n();
 
 	return (
@@ -53,15 +53,17 @@ export const TaxResidency = () => {
 				<CountryTitle country={country} />
 			</div>
 
-			<button
-				type="button"
-				className={changeBtnCss(primaryColor)}
-				onClick={() => {
-					setRoute(Routes.SelectCountry);
-				}}
-			>
-				{change}
-			</button>
+			{countries.length > 1 && (
+				<button
+					type="button"
+					className={changeBtnCss(primaryColor)}
+					onClick={() => {
+						setRoute(Routes.SelectCountry);
+					}}
+				>
+					{change}
+				</button>
+			)}
 		</div>
 	);
 };

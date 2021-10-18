@@ -352,9 +352,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 										setCountry={setCountry}
 									/>
 
-									{config.showTaxResidency && config.countries?.length > 0 && (
-										<TaxResidency />
-									)}
+									{config.countries?.length > 0 && <TaxResidency />}
 
 									<SubmitButton
 										classes={[submitButtonCss]}
