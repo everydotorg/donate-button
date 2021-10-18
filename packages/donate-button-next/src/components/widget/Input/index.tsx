@@ -133,6 +133,7 @@ const addAmountButtonCss = (color: string) =>
 		color: COLORS.Text,
 		borderRadius: Radii.Default,
 		padding: `0 ${Spacing.S}`,
+		fontSize: '14px',
 		fontFamily: 'inherit',
 		cursor: 'pointer',
 		transition: 'background .3s, color .3s',
