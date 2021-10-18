@@ -41,6 +41,7 @@ const labelCss = cxs({
 	justifyContent: 'center',
 	textAlign: 'center',
 	cursor: 'pointer',
+	margin: 0,
 	// Transition: 'background .3s, color .3s',
 	'& > span': {
 		zIndex: 10
