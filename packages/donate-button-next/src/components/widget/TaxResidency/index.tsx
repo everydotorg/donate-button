@@ -15,15 +15,15 @@ const countryCss = cxs({
 	display: 'flex',
 	flexWrap: 'wrap',
 	alignItems: 'center',
-	justifyContent: 'space-between',
-	' span, button': {
-		transform: 'translateY(0.09em)'
-	}
+	justifyContent: 'space-between'
 });
 
 const taxCss = cxs({
 	display: 'flex',
 	alignItems: 'center',
+	'& > span': {
+		transform: 'translateY(0.09em)'
+	},
 	'& > :not(:last-child)': {
 		marginRight: Spacing.XS
 	}
@@ -38,7 +38,8 @@ const changeBtnCss = (color: string) =>
 		margin: 0,
 		border: 'none',
 		backgroundColor: 'transparent',
-		fontFamily: 'inherit'
+		fontFamily: 'inherit',
+		transform: 'translateY(0.09em)'
 	});
 
 export const TaxResidency = () => {
