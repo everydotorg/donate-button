@@ -4,7 +4,7 @@
     <meta name="theme-color" content="#000000">
     <meta name="description" content="Example beta donate buttons">
     <title>v3 Donate Button</title>
-  <script type="text/javascript" src="https://assets.every.org/dist/donate-button/0.3/index.js"></script></head>
+  <link href="https://assets.every.org/dist/donate-button/0.3/bundle.cb525.css" rel="stylesheet"><script type="text/javascript" src="https://assets.every.org/dist/donate-button/0.3/index.js"></script><style>html{box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}*{box-sizing:inherit}</style></head>
 
   <body style="height: 200vh">
     <div id="actions">
@@ -63,6 +63,11 @@
       </div>
       <br>
       <br>
+      <div id="lilbub-donate-button">
+        <a href="https://www.every.org/lilbub/donate">Donate Lilbub</a>
+      </div>
+      <br>
+      <br>
       <div class="livebetter-widget">
         <a href="https://www.every.org/livebetter-corp/donate">Donate Live Better</a>
       </div>
@@ -87,6 +92,7 @@
           withIcon: true,
           bgColor: '#48739c',
         });
+
         everyDotOrgDonateButton.createWidget({
           selector: ".livebetter-widget",
           options: {
@@ -120,7 +126,7 @@
                 name: "USD",
                 symbol: "$",
                 minimumAmount: 10,
-              },
+              }
             ],
           }});
 
@@ -152,6 +158,22 @@
                 `,
                 },
               ],
+              countries: [
+                {
+                  id: "US",
+                  countryCode: "US",
+                  name: "United States",
+                  nameAndRegistration: 'Income Movement USA',
+                  paymentMethods: ['card', 'applePay', 'googlePay', 'stock', 'crypto', 'daf']
+                },
+                {
+                  id: "UK",
+                  countryCode: 'UK',
+                  name: 'United Kingdom',
+                  nameAndRegistration: 'Income Movement UK',
+                  paymentMethods: ['card', 'applePay', 'googlePay']
+                }
+              ],
               currencies: [
                 {
                   countryCodes: ["US"],
@@ -159,8 +181,44 @@
                   symbol: "$",
                   minimumAmount: 10,
                 },
+                {
+                  countryCodes: ["UK"],
+                  name: "GBP",
+                  symbol: "£",
+                  minimumAmount: 10,
+                },
               ],
             },
+          });
+
+          everyDotOrgDonateButton.createWidget({
+            // Selector to attach the widget to be opened on click
+            selector: "#lilbub-donate-button",
+            // Widget configuration
+            options: {
+              nonprofitSlug: "lilbubsbigfund",
+              primaryColor: "#D55684",
+              showInitialMessage: false,
+              defaultFrequency: "once",
+              countries: [
+                {
+                  id: "lilbubsbigfund",
+                  name: "United States",
+                  nameAndRegistration:
+                    "Lil BUB's Big Fund",
+                  countryCode: "US",
+                  paymentMethods: [],
+                },
+              ],
+              currencies: [
+                {
+                  countryCodes: ["US", "GLOBAL"],
+                  name: "USD",
+                  symbol: "$",
+                  minimumAmount: 10,
+                },
+              ],
+            }
           });
       </script>
     </div>
