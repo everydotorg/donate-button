@@ -1,0 +1,27 @@
+diff --git a/node_modules/cxs/dist/index.js b/node_modules/cxs/dist/index.js
+index 2fc345c..45d39ef 100644
+--- a/node_modules/cxs/dist/index.js
++++ b/node_modules/cxs/dist/index.js
+@@ -64,9 +64,21 @@ module.exports.prefix = function (val) {
+   return prefix = val;
+ };
+ 
++
+ if (typeof document !== 'undefined') {
+-  var sheet = document.head.appendChild(document.createElement('style')).sheet;
++  const styles = document.createElement('style')
++  styles.id = 'edo-styles'
++  var sheet = document.head.appendChild(styles).sheet;
++
+   insert = function insert(rule) {
++    const shadowRoot = document.querySelector('#shadow-wrapper')
++
++    if(shadowRoot) {
++      const edoShadowStyles = shadowRoot.shadowRoot.querySelector('#edo-shadow-styles')
++      
++      edoShadowStyles.innerHTML += rule
++    }
++
+     rules.push(rule);
+     sheet.insertRule(rule, sheet.cssRules.length);
+   };
