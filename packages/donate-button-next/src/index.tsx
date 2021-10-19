@@ -156,11 +156,28 @@ const setOptions = (newOptions: Partial<WidgetConfig>) => {
 };
 
 const mount = () => {
-	const widgetWrapper = document.createElement('div');
-	document.body.append(widgetWrapper);
+	const shadowWidgetWrapper = document.createElement('div');
+	shadowWidgetWrapper.id = 'shadow-wrapper';
+	document.body.append(shadowWidgetWrapper);
 
 	mountPoint = document.createElement('div');
-	widgetWrapper.append(mountPoint);
+	shadowWidgetWrapper.attachShadow({mode: 'open'}).append(mountPoint);
+
+	const edoStyles: HTMLStyleElement | null = document.querySelector(
+		'#edo-styles'
+	);
+
+	if (edoStyles) {
+		const rules = Object.values(edoStyles.sheet?.cssRules ?? {})
+			.map((rule) => rule.cssText)
+			.join('\n');
+
+		const edoShadowStyles = document.createElement('style');
+		edoShadowStyles.id = 'edo-shadow-styles';
+		edoShadowStyles.innerHTML = rules;
+
+		mountPoint.append(edoShadowStyles);
+	}
 };
 
 const renderWidget = () => {
