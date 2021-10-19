@@ -1,5 +1,4 @@
 import cxs from 'cxs';
-import 'src/components/widget/theme/global.css';
 import {useEffect, useRef, useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
@@ -35,6 +34,21 @@ import constructEveryUrl from 'src/helpers/construct-every-url';
 import {mergeConfig} from 'src/helpers/options-types';
 
 cxs.prefix('edoWidget-');
+
+const resetCss = cxs({
+	boxSizing: 'border-box',
+	'-webkit-font-smoothing': 'antialiased',
+	'-moz-osx-font-smoothing': 'grayscale',
+	'& *': {
+		boxSizing: 'inherit'
+	},
+	'& *:before': {
+		boxSizing: 'inherit'
+	},
+	'& *:after': {
+		boxSizing: 'inherit'
+	}
+});
 
 const wrapperCss = cxs({
 	position: 'fixed',
@@ -320,7 +334,10 @@ const Widget = ({options, hide}: WidgetProps) => {
 					hideWidget: hide
 				}}
 			>
-				<div className={wrapperCss} onClick={hideOnWrapperClick}>
+				<div
+					className={[wrapperCss, resetCss].join(' ')}
+					onClick={hideOnWrapperClick}
+				>
 					<CloseButton
 						positionCss={[closeButtonCss, desktopCloseBtnCss].join(' ')}
 					/>

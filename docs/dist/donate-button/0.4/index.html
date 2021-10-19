@@ -4,7 +4,7 @@
     <meta name="theme-color" content="#000000">
     <meta name="description" content="Example beta donate buttons">
     <title>v3 Donate Button</title>
-  <link href="https://assets.every.org/dist/donate-button/0.4/bundle.cb525.css" rel="stylesheet"><script type="text/javascript" src="https://assets.every.org/dist/donate-button/0.4/index.js"></script><style>html{box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}*{box-sizing:inherit}</style></head>
+  <script type="text/javascript" src="https://assets.every.org/dist/donate-button/0.4/index.js"></script></head>
 
   <body style="height: 200vh">
     <div id="actions">
@@ -60,6 +60,11 @@
       </script>
       <div id="incomemovement-donate-button">
         <a href="https://www.every.org/incomemovement/donate">Donate Income Movement</a>
+      </div>
+      <br>
+      <br>
+      <div id="lilbub-donate-button">
+        <a href="https://www.every.org/lilbub/donate">Donate Lilbub</a>
       </div>
       <br>
       <br>
@@ -132,7 +137,6 @@
               primaryColor: "#1AAFA7",
               showInitialMessage: false,
               defaultFrequency: "once",
-              showTaxResidency: true,
               countrySelection: undefined,
               noExit: false,
               infoPages: [
@@ -185,6 +189,36 @@
                 },
               ],
             },
+          });
+
+          everyDotOrgDonateButton.createWidget({
+            // Selector to attach the widget to be opened on click
+            selector: "#lilbub-donate-button",
+            // Widget configuration
+            options: {
+              nonprofitSlug: "lilbubsbigfund",
+              primaryColor: "#D55684",
+              showInitialMessage: false,
+              defaultFrequency: "once",
+              countries: [
+                {
+                  id: "lilbubsbigfund",
+                  name: "United States",
+                  nameAndRegistration:
+                    "Lil BUB's Big Fund",
+                  countryCode: "US",
+                  paymentMethods: [],
+                },
+              ],
+              currencies: [
+                {
+                  countryCodes: ["US", "GLOBAL"],
+                  name: "USD",
+                  symbol: "$",
+                  minimumAmount: 10,
+                },
+              ],
+            }
           });
       </script>
     </div>
