@@ -40,7 +40,7 @@ const navItemsContainerCss = (primaryColor: string) =>
 	});
 
 export const InfoPagesNav = ({classes}: InfoPagesNavProps) => {
-	const {infoPages, primaryColor} = useConfigContext();
+	const {infoPages, primaryColor, showFundraiser, nonprofitSlug } = useConfigContext();
 	const {setRoute} = useWidgetContext();
 
 	return (
@@ -58,6 +58,7 @@ export const InfoPagesNav = ({classes}: InfoPagesNavProps) => {
 						{page.name}
 					</span>
 				))}
+				{showFundraiser && <span key="fundraiser"><a href={`https://www.every.org/${nonprofitSlug}/fundraiser`}>Fundraise</a></span>}
 			</div>
 		</div>
 	);

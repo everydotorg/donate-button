@@ -23,6 +23,7 @@ export type WidgetConfig = {
 	defaultFrequency: DonationFrequency;
 	showInitialMessage?: boolean;
 	showInputButtons?: boolean;
+	showFundraiser?: boolean;
 	showAlternatePayments?: boolean;
 	countries: DonationRecipient[];
 	infoPages: InfoPage[];
