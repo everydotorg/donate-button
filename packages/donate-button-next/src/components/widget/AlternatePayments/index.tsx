@@ -23,7 +23,7 @@ const containerCss = cxs({
 	}
 });
 
-export const linksContainerCss = (primaryColor: string) =>
+const linksContainerCss = (primaryColor: string) =>
 	cxs({
 		display: 'flex',
 		alignItems: 'center',

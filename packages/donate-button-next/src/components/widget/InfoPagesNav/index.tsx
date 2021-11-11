@@ -1,5 +1,4 @@
 import cxs from 'cxs';
-import {linksContainerCss} from 'src/components/widget/AlternatePayments';
 import {Divider} from 'src/components/widget/Divider';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
@@ -62,12 +61,7 @@ export const InfoPagesNav = ({classes}: InfoPagesNavProps) => {
 		<div className={[...classes, containerCss].join(' ')}>
 			<Divider classes={[dividerCss]} />
 
-			<div
-				className={[
-					navItemsContainerCss(primaryColor),
-					linksContainerCss(primaryColor)
-				].join(' ')}
-			>
+			<div className={navItemsContainerCss(primaryColor)}>
 				{infoPages?.map((page) => (
 					<span
 						key={page.key}
