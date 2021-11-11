@@ -1,4 +1,5 @@
 import cxs from 'cxs';
+import {linksContainerCss} from 'src/components/widget/AlternatePayments';
 import {Divider} from 'src/components/widget/Divider';
 import {useConfigContext} from 'src/components/widget/hooks/use-config-context';
 import {useWidgetContext} from 'src/components/widget/hooks/use-widget-context';
@@ -36,18 +37,37 @@ const navItemsContainerCss = (primaryColor: string) =>
 		},
 		'& > :not(:last-child)': {
 			margin: Spacing.Inline_XL
+		},
+		a: {
+			color: primaryColor,
+			cursor: 'pointer',
+			textDecoration: 'none'
 		}
 	});
 
 export const InfoPagesNav = ({classes}: InfoPagesNavProps) => {
-	const {infoPages, primaryColor, showFundraiser, nonprofitSlug } = useConfigContext();
+	const {
+		infoPages,
+		primaryColor,
+		showFundraiser,
+		nonprofitSlug
+	} = useConfigContext();
 	const {setRoute} = useWidgetContext();
+
+	if (infoPages?.length === 0 && !showFundraiser) {
+		return null;
+	}
 
 	return (
 		<div className={[...classes, containerCss].join(' ')}>
 			<Divider classes={[dividerCss]} />
 
-			<div className={navItemsContainerCss(primaryColor)}>
+			<div
+				className={[
+					navItemsContainerCss(primaryColor),
+					linksContainerCss(primaryColor)
+				].join(' ')}
+			>
 				{infoPages?.map((page) => (
 					<span
 						key={page.key}
@@ -58,7 +78,13 @@ export const InfoPagesNav = ({classes}: InfoPagesNavProps) => {
 						{page.name}
 					</span>
 				))}
-				{showFundraiser && <span key="fundraiser"><a href={`https://www.every.org/${nonprofitSlug}/fundraiser`}>Fundraise</a></span>}
+				{showFundraiser && (
+					<span key="fundraiser">
+						<a href={`https://www.every.org/${nonprofitSlug}/fundraiser`}>
+							Fundraise
+						</a>
+					</span>
+				)}
 			</div>
 		</div>
 	);

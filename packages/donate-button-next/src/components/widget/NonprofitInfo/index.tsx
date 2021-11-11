@@ -141,7 +141,7 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 			>
 				<span>{description}</span>
 
-				{infoPages?.length > 0 && <InfoPagesNav classes={[pagesNavCss]} />}
+				<InfoPagesNav classes={[pagesNavCss]} />
 			</div>
 		</div>
 	);
