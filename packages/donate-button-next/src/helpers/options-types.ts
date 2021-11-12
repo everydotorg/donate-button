@@ -60,6 +60,7 @@ const defaults: Partial<WidgetConfig> = {
 		}
 	],
 	defaultFrequency: DonationFrequency.OneTime,
+	showFundraiser: true,
 	showInitialMessage: false,
 	showInputButtons: true,
 	showAlternatePayments: true,

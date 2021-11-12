@@ -390,7 +390,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 
 								<NonprofitInfo classes={[nonProfitInfoCss(config)]} />
 
-								{config?.infoPages?.length > 0 && (
+								{(config?.infoPages?.length || config?.showFundraiser) && (
 									<InfoPagesNav classes={[navbarCss]} />
 								)}
 

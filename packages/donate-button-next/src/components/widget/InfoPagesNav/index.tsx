@@ -36,11 +36,21 @@ const navItemsContainerCss = (primaryColor: string) =>
 		},
 		'& > :not(:last-child)': {
 			margin: Spacing.Inline_XL
+		},
+		'& > a': {
+			color: primaryColor,
+			cursor: 'pointer',
+			textDecoration: 'none'
 		}
 	});
 
 export const InfoPagesNav = ({classes}: InfoPagesNavProps) => {
-	const {infoPages, primaryColor} = useConfigContext();
+	const {
+		infoPages,
+		primaryColor,
+		showFundraiser,
+		nonprofitSlug
+	} = useConfigContext();
 	const {setRoute} = useWidgetContext();
 
 	return (
@@ -58,6 +68,11 @@ export const InfoPagesNav = ({classes}: InfoPagesNavProps) => {
 						{page.name}
 					</span>
 				))}
+				{showFundraiser && (
+					<a href={`https://www.every.org/${nonprofitSlug}/fundraiser`}>
+						Fundraise
+					</a>
+				)}
 			</div>
 		</div>
 	);
