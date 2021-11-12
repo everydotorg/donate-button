@@ -94,6 +94,7 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 		description,
 		primaryColor,
 		infoPages,
+		showFundraiser,
 		showInputButtons
 	} = useConfigContext();
 
@@ -141,7 +142,9 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 			>
 				<span>{description}</span>
 
-				<InfoPagesNav classes={[pagesNavCss]} />
+				{(infoPages?.length || showFundraiser) && (
+					<InfoPagesNav classes={[pagesNavCss]} />
+				)}
 			</div>
 		</div>
 	);
