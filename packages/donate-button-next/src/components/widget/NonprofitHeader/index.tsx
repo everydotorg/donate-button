@@ -43,10 +43,12 @@ type NonprofitHeader = {
 export const NonprofitHeader = ({classes}: NonprofitHeader) => {
 	const {logo, backgroundImage} = useConfigContext();
 
+	if (!logo || !backgroundImage) return null;
+
 	return (
 		<div className={[containerCss(backgroundImage)].concat(classes).join(' ')}>
 			<div className={logoContainerCss}>
-				{logo && <div alt="nonprofit logo" className={logoImageCss(logo)} />}
+				<div alt="nonprofit logo" className={logoImageCss(logo)} />
 			</div>
 		</div>
 	);
