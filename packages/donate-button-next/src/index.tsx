@@ -8,6 +8,8 @@ import {
 import {loadFonts} from 'src/load-fonts';
 import {WidgetLoader} from 'src/loaders/widget-loader';
 
+const HASH_OPEN_WIDGET = '#donate-widget';
+
 interface CreateButtonInSelectorProps extends EmbedButtonOptions {
 	/**
 	 * Element to render button in; takes precedence over selector
@@ -180,9 +182,18 @@ const mount = () => {
 	}
 };
 
+let initiallyOpened = false;
 const renderWidget = () => {
 	if (!mountPoint) {
 		mount();
+	}
+
+	const hash = window.location?.hash;
+	const shouldShowWidget = !initiallyOpened && hash === HASH_OPEN_WIDGET;
+
+	if (shouldShowWidget) {
+		Object.assign(options, {show: true});
+		initiallyOpened = true;
 	}
 
 	const finalOptions: Partial<WidgetConfig> = {
