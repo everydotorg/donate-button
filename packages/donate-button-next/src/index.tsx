@@ -8,7 +8,7 @@ import {
 import {loadFonts} from 'src/load-fonts';
 import {WidgetLoader} from 'src/loaders/widget-loader';
 
-const DEFAULT_HASH_OPEN_WIDGET = '#donate-widget';
+const DEFAULT_HASH_OPEN_WIDGET = 'donate-widget';
 interface CreateButtonInSelectorProps extends EmbedButtonOptions {
 	/**
 	 * Element to render button in; takes precedence over selector
