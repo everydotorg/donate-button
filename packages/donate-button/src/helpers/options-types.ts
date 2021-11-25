@@ -81,6 +81,7 @@ export enum DefaultFrequency {
 	ONE_TIME = 'one-time'
 }
 export interface DonateButtonOptions {
+	readonly openAt?: string;
 	readonly monthly: MonthlyOptions;
 	readonly oneTime: OneTimeOptions;
 	readonly onSubmit: OnSubmit;

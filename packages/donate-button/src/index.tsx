@@ -6,11 +6,14 @@ import {
 	GenericButtonProps
 } from 'src/helpers/options-types';
 import {loadFonts} from 'src/load-fonts';
+const DEFAULT_HASH_OPEN_WIDGET = 'donate-widget';
 
 const defaultOptions = {
 	currency: 'USD'
 };
-const baseOptions = {};
+const baseOptions = {
+	openAt: DEFAULT_HASH_OPEN_WIDGET
+};
 let instanceOptions = {};
 
 let mountPoint: HTMLElement;
@@ -60,6 +63,7 @@ const mount = () => {
 	shadowRoot.attachShadow({mode: 'open'}).append(mountPoint);
 };
 
+let initiallyOpened = false;
 const render = () => {
 	if (!mountPoint) {
 		mount();
@@ -70,6 +74,16 @@ const render = () => {
 		...baseOptions,
 		...instanceOptions
 	};
+
+	const hash = window.location?.hash;
+	const shouldShowWidget =
+		!initiallyOpened && hash === `#${options?.openAt ?? ''}`;
+
+	if (shouldShowWidget) {
+		Object.assign(baseOptions, {show: true});
+		initiallyOpened = true;
+	}
+
 	prRender(<EveryMonthLoader options={options} hide={hide} />, mountPoint);
 };
 
@@ -81,6 +95,10 @@ const setToggleButton = (
 	if (!button) {
 		return;
 	}
+
+	Object.assign(baseOptions, {
+		openAt: options?.openAt ?? DEFAULT_HASH_OPEN_WIDGET
+	});
 
 	button.addEventListener('click', () => {
 		instanceOptions = {...options};
