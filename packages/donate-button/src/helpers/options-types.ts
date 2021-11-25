@@ -89,7 +89,7 @@ export interface DonateButtonOptions {
 	readonly currency: string;
 	readonly mode: LayoutMode;
 	readonly completeDonationInNewTab: boolean;
-	readonly show: boolean;
+	show: boolean;
 	readonly i18n: Partial<Record<string, I18NOptions>>;
 	language: string;
 }
