@@ -137,8 +137,8 @@ const options = {
 	show: false,
 	openAt: DEFAULT_HASH_OPEN_WIDGET
 };
-const baseOptions = {};
-let instanceOptions = {};
+const baseOptions: Partial<WidgetConfig> = {};
+let instanceOptions: Partial<WidgetConfig> = {};
 const showWidget = () => {
 	Object.assign(options, {show: true});
 
@@ -188,20 +188,24 @@ const renderWidget = () => {
 		mount();
 	}
 
-	const finalOptions: Partial<WidgetConfig> = {
-		...options,
-		...baseOptions,
-		...instanceOptions
-	};
-
 	const hash = window.location?.hash;
 	const shouldShowWidget =
-		!initiallyOpened && hash === `#${finalOptions?.openAt ?? ''}`;
+		!initiallyOpened &&
+		hash ===
+			`#${
+				instanceOptions?.openAt ?? baseOptions?.openAt ?? options?.openAt ?? ''
+			}`;
 
 	if (shouldShowWidget) {
 		Object.assign(options, {show: true});
 		initiallyOpened = true;
 	}
+
+	const finalOptions: Partial<WidgetConfig> = {
+		...options,
+		...baseOptions,
+		...instanceOptions
+	};
 
 	render(<WidgetLoader options={finalOptions} hide={hideWidget} />, mountPoint);
 };
