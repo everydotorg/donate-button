@@ -232,6 +232,7 @@ const createWidgetInSelector = ({element, selector, options = {}}: any) => {
 		node.addEventListener('click', updateOptionsAndShowCb(options));
 	}
 
+	Object.assign(baseOptions, options);
 	renderWidget();
 };
 
