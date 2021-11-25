@@ -14,7 +14,7 @@ const defaultOptions = {
 const baseOptions = {
 	openAt: DEFAULT_HASH_OPEN_WIDGET
 };
-let instanceOptions = {};
+let instanceOptions: Partial<DonateButtonOptions> = {};
 
 let mountPoint: HTMLElement;
 
@@ -69,20 +69,21 @@ const render = () => {
 		mount();
 	}
 
-	const options = {
-		...defaultOptions,
-		...baseOptions,
-		...instanceOptions
-	};
-
 	const hash = window.location?.hash;
 	const shouldShowWidget =
-		!initiallyOpened && hash === `#${options?.openAt ?? ''}`;
+		!initiallyOpened &&
+		hash === `#${baseOptions?.openAt ?? instanceOptions?.openAt ?? ''}`;
 
 	if (shouldShowWidget) {
 		Object.assign(baseOptions, {show: true});
 		initiallyOpened = true;
 	}
+
+	const options = {
+		...defaultOptions,
+		...baseOptions,
+		...instanceOptions
+	};
 
 	prRender(<EveryMonthLoader options={options} hide={hide} />, mountPoint);
 };
