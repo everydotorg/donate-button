@@ -69,7 +69,7 @@ const render = () => {
 		mount();
 	}
 
-	const options = {
+	const options: Partial<DonateButtonOptions> = {
 		...defaultOptions,
 		...baseOptions,
 		...instanceOptions
@@ -81,6 +81,7 @@ const render = () => {
 
 	if (shouldShowWidget) {
 		Object.assign(baseOptions, {show: true});
+		options.show = true;
 		initiallyOpened = true;
 	}
 
