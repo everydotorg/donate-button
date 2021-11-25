@@ -360,6 +360,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 									</FormControl>
 
 									<Input
+										autoFocus
 										selectedCurrency={currency}
 										setCurrency={setCurrency}
 										value={donationAmount}

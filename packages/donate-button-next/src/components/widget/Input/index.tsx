@@ -1,5 +1,5 @@
 import cxs from 'cxs';
-import {StateUpdater, useRef} from 'preact/hooks';
+import {StateUpdater, useEffect, useRef} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {JSXInternal} from 'preact/src/jsx';
 import {FormControl} from 'src/components/widget/FormControl';
@@ -13,6 +13,7 @@ import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 import {CurrencyOption} from 'src/components/widget/types/currency-option';
 import {DonationRecipient} from 'src/components/widget/types/donation-recipient';
+import {isTouchDevice} from 'src/helpers/is-touch-device';
 
 const preventDecimal = (
 	event: JSXInternal.TargetedEvent<HTMLInputElement, KeyboardEvent>
@@ -165,8 +166,10 @@ export const Input = ({
 	selectedCurrency,
 	setCurrency,
 	setCountry,
+	autoFocus,
 	...otherProps
 }: InputProps) => {
+	const inputRef = useRef<HTMLInputElement>(null);
 	const {
 		primaryColor,
 		currencies,
@@ -174,6 +177,18 @@ export const Input = ({
 		showInputButtons
 	} = useConfigContext();
 	const i18n = useI18n();
+
+	const autoFocusInput = () => {
+		if (inputRef.current) {
+			inputRef.current.focus();
+		}
+	};
+
+	useEffect(() => {
+		if (autoFocus && !isTouchDevice()) {
+			autoFocusInput();
+		}
+	}, [autoFocus]);
 
 	const inputContainerClasses = [inputContainerCss(primaryColor)]
 		.concat(error ? [inputContainerErrorCss] : [])
@@ -206,6 +221,7 @@ export const Input = ({
 				</div>
 
 				<input
+					ref={inputRef}
 					id="donation-input"
 					className={inputCss}
 					placeholder={i18n.enterAnAmount}
