@@ -8,6 +8,7 @@ import {
 import {loadFonts} from 'src/load-fonts';
 import {WidgetLoader} from 'src/loaders/widget-loader';
 
+const DEFAULT_HASH_OPEN_WIDGET = 'donate-widget';
 interface CreateButtonInSelectorProps extends EmbedButtonOptions {
 	/**
 	 * Element to render button in; takes precedence over selector
@@ -133,7 +134,8 @@ function initButtons(instanceOptions: Partial<EmbedButtonOptions> = {}) {
 
 let mountPoint: HTMLElement;
 const options = {
-	show: false
+	show: false,
+	openAt: DEFAULT_HASH_OPEN_WIDGET
 };
 const baseOptions = {};
 let instanceOptions = {};
@@ -180,6 +182,7 @@ const mount = () => {
 	}
 };
 
+let initiallyOpened = false;
 const renderWidget = () => {
 	if (!mountPoint) {
 		mount();
@@ -191,11 +194,23 @@ const renderWidget = () => {
 		...instanceOptions
 	};
 
+	const hash = window.location?.hash;
+	const shouldShowWidget =
+		!initiallyOpened && hash === `#${finalOptions?.openAt ?? ''}`;
+
+	if (shouldShowWidget) {
+		Object.assign(options, {show: true});
+		initiallyOpened = true;
+	}
+
 	render(<WidgetLoader options={finalOptions} hide={hideWidget} />, mountPoint);
 };
 
-function updateOptionsAndShowCb(options: WidgetConfig) {
-	const optionsCopy = {...options};
+function updateOptionsAndShowCb(newOptions: WidgetConfig) {
+	const optionsCopy = {...newOptions};
+	Object.assign(options, {
+		openAt: optionsCopy.openAt ?? DEFAULT_HASH_OPEN_WIDGET
+	});
 	return (event: any) => {
 		event.preventDefault();
 		instanceOptions = optionsCopy;
