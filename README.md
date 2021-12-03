@@ -2,32 +2,68 @@
 
 For nonprofits — the simplest way to give your supporters a beautiful donation experience. This button opens a donation flow through [Every.org](https://www.every.org/nonprofits).
 
-See a demo at https://embeds.every.org
-
-And see this in production helping raise funds at https://ffungi.org/eng/
+See some demoes at https://embeds.every.org/0.3. And see this in production helping raise funds at https://www.goodjobbub.org/
 
 ## Use
 
-Add this code at the bottom of your page, just before the `</body>`
+Here is an example html file with a donate button for https://www.every.org/lilbubsbigfund. You can copy
+paste this code and and then replace lilbubsbigfund with the correct handle.
 
-```js
-<script async defer id="edoDonateButton" src="https://assets.every.org/dist/donate-button/0.2/bundle.js"/>
-
-<script>
-  window.getElementById("edoDonateButton").addEventListener("load", function() {
-    // The above incantation ensures the script was fully loaded before trying
-    // to use the donate-button.
-
-    // Set global configuration for the donate button
-    everyMonthWidget.setOptions({
-      ... // See below for configuration options
-    })
-    everyMonthWidget.showOnClick('#yourSelector')
-
-    // You can set many selectors and override options for a specific one
-    everyMonthWidget.showOnClick('#anotherCoolSelector', { currency: 'ARS' })
-  })
-</script>
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="edo-donate-btn">
+      <a href="https://www.every.org/lilbubsbigfund/donate">Donate</a>
+    </div>
+    <script
+      async
+      defer
+      src="https://assets.every.org/dist/donate-button/0.3/index.js"
+      class="edo-donate-btn-js"
+    ></script>
+    <script>
+      function createWidget() {
+        const COLOR = "#00a380";
+        everyDotOrgDonateButton.createButton({
+          selector: "#edo-donate-btn",
+          bgColor: COLOR,
+        });
+        everyDotOrgDonateButton.createWidget({
+          selector: "#edo-donate-btn",
+          options: {
+            nonprofitSlug: "lilbubsbigfund",
+            primaryColor: COLOR,
+            showInitialMessage: false,
+            defaultFrequency: "once",
+            infoPages: [
+              {
+                key: "faq",
+                name: "FAQ",
+                source: `## How does this donate button work?
+        This button is powered by Every.org, a tax-exempt US 501(c)(3) nonprofit building accessible giving infrastructure to help every person and organization do more good.
+              `,
+              },
+            ],
+            currencies: [
+              {
+                countryCodes: ["US"],
+                name: "USD",
+                symbol: "$",
+                minimumAmount: 10,
+              },
+            ],
+          },
+        });
+      }
+      if (window.everyDotOrgDonateButton) {
+        createWidget();
+      } else {
+        document.querySelector(".edo-donate-btn-js").onload = createWidget;
+      }
+    </script>
+  </body>
+</html>
 ```
 
 ## Configure
