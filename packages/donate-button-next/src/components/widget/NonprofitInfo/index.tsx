@@ -125,7 +125,9 @@ export const NonprofitInfo = ({classes}: NonprofitInfo) => {
 			>
 				<div>
 					<h1 className={nonprofitNameCss}>{name}</h1>
-					<h2 className={locationAddressCss}>{locationAddress}&nbsp;</h2>
+					{locationAddress && (
+						<h2 className={locationAddressCss}>{locationAddress}&nbsp;</h2>
+					)}
 				</div>
 
 				<ChevronDown
