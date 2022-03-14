@@ -14,7 +14,7 @@ import {NonprofitHeader} from 'src/components/widget/NonprofitHeader';
 import {NonprofitInfo} from 'src/components/widget/NonprofitInfo';
 import {SubmitButton} from 'src/components/widget/SubmitButton';
 import {TaxResidency} from 'src/components/widget/TaxResidency';
-import {getNonprofitInfo} from 'src/components/widget/api/get-nonprofit-info';
+import {getEdoInfo} from 'src/components/widget/api/get-nonprofit-info';
 import {ConfigContext} from 'src/components/widget/context/config-context';
 import {WidgetContext} from 'src/components/widget/context/widget-context';
 import {getTranslations} from 'src/components/widget/hooks/use-i18n';
@@ -240,8 +240,9 @@ const Widget = ({options, hide}: WidgetProps) => {
 
 	useEffect(() => {
 		const fetchInfo = async () => {
-			const info = await getNonprofitInfo(
-				options.nonprofitSlug ?? 'everydotorg'
+			const info = await getEdoInfo(
+				options.nonprofitSlug ?? 'everydotorg',
+				options.fundraiserSlug
 			);
 
 			setConfig(
