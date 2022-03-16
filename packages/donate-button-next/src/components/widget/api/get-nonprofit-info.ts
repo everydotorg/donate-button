@@ -94,7 +94,6 @@ export async function getEdoInfo(
 	nonprofitSlug: string,
 	fundraiserSlug?: string
 ) {
-	if (fundraiserSlug) return getfundraiserInfo(nonprofitSlug, fundraiserSlug);
-
+	if (fundraiserSlug) return getFundraiserInfo(nonprofitSlug, fundraiserSlug);
 	return getNonprofitInfo(nonprofitSlug);
 }
