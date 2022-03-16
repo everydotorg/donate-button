@@ -9,7 +9,7 @@ export type WidgetConfig = {
 	show: boolean;
 	nonprofitSlug: string;
 	fundraiserSlug?: string;
-	fundraiserId?: string
+	fundraiserId?: string;
 	name: string;
 	locationAddress: string | null;
 	description: string;
