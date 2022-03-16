@@ -304,15 +304,22 @@ const Widget = ({options, hide}: WidgetProps) => {
 			return;
 		}
 
-		const url = constructEveryUrl({
+		let options = {
 			amount: donationAmount,
 			crypto: false,
 			frequency,
-			nonprofitSlug: country.id,
+			nonprofitSlug: country.id, // country.id has the nonprofit slug
 			noExit: mergedConfig.noExit
-		});
+		};
 
-		window.open(url, '_self');
+		if (config.fundraiserSlug && config.fundraiserId) {
+			Object.assign(options, {
+				fundraiserSlug: config.fundraiserSlug,
+				fundraiserId: config.fundraiserId
+			});
+		}
+
+		window.open(constructEveryUrl(options), '_self');
 	};
 
 	return config.show ? (
