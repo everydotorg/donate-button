@@ -78,7 +78,7 @@ const getNonprofitInfo = async (nonprofitSlug: string) => {
 	return mapNonprofitInfo(data.data.nonprofit);
 };
 
-async function getfundraiserInfo(
+async function getFundraiserInfo(
 	nonprofitSlug: string,
 	fundraiserSlug: string
 ) {
