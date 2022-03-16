@@ -61,6 +61,12 @@
       <div id="incomemovement-donate-button">
         <a href="https://www.every.org/incomemovement/donate">Donate Income Movement</a>
       </div>
+      
+      <br>
+      <br>
+      <div id="wphfund-donate-button">
+        <a href="https://www.every.org/wphfund/f/wphf-urgent-need-for">Donate Wphfund</a>
+      </div>
       <br>
       <br>
       <div id="lilbub-donate-button">
@@ -81,10 +87,13 @@
       <div class="edo-donate-btn">
         <a href="https://www.every.org/livebetter-corp/donate/crypto">Donate Crypto</a>
       </div>
+
+      </div>
       <script>
         everyDotOrgDonateButton.createButton({
           selector: "#livebetter-styled",
           nonprofitSlug: "livebetter-corp",
+          fundraiserSlug: undefined,
           primaryColor: "#48739c",
           showInitialMessage: false,
           defaultFrequency: "once",
@@ -134,6 +143,7 @@
             selector: "#incomemovement-donate-button",
             options: {
               nonprofitSlug: "incomemovement",
+              fundraiserSlug: undefined,
               primaryColor: "#1AAFA7",
               defaultFrequency: "once",
               noExit: false,
@@ -166,6 +176,7 @@
             // Widget configuration
             options: {
               nonprofitSlug: "lilbubsbigfund",
+              fundraiserSlug: undefined,
               primaryColor: "#D55684",
               showInitialMessage: false,
               defaultFrequency: "once",
@@ -189,8 +200,16 @@
               ],
             }
           });
+
+          everyDotOrgDonateButton.createWidget({
+            selector: "#wphfund-donate-button",
+            options: {
+              nonprofitSlug: "wphfund",
+              fundraiserSlug: 'wphf-urgent-need-for',
+            }
+          });
       </script>
-    </div>
+    
 
     <!-- EVERY MONTH -->
 
