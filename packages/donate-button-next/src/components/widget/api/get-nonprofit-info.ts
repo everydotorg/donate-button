@@ -71,7 +71,7 @@ const mapFundraiserInfo = (data: FundraiserResponse['data']): NonprofitInfo => {
 };
 
 const getNonprofitInfo = async (nonprofitSlug: string) => {
-	const data: EveryResponse = await fetch(
+	const data: NonprofitResponse = await fetch(
 		`${BASE_EVERY_URL}/${nonprofitSlug}`
 	).then((response) => response.json());
 
