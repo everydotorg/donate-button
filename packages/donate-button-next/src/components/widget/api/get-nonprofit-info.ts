@@ -27,7 +27,7 @@ type EveryNonprofit = {
 	locationAddress: string | null;
 };
 
-type EveryResponse = {
+type NonprofitResponse = {
 	message: string;
 	data: {
 		nonprofit: EveryNonprofit;
