@@ -304,7 +304,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 			return;
 		}
 
-		let options = {
+		const options = {
 			amount: donationAmount,
 			crypto: false,
 			frequency,
