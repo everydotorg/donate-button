@@ -7,4 +7,5 @@ export interface NonprofitInfo {
 	backgroundImage: string;
 	description: string;
 	countries: DonationRecipient[];
+	fundraiserId?: string;
 }

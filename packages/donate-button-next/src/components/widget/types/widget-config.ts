@@ -8,6 +8,8 @@ export type WidgetConfig = {
 	openAt: string;
 	show: boolean;
 	nonprofitSlug: string;
+	fundraiserSlug?: string;
+	fundraiserId?: string;
 	name: string;
 	locationAddress: string | null;
 	description: string;
