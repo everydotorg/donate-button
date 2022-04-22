@@ -21,29 +21,19 @@ function serializeParams(params: Object) {
 
 function constructEveryUrl({
 	nonprofitSlug,
-	fundraiserId,
 	fundraiserSlug,
 	crypto,
 	frequency,
 	noExit,
 	amount
 }: Params) {
-	if (fundraiserId && fundraiserSlug) {
-		const baseUrl = `https://www.every.org/${nonprofitSlug}/f/${fundraiserSlug}`;
+	const hash = crypto ? 'donate-crypto' : 'donate';
 
-		const params = serializeParams({
-			frequency,
-			amount,
-			donateTo: nonprofitSlug,
-			fundraiser_id: fundraiserId
-		});
+	let baseUrl = 'https://www.every.org/' + nonprofitSlug;
 
-		return baseUrl + '?' + params;
+	if (fundraiserSlug) {
+		baseUrl += '/f/' + fundraiserSlug;
 	}
-
-	const baseUrl = `https://www.every.org/${nonprofitSlug}/donate${
-		crypto ? '/crypto' : ''
-	}`;
 
 	const parameters = serializeParams({
 		frequency,
@@ -54,7 +44,7 @@ function constructEveryUrl({
 		no_exit: noExit ?? 1
 	});
 
-	return `${baseUrl}?${parameters}`;
+	return `${baseUrl}?${parameters}#${hash}`;
 }
 
 export default constructEveryUrl;
