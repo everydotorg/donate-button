@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 14.18.2
       - run: yarn
-      - run: yarn build
+      - run: yarn build:donateButtonNext
   test:
     runs-on: ubuntu-latest
     steps:
@@ -46,7 +46,7 @@ jobs:
         with:
           node-version: 14.18.2
       - run: yarn
-      - run: yarn build
+      - run: yarn build:donateButtonNext
       - name: Get changes
         id: get-changes
         run: |
