@@ -37,7 +37,7 @@ type NonprofitResponse = {
 type FundraiserResponse = {
 	data: {
 		fundraiser: EveryFundraiser;
-		nonprofits: Array<EveryNonprofit>;
+		nonprofits: EveryNonprofit[];
 	};
 };
 
@@ -73,7 +73,7 @@ const mapFundraiserInfo = (data: FundraiserResponse['data']): NonprofitInfo => {
 const getNonprofitInfo = async (nonprofitSlug: string) => {
 	const data: NonprofitResponse = await fetch(
 		`${BASE_EVERY_URL}/${nonprofitSlug}`
-	).then((response) => response.json());
+	).then(async (response) => response.json());
 
 	return mapNonprofitInfo(data.data.nonprofit);
 };
@@ -83,7 +83,7 @@ async function getFundraiserInfo(
 	fundraiserSlug: string
 ) {
 	const url = `${BASE_EVERY_URL}/${nonprofitSlug}/fundraiser/${fundraiserSlug}`;
-	const data: FundraiserResponse = await fetch(url).then((response) =>
+	const data: FundraiserResponse = await fetch(url).then(async (response) =>
 		response.json()
 	);
 
