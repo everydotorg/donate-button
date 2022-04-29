@@ -8,7 +8,7 @@
 	"source": "components/hello-world/index.js",
 	"scripts": {
 		"tsc": "tsc",
-		"test": "ava",
+		"test": "echo 'no tests'",
 		"build": "preact build --no-prerender --clean  --no-sw",
 		"postbuild": "cp dist/donate-button/0.3/index.js dist/donate-button/0.3/donate-button.js",
 		"serve": "preact serve",
