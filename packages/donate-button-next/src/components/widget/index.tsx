@@ -327,7 +327,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 			<WidgetContext.Provider
 				value={{
 					showFrequencyPopover,
-					dismissPopover: () => {
+					dismissPopover() {
 						setShowFrequencyPopover(false);
 					},
 					setRoute,
