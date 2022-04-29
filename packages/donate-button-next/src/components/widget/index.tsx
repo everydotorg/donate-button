@@ -277,7 +277,7 @@ const Widget = ({options, hide}: WidgetProps) => {
 	 * otherwise the height will adjust to the content of the new route.
 	 */
 	const setRoute = (route: Routes) => {
-		if (route !== Routes.DonationForm && !widgetHeight) {
+		if (route !== Routes.DonationForm && !widgetHeight && widgetRef.current) {
 			setWidgetHeight(widgetRef.current.clientHeight);
 		}
 
