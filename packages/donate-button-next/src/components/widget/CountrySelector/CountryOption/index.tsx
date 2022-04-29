@@ -58,7 +58,7 @@ const paymentMethodCss = cxs({
 });
 
 type CountryOptionProps = {
-	selected: boolean;
+	isSelected: boolean;
 	country: DonationRecipient;
 	selectCountry: (country: DonationRecipient) => void;
 };
@@ -66,7 +66,7 @@ type CountryOptionProps = {
 export const CountryOption = ({
 	country,
 	selectCountry,
-	selected
+	isSelected
 }: CountryOptionProps) => {
 	const {name, primaryColor} = useConfigContext();
 	const {nameAndRegistration} = country;
@@ -74,7 +74,7 @@ export const CountryOption = ({
 
 	return (
 		<div
-			className={containerCss(selected, primaryColor)}
+			className={containerCss(isSelected, primaryColor)}
 			onClick={() => {
 				selectCountry(country);
 			}}

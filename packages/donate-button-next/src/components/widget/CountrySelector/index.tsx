@@ -54,7 +54,7 @@ export const CountrySelector = () => {
 					{countries.map((country) => (
 						<CountryOption
 							key={`${country.id}-${country.name}`}
-							selected={selectedCountry === country}
+							isSelected={selectedCountry === country}
 							country={country}
 							selectCountry={selectCountry}
 						/>

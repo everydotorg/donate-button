@@ -45,12 +45,8 @@ const navItemsContainerCss = (primaryColor: string) =>
 	});
 
 export const InfoPagesNav = ({classes}: InfoPagesNavProps) => {
-	const {
-		infoPages,
-		primaryColor,
-		showFundraiser,
-		nonprofitSlug
-	} = useConfigContext();
+	const {infoPages, primaryColor, showFundraiser, nonprofitSlug} =
+		useConfigContext();
 	const {setRoute} = useWidgetContext();
 
 	return (
