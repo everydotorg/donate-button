@@ -3,8 +3,8 @@
     "build:donateButton": "yarn workspace @everydotorg/donate-button build && cp -r packages/donate-button/dist ./docs",
     "build:donateButtonNext": "yarn workspace @everydotorg/donate-button-next build && cp -r packages/donate-button-next/dist ./docs",
     "build": "concurrently --names 'btn,btn-next' 'yarn build:donateButton' 'yarn build:donateButtonNext'",
-    "lint": "yarn workspaces @everydotorg/donate-button-next run lint",
-    "lint:fix": "yarn workspaces @everydotorg/donate-button-next run lint:fix",
+    "lint": "yarn workspaces @everydotorg/donate-button-next lint",
+    "lint:fix": "yarn workspaces @everydotorg/donate-button-next lint:fix",
     "test": "yarn workspaces run test",
     "postinstall": "patch-package"
   },
