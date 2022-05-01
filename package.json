@@ -2,9 +2,9 @@
   "scripts": {
     "build:donateButton": "yarn workspace @everydotorg/donate-button build && cp -r packages/donate-button/dist ./docs",
     "build:donateButtonNext": "yarn workspace @everydotorg/donate-button-next build && cp -r packages/donate-button-next/dist ./docs",
-    "build": "concurrently --names 'btn,btn-next' 'yarn build:donateButton' 'yarn build:donateButtonNext'",
-    "lint": "yarn workspaces run lint",
-    "lint:fix": "yarn workspaces run lint:fix",
+    "build": "yarn workspace @everydotorg/donate-button-next build",
+    "lint": "yarn workspace @everydotorg/donate-button-next lint",
+    "lint:fix": "yarn workspaces @everydotorg/donate-button-next lint:fix",
     "test": "yarn workspaces run test",
     "postinstall": "patch-package"
   },
@@ -13,10 +13,10 @@
     "packages/*"
   ],
   "devDependencies": {
-    "concurrently": "^5.3.0",
+    "concurrently": "^7.1.0",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.2.1",
-    "xo": "^0.37.1"
+    "xo": "^0.48.0"
   }
 }

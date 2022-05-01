@@ -93,7 +93,6 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 					name="frequency"
 					id="monthly"
 					className={inputCss}
-					// @ts-expect-error
 					defaultChecked={frequency === DonationFrequency.Monthly}
 					value={DonationFrequency.Monthly}
 				/>
@@ -114,7 +113,6 @@ export const Frequency = ({frequency, setFrequency}: FrequencyProps) => {
 					type="radio"
 					name="frequency"
 					id="one-time"
-					// @ts-expect-error
 					defaultChecked={frequency === DonationFrequency.OneTime}
 					value={DonationFrequency.OneTime}
 				/>

@@ -170,12 +170,8 @@ export const Input = ({
 	...otherProps
 }: InputProps) => {
 	const inputRef = useRef<HTMLInputElement>(null);
-	const {
-		primaryColor,
-		currencies,
-		countries,
-		showInputButtons
-	} = useConfigContext();
+	const {primaryColor, currencies, countries, showInputButtons} =
+		useConfigContext();
 	const i18n = useI18n();
 
 	const autoFocusInput = () => {
@@ -214,7 +210,7 @@ export const Input = ({
 	};
 
 	return (
-		<FormControl label={error ?? i18n.amount} error={Boolean(error)}>
+		<FormControl label={error ?? i18n.amount} isError={Boolean(error)}>
 			<div className={inputContainerClasses}>
 				<div className={inputPrefixContainerCss}>
 					<span>{selectedCurrency?.symbol}</span>

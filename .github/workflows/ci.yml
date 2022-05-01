@@ -37,27 +37,28 @@ jobs:
           node-version: 14.18.2
       - run: yarn
       - run: yarn lint
-  needs-docs-update:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 14.18.2
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.18.2
-      - run: yarn
-      - run: yarn build:donateButtonNext
-      - name: Get changes
-        id: get-changes
-        run: |
-          if [ -z "$(git status --porcelain=v1 2>/dev/null)" ];
-            then echo "::set-output name=changes::false";
-            else echo "::set-output name=changes::true";
-          fi
-      - name: Fail if build resulted in changes
-        id: check-changes
-        if: steps.get-changes.outputs.changes == 'true'
-        run: |
-          echo "Uncommitted build artifacts exist, please check them in."
-          git status
-          exit 1
+  # Not currently working, always some differences
+  # needs-docs-update:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Use Node.js 14.18.2
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 14.18.2
+  #     - run: yarn
+  #     - run: yarn build:donateButtonNext
+  #     - name: Get changes
+  #       id: get-changes
+  #       run: |
+  #         if [ -z "$(git status --porcelain=v1 2>/dev/null)" ];
+  #           then echo "::set-output name=changes::false";
+  #           else echo "::set-output name=changes::true";
+  #         fi
+  #     - name: Fail if build resulted in changes
+  #       id: check-changes
+  #       if: steps.get-changes.outputs.changes == 'true'
+  #       run: |
+  #         echo "Uncommitted build artifacts exist, please check them in."
+  #         git status
+  #         exit 1

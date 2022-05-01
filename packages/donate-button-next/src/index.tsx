@@ -165,9 +165,8 @@ const mount = () => {
 	mountPoint = document.createElement('div');
 	shadowWidgetWrapper.attachShadow({mode: 'open'}).append(mountPoint);
 
-	const edoStyles: HTMLStyleElement | null = document.querySelector(
-		'#edo-styles'
-	);
+	const edoStyles: HTMLStyleElement | null =
+		document.querySelector('#edo-styles');
 
 	if (edoStyles) {
 		const rules = Object.values(edoStyles.sheet?.cssRules ?? {})
