@@ -319,7 +319,9 @@ const Widget = ({options, hide}: WidgetProps) => {
 			});
 		}
 
-		window.open(constructEveryUrl(options), '_self');
+		const target = config.completeDonationInNewTab ? '_blank' : '_self';
+
+		window.open(constructEveryUrl(options), target);
 	};
 
 	return config.show ? (
