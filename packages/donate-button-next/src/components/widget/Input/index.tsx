@@ -144,10 +144,6 @@ const addAmountButtonCss = (color: string) =>
 		}
 	});
 
-// The minimum donation amount for HKD is 50 - until we support dynamic
-// suggested amounts depending on the currency, start at 50 for all.
-const addAmounts = [50, 100, 200, 500];
-
 interface InputProps extends JSXInternal.HTMLAttributes<HTMLInputElement> {
 	value?: number;
 	setValue: StateUpdater<number | undefined>;
@@ -170,7 +166,7 @@ export const Input = ({
 	...otherProps
 }: InputProps) => {
 	const inputRef = useRef<HTMLInputElement>(null);
-	const {primaryColor, currencies, countries, showInputButtons} =
+	const {primaryColor, currencies, countries, showInputButtons, addAmounts} =
 		useConfigContext();
 	const i18n = useI18n();
 
@@ -260,7 +256,7 @@ export const Input = ({
 
 			{showInputButtons && (
 				<div className={addAmountContainerCss}>
-					{addAmounts.map((amount) => (
+					{(addAmounts ?? [50, 100, 200, 500]).map((amount) => (
 						<button
 							key={amount}
 							className={addAmountButtonCss(primaryColor)}
