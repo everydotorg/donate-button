@@ -21,6 +21,7 @@ export type WidgetConfig = {
 	primaryColor: string;
 	forceLanguage: string | false;
 	defaultDonationAmount?: number;
+	addAmounts?: number[];
 	completeDonationInNewTab?: boolean;
 	noExit?: boolean;
 	currencies: CurrencyOption[];
