@@ -1,8 +1,12 @@
 import {createContext, FunctionalComponent} from 'preact';
-import {StateUpdater, useState} from 'preact/hooks';
+import {StateUpdater, useEffect, useState} from 'preact/hooks';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
+import {
+	checkPaymentRequest,
+	PaymentRequestAvailable
+} from 'src/helpers/checkPaymentRequest';
 
 interface WidgetContextProps {
 	frequency: DonationFrequency;
@@ -13,6 +17,7 @@ interface WidgetContextProps {
 	setSubmitError: StateUpdater<string | null>;
 	selectedPaymentMethod: PaymentMethod;
 	setSelectedPaymentMethod: StateUpdater<PaymentMethod>;
+	paymentRequestAvailable: PaymentRequestAvailable;
 	hideWidget: () => void;
 }
 
@@ -34,6 +39,22 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 	const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(
 		config.methods[0]
 	);
+
+	const [paymentRequestAvailable, setPaymentRequestAvailable] =
+		useState<PaymentRequestAvailable>({
+			googlePay: false,
+			applePay: false
+		});
+
+	useEffect(() => {
+		const check = async () => {
+			const response = await checkPaymentRequest();
+			setPaymentRequestAvailable(response);
+		};
+
+		void check();
+	}, []);
+
 	return (
 		<WidgetContext.Provider
 			value={{
@@ -45,7 +66,8 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 				submitError,
 				setSubmitError,
 				selectedPaymentMethod,
-				setSelectedPaymentMethod
+				setSelectedPaymentMethod,
+				paymentRequestAvailable
 			}}
 		>
 			{children}

@@ -44,8 +44,21 @@ const useOnSelectPaymentMethod = () => {
 	return onSelectPaymentMethod;
 };
 
-export const LargePaymentMethodSelect = () => {
+const usePaymentMethods = () => {
 	const {methods} = useConfigContext();
+	const {paymentRequestAvailable} = useWidgetContext();
+
+	const filteredMethods = methods.filter((method) =>
+		method === PaymentMethod.PAYMENT_REQUEST
+			? paymentRequestAvailable.applePay || paymentRequestAvailable.googlePay
+			: true
+	);
+
+	return filteredMethods;
+};
+
+export const LargePaymentMethodSelect = () => {
+	const methods = usePaymentMethods();
 	const {selectedPaymentMethod} = useWidgetContext();
 	const onSelectPaymentMethod = useOnSelectPaymentMethod();
 
@@ -72,7 +85,8 @@ export const LargePaymentMethodSelect = () => {
 };
 
 export const SmallPaymentMethodSelect = () => {
-	const {methods, primaryColor} = useConfigContext();
+	const methods = usePaymentMethods();
+	const {primaryColor} = useConfigContext();
 	const {selectedPaymentMethod} = useWidgetContext();
 	const onSelectPaymentMethod = useOnSelectPaymentMethod();
 

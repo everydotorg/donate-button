@@ -1,15 +1,40 @@
 import cxs from 'cxs';
+import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
+import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {textSize} from 'src/components/widget/theme/font-sizes';
-import {
-	NameForPaymentMethodMap,
-	PaymentMethod
-} from 'src/components/widget/types/PaymentMethod';
+import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
+import {PaymentRequestAvailable} from 'src/helpers/checkPaymentRequest';
+
+const NameForPaymentMethodMap: {
+	[key in Exclude<PaymentMethod, PaymentMethod.PAYMENT_REQUEST>]: string;
+} = {
+	[PaymentMethod.CREDIT_CARD]: 'Card',
+	[PaymentMethod.BANK]: 'Bank',
+	[PaymentMethod.PAYPAL]: 'PayPal',
+	[PaymentMethod.VENMO]: 'Venmo',
+	[PaymentMethod.CRYPTO]: 'Crypto',
+	[PaymentMethod.STOCKS]: 'Stocks',
+	[PaymentMethod.DAF]: 'DAF'
+};
+
+function getNameForPaymentMethod(
+	method: PaymentMethod,
+	paymentRequestAvailable: PaymentRequestAvailable
+) {
+	if (method === PaymentMethod.PAYMENT_REQUEST) {
+		return paymentRequestAvailable.applePay ? 'Apple Pay' : 'Google Pay';
+	}
+
+	return NameForPaymentMethodMap[method];
+}
 
 interface NameForPaymentMethodProps {
 	method: PaymentMethod;
 }
-export const NameForPaymentMethod = ({method}: NameForPaymentMethodProps) => (
-	<span className={cxs({...textSize.s})}>
-		{NameForPaymentMethodMap[method]}
-	</span>
-);
+
+export const NameForPaymentMethod = ({method}: NameForPaymentMethodProps) => {
+	const {paymentRequestAvailable} = useWidgetContext();
+
+	const name = getNameForPaymentMethod(method, paymentRequestAvailable);
+	return <span className={cxs({...textSize.s})}>{name}</span>;
+};
