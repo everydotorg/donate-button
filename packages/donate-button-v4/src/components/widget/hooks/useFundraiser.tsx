@@ -7,16 +7,14 @@ import {
 
 export const useFundraiser = () => useContext(FundraiserContext).fundraiser;
 
-export const useFundraiserOrError = () => {
+export const useFundraiserOrUndefined = () => {
 	const fundraiser = useFundraiser();
 
 	if (
-		!fundraiser ||
 		fundraiser === FundraiserFetchError ||
 		fundraiser === FundraiserFetching
 	) {
-		// TODO: add more readable error
-		throw new Error('Fundraiser error');
+		return undefined;
 	}
 
 	return fundraiser;

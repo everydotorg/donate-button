@@ -5,6 +5,8 @@ export interface Nonprofit {
 	name: string;
 	primarySlug: string;
 	profileUrl: string;
+	directDisbursement?: boolean;
+	hasAdmin?: boolean;
 	description: string | null;
 	coverImageCloudinaryId: string | null;
 	coverImageUrl: string | null;
