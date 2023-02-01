@@ -1,15 +1,11 @@
 import {Fragment} from 'preact/jsx-runtime';
 import {GridCard} from 'src/components/widget/components/GridCard';
 import {
-	textContainerCss,
-	smallCardCss,
-	smallLogoImageCss,
+	LogoImageCss,
 	nonprofitNameCss,
-	locationAddressCss,
-	largeCardCss,
-	headerContainerCss,
-	largeLogoImageCss,
-	descriptionCss
+	descriptionCss,
+	avatarAndNameWrapperCss,
+	cardCss
 } from 'src/components/widget/components/NonprofitInfo/styles';
 import {useNonprofitOrError} from 'src/components/widget/hooks/useNonprofit';
 import {
@@ -18,64 +14,23 @@ import {
 } from 'src/constants/placeholders';
 import {getCloudinaryUrl} from 'src/helpers/getCloudinaryUrl';
 
-const SmallNonprofitInfo = () => {
-	const {name, locationAddress, logoCloudinaryId} = useNonprofitOrError();
-
+export const NonprofitCard = () => {
+	const {name, logoCloudinaryId} = useNonprofitOrError();
 	const logoUrl = getCloudinaryUrl(
 		logoCloudinaryId ?? LOGO_IMAGE_PLACEHOLDER_ID
 	);
 	return (
-		<GridCard className={smallCardCss}>
-			{logoUrl && (
-				<div alt="nonprofit logo" className={smallLogoImageCss(logoUrl)} />
-			)}
-			<div>
-				<h1 className={nonprofitNameCss}>{name}</h1>
-				{locationAddress && (
-					<h2 className={locationAddressCss}>{locationAddress}&nbsp;</h2>
-				)}
+		<GridCard className={cardCss}>
+			<div className={avatarAndNameWrapperCss}>
+				<div alt="nonprofit logo" className={LogoImageCss(logoUrl)} />
+				<h1 className={nonprofitNameCss}>
+					<span>{name}</span> is using Every.org to accept this donation
+				</h1>
 			</div>
+			<p className={descriptionCss}>
+				Every.org is a 501(c)(3) nonprofit building free, accessible giving
+				tools for every person and every organization.
+			</p>
 		</GridCard>
 	);
 };
-
-const LargeNonprofitInfo = () => {
-	const {
-		name,
-		locationAddress,
-		logoCloudinaryId,
-		coverImageCloudinaryId,
-		description
-	} = useNonprofitOrError();
-	const logoUrl = getCloudinaryUrl(
-		logoCloudinaryId ?? LOGO_IMAGE_PLACEHOLDER_ID
-	);
-	const coverImageUrl = getCloudinaryUrl(
-		coverImageCloudinaryId ?? COVER_IMAGE_PLACEHOLDER_ID
-	);
-	return (
-		<GridCard className={largeCardCss}>
-			{coverImageUrl && (
-				<div className={headerContainerCss(coverImageUrl)}>
-					{logoUrl && (
-						<div alt="nonprofit logo" className={largeLogoImageCss(logoUrl)} />
-					)}
-				</div>
-			)}
-			<div className={textContainerCss}>
-				<h1 className={nonprofitNameCss}>{name}</h1>
-				{locationAddress && (
-					<h2 className={locationAddressCss}>{locationAddress}&nbsp;</h2>
-				)}
-				{description && <p className={descriptionCss}>{description}</p>}
-			</div>
-		</GridCard>
-	);
-};
-
-export const NonprofitCard = () => (
-	<Fragment>
-		<LargeNonprofitInfo />
-		<SmallNonprofitInfo />
-	</Fragment>
-);
