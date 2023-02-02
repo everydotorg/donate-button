@@ -1,17 +1,14 @@
 import {Fragment} from 'preact/jsx-runtime';
 import {GridCard} from 'src/components/widget/components/GridCard';
 import {
-	LogoImageCss,
+	logoImageCss,
 	nonprofitNameCss,
 	descriptionCss,
 	avatarAndNameWrapperCss,
 	cardCss
 } from 'src/components/widget/components/NonprofitInfo/styles';
 import {useNonprofitOrError} from 'src/components/widget/hooks/useNonprofit';
-import {
-	COVER_IMAGE_PLACEHOLDER_ID,
-	LOGO_IMAGE_PLACEHOLDER_ID
-} from 'src/constants/placeholders';
+import {LOGO_IMAGE_PLACEHOLDER_ID} from 'src/constants/placeholders';
 import {getCloudinaryUrl} from 'src/helpers/getCloudinaryUrl';
 
 export const NonprofitCard = () => {
@@ -22,7 +19,7 @@ export const NonprofitCard = () => {
 	return (
 		<GridCard className={cardCss}>
 			<div className={avatarAndNameWrapperCss}>
-				<div alt="nonprofit logo" className={LogoImageCss(logoUrl)} />
+				<div alt="nonprofit logo" className={logoImageCss(logoUrl)} />
 				<h1 className={nonprofitNameCss}>
 					{hasAdmin ? (
 						<Fragment>

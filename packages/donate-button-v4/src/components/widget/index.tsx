@@ -43,7 +43,7 @@ const Widget = () => {
 		nonprofit === NonprofitFetchError ||
 		(fundraiserSlug && findraiser === FundraiserFetchError)
 	) {
-		// TODO: Redirect
+		hideWidget();
 		return null;
 	}
 

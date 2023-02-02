@@ -1,4 +1,4 @@
-import {FunctionComponent, Attributes} from 'preact';
+import {FunctionComponent} from 'preact';
 import {JSXInternal} from 'preact/src/jsx';
 import {getTaxDeductibleStatement} from 'src/components/widget/components/Footer/helpers';
 import {

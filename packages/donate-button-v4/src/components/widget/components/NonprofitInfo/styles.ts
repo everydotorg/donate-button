@@ -14,7 +14,7 @@ export const nonprofitNameCss = cxs({
 	}
 });
 
-export const LogoImageCss = (logoUrl: string) =>
+export const logoImageCss = (logoUrl: string) =>
 	cxs({
 		borderRadius: Radii.Circle,
 		overflow: 'hidden',
