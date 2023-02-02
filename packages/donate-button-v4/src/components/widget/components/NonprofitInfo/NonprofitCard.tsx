@@ -15,7 +15,7 @@ import {
 import {getCloudinaryUrl} from 'src/helpers/getCloudinaryUrl';
 
 export const NonprofitCard = () => {
-	const {name, logoCloudinaryId} = useNonprofitOrError();
+	const {name, logoCloudinaryId, hasAdmin} = useNonprofitOrError();
 	const logoUrl = getCloudinaryUrl(
 		logoCloudinaryId ?? LOGO_IMAGE_PLACEHOLDER_ID
 	);
@@ -24,7 +24,15 @@ export const NonprofitCard = () => {
 			<div className={avatarAndNameWrapperCss}>
 				<div alt="nonprofit logo" className={LogoImageCss(logoUrl)} />
 				<h1 className={nonprofitNameCss}>
-					<span>{name}</span> is using Every.org to accept this donation
+					{hasAdmin ? (
+						<Fragment>
+							<span>{name}</span> is using Every.org to accept this donation
+						</Fragment>
+					) : (
+						<Fragment>
+							Every.org created this page for <span>{name}</span>
+						</Fragment>
+					)}
 				</h1>
 			</div>
 			<p className={descriptionCss}>
