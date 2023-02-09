@@ -1,7 +1,6 @@
 import cxs from 'cxs';
 import {FontFamily} from 'src/components/widget/theme/font-family';
 
-cxs.prefix('edoBtn-');
 export const buttonCss = cxs({
 	display: 'flex',
 	alignItems: 'center',

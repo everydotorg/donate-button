@@ -1,12 +1,9 @@
-// import cxs from 'cxs';
-
 import cxs from 'cxs';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {textSize} from 'src/components/widget/theme/font-sizes';
 import {horizontalStackCss, Spacing} from 'src/components/widget/theme/spacing';
 
-// cxs.prefix('edoWidgetFaq-');
 export const faqListCss = cxs({
 	display: 'flex',
 	flexDirection: 'column',
