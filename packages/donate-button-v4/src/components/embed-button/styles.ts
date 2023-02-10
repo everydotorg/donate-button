@@ -1,6 +1,8 @@
 import cxs from 'cxs';
 import {FontFamily} from 'src/components/widget/theme/font-family';
 
+cxs.prefix('edo-embedded-');
+
 export const buttonCss = cxs({
 	display: 'flex',
 	alignItems: 'center',
