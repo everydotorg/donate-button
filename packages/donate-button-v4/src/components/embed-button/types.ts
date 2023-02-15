@@ -8,6 +8,14 @@ export interface DonateButtonOptions {
 	 */
 	readonly nonprofitSlug: string;
 	/**
+     * Identifier for fundraiser on Every.org; you can get it by going to the
+     * fundraiser's profile on Every.org and looking at its URL
+     *
+     * @example
+     * If the URL is https://www.every.org/givedirectly/f/my-fundraiser, the slug is "my-fundraiser"
+     */
+	fundraiserSlug?: string;
+	/**
 	 * If present, do not show the normal www.every.org background,
 	 * only show the donation modal and do not allow people to exit
 	 * the modal. Defaults to true.
@@ -16,7 +24,7 @@ export interface DonateButtonOptions {
 }
 
 export interface EmbedButtonOptions extends DonateButtonOptions {
-	readonly label?: string;
+readonly label?: string;
 	readonly className?: string;
 	readonly withLogo?: boolean;
 	readonly bgColor?: string;
@@ -24,7 +32,7 @@ export interface EmbedButtonOptions extends DonateButtonOptions {
 	readonly borderRadius?: string;
 	readonly fontSize?: string;
 	readonly padding?: string;
-	readonly target?: string;
+	readonly target?: string;	
 	/**
 	 * If not present, just a link to hrefUrl
 	 */
