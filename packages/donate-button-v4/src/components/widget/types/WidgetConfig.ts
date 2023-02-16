@@ -1,7 +1,7 @@
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
 
-export type WidgetConfig = {
+export interface WidgetConfig  {
 	nonprofitSlug: string;
 
 	fundraiserSlug?: string;

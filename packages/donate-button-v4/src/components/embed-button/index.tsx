@@ -4,7 +4,7 @@ import {
 	verticalCenterTextCss
 } from 'src/components/embed-button/styles';
 import constructEveryUrl from 'src/helpers/constructEveryUrl';
-import {EmbedButtonOptions} from 'src/helpers/optionsTypes';
+import {EmbedButtonOptions} from 'src/components/embed-button/types';
 
 /**
  * Used to identify if a link is a donate button

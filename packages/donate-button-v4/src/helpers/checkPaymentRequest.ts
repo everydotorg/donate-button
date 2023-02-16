@@ -21,7 +21,6 @@ export async function checkPaymentRequest(): Promise<PaymentRequestAvailable> {
 
 		return {googlePay, applePay};
 	} catch (error: unknown) {
-		console.log(error);
 		return {googlePay: false, applePay: false};
 	}
 }
