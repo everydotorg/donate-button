@@ -15,23 +15,15 @@
 			function createWidget() {
 				everyDotOrgDonateButton.createButton({
 					selector: '#edo-donate-btn',
-					fontSize: '18px'
+					fontSize: '18px',
 				});
 				everyDotOrgDonateButton.createWidget({
 					selector: '#edo-donate-btn',
-					options: {
-						nonprofitSlug: 'closegap',
-						defaultFrequency: 'once',
-						addAmounts: [10, 20, 50],
-						defaultDonationAmount: 25,
-						completeDonationInNewTab: true,
-						currency: {
-							countryCodes: ['US'],
-							name: 'USD',
-							symbol: '$',
-							minimumAmount: 10
-						}
-					}
+					nonprofitSlug: 'closegap',
+					defaultFrequency: 'once',
+					addAmounts: [10, 20, 50],
+					defaultDonationAmount: 25,
+					completeDonationInNewTab: true,
 				});
 			}
 			if (window.everyDotOrgDonateButton) {
