@@ -1,11 +1,11 @@
 import cxs from 'cxs';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {FontFamily} from 'src/components/widget/theme/font-family';
-import {buttonText} from 'src/components/widget/theme/font-sizes';
+import {Spacing} from 'src/components/widget/theme/spacing';
 
 export const buttonCss = cxs({
 	cursor: 'pointer',
-	display: 'flex',
+	display: 'inline-flex',
 	alignItems: 'center',
 	justifyContent: 'center',
 	padding: 0,
@@ -14,21 +14,24 @@ export const buttonCss = cxs({
 	fontFamily: FontFamily.BasisGrotesque
 });
 
-export const iconCss = cxs({
-	height: '100%',
+export const smallScreenCloseButtonCss = cxs({
 	display: 'block',
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		display: 'none'
 	}
 });
 
-export const textCss = (primaryColor: string) =>
-	cxs({
-		color: primaryColor,
-		...buttonText,
-		fontWeight: 500,
-		display: 'none',
-		[BREAKPOINTS.TabletLandscapeUp]: {
-			display: 'block'
-		}
-	});
+export const largeScreenCloseButtonCss = cxs({
+	position: 'absolute',
+	right: Spacing.XL,
+	top: Spacing.XL,
+
+	padding: Spacing.XXS,
+	background: 'white',
+	borderRadius: '8px',
+
+	display: 'none',
+	[BREAKPOINTS.TabletLandscapeUp]: {
+		display: 'block'
+	}
+});

@@ -30,7 +30,13 @@ const gridCss = cxs({
 		}
 	},
 
-	'& > #edo-header': {gridArea: 'header'},
+	'& > #edo-header': {
+		gridArea: 'header',
+		display: 'block',
+		[BREAKPOINTS.TabletLandscapeUp]: {
+			display: 'none'
+		}
+	},
 	'& > #edo-promoBanners': {gridArea: 'promoBanners'},
 	'& > #edo-nonprofitInfo': {gridArea: 'nonprofitInfo'},
 	'& > #edo-paymentProcess': {gridArea: 'paymentProcess'},
