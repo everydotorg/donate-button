@@ -1,10 +1,11 @@
-import cxs from 'cxs';
 import {JSXInternal} from 'preact/src/jsx';
 import {Faq} from 'src/components/widget/components/Faq';
 import {Footer} from 'src/components/widget/components/Footer';
 import {FundraiserLink} from 'src/components/widget/components/FundraiserLink';
 import {Grid} from 'src/components/widget/components/Grid';
 import {Header} from 'src/components/widget/components/Header';
+import {CloseButton} from 'src/components/widget/components/Header/CloseButton';
+import {largeScreenCloseButtonCss} from 'src/components/widget/components/Header/CloseButton/styles';
 import {NonprofitInfo} from 'src/components/widget/components/NonprofitInfo';
 import {PaymentProcess} from 'src/components/widget/components/PaymentProcess';
 import {WidgetCard} from 'src/components/widget/components/WidgetCard';
@@ -58,6 +59,7 @@ const Widget = () => {
 
 	return (
 		<WidgetOverlay onClick={hideOnWrapperClick}>
+			<CloseButton className={largeScreenCloseButtonCss} />
 			<WidgetCard height={null}>
 				<Grid>
 					<div id="edo-header">

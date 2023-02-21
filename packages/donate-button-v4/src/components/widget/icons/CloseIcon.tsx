@@ -1,29 +1,26 @@
-type CloseProps = {
-	color: string;
-	className?: string;
-	size?: number;
-};
+import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 
-export const CloseIcon = ({color, className, size = 24}: CloseProps) => {
+export const CloseIcon = () => {
+	const {primaryColor} = useConfigContext();
+
 	return (
 		<svg
-			className={className}
-			width={size}
-			height={size}
+			width="24"
+			height="24"
 			viewBox="0 0 24 24"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<path
 				d="M18 6L6 18"
-				stroke={color}
+				stroke={primaryColor}
 				strokeWidth="2"
 				strokeLinecap="round"
 				strokeLinejoin="round"
 			/>
 			<path
 				d="M6 6L18 18"
-				stroke={color}
+				stroke={primaryColor}
 				strokeWidth="2"
 				strokeLinecap="round"
 				strokeLinejoin="round"
