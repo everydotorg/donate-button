@@ -14,36 +14,6 @@ import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
 import constructEveryUrl from 'src/helpers/constructEveryUrl';
 
-const InstantRedirectPaymentMethods = new Set([
-	PaymentMethod.CRYPTO,
-	PaymentMethod.STOCKS,
-	PaymentMethod.DAF
-]);
-
-const useOnSelectPaymentMethod = () => {
-	const {nonprofitSlug, completeDonationInNewTab} = useConfigContext();
-	const {setSelectedPaymentMethod} = useWidgetContext();
-
-	const onSelectPaymentMethod = useCallback(
-		(method: PaymentMethod) => {
-			if (InstantRedirectPaymentMethods.has(method)) {
-				window.open(
-					constructEveryUrl({
-						nonprofitSlug,
-						method
-					}),
-					completeDonationInNewTab ? '_blank' : '_self'
-				);
-			} else {
-				setSelectedPaymentMethod(method);
-			}
-		},
-		[nonprofitSlug, completeDonationInNewTab, setSelectedPaymentMethod]
-	);
-
-	return onSelectPaymentMethod;
-};
-
 const usePaymentMethods = () => {
 	const {methods} = useConfigContext();
 	const {paymentRequestAvailable} = useWidgetContext();
@@ -59,8 +29,7 @@ const usePaymentMethods = () => {
 
 export const LargePaymentMethodSelect = () => {
 	const methods = usePaymentMethods();
-	const {selectedPaymentMethod} = useWidgetContext();
-	const onSelectPaymentMethod = useOnSelectPaymentMethod();
+	const {selectedPaymentMethod, setSelectedPaymentMethod} = useWidgetContext();
 
 	return (
 		<ul className={largePaymentMethodSelectListCss}>
@@ -72,7 +41,7 @@ export const LargePaymentMethodSelect = () => {
 							method === selectedPaymentMethod
 						)}
 						onClick={() => {
-							onSelectPaymentMethod(method);
+							setSelectedPaymentMethod(method);
 						}}
 					>
 						<IconForPaymentMethod method={method} />
@@ -87,8 +56,7 @@ export const LargePaymentMethodSelect = () => {
 export const SmallPaymentMethodSelect = () => {
 	const methods = usePaymentMethods();
 	const {primaryColor} = useConfigContext();
-	const {selectedPaymentMethod} = useWidgetContext();
-	const onSelectPaymentMethod = useOnSelectPaymentMethod();
+	const {selectedPaymentMethod, setSelectedPaymentMethod} = useWidgetContext();
 
 	return (
 		<fieldset className={smallPaymentMethodFieldSetCss}>
@@ -103,7 +71,7 @@ export const SmallPaymentMethodSelect = () => {
 								primaryColor
 							)}
 							onClick={() => {
-								onSelectPaymentMethod(method);
+								setSelectedPaymentMethod(method);
 							}}
 						>
 							<IconForPaymentMethod method={method} />
