@@ -17,6 +17,7 @@ const resetcss = `
     border: 0;
     font-size: 100%;
     font: inherit;
+    font-family: 'Basis Grotesque Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Roboto, sans-serif;
     vertical-align: baseline;
   }
   /* HTML5 display-role reset for older browsers */

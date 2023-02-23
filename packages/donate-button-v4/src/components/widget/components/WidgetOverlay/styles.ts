@@ -1,9 +1,11 @@
 import cxs from 'cxs';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {FontFamily} from 'src/components/widget/theme/font-family';
+import {textSize} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
 
 export const overlayCss = cxs({
+	...textSize.s,
 	position: 'fixed',
 	height: 'auto',
 	width: '100%',
@@ -33,5 +35,18 @@ export const overlayCss = cxs({
 	},
 	'& *:after': {
 		boxSizing: 'inherit'
+	},
+	'h1,h2,h3,h4,h5,h6': {fontWeight: 700},
+
+	h1: {
+		...textSize.xl
+	},
+
+	h2: {
+		...textSize.l
+	},
+
+	'h3,h4,h5,h6': {
+		...textSize.m
 	}
 });
