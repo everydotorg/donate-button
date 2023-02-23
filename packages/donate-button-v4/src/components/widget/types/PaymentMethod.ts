@@ -9,4 +9,5 @@ export enum PaymentMethod {
 	DAF = 'daf'
 }
 
+export const OneTimeFrequencyMethods = [PaymentMethod.VENMO, PaymentMethod.DAF];
 export const AvailablePaymentMethods = Object.values(PaymentMethod);

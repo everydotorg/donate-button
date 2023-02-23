@@ -1,8 +1,13 @@
 import {useCallback} from 'preact/hooks';
 import {JSXInternal} from 'preact/src/jsx';
+import {Frequency} from 'src/components/widget/components/PaymentProcess/Frequency';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
-import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
+import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
+import {
+	OneTimeFrequencyMethods,
+	PaymentMethod
+} from 'src/components/widget/types/PaymentMethod';
 import {DEFAULT_CURRENCY} from 'src/constants/currency';
 import {
 	constructDonateStocksUrl,
@@ -78,7 +83,9 @@ export const useSubmitDonation = () => {
 					window.open(
 						constructDonateUrl({
 							amount: donationAmount,
-							frequency,
+							frequency: OneTimeFrequencyMethods.includes(selectedPaymentMethod)
+								? DonationFrequency.OneTime
+								: frequency,
 							...baseParameters
 						}),
 						target

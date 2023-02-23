@@ -11,15 +11,16 @@ import {
 	formCss,
 	formContainerCss
 } from 'src/components/widget/components/PaymentProcess/styles';
+import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
-import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const DafAmountView = ({changeView}: DafFlowViewProps) => {
-	const {frequency, donationAmount} = useWidgetContext();
+	const submitDonation = useSubmitDonation();
+	const {frequency, donationAmount, submitError} = useWidgetContext();
 
 	return (
-		<div className={formCss}>
+		<form className={formCss} onSubmit={submitDonation}>
 			<BackButton
 				handleClick={() => {
 					changeView(DafFlowView.START);
@@ -30,16 +31,12 @@ export const DafAmountView = ({changeView}: DafFlowViewProps) => {
 				<Frequency />
 				<DonationAmount />
 				<SubmitButton
-					disabled={
-						frequency === DonationFrequency.Unselected ||
-						!donationAmount ||
-						Number.isNaN(donationAmount)
-					}
+					disabled={!donationAmount || Number.isNaN(donationAmount)}
 				>
 					{getSubmitButtonText(donationAmount, frequency)}
 				</SubmitButton>
 				<RedirectNotice />
 			</div>
-		</div>
+		</form>
 	);
 };

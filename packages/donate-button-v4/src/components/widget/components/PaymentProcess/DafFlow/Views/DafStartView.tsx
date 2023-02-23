@@ -1,4 +1,3 @@
-import cxs from 'cxs';
 import {
 	chariotButtonCss,
 	manualButtonCss
@@ -17,9 +16,6 @@ import {
 	formContainerCss
 } from 'src/components/widget/components/PaymentProcess/styles';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
-import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
-import {horizontalStackCss, Spacing} from 'src/components/widget/theme/spacing';
-import joinClassNames from 'src/helpers/joinClassNames';
 
 export const ChariotLogo = () => {
 	return (
@@ -72,10 +68,9 @@ export const ChariotLogo = () => {
 
 export const DafStartView = ({changeView}: DafFlowViewProps) => {
 	const {primaryColor} = useConfigContext();
-	const submitDonation = useSubmitDonation();
 
 	return (
-		<form className={formCss} onSubmit={submitDonation}>
+		<div className={formCss}>
 			<LargePaymentMethodSelect />
 			<div className={formContainerCss}>
 				<SmallPaymentMethodSelect />
@@ -106,6 +101,6 @@ export const DafStartView = ({changeView}: DafFlowViewProps) => {
 				</button>
 				<RedirectNotice />
 			</div>
-		</form>
+		</div>
 	);
 };

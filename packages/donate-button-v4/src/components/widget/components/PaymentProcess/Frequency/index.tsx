@@ -10,16 +10,16 @@ import {
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
-import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
+import {
+	OneTimeFrequencyMethods,
+	PaymentMethod
+} from 'src/components/widget/types/PaymentMethod';
 
 export const Frequency = () => {
 	const {primaryColor} = useConfigContext();
 	const {frequency, selectedPaymentMethod, setFrequency} = useWidgetContext();
 
-	if (
-		selectedPaymentMethod === PaymentMethod.VENMO ||
-		selectedPaymentMethod === PaymentMethod.DAF
-	) {
+	if (OneTimeFrequencyMethods.includes(selectedPaymentMethod)) {
 		return (
 			<fieldset className={fieldSetCss}>
 				<legend className={legendCss}>Frequency</legend>
