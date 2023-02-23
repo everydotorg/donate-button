@@ -2,43 +2,89 @@ import {useCallback} from 'preact/hooks';
 import {JSXInternal} from 'preact/src/jsx';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
+import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
 import {DEFAULT_CURRENCY} from 'src/constants/currency';
-import constructEveryUrl from 'src/helpers/constructEveryUrl';
+import {
+	constructDonateStocksUrl,
+	constructDonateCryptoUrl,
+	constructDonateUrl
+} from 'src/helpers/constructDonateUrl';
 
 export const useSubmitDonation = () => {
 	const config = useConfigContext();
 
-	const {frequency, donationAmount, setSubmitError, selectedPaymentMethod} =
-		useWidgetContext();
+	const {
+		frequency,
+		donationAmount,
+		setSubmitError,
+		selectedPaymentMethod,
+		stockAmount,
+		stockSymbol,
+		cryptoAmount,
+		cryptoCurrency
+	} = useWidgetContext();
 	const {minDonationAmount} = useConfigContext();
 
 	const submitDonation = useCallback(
 		(event: JSXInternal.TargetedEvent<HTMLFormElement>) => {
 			event.preventDefault();
 
-			if (!donationAmount || donationAmount < minDonationAmount) {
-				setSubmitError(
-					`The minimum donation amount is ${DEFAULT_CURRENCY.symbol}${minDonationAmount}`
-				);
-				return;
-			}
-
-			const options = {
-				amount: donationAmount,
-				frequency,
-				method: selectedPaymentMethod,
-				nonprofitSlug: config.nonprofitSlug
-			};
-
-			if (config.fundraiserSlug) {
-				Object.assign(options, {
-					fundraiserSlug: config.fundraiserSlug
-				});
-			}
-
 			const target = config.completeDonationInNewTab ? '_blank' : '_self';
 
-			window.open(constructEveryUrl(options), target);
+			const baseParameters = {
+				method: selectedPaymentMethod,
+				nonprofitSlug: config.nonprofitSlug,
+				fundraiserSlug: config.fundraiserSlug
+			};
+			switch (selectedPaymentMethod) {
+				case PaymentMethod.CRYPTO:
+					if (!cryptoAmount || !cryptoCurrency) {
+						setSubmitError(`Please enter currency and amount`);
+						break;
+					}
+
+					window.open(
+						constructDonateCryptoUrl({
+							cryptoAmount,
+							cryptoCurrency,
+							...baseParameters
+						}),
+						target
+					);
+					break;
+				case PaymentMethod.STOCKS:
+					if (!stockSymbol || !stockAmount) {
+						setSubmitError(`Please enter the symbol and amount`);
+						break;
+					}
+
+					window.open(
+						constructDonateStocksUrl({
+							stockSymbol,
+							stockAmount,
+							...baseParameters
+						}),
+						target
+					);
+					break;
+				default:
+					if (!donationAmount || donationAmount < minDonationAmount) {
+						setSubmitError(
+							`The minimum donation amount is ${DEFAULT_CURRENCY.symbol}${minDonationAmount}`
+						);
+						break;
+					}
+
+					window.open(
+						constructDonateUrl({
+							amount: donationAmount,
+							frequency,
+							...baseParameters
+						}),
+						target
+					);
+					break;
+			}
 		},
 		[
 			frequency,
@@ -46,7 +92,11 @@ export const useSubmitDonation = () => {
 			setSubmitError,
 			selectedPaymentMethod,
 			config,
-			minDonationAmount
+			minDonationAmount,
+			stockAmount,
+			stockSymbol,
+			cryptoAmount,
+			cryptoCurrency
 		]
 	);
 

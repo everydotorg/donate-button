@@ -3,8 +3,8 @@ import {
 	logoCss,
 	verticalCenterTextCss
 } from 'src/components/embed-button/styles';
-import constructEveryUrl from 'src/helpers/constructEveryUrl';
 import {EmbedButtonOptions} from 'src/components/embed-button/types';
+import {constructBasicDonateUrl} from 'src/helpers/constructDonateUrl';
 
 /**
  * Used to identify if a link is a donate button
@@ -21,7 +21,7 @@ const EmbedButton = ({
 	target = '_blank',
 	...donateOptions
 }: EmbedButtonOptions) => {
-	const url = constructEveryUrl(donateOptions);
+	const url = constructBasicDonateUrl(donateOptions);
 	return (
 		<a
 			href={url}

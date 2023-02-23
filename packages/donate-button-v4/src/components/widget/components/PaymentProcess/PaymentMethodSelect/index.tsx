@@ -12,7 +12,6 @@ import {legendCss} from 'src/components/widget/components/PaymentProcess/styles'
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
-import constructEveryUrl from 'src/helpers/constructEveryUrl';
 
 const usePaymentMethods = () => {
 	const {methods} = useConfigContext();
