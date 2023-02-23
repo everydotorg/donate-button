@@ -39,8 +39,6 @@ export const formCss = cxs({
 
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		gridAutoFlow: 'column',
-		gridTemplateColumns: '170px 1fr'
+		gridTemplateColumns: 'auto 1fr'
 	}
 });
-
-export const paymentMethodSelectContainerCss = cxs({});

@@ -1,25 +1,19 @@
-import {
-	LargePaymentMethodSelect,
-	SmallPaymentMethodSelect
-} from 'src/components/widget/components/PaymentProcess/PaymentMethodSelect';
-import {RedirectNotice} from 'src/components/widget/components/PaymentProcess/RedirectNotice';
-import {
-	formContainerCss,
-	formCss
-} from 'src/components/widget/components/PaymentProcess/styles';
-import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
+import {useState} from 'preact/hooks';
+import {DafAmountView} from 'src/components/widget/components/PaymentProcess/DafFlow/Views/DafAmountView';
+import {DafManualView} from 'src/components/widget/components/PaymentProcess/DafFlow/Views/DafManualView';
+import {DafStartView} from 'src/components/widget/components/PaymentProcess/DafFlow/Views/DafStartView';
+import {DafFlowView} from 'src/components/widget/components/PaymentProcess/DafFlow/types';
 
 export const DafFlow = () => {
-	const submitDonation = useSubmitDonation();
+	const [view, setView] = useState<DafFlowView>(DafFlowView.START);
 
-	return (
-		<form className={formCss} onSubmit={submitDonation}>
-			<LargePaymentMethodSelect />
-			<div className={formContainerCss}>
-				<SmallPaymentMethodSelect />
-				<div>DafFlow</div>
-				<RedirectNotice />
-			</div>
-		</form>
-	);
+	// eslint-disable-next-line default-case
+	switch (view) {
+		case DafFlowView.START:
+			return <DafStartView changeView={setView} />;
+		case DafFlowView.MANUAL:
+			return <DafManualView changeView={setView} />;
+		case DafFlowView.AMOUNT:
+			return <DafAmountView changeView={setView} />;
+	}
 };

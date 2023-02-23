@@ -16,11 +16,17 @@ export const Frequency = () => {
 	const {primaryColor} = useConfigContext();
 	const {frequency, selectedPaymentMethod, setFrequency} = useWidgetContext();
 
-	if (selectedPaymentMethod === PaymentMethod.VENMO) {
+	if (
+		selectedPaymentMethod === PaymentMethod.VENMO ||
+		selectedPaymentMethod === PaymentMethod.DAF
+	) {
 		return (
 			<fieldset className={fieldSetCss}>
 				<legend className={legendCss}>Frequency</legend>
-				<p>Venmo only supports one-time donations</p>
+				<p>
+					{selectedPaymentMethod === PaymentMethod.DAF ? 'Chariot' : 'Venmo'}{' '}
+					only supports one-time donations
+				</p>
 			</fieldset>
 		);
 	}

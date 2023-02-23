@@ -1,5 +1,6 @@
 import cxs from 'cxs';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
+import {COLORS} from 'src/components/widget/theme/colors';
 import {FontFamily} from 'src/components/widget/theme/font-family';
 import {textSize} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
@@ -18,6 +19,7 @@ export const overlayCss = cxs({
 	background: 'rgba(0, 0, 0, 0.5)',
 	justifyContent: 'center',
 	alignItems: 'center',
+	color: COLORS.Text,
 	fontFamily: FontFamily.BasisGrotesque,
 	padding: 0,
 	[BREAKPOINTS.TabletLandscapeUp]: {
