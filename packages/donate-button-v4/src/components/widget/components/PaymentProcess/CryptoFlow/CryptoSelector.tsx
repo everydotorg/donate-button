@@ -70,11 +70,6 @@ const cryptoCurrencyOptions = Object.values(CryptoCurrency).map((value) =>
 
 export const MAX_CRYPTO_DECIMALS_FOR_DISPLAY = 7;
 
-interface CryptoSelectorProps {
-	value?: string;
-	onChange: (value?: string) => void;
-}
-
 const CryptoSelectorDropDownItem = ({
 	onClick,
 	option
@@ -97,14 +92,14 @@ const CryptoSelectorDropDownItem = ({
 	</li>
 );
 
-export const CryptoSelector = ({value, onChange}: CryptoSelectorProps) => {
-	const {submitError} = useWidgetContext();
+export const CryptoSelector = () => {
+	const {submitError, cryptoCurrency, setCryptoCurrency} = useWidgetContext();
 	const {primaryColor} = useConfigContext();
 
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [selectedOption, setSelectedOption] = useState<
 		CryptoCurrencyOption | undefined
-	>(cryptoCurrencyOptions.find((option) => option.value === value));
+	>(cryptoCurrencyOptions.find((option) => option.value === cryptoCurrency));
 
 	const [inputValue, setInputValue] = useState(selectedOption?.label);
 
@@ -112,14 +107,14 @@ export const CryptoSelector = ({value, onChange}: CryptoSelectorProps) => {
 
 	const handleItemClick = (option: CryptoCurrencyOption) => {
 		setSelectedOption(option);
-		onChange(option.value);
+		setCryptoCurrency(option.value);
 		setInputValue(option.label);
 		setShowDrowDown(false);
 	};
 
 	const handleInputFocus = () => {
 		setSelectedOption(undefined);
-		onChange(undefined);
+		setCryptoCurrency(undefined);
 		setShowDrowDown(true);
 		setInputValue('');
 	};
@@ -127,7 +122,7 @@ export const CryptoSelector = ({value, onChange}: CryptoSelectorProps) => {
 	const handleInput = (value: string) => {
 		setInputValue(value);
 		setSelectedOption(undefined);
-		onChange(undefined);
+		setCryptoCurrency(undefined);
 		setShowDrowDown(true);
 	};
 

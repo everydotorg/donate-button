@@ -1,11 +1,6 @@
 import cxs from 'cxs';
+import {CryptoAmountInput} from 'src/components/widget/components/PaymentProcess/CryptoFlow/CryptoAmountInput';
 import {CryptoSelector} from 'src/components/widget/components/PaymentProcess/CryptoFlow/CryptoSelector';
-import {cryptoAmountInputContainerCss} from 'src/components/widget/components/PaymentProcess/CryptoFlow/styles';
-import {
-	inputContainerCss,
-	inputContainerErrorCss,
-	inputCss
-} from 'src/components/widget/components/PaymentProcess/DonationAmount/styles';
 import {
 	LargePaymentMethodSelect,
 	SmallPaymentMethodSelect
@@ -18,31 +13,13 @@ import {
 	formCss,
 	legendCss
 } from 'src/components/widget/components/PaymentProcess/styles';
-import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {verticalStackCss, Spacing} from 'src/components/widget/theme/spacing';
-import joinClassNames from 'src/helpers/joinClassNames';
 
 export const CryptoFlow = () => {
 	const submitDonation = useSubmitDonation();
-
-	const {primaryColor} = useConfigContext();
-
-	const {
-		cryptoAmount,
-		setCryptoAmount,
-		cryptoCurrency,
-		setCryptoCurrency,
-		submitError,
-		setSubmitError
-	} = useWidgetContext();
-
-	const inputContainerClasses = joinClassNames([
-		inputContainerCss(primaryColor),
-		cryptoAmountInputContainerCss,
-		...(submitError ? [inputContainerErrorCss] : [])
-	]);
+	const {cryptoAmount, cryptoCurrency} = useWidgetContext();
 
 	return (
 		<form className={formCss} onSubmit={submitDonation}>
@@ -54,30 +31,11 @@ export const CryptoFlow = () => {
 				>
 					<div>
 						<legend className={legendCss}>Crypto currency</legend>
-						<CryptoSelector
-							value={cryptoCurrency}
-							onChange={(cryptoCurrency?: string) => {
-								setCryptoCurrency(cryptoCurrency);
-								setSubmitError(null);
-							}}
-						/>
+						<CryptoSelector />
 					</div>
 					<div>
 						<legend className={legendCss}>Amount</legend>
-						<div className={inputContainerClasses}>
-							<input
-								id="donation-input"
-								className={inputCss}
-								type="text"
-								inputMode="decimal"
-								value={cryptoAmount ? cryptoAmount : undefined}
-								onInput={(event) => {
-									setCryptoAmount(Number(event.currentTarget.value));
-									setSubmitError(null);
-								}}
-							/>
-							<span>{cryptoCurrency}</span>
-						</div>
+						<CryptoAmountInput />
 					</div>
 				</fieldset>
 				<SubmitButton disabled={!cryptoAmount || !cryptoCurrency}>
