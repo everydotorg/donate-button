@@ -21,6 +21,7 @@ export const inputContainerCss = (color: string) =>
 		color: COLORS.Text,
 		backgroundColor: COLORS.Gray,
 		border: getColoredBorder(Borders.Normal, COLORS.LightGray),
+		cursor: 'text',
 		':focus-within': {
 			backgroundColor: 'white',
 			borderColor: color

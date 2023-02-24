@@ -1,4 +1,9 @@
 import cxs from 'cxs';
+import {CryptoSelector} from 'src/components/widget/components/PaymentProcess/CryptoFlow/CryptoSelector';
+import {
+	cryptoAmountInputContainerCss,
+	cryptoAmountInputCss
+} from 'src/components/widget/components/PaymentProcess/CryptoFlow/styles';
 import {
 	inputContainerCss,
 	inputContainerErrorCss,
@@ -20,6 +25,7 @@ import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {verticalStackCss, Spacing} from 'src/components/widget/theme/spacing';
+import joinClassNames from 'src/helpers/joinClassNames';
 
 export const CryptoFlow = () => {
 	const submitDonation = useSubmitDonation();
@@ -35,9 +41,11 @@ export const CryptoFlow = () => {
 		setSubmitError
 	} = useWidgetContext();
 
-	const inputContainerClasses = [inputContainerCss(primaryColor)]
-		.concat(submitError ? [inputContainerErrorCss] : [])
-		.join(' ');
+	const inputContainerClasses = joinClassNames([
+		inputContainerCss(primaryColor),
+		cryptoAmountInputContainerCss,
+		...(submitError ? [inputContainerErrorCss] : [])
+	]);
 
 	return (
 		<form className={formCss} onSubmit={submitDonation}>
@@ -49,19 +57,13 @@ export const CryptoFlow = () => {
 				>
 					<div>
 						<legend className={legendCss}>Crypto currency</legend>
-						<span>Example: BTC</span>
-						<div className={inputContainerClasses}>
-							<input
-								id="stock-amount-input"
-								className={inputCss}
-								type="text"
-								value={cryptoCurrency}
-								onInput={(event) => {
-									setCryptoCurrency(event.currentTarget.value);
-									setSubmitError(null);
-								}}
-							/>
-						</div>
+						<CryptoSelector
+							value={cryptoCurrency}
+							onChange={(cryptoCurrency?: string) => {
+								setCryptoCurrency(cryptoCurrency);
+								setSubmitError(null);
+							}}
+						/>
 					</div>
 					<div>
 						<legend className={legendCss}>Amount</legend>
@@ -69,17 +71,15 @@ export const CryptoFlow = () => {
 							<input
 								id="donation-input"
 								className={inputCss}
-								type="number"
-								// pattern="[0-9]*"
-								inputMode="numeric"
-								min={0}
-								step="0.0000001"
+								type="text"
+								inputMode="decimal"
 								value={cryptoAmount ? cryptoAmount : undefined}
 								onInput={(event) => {
 									setCryptoAmount(Number(event.currentTarget.value));
 									setSubmitError(null);
 								}}
 							/>
+							<span>{cryptoCurrency}</span>
 						</div>
 					</div>
 				</fieldset>
