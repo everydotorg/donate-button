@@ -17,7 +17,7 @@ import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const DafAmountView = ({changeView}: DafFlowViewProps) => {
 	const submitDonation = useSubmitDonation();
-	const {frequency, donationAmount, submitError} = useWidgetContext();
+	const {frequency, donationAmount} = useWidgetContext();
 
 	return (
 		<form className={formCss} onSubmit={submitDonation}>

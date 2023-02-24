@@ -33,7 +33,7 @@ function serializeParams(
 	params: Record<string, string | number | boolean | undefined>
 ) {
 	return Object.entries(params)
-		.filter(([_, value]) => Boolean(value))
+		.filter(([, value]) => Boolean(value))
 		.map((entry) => entry.map((part) => encodeURIComponent(part!)).join('='))
 		.join('&');
 }

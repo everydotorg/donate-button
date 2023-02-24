@@ -11,7 +11,7 @@ import filecoin from 'src/components/widget/icons/CryptoCurrencyIcon/filecoin.sv
 import graph from 'src/components/widget/icons/CryptoCurrencyIcon/graph.svg';
 import litecoin from 'src/components/widget/icons/CryptoCurrencyIcon/litecoin.svg';
 import mobilecoin from 'src/components/widget/icons/CryptoCurrencyIcon/mobilecoin.svg';
-import monero from 'src/components/widget/icons/CryptoCurrencyIcon/monero.svg';
+// import monero from 'src/components/widget/icons/CryptoCurrencyIcon/monero.svg';
 import polkadot from 'src/components/widget/icons/CryptoCurrencyIcon/polkadot.svg';
 import polygon from 'src/components/widget/icons/CryptoCurrencyIcon/polygon.svg';
 import raydium from 'src/components/widget/icons/CryptoCurrencyIcon/raydium.svg';
@@ -23,7 +23,7 @@ import stellar from 'src/components/widget/icons/CryptoCurrencyIcon/stellar.svg'
 import tether from 'src/components/widget/icons/CryptoCurrencyIcon/tether.svg';
 import tezos from 'src/components/widget/icons/CryptoCurrencyIcon/tezos.svg';
 import uniswap from 'src/components/widget/icons/CryptoCurrencyIcon/uniswap.svg';
-import usd_coin from 'src/components/widget/icons/CryptoCurrencyIcon/usd-coin.svg';
+// import usd_coin from 'src/components/widget/icons/CryptoCurrencyIcon/usd-coin.svg';
 import zcash from 'src/components/widget/icons/CryptoCurrencyIcon/zcash.svg';
 import {CryptoCurrency} from 'src/components/widget/types/Crypto';
 

@@ -2,8 +2,6 @@ import cxs from 'cxs';
 import {fieldSetCss} from 'src/components/widget/components/PaymentProcess/styles';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {FontFamily} from 'src/components/widget/theme/font-family';
-import {textSize} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {
 	verticalStackCss,

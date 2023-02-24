@@ -1,6 +1,6 @@
-import { WidgetConfig } from "./WidgetConfig";
+import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
 
-export interface CreateWidgetInSelectorProps extends WidgetConfig{
+export interface CreateWidgetInSelectorProps extends WidgetConfig {
 	/**
 	 * Element to render widget in; takes precedence over selector
 	 */

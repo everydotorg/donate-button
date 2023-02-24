@@ -15,7 +15,7 @@ const defaults: Partial<WidgetConfig> = {
 const DEEP_MERGE_OPTIONS: DeepMergeOptions = {
 	// Don't merge arrays, just overwrite them
 
-	arrayMerge: (_destArray, sourceArray, _options) => sourceArray
+	arrayMerge: (_, sourceArray) => sourceArray
 };
 
 export const mergeConfig = (options: Partial<WidgetConfig>): WidgetConfig => {

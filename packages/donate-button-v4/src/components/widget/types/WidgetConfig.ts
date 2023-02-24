@@ -1,7 +1,7 @@
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
 
-export interface WidgetConfig  {
+export interface WidgetConfig {
 	nonprofitSlug: string;
 
 	fundraiserSlug?: string;
@@ -25,4 +25,4 @@ export interface WidgetConfig  {
 	completeDonationInNewTab?: boolean;
 
 	noExit?: boolean;
-};
+}
