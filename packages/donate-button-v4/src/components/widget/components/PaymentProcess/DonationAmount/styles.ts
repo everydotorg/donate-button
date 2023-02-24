@@ -39,6 +39,8 @@ export const inputCss = cxs({
 	background: 'transparent',
 	width: '100%',
 	minWidth: 'unset',
+	padding: 0,
+	margin: 0,
 	'::placeholder': {
 		fontWeight: 400
 	},

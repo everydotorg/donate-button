@@ -87,10 +87,9 @@ export const inputContainerWithDropDownCss = cxs({
 });
 
 export const cryptoAmountInputContainerCss = cxs({
-	alignItems: 'baseline',
 	gap: Spacing.XS,
 	'> input': {
-		textAlign: 'end'
+		textAlign: 'right'
 	}
 });
 

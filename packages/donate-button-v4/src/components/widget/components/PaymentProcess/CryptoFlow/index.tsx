@@ -1,9 +1,6 @@
 import cxs from 'cxs';
 import {CryptoSelector} from 'src/components/widget/components/PaymentProcess/CryptoFlow/CryptoSelector';
-import {
-	cryptoAmountInputContainerCss,
-	cryptoAmountInputCss
-} from 'src/components/widget/components/PaymentProcess/CryptoFlow/styles';
+import {cryptoAmountInputContainerCss} from 'src/components/widget/components/PaymentProcess/CryptoFlow/styles';
 import {
 	inputContainerCss,
 	inputContainerErrorCss,
