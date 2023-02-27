@@ -22,9 +22,6 @@ export enum CryptoCurrency {
 	UNI = 'UNI',
 	USDC = 'USDC',
 	USDT = 'USDT',
-	// Mistakenly thought these were supported by TGB
-	// XLM = "XLM",
-	// XMR = "XMR",
 	XTZ = 'XTZ',
 	ZEC = 'ZEC'
 }
@@ -41,12 +38,7 @@ export interface SharedCryptoCurrencyConfig {
 	contractType?: ContractType;
 }
 
-export const DISABLED_TOKENS = [
-	// Wyre may or may not be dying - check back in in a few months
-	// (comment by rahul, 2023-01-24)
-	CryptoCurrency.ALGO,
-	CryptoCurrency.MOB
-];
+export const DISABLED_TOKENS = [CryptoCurrency.ALGO, CryptoCurrency.MOB];
 
 /**
  * Base configuration for crypto. Backend and frontend-specific configuration
@@ -183,16 +175,6 @@ export const SharedCryptoCurrencyConfig: {
 		abbreviation: 'USDT',
 		decimalOffset: 6
 	},
-	// [CryptoCurrency.XLM]: {
-	//   displayName: "Stellar",
-	//   abbreviation: "XLM",
-	//   decimalOffset: 7,
-	// },
-	// [CryptoCurrency.XMR]: {
-	//   displayName: "Monero",
-	//   abbreviation: "XMR",
-	//   decimalOffset: 12,
-	// },
 	[CryptoCurrency.XTZ]: {
 		displayName: 'Tezos',
 		abbreviation: 'XTZ',

@@ -11,7 +11,6 @@ import filecoin from 'src/components/widget/icons/CryptoCurrencyIcon/filecoin.sv
 import graph from 'src/components/widget/icons/CryptoCurrencyIcon/graph.svg';
 import litecoin from 'src/components/widget/icons/CryptoCurrencyIcon/litecoin.svg';
 import mobilecoin from 'src/components/widget/icons/CryptoCurrencyIcon/mobilecoin.svg';
-// import monero from 'src/components/widget/icons/CryptoCurrencyIcon/monero.svg';
 import polkadot from 'src/components/widget/icons/CryptoCurrencyIcon/polkadot.svg';
 import polygon from 'src/components/widget/icons/CryptoCurrencyIcon/polygon.svg';
 import raydium from 'src/components/widget/icons/CryptoCurrencyIcon/raydium.svg';
@@ -23,38 +22,35 @@ import stellar from 'src/components/widget/icons/CryptoCurrencyIcon/stellar.svg'
 import tether from 'src/components/widget/icons/CryptoCurrencyIcon/tether.svg';
 import tezos from 'src/components/widget/icons/CryptoCurrencyIcon/tezos.svg';
 import uniswap from 'src/components/widget/icons/CryptoCurrencyIcon/uniswap.svg';
-// import usd_coin from 'src/components/widget/icons/CryptoCurrencyIcon/usd-coin.svg';
 import zcash from 'src/components/widget/icons/CryptoCurrencyIcon/zcash.svg';
 import {CryptoCurrency} from 'src/components/widget/types/Crypto';
 
 const IconForCurrency = {
-	[CryptoCurrency.ALGO]: algorand, // 'Algorand',
-	[CryptoCurrency.APE]: apecoin, // 'Apecoin',
-	[CryptoCurrency.AVAX]: avalanche, // 'Avalanche',
-	[CryptoCurrency.BAT]: basic_attention_token, // 'Basic Attention Token',
-	[CryptoCurrency.BTC]: bitcoin, // 'Bitcoin',
-	[CryptoCurrency.DOGE]: dogecoin, // 'DogeCoin',
-	[CryptoCurrency.DAI]: dai, // 'Dai',
-	[CryptoCurrency.DOT]: polkadot, // 'Polkadot',
-	[CryptoCurrency.ETH]: ethereum, // 'Ethereum',
-	[CryptoCurrency.FIL]: filecoin, // 'Filecoin',
-	[CryptoCurrency.GRT]: graph, // 'The Graph',
-	[CryptoCurrency.LINK]: chainlink, // 'Chainlink',
-	[CryptoCurrency.LTC]: litecoin, // 'Litecoin',
-	[CryptoCurrency.MATIC]: polygon, // 'Polygon',
-	[CryptoCurrency.MOB]: mobilecoin, // 'MobileCoin',
-	[CryptoCurrency.RAY]: raydium, // 'Raydium',
-	[CryptoCurrency.SAMO]: samoyed, // 'Samoyed',
-	[CryptoCurrency.SBR]: saber, // 'Saber',
-	[CryptoCurrency.SHIB]: shiba_inu, // 'Shiba Inu',
-	[CryptoCurrency.SOL]: solana, // 'Solana',
-	[CryptoCurrency.UNI]: uniswap, // 'Uniswap',
-	[CryptoCurrency.USDC]: tether, // 'USD Coin',
-	[CryptoCurrency.USDT]: stellar, // 'Tether',
-	// [CryptoCurrency.XLM]: monero, //"Stellar",
-	// [CryptoCurrency.XMR]: usd_coin, // "Monero",
-	[CryptoCurrency.XTZ]: tezos, // 'Tezos',
-	[CryptoCurrency.ZEC]: zcash // 'ZCash',
+	[CryptoCurrency.ALGO]: algorand,
+	[CryptoCurrency.APE]: apecoin,
+	[CryptoCurrency.AVAX]: avalanche,
+	[CryptoCurrency.BAT]: basic_attention_token,
+	[CryptoCurrency.BTC]: bitcoin,
+	[CryptoCurrency.DOGE]: dogecoin,
+	[CryptoCurrency.DAI]: dai,
+	[CryptoCurrency.DOT]: polkadot,
+	[CryptoCurrency.ETH]: ethereum,
+	[CryptoCurrency.FIL]: filecoin,
+	[CryptoCurrency.GRT]: graph,
+	[CryptoCurrency.LINK]: chainlink,
+	[CryptoCurrency.LTC]: litecoin,
+	[CryptoCurrency.MATIC]: polygon,
+	[CryptoCurrency.MOB]: mobilecoin,
+	[CryptoCurrency.RAY]: raydium,
+	[CryptoCurrency.SAMO]: samoyed,
+	[CryptoCurrency.SBR]: saber,
+	[CryptoCurrency.SHIB]: shiba_inu,
+	[CryptoCurrency.SOL]: solana,
+	[CryptoCurrency.UNI]: uniswap,
+	[CryptoCurrency.USDC]: tether,
+	[CryptoCurrency.USDT]: stellar,
+	[CryptoCurrency.XTZ]: tezos,
+	[CryptoCurrency.ZEC]: zcash
 };
 
 export const CryptoCurrencyIcon = ({currency}: {currency: CryptoCurrency}) => {
