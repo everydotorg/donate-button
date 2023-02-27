@@ -1,13 +1,11 @@
 import {render} from 'preact';
 import EmbedButton from 'src/components/embed-button';
+import {CreateButtonInSelectorProps} from 'src/components/embed-button/types';
+import {CreateWidgetInSelectorProps} from 'src/components/widget/types';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
-import {
-	CreateButtonInSelectorProps,
-} from 'src/components/embed-button/types';
 import {loadFonts} from 'src/loadFonts';
 import {WidgetLoader} from 'src/loaders/Widgetloader';
 import resetcss from 'src/resetCss';
-import { CreateWidgetInSelectorProps } from './components/widget/types';
 
 const DEFAULT_HASH_OPEN_WIDGET = 'donate';
 
@@ -64,9 +62,9 @@ const renderWidget = () => {
 	const hash = window.location?.hash;
 	const shouldShowWidget =
 		hash ===
-			`#${
-				instanceOptions?.openAt ?? baseOptions?.openAt ?? options?.openAt ?? ''
-			}`;
+		`#${
+			instanceOptions?.openAt ?? baseOptions?.openAt ?? options?.openAt ?? ''
+		}`;
 
 	if (shouldShowWidget) {
 		Object.assign(options, {show: true});
@@ -78,23 +76,26 @@ const renderWidget = () => {
 		...instanceOptions
 	};
 
-	render(<WidgetLoader options={finalOptions} hide={hideWidget} />, widgetMountPoint);
+	render(
+		<WidgetLoader options={finalOptions} hide={hideWidget} />,
+		widgetMountPoint
+	);
 };
 
-function showWidget () {
+function showWidget() {
 	Object.assign(options, {show: true});
 	renderWidget();
-};
+}
 
-function hideWidget () {
+function hideWidget() {
 	Object.assign(options, {show: false});
 	renderWidget();
-};
+}
 
-function setOptions (newOptions: Partial<WidgetConfig>) {
+function setOptions(newOptions: Partial<WidgetConfig>) {
 	Object.assign(baseOptions, newOptions);
 	renderWidget();
-};
+}
 
 function updateOptionsAndShowCb(newOptions: WidgetConfig) {
 	const optionsCopy = {...newOptions};
@@ -134,7 +135,7 @@ const createButtonInSelector = ({
 		const href = buttonLink?.getAttribute('href') ?? undefined;
 
 		if (!options.nonprofitSlug && !href) {
-			log('link lacks href', buttonLink)
+			log('link lacks href', buttonLink);
 			return;
 		}
 
@@ -149,8 +150,8 @@ const createButtonInSelector = ({
 };
 
 const createWidgetInSelector = ({
-	element, 
-	selector, 
+	element,
+	selector,
 	...options
 }: CreateWidgetInSelectorProps) => {
 	if (!element && !selector) {
@@ -162,10 +163,10 @@ const createWidgetInSelector = ({
 		return;
 	}
 
-  if (!options.nonprofitSlug) {
-    log('createWidget():', 'must provide nonprofitSlug');
-    return
-  }
+	if (!options.nonprofitSlug) {
+		log('createWidget():', 'must provide nonprofitSlug');
+		return;
+	}
 
 	for (const node of nodes) {
 		node.addEventListener('click', updateOptionsAndShowCb(options));

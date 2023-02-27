@@ -13,6 +13,7 @@ import joinClassNames from 'src/helpers/joinClassNames';
 export const largePaymentMethodSelectListCss = cxs({
 	height: '100%',
 	width: '100%',
+	minWidth: '170px',
 	flexGrow: 1,
 	backgroundColor: COLORS.LightGray,
 	display: 'none',
@@ -55,7 +56,6 @@ export const largePaymentMethodButtonCss = (selected: boolean) =>
 			cursor: 'pointer',
 			background: COLORS.Gray
 		},
-
 		...(selected
 			? {
 					background: 'white',

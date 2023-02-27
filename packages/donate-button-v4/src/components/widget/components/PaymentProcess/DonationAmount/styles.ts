@@ -21,6 +21,7 @@ export const inputContainerCss = (color: string) =>
 		color: COLORS.Text,
 		backgroundColor: COLORS.Gray,
 		border: getColoredBorder(Borders.Normal, COLORS.LightGray),
+		cursor: 'text',
 		':focus-within': {
 			backgroundColor: 'white',
 			borderColor: color
@@ -38,6 +39,8 @@ export const inputCss = cxs({
 	background: 'transparent',
 	width: '100%',
 	minWidth: 'unset',
+	padding: 0,
+	margin: 0,
 	'::placeholder': {
 		fontWeight: 400
 	},

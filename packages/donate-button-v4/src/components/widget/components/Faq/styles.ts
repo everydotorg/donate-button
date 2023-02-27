@@ -51,6 +51,7 @@ export const faqItemConateinerCss = (mobileOnly?: boolean) =>
 export const faqItemButtonCss = (isOpen: boolean) =>
 	cxs({
 		...horizontalStackCss.cxs(Spacing.S),
+		...textSize.xs,
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		width: '100%',
@@ -58,7 +59,6 @@ export const faqItemButtonCss = (isOpen: boolean) =>
 		background: 'transparent',
 		textAlign: 'start',
 		padding: 0,
-		marginBottom: Spacing.XS,
 		':hover': {cursor: 'pointer'},
 		'> svg': {
 			width: '16px',

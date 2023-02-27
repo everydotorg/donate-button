@@ -11,12 +11,28 @@ import {
 interface WidgetContextProps {
 	frequency: DonationFrequency;
 	setFrequency: StateUpdater<DonationFrequency>;
+
 	donationAmount?: number;
 	setDonationAmount: StateUpdater<number | undefined>;
+
 	submitError: string | null;
 	setSubmitError: StateUpdater<string | null>;
+
 	selectedPaymentMethod: PaymentMethod;
 	setSelectedPaymentMethod: StateUpdater<PaymentMethod>;
+
+	stockAmount?: number;
+	setStockAmount: StateUpdater<number | undefined>;
+
+	stockSymbol?: string;
+	setStockSymbol: StateUpdater<string | undefined>;
+
+	cryptoAmount?: number;
+	setCryptoAmount: StateUpdater<number | undefined>;
+
+	cryptoCurrency?: string;
+	setCryptoCurrency: StateUpdater<string | undefined>;
+
 	paymentRequestAvailable: PaymentRequestAvailable;
 	hideWidget: () => void;
 }
@@ -39,6 +55,12 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 	const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(
 		config.methods[0]
 	);
+
+	const [stockAmount, setStockAmount] = useState<number>();
+	const [stockSymbol, setStockSymbol] = useState<string>();
+
+	const [cryptoAmount, setCryptoAmount] = useState<number>();
+	const [cryptoCurrency, setCryptoCurrency] = useState<string>();
 
 	const [paymentRequestAvailable, setPaymentRequestAvailable] =
 		useState<PaymentRequestAvailable>({
@@ -67,6 +89,14 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 				setSubmitError,
 				selectedPaymentMethod,
 				setSelectedPaymentMethod,
+				stockAmount,
+				setStockAmount,
+				stockSymbol,
+				setStockSymbol,
+				cryptoAmount,
+				setCryptoAmount,
+				cryptoCurrency,
+				setCryptoCurrency,
 				paymentRequestAvailable
 			}}
 		>

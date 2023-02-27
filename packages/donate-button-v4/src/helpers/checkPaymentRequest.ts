@@ -20,7 +20,7 @@ export async function checkPaymentRequest(): Promise<PaymentRequestAvailable> {
 		]);
 
 		return {googlePay, applePay};
-	} catch (error: unknown) {
+	} catch {
 		return {googlePay: false, applePay: false};
 	}
 }

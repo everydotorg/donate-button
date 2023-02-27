@@ -9,6 +9,7 @@ import {
 } from 'src/components/widget/theme/spacing';
 
 export const nonprofitNameCss = cxs({
+	lineHeight: '20px',
 	'> span': {
 		fontWeight: 700
 	}

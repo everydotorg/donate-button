@@ -1,4 +1,5 @@
 const resetcss = `
+
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
@@ -17,6 +18,7 @@ const resetcss = `
     border: 0;
     font-size: 100%;
     font: inherit;
+    font-family: 'Basis Grotesque Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Roboto, sans-serif;
     vertical-align: baseline;
   }
   /* HTML5 display-role reset for older browsers */
@@ -41,6 +43,11 @@ const resetcss = `
   table {
     border-collapse: collapse;
     border-spacing: 0;
+  }
+
+  button {
+    color: unset;
+    background: unset;
   }
 `;
 
