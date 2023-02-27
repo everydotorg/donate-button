@@ -1,3 +1,4 @@
+import {useMemo} from 'preact/hooks';
 import {JSXInternal} from 'preact/src/jsx';
 import {cryptoAmountInputContainerCss} from 'src/components/widget/components/PaymentProcess/CryptoFlow/styles';
 import {
@@ -7,6 +8,7 @@ import {
 } from 'src/components/widget/components/PaymentProcess/DonationAmount/styles';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
+import {getStepForCurrencyAmountInput} from 'src/helpers/getStepForCurrencyAmountInput';
 import joinClassNames from 'src/helpers/joinClassNames';
 
 export const CryptoAmountInput = () => {
@@ -53,6 +55,7 @@ export const CryptoAmountInput = () => {
 				type="number"
 				inputMode="decimal"
 				pattern="[+-]?(\d*\.)?\d+"
+				step={getStepForCurrencyAmountInput(cryptoCurrency)}
 				value={cryptoAmount}
 				onInput={onAmountInput}
 			/>
