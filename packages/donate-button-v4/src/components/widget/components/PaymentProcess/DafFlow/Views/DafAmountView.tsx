@@ -13,11 +13,12 @@ import {
 } from 'src/components/widget/components/PaymentProcess/styles';
 import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
+import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
 import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const DafAmountView = ({changeView}: DafFlowViewProps) => {
 	const submitDonation = useSubmitDonation();
-	const {frequency, donationAmount} = useWidgetContext();
+	const {donationAmount, selectedPaymentMethod} = useWidgetContext();
 
 	return (
 		<form className={formCss} onSubmit={submitDonation}>
@@ -33,7 +34,7 @@ export const DafAmountView = ({changeView}: DafFlowViewProps) => {
 				<SubmitButton
 					disabled={!donationAmount || Number.isNaN(donationAmount)}
 				>
-					{getSubmitButtonText(donationAmount, frequency)}
+					{getSubmitButtonText({method: PaymentMethod.DAF})}
 				</SubmitButton>
 				<RedirectNotice />
 			</div>

@@ -16,6 +16,8 @@ import {
 import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {verticalStackCss, Spacing} from 'src/components/widget/theme/spacing';
+import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
+import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const CryptoFlow = () => {
 	const submitDonation = useSubmitDonation();
@@ -39,7 +41,7 @@ export const CryptoFlow = () => {
 					</div>
 				</fieldset>
 				<SubmitButton disabled={!cryptoAmount || !cryptoCurrency}>
-					Next
+					{getSubmitButtonText({method: PaymentMethod.CRYPTO, cryptoCurrency})}
 				</SubmitButton>
 				<RedirectNotice />
 			</div>
