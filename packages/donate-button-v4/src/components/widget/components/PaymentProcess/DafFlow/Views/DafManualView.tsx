@@ -12,6 +12,8 @@ import {
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {Spacing, verticalStackCss} from 'src/components/widget/theme/spacing';
+import {TEAM_EMAIL} from 'src/constants/url';
+import {mailToLink} from 'src/helpers/mailToLink';
 
 export const DafManualView = ({changeView}: DafFlowViewProps) => {
 	const {primaryColor} = useConfigContext();
@@ -42,9 +44,12 @@ export const DafManualView = ({changeView}: DafFlowViewProps) => {
 						You may also email us at{' '}
 						<a
 							className={linkCss(primaryColor)}
-							href="mailto:team@every.org?subject=Donation%20via%20DAF"
+							href={mailToLink({
+								address: TEAM_EMAIL,
+								subject: `Donation via DAF`
+							})}
 						>
-							team@every.org
+							{TEAM_EMAIL}
 						</a>{' '}
 						with the memo or to let us know if you wish to share your contact
 						information with the nonprofit/campaign. By default, we do not share
