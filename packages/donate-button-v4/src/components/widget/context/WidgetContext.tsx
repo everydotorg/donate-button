@@ -1,6 +1,7 @@
 import {createContext, FunctionalComponent} from 'preact';
 import {StateUpdater, useEffect, useState} from 'preact/hooks';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
+import {CryptoCurrency} from 'src/components/widget/types/Crypto';
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
 import {
@@ -30,8 +31,8 @@ interface WidgetContextProps {
 	cryptoAmount?: number;
 	setCryptoAmount: StateUpdater<number | undefined>;
 
-	cryptoCurrency?: string;
-	setCryptoCurrency: StateUpdater<string | undefined>;
+	cryptoCurrency?: CryptoCurrency;
+	setCryptoCurrency: StateUpdater<CryptoCurrency | undefined>;
 
 	paymentRequestAvailable: PaymentRequestAvailable;
 	hideWidget: () => void;
@@ -60,7 +61,7 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 	const [stockSymbol, setStockSymbol] = useState<string>();
 
 	const [cryptoAmount, setCryptoAmount] = useState<number>();
-	const [cryptoCurrency, setCryptoCurrency] = useState<string>();
+	const [cryptoCurrency, setCryptoCurrency] = useState<CryptoCurrency>();
 
 	const [paymentRequestAvailable, setPaymentRequestAvailable] =
 		useState<PaymentRequestAvailable>({

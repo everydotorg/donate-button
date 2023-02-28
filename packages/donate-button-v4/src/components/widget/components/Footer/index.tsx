@@ -11,10 +11,12 @@ import {useNonprofitOrError} from 'src/components/widget/hooks/useNonprofit';
 import {
 	TERMS_URL,
 	HELP_URL,
-	FEEDBACK_URL,
-	PRIVACY_URL
+	PRIVACY_URL,
+	SUPPORT_EMAIL
 } from 'src/constants/url';
+import {mailToLink} from 'src/helpers/mailToLink';
 
+const FEEDBACK_URL = mailToLink({address: SUPPORT_EMAIL});
 interface FooterLinkProps
 	extends JSXInternal.HTMLAttributes<HTMLAnchorElement> {}
 const FooterLink: FunctionComponent<FooterLinkProps> = ({

@@ -16,7 +16,12 @@ import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const DefaultFlow = () => {
-	const {frequency, donationAmount} = useWidgetContext();
+	const {
+		frequency,
+		donationAmount,
+		selectedPaymentMethod,
+		paymentRequestAvailable
+	} = useWidgetContext();
 	const submitDonation = useSubmitDonation();
 	return (
 		<form className={formCss} onSubmit={submitDonation}>
@@ -32,7 +37,10 @@ export const DefaultFlow = () => {
 						Number.isNaN(donationAmount)
 					}
 				>
-					{getSubmitButtonText(donationAmount, frequency)}
+					{getSubmitButtonText({
+						method: selectedPaymentMethod,
+						paymentRequestIsApplePay: paymentRequestAvailable.applePay
+					})}
 				</SubmitButton>
 				<RedirectNotice />
 			</div>

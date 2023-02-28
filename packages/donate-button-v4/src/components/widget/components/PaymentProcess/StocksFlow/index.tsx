@@ -20,6 +20,8 @@ import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {verticalStackCss, Spacing} from 'src/components/widget/theme/spacing';
+import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
+import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const StocksFlow = () => {
 	const submitDonation = useSubmitDonation();
@@ -88,7 +90,7 @@ export const StocksFlow = () => {
 					</div>
 				</fieldset>
 				<SubmitButton disabled={!stockAmount || !stockSymbol}>
-					Next
+					{getSubmitButtonText({method: PaymentMethod.STOCKS})}
 				</SubmitButton>
 				<RedirectNotice />
 			</div>

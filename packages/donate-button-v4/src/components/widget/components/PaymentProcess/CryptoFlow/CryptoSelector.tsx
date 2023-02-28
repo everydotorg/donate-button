@@ -19,6 +19,10 @@ import {
 	inputCss
 } from 'src/components/widget/components/PaymentProcess/DonationAmount/styles';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
+import {
+	useNonprofit,
+	useNonprofitOrError
+} from 'src/components/widget/hooks/useNonprofit';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {ArrowIcon} from 'src/components/widget/icons/ArrowIcon';
 import {CryptoCurrencyIcon} from 'src/components/widget/icons/CryptoCurrencyIcon';
@@ -29,7 +33,9 @@ import {
 	CryptoCurrencyOption,
 	DISABLED_TOKENS
 } from 'src/components/widget/types/Crypto';
+import {CRYPTO_EMAIL} from 'src/constants/url';
 import joinClassNames from 'src/helpers/joinClassNames';
+import {mailToLink} from 'src/helpers/mailToLink';
 
 export function displayLabelForCryptoCurrency(cc: CryptoCurrency) {
 	const config = SharedCryptoCurrencyConfig[cc];
@@ -91,6 +97,26 @@ const CryptoSelectorDropDownItem = ({
 		</button>
 	</li>
 );
+
+const CryptoSupprotLink = () => {
+	const nonprofit = useNonprofitOrError();
+
+	const {primaryColor} = useConfigContext();
+	const cryptoSupportBody = `Contents: I would like to make a crypto donation to support https://www.every.org/${nonprofit.primarySlug}.\n\nMy name:\nToken name:\nToken symbol:\nToken quantity:\n\nPlease reply back with an address where I can donate, as this is worth over $5,000 USD.`;
+
+	return (
+		<a
+			className={linkCss(primaryColor)}
+			href={mailToLink({
+				address: CRYPTO_EMAIL,
+				subject: `Crypto donation for ${nonprofit.name}`,
+				body: cryptoSupportBody
+			})}
+		>
+			{CRYPTO_EMAIL}
+		</a>
+	);
+};
 
 export const CryptoSelector = () => {
 	const {submitError, cryptoCurrency, setCryptoCurrency} = useWidgetContext();
@@ -182,14 +208,7 @@ export const CryptoSelector = () => {
 								<div className={cxs({padding: '20px'})}>
 									We don&apos;t currently support this coin on our site, but for
 									donations worth over $5,000 USD we can do it manually. Please
-									email{' '}
-									<a
-										className={linkCss(primaryColor)}
-										href="mailto:crypto@every.org"
-									>
-										crypto@every.org
-									</a>{' '}
-									to arrange.
+									email <CryptoSupprotLink /> to arrange.
 								</div>
 							) : (
 								<ul>
