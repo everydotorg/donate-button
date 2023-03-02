@@ -107,7 +107,7 @@ export const Faq = () => {
 		{
 			id: 'p2p',
 			mobileOnly: true,
-			title: `How else can I support the ${nonprofit.name}`,
+			title: `How else can I support ${nonprofit.name}`,
 			description: (
 				<p>
 					You can also rally your friends, family, and social networks to
