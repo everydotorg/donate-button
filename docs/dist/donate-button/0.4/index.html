@@ -8,31 +8,8 @@
 
 	<body style="height: 200vh">
 		<div id="edo-donate-btn">
-			<a href="https://www.every.org/closegap#donate">Donate</a>
+			<a href="https://www.every.org/closegap#/donate">Donate</a>
 		</div>
-		<script>
-			function createWidget() {
-				everyDotOrgDonateButton.createButton({
-					selector: '#edo-donate-btn',
-					fontSize: '18px',
-				});
-				everyDotOrgDonateButton.createWidget({
-					selector: '#edo-donate-btn',
-					nonprofitSlug: 'closegap',
-					defaultFrequency: 'once',
-					addAmounts: [10, 20, 50],
-					defaultDonationAmount: 25,
-					completeDonationInNewTab: true,
-				});
-			}
-			if (window.everyDotOrgDonateButton) {
-				createWidget();
-			} else {
-				document
-					.querySelector('.edo-donate-btn-js')
-					.addEventListener('load', createWidget);
-			}
-		</script>
 	
 
 </body></html>
