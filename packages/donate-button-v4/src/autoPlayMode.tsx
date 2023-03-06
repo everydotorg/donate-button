@@ -131,37 +131,39 @@ function createButton({element, ...options}: CreateButtonProps) {
 	preactRender(<EmbedButton {...options} />, buttonContainer, element);
 }
 
+function findAndReplaceLinks() {
+	const links = document.querySelectorAll("*[href^='https://www.every.org/']");
+
+	links.forEach((link) => {
+		const urlString = link.getAttribute('href');
+		if (urlString?.includes('#/donate')) {
+			const options = parseUrl(urlString);
+
+			if (!options) {
+				return;
+			}
+
+			const widget = createWidget(options);
+
+			createButton({
+				element: link,
+				onClick: () => {
+					widget.show();
+				},
+				...options
+			});
+		}
+	});
+}
+
 export default function autoPlayMode() {
 	loadFonts();
+	findAndReplaceLinks();
 
 	const observer = new MutationObserver((_, observer) => {
 		// disconnect before changing DOM so as not to cause an infinite loop
 		observer.disconnect();
-
-		const links = document.querySelectorAll(
-			"*[href^='https://www.every.org/']"
-		);
-
-		links.forEach((link) => {
-			const urlString = link.getAttribute('href');
-			if (urlString?.includes('#/donate')) {
-				const options = parseUrl(urlString);
-
-				if (!options) {
-					return;
-				}
-
-				const widget = createWidget(options);
-
-				createButton({
-					element: link,
-					onClick: () => {
-						widget.show();
-					},
-					...options
-				});
-			}
-		});
+		findAndReplaceLinks();
 		observer.observe(document, OBSERVER_OPTIONS);
 	});
 
