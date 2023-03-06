@@ -7,8 +7,8 @@ import resetcss from 'src/resetCss';
 
 const OBSERVER_OPTIONS = {
 	childList: true,
-	subtree: true
-    attributeFilter: ['href']
+	subtree: true,
+	attributeFilter: ['href']
 };
 
 interface CreateButtonProps extends Partial<WidgetConfig> {
@@ -135,6 +135,7 @@ export default function autoPlayMode() {
 	loadFonts();
 
 	const observer = new MutationObserver((_, observer) => {
+		// disconnect before changing DOM so as not to cause an infinite loop
 		observer.disconnect();
 
 		const links = document.querySelectorAll(
