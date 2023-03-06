@@ -8,6 +8,7 @@ import resetcss from 'src/resetCss';
 const OBSERVER_OPTIONS = {
 	childList: true,
 	subtree: true
+    attributeFilter: ['href']
 };
 
 interface CreateButtonProps extends Partial<WidgetConfig> {
