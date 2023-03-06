@@ -10,7 +10,7 @@
 		"tsc": "tsc",
 		"test": "echo 'no tests'",
 		"build": "preact build --no-prerender --clean  --no-sw",
-		"postbuild": "cp dist/donate-button/0.4/index.js dist/donate-button/0.4/donate-button.js",
+		"postbuild": "cp dist/donate-button/0.4/index.js dist/donate-button/0.4/button.js",
 		"serve": "preact serve",
 		"dev": "preact watch -c ./preact.config.js --no-prerender --no-sw",
 		"lint": "xo",

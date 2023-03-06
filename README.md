@@ -13,13 +13,29 @@ paste this code and and then replace lilbubsbigfund with the correct handle.
 <!DOCTYPE html>
 <html lang="en">
   <body>
+    <a href="https://www.every.org/lilbubsbigfund#/donate">Donate</a>
+    <script async defer src="https://embeds.every.org/0.4/button.js"></script>
+  </body>
+</html>
+```
+
+## Configure
+
+To configure your button manualy, add `?explicit=1` to the script `src`
+
+Here is an example html file with a manual configuration.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <body>
     <div id="edo-donate-btn">
-      <a href="https://www.every.org/lilbubsbigfund/donate">Donate</a>
+      <a href="https://www.every.org/lilbubsbigfund#/donate">Donate</a>
     </div>
     <script
       async
       defer
-      src="https://assets.every.org/dist/donate-button/0.4/index.js"
+      src="https://embeds.every.org/0.4/button.js?explicit=1"
       id="edo-donate-btn-js"
     ></script>
     <script>
@@ -41,8 +57,6 @@ paste this code and and then replace lilbubsbigfund with the correct handle.
   </body>
 </html>
 ```
-
-## Configure
 
 ### Widget
 
