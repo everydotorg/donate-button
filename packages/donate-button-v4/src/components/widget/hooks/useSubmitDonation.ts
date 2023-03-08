@@ -36,7 +36,7 @@ export const useSubmitDonation = () => {
 			const target = config.completeDonationInNewTab ? '_blank' : '_self';
 
 			const baseParameters = {
-				method: selectedPaymentMethod,
+				methods: [selectedPaymentMethod],
 				nonprofitSlug: config.nonprofitSlug,
 				fundraiserSlug: config.fundraiserSlug
 			};

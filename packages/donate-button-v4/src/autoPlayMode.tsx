@@ -1,6 +1,7 @@
 import {render as preactRender} from 'preact';
 import EmbedButton from 'src/components/embed-button';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
+import {methodsFromString} from 'src/helpers/methodsFromString';
 import {loadFonts} from 'src/loadFonts';
 import {WidgetLoader} from 'src/loaders/Widgetloader';
 import resetcss from 'src/resetCss';
@@ -68,13 +69,17 @@ const parseUrl = (
 	const fundraiserSlug = url.pathname.split('/f/')[1];
 	const nonprofitSlug = url.pathname.split('/')[1];
 
+	const searchParameters = new URLSearchParams(url.search);
+	const methods = methodsFromString(searchParameters.get('method'));
+
 	if (!nonprofitSlug) {
 		return;
 	}
 
 	return {
 		fundraiserSlug,
-		nonprofitSlug
+		nonprofitSlug,
+		methods
 	};
 };
 
