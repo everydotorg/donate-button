@@ -21,8 +21,9 @@ export interface DonateButtonOptions {
 	 * the modal. Defaults to true.
 	 */
 	readonly noExit?: boolean;
-}
 
+	url?: string;
+}
 export interface EmbedButtonOptions extends DonateButtonOptions {
 	readonly label?: string;
 	readonly className?: string;

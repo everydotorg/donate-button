@@ -19,9 +19,10 @@ const EmbedButton = ({
 	className,
 	onClick,
 	target = '_blank',
+	url: initialUrl,
 	...donateOptions
 }: EmbedButtonOptions) => {
-	const url = constructBasicDonateUrl(donateOptions);
+	const url = initialUrl ? initialUrl : constructBasicDonateUrl(donateOptions);
 	return (
 		<a
 			href={url}

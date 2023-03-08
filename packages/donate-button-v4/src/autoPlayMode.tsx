@@ -16,6 +16,7 @@ interface CreateButtonProps extends Partial<WidgetConfig> {
 	element: Element;
 	nonprofitSlug: string;
 	onClick: () => void;
+	url?: string;
 }
 
 interface CreateWidgetProps extends Partial<WidgetConfig> {
@@ -155,7 +156,8 @@ function findAndReplaceLinks() {
 				onClick: () => {
 					widget.show();
 				},
-				...options
+				...options,
+				url: urlString
 			});
 		}
 	});
