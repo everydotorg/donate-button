@@ -1,5 +1,6 @@
 import {render as preactRender} from 'preact';
 import EmbedButton from 'src/components/embed-button';
+import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
 import {frequencyFromString} from 'src/helpers/frequencyFromString';
 import {methodsFromString} from 'src/helpers/methodsFromString';
@@ -77,6 +78,8 @@ const parseUrl = (
 		searchParameters.get('frequency')
 	);
 
+	const lockMonthlyFrequency = defaultFrequency === DonationFrequency.Monthly;
+
 	if (!nonprofitSlug) {
 		return;
 	}
@@ -85,7 +88,8 @@ const parseUrl = (
 		fundraiserSlug,
 		nonprofitSlug,
 		defaultFrequency,
-		methods
+		methods,
+		lockMonthlyFrequency
 	};
 };
 

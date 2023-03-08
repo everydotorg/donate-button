@@ -14,6 +14,8 @@ export interface WidgetConfig {
 
 	primaryColor: string;
 
+	lockMonthlyFrequency: boolean;
+
 	defaultDonationAmount?: number;
 
 	minDonationAmount: number;

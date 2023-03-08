@@ -1,3 +1,4 @@
+import {useMemo} from 'preact/hooks';
 import {IconForPaymentMethod} from 'src/components/widget/components/PaymentProcess/PaymentMethodSelect/IconForPaymentMethod';
 import {NameForPaymentMethod} from 'src/components/widget/components/PaymentProcess/PaymentMethodSelect/NameForPaymentMethod';
 import {
@@ -10,16 +11,32 @@ import {
 import {legendCss} from 'src/components/widget/components/PaymentProcess/styles';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
-import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
+import {
+	OneTimeFrequencyMethods,
+	PaymentMethod
+} from 'src/components/widget/types/PaymentMethod';
 
 const usePaymentMethods = () => {
-	const {methods} = useConfigContext();
+	const {methods, lockMonthlyFrequency} = useConfigContext();
 	const {paymentRequestAvailable} = useWidgetContext();
 
-	const filteredMethods = methods.filter((method) =>
-		method === PaymentMethod.PAYMENT_REQUEST
-			? paymentRequestAvailable.applePay || paymentRequestAvailable.googlePay
-			: true
+	const filteredMethods = useMemo(
+		() =>
+			methods.filter((method) => {
+				if (lockMonthlyFrequency && OneTimeFrequencyMethods.includes(method)) {
+					return false;
+				}
+
+				if (method === PaymentMethod.PAYMENT_REQUEST) {
+					return (
+						paymentRequestAvailable.applePay ||
+						paymentRequestAvailable.googlePay
+					);
+				}
+
+				return true;
+			}),
+		[methods, lockMonthlyFrequency, paymentRequestAvailable]
 	);
 
 	return filteredMethods;
