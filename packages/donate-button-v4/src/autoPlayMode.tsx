@@ -1,6 +1,7 @@
 import {render as preactRender} from 'preact';
 import EmbedButton from 'src/components/embed-button';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
+import {frequencyFromString} from 'src/helpers/frequencyFromString';
 import {methodsFromString} from 'src/helpers/methodsFromString';
 import {loadFonts} from 'src/loadFonts';
 import {WidgetLoader} from 'src/loaders/Widgetloader';
@@ -72,6 +73,9 @@ const parseUrl = (
 
 	const searchParameters = new URLSearchParams(url.search);
 	const methods = methodsFromString(searchParameters.get('method'));
+	const defaultFrequency = frequencyFromString(
+		searchParameters.get('frequency')
+	);
 
 	if (!nonprofitSlug) {
 		return;
@@ -80,6 +84,7 @@ const parseUrl = (
 	return {
 		fundraiserSlug,
 		nonprofitSlug,
+		defaultFrequency,
 		methods
 	};
 };
