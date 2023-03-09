@@ -183,10 +183,18 @@ export default function autoPlayMode() {
 	loadFonts();
 	findAndReplaceLinks();
 
-	const observer = new MutationObserver((_, observer) => {
+	const observer = new MutationObserver((mutations, observer) => {
 		// disconnect before changing DOM so as not to cause an infinite loop
 		observer.disconnect();
-		findAndReplaceLinks();
+
+		const isLinksChanged = Boolean(
+			mutations.some((mutation) => mutation.target.nodeName === 'A')
+		);
+
+		if (isLinksChanged) {
+			findAndReplaceLinks();
+		}
+
 		observer.observe(document, OBSERVER_OPTIONS);
 	});
 
