@@ -160,14 +160,21 @@ function findAndReplaceLinks() {
 
 			const widget = createWidget(options);
 
-			createButton({
-				element: link,
-				onClick: () => {
+			if (link.getAttribute('data-edo-button') === null) {
+				link.addEventListener('click', (event) => {
+					event.preventDefault();
 					widget.show();
-				},
-				...options,
-				url: urlString
-			});
+				});
+			} else {
+				createButton({
+					element: link,
+					onClick: () => {
+						widget.show();
+					},
+					...options,
+					url: urlString
+				});
+			}
 		}
 	});
 }
@@ -176,10 +183,18 @@ export default function autoPlayMode() {
 	loadFonts();
 	findAndReplaceLinks();
 
-	const observer = new MutationObserver((_, observer) => {
+	const observer = new MutationObserver((mutations, observer) => {
 		// disconnect before changing DOM so as not to cause an infinite loop
 		observer.disconnect();
-		findAndReplaceLinks();
+
+		const isLinksChanged = Boolean(
+			mutations.some((mutation) => mutation.target.nodeName === 'A')
+		);
+
+		if (isLinksChanged) {
+			findAndReplaceLinks();
+		}
+
 		observer.observe(document, OBSERVER_OPTIONS);
 	});
 
