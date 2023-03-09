@@ -1,6 +1,9 @@
 import {render as preactRender} from 'preact';
 import EmbedButton from 'src/components/embed-button';
+import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
+import {frequencyFromString} from 'src/helpers/frequencyFromString';
+import {methodsFromString} from 'src/helpers/methodsFromString';
 import {loadFonts} from 'src/loadFonts';
 import {WidgetLoader} from 'src/loaders/Widgetloader';
 import resetcss from 'src/resetCss';
@@ -15,6 +18,7 @@ interface CreateButtonProps extends Partial<WidgetConfig> {
 	element: Element;
 	nonprofitSlug: string;
 	onClick: () => void;
+	url?: string;
 }
 
 interface CreateWidgetProps extends Partial<WidgetConfig> {
@@ -68,13 +72,24 @@ const parseUrl = (
 	const fundraiserSlug = url.pathname.split('/f/')[1];
 	const nonprofitSlug = url.pathname.split('/')[1];
 
+	const searchParameters = new URLSearchParams(url.search);
+	const methods = methodsFromString(searchParameters.get('method'));
+	const defaultFrequency = frequencyFromString(
+		searchParameters.get('frequency')
+	);
+
+	const lockMonthlyFrequency = defaultFrequency === DonationFrequency.Monthly;
+
 	if (!nonprofitSlug) {
 		return;
 	}
 
 	return {
 		fundraiserSlug,
-		nonprofitSlug
+		nonprofitSlug,
+		defaultFrequency,
+		methods,
+		lockMonthlyFrequency
 	};
 };
 
@@ -150,7 +165,8 @@ function findAndReplaceLinks() {
 				onClick: () => {
 					widget.show();
 				},
-				...options
+				...options,
+				url: urlString
 			});
 		}
 	});
