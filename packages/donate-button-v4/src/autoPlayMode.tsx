@@ -160,7 +160,7 @@ function findAndReplaceLinks() {
 
 			const widget = createWidget(options);
 
-			if (link.getAttribute('data-every-button') === null) {
+			if (link.getAttribute('data-every-style') === null) {
 				link.addEventListener('click', (event) => {
 					event.preventDefault();
 					widget.show();

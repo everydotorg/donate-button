@@ -9,14 +9,16 @@ See some demoes at https://embeds.every.org/0.4. And see this in production help
 Here is an example html file with a donate button for https://www.every.org/lilbubsbigfund. You can copy
 paste this code and and then replace lilbubsbigfund with the correct handle.
 
-If you want us to style the button for you, add `data-every-button` and it will use Every.org styling.
+The below code will use Every.org styling, because the `a` tag has the `data-every-style` attribute. To use your own styling, remove that attribute and add your own class or css.
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <script async defer src="https://embeds.every.org/0.4/button.js" />
+  </head>
   <body>
-    <a href="https://www.every.org/lilbubsbigfund#/donate">Donate</a>
-    <script async defer src="https://embeds.every.org/0.4/button.js"></script>
+    <a data-every-style href="https://www.every.org/lilbubsbigfund#/donate">Donate</a>
   </body>
 </html>
 ```
