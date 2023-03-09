@@ -160,14 +160,21 @@ function findAndReplaceLinks() {
 
 			const widget = createWidget(options);
 
-			createButton({
-				element: link,
-				onClick: () => {
+			if (link.getAttribute('data-edo-button') === null) {
+				link.addEventListener('click', (event) => {
+					event.preventDefault();
 					widget.show();
-				},
-				...options,
-				url: urlString
-			});
+				});
+			} else {
+				createButton({
+					element: link,
+					onClick: () => {
+						widget.show();
+					},
+					...options,
+					url: urlString
+				});
+			}
 		}
 	});
 }

@@ -9,6 +9,8 @@ See some demoes at https://embeds.every.org/0.4. And see this in production help
 Here is an example html file with a donate button for https://www.every.org/lilbubsbigfund. You can copy
 paste this code and and then replace lilbubsbigfund with the correct handle.
 
+If you want us to style the button for you, add `data-edo-button` and it will use Every.org styling.
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
