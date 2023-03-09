@@ -33,7 +33,7 @@ import {WidgetConfig} from 'src/components/widget/types/widget-config';
 import constructEveryUrl from 'src/helpers/construct-every-url';
 import {mergeConfig} from 'src/helpers/options-types';
 
-cxs.prefix('edoWidget-');
+cxs.prefix('everyWidget-');
 
 const resetCss = cxs({
 	boxSizing: 'border-box',

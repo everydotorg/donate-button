@@ -109,19 +109,19 @@ function mountWidgetContainer() {
 	widgetContainer.id = 'widget-container';
 	shadowRoot.append(widgetContainer);
 
-	const edoStyles: HTMLStyleElement | null =
-		document.querySelector('#edo-styles');
+	const everyStyles: HTMLStyleElement | null =
+		document.querySelector('#every-styles');
 
-	if (edoStyles) {
-		const rules = Object.values(edoStyles.sheet?.cssRules ?? {})
+	if (everyStyles) {
+		const rules = Object.values(everyStyles.sheet?.cssRules ?? {})
 			.map((rule) => rule.cssText)
 			.join('\n');
 
-		const edoShadowStyles = document.createElement('style');
-		edoShadowStyles.id = 'edo-shadow-styles';
-		edoShadowStyles.innerHTML = resetcss + rules;
+		const everyShadowStyles = document.createElement('style');
+		everyShadowStyles.id = 'every-shadow-styles';
+		everyShadowStyles.innerHTML = resetcss + rules;
 
-		widgetContainer.append(edoShadowStyles);
+		widgetContainer.append(everyShadowStyles);
 	}
 }
 
@@ -160,7 +160,7 @@ function findAndReplaceLinks() {
 
 			const widget = createWidget(options);
 
-			if (link.getAttribute('data-edo-button') === null) {
+			if (link.getAttribute('data-every-button') === null) {
 				link.addEventListener('click', (event) => {
 					event.preventDefault();
 					widget.show();

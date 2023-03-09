@@ -9,7 +9,7 @@ See some demoes at https://embeds.every.org/0.4. And see this in production help
 Here is an example html file with a donate button for https://www.every.org/lilbubsbigfund. You can copy
 paste this code and and then replace lilbubsbigfund with the correct handle.
 
-If you want us to style the button for you, add `data-edo-button` and it will use Every.org styling.
+If you want us to style the button for you, add `data-every-button` and it will use Every.org styling.
 
 ```html
 <!DOCTYPE html>
@@ -31,29 +31,29 @@ Here is an example html file with a manual configuration.
 <!DOCTYPE html>
 <html lang="en">
   <body>
-    <div id="edo-donate-btn">
+    <div id="every-donate-btn">
       <a href="https://www.every.org/lilbubsbigfund#/donate">Donate</a>
     </div>
     <script
       async
       defer
       src="https://embeds.every.org/0.4/button.js?explicit=1"
-      id="edo-donate-btn-js"
+      id="every-donate-btn-js"
     ></script>
     <script>
       function createWidget() {
         everyDotOrgDonateButton.createButton({
-          selector: "#edo-donate-btn",
+          selector: "#every-donate-btn",
         });
         everyDotOrgDonateButton.createWidget({
-          selector: "#edo-donate-btn",
+          selector: "#every-donate-btn",
           nonprofitSlug: "lilbubsbigfund",
         });
       }
       if (window.everyDotOrgDonateButton) {
         createWidget();
       } else {
-        document.getElementById("edo-donate-btn-js").onload = createWidget;
+        document.getElementById("every-donate-btn-js").onload = createWidget;
       }
     </script>
   </body>
