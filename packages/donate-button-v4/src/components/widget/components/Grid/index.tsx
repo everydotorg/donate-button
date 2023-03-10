@@ -30,19 +30,19 @@ const gridCss = cxs({
 		}
 	},
 
-	'& > #edo-header': {
+	'& > #every-header': {
 		gridArea: 'header',
 		display: 'block',
 		[BREAKPOINTS.TabletLandscapeUp]: {
 			display: 'none'
 		}
 	},
-	'& > #edo-promoBanners': {gridArea: 'promoBanners'},
-	'& > #edo-nonprofitInfo': {gridArea: 'nonprofitInfo'},
-	'& > #edo-paymentProcess': {gridArea: 'paymentProcess'},
-	'& > #edo-faq': {gridArea: 'faq'},
-	'& > #edo-fundraiserLink': {gridArea: 'fundraiserLink'},
-	'& > #edo-footer': {gridArea: 'footer'}
+	'& > #every-promoBanners': {gridArea: 'promoBanners'},
+	'& > #every-nonprofitInfo': {gridArea: 'nonprofitInfo'},
+	'& > #every-paymentProcess': {gridArea: 'paymentProcess'},
+	'& > #every-faq': {gridArea: 'faq'},
+	'& > #every-fundraiserLink': {gridArea: 'fundraiserLink'},
+	'& > #every-footer': {gridArea: 'footer'}
 });
 
 export const Grid: FunctionalComponent = ({children}) => {

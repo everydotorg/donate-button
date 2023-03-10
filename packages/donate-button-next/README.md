@@ -13,24 +13,24 @@ paste this code and and then replace lilbubsbigfund with the correct handle.
 <!DOCTYPE html>
 <html lang="en">
   <body>
-    <div id="edo-donate-btn">
+    <div id="every-donate-btn">
       <a href="https://www.every.org/lilbubsbigfund/donate">Donate</a>
     </div>
     <script
       async
       defer
       src="https://assets.every.org/dist/donate-button/0.3/index.js"
-      class="edo-donate-btn-js"
+      class="every-donate-btn-js"
     ></script>
     <script>
       function createWidget() {
         const COLOR = "#00a380";
         everyDotOrgDonateButton.createButton({
-          selector: "#edo-donate-btn",
+          selector: "#every-donate-btn",
           bgColor: COLOR,
         });
         everyDotOrgDonateButton.createWidget({
-          selector: "#edo-donate-btn",
+          selector: "#every-donate-btn",
           options: {
             nonprofitSlug: "lilbubsbigfund",
             primaryColor: COLOR,
@@ -59,7 +59,7 @@ paste this code and and then replace lilbubsbigfund with the correct handle.
       if (window.everyDotOrgDonateButton) {
         createWidget();
       } else {
-        document.querySelector(".edo-donate-btn-js").onload = createWidget;
+        document.querySelector(".every-donate-btn-js").onload = createWidget;
       }
     </script>
   </body>

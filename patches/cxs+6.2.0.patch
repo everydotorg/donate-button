@@ -10,16 +10,16 @@ index 2fc345c..45d39ef 100644
  if (typeof document !== 'undefined') {
 -  var sheet = document.head.appendChild(document.createElement('style')).sheet;
 +  const styles = document.createElement('style')
-+  styles.id = 'edo-styles'
++  styles.id = 'every-styles'
 +  var sheet = document.head.appendChild(styles).sheet;
 +
    insert = function insert(rule) {
 +    const shadowRoot = document.querySelector('#shadow-wrapper')
 +
 +    if(shadowRoot) {
-+      const edoShadowStyles = shadowRoot.shadowRoot.querySelector('#edo-shadow-styles')
++      const everyShadowStyles = shadowRoot.shadowRoot.querySelector('#every-shadow-styles')
 +      
-+      edoShadowStyles.innerHTML += rule
++      everyShadowStyles.innerHTML += rule
 +    }
 +
      rules.push(rule);

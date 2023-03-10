@@ -89,8 +89,8 @@ function optionsFromEdoUrl(
 	}
 }
 
-const DONATE_BUTTON_CLASS = 'edo-donate-btn';
-const INITIALIZED_ATTRIBUTE = 'data-edo-init';
+const DONATE_BUTTON_CLASS = 'every-donate-btn';
+const INITIALIZED_ATTRIBUTE = 'data-every-init';
 function initButtons(instanceOptions: Partial<EmbedButtonOptions> = {}) {
 	for (const buttonContainer of document.querySelectorAll(
 		// Don't double-initialize an initialized container
@@ -165,19 +165,19 @@ const mount = () => {
 	mountPoint = document.createElement('div');
 	shadowWidgetWrapper.attachShadow({mode: 'open'}).append(mountPoint);
 
-	const edoStyles: HTMLStyleElement | null =
-		document.querySelector('#edo-styles');
+	const everyStyles: HTMLStyleElement | null =
+		document.querySelector('#every-styles');
 
-	if (edoStyles) {
-		const rules = Object.values(edoStyles.sheet?.cssRules ?? {})
+	if (everyStyles) {
+		const rules = Object.values(everyStyles.sheet?.cssRules ?? {})
 			.map((rule) => rule.cssText)
 			.join('\n');
 
-		const edoShadowStyles = document.createElement('style');
-		edoShadowStyles.id = 'edo-shadow-styles';
-		edoShadowStyles.innerHTML = rules;
+		const everyShadowStyles = document.createElement('style');
+		everyShadowStyles.id = 'every-shadow-styles';
+		everyShadowStyles.innerHTML = rules;
 
-		mountPoint.append(edoShadowStyles);
+		mountPoint.append(everyShadowStyles);
 	}
 };
 

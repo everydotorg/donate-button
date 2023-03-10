@@ -3,7 +3,7 @@ import {FontFamily} from 'src/components/widget/theme/font-family';
 import constructEveryUrl from 'src/helpers/construct-every-url';
 import {EmbedButtonOptions} from 'src/helpers/options-types';
 
-cxs.prefix('edoBtn-');
+cxs.prefix('everyBtn-');
 const buttonCss = cxs({
 	display: 'flex',
 	alignItems: 'center',

@@ -9,23 +9,23 @@
 	</head>
 
 	<body style="height: 200vh">
-		<div id="edo-donate-btn">
+		<div id="every-donate-btn">
 			<a href="https://www.every.org/closegap#donate">Donate</a>
 		</div>
 		<script
 			async
 			defer
 			src="https://assets.every.org/dist/donate-button/0.3/index.js"
-			class="edo-donate-btn-js"
+			class="every-donate-btn-js"
 		></script>
 		<script>
 			function createWidget() {
 				everyDotOrgDonateButton.createButton({
-					selector: '#edo-donate-btn',
+					selector: '#every-donate-btn',
 					fontSize: '18px'
 				});
 				everyDotOrgDonateButton.createWidget({
-					selector: '#edo-donate-btn',
+					selector: '#every-donate-btn',
 					options: {
 						nonprofitSlug: 'closegap',
 						showInitialMessage: false,
@@ -55,7 +55,7 @@
 				createWidget();
 			} else {
 				document
-					.querySelector('.edo-donate-btn-js')
+					.querySelector('.every-donate-btn-js')
 					.addEventListener('load', createWidget);
 			}
 		</script>

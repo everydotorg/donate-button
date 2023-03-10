@@ -62,22 +62,22 @@ const Widget = () => {
 			<CloseButton className={largeScreenCloseButtonCss} />
 			<WidgetCard height={null}>
 				<Grid>
-					<div id="edo-header">
+					<div id="every-header">
 						<Header />
 					</div>
-					<div id="edo-nonprofitInfo">
+					<div id="every-nonprofitInfo">
 						<NonprofitInfo />
 					</div>
-					<div id="edo-paymentProcess">
+					<div id="every-paymentProcess">
 						<PaymentProcess />
 					</div>
-					<div id="edo-faq">
+					<div id="every-faq">
 						<Faq />
 					</div>
-					<div id="edo-fundraiserLink">
+					<div id="every-fundraiserLink">
 						<FundraiserLink />
 					</div>
-					<div id="edo-footer">
+					<div id="every-footer">
 						<Footer />
 					</div>
 				</Grid>

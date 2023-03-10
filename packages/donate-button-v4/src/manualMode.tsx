@@ -50,19 +50,19 @@ export default function manualMode() {
 		widgetMountPoint = document.createElement('div');
 		shadowWidgetWrapper.attachShadow({mode: 'open'}).append(widgetMountPoint);
 
-		const edoStyles: HTMLStyleElement | null =
-			document.querySelector('#edo-styles');
+		const everyStyles: HTMLStyleElement | null =
+			document.querySelector('#every-styles');
 
-		if (edoStyles) {
-			const rules = Object.values(edoStyles.sheet?.cssRules ?? {})
+		if (everyStyles) {
+			const rules = Object.values(everyStyles.sheet?.cssRules ?? {})
 				.map((rule) => rule.cssText)
 				.join('\n');
 
-			const edoShadowStyles = document.createElement('style');
-			edoShadowStyles.id = 'edo-shadow-styles';
-			edoShadowStyles.innerHTML = resetcss + rules;
+			const everyShadowStyles = document.createElement('style');
+			everyShadowStyles.id = 'every-shadow-styles';
+			everyShadowStyles.innerHTML = resetcss + rules;
 
-			widgetMountPoint.append(edoShadowStyles);
+			widgetMountPoint.append(everyShadowStyles);
 		}
 	};
 
