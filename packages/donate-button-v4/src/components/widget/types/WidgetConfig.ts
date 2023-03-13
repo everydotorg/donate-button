@@ -27,4 +27,6 @@ export interface WidgetConfig {
 	completeDonationInNewTab?: boolean;
 
 	noExit?: boolean;
+
+	monthlyTitle?: string;
 }
