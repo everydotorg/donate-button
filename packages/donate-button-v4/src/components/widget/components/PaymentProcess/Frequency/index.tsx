@@ -15,13 +15,13 @@ import {
 	PaymentMethod
 } from 'src/components/widget/types/PaymentMethod';
 
-const defaultMonthlyTitle = 'Monthly donation';
+const DEFAULT_MONTHLY_TITLE = 'Monthly donation';
 
 export const Frequency = () => {
 	const {
 		primaryColor,
 		lockMonthlyFrequency,
-		monthlyTitle = defaultMonthlyTitle
+		monthlyTitle = DEFAULT_MONTHLY_TITLE
 	} = useConfigContext();
 	const {frequency, selectedPaymentMethod, setFrequency} = useWidgetContext();
 
