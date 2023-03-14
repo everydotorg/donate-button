@@ -77,6 +77,7 @@ const parseUrl = (
 	const defaultFrequency = frequencyFromString(
 		searchParameters.get('frequency')
 	);
+	const monthlyTitle = searchParameters.get('monthlyTitle') ?? undefined;
 
 	const lockMonthlyFrequency = defaultFrequency === DonationFrequency.Monthly;
 
@@ -89,7 +90,8 @@ const parseUrl = (
 		nonprofitSlug,
 		defaultFrequency,
 		methods,
-		lockMonthlyFrequency
+		lockMonthlyFrequency,
+		monthlyTitle
 	};
 };
 
