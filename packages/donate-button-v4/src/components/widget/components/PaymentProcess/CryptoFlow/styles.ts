@@ -7,8 +7,6 @@ import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 
 export const cryptoSelectorContainerCss = cxs({
-	position: 'relative',
-
 	'& input': {
 		fontSize: textSize.s.fontSize,
 		lineHeight: textSize.s.fontSize,
@@ -17,12 +15,6 @@ export const cryptoSelectorContainerCss = cxs({
 });
 
 export const cryptoSelectorDropDownContainerCss = cxs({
-	position: 'absolute',
-	top: '100%',
-	left: '0',
-	right: '0',
-	overflow: 'hidden',
-	zIndex: 2,
 	background: COLORS.White,
 	borderRadius: `0 0 ${Radii.Default} ${Radii.Default}`,
 	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
