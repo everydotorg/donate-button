@@ -2,9 +2,9 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 14.18.2
       - run: yarn
-      - run: yarn build:donateButtonNext
+      - run: yarn build
   test:
     runs-on: ubuntu-latest
     steps:
