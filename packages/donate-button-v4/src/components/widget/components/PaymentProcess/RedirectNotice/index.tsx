@@ -27,7 +27,7 @@ export const RedirectNotice = () => {
 	return (
 		<div className={containerCss}>
 			<span className={redirectTextCss}>
-				Every.org will process your donation.{' '}
+				Every.org will accept your donation.{' '}
 				<a
 					href={ABOUT_URL}
 					target="_blank"
