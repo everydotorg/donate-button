@@ -35,10 +35,12 @@ export const CryptoFlow = () => {
 						<legend className={legendCss}>Crypto currency</legend>
 						<CryptoSelector />
 					</div>
-					<div>
-						<legend className={legendCss}>Amount</legend>
-						<CryptoAmountInput />
-					</div>
+					{cryptoCurrency && (
+						<div>
+							<legend className={legendCss}>Amount</legend>
+							<CryptoAmountInput />
+						</div>
+					)}
 				</fieldset>
 				<SubmitButton disabled={!cryptoAmount || !cryptoCurrency}>
 					{getSubmitButtonText({method: PaymentMethod.CRYPTO, cryptoCurrency})}

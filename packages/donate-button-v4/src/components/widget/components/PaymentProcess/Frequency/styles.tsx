@@ -12,7 +12,7 @@ export const inputLabelCss = (primaryColor: string) =>
 		color: primaryColor,
 		fontWeight: 500,
 		border: `2px solid ${primaryColor}`,
-		borderRight: ''
+		borderRight: 'none'
 	});
 
 export const inputItemCss = (primaryColor: string) =>
