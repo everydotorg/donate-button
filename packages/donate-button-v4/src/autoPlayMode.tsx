@@ -1,9 +1,7 @@
 import {render as preactRender} from 'preact';
 import EmbedButton from 'src/components/embed-button';
-import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
-import {frequencyFromString} from 'src/helpers/frequencyFromString';
-import {methodsFromString} from 'src/helpers/methodsFromString';
+import {parseDonateUrl} from 'src/helpers/parseDonateUrl';
 import {loadFonts} from 'src/loadFonts';
 import {WidgetLoader} from 'src/loaders/Widgetloader';
 import resetcss from 'src/resetCss';
@@ -64,37 +62,6 @@ class WidgetController {
 	}
 }
 
-const parseUrl = (
-	urlString: string
-): (Partial<WidgetConfig> & {nonprofitSlug: string}) | undefined => {
-	const url = new URL(urlString);
-
-	const fundraiserSlug = url.pathname.split('/f/')[1];
-	const nonprofitSlug = url.pathname.split('/')[1];
-
-	const searchParameters = new URLSearchParams(url.search);
-	const methods = methodsFromString(searchParameters.get('method'));
-	const defaultFrequency = frequencyFromString(
-		searchParameters.get('frequency')
-	);
-	const monthlyTitle = searchParameters.get('monthlyTitle') ?? undefined;
-
-	const lockMonthlyFrequency = defaultFrequency === DonationFrequency.Monthly;
-
-	if (!nonprofitSlug) {
-		return;
-	}
-
-	return {
-		fundraiserSlug,
-		nonprofitSlug,
-		defaultFrequency,
-		methods,
-		lockMonthlyFrequency,
-		monthlyTitle
-	};
-};
-
 function mountShadowRoot() {
 	const shadowWidgetWrapper = document.createElement('div');
 	shadowWidgetWrapper.id = 'shadow-wrapper';
@@ -154,7 +121,7 @@ function findAndReplaceLinks() {
 	links.forEach((link) => {
 		const urlString = link.getAttribute('href');
 		if (urlString?.includes('#/donate')) {
-			const options = parseUrl(urlString);
+			const options = parseDonateUrl(urlString);
 
 			if (!options) {
 				return;
