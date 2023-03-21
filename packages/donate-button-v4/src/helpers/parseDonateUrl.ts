@@ -5,10 +5,13 @@ import {
 } from 'src/components/widget/types/PaymentMethod';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
 
+const MAX_AMOUNT_SUGGESTIONS = 5;
+
 enum DonateUrlParameters {
 	METHOD = 'method',
 	FREQUENCY = 'frequency',
-	MONTHLY_TITLE = 'monthlyTitle'
+	MONTHLY_TITLE = 'monthlyTitle',
+	SUGGESTED_AMOUNTS = 'suggestedAmounts'
 }
 
 function methodsFromString(string?: string | null) {
@@ -25,6 +28,15 @@ function frequencyFromString(string?: string | null) {
 	return Object.values(DonationFrequency).find(
 		(frequency) => frequency.toUpperCase() === string.toUpperCase()
 	);
+}
+
+function addAmountsFromString(string?: string | null) {
+	if (!string) return;
+	return string
+		.split(',')
+		.map(Number.parseFloat)
+		.filter(Boolean)
+		.slice(0, MAX_AMOUNT_SUGGESTIONS);
 }
 
 export function parseDonateUrl(
@@ -45,6 +57,9 @@ export function parseDonateUrl(
 	const monthlyTitle =
 		searchParameters.get(DonateUrlParameters.MONTHLY_TITLE) ?? undefined;
 
+	const addAmounts = addAmountsFromString(
+		searchParameters.get(DonateUrlParameters.SUGGESTED_AMOUNTS)
+	);
 	const lockMonthlyFrequency = defaultFrequency === DonationFrequency.Monthly;
 
 	if (!nonprofitSlug) {
@@ -57,6 +72,7 @@ export function parseDonateUrl(
 		defaultFrequency,
 		methods,
 		lockMonthlyFrequency,
-		monthlyTitle
+		monthlyTitle,
+		addAmounts
 	};
 }
