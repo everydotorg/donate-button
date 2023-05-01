@@ -5,6 +5,7 @@ import {
 } from 'src/components/widget/components/PaymentProcess/DafFlow/types';
 import {DonationAmount} from 'src/components/widget/components/PaymentProcess/DonationAmount';
 import {Frequency} from 'src/components/widget/components/PaymentProcess/Frequency';
+import {PrivateNote} from 'src/components/widget/components/PaymentProcess/PrivateNote';
 import {RedirectNotice} from 'src/components/widget/components/PaymentProcess/RedirectNotice';
 import {SubmitButton} from 'src/components/widget/components/PaymentProcess/SubmitButton';
 import {
@@ -31,6 +32,7 @@ export const DafAmountView = ({changeView}: DafFlowViewProps) => {
 				<h3>Connect your DAF with Chariot</h3>
 				<Frequency />
 				<DonationAmount />
+				<PrivateNote />
 				<SubmitButton
 					disabled={!donationAmount || Number.isNaN(donationAmount)}
 				>
