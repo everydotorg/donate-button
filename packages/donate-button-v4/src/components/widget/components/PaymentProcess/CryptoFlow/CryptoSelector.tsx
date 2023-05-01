@@ -14,15 +14,12 @@ import {
 	quickSelectOptionsListCss
 } from 'src/components/widget/components/PaymentProcess/CryptoFlow/styles';
 import {
-	inputContainerCss,
-	inputContainerErrorCss,
-	inputCss
+	donationAmountInputContainerErrorCss,
+	donationAmountInputCss
 } from 'src/components/widget/components/PaymentProcess/DonationAmount/styles';
+import {TextInput} from 'src/components/widget/components/TextInput';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
-import {
-	useNonprofit,
-	useNonprofitOrError
-} from 'src/components/widget/hooks/useNonprofit';
+import {useNonprofitOrError} from 'src/components/widget/hooks/useNonprofit';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {ArrowIcon} from 'src/components/widget/icons/ArrowIcon';
 import {CryptoCurrencyIcon} from 'src/components/widget/icons/CryptoCurrencyIcon';
@@ -158,9 +155,8 @@ export const CryptoSelector = () => {
 	};
 
 	const inputContainerClasses = joinClassNames([
-		inputContainerCss(primaryColor),
 		cryptoSelectorInputContainerCss,
-		...(submitError ? [inputContainerErrorCss] : []),
+		...(submitError ? [donationAmountInputContainerErrorCss] : []),
 		...(showDropDown ? [inputContainerWithDropDownCss] : [])
 	]);
 
@@ -179,27 +175,31 @@ export const CryptoSelector = () => {
 
 	return (
 		<div className={cryptoSelectorContainerCss}>
-			<div className={inputContainerClasses} onClick={handleContainerClick}>
-				{selectedOption ? (
-					<CryptoCurrencyIcon currency={selectedOption.value} />
-				) : (
-					<SearchIcon />
-				)}
-				<input
-					ref={inputRef}
-					className={inputCss}
-					value={inputValue}
-					onInput={(event) => {
-						handleInput(event.currentTarget.value);
-					}}
-					onFocus={handleInputFocus}
-				/>
-				<span
-					className={cryptoSelectorInputSufixCss(primaryColor, showDropDown)}
-				>
-					<span>{selectedOption?.contractType}</span> <ArrowIcon />
-				</span>
-			</div>
+			<TextInput
+				ref={inputRef}
+				inputClassName={donationAmountInputCss}
+				containerOnClick={handleContainerClick}
+				value={inputValue}
+				prefix={
+					selectedOption ? (
+						<CryptoCurrencyIcon currency={selectedOption.value} />
+					) : (
+						<SearchIcon />
+					)
+				}
+				prefixClassName={cxs({display: 'inline-flex'})}
+				sufixClassName={cryptoSelectorInputSufixCss(primaryColor, showDropDown)}
+				containerClassName={inputContainerClasses}
+				sufix={
+					<Fragment>
+						<span>{selectedOption?.contractType}</span> <ArrowIcon />
+					</Fragment>
+				}
+				onInput={(event) => {
+					handleInput(event.currentTarget.value);
+				}}
+				onFocus={handleInputFocus}
+			/>
 			{showDropDown && (
 				<div className={cryptoSelectorDropDownContainerCss}>
 					<div className={cryptoSelectorDropDownContentCss}>

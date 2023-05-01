@@ -1,11 +1,10 @@
-import {useMemo} from 'preact/hooks';
 import {JSXInternal} from 'preact/src/jsx';
 import {cryptoAmountInputContainerCss} from 'src/components/widget/components/PaymentProcess/CryptoFlow/styles';
 import {
-	inputContainerCss,
-	inputContainerErrorCss,
-	inputCss
+	donationAmountInputContainerErrorCss,
+	donationAmountInputCss
 } from 'src/components/widget/components/PaymentProcess/DonationAmount/styles';
+import {TextInput} from 'src/components/widget/components/TextInput';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {getStepForCurrencyAmountInput} from 'src/helpers/getStepForCurrencyAmountInput';
@@ -23,9 +22,8 @@ export const CryptoAmountInput = () => {
 	} = useWidgetContext();
 
 	const inputContainerClasses = joinClassNames([
-		inputContainerCss(primaryColor),
 		cryptoAmountInputContainerCss,
-		...(submitError ? [inputContainerErrorCss] : [])
+		...(submitError ? [donationAmountInputContainerErrorCss] : [])
 	]);
 
 	const onAmountInput = (
@@ -49,17 +47,18 @@ export const CryptoAmountInput = () => {
 
 	return (
 		<div className={inputContainerClasses}>
-			<input
+			<TextInput
 				id="donation-input"
-				className={inputCss}
+				inputClassName={donationAmountInputCss}
+				containerClassName={inputContainerClasses}
 				type="number"
 				inputMode="decimal"
 				pattern="[+-]?(\d*\.)?\d+"
 				step={getStepForCurrencyAmountInput(cryptoCurrency)}
 				value={cryptoAmount}
+				sufix={<span>{cryptoCurrency}</span>}
 				onInput={onAmountInput}
 			/>
-			<span>{cryptoCurrency}</span>
 		</div>
 	);
 };

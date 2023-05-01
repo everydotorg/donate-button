@@ -2,18 +2,18 @@ import cxs from 'cxs';
 import {useEffect, useRef} from 'preact/hooks';
 import {JSXInternal} from 'preact/src/jsx';
 import {
-	addAmountButtonCss,
-	addAmountContainerCss,
-	inputPrefixCss,
-	inputSufixCss,
-	inputContainerCss,
-	inputContainerErrorCss,
-	inputCss
+	donationAmountAddAmountButtonCss,
+	donationAmountAddAmountContainerCss,
+	donationAmountInputPrefixCss,
+	donationAmountInputSufixCss,
+	donationAmountInputContainerErrorCss,
+	donationAmountInputCss
 } from 'src/components/widget/components/PaymentProcess/DonationAmount/styles';
 import {
 	fieldSetCss,
 	legendCss
 } from 'src/components/widget/components/PaymentProcess/styles';
+import {TextInput} from 'src/components/widget/components/TextInput';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {verticalStackCss, Spacing} from 'src/components/widget/theme/spacing';
@@ -48,43 +48,40 @@ export const DonationAmount = () => {
 		}
 	}, []);
 
-	const inputContainerClasses = [inputContainerCss(primaryColor)]
-		.concat(submitError ? [inputContainerErrorCss] : [])
-		.join(' ');
-
 	return (
 		<fieldset
 			className={cxs({fieldSetCss, ...verticalStackCss.cxs(Spacing.S)})}
 		>
 			<legend className={legendCss}>Donation amount</legend>
-			<div className={inputContainerClasses}>
-				<span className={inputPrefixCss}>{DEFAULT_CURRENCY.symbol}</span>
-				<input
-					ref={inputRef}
-					id="donation-input"
-					className={inputCss}
-					type="number"
-					pattern="[0-9]*"
-					inputMode="numeric"
-					min={0}
-					step={1}
-					value={donationAmount ? donationAmount : undefined}
-					onKeyDown={preventDecimal}
-					onInput={(event) => {
-						setDonationAmount(Number(event.currentTarget.value));
-						setSubmitError(null);
-					}}
-				/>
-				<span className={inputSufixCss(primaryColor)}>
-					{DEFAULT_CURRENCY.name}
-				</span>
-			</div>
+			<TextInput
+				ref={inputRef}
+				id="donation-input"
+				type="number"
+				pattern="[0-9]*"
+				inputMode="numeric"
+				min={0}
+				step={1}
+				value={donationAmount ? donationAmount : undefined}
+				prefix={DEFAULT_CURRENCY.symbol}
+				inputClassName={donationAmountInputCss}
+				prefixClassName={donationAmountInputPrefixCss}
+				sufix={DEFAULT_CURRENCY.name}
+				sufixClassName={donationAmountInputSufixCss(primaryColor)}
+				containerClassName={
+					submitError ? donationAmountInputContainerErrorCss : undefined
+				}
+				onKeyDown={preventDecimal}
+				onInput={(event) => {
+					setDonationAmount(Number(event.currentTarget.value));
+					setSubmitError(null);
+				}}
+			/>
 			{addAmounts && addAmounts.length > 0 && (
-				<div className={addAmountContainerCss}>
+				<div className={donationAmountAddAmountContainerCss}>
 					{addAmounts.map((amount) => (
 						<button
 							key={amount}
-							className={addAmountButtonCss(primaryColor)}
+							className={donationAmountAddAmountButtonCss(primaryColor)}
 							type="button"
 							onClick={() => {
 								setDonationAmount((previous) => {
