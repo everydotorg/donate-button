@@ -25,7 +25,8 @@ export const useSubmitDonation = () => {
 		stockAmount,
 		stockSymbol,
 		cryptoAmount,
-		cryptoCurrency
+		cryptoCurrency,
+		privateNote
 	} = useWidgetContext();
 	const {minDonationAmount} = useConfigContext();
 
@@ -38,7 +39,8 @@ export const useSubmitDonation = () => {
 			const baseParameters = {
 				methods: [selectedPaymentMethod],
 				nonprofitSlug: config.nonprofitSlug,
-				fundraiserSlug: config.fundraiserSlug
+				fundraiserSlug: config.fundraiserSlug,
+				privateNote
 			};
 			switch (selectedPaymentMethod) {
 				case PaymentMethod.CRYPTO:
@@ -102,7 +104,8 @@ export const useSubmitDonation = () => {
 			stockAmount,
 			stockSymbol,
 			cryptoAmount,
-			cryptoCurrency
+			cryptoCurrency,
+			privateNote
 		]
 	);
 
