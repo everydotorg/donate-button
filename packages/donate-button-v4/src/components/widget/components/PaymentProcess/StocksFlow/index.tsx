@@ -1,13 +1,13 @@
 import cxs from 'cxs';
 import {
-	inputContainerCss,
-	inputContainerErrorCss,
-	inputCss
+	donationAmountInputContainerErrorCss,
+	donationAmountInputCss
 } from 'src/components/widget/components/PaymentProcess/DonationAmount/styles';
 import {
 	LargePaymentMethodSelect,
 	SmallPaymentMethodSelect
 } from 'src/components/widget/components/PaymentProcess/PaymentMethodSelect';
+import {PrivateNote} from 'src/components/widget/components/PaymentProcess/PrivateNote';
 import {RedirectNotice} from 'src/components/widget/components/PaymentProcess/RedirectNotice';
 import {SubmitButton} from 'src/components/widget/components/PaymentProcess/SubmitButton';
 import {
@@ -16,6 +16,7 @@ import {
 	formCss,
 	legendCss
 } from 'src/components/widget/components/PaymentProcess/styles';
+import {TextInput} from 'src/components/widget/components/TextInput';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
@@ -37,10 +38,6 @@ export const StocksFlow = () => {
 		setSubmitError
 	} = useWidgetContext();
 
-	const inputContainerClasses = [inputContainerCss(primaryColor)]
-		.concat(submitError ? [inputContainerErrorCss] : [])
-		.join(' ');
-
 	return (
 		<form className={formCss} onSubmit={submitDonation}>
 			<LargePaymentMethodSelect />
@@ -54,41 +51,44 @@ export const StocksFlow = () => {
 							What is the symbol of the shares?
 						</legend>
 						<span>Example: GOOG</span>
-						<div className={inputContainerClasses}>
-							<input
-								id="stock-amount-input"
-								className={inputCss}
-								type="text"
-								value={stockSymbol}
-								onInput={(event) => {
-									setStockSymbol(event.currentTarget.value);
-									setSubmitError(null);
-								}}
-							/>
-						</div>
+						<TextInput
+							id="stock-amount-input"
+							inputClassName={donationAmountInputCss}
+							containerClassName={
+								submitError ? donationAmountInputContainerErrorCss : undefined
+							}
+							type="text"
+							value={stockSymbol}
+							onInput={(event) => {
+								setStockSymbol(event.currentTarget.value);
+								setSubmitError(null);
+							}}
+						/>
 					</div>
 					<div>
 						<legend className={legendCss}>
 							How many shares are you donating?
 						</legend>
-						<div className={inputContainerClasses}>
-							<input
-								id="donation-input"
-								className={inputCss}
-								type="number"
-								pattern="[0-9]*"
-								inputMode="numeric"
-								min={0}
-								step={1}
-								value={stockAmount ? stockAmount : undefined}
-								onInput={(event) => {
-									setStockAmount(Number(event.currentTarget.value));
-									setSubmitError(null);
-								}}
-							/>
-						</div>
+						<TextInput
+							id="donation-input"
+							inputClassName={donationAmountInputCss}
+							containerClassName={
+								submitError ? donationAmountInputContainerErrorCss : undefined
+							}
+							type="number"
+							pattern="[0-9]*"
+							inputMode="numeric"
+							min={0}
+							step={1}
+							value={stockAmount ? stockAmount : undefined}
+							onInput={(event) => {
+								setStockAmount(Number(event.currentTarget.value));
+								setSubmitError(null);
+							}}
+						/>
 					</div>
 				</fieldset>
+				<PrivateNote />
 				<SubmitButton disabled={!stockAmount || !stockSymbol}>
 					{getSubmitButtonText({method: PaymentMethod.STOCKS})}
 				</SubmitButton>

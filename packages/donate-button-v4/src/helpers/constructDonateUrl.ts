@@ -12,6 +12,7 @@ interface BaseUrlParams {
 	fundraiserId?: string;
 	noExit?: boolean;
 	methods?: PaymentMethod[];
+	privateNote?: string;
 }
 
 interface DonateUrlParams extends BaseUrlParams {
@@ -54,14 +55,19 @@ function getBaseUrl({
 function getBaseParams({
 	methods,
 	nonprofitSlug,
-	noExit
-}: Pick<BaseUrlParams, 'nonprofitSlug' | 'methods' | 'noExit'>) {
+	noExit,
+	privateNote
+}: Pick<
+	BaseUrlParams,
+	'nonprofitSlug' | 'methods' | 'noExit' | 'privateNote'
+>) {
 	return {
 		method: methods?.join(','),
 		utm_campaign: 'donate-button',
 		utm_source: nonprofitSlug,
 		utm_medium: UTM_MEDIUM,
-		no_exit: noExit ?? 1
+		no_exit: noExit ?? 1,
+		private_note: privateNote
 	};
 }
 

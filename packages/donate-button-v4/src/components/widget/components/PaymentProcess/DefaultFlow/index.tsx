@@ -4,6 +4,7 @@ import {
 	LargePaymentMethodSelect,
 	SmallPaymentMethodSelect
 } from 'src/components/widget/components/PaymentProcess/PaymentMethodSelect';
+import {PrivateNote} from 'src/components/widget/components/PaymentProcess/PrivateNote';
 import {RedirectNotice} from 'src/components/widget/components/PaymentProcess/RedirectNotice';
 import {SubmitButton} from 'src/components/widget/components/PaymentProcess/SubmitButton';
 import {
@@ -30,6 +31,7 @@ export const DefaultFlow = () => {
 				<SmallPaymentMethodSelect />
 				<Frequency />
 				<DonationAmount />
+				<PrivateNote />
 				<SubmitButton
 					disabled={
 						frequency === DonationFrequency.Unselected ||

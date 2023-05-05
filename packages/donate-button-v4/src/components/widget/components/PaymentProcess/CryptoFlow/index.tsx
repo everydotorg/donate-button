@@ -5,6 +5,7 @@ import {
 	LargePaymentMethodSelect,
 	SmallPaymentMethodSelect
 } from 'src/components/widget/components/PaymentProcess/PaymentMethodSelect';
+import {PrivateNote} from 'src/components/widget/components/PaymentProcess/PrivateNote';
 import {RedirectNotice} from 'src/components/widget/components/PaymentProcess/RedirectNotice';
 import {SubmitButton} from 'src/components/widget/components/PaymentProcess/SubmitButton';
 import {
@@ -42,6 +43,7 @@ export const CryptoFlow = () => {
 						</div>
 					)}
 				</fieldset>
+				<PrivateNote />
 				<SubmitButton disabled={!cryptoAmount || !cryptoCurrency}>
 					{getSubmitButtonText({method: PaymentMethod.CRYPTO, cryptoCurrency})}
 				</SubmitButton>

@@ -36,6 +36,9 @@ interface WidgetContextProps {
 
 	paymentRequestAvailable: PaymentRequestAvailable;
 	hideWidget: () => void;
+
+	privateNote?: string;
+	setPrivateNote: StateUpdater<string | undefined>;
 }
 
 export const WidgetContext = createContext<WidgetContextProps>(
@@ -69,6 +72,8 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 			applePay: false
 		});
 
+	const [privateNote, setPrivateNote] = useState<string>();
+
 	useEffect(() => {
 		const check = async () => {
 			const response = await checkPaymentRequest();
@@ -98,7 +103,9 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 				setCryptoAmount,
 				cryptoCurrency,
 				setCryptoCurrency,
-				paymentRequestAvailable
+				paymentRequestAvailable,
+				privateNote,
+				setPrivateNote
 			}}
 		>
 			{children}
