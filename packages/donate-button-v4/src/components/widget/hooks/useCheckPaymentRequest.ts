@@ -1,16 +1,12 @@
 import {Stripe, loadStripe} from '@stripe/stripe-js';
 import {useState, useCallback, useEffect} from 'preact/hooks';
+import {PaymentRequestAvailable} from 'src/components/widget/types/PaymentMethod';
 import {STRIPE_API_VERSION, STRIPE_PUBLIC_KEY} from 'src/constants/stripe';
 
 declare global {
 	interface Window {
 		ApplePaySession: any;
 	}
-}
-
-export interface PaymentRequestAvailable {
-	googlePay: boolean;
-	applePay: boolean;
 }
 
 function useStripe() {

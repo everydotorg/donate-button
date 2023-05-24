@@ -16,3 +16,7 @@ export const OneTimeFrequencyMethods = [
 	PaymentMethod.STOCKS
 ];
 export const AvailablePaymentMethods = Object.values(PaymentMethod);
+export interface PaymentRequestAvailable {
+	googlePay: boolean;
+	applePay: boolean;
+}

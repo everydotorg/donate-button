@@ -1,13 +1,13 @@
 import {createContext, FunctionalComponent} from 'preact';
 import {StateUpdater, useEffect, useState} from 'preact/hooks';
-import {
-	PaymentRequestAvailable,
-	useCheckPaymentRequest
-} from 'src/components/widget/hooks/useCheckPaymentRequest';
+import {useCheckPaymentRequest} from 'src/components/widget/hooks/useCheckPaymentRequest';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {CryptoCurrency} from 'src/components/widget/types/Crypto';
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
-import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
+import {
+	PaymentMethod,
+	PaymentRequestAvailable
+} from 'src/components/widget/types/PaymentMethod';
 
 interface WidgetContextProps {
 	frequency: DonationFrequency;
