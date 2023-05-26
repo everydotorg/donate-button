@@ -1,8 +1,10 @@
 import cxs from 'cxs';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {textSize} from 'src/components/widget/theme/font-sizes';
-import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
-import {PaymentRequestAvailable} from 'src/helpers/checkPaymentRequest';
+import {
+	PaymentMethod,
+	PaymentRequestAvailable
+} from 'src/components/widget/types/PaymentMethod';
 
 const NameForPaymentMethodMap: {
 	[key in Exclude<PaymentMethod, PaymentMethod.PAYMENT_REQUEST>]: string;

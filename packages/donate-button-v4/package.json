@@ -58,6 +58,7 @@
 		"xo": "^0.37.1"
 	},
 	"dependencies": {
+		"@stripe/stripe-js": "^1.53.0",
 		"cxs": "^6.2.0",
 		"preact": "^10.5.12",
 		"fuzzy": "^0.1.3"

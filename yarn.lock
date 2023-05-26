@@ -2446,6 +2446,11 @@
     resolve-from "^5.0.0"
     store2 "^2.12.0"
 
+"@stripe/stripe-js@^1.53.0":
+  version "1.53.0"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.53.0.tgz#7821e0ba3204a551de88acc7eb92b77bfc252628"
+  integrity sha512-qhhAa5WxlgVqh1J41ppyqqQVu6S1T1Q9lDAk2Ho9eI/GjrkMvAHcJpKqhekJRsZ1vjsK4P68PYOcXBXPyNCpnQ==
+
 "@surma/rollup-plugin-off-main-thread@^1.1.1":
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@surma/rollup-plugin-off-main-thread/-/rollup-plugin-off-main-thread-1.4.2.tgz#e6786b6af5799f82f7ab3a82e53f6182d2b91a58"

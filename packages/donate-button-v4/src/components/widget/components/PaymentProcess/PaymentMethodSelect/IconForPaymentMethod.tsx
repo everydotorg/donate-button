@@ -9,8 +9,10 @@ import {GoogleIcon} from 'src/components/widget/icons/GoogleIcon';
 import {PaypalIcon} from 'src/components/widget/icons/Paypalcon';
 import {StocksIcon} from 'src/components/widget/icons/StocksIcon';
 import {VenmoIcon} from 'src/components/widget/icons/VenmoIcon';
-import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
-import {PaymentRequestAvailable} from 'src/helpers/checkPaymentRequest';
+import {
+	PaymentMethod,
+	PaymentRequestAvailable
+} from 'src/components/widget/types/PaymentMethod';
 
 interface IconForPaymentMethodProps {
 	method: PaymentMethod;

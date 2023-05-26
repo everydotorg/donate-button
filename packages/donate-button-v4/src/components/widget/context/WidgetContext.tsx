@@ -1,13 +1,13 @@
 import {createContext, FunctionalComponent} from 'preact';
 import {StateUpdater, useEffect, useState} from 'preact/hooks';
+import {useCheckPaymentRequest} from 'src/components/widget/hooks/useCheckPaymentRequest';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {CryptoCurrency} from 'src/components/widget/types/Crypto';
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
-import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
 import {
-	checkPaymentRequest,
+	PaymentMethod,
 	PaymentRequestAvailable
-} from 'src/helpers/checkPaymentRequest';
+} from 'src/components/widget/types/PaymentMethod';
 
 interface WidgetContextProps {
 	frequency: DonationFrequency;
@@ -66,22 +66,9 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 	const [cryptoAmount, setCryptoAmount] = useState<number>();
 	const [cryptoCurrency, setCryptoCurrency] = useState<CryptoCurrency>();
 
-	const [paymentRequestAvailable, setPaymentRequestAvailable] =
-		useState<PaymentRequestAvailable>({
-			googlePay: false,
-			applePay: false
-		});
+	const paymentRequestAvailable = useCheckPaymentRequest();
 
 	const [privateNote, setPrivateNote] = useState<string>();
-
-	useEffect(() => {
-		const check = async () => {
-			const response = await checkPaymentRequest();
-			setPaymentRequestAvailable(response);
-		};
-
-		void check();
-	}, []);
 
 	return (
 		<WidgetContext.Provider
