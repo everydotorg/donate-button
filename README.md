@@ -15,7 +15,7 @@ The below code will use Every.org styling, because the `a` tag has the `data-eve
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script async defer src="https://embeds.every.org/0.4/button.js" />
+    <script async defer src="https://embeds.every.org/0.4/button.js"></script>
   </head>
   <body>
     <a data-every-style href="https://www.every.org/lilbubsbigfund#/donate">Donate</a>
