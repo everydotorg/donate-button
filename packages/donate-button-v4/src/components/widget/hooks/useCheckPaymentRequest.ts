@@ -42,7 +42,8 @@ export function useCheckPaymentRequest(): PaymentRequestAvailable {
 		});
 		const canMakePayment = Boolean(await pr?.canMakePayment());
 		console.log({
-			pr
+			pr,
+			canMakePayment
 		});
 		setCanMakePayment(canMakePayment);
 	}, []);
