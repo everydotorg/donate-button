@@ -41,6 +41,9 @@ export function useCheckPaymentRequest(): PaymentRequestAvailable {
 			requestPayerEmail: false
 		});
 		const canMakePayment = Boolean(await pr?.canMakePayment());
+		console.log({
+			pr
+		});
 		setCanMakePayment(canMakePayment);
 	}, []);
 
@@ -54,5 +57,9 @@ export function useCheckPaymentRequest(): PaymentRequestAvailable {
 
 	const isApplePay = Boolean(window.ApplePaySession);
 
+	console.log({
+		isApplePay,
+		canMakePayment
+	});
 	return {googlePay: canMakePayment, applePay: canMakePayment && isApplePay};
 }
