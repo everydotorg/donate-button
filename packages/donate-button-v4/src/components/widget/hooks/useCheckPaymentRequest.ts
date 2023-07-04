@@ -30,29 +30,35 @@ function useStripe() {
 export function useCheckPaymentRequest(): PaymentRequestAvailable {
 	const stripe = useStripe();
 
-	const [canMakePayment, setCanMakePayment] = useState<boolean>(false);
+	const [googlePay, setGooglePay] = useState<boolean>(false);
+	const [applePay, setApplePay] = useState<boolean>(false);
 
-	const initializePaymentRequest = useCallback(async (stripe: Stripe) => {
-		const pr = stripe?.paymentRequest({
-			country: 'US',
-			currency: 'usd',
-			total: {label: 'test', amount: 0},
-			requestPayerName: false,
-			requestPayerEmail: false
-		});
-		const canMakePayment = Boolean(await pr?.canMakePayment());
-		setCanMakePayment(canMakePayment);
-	}, []);
+	const initializePaymentRequest = useCallback(
+		async (stripe?: Stripe | null) => {
+			const applePay = Boolean(window.ApplePaySession);
+			setApplePay(applePay);
+
+			if (!stripe) {
+				return;
+			}
+
+			const pr = stripe?.paymentRequest({
+				country: 'US',
+				currency: 'usd',
+				total: {label: 'test', amount: 0},
+				requestPayerName: false,
+				requestPayerEmail: false
+			});
+			const googlePay = Boolean(await pr?.canMakePayment());
+
+			setGooglePay(googlePay);
+		},
+		[]
+	);
 
 	useEffect(() => {
-		if (!stripe) {
-			return;
-		}
-
 		void initializePaymentRequest(stripe);
 	}, [initializePaymentRequest, stripe]);
 
-	const isApplePay = Boolean(window.ApplePaySession);
-
-	return {googlePay: canMakePayment, applePay: canMakePayment && isApplePay};
+	return {googlePay, applePay};
 }
