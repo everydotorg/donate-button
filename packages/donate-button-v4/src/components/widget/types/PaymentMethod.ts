@@ -6,7 +6,8 @@ export enum PaymentMethod {
 	PAYMENT_REQUEST = 'pay',
 	CRYPTO = 'crypto',
 	STOCKS = 'stocks',
-	DAF = 'daf'
+	DAF = 'daf',
+	GIFT_CARD = 'gift'
 }
 
 export const OneTimeFrequencyMethods = [
