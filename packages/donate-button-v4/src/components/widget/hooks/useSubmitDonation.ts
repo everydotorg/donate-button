@@ -11,7 +11,8 @@ import {DEFAULT_CURRENCY} from 'src/constants/currency';
 import {
 	constructDonateStocksUrl,
 	constructDonateCryptoUrl,
-	constructDonateUrl
+	constructDonateUrl,
+	constructGiftCardUrl
 } from 'src/helpers/constructDonateUrl';
 
 export const useSubmitDonation = () => {
@@ -72,6 +73,9 @@ export const useSubmitDonation = () => {
 						}),
 						target
 					);
+					break;
+				case PaymentMethod.GIFT_CARD:
+					window.open(constructGiftCardUrl(config.nonprofitSlug), target);
 					break;
 				default:
 					if (!donationAmount || donationAmount < minDonationAmount) {

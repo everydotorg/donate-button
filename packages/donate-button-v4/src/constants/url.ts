@@ -12,8 +12,10 @@ export const HELP_ROUTE = 'support';
 export const PRIVACY_ROUTE = 'privacy';
 export const ABOUT_ROUTE = 'about-us';
 export const FUNDRAISER_ROUTE = 'fundraiser';
+export const GIFT_CARD_ROUTE = 'gift';
 
 export const TERMS_URL = BASE_URL + TERMS_ROUTE;
 export const HELP_URL = BASE_URL + HELP_ROUTE;
 export const PRIVACY_URL = BASE_URL + PRIVACY_ROUTE;
 export const ABOUT_URL = BASE_URL + ABOUT_ROUTE;
+export const GIFT_CARD_URL = BASE_URL + GIFT_CARD_ROUTE;
