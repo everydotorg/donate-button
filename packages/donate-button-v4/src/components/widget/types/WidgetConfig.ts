@@ -29,4 +29,6 @@ export interface WidgetConfig {
 	noExit?: boolean;
 
 	monthlyTitle?: string;
+
+	showGiftCardOption?: boolean;
 }
