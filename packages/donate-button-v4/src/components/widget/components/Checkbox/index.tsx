@@ -29,7 +29,7 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
 					role="checkbox"
 					{...rest}
 				/>
-				<div className={checkboxCss({checked, primaryColor})}>
+				<div className={checkboxCss({checked: Boolean(checked), primaryColor})}>
 					{checked && <CheckMarkIcon className={checkMarkIconCss} />}
 				</div>
 			</div>

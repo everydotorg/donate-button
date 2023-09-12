@@ -32,11 +32,14 @@ function frequencyFromString(string?: string | null) {
 
 function addAmountsFromString(string?: string | null) {
 	if (!string) return;
-	return string
-		.split(',')
-		.map(Number.parseFloat)
-		.filter(Boolean)
-		.slice(0, MAX_AMOUNT_SUGGESTIONS);
+	return (
+		string
+			.split(',')
+			// eslint-disable-next-line unicorn/no-array-callback-reference
+			.map(Number.parseFloat)
+			.filter(Boolean)
+			.slice(0, MAX_AMOUNT_SUGGESTIONS)
+	);
 }
 
 export function parseDonateUrl(
