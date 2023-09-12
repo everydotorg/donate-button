@@ -13,6 +13,7 @@ const NameForPaymentMethodMap: {
 	[PaymentMethod.BANK]: 'Bank',
 	[PaymentMethod.PAYPAL]: 'PayPal',
 	[PaymentMethod.VENMO]: 'Venmo',
+	[PaymentMethod.GIFT_CARD]: 'Gift card',
 	[PaymentMethod.CRYPTO]: 'Crypto',
 	[PaymentMethod.STOCKS]: 'Stocks',
 	[PaymentMethod.DAF]: 'DAF'

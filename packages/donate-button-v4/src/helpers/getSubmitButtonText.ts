@@ -26,6 +26,8 @@ export function getSubmitButtonText({
 			return base + 'Chariot';
 		case PaymentMethod.CRYPTO:
 			return base + (cryptoCurrency ?? 'crypto');
+		case PaymentMethod.GIFT_CARD:
+			return 'Redeem gift card';
 		default:
 			return 'Continue';
 	}

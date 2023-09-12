@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
-import {BASE_URL} from 'src/constants/url';
+import {BASE_URL, GIFT_CARD_URL} from 'src/constants/url';
 
 const UTM_MEDIUM = 'donate-button-0.4'; // Update this if the major version changes
 const HASH = 'donate';
@@ -132,4 +132,12 @@ export function constructDonateCryptoUrl({
 	});
 
 	return `${baseUrl}?${parameters}#/${HASH}`;
+}
+
+export function constructGiftCardUrl(nonprofitSlug: string) {
+	const parameters = serializeParams({
+		nonprofitSlug
+	});
+
+	return `${GIFT_CARD_URL}?${parameters}`;
 }

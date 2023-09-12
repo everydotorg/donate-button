@@ -5,6 +5,7 @@ import {BankIcon} from 'src/components/widget/icons/BankIcon';
 import {CardIcon} from 'src/components/widget/icons/CardIcon';
 import {CryptoIcon} from 'src/components/widget/icons/CryptoIcon';
 import {DafIcon} from 'src/components/widget/icons/DafIcon';
+import {GiftIcon} from 'src/components/widget/icons/GiftIcon';
 import {GoogleIcon} from 'src/components/widget/icons/GoogleIcon';
 import {PaypalIcon} from 'src/components/widget/icons/Paypalcon';
 import {StocksIcon} from 'src/components/widget/icons/StocksIcon';
@@ -27,7 +28,8 @@ const IconForPaymentMethodMap: {
 	[PaymentMethod.VENMO]: <VenmoIcon />,
 	[PaymentMethod.CRYPTO]: <CryptoIcon />,
 	[PaymentMethod.STOCKS]: <StocksIcon />,
-	[PaymentMethod.DAF]: <DafIcon />
+	[PaymentMethod.DAF]: <DafIcon />,
+	[PaymentMethod.GIFT_CARD]: <GiftIcon />
 };
 
 function getIconForPaymentMethod(
