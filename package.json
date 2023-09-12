@@ -11,7 +11,10 @@
   },
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/cloudflare-worker",
+    "packages/donate-button",
+    "packages/donate-button-next",
+    "packages/donate-button-v4"
   ],
   "devDependencies": {
     "concurrently": "^7.1.0",
