@@ -4,8 +4,8 @@
     "build:donateButtonNext": "yarn workspace @everydotorg/donate-button-next build && cp -r packages/donate-button-next/dist ./docs",
     "build:donateButtonV4": "yarn workspace @everydotorg/donate-button-v4 build && cp -r packages/donate-button-v4/dist ./docs",
     "build": "yarn build:donateButtonV4",
-    "lint": "yarn workspace @everydotorg/donate-button-next lint",
-    "lint:fix": "yarn workspaces @everydotorg/donate-button-next lint:fix",
+    "lint": "yarn workspace @everydotorg/donate-button-v4 lint",
+    "lint:fix": "yarn workspaces @everydotorg/donate-button-v4 lint:fix",
     "test": "yarn workspaces run test",
     "postinstall": "patch-package"
   },
