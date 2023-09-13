@@ -9,7 +9,7 @@
 	"scripts": {
 		"tsc": "tsc",
 		"test": "echo 'no tests'",
-		"build": "preact build --no-prerender --clean  --no-sw",
+		"build": "preact build --no-prerender --no-sw",
 		"postbuild": "cp dist/donate-button/0.4/index.js dist/donate-button/0.4/button.js",
 		"serve": "preact serve",
 		"dev": "preact watch -c ./preact.config.js --no-prerender --no-sw",
@@ -45,7 +45,7 @@
 		"eslint-plugin-react": "^7.22.0",
 		"eslint-plugin-react-hooks": "^4.2.0",
 		"identity-obj-proxy": "^3.0.0",
-		"preact-cli": "3.0.3",
+		"preact-cli": "^3.5.0",
 		"preact-render-to-string": "^5.1.12",
 		"prettier": "^2.2.1",
 		"sass-loader": "^6.0.6",
@@ -60,7 +60,7 @@
 	"dependencies": {
 		"@stripe/stripe-js": "^1.53.0",
 		"cxs": "^6.2.0",
-		"preact": "^10.5.12",
-		"fuzzy": "^0.1.3"
+		"fuzzy": "^0.1.3",
+		"preact": "^10.17.1"
 	}
 }

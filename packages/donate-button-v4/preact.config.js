@@ -38,7 +38,9 @@ const config = {
 			// Copy assets
 			config.plugins.push(
 				// Need trailing slash to make sure copy plugin treats as directory
-				new CopyPlugin([{from: 'public', to: `${config.output.path}/`}])
+				new CopyPlugin({
+					patterns: [{from: 'public', to: `${config.output.path}/`}]
+				})
 			);
 		}
 
