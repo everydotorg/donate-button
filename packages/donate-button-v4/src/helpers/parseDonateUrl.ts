@@ -11,7 +11,8 @@ enum DonateUrlParameters {
 	METHOD = 'method',
 	FREQUENCY = 'frequency',
 	MONTHLY_TITLE = 'monthlyTitle',
-	SUGGESTED_AMOUNTS = 'suggestedAmounts'
+	SUGGESTED_AMOUNTS = 'suggestedAmounts',
+	AMOUNT = 'amount'
 }
 
 function methodsFromString(string?: string | null) {
@@ -42,6 +43,12 @@ function addAmountsFromString(string?: string | null) {
 	);
 }
 
+function intFromString(string?: string | null) {
+	if (!string) return;
+	const number = Number.parseInt(string, 10);
+	return Number.isNaN(number) ? undefined : number;
+}
+
 export function parseDonateUrl(
 	urlString: string
 ): (Partial<WidgetConfig> & {nonprofitSlug: string}) | undefined {
@@ -56,6 +63,9 @@ export function parseDonateUrl(
 	);
 	const defaultFrequency = frequencyFromString(
 		searchParameters.get(DonateUrlParameters.FREQUENCY)
+	);
+	const defaultDonationAmount = intFromString(
+		searchParameters.get(DonateUrlParameters.AMOUNT)
 	);
 	const monthlyTitle =
 		searchParameters.get(DonateUrlParameters.MONTHLY_TITLE) ?? undefined;
@@ -76,6 +86,7 @@ export function parseDonateUrl(
 		methods,
 		lockMonthlyFrequency,
 		monthlyTitle,
-		addAmounts
+		addAmounts,
+		defaultDonationAmount
 	};
 }

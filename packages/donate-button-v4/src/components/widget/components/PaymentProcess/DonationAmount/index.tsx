@@ -28,6 +28,34 @@ const preventDecimal = (
 	}
 };
 
+const abbreviateNumber = (n: number, significantDigits?: number): string => {
+	if (n < 1e3) {
+		return n.toString();
+	}
+
+	let symbol = '';
+	let denom = 1;
+	if (n >= 1e3 && n < 1e6) {
+		denom = 1e3;
+		symbol = 'k';
+	} else if (n >= 1e6 && n < 1e9) {
+		denom = 1e6;
+		symbol = 'm';
+	} else if (n >= 1e9 && n < 1e12) {
+		denom = 1e9;
+		symbol = 'b';
+	} else if (n >= 1e12) {
+		denom = 1e12;
+		symbol = 't';
+	}
+
+	if (significantDigits === undefined) {
+		return (n / denom).toFixed(3).replace(/\.?0+$/, '') + symbol;
+	}
+
+	return (n / denom).toFixed(significantDigits) + symbol;
+};
+
 export const DonationAmount = () => {
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -91,7 +119,7 @@ export const DonationAmount = () => {
 								});
 							}}
 						>
-							+{amount}
+							+{abbreviateNumber(amount)}
 						</button>
 					))}
 				</div>
