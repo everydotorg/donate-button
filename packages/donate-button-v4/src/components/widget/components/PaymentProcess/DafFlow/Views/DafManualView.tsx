@@ -16,7 +16,7 @@ import {TEAM_EMAIL} from 'src/constants/url';
 import {mailToLink} from 'src/helpers/mailToLink';
 
 export const DafManualView = ({changeView}: DafFlowViewProps) => {
-	const {primaryColor} = useConfigContext();
+	const {nonprofitSlug, primaryColor} = useConfigContext();
 	return (
 		<div className={formCss}>
 			<BackButton
@@ -33,9 +33,7 @@ export const DafManualView = ({changeView}: DafFlowViewProps) => {
 					<p className={verticalStackCss.className(0)}>
 						<span>Every.org (EIN: 61-1913297)</span>
 						<span>58 West Portal Ave #781 San Francisco, CA 94127</span>
-						<span>
-							Memo: For every.org/themarshallproject from @darth.vader506
-						</span>
+						<span>Memo: every.org/{nonprofitSlug}</span>
 						<span>Contact info: Mark Ulrich, CEO</span>
 						<span>Email: team@every.org</span>
 						<span>Phone number: +1 (415) 650-0503</span>
