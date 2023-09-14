@@ -1,6 +1,6 @@
 import cxs from 'cxs';
-import { linkCss } from 'src/components/widget/components/FundraiserLink/styles';
-import { BackButton } from 'src/components/widget/components/PaymentProcess/BackButton';
+import {linkCss} from 'src/components/widget/components/FundraiserLink/styles';
+import {BackButton} from 'src/components/widget/components/PaymentProcess/BackButton';
 import {
 	DafFlowViewProps,
 	DafFlowView
@@ -9,16 +9,19 @@ import {
 	formContainerCss,
 	formCss
 } from 'src/components/widget/components/PaymentProcess/styles';
-import { useConfigContext } from 'src/components/widget/hooks/useConfigContext';
-import { useNonprofit } from 'src/components/widget/hooks/useNonprofit';
-import { COLORS } from 'src/components/widget/theme/colors';
-import { Spacing, verticalStackCss } from 'src/components/widget/theme/spacing';
-import { NonprofitFetchError, NonprofitFetching } from 'src/components/widget/types/Nonprofit';
-import { TEAM_EMAIL } from 'src/constants/url';
-import { mailToLink } from 'src/helpers/mailToLink';
+import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
+import {useNonprofit} from 'src/components/widget/hooks/useNonprofit';
+import {COLORS} from 'src/components/widget/theme/colors';
+import {Spacing, verticalStackCss} from 'src/components/widget/theme/spacing';
+import {
+	NonprofitFetchError,
+	NonprofitFetching
+} from 'src/components/widget/types/Nonprofit';
+import {TEAM_EMAIL} from 'src/constants/url';
+import {mailToLink} from 'src/helpers/mailToLink';
 
-export const DafManualView = ({ changeView }: DafFlowViewProps) => {
-	const { nonprofitSlug, primaryColor } = useConfigContext();
+export const DafManualView = ({changeView}: DafFlowViewProps) => {
+	const {nonprofitSlug, primaryColor} = useConfigContext();
 	const nonprofit = useNonprofit();
 	const nonprofitName =
 		nonprofit === NonprofitFetching || nonprofit === NonprofitFetchError
