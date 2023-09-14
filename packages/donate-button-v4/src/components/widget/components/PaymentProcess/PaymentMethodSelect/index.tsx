@@ -46,6 +46,10 @@ export const LargePaymentMethodSelect = () => {
 	const methods = usePaymentMethods();
 	const {selectedPaymentMethod, setSelectedPaymentMethod} = useWidgetContext();
 
+	if (methods.length === 1) {
+		return null;
+	}
+
 	return (
 		<ul className={largePaymentMethodSelectListCss}>
 			{methods.map((method) => (
@@ -72,6 +76,10 @@ export const SmallPaymentMethodSelect = () => {
 	const methods = usePaymentMethods();
 	const {primaryColor} = useConfigContext();
 	const {selectedPaymentMethod, setSelectedPaymentMethod} = useWidgetContext();
+
+	if (methods.length === 1) {
+		return null;
+	}
 
 	return (
 		<fieldset className={smallPaymentMethodFieldSetCss}>

@@ -29,6 +29,7 @@ export const formContainerCss = cxs({
 	...verticalStackCss.cxs(Spacing.XL),
 	padding: '0px',
 	[BREAKPOINTS.TabletLandscapeUp]: {
+		gridColumn: '2/3',
 		padding: Spacing.XXL
 	}
 });
