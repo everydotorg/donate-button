@@ -10,13 +10,23 @@ import {
 	formCss
 } from 'src/components/widget/components/PaymentProcess/styles';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
+import {useNonprofit} from 'src/components/widget/hooks/useNonprofit';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {Spacing, verticalStackCss} from 'src/components/widget/theme/spacing';
+import {
+	NonprofitFetchError,
+	NonprofitFetching
+} from 'src/components/widget/types/Nonprofit';
 import {TEAM_EMAIL} from 'src/constants/url';
 import {mailToLink} from 'src/helpers/mailToLink';
 
 export const DafManualView = ({changeView}: DafFlowViewProps) => {
 	const {nonprofitSlug, primaryColor} = useConfigContext();
+	const nonprofit = useNonprofit();
+	const nonprofitName =
+		nonprofit === NonprofitFetching || nonprofit === NonprofitFetchError
+			? 'the nonprofit'
+			: nonprofit.name;
 	return (
 		<div className={formCss}>
 			<BackButton
@@ -50,8 +60,9 @@ export const DafManualView = ({changeView}: DafFlowViewProps) => {
 							{TEAM_EMAIL}
 						</a>{' '}
 						with the memo or to let us know if you wish to share your contact
-						information with the nonprofit/campaign. By default, we do not share
-						your contact information
+						information with the nonprofit/campaign. By default, your name and
+						email will be shared with {nonprofitName} if included in the grant
+						letter from your DAF.
 					</p>
 				</div>
 				<div
@@ -78,7 +89,7 @@ export const DafManualView = ({changeView}: DafFlowViewProps) => {
 					</p>
 					<p>
 						If we receive only a nonprofit/campaign, we will send that amount to
-						that nonprofit/campaign as an anonymous donation.
+						that nonprofit/campaign.
 					</p>
 					<p>
 						If we do not receive any information by the time the wire/ACH is
