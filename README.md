@@ -18,7 +18,9 @@ The below code will use Every.org styling, because the `a` tag has the `data-eve
     <script async defer src="https://embeds.every.org/0.4/button.js"></script>
   </head>
   <body>
-    <a data-every-style href="https://www.every.org/lilbubsbigfund#/donate">Donate</a>
+    <a data-every-style href="https://www.every.org/lilbubsbigfund#/donate"
+      >Donate</a
+    >
   </body>
 </html>
 ```
@@ -89,7 +91,7 @@ The `createWidget` function accepts an object with the following properties:
      */
     fundraiserSlug?: string;
     /**
-     * Payment methods: ["card", "bank", "paypal", "venmo", "pay", "crypto", "stocks", "daf"]
+     * Payment methods: ["card", "bank", "paypal", "venmo", "pay", "crypto", "stocks", "daf", "gift"]
      * "pay" - for apple/google pay
      */
     methods?: string[];
@@ -136,6 +138,12 @@ The `createWidget` function accepts an object with the following properties:
      * @default true
      */
     noExit?: boolean;
+    /**
+     * if true, the gift card option is displayed
+     * in the payment selection interface
+     * @default false
+     */
+    showGiftCardOption?: boolean;
   }
 ```
 
