@@ -1,10 +1,7 @@
 import {FunctionalComponent, VNode} from 'preact';
 import {useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
-import {
-	getDisbursementDescription,
-	getFeeDescription
-} from 'src/components/widget/components/Faq/helpers';
+import {getFeeDescription} from 'src/components/widget/components/Faq/helpers';
 import {
 	faqItemConateinerCss,
 	faqItemButtonCss,
@@ -15,6 +12,7 @@ import {
 } from 'src/components/widget/components/Faq/styles';
 import {getTaxDeductibleStatement} from 'src/components/widget/components/Footer/helpers';
 import {GridCard} from 'src/components/widget/components/GridCard';
+import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useFundraiserOrUndefined} from 'src/components/widget/hooks/useFundraiser';
 import {useNonprofitOrError} from 'src/components/widget/hooks/useNonprofit';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
@@ -26,10 +24,16 @@ interface FaqItemTypes {
 	title: string;
 	description: VNode;
 	mobileOnly?: boolean;
+	hideSlugList?: string[];
 }
 
 const FaqItem: FunctionalComponent<{faqData: FaqItemTypes}> = ({faqData}) => {
 	const [isOpen, setOpen] = useState(false);
+	const {nonprofitSlug} = useConfigContext();
+
+	if (faqData.hideSlugList?.includes(nonprofitSlug)) {
+		return null;
+	}
 
 	return (
 		<div className={faqItemConateinerCss(faqData.mobileOnly)}>
@@ -63,14 +67,14 @@ export const Faq = () => {
 			description: (
 				<Fragment>
 					<p>
-						Your donation first goes to Every.org, a US 501(c)(3) public
-						charity, and we immediately issue a receipt for your charitable
-						contribution. {getDisbursementDescription(nonprofit)}
+						Your donation is made to Every.org, a US 501(c)(3) public charity.
+						Every.org will immediately send you a receipt by email. On a weekly
+						basis, Every.org sends funds to {nonprofit.name}.
 					</p>
 					<p>
-						This process ensures your eligibility for a tax-deduction,
-						consolidates records of your giving, and reduces the administrative
-						burden on the nonprofits.
+						This process ensures your eligibility for a tax-deduction, enables
+						you to consolidate your gift records, and reduces the burden on{' '}
+						{nonprofit.name}.
 					</p>
 				</Fragment>
 			)
@@ -107,6 +111,7 @@ export const Faq = () => {
 		{
 			id: 'p2p',
 			mobileOnly: true,
+			hideSlugList: ['irc'],
 			title: `How else can I support ${nonprofit.name}`,
 			description: (
 				<p>
