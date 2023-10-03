@@ -33,8 +33,8 @@ export const NonprofitCard = () => {
 				</h1>
 			</div>
 			<p className={descriptionCss}>
-				Every.org is a 501(c)(3) nonprofit building free, accessible giving
-				tools for every person and every organization.
+				Every.org is a 501(c)(3) nonprofit inspiring generosity and philanthropy
+				for everyone.
 			</p>
 		</GridCard>
 	);
