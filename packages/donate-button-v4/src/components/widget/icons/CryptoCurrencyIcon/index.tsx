@@ -18,10 +18,10 @@ import saber from 'src/components/widget/icons/CryptoCurrencyIcon/saber.svg';
 import samoyed from 'src/components/widget/icons/CryptoCurrencyIcon/samoyed.svg';
 import shiba_inu from 'src/components/widget/icons/CryptoCurrencyIcon/shiba-inu.svg';
 import solana from 'src/components/widget/icons/CryptoCurrencyIcon/solana.svg';
-import stellar from 'src/components/widget/icons/CryptoCurrencyIcon/stellar.svg';
 import tether from 'src/components/widget/icons/CryptoCurrencyIcon/tether.svg';
 import tezos from 'src/components/widget/icons/CryptoCurrencyIcon/tezos.svg';
 import uniswap from 'src/components/widget/icons/CryptoCurrencyIcon/uniswap.svg';
+import usdcoin from 'src/components/widget/icons/CryptoCurrencyIcon/usd-coin.svg';
 import zcash from 'src/components/widget/icons/CryptoCurrencyIcon/zcash.svg';
 import {CryptoCurrency} from 'src/components/widget/types/Crypto';
 
@@ -47,8 +47,8 @@ const IconForCurrency = {
 	[CryptoCurrency.SHIB]: shiba_inu,
 	[CryptoCurrency.SOL]: solana,
 	[CryptoCurrency.UNI]: uniswap,
-	[CryptoCurrency.USDC]: tether,
-	[CryptoCurrency.USDT]: stellar,
+	[CryptoCurrency.USDC]: usdcoin,
+	[CryptoCurrency.USDT]: tether,
 	[CryptoCurrency.XTZ]: tezos,
 	[CryptoCurrency.ZEC]: zcash
 };
