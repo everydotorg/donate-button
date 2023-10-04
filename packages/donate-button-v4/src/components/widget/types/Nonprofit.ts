@@ -16,6 +16,9 @@ export interface Nonprofit {
 	logoCloudinaryId: string | null;
 	logoUrl: string | null;
 	nteeCode: string | null;
+	metadata?: {
+		disablePrivateNotes?: boolean;
+	};
 }
 
 export const NonprofitFetchError = Symbol('NonprofitFetchError');
