@@ -12,7 +12,8 @@ import {verticalStackCss, Spacing} from 'src/components/widget/theme/spacing';
 
 export const PrivateNote = () => {
 	const nonprofit = useNonprofitOrError();
-	const enablePrivateNoteField = nonprofit.hasAdmin; // add metadata check
+	const enablePrivateNoteField =
+		nonprofit.hasAdmin && !nonprofit.metadata?.disablePrivateNotes;
 
 	const {privateNote, setPrivateNote} = useWidgetContext();
 	const [showPrivateNoteField, setShowPrivateNoteField] = useState(

@@ -14,7 +14,6 @@ import {
 	formCss,
 	legendCss
 } from 'src/components/widget/components/PaymentProcess/styles';
-import {useNonprofitOrError} from 'src/components/widget/hooks/useNonprofit';
 import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {verticalStackCss, Spacing} from 'src/components/widget/theme/spacing';
@@ -24,7 +23,6 @@ import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 export const CryptoFlow = () => {
 	const submitDonation = useSubmitDonation();
 	const {cryptoAmount, cryptoCurrency} = useWidgetContext();
-	const {metadata} = useNonprofitOrError();
 
 	return (
 		<form className={formCss} onSubmit={submitDonation}>
@@ -45,7 +43,7 @@ export const CryptoFlow = () => {
 						</div>
 					)}
 				</fieldset>
-				{!metadata?.disablePrivateNotes && <PrivateNote />}
+				<PrivateNote />
 				<SubmitButton disabled={!cryptoAmount || !cryptoCurrency}>
 					{getSubmitButtonText({method: PaymentMethod.CRYPTO, cryptoCurrency})}
 				</SubmitButton>
