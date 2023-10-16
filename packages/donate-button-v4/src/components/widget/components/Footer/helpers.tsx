@@ -1,3 +1,4 @@
+import {getNonprofitName} from 'src/components/widget/components/Faq/helpers';
 import {Fundraiser} from 'src/components/widget/types/Fundraiser';
 import {Nonprofit} from 'src/components/widget/types/Nonprofit';
 
@@ -11,8 +12,12 @@ export const getTaxDeductibleStatement = (
 ) => {
 	const base = `100% of your donation is tax-deductible to the extent allowed by US law. 
       Your donation is made to Every.org, a tax-exempt US 501(c)(3) charity that
-      grants unrestricted funds to ${nonprofit.name} on your behalf. 
-      As a legal matter, Every.org must provide any donations to ${nonprofit.name} on an
+      grants unrestricted funds to ${getNonprofitName(
+				nonprofit
+			)} on your behalf. 
+      As a legal matter, Every.org must provide any donations to ${
+				nonprofit.name
+			} on an
       unrestricted basis, regardless of any designations or restrictions made by
       you.`;
 

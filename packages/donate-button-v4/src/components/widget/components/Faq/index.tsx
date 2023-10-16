@@ -1,7 +1,10 @@
 import {FunctionalComponent, VNode} from 'preact';
 import {useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
-import {getFeeDescription} from 'src/components/widget/components/Faq/helpers';
+import {
+	getFeeDescription,
+	getNonprofitName
+} from 'src/components/widget/components/Faq/helpers';
 import {
 	faqItemConateinerCss,
 	faqItemButtonCss,
@@ -69,12 +72,12 @@ export const Faq = () => {
 					<p>
 						Your donation is made to Every.org, a US 501(c)(3) public charity.
 						Every.org will immediately send you a receipt by email. On a weekly
-						basis, Every.org sends funds to {nonprofit.name}.
+						basis, Every.org sends funds to {getNonprofitName(nonprofit)}.
 					</p>
 					<p>
 						This process ensures your eligibility for a tax-deduction, enables
 						you to consolidate your gift records, and reduces the burden on{' '}
-						{nonprofit.name}.
+						{getNonprofitName(nonprofit)}.
 					</p>
 				</Fragment>
 			)

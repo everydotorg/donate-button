@@ -3,6 +3,12 @@ import {faqLinkCss} from 'src/components/widget/components/Faq/styles';
 import {Nonprofit} from 'src/components/widget/types/Nonprofit';
 import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
 
+export function getNonprofitName(nonprofit: Nonprofit) {
+	return nonprofit.metadata?.prefixWithThe
+		? `the ${nonprofit.name}`
+		: nonprofit.name;
+}
+
 export function getDisbursementDescription(nonprofit: Nonprofit) {
 	if (nonprofit.directDisbursement) {
 		return (
