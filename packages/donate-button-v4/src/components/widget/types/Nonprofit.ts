@@ -18,6 +18,7 @@ export interface Nonprofit {
 	nteeCode: string | null;
 	metadata?: {
 		disablePrivateNotes?: boolean;
+		prefixWithThe?: boolean;
 	};
 }
 
