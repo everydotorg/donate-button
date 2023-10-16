@@ -15,9 +15,9 @@ export const getTaxDeductibleStatement = (
       grants unrestricted funds to ${getNonprofitName(
 				nonprofit
 			)} on your behalf. 
-      As a legal matter, Every.org must provide any donations to ${
-				nonprofit.name
-			} on an
+      As a legal matter, Every.org must provide any donations to ${getNonprofitName(
+				nonprofit
+			)} on an
       unrestricted basis, regardless of any designations or restrictions made by
       you.`;
 
