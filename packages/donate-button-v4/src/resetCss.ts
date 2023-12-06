@@ -49,6 +49,10 @@ const resetcss = `
     color: unset;
     background: unset;
   }
+
+  h1, h2, h3, h4, h4, h6 {
+    font-weight: 700
+  }
 `;
 
 export default resetcss;
