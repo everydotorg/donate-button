@@ -37,18 +37,5 @@ export const overlayCss = cxs({
 	},
 	'& *:after': {
 		boxSizing: 'inherit'
-	},
-	'h1,h2,h3,h4,h5,h6': {fontWeight: 700},
-
-	h1: {
-		...textSize.xl
-	},
-
-	h2: {
-		...textSize.l
-	},
-
-	'h3,h4,h5,h6': {
-		...textSize.m
 	}
 });
