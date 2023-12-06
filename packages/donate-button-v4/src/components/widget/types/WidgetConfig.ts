@@ -31,4 +31,6 @@ export interface WidgetConfig {
 	monthlyTitle?: string;
 
 	showGiftCardOption?: boolean;
+
+	utmSource?: string;
 }
