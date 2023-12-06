@@ -50,7 +50,7 @@ export const StocksFlow = () => {
 						<legend className={legendCss}>
 							What is the symbol of the shares?
 						</legend>
-						<span>Example: GOOG</span>
+						<span>Example: AAPL</span>
 						<TextInput
 							id="stock-amount-input"
 							inputClassName={donationAmountInputCss}
