@@ -75,6 +75,17 @@ export function parseDonateUrl(
 	);
 	const lockMonthlyFrequency = defaultFrequency === DonationFrequency.Monthly;
 
+	console.log({
+		fundraiserSlug,
+		nonprofitSlug,
+		defaultFrequency,
+		methods,
+		lockMonthlyFrequency,
+		monthlyTitle,
+		addAmounts,
+		defaultDonationAmount
+	});
+
 	if (!nonprofitSlug) {
 		return;
 	}
