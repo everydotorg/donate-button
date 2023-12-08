@@ -12,7 +12,8 @@ enum DonateUrlParameters {
 	FREQUENCY = 'frequency',
 	MONTHLY_TITLE = 'monthlyTitle',
 	SUGGESTED_AMOUNTS = 'suggestedAmounts',
-	AMOUNT = 'amount'
+	AMOUNT = 'amount',
+	UTM_SOURCE = 'utm_source'
 }
 
 function methodsFromString(string?: string | null) {
@@ -73,6 +74,8 @@ export function parseDonateUrl(
 	const addAmounts = addAmountsFromString(
 		searchParameters.get(DonateUrlParameters.SUGGESTED_AMOUNTS)
 	);
+	const utmSource =
+		searchParameters.get(DonateUrlParameters.UTM_SOURCE) ?? undefined;
 	const lockMonthlyFrequency = defaultFrequency === DonationFrequency.Monthly;
 
 	if (!nonprofitSlug) {
@@ -87,6 +90,7 @@ export function parseDonateUrl(
 		lockMonthlyFrequency,
 		monthlyTitle,
 		addAmounts,
+		utmSource,
 		defaultDonationAmount
 	};
 }

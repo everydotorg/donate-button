@@ -41,6 +41,7 @@ export const useSubmitDonation = () => {
 				methods: [selectedPaymentMethod],
 				nonprofitSlug: config.nonprofitSlug,
 				fundraiserSlug: config.fundraiserSlug,
+				utmSource: config.utmSource,
 				privateNote
 			};
 			switch (selectedPaymentMethod) {
