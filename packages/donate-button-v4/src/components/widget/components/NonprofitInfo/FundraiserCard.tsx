@@ -50,7 +50,8 @@ const LargeFundraiserCard = ({fundraiser}: FundraiserCardProps) => {
 		logoCloudinaryId ?? LOGO_IMAGE_PLACEHOLDER_ID
 	);
 	const coverImageUrl =
-		coverImageCloudinaryId && getCloudinaryUrl(coverImageCloudinaryId);
+		coverImageCloudinaryId &&
+		getCloudinaryUrl(coverImageCloudinaryId, {width: 320});
 
 	return (
 		<GridCard className={largeFundraiserCardCss}>
