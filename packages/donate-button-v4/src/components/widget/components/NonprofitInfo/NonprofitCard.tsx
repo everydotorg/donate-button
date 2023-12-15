@@ -5,7 +5,7 @@ import {
 	nonprofitNameCss,
 	descriptionCss,
 	avatarAndNameWrapperCss,
-	cardCss
+	nonprofitCardCss
 } from 'src/components/widget/components/NonprofitInfo/styles';
 import {useNonprofitOrError} from 'src/components/widget/hooks/useNonprofit';
 import {LOGO_IMAGE_PLACEHOLDER_ID} from 'src/constants/placeholders';
@@ -17,7 +17,7 @@ export const NonprofitCard = () => {
 		logoCloudinaryId ?? LOGO_IMAGE_PLACEHOLDER_ID
 	);
 	return (
-		<GridCard className={cardCss}>
+		<GridCard className={nonprofitCardCss}>
 			<div className={avatarAndNameWrapperCss}>
 				<div alt="nonprofit logo" className={logoImageCss(logoUrl)} />
 				<h1 className={nonprofitNameCss}>
