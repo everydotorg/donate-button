@@ -7,6 +7,7 @@ import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
 
 export const cryptoSelectorContainerCss = cxs({
+	height: '250px',
 	'& input': {
 		fontSize: textSize.s.fontSize,
 		lineHeight: textSize.s.fontSize,
