@@ -121,7 +121,12 @@ export interface SharedCryptoCurrencyConfig {
 	contractType?: ContractType;
 }
 
-export const DISABLED_TOKENS = [CryptoCurrency.ALGO, CryptoCurrency.MOB];
+export const DISABLED_TOKENS = [
+	CryptoCurrency.ALGO,
+	CryptoCurrency.MOB,
+	CryptoCurrency.XLM,
+	CryptoCurrency.BNB
+];
 
 export const SharedCryptoCurrencyConfig: {
 	[key in CryptoCurrency]: SharedCryptoCurrencyConfig;
