@@ -19,6 +19,7 @@ export interface Nonprofit {
 	metadata?: {
 		disablePrivateNotes?: boolean;
 		prefixWithThe?: boolean;
+		hideFundraiseButton?: boolean;
 	};
 }
 
