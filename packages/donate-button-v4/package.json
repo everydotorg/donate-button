@@ -32,6 +32,7 @@
 		"@babel/preset-stage-1": "^7.8.3",
 		"@babel/preset-typescript": "^7.13.0",
 		"@testing-library/react": "^11.2.5",
+		"@types/big.js": "^6.2.2",
 		"@types/cxs": "^6.2.1",
 		"ava": "^3.15.0",
 		"babel-core": "^7.0.0-bridge.0",
@@ -59,6 +60,7 @@
 	},
 	"dependencies": {
 		"@stripe/stripe-js": "^1.53.0",
+		"big.js": "^6.2.1",
 		"cxs": "^6.2.0",
 		"fuzzy": "^0.1.3",
 		"preact": "^10.17.1"

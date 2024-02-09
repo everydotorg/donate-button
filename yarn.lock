@@ -1973,12 +1973,14 @@ __metadata:
     "@babel/preset-typescript": ^7.13.0
     "@stripe/stripe-js": ^1.53.0
     "@testing-library/react": ^11.2.5
+    "@types/big.js": ^6.2.2
     "@types/cxs": ^6.2.1
     ava: ^3.15.0
     babel-core: ^7.0.0-bridge.0
     babel-plugin-jsx-pragmatic: ^1.0.2
     babel-plugin-transform-decorators-legacy: ^1.3.5
     babel-plugin-transform-react-remove-prop-types: ^0.4.24
+    big.js: ^6.2.1
     cxs: ^6.2.0
     deepmerge: ^4.2.2
     eslint: ^7.14.0
@@ -3749,6 +3751,13 @@ __metadata:
   version: 4.2.2
   resolution: "@types/aria-query@npm:4.2.2"
   checksum: 6f2ce11d91e2d665f3873258db19da752d91d85d3679eb5efcdf9c711d14492287e1e4eb52613b28e60375841a9e428594e745b68436c963d8bad4bf72188df3
+  languageName: node
+  linkType: hard
+
+"@types/big.js@npm:^6.2.2":
+  version: 6.2.2
+  resolution: "@types/big.js@npm:6.2.2"
+  checksum: 6aeff1b763e71b79bb796c9f395ebecdd5a6aeb997b1c9b9acb2e14aa2f88eec620f26a6aedeba120ec7a881a0834d0b8e9869da864c60bba623f92d6de6f848
   languageName: node
   linkType: hard
 
@@ -6240,6 +6249,13 @@ __metadata:
   version: 5.2.2
   resolution: "big.js@npm:5.2.2"
   checksum: b89b6e8419b097a8fb4ed2399a1931a68c612bce3cfd5ca8c214b2d017531191070f990598de2fc6f3f993d91c0f08aa82697717f6b3b8732c9731866d233c9e
+  languageName: node
+  linkType: hard
+
+"big.js@npm:^6.2.1":
+  version: 6.2.1
+  resolution: "big.js@npm:6.2.1"
+  checksum: 0b234a2fd56c52bed2798ed2020bcab6fef5e9523b99a05406ad071d1aed6ee97ada9fb8de9576092da74c68825c276e19015743b8d1baea269b60a5c666b0cd
   languageName: node
   linkType: hard
 
