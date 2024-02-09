@@ -63,9 +63,9 @@ export const CryptoFlow = () => {
 				{cryptoCurrency && cryptoTokenRate && cryptoTokenRate > 0 && (
 					<p className={cxs({color: COLORS.TextGray, ...textSize.xs})}>
 						*Estimated exchange rate of{' '}
-						{displayCurrencyValue(cryptoTokenRate, 'USD')} / {cryptoCurrency} is
-						provided by CoinGecko. Final rate will be determined by our
-						brokerage at time of transaction conversion.
+						{displayCurrencyValue(cryptoTokenRate, 'USD', {showCurrency: true})}{' '}
+						/ {cryptoCurrency} is provided by CoinGecko. Final rate will be
+						determined by our brokerage at time of transaction conversion.
 					</p>
 				)}
 			</div>

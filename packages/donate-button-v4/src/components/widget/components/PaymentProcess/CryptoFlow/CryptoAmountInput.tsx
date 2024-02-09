@@ -163,7 +163,9 @@ export const CryptoAmountInput = ({
 							{cryptoTokenRate === null && cryptoTokenLoading ? (
 								<LoadingIcon size={16} />
 							) : isCryptoInput ? (
-								displayCurrencyValue(amountValue ?? 0, 'USD')
+								displayCurrencyValue(amountValue ?? 0, 'USD', {
+									showCurrency: false
+								})
 							) : (
 								cryptoAmount ?? 0
 							)}
