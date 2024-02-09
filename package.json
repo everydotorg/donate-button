@@ -22,5 +22,6 @@
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.2.1",
     "xo": "^0.48.0"
-  }
+  },
+  "packageManager": "yarn@3.6.1"
 }
