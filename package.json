@@ -6,7 +6,7 @@
     "build": "yarn build:donateButtonV4",
     "lint": "yarn workspace @everydotorg/donate-button-v4 lint",
     "lint:fix": "yarn workspaces @everydotorg/donate-button-v4 lint:fix",
-    "test": "yarn workspaces run test",
+    "test": "yarn concurrently -n 'api,website-next,common,partner-api' 'yarn workspace @everydotorg/donate-button-cloudflare-worker test'  'yarn workspace @everydotorg/donate-button test'  'yarn workspace @everydotorg/donate-button-next test' 'yarn workspace @everydotorg/donate-button-v4 test'",
     "postinstall": "patch-package"
   },
   "private": true,
