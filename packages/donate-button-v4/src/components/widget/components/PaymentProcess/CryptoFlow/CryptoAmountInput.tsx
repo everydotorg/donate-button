@@ -1,7 +1,6 @@
 import {Big} from 'big.js';
 import cxs from 'cxs';
 import {useState, useRef, useEffect, useCallback} from 'preact/hooks';
-import {JSXInternal} from 'preact/src/jsx';
 import {MAX_CRYPTO_DECIMALS_FOR_DISPLAY} from 'src/components/widget/components/PaymentProcess/CryptoFlow/CryptoSelector';
 import {
 	changeModeButtonCss,
@@ -10,31 +9,14 @@ import {
 	cryptoAmountInputFirstColumn,
 	cryptoAmountInputSecondColumn
 } from 'src/components/widget/components/PaymentProcess/CryptoFlow/styles';
-import {
-	donationAmountInputContainerErrorCss,
-	donationAmountInputCss
-} from 'src/components/widget/components/PaymentProcess/DonationAmount/styles';
-import {
-	btnCss,
-	btnDisabledCss,
-	btnActiveColor
-} from 'src/components/widget/components/PaymentProcess/SubmitButton/styles';
-import {TextInput} from 'src/components/widget/components/TextInput';
-import {
-	textInputContainerCss,
-	textInputCss
-} from 'src/components/widget/components/TextInput/styles';
-import useCoingeckoRate from 'src/components/widget/hooks/useCoingeckoRate';
+import {donationAmountInputContainerErrorCss} from 'src/components/widget/components/PaymentProcess/DonationAmount/styles';
+import {textInputCss} from 'src/components/widget/components/TextInput/styles';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {LoadingIcon} from 'src/components/widget/icons/LoadingIcon';
 import {RepeatIcon} from 'src/components/widget/icons/RepeatIcon';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {bodyText} from 'src/components/widget/theme/font-sizes';
-import {Spacing, verticalStackCss} from 'src/components/widget/theme/spacing';
-import {CryptoCurrencyConfig} from 'src/components/widget/types/Crypto';
 import {displayCurrencyValue} from 'src/helpers/displayCurrencyValue';
-import {getStepForCurrencyAmountInput} from 'src/helpers/getStepForCurrencyAmountInput';
 import joinClassNames from 'src/helpers/joinClassNames';
 
 interface CryptoAmountInputProps {
@@ -46,13 +28,8 @@ export const CryptoAmountInput = ({
 	cryptoTokenRate
 }: CryptoAmountInputProps) => {
 	const [cryptoAmountString, setCryptoAmountString] = useState<string>('');
-	const {
-		cryptoAmount,
-		setCryptoAmount,
-		cryptoCurrency,
-		submitError,
-		setSubmitError
-	} = useWidgetContext();
+	const {cryptoAmount, setCryptoAmount, cryptoCurrency, submitError} =
+		useWidgetContext();
 
 	const {primaryColor} = useConfigContext();
 	const inputContainerClasses = joinClassNames([
