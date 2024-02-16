@@ -14,15 +14,24 @@ import {
 	formCss,
 	legendCss
 } from 'src/components/widget/components/PaymentProcess/styles';
+import useCoingeckoRate from 'src/components/widget/hooks/useCoingeckoRate';
 import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
+import {COLORS} from 'src/components/widget/theme/colors';
+import {textSize} from 'src/components/widget/theme/font-sizes';
 import {verticalStackCss, Spacing} from 'src/components/widget/theme/spacing';
+import {CryptoCurrencyConfig} from 'src/components/widget/types/Crypto';
 import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
+import {displayCurrencyValue} from 'src/helpers/displayCurrencyValue';
 import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const CryptoFlow = () => {
 	const submitDonation = useSubmitDonation();
 	const {cryptoAmount, cryptoCurrency} = useWidgetContext();
+
+	const [cryptoTokenRate, cryptoTokenLoading] = useCoingeckoRate(
+		cryptoCurrency && CryptoCurrencyConfig[cryptoCurrency]?.coingeckoId
+	);
 
 	return (
 		<form className={formCss} onSubmit={submitDonation}>
@@ -39,7 +48,10 @@ export const CryptoFlow = () => {
 					{cryptoCurrency && (
 						<div>
 							<legend className={legendCss}>Amount</legend>
-							<CryptoAmountInput />
+							<CryptoAmountInput
+								cryptoTokenRate={cryptoTokenRate}
+								cryptoTokenLoading={cryptoTokenLoading}
+							/>
 						</div>
 					)}
 				</fieldset>
@@ -48,6 +60,14 @@ export const CryptoFlow = () => {
 					{getSubmitButtonText({method: PaymentMethod.CRYPTO, cryptoCurrency})}
 				</SubmitButton>
 				<RedirectNotice />
+				{cryptoCurrency && cryptoTokenRate && cryptoTokenRate > 0 && (
+					<p className={cxs({color: COLORS.TextGray, ...textSize.xs})}>
+						*Estimated exchange rate of{' '}
+						{displayCurrencyValue(cryptoTokenRate, 'USD', {showCurrency: true})}{' '}
+						/ {cryptoCurrency} is provided by CoinGecko. Final rate will be
+						determined by our brokerage at time of transaction conversion.
+					</p>
+				)}
 			</div>
 		</form>
 	);

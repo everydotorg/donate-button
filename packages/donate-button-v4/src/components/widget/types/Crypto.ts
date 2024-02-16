@@ -119,6 +119,7 @@ export interface SharedCryptoCurrencyConfig {
 	abbreviation: string;
 	decimalOffset: number;
 	contractType?: ContractType;
+	coingeckoId: string;
 }
 
 export const DISABLED_TOKENS = [
@@ -135,458 +136,537 @@ export const SharedCryptoCurrencyConfig: {
 		displayName: 'Aave',
 		abbreviation: 'AAVE',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'aave'
 	},
 	[CryptoCurrency.ALCX]: {
 		displayName: 'Alchemix',
 		abbreviation: 'ALCX',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'alchemix'
 	},
 	[CryptoCurrency.ALGO]: {
 		displayName: 'Algorand',
 		abbreviation: 'ALGO',
-		decimalOffset: 6
+		decimalOffset: 6,
+		coingeckoId: 'algorand'
 	},
 	[CryptoCurrency.AMP]: {
 		displayName: 'Amp',
 		abbreviation: 'AMP',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'amp-token'
 	},
 	[CryptoCurrency.ANKR]: {
 		displayName: 'Ankr',
 		abbreviation: 'ANKR',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'ankr'
 	},
 	[CryptoCurrency.APE]: {
 		displayName: 'Apecoin',
 		abbreviation: 'APE',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'apecoin'
 	},
 	[CryptoCurrency.API3]: {
 		displayName: 'API3',
 		abbreviation: 'API3',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'api3'
 	},
 	[CryptoCurrency.AUDIO]: {
 		displayName: 'Audius',
 		abbreviation: 'AUDIO',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'audius'
 	},
 	[CryptoCurrency.AVAX]: {
 		displayName: 'Avalanche',
 		abbreviation: 'AVAX',
-		decimalOffset: 9
+		decimalOffset: 9,
+		coingeckoId: 'avalanche-2'
 	},
 	[CryptoCurrency.AXS]: {
 		displayName: 'Axie Infinity',
 		abbreviation: 'AXS',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'axs'
 	},
 	[CryptoCurrency.BAT]: {
 		displayName: 'Basic Attention Token',
 		abbreviation: 'BAT',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'basic-attention-token'
 	},
 	[CryptoCurrency.BCH]: {
 		displayName: 'Bitcoin Cash',
 		abbreviation: 'BCH',
-		decimalOffset: 8
+		decimalOffset: 8,
+		coingeckoId: 'bitcoin-cash'
 	},
 	[CryptoCurrency.BNB]: {
 		displayName: 'Binance Coin',
 		abbreviation: 'BNB',
-		decimalOffset: 8
+		decimalOffset: 8,
+		coingeckoId: 'binancecoin'
 	},
 	[CryptoCurrency.BNT]: {
 		displayName: 'Bancor',
 		abbreviation: 'BNT',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'bancor'
 	},
 	[CryptoCurrency.BOND]: {
 		displayName: 'BarnBridge',
 		abbreviation: 'BOND',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'barnbridge'
 	},
 	[CryptoCurrency.BTC]: {
 		displayName: 'Bitcoin',
 		abbreviation: 'BTC',
-		decimalOffset: 8
+		decimalOffset: 8,
+		coingeckoId: 'bitcoin'
 	},
 	[CryptoCurrency.CHZ]: {
 		displayName: 'Chiliz',
 		abbreviation: 'CHZ',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'chiliz'
 	},
 	[CryptoCurrency.COMP]: {
 		displayName: 'Compound',
 		abbreviation: 'COMP',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'compound-governance-token'
 	},
 	[CryptoCurrency.CRV]: {
 		displayName: 'Curve DAO Token',
 		abbreviation: 'CRV',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'curve-dao-token'
 	},
 	[CryptoCurrency.CUBE]: {
 		displayName: 'Cube',
 		abbreviation: 'CUBE',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'somnium-space-cubes'
 	},
 	[CryptoCurrency.CVC]: {
 		displayName: 'Civic',
 		abbreviation: 'CVC',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'civic'
 	},
 	[CryptoCurrency.DAI]: {
 		displayName: 'Dai',
 		abbreviation: 'DAI',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'dai'
 	},
 	[CryptoCurrency.DOGE]: {
 		displayName: 'DogeCoin',
 		abbreviation: 'DOGE',
-		decimalOffset: 8
+		decimalOffset: 8,
+		coingeckoId: 'dogecoin'
 	},
 	[CryptoCurrency.DOT]: {
 		displayName: 'Polkadot',
 		abbreviation: 'DOT',
-		decimalOffset: 10
+		decimalOffset: 10,
+		coingeckoId: 'polkadot'
 	},
 	[CryptoCurrency.ELON]: {
 		displayName: 'Dogelon Mars',
 		abbreviation: 'ELON',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'dogelon-mars'
 	},
 	[CryptoCurrency.ENS]: {
 		displayName: 'Ethereum Name Service',
 		abbreviation: 'ENS',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'ethereum-name-service'
 	},
 	[CryptoCurrency.ETH]: {
 		displayName: 'Ethereum',
 		abbreviation: 'ETH',
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'ethereum'
 	},
 	[CryptoCurrency.FET]: {
 		displayName: 'Fetch.ai',
 		abbreviation: 'FET',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'fetch-ai'
 	},
 	[CryptoCurrency.FIL]: {
 		displayName: 'Filecoin',
 		abbreviation: 'FIL',
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'filecoin'
 	},
 	[CryptoCurrency.FTM]: {
 		displayName: 'Fantom',
 		abbreviation: 'FTM',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'fantom'
 	},
 	[CryptoCurrency.GAL]: {
 		displayName: 'Galaxe',
 		abbreviation: 'GAL',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'project-galaxy'
 	},
 	[CryptoCurrency.GALA]: {
 		displayName: 'Gala',
 		abbreviation: 'GALA',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'gala'
 	},
 	[CryptoCurrency.GMT]: {
 		displayName: 'STEPN',
 		abbreviation: 'GMT',
 		contractType: ContractType.SPL,
-		decimalOffset: 9
+		decimalOffset: 9,
+		coingeckoId: 'stepn'
 	},
 	[CryptoCurrency.GRT]: {
 		displayName: 'The Graph',
 		abbreviation: 'GRT',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'the-graph'
 	},
 	[CryptoCurrency.GUSD]: {
 		displayName: 'Gemini Dollar',
 		abbreviation: 'GUSD',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'gemini-dollar'
 	},
 	[CryptoCurrency.INJ]: {
 		displayName: 'Injective Protocol',
 		abbreviation: 'INJ',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'injective-protocol'
 	},
 	[CryptoCurrency.JAM]: {
 		displayName: 'Geojam',
 		abbreviation: 'JAM',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'geojam'
 	},
 	[CryptoCurrency.KNC]: {
 		displayName: 'Kyber types.Network',
 		abbreviation: 'KNC',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'kyber-network-crystal'
 	},
 	[CryptoCurrency.KP3R]: {
 		displayName: 'Keep3rV1',
 		abbreviation: 'KP3R',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'keep3rv1'
 	},
 	[CryptoCurrency.LDO]: {
 		displayName: 'Lido DAO',
 		abbreviation: 'LDO',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'lido-dao'
 	},
 	[CryptoCurrency.LINK]: {
 		displayName: 'Chainlink',
 		abbreviation: 'LINK',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'chainlink'
 	},
 	[CryptoCurrency.LPT]: {
 		displayName: 'Livepeer',
 		abbreviation: 'LPT',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'livepeer'
 	},
 	[CryptoCurrency.LRC]: {
 		displayName: 'Loopring',
 		abbreviation: 'LRC',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'loopring'
 	},
 	[CryptoCurrency.LTC]: {
 		displayName: 'Litecoin',
 		abbreviation: 'LTC',
-		decimalOffset: 8
+		decimalOffset: 8,
+		coingeckoId: 'litecoin'
 	},
 	[CryptoCurrency.MANA]: {
 		displayName: 'Mana',
 		abbreviation: 'MANA',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'decentraland'
 	},
 	[CryptoCurrency.MASK]: {
 		displayName: 'Mask Network',
 		abbreviation: 'MASK',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'mask-network'
 	},
 	[CryptoCurrency.MATIC]: {
 		displayName: 'Polygon',
 		abbreviation: 'MATIC',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'matic-network'
 	},
 	[CryptoCurrency.MCO2]: {
 		displayName: 'Moss Carbon Credit',
 		abbreviation: 'MCO2',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'moss-carbon-credit'
 	},
 	[CryptoCurrency.MKR]: {
 		displayName: 'Maker',
 		abbreviation: 'MKR',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'maker'
 	},
 	[CryptoCurrency.MOB]: {
 		displayName: 'MobileCoin',
 		abbreviation: 'MOB',
-		decimalOffset: 12
+		decimalOffset: 12,
+		coingeckoId: 'mobilecoin'
 	},
 	[CryptoCurrency.NMR]: {
 		displayName: 'Numeraire',
 		abbreviation: 'NMR',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'numeraire'
 	},
 	[CryptoCurrency.OXT]: {
 		displayName: 'Orchid',
 		abbreviation: 'OXT',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'orchid-protocol'
 	},
 	[CryptoCurrency.PAXG]: {
 		displayName: 'PAX Gold',
 		abbreviation: 'PAXG',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'pax-gold'
 	},
 	[CryptoCurrency.QNT]: {
 		displayName: 'Quant',
 		abbreviation: 'QNT',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'quant-network'
 	},
 	[CryptoCurrency.QRDO]: {
 		displayName: 'Qredo',
 		abbreviation: 'QRDO',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'qredo'
 	},
 	[CryptoCurrency.RAY]: {
 		displayName: 'Raydium',
 		abbreviation: 'RAY',
 		decimalOffset: 6,
-		contractType: ContractType.SPL
+		contractType: ContractType.SPL,
+		coingeckoId: 'raydium'
 	},
 	[CryptoCurrency.REN]: {
 		displayName: 'Ren',
 		abbreviation: 'REN',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'republic-protocol'
 	},
 	[CryptoCurrency.RNDR]: {
 		displayName: 'Render Token',
 		abbreviation: 'RNDR',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'render-token'
 	},
 	[CryptoCurrency.SAMO]: {
 		displayName: 'Samoyed',
 		abbreviation: 'SAMO',
 		decimalOffset: 9,
-		contractType: ContractType.SPL
+		contractType: ContractType.SPL,
+		coingeckoId: 'samoyedcoin'
 	},
 	[CryptoCurrency.SAND]: {
 		displayName: 'Sandbox',
 		abbreviation: 'SAND',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'the-sandbox'
 	},
 	[CryptoCurrency.SBR]: {
 		displayName: 'Saber',
 		abbreviation: 'SBR',
 		decimalOffset: 6,
-		contractType: ContractType.SPL
+		contractType: ContractType.SPL,
+		coingeckoId: 'saber'
 	},
 	[CryptoCurrency.SHIB]: {
 		displayName: 'Shiba Inu',
 		abbreviation: 'SHIB',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'shiba-inu'
 	},
 	[CryptoCurrency.SKL]: {
 		displayName: 'Skale',
 		abbreviation: 'SKL',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'skale'
 	},
 	[CryptoCurrency.SLP]: {
 		displayName: 'Smooth Love Potion',
 		abbreviation: 'SLP',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'smooth-love-potion'
 	},
 	[CryptoCurrency.SNX]: {
 		displayName: 'Synthetix',
 		abbreviation: 'SNX',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'havven'
 	},
 	[CryptoCurrency.SOL]: {
 		displayName: 'Solana',
 		abbreviation: 'SOL',
-		decimalOffset: 9
+		decimalOffset: 9,
+		coingeckoId: 'solana'
 	},
 	[CryptoCurrency.STORJ]: {
 		displayName: 'Storj',
 		abbreviation: 'STORJ',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'storj'
 	},
 	[CryptoCurrency.SUSHI]: {
 		displayName: 'SushiSwap',
 		abbreviation: 'SUSHI',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'sushi'
 	},
 	[CryptoCurrency.UMA]: {
 		displayName: 'UMA',
 		abbreviation: 'UMA',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'uma'
 	},
 	[CryptoCurrency.UNI]: {
 		displayName: 'Uniswap',
 		abbreviation: 'UNI',
 		decimalOffset: 18,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'uniswap'
 	},
 	[CryptoCurrency.USDC]: {
 		displayName: 'USD Coin',
 		abbreviation: 'USDC',
 		decimalOffset: 6,
-		contractType: ContractType.ERC20
+		contractType: ContractType.ERC20,
+		coingeckoId: 'usd-coin'
 	},
 	[CryptoCurrency.USDT]: {
 		displayName: 'Tether',
 		abbreviation: 'USDT',
-		decimalOffset: 6
+		decimalOffset: 6,
+		coingeckoId: 'tether'
 	},
 	[CryptoCurrency.XLM]: {
 		displayName: 'Stellar',
 		abbreviation: 'XLM',
-		decimalOffset: 7
+		decimalOffset: 7,
+		coingeckoId: 'stellar'
 	},
 	[CryptoCurrency.XRP]: {
 		displayName: 'XRP',
 		abbreviation: 'XRP',
-		decimalOffset: 6
+		decimalOffset: 6,
+		coingeckoId: 'ripple'
 	},
 	[CryptoCurrency.XTZ]: {
 		displayName: 'Tezos',
 		abbreviation: 'XTZ',
-		decimalOffset: 6
+		decimalOffset: 6,
+		coingeckoId: 'tezos'
 	},
 	[CryptoCurrency.YFI]: {
 		displayName: 'Yearn Finance',
 		abbreviation: 'YFI',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: 'yearn-finance'
 	},
 	[CryptoCurrency.ZBC]: {
 		displayName: 'Zebec Protocol',
 		abbreviation: 'ZBC',
 		contractType: ContractType.SPL,
-		decimalOffset: 9
+		decimalOffset: 9,
+		coingeckoId: 'zebec-protocol'
 	},
 	[CryptoCurrency.ZEC]: {
 		displayName: 'ZCash',
 		abbreviation: 'ZEC',
-		decimalOffset: 8
+		decimalOffset: 8,
+		coingeckoId: 'zcash'
 	},
 	[CryptoCurrency.ZRX]: {
 		displayName: '0x',
 		abbreviation: 'ZRX',
 		contractType: ContractType.ERC20,
-		decimalOffset: 18
+		decimalOffset: 18,
+		coingeckoId: '0x'
 	}
 };
 

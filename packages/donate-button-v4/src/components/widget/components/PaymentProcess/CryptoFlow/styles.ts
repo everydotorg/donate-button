@@ -1,13 +1,15 @@
 import cxs from 'cxs';
 import {rotateCss} from 'src/components/widget/components/Faq/styles';
+import {textInputContainerCss} from 'src/components/widget/components/TextInput/styles';
 import {getColoredBorder, Borders} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
-import {textSize} from 'src/components/widget/theme/font-sizes';
+import {bodyText, textSize} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import joinClassNames from 'src/helpers/joinClassNames';
 
 export const cryptoSelectorContainerCss = cxs({
-	height: '250px',
+	maxHeight: '250px',
 	'& input': {
 		fontSize: textSize.s.fontSize,
 		lineHeight: textSize.s.fontSize,
@@ -27,6 +29,7 @@ export const cryptoSelectorInputContainerCss = cxs({
 	alignItems: 'center',
 	gap: Spacing.XXS
 });
+
 export const cryptoSelectorDropDownContentCss = cxs({
 	overflowY: 'scroll',
 	height: '100%',
@@ -79,11 +82,47 @@ export const inputContainerWithDropDownCss = cxs({
 	borderRadius: `${Radii.Default} ${Radii.Default} 0 0 `
 });
 
-export const cryptoAmountInputContainerCss = cxs({
-	gap: Spacing.XS,
-	'> input': {
-		textAlign: 'right'
-	}
+export const cryptoAmountInputContainerCss = (primaryColor: string) =>
+	joinClassNames([textInputContainerCss(primaryColor)]);
+
+export const cryptoAmountInputColumns = cxs({
+	display: 'flex',
+	width: '100%',
+	gap: Spacing.S,
+	alignItems: 'flex-end',
+	fontWeight: 500
 });
 
-export const cryptoAmountInputCss = cxs({});
+export const cryptoAmountInputFirstColumn = cxs({
+	display: 'flex',
+	flexDirection: 'column',
+	width: '100%',
+	gap: Spacing.XXS,
+	'> input': {
+		width: '100%',
+		textAlign: 'right',
+		fontWeight: 700,
+		...textSize.l
+	},
+	textAlign: 'right'
+});
+
+export const cryptoAmountInputSecondColumn = cxs({
+	gap: Spacing.XXS,
+	display: 'flex',
+	flexDirection: 'column'
+});
+
+export const changeModeButtonCss = cxs({
+	...bodyText,
+	outline: 'none',
+	border: 'none',
+	fontFamily: 'inherit',
+	cursor: 'pointer',
+	padding: Spacing.XXS,
+	transform: 'rotate(90deg)',
+	color: COLORS.TextGray,
+	'> svg': {
+		strokeWidth: '2px'
+	}
+});

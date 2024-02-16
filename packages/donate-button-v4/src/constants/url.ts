@@ -2,6 +2,7 @@ export const BASE_URL = 'https://www.every.org/';
 export const BASE_API_URL = 'https://partners.every.org/v0.2/nonprofit';
 export const BASE_CLOUDINARY_URL =
 	'https://res.cloudinary.com/everydotorg/image/upload/';
+export const BASE_COINGECKO_URL = 'https://api.coingecko.com/api/v3';
 
 export const SUPPORT_EMAIL = 'support@every.org';
 export const TEAM_EMAIL = 'team@every.org';

@@ -1,6 +1,6 @@
 import {Fundraiser} from 'src/components/widget/types/Fundraiser';
 import {Nonprofit} from 'src/components/widget/types/Nonprofit';
-import {BASE_API_URL} from 'src/constants/url';
+import {BASE_API_URL, BASE_COINGECKO_URL} from 'src/constants/url';
 
 type NonprofitResponse = {
 	message: string;
@@ -34,4 +34,19 @@ export async function getFundraiser(
 	);
 
 	return data.data.fundraiser;
+}
+
+interface CoingeckoData {
+	market_data: {
+		current_price: {
+			usd: number;
+		};
+	};
+}
+
+export async function getCoingeckoRate(coingeckoId: string) {
+	const url = `${BASE_COINGECKO_URL}/coins/${coingeckoId}`;
+	const data = await fetch(url).then(async (response) => response.json());
+
+	return (data as CoingeckoData).market_data.current_price.usd;
 }
