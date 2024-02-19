@@ -52,24 +52,28 @@ function cryptoCurrencyToOption(cc: CryptoCurrency): CryptoCurrencyOption {
 	};
 }
 
-const quickSelectTokens = [
+const quickSelectTokens = new Set([
 	CryptoCurrency.BTC,
 	CryptoCurrency.ETH,
 	CryptoCurrency.USDC
-];
+]);
 
-const quickSelectOptions = quickSelectTokens.map((value) =>
-	cryptoCurrencyToOption(value)
-);
+const enabledCryptoCurrencyOptions: CryptoCurrencyOption[] = [];
+const quickSelectOptions: CryptoCurrencyOption[] = [];
+const otherOptions: CryptoCurrencyOption[] = [];
 
-const otherOptions = Object.values(CryptoCurrency)
-	.filter((cc) => !quickSelectTokens.includes(cc))
-	.filter((cc) => !DISABLED_TOKENS.includes(cc))
-	.map((value) => cryptoCurrencyToOption(value));
+Object.values(CryptoCurrency).forEach((value) => {
+	const option = cryptoCurrencyToOption(value);
+	if (!DISABLED_TOKENS.includes(value)) {
+		enabledCryptoCurrencyOptions.push(option);
 
-const cryptoCurrencyOptions = Object.values(CryptoCurrency).map((value) =>
-	cryptoCurrencyToOption(value)
-);
+		if (quickSelectTokens.has(value)) {
+			quickSelectOptions.push(option);
+		} else {
+			otherOptions.push(option);
+		}
+	}
+});
 
 export const MAX_CRYPTO_DECIMALS_FOR_DISPLAY = 7;
 
@@ -122,7 +126,11 @@ export const CryptoSelector = () => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [selectedOption, setSelectedOption] = useState<
 		CryptoCurrencyOption | undefined
-	>(cryptoCurrencyOptions.find((option) => option.value === cryptoCurrency));
+	>(
+		enabledCryptoCurrencyOptions.find(
+			(option) => option.value === cryptoCurrency
+		)
+	);
 
 	const [inputValue, setInputValue] = useState(selectedOption?.label);
 
@@ -165,7 +173,7 @@ export const CryptoSelector = () => {
 	);
 
 	const filteredOptions = inputValue
-		? fuzzyFilter(inputValue, cryptoCurrencyOptions, {
+		? fuzzyFilter(inputValue, enabledCryptoCurrencyOptions, {
 				extract: (option) => {
 					const config = SharedCryptoCurrencyConfig[option.value];
 					return [config.displayName, config.abbreviation].join(' ');
