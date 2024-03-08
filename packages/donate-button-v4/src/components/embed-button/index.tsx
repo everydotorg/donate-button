@@ -20,7 +20,7 @@ const EmbedButton = ({
 	onClick,
 	target = '_blank',
 	url: initialUrl,
-	label = "Donate",
+	label = 'Donate',
 	...donateOptions
 }: EmbedButtonOptions) => {
 	const url = initialUrl ? initialUrl : constructBasicDonateUrl(donateOptions);
