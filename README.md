@@ -220,7 +220,7 @@ The `createButton` function accepts an object with the following properties:
     // Css class to add to the button
     className?: string;
     // Show the every icon inside the button
-    withIcon: boolean;
+    withLogo: boolean;
     // Useful styling props
     bgColor?: string;
     textColor?: string;
