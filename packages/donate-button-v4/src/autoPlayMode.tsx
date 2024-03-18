@@ -25,6 +25,7 @@ interface CreateWidgetProps extends Partial<WidgetConfig> {
 
 let shadowRoot: ShadowRoot;
 let widgetContainer: HTMLElement;
+const widgetsMap = new Map<string, WidgetController>();
 
 class WidgetController {
 	options: CreateWidgetProps;
@@ -96,7 +97,7 @@ function mountWidgetContainer() {
 	}
 }
 
-function createWidget(options: CreateWidgetProps) {
+function createWidget(options: CreateWidgetProps, urlString: string) {
 	if (!widgetContainer) {
 		mountWidgetContainer();
 	}
@@ -104,7 +105,9 @@ function createWidget(options: CreateWidgetProps) {
 	const widgetMountPoint = document.createElement('div');
 	widgetContainer.append(widgetMountPoint);
 
-	return new WidgetController(options, widgetMountPoint);
+	const widget = new WidgetController(options, widgetMountPoint);
+	widgetsMap.set(urlString, widget);
+	return widget;
 }
 
 function createButton({element, ...options}: CreateButtonProps) {
@@ -129,7 +132,8 @@ function findAndReplaceLinks() {
 				return;
 			}
 
-			const widget = createWidget(options);
+			const widget =
+				widgetsMap.get(urlString) ?? createWidget(options, urlString);
 
 			if (link.getAttribute('data-every-style') === null) {
 				link.addEventListener('click', (event) => {
