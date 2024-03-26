@@ -4,6 +4,11 @@ For nonprofits — the simplest way to give your supporters a beautiful donation
 
 See some demos at https://embeds.every.org/0.4. And see this in production helping raise funds at https://www.goodjobbub.org/.
 
+## Publishing
+
+Run `yarn build` and check in the latest version of `/docs/dist` to publish the
+latest version of the donate button.
+
 ## Use
 
 Here is an example html file with a donate button for https://www.every.org/lilbubsbigfund. You can copy
