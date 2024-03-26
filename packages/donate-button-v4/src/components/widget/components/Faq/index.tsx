@@ -75,7 +75,7 @@ export const Faq = () => {
 						basis, Every.org sends funds to {getNonprofitName(nonprofit)}.
 					</p>
 					<p>
-						This process ensures your eligibility for a tax-deduction, enables
+						This process ensures your eligibility for a tax deduction, enables
 						you to consolidate your gift records, and reduces the burden on{' '}
 						{getNonprofitName(nonprofit)}.
 					</p>
@@ -115,7 +115,7 @@ export const Faq = () => {
 			id: 'p2p',
 			mobileOnly: true,
 			hideSlugList: ['irc'],
-			title: `How else can I support ${nonprofit.name}`,
+			title: `How else can I support ${nonprofit.name}?`,
 			description: (
 				<p>
 					You can also rally your friends, family, and social networks to
