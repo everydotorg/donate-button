@@ -72,7 +72,7 @@ export const Faq = () => {
 				<Fragment>
 					<p>
 						Your donation is made to Every.org, a US 501(c)(3) public charity.
-						Every.org will immediately send you a receipt by email. {" "}
+						Every.org will immediately send you a receipt by email.{' '}
 						{getDisbursementDescription(nonprofit)}
 					</p>
 					<p>

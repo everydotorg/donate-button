@@ -1,6 +1,9 @@
 import {Fragment} from 'preact/jsx-runtime';
 import {faqLinkCss} from 'src/components/widget/components/Faq/styles';
-import {DisbursementType, Nonprofit} from 'src/components/widget/types/Nonprofit';
+import {
+	DisbursementType,
+	Nonprofit
+} from 'src/components/widget/types/Nonprofit';
 import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
 
 export function getNonprofitName(nonprofit: Nonprofit) {
@@ -11,37 +14,42 @@ export function getNonprofitName(nonprofit: Nonprofit) {
 
 export function getDisbursementDescription(nonprofit: Nonprofit) {
 	if (nonprofit.disbursementType === DisbursementType.STRIPE_CONNECT) {
-    return <span>On a weekly basis, Every.org grants to {nonprofit.name}.</span>;
-  }
+		return (
+			<span>On a weekly basis, Every.org grants to {nonprofit.name}.</span>
+		);
+	}
 
-  if (nonprofit.disbursementType === DisbursementType.MANUAL) {
-    return (
-      <span>
-        Every.org grants directly to {nonprofit.name} on a regular basis.
-      </span>
-    );
-  }
+	if (nonprofit.disbursementType === DisbursementType.MANUAL) {
+		return (
+			<span>
+				Every.org grants directly to {nonprofit.name} on a regular basis.
+			</span>
+		);
+	}
 
-  const isPayPal =
-    nonprofit.disbursementType === DisbursementType.PAYPAL_GRANTS;
+	const isPayPal =
+		nonprofit.disbursementType === DisbursementType.PAYPAL_GRANTS;
 
 	return (
 		<span>
-			We then partner with {isPayPal ? "PayPal Grants" : "Network for Good"} to grant to {nonprofit.name} on a{' '}
+			We then partner with {isPayPal ? 'PayPal Grants' : 'Network for Good'} to
+			grant to {nonprofit.name} on a{' '}
 			<a
 				className={faqLinkCss}
 				href="https://networkforgood.zendesk.com/hc/en-us/articles/115006168307-How-does-my-organization-get-paid-"
 			>
 				monthly basis
 			</a>
-			{isPayPal ? " (or semiannually for balance under $100)." : "."}
+			{isPayPal ? ' (or semiannually for balance under $100).' : '.'}
 		</span>
 	);
 }
 
 export function getNfgDisclaimer(nonprofit: Nonprofit) {
-	if (!nonprofit.disbursementType ||
-    nonprofit.disbursementType === DisbursementType.NFG_BATCH_FILE) {
+	if (
+		!nonprofit.disbursementType ||
+		nonprofit.disbursementType === DisbursementType.NFG_BATCH_FILE
+	) {
 		return (
 			<p>
 				{nonprofit.name} has not added bank deposit info to Every.org yet, so we
