@@ -2,6 +2,7 @@ import {FunctionalComponent, VNode} from 'preact';
 import {useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {
+	getDisbursementDescription,
 	getFeeDescription,
 	getNonprofitName
 } from 'src/components/widget/components/Faq/helpers';
@@ -71,8 +72,8 @@ export const Faq = () => {
 				<Fragment>
 					<p>
 						Your donation is made to Every.org, a US 501(c)(3) public charity.
-						Every.org will immediately send you a receipt by email. On a weekly
-						basis, Every.org sends funds to {getNonprofitName(nonprofit)}.
+						Every.org will immediately send you a receipt by email. {" "}
+						{getDisbursementDescription(nonprofit)}
 					</p>
 					<p>
 						This process ensures your eligibility for a tax deduction, enables
