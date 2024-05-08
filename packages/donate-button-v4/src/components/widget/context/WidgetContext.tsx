@@ -39,6 +39,9 @@ interface WidgetContextProps {
 
 	privateNote?: string;
 	setPrivateNote: StateUpdater<string | undefined>;
+
+	giftCardCode?: string;
+	setGiftCardCode: StateUpdater<string | undefined>;
 }
 
 export const WidgetContext = createContext<WidgetContextProps>(
@@ -70,6 +73,8 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 
 	const [privateNote, setPrivateNote] = useState<string>();
 
+	const [giftCardCode, setGiftCardCode] = useState<string>();
+
 	return (
 		<WidgetContext.Provider
 			value={{
@@ -92,7 +97,9 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 				setCryptoCurrency,
 				paymentRequestAvailable,
 				privateNote,
-				setPrivateNote
+				setPrivateNote,
+				giftCardCode,
+				setGiftCardCode
 			}}
 		>
 			{children}
