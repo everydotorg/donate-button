@@ -149,6 +149,10 @@ The `createWidget` function accepts an object with the following properties:
      * @default false
      */
     showGiftCardOption?: boolean;
+    /**
+     * Partner webhook token
+     */
+    webhookToken?: string;
   }
 ```
 
