@@ -14,7 +14,8 @@ const defaults: Partial<WidgetConfig> = {
 	defaultFrequency: DonationFrequency.OneTime,
 	minDonationAmount: 5,
 	primaryColor: '#018669',
-	showGiftCardOption: false
+	showGiftCardOption: false,
+	redeemGiftCardInFlow: false
 };
 
 const DEEP_MERGE_OPTIONS: DeepMergeOptions = {

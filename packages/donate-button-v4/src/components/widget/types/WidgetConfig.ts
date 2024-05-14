@@ -33,4 +33,8 @@ export interface WidgetConfig {
 	showGiftCardOption?: boolean;
 
 	utmSource?: string;
+
+	webhookToken?: string;
+
+	redeemGiftCardInFlow?: boolean;
 }

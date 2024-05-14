@@ -4,6 +4,7 @@ import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {
+	AvailablePaymentMethods,
 	OneTimeFrequencyMethods,
 	PaymentMethod
 } from 'src/components/widget/types/PaymentMethod';
@@ -27,9 +28,11 @@ export const useSubmitDonation = () => {
 		stockSymbol,
 		cryptoAmount,
 		cryptoCurrency,
-		privateNote
+		privateNote,
+		giftCardCode
 	} = useWidgetContext();
-	const {minDonationAmount} = useConfigContext();
+	const {minDonationAmount, webhookToken, redeemGiftCardInFlow} =
+		useConfigContext();
 
 	const submitDonation = useCallback(
 		(event: JSXInternal.TargetedEvent<HTMLFormElement>) => {
@@ -42,7 +45,8 @@ export const useSubmitDonation = () => {
 				nonprofitSlug: config.nonprofitSlug,
 				fundraiserSlug: config.fundraiserSlug,
 				utmSource: config.utmSource,
-				privateNote
+				privateNote,
+				webhookToken
 			};
 			switch (selectedPaymentMethod) {
 				case PaymentMethod.CRYPTO:
@@ -76,7 +80,15 @@ export const useSubmitDonation = () => {
 					);
 					break;
 				case PaymentMethod.GIFT_CARD:
-					window.open(constructGiftCardUrl(config.nonprofitSlug), target);
+					window.open(
+						constructGiftCardUrl({
+							redeemGiftCardInFlow,
+							giftCardCode,
+							...baseParameters,
+							methods: undefined
+						}),
+						target
+					);
 					break;
 				default:
 					if (!donationAmount || donationAmount < minDonationAmount) {
@@ -110,7 +122,10 @@ export const useSubmitDonation = () => {
 			stockSymbol,
 			cryptoAmount,
 			cryptoCurrency,
-			privateNote
+			privateNote,
+			giftCardCode,
+			webhookToken,
+			redeemGiftCardInFlow
 		]
 	);
 

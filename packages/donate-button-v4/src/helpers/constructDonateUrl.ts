@@ -1,6 +1,9 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
-import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
+import {
+	AvailablePaymentMethods,
+	PaymentMethod
+} from 'src/components/widget/types/PaymentMethod';
 import {BASE_URL, GIFT_CARD_URL} from 'src/constants/url';
 
 const UTM_MEDIUM = 'donate-button-0.4'; // Update this if the major version changes
@@ -14,6 +17,7 @@ interface BaseUrlParams {
 	methods?: PaymentMethod[];
 	privateNote?: string;
 	utmSource?: string;
+	webhookToken?: string;
 }
 
 interface DonateUrlParams extends BaseUrlParams {
@@ -29,6 +33,11 @@ interface DonateStocksUrlParams extends BaseUrlParams {
 interface DonateCryptoUrlParams extends BaseUrlParams {
 	cryptoAmount: number;
 	cryptoCurrency: string;
+}
+
+interface GiftCardUrlParams extends BaseUrlParams {
+	giftCardCode?: string;
+	redeemGiftCardInFlow?: boolean;
 }
 
 function serializeParams(
@@ -58,10 +67,16 @@ function getBaseParams({
 	nonprofitSlug,
 	noExit,
 	privateNote,
-	utmSource
+	utmSource,
+	webhookToken
 }: Pick<
 	BaseUrlParams,
-	'nonprofitSlug' | 'methods' | 'noExit' | 'privateNote' | 'utmSource'
+	| 'nonprofitSlug'
+	| 'methods'
+	| 'noExit'
+	| 'privateNote'
+	| 'utmSource'
+	| 'webhookToken'
 >) {
 	return {
 		method: methods?.join(','),
@@ -69,7 +84,8 @@ function getBaseParams({
 		utm_source: utmSource ?? nonprofitSlug,
 		utm_medium: UTM_MEDIUM,
 		no_exit: noExit ?? 1,
-		private_note: privateNote
+		private_note: privateNote,
+		webhook_token: webhookToken
 	};
 }
 
@@ -136,9 +152,25 @@ export function constructDonateCryptoUrl({
 	return `${baseUrl}?${parameters}#/${HASH}`;
 }
 
-export function constructGiftCardUrl(nonprofitSlug: string) {
+export function constructGiftCardUrl({
+	redeemGiftCardInFlow,
+	giftCardCode,
+	...rest
+}: GiftCardUrlParams) {
+	if (redeemGiftCardInFlow) {
+		const baseUrl = getBaseUrl(rest);
+		const params = getBaseParams(rest);
+
+		const parameters = serializeParams({
+			...params,
+			gift_card_code: giftCardCode
+		});
+
+		return `${baseUrl}?${parameters}#/${HASH}`;
+	}
+
 	const parameters = serializeParams({
-		nonprofitSlug
+		nonprofitSlug: rest.nonprofitSlug
 	});
 
 	return `${GIFT_CARD_URL}?${parameters}`;
