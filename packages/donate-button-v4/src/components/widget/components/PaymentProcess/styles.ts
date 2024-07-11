@@ -25,6 +25,16 @@ export const legendCss = cxs({
 	marginBottom: Spacing.S
 });
 
+export const fixedFrequencyCss = cxs({
+	fontWeight: 700,
+	...textSize.l
+});
+
+export const fixedAmountsCss = cxs({
+	fontWeight: 700,
+	...textSize.xl
+});
+
 export const formContainerCss = cxs({
 	...verticalStackCss.cxs(Spacing.XL),
 	padding: '0px',
@@ -33,6 +43,30 @@ export const formContainerCss = cxs({
 		padding: Spacing.XXL
 	}
 });
+
+export const frequencyAndAmountCss = ({
+	horizontal,
+	fixedAmount
+}: {
+	horizontal: boolean;
+	fixedAmount: boolean;
+}) =>
+	horizontal
+		? cxs({
+				display: 'grid',
+				gridTemplateColumns: '1fr 1fr',
+				gridColumnGap: Spacing.L
+		  })
+		: cxs({
+				...verticalStackCss.cxs(Spacing.XL),
+				...(fixedAmount
+					? {
+							'> fieldset:last-child': {
+								alignSelf: 'center'
+							}
+					  }
+					: {})
+		  });
 
 export const formCss = cxs({
 	display: 'grid',

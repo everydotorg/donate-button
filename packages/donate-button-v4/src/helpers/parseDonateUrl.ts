@@ -62,10 +62,10 @@ export function parseDonateUrl(
 	const methods = methodsFromString(
 		searchParameters.get(DonateUrlParameters.METHOD)
 	);
-	const defaultFrequency = frequencyFromString(
+	const fixedFrequency = frequencyFromString(
 		searchParameters.get(DonateUrlParameters.FREQUENCY)
 	);
-	const defaultDonationAmount = intFromString(
+	const fixedDonationAmount = intFromString(
 		searchParameters.get(DonateUrlParameters.AMOUNT)
 	);
 	const monthlyTitle =
@@ -76,7 +76,6 @@ export function parseDonateUrl(
 	);
 	const utmSource =
 		searchParameters.get(DonateUrlParameters.UTM_SOURCE) ?? undefined;
-	const lockMonthlyFrequency = defaultFrequency === DonationFrequency.Monthly;
 
 	if (!nonprofitSlug) {
 		return;
@@ -85,12 +84,13 @@ export function parseDonateUrl(
 	return {
 		fundraiserSlug,
 		nonprofitSlug,
-		defaultFrequency,
+		fixedFrequency,
+		defaultFrequency: fixedFrequency,
 		methods,
-		lockMonthlyFrequency,
 		monthlyTitle,
 		addAmounts,
 		utmSource,
-		defaultDonationAmount
+		fixedDonationAmount,
+		defaultDonationAmount: fixedDonationAmount
 	};
 }

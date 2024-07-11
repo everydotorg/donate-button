@@ -11,6 +11,7 @@ import {
 } from 'src/components/widget/components/PaymentProcess/DonationAmount/styles';
 import {
 	fieldSetCss,
+	fixedAmountsCss,
 	legendCss
 } from 'src/components/widget/components/PaymentProcess/styles';
 import {TextInput} from 'src/components/widget/components/TextInput';
@@ -59,7 +60,7 @@ const abbreviateNumber = (n: number, significantDigits?: number): string => {
 export const DonationAmount = () => {
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const {primaryColor, addAmounts} = useConfigContext();
+	const {primaryColor, addAmounts, fixedDonationAmount} = useConfigContext();
 
 	const {setDonationAmount, donationAmount, setSubmitError, submitError} =
 		useWidgetContext();
@@ -75,6 +76,20 @@ export const DonationAmount = () => {
 			autoFocusInput();
 		}
 	}, []);
+
+	if (fixedDonationAmount) {
+		return (
+			<fieldset
+				className={cxs({
+					fieldSetCss,
+					...verticalStackCss.cxs(Spacing.S)
+				})}
+			>
+				<legend className={legendCss}>Donation amount</legend>
+				<p className={fixedAmountsCss}>${fixedDonationAmount}</p>
+			</fieldset>
+		);
+	}
 
 	return (
 		<fieldset

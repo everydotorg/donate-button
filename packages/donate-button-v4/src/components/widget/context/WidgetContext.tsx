@@ -56,7 +56,7 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 
 	const [frequency, setFrequency] = useState(config.defaultFrequency);
 	const [donationAmount, setDonationAmount] = useState(
-		config.defaultDonationAmount
+		config.fixedDonationAmount ?? config.defaultDonationAmount
 	);
 	const [submitError, setSubmitError] = useState<string | null>(null);
 	const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(

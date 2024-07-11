@@ -14,13 +14,21 @@ export interface WidgetConfig {
 
 	primaryColor: string;
 
-	lockMonthlyFrequency: boolean;
-
+	/**
+	 * @deprecated
+	 * @see fixedDonationAmount
+	 */
 	defaultDonationAmount?: number;
+	fixedDonationAmount?: number;
 
 	minDonationAmount: number;
 
+	/**
+	 * @deprecated
+	 * @see fixedFrequency
+	 */
 	defaultFrequency: DonationFrequency;
+	fixedFrequency?: DonationFrequency;
 
 	addAmounts?: number[];
 
