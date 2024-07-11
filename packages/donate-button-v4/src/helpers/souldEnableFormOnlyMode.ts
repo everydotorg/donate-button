@@ -6,8 +6,8 @@ export function shouldEnableFormOnlyMode() {
 	const parameters = getScriptParameters();
 
 	if (parameters) {
-		return parameters[FORM_ONLY_PARAM] !== '1';
+		return parameters[FORM_ONLY_PARAM] === '1';
 	}
 
-	return true;
+	return false;
 }
