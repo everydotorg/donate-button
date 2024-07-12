@@ -1,7 +1,7 @@
 import autoPlayMode from 'src/autoPlayMode';
 import formOnlyMode from 'src/formOnlyMode';
 import {shouldEnableAutoPlay} from 'src/helpers/shouldEnableAutoPlay';
-import {shouldEnableFormOnlyMode} from 'src/helpers/souldEnableFormOnlyMode';
+import {shouldEnableFormOnlyMode} from 'src/helpers/shouldEnableFormOnlyMode';
 import manualMode from 'src/manualMode';
 
 const autoPlay = shouldEnableAutoPlay();

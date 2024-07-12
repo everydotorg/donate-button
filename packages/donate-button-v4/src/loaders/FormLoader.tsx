@@ -20,12 +20,12 @@ export const FormLoader = ({options = {}}: FormLoaderProps) => {
 				// do nothing
 			}}
 		>
-			<From />
+			<Form />
 		</ContextProvider>
 	);
 };
 
-const From = () => {
+const Form = () => {
 	const {fundraiserSlug} = useConfigContext();
 	const findraiser = useFundraiser();
 	const nonprofit = useNonprofit();
