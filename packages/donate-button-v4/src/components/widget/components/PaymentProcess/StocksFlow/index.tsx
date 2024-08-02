@@ -1,4 +1,5 @@
 import cxs from 'cxs';
+import {ErrorMessage} from 'src/components/widget/components/ErrorMessage';
 import {
 	donationAmountInputContainerErrorCss,
 	donationAmountInputCss
@@ -89,6 +90,7 @@ export const StocksFlow = () => {
 					</div>
 				</fieldset>
 				<PrivateNote />
+				<ErrorMessage message={submitError} />
 				<SubmitButton disabled={!stockAmount || !stockSymbol}>
 					{getSubmitButtonText({method: PaymentMethod.STOCKS})}
 				</SubmitButton>

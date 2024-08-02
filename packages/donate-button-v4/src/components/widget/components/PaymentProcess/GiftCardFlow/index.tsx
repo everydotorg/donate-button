@@ -1,4 +1,5 @@
 import cxs from 'cxs';
+import {ErrorMessage} from 'src/components/widget/components/ErrorMessage';
 import {giftCardIconCss} from 'src/components/widget/components/PaymentProcess/GiftCardFlow/styles';
 import {
 	LargePaymentMethodSelect,
@@ -22,7 +23,7 @@ import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 export const GiftCardFlow = () => {
 	const submitDonation = useSubmitDonation();
 	const {redeemGiftCardInFlow} = useConfigContext();
-	const {giftCardCode, setGiftCardCode} = useWidgetContext();
+	const {giftCardCode, setGiftCardCode, submitError} = useWidgetContext();
 
 	return (
 		<form className={formCss} onSubmit={submitDonation}>
@@ -41,6 +42,7 @@ export const GiftCardFlow = () => {
 						}}
 					/>
 				)}
+				<ErrorMessage message={submitError} />
 				<SubmitButton>
 					{getSubmitButtonText({method: PaymentMethod.GIFT_CARD})}
 				</SubmitButton>
