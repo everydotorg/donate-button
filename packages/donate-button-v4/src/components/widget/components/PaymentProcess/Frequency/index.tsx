@@ -17,8 +17,12 @@ import {
 } from 'src/components/widget/types/PaymentMethod';
 
 export const Frequency = () => {
-	const {primaryColor, fixedFrequency, fixedDonationAmount, monthlyTitle} =
-		useConfigContext();
+	const {
+		primaryColor,
+		frequency: fixedFrequency,
+		amount: fixedAmount,
+		monthlyTitle
+	} = useConfigContext();
 	const {frequency, selectedPaymentMethod, setFrequency} = useWidgetContext();
 
 	if (fixedFrequency && monthlyTitle) {
@@ -26,7 +30,7 @@ export const Frequency = () => {
 	}
 
 	if (fixedFrequency) {
-		if (fixedDonationAmount) {
+		if (fixedAmount) {
 			return (
 				<fieldset className={fieldSetCss}>
 					<legend className={legendCss}>Frequency</legend>

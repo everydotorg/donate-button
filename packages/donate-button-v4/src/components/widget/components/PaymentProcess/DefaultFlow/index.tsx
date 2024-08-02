@@ -18,7 +18,7 @@ import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const DefaultFlow = () => {
-	const {fixedFrequency, fixedDonationAmount} = useConfigContext();
+	const {frequency: fixedFrequency, amount: fixedAmount} = useConfigContext();
 	const {
 		frequency,
 		donationAmount,
@@ -33,8 +33,8 @@ export const DefaultFlow = () => {
 				<SmallPaymentMethodSelect />
 				<div
 					className={frequencyAndAmountCss({
-						horizontal: Boolean(fixedDonationAmount && fixedFrequency),
-						fixedAmount: Boolean(fixedDonationAmount)
+						horizontal: Boolean(fixedAmount && fixedFrequency),
+						fixedAmount: Boolean(fixedAmount)
 					})}
 				>
 					<Frequency />

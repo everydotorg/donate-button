@@ -122,7 +122,7 @@ The `createWidget` function accepts an object with the following properties:
     /**
      * Prefilled donation amount without the option to change it
      */
-    fixedDonationAmount?: number;
+    amount?: number;
     /**
      * Minimum donation amount
      * @default 5
@@ -130,9 +130,8 @@ The `createWidget` function accepts an object with the following properties:
     minDonationAmount?: number;
     /**
      * Preselected donation frequency without the option to change it
-     * @default 'once'
      */
-    fixedFrequency?: DonationFrequency;
+    frequency?: DonationFrequency;
     /**
      * Preselected donation frequency
      * @default 'once'

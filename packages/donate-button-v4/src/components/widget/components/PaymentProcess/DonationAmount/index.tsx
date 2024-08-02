@@ -60,7 +60,7 @@ const abbreviateNumber = (n: number, significantDigits?: number): string => {
 export const DonationAmount = () => {
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const {primaryColor, addAmounts, fixedDonationAmount} = useConfigContext();
+	const {primaryColor, addAmounts, amount: fixedAmount} = useConfigContext();
 
 	const {setDonationAmount, donationAmount, setSubmitError, submitError} =
 		useWidgetContext();
@@ -77,7 +77,7 @@ export const DonationAmount = () => {
 		}
 	}, []);
 
-	if (fixedDonationAmount) {
+	if (fixedAmount) {
 		return (
 			<fieldset
 				className={cxs({
@@ -86,7 +86,7 @@ export const DonationAmount = () => {
 				})}
 			>
 				<legend className={legendCss}>Donation amount</legend>
-				<p className={fixedAmountsCss}>${fixedDonationAmount}</p>
+				<p className={fixedAmountsCss}>${fixedAmount}</p>
 			</fieldset>
 		);
 	}

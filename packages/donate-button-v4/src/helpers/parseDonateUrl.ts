@@ -62,10 +62,10 @@ export function parseDonateUrl(
 	const methods = methodsFromString(
 		searchParameters.get(DonateUrlParameters.METHOD)
 	);
-	const fixedFrequency = frequencyFromString(
+	const frequency = frequencyFromString(
 		searchParameters.get(DonateUrlParameters.FREQUENCY)
 	);
-	const fixedDonationAmount = intFromString(
+	const amount = intFromString(
 		searchParameters.get(DonateUrlParameters.AMOUNT)
 	);
 	const monthlyTitle =
@@ -84,13 +84,13 @@ export function parseDonateUrl(
 	return {
 		fundraiserSlug,
 		nonprofitSlug,
-		fixedFrequency,
-		defaultFrequency: fixedFrequency,
+		frequency,
+		defaultFrequency: frequency,
 		methods,
 		monthlyTitle,
 		addAmounts,
 		utmSource,
-		fixedDonationAmount,
-		defaultDonationAmount: fixedDonationAmount
+		amount,
+		defaultDonationAmount: amount
 	};
 }

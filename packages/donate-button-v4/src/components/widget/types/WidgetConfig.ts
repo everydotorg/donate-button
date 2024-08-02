@@ -16,19 +16,21 @@ export interface WidgetConfig {
 
 	/**
 	 * @deprecated
-	 * @see fixedDonationAmount
+	 * @see amount
 	 */
 	defaultDonationAmount?: number;
-	fixedDonationAmount?: number;
+
+	amount?: number;
 
 	minDonationAmount: number;
 
 	/**
 	 * @deprecated
-	 * @see fixedFrequency
+	 * @see frequency
 	 */
 	defaultFrequency: DonationFrequency;
-	fixedFrequency?: DonationFrequency;
+
+	frequency?: DonationFrequency;
 
 	addAmounts?: number[];
 
