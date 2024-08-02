@@ -13,7 +13,8 @@ enum DonateUrlParameters {
 	MONTHLY_TITLE = 'monthlyTitle',
 	SUGGESTED_AMOUNTS = 'suggestedAmounts',
 	AMOUNT = 'amount',
-	UTM_SOURCE = 'utm_source'
+	UTM_SOURCE = 'utm_source',
+	MIN_AMOUNT = 'minAmount'
 }
 
 function methodsFromString(string?: string | null) {
@@ -76,6 +77,9 @@ export function parseDonateUrl(
 	);
 	const utmSource =
 		searchParameters.get(DonateUrlParameters.UTM_SOURCE) ?? undefined;
+	const minAmount = intFromString(
+		searchParameters.get(DonateUrlParameters.MIN_AMOUNT)
+	);
 
 	if (!nonprofitSlug) {
 		return;
@@ -91,6 +95,7 @@ export function parseDonateUrl(
 		addAmounts,
 		utmSource,
 		amount,
-		defaultDonationAmount: amount
+		defaultDonationAmount: amount,
+		minDonationAmount: minAmount
 	};
 }
