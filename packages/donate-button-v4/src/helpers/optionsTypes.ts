@@ -11,7 +11,6 @@ const defaults: Partial<WidgetConfig> = {
 	methods: Object.values(DefaultPaymentMethods),
 	show: false,
 	addAmounts: [10, 50, 100],
-	defaultFrequency: DonationFrequency.OneTime,
 	minDonationAmount: 5,
 	primaryColor: '#018669',
 	showGiftCardOption: false,
