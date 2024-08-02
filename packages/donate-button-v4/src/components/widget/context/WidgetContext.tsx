@@ -63,6 +63,12 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 		config.methods[0]
 	);
 
+	useEffect(() => {
+		if (!config.methods.includes(selectedPaymentMethod)) {
+			setSelectedPaymentMethod(config.methods[0]);
+		}
+	}, [config.methods, selectedPaymentMethod]);
+
 	const [stockAmount, setStockAmount] = useState<number>();
 	const [stockSymbol, setStockSymbol] = useState<string>();
 
