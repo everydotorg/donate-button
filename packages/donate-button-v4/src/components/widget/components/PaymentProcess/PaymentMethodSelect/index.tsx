@@ -14,7 +14,8 @@ import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {
 	OneTimeFrequencyMethods,
-	PaymentMethod
+	PaymentMethod,
+	PaymentMethodsOrder
 } from 'src/components/widget/types/PaymentMethod';
 
 const usePaymentMethods = () => {
@@ -23,23 +24,28 @@ const usePaymentMethods = () => {
 
 	const filteredMethods = useMemo(
 		() =>
-			methods.filter((method) => {
-				if (
-					fixedFrequency === DonationFrequency.Monthly &&
-					OneTimeFrequencyMethods.includes(method)
-				) {
-					return false;
-				}
+			methods
+				.filter((method) => {
+					if (
+						fixedFrequency === DonationFrequency.Monthly &&
+						OneTimeFrequencyMethods.includes(method)
+					) {
+						return false;
+					}
 
-				if (method === PaymentMethod.PAYMENT_REQUEST) {
-					return (
-						paymentRequestAvailable.applePay ||
-						paymentRequestAvailable.googlePay
-					);
-				}
+					if (method === PaymentMethod.PAYMENT_REQUEST) {
+						return (
+							paymentRequestAvailable.applePay ||
+							paymentRequestAvailable.googlePay
+						);
+					}
 
-				return true;
-			}),
+					return true;
+				})
+				.sort(
+					(a, b) =>
+						PaymentMethodsOrder.indexOf(a) - PaymentMethodsOrder.indexOf(b)
+				),
 		[methods, fixedFrequency, paymentRequestAvailable]
 	);
 
