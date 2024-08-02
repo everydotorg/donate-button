@@ -2,6 +2,7 @@ import {render as preactRender} from 'preact';
 import EmbedButton from 'src/components/embed-button';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
 import {parseDonateUrl} from 'src/helpers/parseDonateUrl';
+import shouldApplyEveryStyleForAllLinks from 'src/helpers/shouldApplyEveryStyleForAllLinks';
 import {loadFonts} from 'src/loadFonts';
 import {WidgetLoader} from 'src/loaders/Widgetloader';
 import resetcss from 'src/resetCss';
@@ -26,6 +27,7 @@ interface CreateWidgetProps extends Partial<WidgetConfig> {
 let shadowRoot: ShadowRoot;
 let widgetContainer: HTMLElement;
 const widgetsMap = new Map<string, WidgetController>();
+const applyEveryStyleForAllLinks = shouldApplyEveryStyleForAllLinks();
 
 class WidgetController {
 	options: CreateWidgetProps;
@@ -135,12 +137,10 @@ function findAndReplaceLinks() {
 			const widget =
 				widgetsMap.get(urlString) ?? createWidget(options, urlString);
 
-			if (link.getAttribute('data-every-style') === null) {
-				link.addEventListener('click', (event) => {
-					event.preventDefault();
-					widget.show();
-				});
-			} else {
+			if (
+				applyEveryStyleForAllLinks ||
+				link.getAttribute('data-every-style') !== null
+			) {
 				createButton({
 					element: link,
 					onClick: () => {
@@ -148,6 +148,11 @@ function findAndReplaceLinks() {
 					},
 					...options,
 					url: urlString
+				});
+			} else {
+				link.addEventListener('click', (event) => {
+					event.preventDefault();
+					widget.show();
 				});
 			}
 		}
