@@ -25,3 +25,14 @@ export interface PaymentRequestAvailable {
 	googlePay: boolean;
 	applePay: boolean;
 }
+export const PaymentMethodsOrder = [
+	PaymentMethod.CREDIT_CARD,
+	PaymentMethod.PAYPAL,
+	PaymentMethod.GIFT_CARD,
+	PaymentMethod.BANK,
+	PaymentMethod.CRYPTO,
+	PaymentMethod.DAF,
+	PaymentMethod.VENMO,
+	PaymentMethod.STOCKS,
+	PaymentMethod.PAYMENT_REQUEST
+];

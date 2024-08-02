@@ -1,3 +1,4 @@
+import {ErrorMessage} from 'src/components/widget/components/ErrorMessage';
 import {BackButton} from 'src/components/widget/components/PaymentProcess/BackButton';
 import {
 	DafFlowViewProps,
@@ -19,7 +20,7 @@ import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const DafAmountView = ({changeView}: DafFlowViewProps) => {
 	const submitDonation = useSubmitDonation();
-	const {donationAmount, selectedPaymentMethod} = useWidgetContext();
+	const {donationAmount, submitError} = useWidgetContext();
 
 	return (
 		<form className={formCss} onSubmit={submitDonation}>
@@ -33,6 +34,7 @@ export const DafAmountView = ({changeView}: DafFlowViewProps) => {
 				<Frequency />
 				<DonationAmount />
 				<PrivateNote />
+				<ErrorMessage message={submitError} />
 				<SubmitButton
 					disabled={!donationAmount || Number.isNaN(donationAmount)}
 				>

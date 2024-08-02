@@ -1,4 +1,5 @@
 import cxs from 'cxs';
+import {ErrorMessage} from 'src/components/widget/components/ErrorMessage';
 import {CryptoAmountInput} from 'src/components/widget/components/PaymentProcess/CryptoFlow/CryptoAmountInput';
 import {CryptoSelector} from 'src/components/widget/components/PaymentProcess/CryptoFlow/CryptoSelector';
 import {
@@ -27,7 +28,7 @@ import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const CryptoFlow = () => {
 	const submitDonation = useSubmitDonation();
-	const {cryptoAmount, cryptoCurrency} = useWidgetContext();
+	const {cryptoAmount, cryptoCurrency, submitError} = useWidgetContext();
 
 	const [cryptoTokenRate, cryptoTokenLoading] = useCoingeckoRate(
 		cryptoCurrency && CryptoCurrencyConfig[cryptoCurrency]?.coingeckoId
@@ -56,6 +57,7 @@ export const CryptoFlow = () => {
 					)}
 				</fieldset>
 				<PrivateNote />
+				<ErrorMessage message={submitError} />
 				<SubmitButton disabled={!cryptoAmount || !cryptoCurrency}>
 					{getSubmitButtonText({method: PaymentMethod.CRYPTO, cryptoCurrency})}
 				</SubmitButton>

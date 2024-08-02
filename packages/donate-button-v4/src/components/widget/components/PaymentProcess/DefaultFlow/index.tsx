@@ -1,3 +1,4 @@
+import {ErrorMessage} from 'src/components/widget/components/ErrorMessage';
 import {DonationAmount} from 'src/components/widget/components/PaymentProcess/DonationAmount';
 import {Frequency} from 'src/components/widget/components/PaymentProcess/Frequency';
 import {
@@ -23,7 +24,8 @@ export const DefaultFlow = () => {
 		frequency,
 		donationAmount,
 		selectedPaymentMethod,
-		paymentRequestAvailable
+		paymentRequestAvailable,
+		submitError
 	} = useWidgetContext();
 	const submitDonation = useSubmitDonation();
 	return (
@@ -41,6 +43,7 @@ export const DefaultFlow = () => {
 					<DonationAmount />
 				</div>
 				<PrivateNote />
+				<ErrorMessage message={submitError} />
 				<SubmitButton
 					disabled={
 						!frequency || !donationAmount || Number.isNaN(donationAmount)
