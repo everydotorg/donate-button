@@ -115,15 +115,25 @@ The `createWidget` function accepts an object with the following properties:
      * @default "#018669"
      */
     primaryColor?: string;
-
+    /**
+     * Prefilled donation amount
+     */
     defaultDonationAmount?: number;
+    /**
+     * Prefilled donation amount without the option to change it
+     */
+    amount?: number;
     /**
      * Minimum donation amount
      * @default 5
      */
     minDonationAmount?: number;
     /**
-     * Donation frequency
+     * Preselected donation frequency without the option to change it
+     */
+    frequency?: DonationFrequency;
+    /**
+     * Preselected donation frequency
      * @default 'once'
      */
     defaultFrequency?: DonationFrequency;

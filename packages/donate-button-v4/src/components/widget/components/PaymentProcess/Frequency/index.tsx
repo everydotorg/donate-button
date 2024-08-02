@@ -5,6 +5,7 @@ import {
 } from 'src/components/widget/components/PaymentProcess/Frequency/styles';
 import {
 	fieldSetCss,
+	fixedFrequencyCss,
 	legendCss
 } from 'src/components/widget/components/PaymentProcess/styles';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
@@ -15,18 +16,39 @@ import {
 	PaymentMethod
 } from 'src/components/widget/types/PaymentMethod';
 
-const DEFAULT_MONTHLY_TITLE = 'Monthly donation';
-
 export const Frequency = () => {
 	const {
 		primaryColor,
-		lockMonthlyFrequency,
-		monthlyTitle = DEFAULT_MONTHLY_TITLE
+		frequency: fixedFrequency,
+		amount: fixedAmount,
+		monthlyTitle
 	} = useConfigContext();
 	const {frequency, selectedPaymentMethod, setFrequency} = useWidgetContext();
 
-	if (lockMonthlyFrequency) {
+	if (fixedFrequency && monthlyTitle) {
 		return <h4>{monthlyTitle}</h4>;
+	}
+
+	if (fixedFrequency) {
+		if (fixedAmount) {
+			return (
+				<fieldset className={fieldSetCss}>
+					<legend className={legendCss}>Frequency</legend>
+					<p className={fixedFrequencyCss}>
+						{fixedFrequency === DonationFrequency.Monthly
+							? 'Monthly'
+							: 'One-time'}
+					</p>
+				</fieldset>
+			);
+		}
+
+		return (
+			<h4 className={fixedFrequencyCss}>
+				Frequency:{' '}
+				{fixedFrequency === DonationFrequency.Monthly ? 'Monthly' : 'One-time'}
+			</h4>
+		);
 	}
 
 	if (OneTimeFrequencyMethods.includes(selectedPaymentMethod)) {

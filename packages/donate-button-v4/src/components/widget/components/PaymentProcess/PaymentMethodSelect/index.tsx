@@ -11,19 +11,23 @@ import {
 import {legendCss} from 'src/components/widget/components/PaymentProcess/styles';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
+import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {
 	OneTimeFrequencyMethods,
 	PaymentMethod
 } from 'src/components/widget/types/PaymentMethod';
 
 const usePaymentMethods = () => {
-	const {methods, lockMonthlyFrequency} = useConfigContext();
+	const {methods, frequency: fixedFrequency} = useConfigContext();
 	const {paymentRequestAvailable} = useWidgetContext();
 
 	const filteredMethods = useMemo(
 		() =>
 			methods.filter((method) => {
-				if (lockMonthlyFrequency && OneTimeFrequencyMethods.includes(method)) {
+				if (
+					fixedFrequency === DonationFrequency.Monthly &&
+					OneTimeFrequencyMethods.includes(method)
+				) {
 					return false;
 				}
 
@@ -36,7 +40,7 @@ const usePaymentMethods = () => {
 
 				return true;
 			}),
-		[methods, lockMonthlyFrequency, paymentRequestAvailable]
+		[methods, fixedFrequency, paymentRequestAvailable]
 	);
 
 	return filteredMethods;

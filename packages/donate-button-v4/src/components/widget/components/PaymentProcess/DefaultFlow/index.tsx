@@ -9,14 +9,16 @@ import {RedirectNotice} from 'src/components/widget/components/PaymentProcess/Re
 import {SubmitButton} from 'src/components/widget/components/PaymentProcess/SubmitButton';
 import {
 	formContainerCss,
-	formCss
+	formCss,
+	frequencyAndAmountCss
 } from 'src/components/widget/components/PaymentProcess/styles';
+import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
-import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const DefaultFlow = () => {
+	const {frequency: fixedFrequency, amount: fixedAmount} = useConfigContext();
 	const {
 		frequency,
 		donationAmount,
@@ -29,14 +31,19 @@ export const DefaultFlow = () => {
 			<LargePaymentMethodSelect />
 			<div className={formContainerCss}>
 				<SmallPaymentMethodSelect />
-				<Frequency />
-				<DonationAmount />
+				<div
+					className={frequencyAndAmountCss({
+						horizontal: Boolean(fixedAmount && fixedFrequency),
+						fixedAmount: Boolean(fixedAmount)
+					})}
+				>
+					<Frequency />
+					<DonationAmount />
+				</div>
 				<PrivateNote />
 				<SubmitButton
 					disabled={
-						frequency === DonationFrequency.Unselected ||
-						!donationAmount ||
-						Number.isNaN(donationAmount)
+						!frequency || !donationAmount || Number.isNaN(donationAmount)
 					}
 				>
 					{getSubmitButtonText({
