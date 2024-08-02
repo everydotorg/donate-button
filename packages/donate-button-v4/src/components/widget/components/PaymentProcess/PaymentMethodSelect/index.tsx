@@ -18,7 +18,7 @@ import {
 } from 'src/components/widget/types/PaymentMethod';
 
 const usePaymentMethods = () => {
-	const {methods, fixedFrequency} = useConfigContext();
+	const {methods, frequency: fixedFrequency} = useConfigContext();
 	const {paymentRequestAvailable} = useWidgetContext();
 
 	const filteredMethods = useMemo(
