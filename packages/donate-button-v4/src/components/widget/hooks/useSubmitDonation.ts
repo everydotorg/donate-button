@@ -29,6 +29,7 @@ export const useSubmitDonation = () => {
 		cryptoAmount,
 		cryptoCurrency,
 		privateNote,
+		publicTestimony,
 		giftCardCode
 	} = useWidgetContext();
 	const {minDonationAmount, webhookToken, redeemGiftCardInFlow} =
@@ -46,6 +47,7 @@ export const useSubmitDonation = () => {
 				fundraiserSlug: config.fundraiserSlug,
 				utmSource: config.utmSource,
 				privateNote,
+				publicTestimony,
 				webhookToken
 			};
 			switch (selectedPaymentMethod) {
@@ -123,6 +125,7 @@ export const useSubmitDonation = () => {
 			cryptoAmount,
 			cryptoCurrency,
 			privateNote,
+			publicTestimony,
 			giftCardCode,
 			webhookToken,
 			redeemGiftCardInFlow

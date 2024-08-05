@@ -40,6 +40,9 @@ interface WidgetContextProps {
 	privateNote?: string;
 	setPrivateNote: StateUpdater<string | undefined>;
 
+	publicTestimony?: string;
+	setPublicTestimony: StateUpdater<string | undefined>;
+
 	giftCardCode?: string;
 	setGiftCardCode: StateUpdater<string | undefined>;
 }
@@ -58,6 +61,11 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 	const [donationAmount, setDonationAmount] = useState(
 		config.amount ?? config.defaultDonationAmount
 	);
+
+	useEffect(() => {
+		setDonationAmount(config.amount);
+	}, [config.amount]);
+
 	const [submitError, setSubmitError] = useState<string | null>(null);
 	const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(
 		config.methods[0]
@@ -78,6 +86,7 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 	const paymentRequestAvailable = useCheckPaymentRequest();
 
 	const [privateNote, setPrivateNote] = useState<string>();
+	const [publicTestimony, setPublicTestimony] = useState<string>();
 
 	const [giftCardCode, setGiftCardCode] = useState<string>();
 
@@ -104,6 +113,8 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 				paymentRequestAvailable,
 				privateNote,
 				setPrivateNote,
+				publicTestimony,
+				setPublicTestimony,
 				giftCardCode,
 				setGiftCardCode
 			}}
