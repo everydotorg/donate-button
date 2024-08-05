@@ -104,7 +104,7 @@ export const DonationAmount = () => {
 				inputMode="numeric"
 				min={0}
 				step={1}
-				value={donationAmount ? donationAmount : undefined}
+				value={donationAmount ? donationAmount : ''}
 				prefix={DEFAULT_CURRENCY.symbol}
 				inputClassName={donationAmountInputCss}
 				prefixClassName={donationAmountInputPrefixCss}
