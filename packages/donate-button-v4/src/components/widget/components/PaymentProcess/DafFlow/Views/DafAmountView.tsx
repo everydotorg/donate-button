@@ -7,6 +7,7 @@ import {
 import {DonationAmount} from 'src/components/widget/components/PaymentProcess/DonationAmount';
 import {Frequency} from 'src/components/widget/components/PaymentProcess/Frequency';
 import {PrivateNote} from 'src/components/widget/components/PaymentProcess/PrivateNote';
+import {PublicTestimony} from 'src/components/widget/components/PaymentProcess/PublicTestimony';
 import {RedirectNotice} from 'src/components/widget/components/PaymentProcess/RedirectNotice';
 import {SubmitButton} from 'src/components/widget/components/PaymentProcess/SubmitButton';
 import {
@@ -34,6 +35,7 @@ export const DafAmountView = ({changeView}: DafFlowViewProps) => {
 				<Frequency />
 				<DonationAmount />
 				<PrivateNote />
+				<PublicTestimony />
 				<ErrorMessage message={submitError} />
 				<SubmitButton
 					disabled={!donationAmount || Number.isNaN(donationAmount)}

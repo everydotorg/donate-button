@@ -9,6 +9,7 @@ import {
 	SmallPaymentMethodSelect
 } from 'src/components/widget/components/PaymentProcess/PaymentMethodSelect';
 import {PrivateNote} from 'src/components/widget/components/PaymentProcess/PrivateNote';
+import {PublicTestimony} from 'src/components/widget/components/PaymentProcess/PublicTestimony';
 import {RedirectNotice} from 'src/components/widget/components/PaymentProcess/RedirectNotice';
 import {SubmitButton} from 'src/components/widget/components/PaymentProcess/SubmitButton';
 import {
@@ -90,6 +91,7 @@ export const StocksFlow = () => {
 					</div>
 				</fieldset>
 				<PrivateNote />
+				<PublicTestimony />
 				<ErrorMessage message={submitError} />
 				<SubmitButton disabled={!stockAmount || !stockSymbol}>
 					{getSubmitButtonText({method: PaymentMethod.STOCKS})}

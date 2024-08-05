@@ -16,6 +16,7 @@ interface BaseUrlParams {
 	noExit?: boolean;
 	methods?: PaymentMethod[];
 	privateNote?: string;
+	publicTestimony?: string;
 	utmSource?: string;
 	webhookToken?: string;
 }
@@ -67,6 +68,7 @@ function getBaseParams({
 	nonprofitSlug,
 	noExit,
 	privateNote,
+	publicTestimony,
 	utmSource,
 	webhookToken
 }: Pick<
@@ -75,6 +77,7 @@ function getBaseParams({
 	| 'methods'
 	| 'noExit'
 	| 'privateNote'
+	| 'publicTestimony'
 	| 'utmSource'
 	| 'webhookToken'
 >) {
@@ -85,6 +88,7 @@ function getBaseParams({
 		utm_medium: UTM_MEDIUM,
 		no_exit: noExit ?? 1,
 		private_note: privateNote,
+		public_testimony: publicTestimony,
 		webhook_token: webhookToken
 	};
 }
