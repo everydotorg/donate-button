@@ -52,6 +52,12 @@ function intFromString(string?: string | null) {
 	return Number.isNaN(number) ? undefined : number;
 }
 
+function removeEmptyValues<T extends Record<string, unknown>>(object: T): T {
+	return Object.fromEntries(
+		Object.entries(object).filter(([, value]) => value !== undefined)
+	) as T;
+}
+
 export function parseDonateUrl(
 	urlString: string
 ): (Partial<WidgetConfig> & {nonprofitSlug: string}) | undefined {
@@ -88,7 +94,7 @@ export function parseDonateUrl(
 		return;
 	}
 
-	return {
+	return removeEmptyValues({
 		fundraiserSlug,
 		nonprofitSlug,
 		frequency,
@@ -101,5 +107,5 @@ export function parseDonateUrl(
 		defaultDonationAmount: amount,
 		minDonationAmount: minAmount,
 		primaryColor
-	};
+	});
 }
