@@ -5,7 +5,6 @@ import {parseDonateUrl} from 'src/helpers/parseDonateUrl';
 import shouldApplyEveryStyleForAllLinks from 'src/helpers/shouldApplyEveryStyleForAllLinks';
 import {loadFonts} from 'src/loadFonts';
 import {WidgetLoader} from 'src/loaders/Widgetloader';
-import resetcss from 'src/resetCss';
 
 const OBSERVER_OPTIONS = {
 	childList: true,
@@ -83,20 +82,10 @@ function mountWidgetContainer() {
 	widgetContainer.id = 'widget-container';
 	shadowRoot.append(widgetContainer);
 
-	const everyStyles: HTMLStyleElement | null =
-		document.querySelector('#every-styles');
+	const everyShadowStyles = document.createElement('style');
+	everyShadowStyles.id = 'every-shadow-styles';
 
-	if (everyStyles) {
-		const rules = Object.values(everyStyles.sheet?.cssRules ?? {})
-			.map((rule) => rule.cssText)
-			.join('\n');
-
-		const everyShadowStyles = document.createElement('style');
-		everyShadowStyles.id = 'every-shadow-styles';
-		everyShadowStyles.innerHTML = resetcss + rules;
-
-		widgetContainer.append(everyShadowStyles);
-	}
+	widgetContainer.append(everyShadowStyles);
 }
 
 function createWidget(options: CreateWidgetProps, urlString: string) {
