@@ -1,10 +1,10 @@
-import cxs from 'cxs';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {textSize} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 
-export const footerCardCss = cxs({
+export const footerCardCss = css({
 	padding: `${Spacing.XL} ${Spacing.XL} 0px`,
 	backgroundColor: 'unset',
 
@@ -23,7 +23,7 @@ export const footerCardCss = cxs({
 	}
 });
 
-export const footerLinkCss = cxs({
+export const footerLinkCss = css({
 	color: COLORS.TextGray,
 	fontWeight: 500,
 	textDecoration: 'none',

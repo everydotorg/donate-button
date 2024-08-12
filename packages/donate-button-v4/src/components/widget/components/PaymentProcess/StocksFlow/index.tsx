@@ -1,4 +1,3 @@
-import cxs from 'cxs';
 import {ErrorMessage} from 'src/components/widget/components/ErrorMessage';
 import {
 	donationAmountInputContainerErrorCss,
@@ -24,6 +23,7 @@ import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {verticalStackCss, Spacing} from 'src/components/widget/theme/spacing';
 import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
+import css from 'src/helpers/css';
 import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const StocksFlow = () => {
@@ -46,7 +46,7 @@ export const StocksFlow = () => {
 			<div className={formContainerCss}>
 				<SmallPaymentMethodSelect />
 				<fieldset
-					className={cxs({fieldSetCss, ...verticalStackCss.cxs(Spacing.XXL)})}
+					className={css({fieldSetCss, ...verticalStackCss.css(Spacing.XXL)})}
 				>
 					<div>
 						<legend className={legendCss}>

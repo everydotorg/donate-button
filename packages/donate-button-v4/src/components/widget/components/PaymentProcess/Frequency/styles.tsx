@@ -1,7 +1,7 @@
-import cxs from 'cxs';
+import css from 'src/helpers/css';
 
 export const inputLabelCss = (primaryColor: string) =>
-	cxs({
+	css({
 		position: 'relative',
 		cursor: 'pointer',
 		display: 'flex',
@@ -16,7 +16,7 @@ export const inputLabelCss = (primaryColor: string) =>
 	});
 
 export const inputItemCss = (primaryColor: string) =>
-	cxs({
+	css({
 		cursor: 'pointer',
 		display: 'flex',
 		flexDirection: 'column',
@@ -39,7 +39,7 @@ export const inputItemCss = (primaryColor: string) =>
 	});
 
 export const inputContainerCss = (primaryColor: string) =>
-	cxs({
+	css({
 		display: 'flex',
 		width: '100%',
 

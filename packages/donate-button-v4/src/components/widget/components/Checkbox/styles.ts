@@ -1,10 +1,10 @@
-import cxs from 'cxs';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 
 /* Hide checkbox visually but remain accessible to screen readers.
   Source: https://polished.js.org/docs/#hidevisually */
-export const hiddenCheckboxCss = cxs({
+export const hiddenCheckboxCss = css({
 	border: 0,
 	clip: 'rect(0 0 0 0)',
 	clipPath: 'inset(50%)',
@@ -24,7 +24,7 @@ export const checkboxCss = ({
 	checked?: boolean;
 	primaryColor: string;
 }) =>
-	cxs({
+	css({
 		cursor: 'pointer',
 		width: '24px',
 		minWidth: '24px',
@@ -37,7 +37,7 @@ export const checkboxCss = ({
 		...(checked ? {background: primaryColor} : {})
 	});
 
-export const checkMarkIconCss = cxs({
+export const checkMarkIconCss = css({
 	width: '16px',
 	height: '16px',
 	'& > path': {
@@ -46,11 +46,11 @@ export const checkMarkIconCss = cxs({
 	}
 });
 
-export const checkboxLabelTextCss = cxs({
+export const checkboxLabelTextCss = css({
 	cursor: 'pointer'
 });
 
-export const checkboxLabelContainerCss = cxs({
+export const checkboxLabelContainerCss = css({
 	display: 'flex',
 	alignItems: 'center',
 	gap: Spacing.XS

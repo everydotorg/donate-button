@@ -1,21 +1,21 @@
-import cxs from 'cxs';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {smallText} from 'src/components/widget/theme/font-sizes';
 import {ABOUT_URL} from 'src/constants/url';
+import css from 'src/helpers/css';
 
-const containerCss = cxs({
+const containerCss = css({
 	width: '100%',
 	textAlign: 'center'
 });
 
-const redirectTextCss = cxs({
+const redirectTextCss = css({
 	...smallText,
 	color: COLORS.TextOpaque
 });
 
 const linkCss = (color: string) =>
-	cxs({
+	css({
 		color,
 		textDecoration: 'none',
 		cursor: 'pointer'

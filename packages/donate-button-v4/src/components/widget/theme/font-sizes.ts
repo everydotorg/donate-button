@@ -1,41 +1,41 @@
-import cxs from 'cxs';
+import {CSSObject} from 'src/helpers/css';
 
-export const smallText: cxs.CSSObject = {
+export const smallText: CSSObject = {
 	fontSize: '12px',
 	lineHeight: '16px',
 	letterSpacing: '0.01em'
 };
 
-export const bodyText: cxs.CSSObject = {
+export const bodyText: CSSObject = {
 	fontSize: '16px',
 	lineHeight: '24px',
 	letterSpacing: '-0.01em'
 };
 
-export const inputText: cxs.CSSObject = {
+export const inputText: CSSObject = {
 	fontSize: '16px',
 	lineHeight: '16px'
 };
 
-export const headingText: cxs.CSSObject = {
+export const headingText: CSSObject = {
 	fontSize: '24px',
 	lineHeight: '28px',
 	letterSpacing: '-0.015em'
 };
 
-export const heading2Text: cxs.CSSObject = {
+export const heading2Text: CSSObject = {
 	fontSize: '24px',
 	lineHeight: '28px',
 	letterSpacing: '-0.015em'
 };
 
-export const heading3Text: cxs.CSSObject = {
+export const heading3Text: CSSObject = {
 	fontSize: '20px',
 	lineHeight: '24px',
 	letterSpacing: '-0.015em'
 };
 
-export const buttonText: cxs.CSSObject = {
+export const buttonText: CSSObject = {
 	fontSize: '16px',
 	lineHeight: '24px',
 	letterSpacing: '-0.01em'

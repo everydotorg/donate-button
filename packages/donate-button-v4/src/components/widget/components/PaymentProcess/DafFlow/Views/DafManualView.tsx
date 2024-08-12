@@ -1,4 +1,3 @@
-import cxs from 'cxs';
 import {linkCss} from 'src/components/widget/components/FundraiserLink/styles';
 import {BackButton} from 'src/components/widget/components/PaymentProcess/BackButton';
 import {
@@ -18,6 +17,7 @@ import {
 	NonprofitFetching
 } from 'src/components/widget/types/Nonprofit';
 import {TEAM_EMAIL} from 'src/constants/url';
+import css from 'src/helpers/css';
 import {mailToLink} from 'src/helpers/mailToLink';
 
 export const DafManualView = ({changeView}: DafFlowViewProps) => {
@@ -66,13 +66,13 @@ export const DafManualView = ({changeView}: DafFlowViewProps) => {
 					</p>
 				</div>
 				<div
-					className={cxs({
+					className={css({
 						color: COLORS.TextGray,
-						...verticalStackCss.cxs(0)
+						...verticalStackCss.css(0)
 					})}
 				>
 					<p
-						className={cxs({
+						className={css({
 							paddingBottom: Spacing.S
 						})}
 					>

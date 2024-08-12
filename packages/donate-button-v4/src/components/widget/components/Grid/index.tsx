@@ -1,9 +1,9 @@
-import cxs from 'cxs';
 import {FunctionalComponent} from 'preact';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 
-const gridCss = cxs({
+const gridCss = css({
 	display: 'grid',
 	gridGap: 0,
 	gridTemplateColumns: '1fr',

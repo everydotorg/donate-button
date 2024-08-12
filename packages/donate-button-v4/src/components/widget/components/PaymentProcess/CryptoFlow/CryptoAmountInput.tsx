@@ -1,5 +1,4 @@
 import {Big} from 'big.js';
-import cxs from 'cxs';
 import {useState, useRef, useEffect, useCallback} from 'preact/hooks';
 import {MAX_CRYPTO_DECIMALS_FOR_DISPLAY} from 'src/components/widget/components/PaymentProcess/CryptoFlow/CryptoSelector';
 import {
@@ -16,6 +15,7 @@ import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {LoadingIcon} from 'src/components/widget/icons/LoadingIcon';
 import {RepeatIcon} from 'src/components/widget/icons/RepeatIcon';
 import {COLORS} from 'src/components/widget/theme/colors';
+import css from 'src/helpers/css';
 import {displayCurrencyValue} from 'src/helpers/displayCurrencyValue';
 import joinClassNames from 'src/helpers/joinClassNames';
 
@@ -136,7 +136,7 @@ export const CryptoAmountInput = ({
 						onChange={(event) => onAmountChanged(event.currentTarget.value)}
 					/>
 					{!zeroRate && (
-						<div className={cxs({color: COLORS.TextGray})}>
+						<div className={css({color: COLORS.TextGray})}>
 							{cryptoTokenRate === null && cryptoTokenLoading ? (
 								<LoadingIcon size={16} />
 							) : isCryptoInput ? (
@@ -152,7 +152,7 @@ export const CryptoAmountInput = ({
 				<div className={cryptoAmountInputSecondColumn}>
 					<div>{isCryptoInput ? cryptoCurrency : 'USD'}</div>
 					{!zeroRate && (
-						<div className={cxs({color: COLORS.TextGray})}>
+						<div className={css({color: COLORS.TextGray})}>
 							{isCryptoInput ? 'USD' : cryptoCurrency}*
 						</div>
 					)}

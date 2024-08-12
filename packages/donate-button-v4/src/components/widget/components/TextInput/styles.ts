@@ -1,16 +1,16 @@
-import cxs from 'cxs';
 import {getColoredBorder, Borders} from 'src/components/widget/theme/borders';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {textSize} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 
-export const textInputContainerErrorCss = cxs({
+export const textInputContainerErrorCss = css({
 	border: getColoredBorder(Borders.Normal, COLORS.Error)
 });
 
 export const textInputContainerCss = (color: string) =>
-	cxs({
+	css({
 		position: 'relative',
 		padding: Spacing.M,
 		display: 'flex',
@@ -27,7 +27,7 @@ export const textInputContainerCss = (color: string) =>
 		}
 	});
 
-export const textInputCss = cxs({
+export const textInputCss = css({
 	fontSize: textSize.s.fontSize,
 	lineHeight: textSize.s.fontSize,
 	fontFamily: 'inherit',

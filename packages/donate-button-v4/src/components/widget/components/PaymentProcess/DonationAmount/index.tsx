@@ -1,4 +1,3 @@
-import cxs from 'cxs';
 import {useEffect, useRef} from 'preact/hooks';
 import {JSXInternal} from 'preact/src/jsx';
 import {
@@ -19,6 +18,7 @@ import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {verticalStackCss, Spacing} from 'src/components/widget/theme/spacing';
 import {DEFAULT_CURRENCY} from 'src/constants/currency';
+import css from 'src/helpers/css';
 import {isTouchDevice} from 'src/helpers/isTouchDevice';
 
 const preventDecimal = (
@@ -80,9 +80,9 @@ export const DonationAmount = () => {
 	if (fixedAmount) {
 		return (
 			<fieldset
-				className={cxs({
+				className={css({
 					fieldSetCss,
-					...verticalStackCss.cxs(Spacing.S)
+					...verticalStackCss.css(Spacing.S)
 				})}
 			>
 				<legend className={legendCss}>Donation amount</legend>
@@ -93,7 +93,7 @@ export const DonationAmount = () => {
 
 	return (
 		<fieldset
-			className={cxs({fieldSetCss, ...verticalStackCss.cxs(Spacing.S)})}
+			className={css({fieldSetCss, ...verticalStackCss.css(Spacing.S)})}
 		>
 			<legend className={legendCss}>Donation amount</legend>
 			<TextInput
