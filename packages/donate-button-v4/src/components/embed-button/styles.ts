@@ -1,9 +1,7 @@
-import cxs from 'cxs';
 import {FontFamily} from 'src/components/widget/theme/font-family';
+import {cssButton} from 'src/helpers/css';
 
-cxs.prefix('every-embedded-');
-
-export const buttonCss = cxs({
+export const buttonCss = cssButton({
 	display: 'flex',
 	alignItems: 'center',
 	width: 'max-content',
@@ -25,13 +23,13 @@ export const buttonCss = cxs({
 	'&:hover': {backgroundColor: '#2F806D'}
 });
 
-export const logoCss = cxs({
+export const logoCss = cssButton({
 	width: '16px',
 	height: '16px',
 	fill: '#fff',
 	marginRight: '8px'
 });
 
-export const verticalCenterTextCss = cxs({
+export const verticalCenterTextCss = cssButton({
 	transform: 'translateY(0.08em)'
 });
