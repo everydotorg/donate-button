@@ -1,10 +1,10 @@
-import cxs from 'cxs';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {bodyText} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 
-export const btnCss = cxs({
+export const btnCss = css({
 	...bodyText,
 	outline: 'none',
 	width: '100%',
@@ -19,7 +19,7 @@ export const btnCss = cxs({
 });
 
 export const btnActiveColor = (color: string) =>
-	cxs({
+	css({
 		color: COLORS.White,
 		backgroundColor: color,
 		':hover': {
@@ -27,7 +27,7 @@ export const btnActiveColor = (color: string) =>
 		}
 	});
 
-export const btnDisabledCss = cxs({
+export const btnDisabledCss = css({
 	color: COLORS.White,
 	backgroundColor: COLORS.DarkGray,
 	cursor: 'default',

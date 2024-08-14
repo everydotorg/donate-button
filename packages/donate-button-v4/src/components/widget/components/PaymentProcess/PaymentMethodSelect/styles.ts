@@ -1,4 +1,3 @@
-import cxs from 'cxs';
 import {fieldSetCss} from 'src/components/widget/components/PaymentProcess/styles';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
@@ -8,9 +7,10 @@ import {
 	horizontalStackCss,
 	Spacing
 } from 'src/components/widget/theme/spacing';
+import css, {CSSObject} from 'src/helpers/css';
 import joinClassNames from 'src/helpers/joinClassNames';
 
-export const largePaymentMethodSelectListCss = cxs({
+export const largePaymentMethodSelectListCss = css({
 	height: '100%',
 	width: '100%',
 	minWidth: '170px',
@@ -18,13 +18,13 @@ export const largePaymentMethodSelectListCss = cxs({
 	backgroundColor: COLORS.LightGray,
 	display: 'none',
 	[BREAKPOINTS.TabletLandscapeUp]: {
-		...verticalStackCss.cxs(0)
+		...verticalStackCss.css(0)
 	}
 });
 
 export const smallPaymentMethodFieldSetCss = joinClassNames([
 	fieldSetCss,
-	cxs({
+	css({
 		display: 'block',
 		[BREAKPOINTS.TabletLandscapeUp]: {
 			display: 'none'
@@ -32,14 +32,14 @@ export const smallPaymentMethodFieldSetCss = joinClassNames([
 	})
 ]);
 
-export const smallPaymentMethodSelectListCss = cxs({
+export const smallPaymentMethodSelectListCss = css({
 	display: 'grid',
 	gridTemplateColumns: '1fr 1fr',
 	gridGap: Spacing.S
 });
 
-export const paymentMethodButtonCssBase: cxs.CSSObject = {
-	...horizontalStackCss.cxs(Spacing.XS),
+export const paymentMethodButtonCssBase: CSSObject = {
+	...horizontalStackCss.css(Spacing.XS),
 	alignItems: 'center',
 	justifyContent: 'flex-start',
 	width: '100%',
@@ -47,7 +47,7 @@ export const paymentMethodButtonCssBase: cxs.CSSObject = {
 };
 
 export const largePaymentMethodButtonCss = (selected: boolean) =>
-	cxs({
+	css({
 		...paymentMethodButtonCssBase,
 		border: 'none',
 		padding: Spacing.M,
@@ -71,7 +71,7 @@ export const smallPaymentMethodButtonCss = (
 	selected: boolean,
 	primaryColor: string
 ) =>
-	cxs({
+	css({
 		...paymentMethodButtonCssBase,
 		border: `1px solid ${COLORS.DarkGray}`,
 		background: 'transparent',

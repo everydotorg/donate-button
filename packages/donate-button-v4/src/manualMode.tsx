@@ -5,7 +5,6 @@ import {CreateWidgetInSelectorProps} from 'src/components/widget/types';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
 import {loadFonts} from 'src/loadFonts';
 import {WidgetLoader} from 'src/loaders/Widgetloader';
-import resetcss from 'src/resetCss';
 
 interface GlobalExport {
 	createButton: (options: CreateButtonInSelectorProps) => void;
@@ -52,20 +51,10 @@ export default function manualMode() {
 		widgetMountPoint = document.createElement('div');
 		shadowWidgetWrapper.attachShadow({mode: 'open'}).append(widgetMountPoint);
 
-		const everyStyles: HTMLStyleElement | null =
-			document.querySelector('#every-styles');
+		const everyShadowStyles = document.createElement('style');
+		everyShadowStyles.id = 'every-shadow-styles';
 
-		if (everyStyles) {
-			const rules = Object.values(everyStyles.sheet?.cssRules ?? {})
-				.map((rule) => rule.cssText)
-				.join('\n');
-
-			const everyShadowStyles = document.createElement('style');
-			everyShadowStyles.id = 'every-shadow-styles';
-			everyShadowStyles.innerHTML = resetcss + rules;
-
-			widgetMountPoint.append(everyShadowStyles);
-		}
+		widgetMountPoint.append(everyShadowStyles);
 	};
 
 	const renderWidget = () => {

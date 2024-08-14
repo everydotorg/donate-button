@@ -1,4 +1,3 @@
-import cxs from 'cxs';
 import {useState} from 'preact/hooks';
 import {Checkbox} from 'src/components/widget/components/Checkbox';
 import {
@@ -9,6 +8,7 @@ import {TextArea} from 'src/components/widget/components/TextInput';
 import {useNonprofitOrError} from 'src/components/widget/hooks/useNonprofit';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {verticalStackCss, Spacing} from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 
 export const PublicTestimony = () => {
 	const nonprofit = useNonprofitOrError();
@@ -30,7 +30,7 @@ export const PublicTestimony = () => {
 			</Checkbox>
 			{showPublicTestimonyField && (
 				<fieldset
-					className={cxs({fieldSetCss, ...verticalStackCss.cxs(Spacing.XS)})}
+					className={css({fieldSetCss, ...verticalStackCss.css(Spacing.XS)})}
 				>
 					<legend className={legendCss}>
 						Help {nonprofit.name} by sharing why you support them with the world
@@ -40,7 +40,7 @@ export const PublicTestimony = () => {
 						label="Note"
 						id="publicTestimony"
 						value={publicTestimony}
-						inputClassName={cxs({resize: 'none'})}
+						inputClassName={css({resize: 'none'})}
 						onChange={({currentTarget}) => {
 							setPublicTestimony(currentTarget.value);
 						}}

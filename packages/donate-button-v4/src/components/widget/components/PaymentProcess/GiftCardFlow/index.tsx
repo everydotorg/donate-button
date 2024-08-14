@@ -1,4 +1,3 @@
-import cxs from 'cxs';
 import {ErrorMessage} from 'src/components/widget/components/ErrorMessage';
 import {giftCardIconCss} from 'src/components/widget/components/PaymentProcess/GiftCardFlow/styles';
 import {
@@ -18,6 +17,7 @@ import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {GiftIcon} from 'src/components/widget/icons/GiftIcon';
 import {textSize} from 'src/components/widget/theme/font-sizes';
 import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
+import css from 'src/helpers/css';
 import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const GiftCardFlow = () => {
@@ -52,7 +52,7 @@ export const GiftCardFlow = () => {
 	);
 };
 
-export const giftCardCodeInputCss = cxs({
+export const giftCardCodeInputCss = css({
 	fontSize: textSize.l.fontSize,
 	lineHeight: textSize.l.fontSize,
 	fontWeight: 700

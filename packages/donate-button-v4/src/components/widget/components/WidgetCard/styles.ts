@@ -1,10 +1,10 @@
-import cxs from 'cxs';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 
 export const widgetCss = (height: number | null) =>
-	cxs({
+	css({
 		background: 'white',
 		width: '100%',
 		height: '100%',

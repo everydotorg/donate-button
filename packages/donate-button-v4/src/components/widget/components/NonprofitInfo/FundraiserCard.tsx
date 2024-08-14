@@ -1,4 +1,3 @@
-import cxs from 'cxs';
 import {Fragment} from 'preact/jsx-runtime';
 import {GridCard} from 'src/components/widget/components/GridCard';
 import {
@@ -13,11 +12,12 @@ import {
 import {useNonprofitOrError} from 'src/components/widget/hooks/useNonprofit';
 import {Fundraiser} from 'src/components/widget/types/Fundraiser';
 import {LOGO_IMAGE_PLACEHOLDER_ID} from 'src/constants/placeholders';
+import css from 'src/helpers/css';
 import {getCloudinaryUrl} from 'src/helpers/getCloudinaryUrl';
 import joinClassNames from 'src/helpers/joinClassNames';
 
 const coverImageCss = (url: string) =>
-	cxs({
+	css({
 		backgroundImage: `url(${url})`,
 		backgroundSize: 'cover',
 		width: 'calc(100% + 25px + 25px)',

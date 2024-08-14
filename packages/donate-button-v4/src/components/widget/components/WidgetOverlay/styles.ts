@@ -1,11 +1,11 @@
-import cxs from 'cxs';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import {FontFamily} from 'src/components/widget/theme/font-family';
 import {textSize} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 
-export const overlayCss = cxs({
+export const overlayCss = css({
 	...textSize.s,
 	position: 'fixed',
 	height: 'auto',

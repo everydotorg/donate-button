@@ -1,8 +1,8 @@
-import cxs from 'cxs';
 import {CloseIcon} from 'src/components/widget/icons/CloseIcon';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 
-const errorMessageCss = cxs({
+const errorMessageCss = css({
 	display: 'flex',
 	alignItems: 'center',
 	gap: Spacing.XXS,

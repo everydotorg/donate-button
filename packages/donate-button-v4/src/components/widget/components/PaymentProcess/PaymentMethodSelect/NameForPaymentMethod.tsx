@@ -1,10 +1,10 @@
-import cxs from 'cxs';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {textSize} from 'src/components/widget/theme/font-sizes';
 import {
 	PaymentMethod,
 	PaymentRequestAvailable
 } from 'src/components/widget/types/PaymentMethod';
+import css from 'src/helpers/css';
 
 const NameForPaymentMethodMap: {
 	[key in Exclude<PaymentMethod, PaymentMethod.PAYMENT_REQUEST>]: string;
@@ -38,5 +38,5 @@ export const NameForPaymentMethod = ({method}: NameForPaymentMethodProps) => {
 	const {paymentRequestAvailable} = useWidgetContext();
 
 	const name = getNameForPaymentMethod(method, paymentRequestAvailable);
-	return <span className={cxs({...textSize.s})}>{name}</span>;
+	return <span className={css({...textSize.s})}>{name}</span>;
 };

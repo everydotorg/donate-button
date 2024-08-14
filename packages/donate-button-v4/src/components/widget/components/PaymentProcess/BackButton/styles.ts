@@ -1,10 +1,10 @@
-import cxs from 'cxs';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {textSize} from 'src/components/widget/theme/font-sizes';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 
 export const backButtonCss = (primaryColor: string) =>
-	cxs({
+	css({
 		outline: 'none',
 		border: 'none',
 		fontFamily: 'inherit',

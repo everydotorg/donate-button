@@ -1,13 +1,13 @@
-import cxs from 'cxs';
 import {textSize} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 
 const CAHRIOT_GREEN = '#ADEFD1';
 const CAHRIOT_DARK_GREEN = '#7ce6b6';
 const CHARIOT_DARK_BLUE = '#00203F';
 
-export const chariotButtonCss = cxs({
+export const chariotButtonCss = css({
 	outline: 'none',
 	border: 'none',
 	fontFamily: 'inherit',
@@ -28,7 +28,7 @@ export const chariotButtonCss = cxs({
 });
 
 export const manualButtonCss = (primaryColor: string) =>
-	cxs({
+	css({
 		outline: 'none',
 		border: 'none',
 		background: 'none',

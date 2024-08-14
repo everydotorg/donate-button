@@ -1,4 +1,3 @@
-import cxs from 'cxs';
 import {filter as fuzzyFilter} from 'fuzzy';
 import {useRef, useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
@@ -31,6 +30,7 @@ import {
 	DISABLED_TOKENS
 } from 'src/components/widget/types/Crypto';
 import {CRYPTO_EMAIL} from 'src/constants/url';
+import css from 'src/helpers/css';
 import joinClassNames from 'src/helpers/joinClassNames';
 import {mailToLink} from 'src/helpers/mailToLink';
 
@@ -195,7 +195,7 @@ export const CryptoSelector = () => {
 						<SearchIcon />
 					)
 				}
-				prefixClassName={cxs({display: 'inline-flex'})}
+				prefixClassName={css({display: 'inline-flex'})}
 				sufixClassName={cryptoSelectorInputSufixCss(primaryColor, showDropDown)}
 				containerClassName={inputContainerClasses}
 				sufix={
@@ -213,7 +213,7 @@ export const CryptoSelector = () => {
 					<div className={cryptoSelectorDropDownContentCss}>
 						{filteredOptions ? (
 							filteredOptions.length === 0 ? (
-								<div className={cxs({padding: '20px'})}>
+								<div className={css({padding: '20px'})}>
 									We don&apos;t currently support this coin on our site, but for
 									donations worth over $5,000 USD we can do it manually. Please
 									email <CryptoSupprotLink /> to arrange.

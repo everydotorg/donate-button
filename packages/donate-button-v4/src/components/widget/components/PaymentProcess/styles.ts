@@ -1,16 +1,16 @@
-import cxs from 'cxs';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {textSize} from 'src/components/widget/theme/font-sizes';
 import {Spacing, verticalStackCss} from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 
-export const cardCss = cxs({
+export const cardCss = css({
 	padding: `${Spacing.XL} ${Spacing.XL} 0px`,
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		padding: '0px'
 	}
 });
 
-export const fieldSetCss = cxs({
+export const fieldSetCss = css({
 	border: 'none',
 	padding: 0,
 	margin: 0,
@@ -19,24 +19,24 @@ export const fieldSetCss = cxs({
 	verticalAlign: 'baseline'
 });
 
-export const legendCss = cxs({
+export const legendCss = css({
 	fontWeight: 700,
 	...textSize.s,
 	marginBottom: Spacing.S
 });
 
-export const fixedFrequencyCss = cxs({
+export const fixedFrequencyCss = css({
 	fontWeight: 700,
 	...textSize.l
 });
 
-export const fixedAmountsCss = cxs({
+export const fixedAmountsCss = css({
 	fontWeight: 700,
 	...textSize.xl
 });
 
-export const formContainerCss = cxs({
-	...verticalStackCss.cxs(Spacing.XL),
+export const formContainerCss = css({
+	...verticalStackCss.css(Spacing.XL),
 	padding: '0px',
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		gridColumn: '2/3',
@@ -52,13 +52,13 @@ export const frequencyAndAmountCss = ({
 	fixedAmount: boolean;
 }) =>
 	horizontal
-		? cxs({
+		? css({
 				display: 'grid',
 				gridTemplateColumns: '1fr 1fr',
 				gridColumnGap: Spacing.L
 		  })
-		: cxs({
-				...verticalStackCss.cxs(Spacing.XL),
+		: css({
+				...verticalStackCss.css(Spacing.XL),
 				...(fixedAmount
 					? {
 							'> fieldset:last-child': {
@@ -68,7 +68,7 @@ export const frequencyAndAmountCss = ({
 					: {})
 		  });
 
-export const formCss = cxs({
+export const formCss = css({
 	display: 'grid',
 	gridTemplateColumns: '1fr',
 

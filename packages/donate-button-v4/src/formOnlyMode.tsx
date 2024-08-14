@@ -1,12 +1,9 @@
 import {render} from 'preact';
-import EmbedButton from 'src/components/embed-button';
 import {CreateButtonInSelectorProps} from 'src/components/embed-button/types';
 import {CreateWidgetInSelectorProps} from 'src/components/widget/types';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
 import {loadFonts} from 'src/loadFonts';
 import {FormLoader} from 'src/loaders/FormLoader';
-import {WidgetLoader} from 'src/loaders/Widgetloader';
-import resetcss from 'src/resetCss';
 
 interface GlobalExport {
 	createButton: (options: CreateButtonInSelectorProps) => void;
@@ -52,20 +49,10 @@ export default function formOnlyMode() {
 		formMountPoint = document.createElement('div');
 		shadowWidgetWrapper.attachShadow({mode: 'open'}).append(formMountPoint);
 
-		const everyStyles: HTMLStyleElement | null =
-			document.querySelector('#every-styles');
+		const everyShadowStyles = document.createElement('style');
+		everyShadowStyles.id = 'every-shadow-styles';
 
-		if (everyStyles) {
-			const rules = Object.values(everyStyles.sheet?.cssRules ?? {})
-				.map((rule) => rule.cssText)
-				.join('\n');
-
-			const everyShadowStyles = document.createElement('style');
-			everyShadowStyles.id = 'every-shadow-styles';
-			everyShadowStyles.innerHTML = resetcss + rules;
-
-			formMountPoint.append(everyShadowStyles);
-		}
+		formMountPoint.append(everyShadowStyles);
 	};
 
 	const renderWidget = () => {

@@ -1,4 +1,4 @@
-import cxs from 'cxs';
+import css, {CSSObject} from 'src/helpers/css';
 
 export enum Spacing {
 	Empty = '0',
@@ -41,14 +41,14 @@ export enum Spacing {
 	Inline_XXL = '0 24px 0 0'
 }
 
-const verticalStackCssObject = (spacing: number | string): cxs.CSSObject => ({
+const verticalStackCssObject = (spacing: number | string): CSSObject => ({
 	display: 'flex',
 	flexDirection: 'column',
 	'> *:not(:last-child)': {
 		marginBottom: typeof spacing === 'number' ? `${spacing}px` : spacing
 	}
 });
-const horizontalStackCssObject = (spacing: number | string): cxs.CSSObject => ({
+const horizontalStackCssObject = (spacing: number | string): CSSObject => ({
 	display: 'flex',
 	flexDirection: 'row',
 	'> *:not(:last-child)': {
@@ -57,12 +57,12 @@ const horizontalStackCssObject = (spacing: number | string): cxs.CSSObject => ({
 });
 
 export const verticalStackCss = {
-	className: (spacing: number | string) => cxs(verticalStackCssObject(spacing)),
-	cxs: (spacing: number | string) => verticalStackCssObject(spacing)
+	className: (spacing: number | string) => css(verticalStackCssObject(spacing)),
+	css: (spacing: number | string) => verticalStackCssObject(spacing)
 };
 
 export const horizontalStackCss = {
 	className: (spacing: number | string) =>
-		cxs(horizontalStackCssObject(spacing)),
-	cxs: (spacing: number | string) => horizontalStackCssObject(spacing)
+		css(horizontalStackCssObject(spacing)),
+	css: (spacing: number | string) => horizontalStackCssObject(spacing)
 };

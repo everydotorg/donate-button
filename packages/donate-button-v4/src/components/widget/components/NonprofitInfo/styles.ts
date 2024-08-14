@@ -1,4 +1,3 @@
-import cxs from 'cxs';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {textSize} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
@@ -7,9 +6,10 @@ import {
 	Spacing,
 	verticalStackCss
 } from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 import joinClassNames from 'src/helpers/joinClassNames';
 
-export const nonprofitNameCss = cxs({
+export const nonprofitNameCss = css({
 	lineHeight: '20px',
 	fontWeight: 'unset',
 	'> span': {
@@ -17,7 +17,7 @@ export const nonprofitNameCss = cxs({
 	}
 });
 
-export const fundraiserNameCss = cxs({
+export const fundraiserNameCss = css({
 	lineHeight: '20px',
 	fontWeight: 'unset',
 	'> span': {
@@ -26,7 +26,7 @@ export const fundraiserNameCss = cxs({
 });
 
 export const logoImageCss = (logoUrl: string) =>
-	cxs({
+	css({
 		borderRadius: Radii.Circle,
 		overflow: 'hidden',
 		display: 'block',
@@ -44,7 +44,7 @@ export const logoImageCss = (logoUrl: string) =>
 export const fundraiserCardLogoCss = (logoUrl: string) =>
 	joinClassNames([
 		logoImageCss(logoUrl),
-		cxs({
+		css({
 			width: '32px',
 			height: '32px',
 			flexShrink: 0,
@@ -55,15 +55,15 @@ export const fundraiserCardLogoCss = (logoUrl: string) =>
 		})
 	]);
 
-export const nonprofitCardCss = cxs({
+export const nonprofitCardCss = css({
 	padding: `${Spacing.XL}`,
 	[BREAKPOINTS.TabletLandscapeUp]: {
-		...verticalStackCss.cxs(Spacing.S),
+		...verticalStackCss.css(Spacing.S),
 		padding: `${Spacing.L}`
 	}
 });
 
-export const largeFundraiserCardCss = cxs({
+export const largeFundraiserCardCss = css({
 	display: 'none',
 	overflow: 'hidden',
 	[BREAKPOINTS.TabletLandscapeUp]: {
@@ -74,7 +74,7 @@ export const largeFundraiserCardCss = cxs({
 	}
 });
 
-export const smallFundraiserCardCss = cxs({
+export const smallFundraiserCardCss = css({
 	display: 'flex',
 	gap: `${Spacing.S}`,
 	padding: `${Spacing.XL}`,
@@ -86,12 +86,12 @@ export const smallFundraiserCardCss = cxs({
 	}
 });
 
-export const avatarAndNameWrapperCss = cxs({
-	...horizontalStackCss.cxs(Spacing.S),
+export const avatarAndNameWrapperCss = css({
+	...horizontalStackCss.css(Spacing.S),
 	alignItems: 'center'
 });
 
-export const fundraiserAvatarAndNameWrapperCss = cxs({
+export const fundraiserAvatarAndNameWrapperCss = css({
 	display: 'flex',
 	gap: `${Spacing.S}`,
 	alignItems: 'center',
@@ -104,7 +104,7 @@ export const fundraiserAvatarAndNameWrapperCss = cxs({
 	}
 });
 
-export const descriptionCss = cxs({
+export const descriptionCss = css({
 	...textSize.xs,
 	color: 'rgba(0, 0, 0, 0.7)',
 	display: 'none',
@@ -114,7 +114,7 @@ export const descriptionCss = cxs({
 });
 
 export const truncatedTextCss = (numberLines: number) =>
-	cxs({
+	css({
 		overflow: 'hidden',
 		overflowWrap: 'anywhere',
 		wordBreak: 'break-word',

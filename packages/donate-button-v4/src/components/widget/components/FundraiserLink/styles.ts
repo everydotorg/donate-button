@@ -1,8 +1,8 @@
-import cxs from 'cxs';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
+import css from 'src/helpers/css';
 
 export const linkCss = (primaryColor: string) =>
-	cxs({
+	css({
 		color: primaryColor,
 		fontWeight: 500,
 		textDecoration: 'none',
@@ -11,7 +11,7 @@ export const linkCss = (primaryColor: string) =>
 		}
 	});
 
-export const cardCss = cxs({
+export const cardCss = css({
 	display: 'none',
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		display: 'block'

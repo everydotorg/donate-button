@@ -1,9 +1,9 @@
-import cxs from 'cxs';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {FontFamily} from 'src/components/widget/theme/font-family';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 
-export const buttonCss = cxs({
+export const buttonCss = css({
 	cursor: 'pointer',
 	display: 'inline-flex',
 	alignItems: 'center',
@@ -14,14 +14,14 @@ export const buttonCss = cxs({
 	fontFamily: FontFamily.BasisGrotesque
 });
 
-export const smallScreenCloseButtonCss = cxs({
+export const smallScreenCloseButtonCss = css({
 	display: 'block',
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		display: 'none'
 	}
 });
 
-export const largeScreenCloseButtonCss = cxs({
+export const largeScreenCloseButtonCss = css({
 	position: 'absolute',
 	right: Spacing.XL,
 	top: Spacing.XL,

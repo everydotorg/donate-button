@@ -1,4 +1,3 @@
-import cxs from 'cxs';
 import {rotateCss} from 'src/components/widget/components/Faq/styles';
 import {textInputContainerCss} from 'src/components/widget/components/TextInput/styles';
 import {getColoredBorder, Borders} from 'src/components/widget/theme/borders';
@@ -6,9 +5,10 @@ import {COLORS} from 'src/components/widget/theme/colors';
 import {bodyText, textSize} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {Spacing} from 'src/components/widget/theme/spacing';
+import css from 'src/helpers/css';
 import joinClassNames from 'src/helpers/joinClassNames';
 
-export const cryptoSelectorContainerCss = cxs({
+export const cryptoSelectorContainerCss = css({
 	maxHeight: '250px',
 	'& input': {
 		fontSize: textSize.s.fontSize,
@@ -17,30 +17,30 @@ export const cryptoSelectorContainerCss = cxs({
 	}
 });
 
-export const cryptoSelectorDropDownContainerCss = cxs({
+export const cryptoSelectorDropDownContainerCss = css({
 	background: COLORS.White,
 	borderRadius: `0 0 ${Radii.Default} ${Radii.Default}`,
 	border: getColoredBorder(Borders.Normal, COLORS.LightGray),
 	borderTop: 'none'
 });
 
-export const cryptoSelectorInputContainerCss = cxs({
+export const cryptoSelectorInputContainerCss = css({
 	display: 'flex',
 	alignItems: 'center',
 	gap: Spacing.XXS
 });
 
-export const cryptoSelectorDropDownContentCss = cxs({
+export const cryptoSelectorDropDownContentCss = css({
 	overflowY: 'scroll',
 	height: '100%',
 	maxHeight: '200px'
 });
 
-export const quickSelectOptionsListCss = cxs({
+export const quickSelectOptionsListCss = css({
 	borderBottom: getColoredBorder(Borders.Normal, COLORS.LightGray)
 });
 
-export const cryptoSelectorDropDownItemCss = cxs({
+export const cryptoSelectorDropDownItemCss = css({
 	border: 'none',
 	background: 'none',
 
@@ -65,7 +65,7 @@ export const cryptoSelectorInputSufixCss = (
 	primaryColor: string,
 	showDropDown: boolean
 ) =>
-	cxs({
+	css({
 		marginLeft: 'auto',
 		...textSize.xs,
 		color: COLORS.TextGray,
@@ -78,14 +78,14 @@ export const cryptoSelectorInputSufixCss = (
 		}
 	});
 
-export const inputContainerWithDropDownCss = cxs({
+export const inputContainerWithDropDownCss = css({
 	borderRadius: `${Radii.Default} ${Radii.Default} 0 0 `
 });
 
 export const cryptoAmountInputContainerCss = (primaryColor: string) =>
 	joinClassNames([textInputContainerCss(primaryColor)]);
 
-export const cryptoAmountInputColumns = cxs({
+export const cryptoAmountInputColumns = css({
 	display: 'flex',
 	width: '100%',
 	gap: Spacing.S,
@@ -93,7 +93,7 @@ export const cryptoAmountInputColumns = cxs({
 	fontWeight: 500
 });
 
-export const cryptoAmountInputFirstColumn = cxs({
+export const cryptoAmountInputFirstColumn = css({
 	display: 'flex',
 	flexDirection: 'column',
 	width: '100%',
@@ -107,13 +107,13 @@ export const cryptoAmountInputFirstColumn = cxs({
 	textAlign: 'right'
 });
 
-export const cryptoAmountInputSecondColumn = cxs({
+export const cryptoAmountInputSecondColumn = css({
 	gap: Spacing.XXS,
 	display: 'flex',
 	flexDirection: 'column'
 });
 
-export const changeModeButtonCss = cxs({
+export const changeModeButtonCss = css({
 	...bodyText,
 	outline: 'none',
 	border: 'none',
