@@ -42,6 +42,7 @@ export default function manualMode() {
 	let widgetMountPoint: HTMLElement;
 
 	const mountWidget = () => {
+		document.querySelector('#shadow-wrapper')?.remove();
 		const shadowWidgetWrapper = document.createElement('div');
 		shadowWidgetWrapper.id = 'shadow-wrapper';
 		shadowWidgetWrapper.style.position = 'absolute';
