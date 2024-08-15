@@ -20,6 +20,7 @@ import {verticalStackCss, Spacing} from 'src/components/widget/theme/spacing';
 import {DEFAULT_CURRENCY} from 'src/constants/currency';
 import css from 'src/helpers/css';
 import {isTouchDevice} from 'src/helpers/isTouchDevice';
+import joinClassNames from 'src/helpers/joinClassNames';
 
 const preventDecimal = (
 	event: JSXInternal.TargetedEvent<HTMLInputElement, KeyboardEvent>
@@ -60,7 +61,12 @@ const abbreviateNumber = (n: number, significantDigits?: number): string => {
 export const DonationAmount = () => {
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const {primaryColor, addAmounts, amount: fixedAmount} = useConfigContext();
+	const {
+		primaryColor,
+		addAmounts,
+		amount: fixedAmount,
+		frequency: fixedFrequency
+	} = useConfigContext();
 
 	const {setDonationAmount, donationAmount, setSubmitError, submitError} =
 		useWidgetContext();
@@ -86,7 +92,16 @@ export const DonationAmount = () => {
 				})}
 			>
 				<legend className={legendCss}>Donation amount</legend>
-				<p className={fixedAmountsCss}>${fixedAmount}</p>
+				<p
+					className={joinClassNames([
+						fixedAmountsCss,
+						css({
+							textAlign: fixedFrequency ? 'left' : 'center'
+						})
+					])}
+				>
+					${fixedAmount}
+				</p>
 			</fieldset>
 		);
 	}
