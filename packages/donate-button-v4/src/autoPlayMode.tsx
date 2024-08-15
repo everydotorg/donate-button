@@ -65,8 +65,9 @@ class WidgetController {
 }
 
 function mountShadowRoot() {
+	document.querySelector('#every-shadow-wrapper')?.remove();
 	const shadowWidgetWrapper = document.createElement('div');
-	shadowWidgetWrapper.id = 'shadow-wrapper';
+	shadowWidgetWrapper.id = 'every-shadow-wrapper';
 	shadowWidgetWrapper.style.position = 'absolute';
 	shadowWidgetWrapper.style.zIndex = '20000000';
 	document.body.append(shadowWidgetWrapper);

@@ -95,7 +95,7 @@ function widgetCSS() {
 
 	if (typeof document !== 'undefined') {
 		insert = (rule: string) => {
-			const shadowRoot = document.querySelector('#shadow-wrapper');
+			const shadowRoot = document.querySelector('#every-shadow-wrapper');
 			const everyShadowStyles = shadowRoot?.shadowRoot?.querySelector(
 				'#every-shadow-styles'
 			);

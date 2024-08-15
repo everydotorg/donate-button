@@ -42,8 +42,9 @@ export default function formOnlyMode() {
 	let formMountPoint: HTMLElement;
 
 	const mountWidget = () => {
+		document.querySelector('#every-shadow-wrapper')?.remove();
 		const shadowWidgetWrapper = document.createElement('div');
-		shadowWidgetWrapper.id = 'shadow-wrapper';
+		shadowWidgetWrapper.id = 'every-shadow-wrapper';
 		formContainer.append(shadowWidgetWrapper);
 
 		formMountPoint = document.createElement('div');
