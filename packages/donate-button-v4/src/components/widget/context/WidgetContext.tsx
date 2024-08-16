@@ -45,6 +45,9 @@ interface WidgetContextProps {
 
 	giftCardCode?: string;
 	setGiftCardCode: StateUpdater<string | undefined>;
+
+	subMethod: 'apple' | 'google';
+	setSubMethod: StateUpdater<'apple' | 'google'>;
 }
 
 export const WidgetContext = createContext<WidgetContextProps>(
@@ -90,6 +93,8 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 
 	const [giftCardCode, setGiftCardCode] = useState<string>();
 
+	const [subMethod, setSubMethod] = useState<'apple' | 'google'>('apple');
+
 	return (
 		<WidgetContext.Provider
 			value={{
@@ -116,7 +121,9 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 				publicTestimony,
 				setPublicTestimony,
 				giftCardCode,
-				setGiftCardCode
+				setGiftCardCode,
+				subMethod,
+				setSubMethod
 			}}
 		>
 			{children}
