@@ -3,17 +3,19 @@ import {
 	AvailablePaymentMethods,
 	PaymentMethod
 } from 'src/components/widget/types/PaymentMethod';
+import {
+	DonateUrlParameters,
+	UTM_QUERY_PARAM
+} from 'src/components/widget/types/UrlParams';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
 
 const MAX_AMOUNT_SUGGESTIONS = 5;
 
-enum DonateUrlParameters {
-	METHOD = 'method',
-	FREQUENCY = 'frequency',
-	MONTHLY_TITLE = 'monthlyTitle',
-	SUGGESTED_AMOUNTS = 'suggestedAmounts',
-	AMOUNT = 'amount',
-	UTM_SOURCE = 'utm_source',
+/**
+ * Just for backwards compatibility
+ * @deprecated
+ */
+enum OLD_DonateUrlParameters {
 	MIN_AMOUNT = 'minAmount',
 	THEME_COLOR = 'themeColor'
 }
@@ -52,6 +54,11 @@ function intFromString(string?: string | null) {
 	return Number.isNaN(number) ? undefined : number;
 }
 
+function booleanFromString(string?: string | null) {
+	if (!string) return;
+	return string === 'true';
+}
+
 function removeEmptyValues<T extends Record<string, unknown>>(object: T): T {
 	return Object.fromEntries(
 		Object.entries(object).filter(([, value]) => value !== undefined)
@@ -83,12 +90,23 @@ export function parseDonateUrl(
 		searchParameters.get(DonateUrlParameters.SUGGESTED_AMOUNTS)
 	);
 	const utmSource =
-		searchParameters.get(DonateUrlParameters.UTM_SOURCE) ?? undefined;
-	const minAmount = intFromString(
-		searchParameters.get(DonateUrlParameters.MIN_AMOUNT)
-	);
+		searchParameters.get(UTM_QUERY_PARAM.utm_source) ?? undefined;
+
+	const minAmount =
+		intFromString(searchParameters.get(DonateUrlParameters.MIN_VALUE)) ??
+		intFromString(searchParameters.get(OLD_DonateUrlParameters.MIN_AMOUNT));
+
 	const primaryColor =
-		searchParameters.get(DonateUrlParameters.THEME_COLOR) ?? undefined;
+		searchParameters.get(DonateUrlParameters.THEME_COLOR) ??
+		searchParameters.get(OLD_DonateUrlParameters.THEME_COLOR) ??
+		undefined;
+
+	const designation =
+		searchParameters.get(DonateUrlParameters.DESIGNATION) ?? undefined;
+
+	const requireShareInfo = booleanFromString(
+		searchParameters.get(DonateUrlParameters.REQUIRE_SHARE_INFO)
+	);
 
 	if (!nonprofitSlug) {
 		return;
@@ -106,6 +124,8 @@ export function parseDonateUrl(
 		amount,
 		defaultDonationAmount: amount,
 		minDonationAmount: minAmount,
-		primaryColor
+		primaryColor,
+		designation,
+		requireShareInfo
 	});
 }

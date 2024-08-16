@@ -47,4 +47,8 @@ export interface WidgetConfig {
 	webhookToken?: string;
 
 	redeemGiftCardInFlow?: boolean;
+
+	designation?: string;
+
+	requireShareInfo?: boolean;
 }

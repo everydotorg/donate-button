@@ -32,8 +32,13 @@ export const useSubmitDonation = () => {
 		publicTestimony,
 		giftCardCode
 	} = useWidgetContext();
-	const {minDonationAmount, webhookToken, redeemGiftCardInFlow} =
-		useConfigContext();
+	const {
+		minDonationAmount,
+		webhookToken,
+		redeemGiftCardInFlow,
+		designation,
+		requireShareInfo
+	} = useConfigContext();
 
 	const submitDonation = useCallback(
 		(event: JSXInternal.TargetedEvent<HTMLFormElement>) => {
@@ -48,7 +53,9 @@ export const useSubmitDonation = () => {
 				utmSource: config.utmSource,
 				privateNote,
 				publicTestimony,
-				webhookToken
+				webhookToken,
+				designation,
+				requireShareInfo
 			};
 			switch (selectedPaymentMethod) {
 				case PaymentMethod.CRYPTO:
@@ -128,7 +135,9 @@ export const useSubmitDonation = () => {
 			publicTestimony,
 			giftCardCode,
 			webhookToken,
-			redeemGiftCardInFlow
+			redeemGiftCardInFlow,
+			designation,
+			requireShareInfo
 		]
 	);
 
