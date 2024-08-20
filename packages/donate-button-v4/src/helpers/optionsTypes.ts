@@ -6,6 +6,9 @@ import {
 	PaymentMethod
 } from 'src/components/widget/types/PaymentMethod';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
+import getScriptParameters from 'src/helpers/getScriptParameters';
+
+const PREVIEW_MODE_PARAM = 'previewMode';
 
 const defaults: Partial<WidgetConfig> = {
 	methods: Object.values(DefaultPaymentMethods),
@@ -15,7 +18,8 @@ const defaults: Partial<WidgetConfig> = {
 	minDonationAmount: 5,
 	primaryColor: '#018669',
 	showGiftCardOption: false,
-	redeemGiftCardInFlow: false
+	redeemGiftCardInFlow: false,
+	previewMode: getScriptParameters()?.[PREVIEW_MODE_PARAM] === '1'
 };
 
 const DEEP_MERGE_OPTIONS: DeepMergeOptions = {
