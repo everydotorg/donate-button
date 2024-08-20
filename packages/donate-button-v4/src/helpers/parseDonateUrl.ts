@@ -87,8 +87,13 @@ export function parseDonateUrl(
 	const minAmount = intFromString(
 		searchParameters.get(DonateUrlParameters.MIN_AMOUNT)
 	);
-	const primaryColor =
+	const primaryColorFromUrl =
 		searchParameters.get(DonateUrlParameters.THEME_COLOR) ?? undefined;
+	const primaryColor = primaryColorFromUrl
+		? primaryColorFromUrl.startsWith('#')
+			? primaryColorFromUrl
+			: `#${primaryColorFromUrl}`
+		: undefined;
 
 	if (!nonprofitSlug) {
 		return;
