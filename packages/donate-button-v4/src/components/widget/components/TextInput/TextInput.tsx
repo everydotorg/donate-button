@@ -2,11 +2,13 @@ import {ComponentChild} from 'preact';
 import {forwardRef, useRef} from 'preact/compat';
 import {MutableRef} from 'preact/hooks';
 import {JSXInternal} from 'preact/src/jsx';
+import {donationAmountInputContainerErrorCss} from 'src/components/widget/components/PaymentProcess/DonationAmount/styles';
 import {
 	textInputContainerCss,
 	textInputCss
 } from 'src/components/widget/components/TextInput/styles';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
+import {COLORS} from 'src/components/widget/theme/colors';
 import joinClassNames from 'src/helpers/joinClassNames';
 
 interface TextInputProps
@@ -21,6 +23,7 @@ interface TextInputProps
 	containerClassName?: string;
 	inputClassName?: string;
 	containerOnClick?: () => void;
+	error?: string;
 }
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
@@ -32,6 +35,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
 		containerClassName,
 		inputClassName,
 		containerOnClick,
+		error,
 		...rest
 	} = props;
 	const inputRef = useRef<HTMLInputElement>();
@@ -40,7 +44,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
 	return (
 		<div
 			className={joinClassNames([
-				textInputContainerCss(primaryColor),
+				textInputContainerCss(primaryColor, Boolean(error)),
 				containerClassName
 			])}
 			onClick={() => {
