@@ -42,6 +42,7 @@ export const textInputCss = css({
 	minWidth: 'unset',
 	padding: 0,
 	margin: 0,
+	color: COLORS.Text,
 	'::placeholder': {
 		fontWeight: 400
 	},
