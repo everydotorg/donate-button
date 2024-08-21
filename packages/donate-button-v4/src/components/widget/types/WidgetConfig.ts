@@ -48,5 +48,9 @@ export interface WidgetConfig {
 
 	redeemGiftCardInFlow?: boolean;
 
+	designation?: string;
+
+	requireShareInfo?: boolean;
+
 	previewMode?: boolean;
 }

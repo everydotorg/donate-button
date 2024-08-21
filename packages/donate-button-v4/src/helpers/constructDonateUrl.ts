@@ -4,6 +4,10 @@ import {
 	AvailablePaymentMethods,
 	PaymentMethod
 } from 'src/components/widget/types/PaymentMethod';
+import {
+	DonateUrlParameters,
+	UTM_QUERY_PARAM
+} from 'src/components/widget/types/UrlParams';
 import {BASE_URL, GIFT_CARD_URL} from 'src/constants/url';
 
 const UTM_MEDIUM = 'donate-button-0.4'; // Update this if the major version changes
@@ -19,6 +23,8 @@ interface BaseUrlParams {
 	publicTestimony?: string;
 	utmSource?: string;
 	webhookToken?: string;
+	designation?: string;
+	requireShareInfo?: boolean;
 }
 
 interface DonateUrlParams extends BaseUrlParams {
@@ -70,7 +76,9 @@ function getBaseParams({
 	privateNote,
 	publicTestimony,
 	utmSource,
-	webhookToken
+	webhookToken,
+	designation,
+	requireShareInfo
 }: Pick<
 	BaseUrlParams,
 	| 'nonprofitSlug'
@@ -80,16 +88,20 @@ function getBaseParams({
 	| 'publicTestimony'
 	| 'utmSource'
 	| 'webhookToken'
+	| 'designation'
+	| 'requireShareInfo'
 >) {
 	return {
-		method: methods?.join(','),
-		utm_campaign: 'donate-button',
-		utm_source: utmSource ?? nonprofitSlug,
-		utm_medium: UTM_MEDIUM,
-		no_exit: noExit ?? 1,
-		private_note: privateNote,
-		public_testimony: publicTestimony,
-		webhook_token: webhookToken
+		[DonateUrlParameters.METHOD]: methods?.join(','),
+		[DonateUrlParameters.NO_EXIT]: noExit ?? 1,
+		[DonateUrlParameters.PRIVATE_NOTE]: privateNote,
+		[DonateUrlParameters.PUBLIC_TESTIMONY]: publicTestimony,
+		[DonateUrlParameters.PARTNER_WEBHOOK_TOKEN]: webhookToken,
+		[DonateUrlParameters.DESIGNATION]: designation,
+		[DonateUrlParameters.REQUIRE_SHARE_INFO]: requireShareInfo,
+		[UTM_QUERY_PARAM.utm_campaign]: 'donate-button',
+		[UTM_QUERY_PARAM.utm_source]: utmSource ?? nonprofitSlug,
+		[UTM_QUERY_PARAM.utm_medium]: UTM_MEDIUM
 	};
 }
 
@@ -114,8 +126,8 @@ export function constructDonateUrl({
 	const params = getBaseParams(rest);
 
 	const parameters = serializeParams({
-		frequency,
-		amount,
+		[DonateUrlParameters.FREQUENCY]: frequency,
+		[DonateUrlParameters.AMOUNT]: amount,
 		...params
 	});
 
@@ -131,8 +143,8 @@ export function constructDonateStocksUrl({
 	const params = getBaseParams(rest);
 
 	const parameters = serializeParams({
-		stock_amount: stockAmount,
-		stock_symbol: stockSymbol,
+		[DonateUrlParameters.STOCK_AMOUNT]: stockAmount,
+		[DonateUrlParameters.STOCK_SYMBOL]: stockSymbol,
 		...params
 	});
 
@@ -148,8 +160,8 @@ export function constructDonateCryptoUrl({
 	const params = getBaseParams(rest);
 
 	const parameters = serializeParams({
-		crypto_amount: cryptoAmount,
-		crypto_currency: cryptoCurrency,
+		[DonateUrlParameters.CRYPTO_AMOUNT]: cryptoAmount,
+		[DonateUrlParameters.CRYPTO_CURRENCY]: cryptoCurrency,
 		...params
 	});
 
@@ -167,7 +179,7 @@ export function constructGiftCardUrl({
 
 		const parameters = serializeParams({
 			...params,
-			gift_card_code: giftCardCode
+			[DonateUrlParameters.GIFT_CARD_CODE]: giftCardCode
 		});
 
 		return `${baseUrl}?${parameters}#/${HASH}`;
