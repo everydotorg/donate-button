@@ -1,8 +1,5 @@
 import {ErrorMessage} from 'src/components/widget/components/ErrorMessage';
-import {
-	donationAmountInputContainerErrorCss,
-	donationAmountInputCss
-} from 'src/components/widget/components/PaymentProcess/DonationAmount/styles';
+import {donationAmountInputCss} from 'src/components/widget/components/PaymentProcess/DonationAmount/styles';
 import {
 	LargePaymentMethodSelect,
 	SmallPaymentMethodSelect
@@ -56,9 +53,6 @@ export const StocksFlow = () => {
 						<TextInput
 							id="stock-amount-input"
 							inputClassName={donationAmountInputCss}
-							containerClassName={
-								submitError ? donationAmountInputContainerErrorCss : undefined
-							}
 							type="text"
 							value={stockSymbol}
 							onInput={(event) => {
@@ -74,9 +68,6 @@ export const StocksFlow = () => {
 						<TextInput
 							id="donation-input"
 							inputClassName={donationAmountInputCss}
-							containerClassName={
-								submitError ? donationAmountInputContainerErrorCss : undefined
-							}
 							type="number"
 							pattern="[0-9]*"
 							inputMode="numeric"

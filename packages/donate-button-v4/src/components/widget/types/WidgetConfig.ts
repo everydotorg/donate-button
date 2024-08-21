@@ -51,4 +51,6 @@ export interface WidgetConfig {
 	designation?: string;
 
 	requireShareInfo?: boolean;
+
+	previewMode?: boolean;
 }

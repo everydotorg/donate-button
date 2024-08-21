@@ -9,7 +9,7 @@ export const textInputContainerErrorCss = css({
 	border: getColoredBorder(Borders.Normal, COLORS.Error)
 });
 
-export const textInputContainerCss = (color: string) =>
+export const textInputContainerCss = (color: string, error?: boolean) =>
 	css({
 		position: 'relative',
 		padding: Spacing.M,
@@ -19,11 +19,14 @@ export const textInputContainerCss = (color: string) =>
 		borderRadius: Radii.Default,
 		color: COLORS.Text,
 		backgroundColor: COLORS.Gray,
-		border: getColoredBorder(Borders.Normal, COLORS.LightGray),
+		border: getColoredBorder(
+			Borders.Normal,
+			error ? COLORS.Error : COLORS.LightGray
+		),
 		cursor: 'text',
 		':focus-within': {
 			backgroundColor: 'white',
-			borderColor: color
+			borderColor: error ? COLORS.Error : color
 		}
 	});
 

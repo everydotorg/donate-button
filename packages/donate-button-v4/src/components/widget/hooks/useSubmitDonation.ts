@@ -102,7 +102,7 @@ export const useSubmitDonation = () => {
 				default:
 					if (!donationAmount || donationAmount < minDonationAmount) {
 						setSubmitError(
-							`The minimum donation amount is ${DEFAULT_CURRENCY.symbol}${minDonationAmount}`
+							`Amount must be at least ${DEFAULT_CURRENCY.symbol}${minDonationAmount}`
 						);
 						break;
 					}

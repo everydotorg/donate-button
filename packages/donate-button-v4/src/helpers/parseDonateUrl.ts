@@ -96,17 +96,22 @@ export function parseDonateUrl(
 		intFromString(searchParameters.get(DonateUrlParameters.MIN_VALUE)) ??
 		intFromString(searchParameters.get(OLD_DonateUrlParameters.MIN_AMOUNT));
 
-	const primaryColor =
-		searchParameters.get(DonateUrlParameters.THEME_COLOR) ??
-		searchParameters.get(OLD_DonateUrlParameters.THEME_COLOR) ??
-		undefined;
-
 	const designation =
 		searchParameters.get(DonateUrlParameters.DESIGNATION) ?? undefined;
 
 	const requireShareInfo = booleanFromString(
 		searchParameters.get(DonateUrlParameters.REQUIRE_SHARE_INFO)
 	);
+
+	const primaryColorFromUrl =
+		searchParameters.get(DonateUrlParameters.THEME_COLOR) ??
+		searchParameters.get(OLD_DonateUrlParameters.THEME_COLOR) ??
+		undefined;
+	const primaryColor = primaryColorFromUrl
+		? primaryColorFromUrl.startsWith('#')
+			? primaryColorFromUrl
+			: `#${primaryColorFromUrl}`
+		: undefined;
 
 	if (!nonprofitSlug) {
 		return;

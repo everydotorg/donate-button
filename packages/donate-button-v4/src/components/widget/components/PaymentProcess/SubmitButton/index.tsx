@@ -2,9 +2,12 @@ import {ComponentChildren} from 'preact';
 import {
 	btnCss,
 	btnDisabledCss,
-	btnActiveColor
+	btnActiveColor,
+	btnPreviewCss
 } from 'src/components/widget/components/PaymentProcess/SubmitButton/styles';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
+import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
+import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 import joinClassNames from 'src/helpers/joinClassNames';
 
 interface ButtonProps {
@@ -18,7 +21,11 @@ export const SubmitButton = ({
 	disabled,
 	children
 }: ButtonProps) => {
-	const {primaryColor} = useConfigContext();
+	const {primaryColor, previewMode} = useConfigContext();
+
+	if (previewMode) {
+		return <PreviewSubmitButton disabled={disabled} />;
+	}
 
 	return (
 		<button
@@ -31,6 +38,32 @@ export const SubmitButton = ({
 			onClick={handleClick}
 		>
 			<span>{children}</span>
+		</button>
+	);
+};
+
+export const PreviewSubmitButton = ({
+	disabled
+}: Pick<ButtonProps, 'disabled'>) => {
+	const {primaryColor} = useConfigContext();
+	const {selectedPaymentMethod, subMethod} = useWidgetContext();
+
+	return (
+		<button
+			type="button"
+			className={joinClassNames([
+				btnCss,
+				btnPreviewCss,
+				disabled ? btnDisabledCss : btnActiveColor(primaryColor)
+			])}
+			disabled={disabled}
+		>
+			<span>
+				{getSubmitButtonText({
+					method: selectedPaymentMethod,
+					paymentRequestIsApplePay: subMethod === 'apple'
+				})}
+			</span>
 		</button>
 	);
 };

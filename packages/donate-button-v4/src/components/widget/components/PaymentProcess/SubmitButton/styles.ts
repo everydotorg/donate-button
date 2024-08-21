@@ -35,3 +35,7 @@ export const btnDisabledCss = css({
 		opacity: '0.6'
 	}
 });
+
+export const btnPreviewCss = css({
+	cursor: 'not-allowed'
+});
