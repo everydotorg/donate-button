@@ -1,17 +1,9 @@
+import {useEffect} from 'preact/hooks';
 import {ContextProvider} from 'src/components/widget/context';
 import Widget from 'src/components/widget/index';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
 
-let originalOverflow: string;
-const getOriginalOverflow = () => {
-	const body = document.querySelector('body');
-
-	if (!originalOverflow) {
-		originalOverflow = body?.style.overflow ? body.style.overflow : 'unset';
-	}
-
-	return originalOverflow;
-};
+const originalOverflow = document.querySelector('body')?.style.overflow;
 
 const addOverflowToBody = () => {
 	const body = document.querySelector('body');
@@ -22,9 +14,14 @@ const addOverflowToBody = () => {
 
 const removeOverflowFromBody = () => {
 	const body = document.querySelector('body');
-	const overflow = getOriginalOverflow();
+
 	if (body) {
-		body.style.overflow = overflow;
+		if (originalOverflow) {
+			body.style.overflow = originalOverflow;
+			return;
+		}
+
+		body.style.removeProperty('overflow');
 	}
 };
 
@@ -35,6 +32,20 @@ interface WidgetLoaderProps {
 
 export const WidgetLoader = ({options = {}, hide}: WidgetLoaderProps) => {
 	removeOverflowFromBody();
+
+	useEffect(() => {
+		function onPopState() {
+			hide();
+			removeOverflowFromBody();
+		}
+
+		window.addEventListener('popstate', onPopState);
+
+		return () => {
+			window.removeEventListener('popstate', onPopState);
+		};
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+
 	if (!options.show) {
 		// Not showing
 		return null;
