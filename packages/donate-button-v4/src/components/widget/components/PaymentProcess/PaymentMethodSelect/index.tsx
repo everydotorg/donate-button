@@ -43,6 +43,10 @@ const usePaymentMethods = () => {
 		() =>
 			methods
 				.filter((method) => {
+					if (previewMode) {
+						return true;
+					}
+
 					if (
 						fixedFrequency === DonationFrequency.Monthly &&
 						OneTimeFrequencyMethods.includes(method)
@@ -51,10 +55,6 @@ const usePaymentMethods = () => {
 					}
 
 					if (method === PaymentMethod.PAYMENT_REQUEST) {
-						if (previewMode) {
-							return true;
-						}
-
 						return (
 							paymentRequestAvailable.applePay ||
 							paymentRequestAvailable.googlePay
