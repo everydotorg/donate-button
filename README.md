@@ -32,7 +32,7 @@ The below code will use Every.org styling, because the `a` tag has the `data-eve
 
 ## Configure
 
-To configure your button manualy, add `?explicit=1` to the script `src`
+To configure your button manually, add `?explicit=1` to the script `src`
 
 Here is an example html file with a manual configuration.
 
