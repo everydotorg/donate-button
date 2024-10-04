@@ -17,6 +17,7 @@ interface CreateButtonProps extends Partial<WidgetConfig> {
 	nonprofitSlug: string;
 	onClick: () => void;
 	url?: string;
+	bgColor?: string;
 }
 
 interface CreateWidgetProps extends Partial<WidgetConfig> {
@@ -137,6 +138,7 @@ function findAndReplaceLinks() {
 						widget.show();
 					},
 					...options,
+					bgColor: options.primaryColor,
 					url: urlString
 				});
 			} else {
