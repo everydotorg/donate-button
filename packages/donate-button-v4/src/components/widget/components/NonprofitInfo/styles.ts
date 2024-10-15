@@ -32,6 +32,8 @@ export const logoImageCss = (logoUrl: string) =>
 		display: 'block',
 		backgroundImage: `url(${logoUrl})`,
 		backgroundSize: 'contain',
+		backgroundRepeat: 'no-repeat',
+		backgroundPosition: 'center',
 		width: '40px',
 		height: '40px',
 		flexShrink: 0,
