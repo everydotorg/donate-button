@@ -7,7 +7,10 @@ import {
 } from 'src/components/widget/components/Footer/styles';
 import {GridCard} from 'src/components/widget/components/GridCard';
 import {useFundraiserOrUndefined} from 'src/components/widget/hooks/useFundraiser';
-import {useNonprofitOrError} from 'src/components/widget/hooks/useNonprofit';
+import {
+	useNonprofitOrError,
+	useParentNonprofit
+} from 'src/components/widget/hooks/useNonprofit';
 import {
 	TERMS_URL,
 	HELP_URL,
@@ -31,11 +34,12 @@ const FooterLink: FunctionComponent<FooterLinkProps> = ({
 export const Footer = () => {
 	const nonprofit = useNonprofitOrError();
 	const fundraiser = useFundraiserOrUndefined();
+	const parentNonprofit = useParentNonprofit();
 
 	return (
 		<GridCard className={footerCardCss}>
 			<p>
-				{getTaxDeductibleStatement(nonprofit, fundraiser)}{' '}
+				{getTaxDeductibleStatement(nonprofit, fundraiser, parentNonprofit)}{' '}
 				<FooterLink href={TERMS_URL}>See Terms</FooterLink>
 			</p>
 			<p>

@@ -10,6 +10,7 @@ import {
 
 interface NonprofitContextData {
 	nonprofit: Nonprofit | typeof NonprofitFetchError | typeof NonprofitFetching;
+	parentNonprofit?: Nonprofit;
 }
 
 export const NonprofitContext = createContext<NonprofitContextData>({
@@ -20,11 +21,27 @@ export const NonprofitContextProvider: FunctionalComponent = ({children}) => {
 	const {nonprofitSlug} = useConfigContext();
 	const [nonprofit, setNonprofit] =
 		useState<NonprofitContextData['nonprofit']>(NonprofitFetching);
+	const [parentNonprofit, setParentNonprofitNonprofit] =
+		useState<NonprofitContextData['parentNonprofit']>();
 
 	const fetchNonprofit = useCallback(async () => {
 		try {
 			const response = await getNonprofit(nonprofitSlug);
 			setNonprofit(response);
+
+			const parentNonprofitId =
+				response.eligibleDonationRecipientNonprofitIds?.length === 1
+					? response.eligibleDonationRecipientNonprofitIds[0]
+					: undefined;
+
+			if (parentNonprofitId) {
+				try {
+					const response = await getNonprofit(parentNonprofitId);
+					setParentNonprofitNonprofit(response);
+				} catch {
+					setParentNonprofitNonprofit(undefined);
+				}
+			}
 		} catch {
 			setNonprofit(NonprofitFetchError);
 		}
@@ -36,7 +53,7 @@ export const NonprofitContextProvider: FunctionalComponent = ({children}) => {
 	}, [fetchNonprofit]);
 
 	return (
-		<NonprofitContext.Provider value={{nonprofit}}>
+		<NonprofitContext.Provider value={{nonprofit, parentNonprofit}}>
 			{children}
 		</NonprofitContext.Provider>
 	);

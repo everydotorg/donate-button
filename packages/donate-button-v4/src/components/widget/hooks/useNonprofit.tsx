@@ -7,6 +7,9 @@ import {
 
 export const useNonprofit = () => useContext(NonprofitContext).nonprofit;
 
+export const useParentNonprofit = () =>
+	useContext(NonprofitContext).parentNonprofit;
+
 export const useNonprofitOrError = () => {
 	const nonprofit = useNonprofit();
 
