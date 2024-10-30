@@ -21,6 +21,7 @@ export interface Nonprofit {
 		prefixWithThe?: boolean;
 		hideFundraiseButton?: boolean;
 	};
+	eligibleDonationRecipientNonprofitIds?: string[];
 }
 
 export enum DisbursementType {

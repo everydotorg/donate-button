@@ -18,7 +18,10 @@ import {getTaxDeductibleStatement} from 'src/components/widget/components/Footer
 import {GridCard} from 'src/components/widget/components/GridCard';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useFundraiserOrUndefined} from 'src/components/widget/hooks/useFundraiser';
-import {useNonprofitOrError} from 'src/components/widget/hooks/useNonprofit';
+import {
+	useNonprofitOrError,
+	useParentNonprofit
+} from 'src/components/widget/hooks/useNonprofit';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {ArrowIcon} from 'src/components/widget/icons/ArrowIcon';
 import {BASE_URL, FUNDRAISER_ROUTE} from 'src/constants/url';
@@ -61,7 +64,7 @@ const FaqItem: FunctionalComponent<{faqData: FaqItemTypes}> = ({faqData}) => {
 export const Faq = () => {
 	const nonprofit = useNonprofitOrError();
 	const fundraiser = useFundraiserOrUndefined();
-
+	const parentNonprofit = useParentNonprofit();
 	const {selectedPaymentMethod} = useWidgetContext();
 
 	const faqDataList: FaqItemTypes[] = [
@@ -92,7 +95,10 @@ export const Faq = () => {
 			id: 'tax',
 			title: 'Is this donation tax-deductible?',
 			description: (
-				<p>Yes, {getTaxDeductibleStatement(nonprofit, fundraiser)}</p>
+				<p>
+					Yes,{' '}
+					{getTaxDeductibleStatement(nonprofit, fundraiser, parentNonprofit)}
+				</p>
 			)
 		},
 		{
