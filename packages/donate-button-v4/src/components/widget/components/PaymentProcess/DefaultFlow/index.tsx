@@ -48,7 +48,9 @@ export const DefaultFlow = () => {
 				<ErrorMessage message={submitError} />
 				<SubmitButton
 					disabled={
-						!frequency || !donationAmount || Number.isNaN(donationAmount)
+						(!frequency && !fixedFrequency) ||
+						!donationAmount ||
+						Number.isNaN(donationAmount)
 					}
 				>
 					{getSubmitButtonText({
