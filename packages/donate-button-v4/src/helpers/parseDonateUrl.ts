@@ -113,6 +113,12 @@ export function parseDonateUrl(
 			: `#${primaryColorFromUrl}`
 		: undefined;
 
+	const webhookToken =
+		searchParameters.get(DonateUrlParameters.PARTNER_WEBHOOK_TOKEN) ??
+		undefined;
+	const partnerMetadata =
+		searchParameters.get(DonateUrlParameters.PARTNER_METADATA) ?? undefined;
+
 	if (!nonprofitSlug) {
 		return;
 	}
@@ -131,6 +137,8 @@ export function parseDonateUrl(
 		minDonationAmount: minAmount,
 		primaryColor,
 		designation,
-		requireShareInfo
+		requireShareInfo,
+		webhookToken,
+		partnerMetadata
 	});
 }

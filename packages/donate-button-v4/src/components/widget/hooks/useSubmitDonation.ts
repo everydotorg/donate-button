@@ -54,6 +54,7 @@ export const useSubmitDonation = () => {
 				privateNote,
 				publicTestimony,
 				webhookToken,
+				partnerMetadata: config.partnerMetadata,
 				designation,
 				requireShareInfo
 			};
