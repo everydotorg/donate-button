@@ -23,6 +23,7 @@ interface BaseUrlParams {
 	publicTestimony?: string;
 	utmSource?: string;
 	webhookToken?: string;
+	partnerMetadata?: string;
 	designation?: string;
 	requireShareInfo?: boolean;
 }
@@ -77,6 +78,7 @@ function getBaseParams({
 	publicTestimony,
 	utmSource,
 	webhookToken,
+	partnerMetadata,
 	designation,
 	requireShareInfo
 }: Pick<
@@ -88,6 +90,7 @@ function getBaseParams({
 	| 'publicTestimony'
 	| 'utmSource'
 	| 'webhookToken'
+	| 'partnerMetadata'
 	| 'designation'
 	| 'requireShareInfo'
 >) {
@@ -97,6 +100,7 @@ function getBaseParams({
 		[DonateUrlParameters.PRIVATE_NOTE]: privateNote,
 		[DonateUrlParameters.PUBLIC_TESTIMONY]: publicTestimony,
 		[DonateUrlParameters.PARTNER_WEBHOOK_TOKEN]: webhookToken,
+		[DonateUrlParameters.PARTNER_METADATA]: partnerMetadata,
 		[DonateUrlParameters.DESIGNATION]: designation,
 		[DonateUrlParameters.REQUIRE_SHARE_INFO]: requireShareInfo,
 		[UTM_QUERY_PARAM.utm_campaign]: 'donate-button',
