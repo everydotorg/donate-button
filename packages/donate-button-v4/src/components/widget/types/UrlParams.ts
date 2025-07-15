@@ -63,6 +63,7 @@ export enum DonateUrlParameters {
 }
 
 export enum UTM_QUERY_PARAM {
+	utm_id = 'utm_id',
 	utm_source = 'utm_source',
 	utm_medium = 'utm_medium',
 	utm_campaign = 'utm_campaign',
