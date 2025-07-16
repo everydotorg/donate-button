@@ -70,8 +70,7 @@ function getBaseUrl({
 	return baseUrl;
 }
 
-function getUTMParamsFromPageUrl(
-): Record<string, string> {
+function getUTMParamsFromPageUrl(): Record<string, string> {
 	const url = new URL(window.location.href);
 	const utmParams: Record<string, string> = {};
 
