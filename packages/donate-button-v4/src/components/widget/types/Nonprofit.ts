@@ -25,10 +25,10 @@ export interface Nonprofit {
 }
 
 export enum DisbursementType {
-	STRIPE_CONNECT = 'STRIPE_CONNECT',
-	PAYPAL_GRANTS = 'PAYPAL_GRANTS',
-	NFG_BATCH_FILE = 'NFG_BATCH_FILE',
-	MANUAL = 'MANUAL'
+	STRIPE_CONNECT = 'Stripe',
+	PAYPAL_GRANTS = 'PayPal Grants',
+	NFG_BATCH_FILE = 'Network for Good',
+	MANUAL = 'manual'
 }
 
 export const NonprofitFetchError = Symbol('NonprofitFetchError');
