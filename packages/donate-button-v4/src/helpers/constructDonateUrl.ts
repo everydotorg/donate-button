@@ -70,6 +70,20 @@ function getBaseUrl({
 	return baseUrl;
 }
 
+function getUTMParamsFromPageUrl(): Record<string, string> {
+	const url = new URL(window.location.href);
+	const utmParams: Record<string, string> = {};
+
+	Object.values(UTM_QUERY_PARAM).forEach((param) => {
+		const value = url.searchParams.get(param);
+		if (value) {
+			utmParams[param] = value;
+		}
+	});
+
+	return utmParams;
+}
+
 function getBaseParams({
 	methods,
 	nonprofitSlug,
@@ -94,6 +108,8 @@ function getBaseParams({
 	| 'designation'
 	| 'requireShareInfo'
 >) {
+	const utmParams = getUTMParamsFromPageUrl();
+
 	return {
 		[DonateUrlParameters.METHOD]: methods?.join(','),
 		[DonateUrlParameters.NO_EXIT]: noExit ?? 1,
@@ -105,7 +121,8 @@ function getBaseParams({
 		[DonateUrlParameters.REQUIRE_SHARE_INFO]: requireShareInfo,
 		[UTM_QUERY_PARAM.utm_campaign]: 'donate-button',
 		[UTM_QUERY_PARAM.utm_source]: utmSource ?? nonprofitSlug,
-		[UTM_QUERY_PARAM.utm_medium]: UTM_MEDIUM
+		[UTM_QUERY_PARAM.utm_medium]: UTM_MEDIUM,
+		...utmParams
 	};
 }
 
