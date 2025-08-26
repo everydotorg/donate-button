@@ -92,7 +92,8 @@ export function getFeeDescriptionBody(
 		case PaymentMethod.BANK:
 			return (
 				<p>
-					Every.org currently covers the small ACH fees for donations made with a bank.
+					Every.org currently covers the small ACH fees for donations made with
+					a bank.
 				</p>
 			);
 		case PaymentMethod.VENMO:
