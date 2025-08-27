@@ -15,7 +15,7 @@ const defaults: Partial<WidgetConfig> = {
 	show: false,
 	addAmounts: [10, 50, 100],
 	defaultFrequency: DonationFrequency.Unselected,
-	minDonationAmount: 5,
+	minDonationAmount: 10,
 	primaryColor: '#018669',
 	showGiftCardOption: false,
 	redeemGiftCardInFlow: false,
