@@ -125,7 +125,7 @@ The `createWidget` function accepts an object with the following properties:
     amount?: number;
     /**
      * Minimum donation amount
-     * @default 5
+     * @default 10
      */
     minDonationAmount?: number;
     /**
