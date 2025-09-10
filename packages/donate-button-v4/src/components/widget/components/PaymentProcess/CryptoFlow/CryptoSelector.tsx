@@ -103,7 +103,7 @@ const CryptoSupprotLink = () => {
 	const nonprofit = useNonprofitOrError();
 
 	const {primaryColor} = useConfigContext();
-	const cryptoSupportBody = `Contents: I would like to make a crypto donation to support https://www.every.org/${nonprofit.primarySlug}.\n\nMy name:\nToken name:\nToken symbol:\nToken quantity:\n\nPlease reply back with an address where I can donate, as this is worth over $5,000 USD.`;
+	const cryptoSupportBody = `Contents: I would like to make a crypto donation to support https://www.every.org/${nonprofit.primarySlug}.\n\nMy name:\nToken name:\nToken symbol:\nToken quantity:\n\nPlease reply back with an address where I can donate, as this is worth over $100,000 USD.`;
 
 	return (
 		<a
@@ -215,8 +215,8 @@ export const CryptoSelector = () => {
 							filteredOptions.length === 0 ? (
 								<div className={css({padding: '20px'})}>
 									We don&apos;t currently support this coin on our site, but for
-									donations worth over $5,000 USD we can do it manually. Please
-									email <CryptoSupprotLink /> to arrange.
+									donations worth over $100,000 USD we can do it manually.
+									Please email <CryptoSupprotLink /> to arrange.
 								</div>
 							) : (
 								<ul>
