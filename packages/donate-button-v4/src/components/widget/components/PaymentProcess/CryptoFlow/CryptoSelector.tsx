@@ -215,8 +215,8 @@ export const CryptoSelector = () => {
 							filteredOptions.length === 0 ? (
 								<div className={css({padding: '20px'})}>
 									We don&apos;t currently support this coin on our site, but for
-									donations worth over $100,000 USD we can do it manually. Please
-									email <CryptoSupprotLink /> to arrange.
+									donations worth over $100,000 USD we can do it manually.
+									Please email <CryptoSupprotLink /> to arrange.
 								</div>
 							) : (
 								<ul>
