@@ -75,7 +75,6 @@ export function getFeeDescriptionBody(
 						additional 1.5% fee for non-US donors.
 					</p>
 					{getNfgDisclaimer(nonprofit)}
-					{encourageBankDonation(nonprofit)}
 				</Fragment>
 			);
 		case PaymentMethod.CREDIT_CARD:
@@ -88,14 +87,13 @@ export function getFeeDescriptionBody(
 						cards.
 					</p>
 					{getNfgDisclaimer(nonprofit)}
-					{encourageBankDonation(nonprofit)}
 				</Fragment>
 			);
 		case PaymentMethod.BANK:
 			return (
 				<p>
-					Every.org currently covers all fees for donations made with a bank, so
-					100% of your gift reaches {nonprofit.name}.
+					Every.org currently covers the small ACH fees for donations made with
+					a bank.
 				</p>
 			);
 		case PaymentMethod.VENMO:
@@ -106,7 +104,6 @@ export function getFeeDescriptionBody(
 						additional 1.5% fee for non-US donors.
 					</p>
 					{getNfgDisclaimer(nonprofit)}
-					{encourageBankDonation(nonprofit)}
 				</Fragment>
 			);
 		case PaymentMethod.CRYPTO:
@@ -148,19 +145,9 @@ export function getFeeDescriptionBody(
 				<Fragment>
 					<p>However, there are third-party fees.</p>
 					{getNfgDisclaimer(nonprofit)}
-					{encourageBankDonation(nonprofit)}
 				</Fragment>
 			);
 	}
-}
-
-export function encourageBankDonation(nonprofit: Nonprofit) {
-	return (
-		<p>
-			Don’t like fees? Neither do we! Donate via bank and then 100% of your gift
-			will reach {nonprofit.name}.
-		</p>
-	);
 }
 
 export function getFeeDescription(
