@@ -17,9 +17,9 @@ export interface Nonprofit {
 	logoUrl: string | null;
 	nteeCode: string | null;
 	metadata?: {
-		customTaxDeductible?: boolean;
+		customTaxDeductible?: string;
 		disablePrivateNotes?: boolean;
-		granteeName?: boolean;
+		granteeName?: string;
 		prefixWithThe?: boolean;
 		hideFundraiseButton?: boolean;
 	};
