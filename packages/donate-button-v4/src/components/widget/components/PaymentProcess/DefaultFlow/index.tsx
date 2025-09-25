@@ -17,13 +17,11 @@ import {
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
-import {OneTimeFrequencyMethods} from 'src/components/widget/types/PaymentMethod';
 import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const DefaultFlow = () => {
 	const {frequency: fixedFrequency, amount: fixedAmount} = useConfigContext();
 	const {
-		frequency,
 		donationAmount,
 		selectedPaymentMethod,
 		paymentRequestAvailable,
@@ -48,13 +46,7 @@ export const DefaultFlow = () => {
 				<PublicTestimony />
 				<ErrorMessage message={submitError} />
 				<SubmitButton
-					disabled={
-						(!frequency &&
-							!fixedFrequency &&
-							!OneTimeFrequencyMethods.includes(selectedPaymentMethod)) ||
-						!donationAmount ||
-						Number.isNaN(donationAmount)
-					}
+					disabled={!donationAmount || Number.isNaN(donationAmount)}
 				>
 					{getSubmitButtonText({
 						method: selectedPaymentMethod,
