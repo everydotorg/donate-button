@@ -117,8 +117,11 @@ export const Faq = () => {
 					</p>
 				</Fragment>
 			)
-		},
-		{
+		}
+	];
+
+	if (!nonprofit?.metadata?.hideFundraiseButton) {
+		faqDataList.push({
 			id: 'p2p',
 			mobileOnly: true,
 			hideSlugList: ['irc'],
@@ -135,8 +138,8 @@ export const Faq = () => {
 					</a>
 				</p>
 			)
-		}
-	];
+		});
+	}
 
 	return (
 		<GridCard>
