@@ -143,6 +143,8 @@ export function constructDonateUrl({
 	amount,
 	...rest
 }: DonateUrlParams) {
+	// If frequency is "" or undefined, default to one-time
+	frequency ||= DonationFrequency.OneTime;
 	const baseUrl = getBaseUrl(rest);
 	const params = getBaseParams(rest);
 
