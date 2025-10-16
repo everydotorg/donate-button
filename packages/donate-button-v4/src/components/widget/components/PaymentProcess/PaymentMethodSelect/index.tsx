@@ -12,6 +12,7 @@ import {
 } from 'src/components/widget/components/PaymentProcess/PaymentMethodSelect/styles';
 import {legendCss} from 'src/components/widget/components/PaymentProcess/styles';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
+import {useNonprofitOrError} from 'src/components/widget/hooks/useNonprofit';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {AppleIcon} from 'src/components/widget/icons/AppleIcon';
 import {GoogleIcon} from 'src/components/widget/icons/GoogleIcon';
@@ -38,11 +39,18 @@ interface PaymentMethodListItemProps {
 const usePaymentMethods = () => {
 	const {methods, frequency: fixedFrequency, previewMode} = useConfigContext();
 	const {paymentRequestAvailable} = useWidgetContext();
+	const nonprofit = useNonprofitOrError();
 
 	const filteredMethods = useMemo(
 		() =>
 			methods
 				.filter((method) => {
+					if (
+						nonprofit?.metadata?.disabledPaymentFlowOptions?.includes(method)
+					) {
+						return false;
+					}
+
 					if (
 						fixedFrequency === DonationFrequency.Monthly &&
 						OneTimeFrequencyMethods.includes(method)

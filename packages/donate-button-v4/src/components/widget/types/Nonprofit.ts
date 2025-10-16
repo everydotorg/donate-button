@@ -18,6 +18,7 @@ export interface Nonprofit {
 	nteeCode: string | null;
 	metadata?: {
 		customTaxDeductible?: string;
+		disabledPaymentFlowOptions?: string;
 		disablePrivateNotes?: boolean;
 		granteeName?: string;
 		prefixWithThe?: boolean;
