@@ -18,6 +18,8 @@ export interface Nonprofit {
 	nteeCode: string | null;
 	metadata?: {
 		customTaxDeductible?: string;
+		// Note that multiple payment methods can be disabled, but it still arrives as a single
+		// comma-separated string from the API eg "card,paypal" so we type it as such here
 		disabledPaymentFlowOptions?: string;
 		disablePrivateNotes?: boolean;
 		granteeName?: string;
