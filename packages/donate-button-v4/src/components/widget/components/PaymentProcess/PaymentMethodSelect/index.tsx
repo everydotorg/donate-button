@@ -45,11 +45,8 @@ const usePaymentMethods = () => {
 		() =>
 			methods
 				.filter((method) => {
-					// There is a bug where instead of being a proper array of disabled methods,
-					// it comes as an array of length 1 with a comma-separated string inside
 					if (
-						nonprofit?.metadata?.disabledPaymentFlowOptions?.length === 1 &&
-						nonprofit?.metadata?.disabledPaymentFlowOptions[0]?.includes(method)
+						nonprofit?.metadata?.disabledPaymentFlowOptions?.includes(method)
 					) {
 						return false;
 					}
