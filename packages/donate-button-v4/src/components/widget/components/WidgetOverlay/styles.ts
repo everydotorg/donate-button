@@ -10,7 +10,7 @@ export const overlayCss = css({
 	position: 'fixed',
 	height: 'auto',
 	width: '100%',
-	zIndex: 999,
+	zIndex: 2147483647,
 	top: 0,
 	bottom: 0,
 	left: 0,

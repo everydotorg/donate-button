@@ -46,7 +46,7 @@ export default function manualMode() {
 		const shadowWidgetWrapper = document.createElement('div');
 		shadowWidgetWrapper.id = 'every-shadow-wrapper';
 		shadowWidgetWrapper.style.position = 'absolute';
-		shadowWidgetWrapper.style.zIndex = '20000000';
+		shadowWidgetWrapper.style.zIndex = '2147483647';
 		document.body.append(shadowWidgetWrapper);
 
 		widgetMountPoint = document.createElement('div');
