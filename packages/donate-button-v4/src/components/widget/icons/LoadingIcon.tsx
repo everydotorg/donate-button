@@ -1,5 +1,5 @@
-import { useConfigContext } from 'src/components/widget/hooks/useConfigContext';
-import { BREAKPOINTS } from 'src/components/widget/theme/breakpoints';
+import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
+import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import css from 'src/helpers/css';
 
@@ -20,20 +20,19 @@ const loadingPathCss = (primaryColor: string) =>
 	css({
 		fill: primaryColor,
 		[BREAKPOINTS.TabletLandscapeUp]: {
-			fill: COLORS.Gray,
-	}
+			fill: COLORS.Gray
+		}
 	});
 
 interface LoadingIconProps {
 	size?: number;
-	color?: string;
 }
 
 export const LoadingIcon = ({
-	size = DEFAULT_LOADING_SIZE,
+	size = DEFAULT_LOADING_SIZE
 }: LoadingIconProps) => {
 	const {primaryColor} = useConfigContext();
-	
+
 	return (
 		<svg
 			width={size}
