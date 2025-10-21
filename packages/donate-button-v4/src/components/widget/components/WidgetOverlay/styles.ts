@@ -16,14 +16,15 @@ export const overlayCss = css({
 	left: 0,
 	right: 0,
 	display: 'flex',
-	background: 'rgba(0, 0, 0, 0.5)',
+	background: '#ffffff',
 	justifyContent: 'center',
 	alignItems: 'center',
 	color: COLORS.Text,
 	fontFamily: FontFamily.BasisGrotesque,
 	padding: 0,
 	[BREAKPOINTS.TabletLandscapeUp]: {
-		padding: Spacing.XL
+		padding: Spacing.XL,
+		background: 'rgba(0, 0, 0, 0.5)'
 	},
 	// reset
 	boxSizing: 'border-box',

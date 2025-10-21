@@ -1,3 +1,5 @@
+import { useConfigContext } from 'src/components/widget/hooks/useConfigContext';
+import { BREAKPOINTS } from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
 import css from 'src/helpers/css';
 
@@ -14,10 +16,14 @@ const loadingSvgCss = css({
 	maskSize: 'cover'
 });
 
-const loadingPathCss = (color: string) =>
+const loadingPathCss = (primaryColor: string) =>
 	css({
-		fill: color
+		fill: primaryColor,
+		[BREAKPOINTS.TabletLandscapeUp]: {
+			fill: COLORS.Gray,
+	}
 	});
+
 interface LoadingIconProps {
 	size?: number;
 	color?: string;
@@ -25,8 +31,9 @@ interface LoadingIconProps {
 
 export const LoadingIcon = ({
 	size = DEFAULT_LOADING_SIZE,
-	color = COLORS.LightGray
 }: LoadingIconProps) => {
+	const {primaryColor} = useConfigContext();
+	
 	return (
 		<svg
 			width={size}
@@ -37,7 +44,7 @@ export const LoadingIcon = ({
 			className={loadingSvgCss}
 		>
 			<path
-				className={loadingPathCss(color)}
+				className={loadingPathCss(primaryColor)}
 				d="M51.147 28.97C51.147 17.614 41.667 9 29.493 9C15.875 9 5 20.5 5 34.744C5 50.094 17.223 62.365 33.68 62.365C50.137 62.365 64.862 49.325 66.017 32.242H58.51C57.114 45.042 46.287 54.859 33.68 54.859C21.553 54.859 12.555 45.956 12.555 34.744C12.555 24.639 20.062 16.507 29.493 16.507C37.385 16.507 43.593 21.897 43.593 28.97C43.593 34.84 39.358 39.749 33.728 39.749V47.256C43.688 47.256 51.148 38.931 51.148 28.97"
 			/>
 		</svg>
