@@ -6,7 +6,7 @@ export const containerCss = css({
 	display: 'flex',
 	justifyContent: 'flex-end',
 	alignItems: 'center',
-	padding: `${Spacing.M} ${Spacing.XL}`,
+	padding: `${Spacing.M} ${Spacing.L}`,
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		padding: 0
 	}
