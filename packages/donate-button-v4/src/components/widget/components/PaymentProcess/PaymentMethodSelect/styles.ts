@@ -1,6 +1,7 @@
 import {fieldSetCss} from 'src/components/widget/components/PaymentProcess/styles';
 import {BREAKPOINTS} from 'src/components/widget/theme/breakpoints';
 import {COLORS} from 'src/components/widget/theme/colors';
+import {textSize} from 'src/components/widget/theme/font-sizes';
 import {Radii} from 'src/components/widget/theme/radii';
 import {
 	verticalStackCss,
@@ -25,6 +26,7 @@ export const largePaymentMethodSelectListCss = css({
 export const smallPaymentMethodFieldSetCss = joinClassNames([
 	fieldSetCss,
 	css({
+		marginBottom: Spacing.S,
 		display: 'block',
 		[BREAKPOINTS.TabletLandscapeUp]: {
 			display: 'none'
@@ -102,4 +104,20 @@ export const smallPaymentMethodButtonCss = (
 					}
 			  }
 			: {})
+	});
+
+export const showMoreButtonCss = (primaryColor: string) =>
+	css({
+		background: 'transparent',
+		border: 'none',
+		color: primaryColor,
+		cursor: 'pointer',
+		textDecoration: 'none',
+		fontWeight: 700,
+		fontSize: textSize.xs.fontSize,
+		lineHeight: textSize.xs.lineHeight,
+		padding: 0,
+		textAlign: 'center',
+		margin: `${Spacing.S} auto 0`,
+		width: '100%'
 	});
