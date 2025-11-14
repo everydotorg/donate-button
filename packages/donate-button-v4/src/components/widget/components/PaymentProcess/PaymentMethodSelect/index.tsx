@@ -8,7 +8,8 @@ import {
 	largePaymentMethodButtonCss,
 	smallPaymentMethodFieldSetCss,
 	smallPaymentMethodSelectListCss,
-	smallPaymentMethodButtonCss
+	smallPaymentMethodButtonCss,
+	showMoreButtonCss
 } from 'src/components/widget/components/PaymentProcess/PaymentMethodSelect/styles';
 import {legendCss} from 'src/components/widget/components/PaymentProcess/styles';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
@@ -185,7 +186,9 @@ export const LargePaymentMethodSelect = () => {
 
 export const SmallPaymentMethodSelect = () => {
 	const methods = usePaymentMethods();
+	const {primaryColor} = useConfigContext();
 
+	const [showMore, setShowMore] = useState(false);
 	if (methods.length === 1) {
 		return null;
 	}
@@ -194,10 +197,27 @@ export const SmallPaymentMethodSelect = () => {
 		<fieldset className={smallPaymentMethodFieldSetCss}>
 			<legend className={legendCss}>Payment method</legend>
 			<ul className={smallPaymentMethodSelectListCss}>
-				{methods.map((method) => (
+				{methods.slice(0, 4).map((method) => (
 					<PaymentMethodListItem key={method} small method={method} />
 				))}
+				{showMore &&
+					methods
+						.slice(4)
+						.map((method) => (
+							<PaymentMethodListItem key={method} small method={method} />
+						))}
 			</ul>
+			{!showMore && (
+				<button
+					type="button"
+					className={showMoreButtonCss(primaryColor)}
+					onClick={() => {
+						setShowMore(true);
+					}}
+				>
+					More options
+				</button>
+			)}
 		</fieldset>
 	);
 };

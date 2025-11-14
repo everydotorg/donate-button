@@ -58,7 +58,7 @@ export const fundraiserCardLogoCss = (logoUrl: string) =>
 	]);
 
 export const nonprofitCardCss = css({
-	padding: `${Spacing.XL}`,
+	padding: `0 ${Spacing.L} ${Spacing.L}`,
 	[BREAKPOINTS.TabletLandscapeUp]: {
 		...verticalStackCss.css(Spacing.S),
 		padding: `${Spacing.L}`

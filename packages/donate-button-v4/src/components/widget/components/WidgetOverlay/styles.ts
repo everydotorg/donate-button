@@ -10,20 +10,21 @@ export const overlayCss = css({
 	position: 'fixed',
 	height: 'auto',
 	width: '100%',
-	zIndex: 999,
+	zIndex: 2147483647,
 	top: 0,
 	bottom: 0,
 	left: 0,
 	right: 0,
 	display: 'flex',
-	background: 'rgba(0, 0, 0, 0.5)',
+	background: '#ffffff',
 	justifyContent: 'center',
 	alignItems: 'center',
 	color: COLORS.Text,
 	fontFamily: FontFamily.BasisGrotesque,
 	padding: 0,
 	[BREAKPOINTS.TabletLandscapeUp]: {
-		padding: Spacing.XL
+		padding: Spacing.XL,
+		background: 'rgba(0, 0, 0, 0.5)'
 	},
 	// reset
 	boxSizing: 'border-box',
