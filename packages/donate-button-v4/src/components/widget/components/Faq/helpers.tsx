@@ -110,12 +110,14 @@ export function getFeeDescriptionBody(
 			return (
 				<Fragment>
 					<p>
-						Our exchanges generally charge a 1% flat fee to automatically
-						liquidate cryptocurrency. For large donations worth over $5k, you
-						have the option to email crypto@every.org to request an address and
-						we can do a manual conversion to get the best rates possible
-						(usually 0.1%-0.4%). Or you are welcome to donate here with the 1%
-						fee.
+						Our exchanges charge a 1% flat fee to automatically liquidate
+            			cryptocurrency immediately after donation. Every.org does not charge
+            			any fees of our own. While usually not recommended, for donations
+            			worth over $100k, donors have the option to email crypto@every.org
+            			to arrange for manual exchange and potentially a lower fee. But even
+            			for large donations, we encourage you to immediately donate on the
+            			website. Donating here is the most straightforward and secure method
+            			to minimize risk of phishing or delays and loss caused by slippage.
 					</p>
 					{getNfgDisclaimer(nonprofit)}
 				</Fragment>
