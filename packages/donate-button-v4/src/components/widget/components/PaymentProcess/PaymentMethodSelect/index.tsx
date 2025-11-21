@@ -187,8 +187,9 @@ export const LargePaymentMethodSelect = () => {
 export const SmallPaymentMethodSelect = () => {
 	const methods = usePaymentMethods();
 	const {primaryColor} = useConfigContext();
+  const  {showMorePaymentMethods, setShowMorePaymentMethods} = useWidgetContext();
 
-	const [showMore, setShowMore] = useState(false);
+
 	if (methods.length === 1) {
 		return null;
 	}
@@ -200,19 +201,19 @@ export const SmallPaymentMethodSelect = () => {
 				{methods.slice(0, 4).map((method) => (
 					<PaymentMethodListItem key={method} small method={method} />
 				))}
-				{showMore &&
+				{showMorePaymentMethods &&
 					methods
 						.slice(4)
 						.map((method) => (
 							<PaymentMethodListItem key={method} small method={method} />
 						))}
 			</ul>
-			{!showMore && (
+			{!showMorePaymentMethods && (
 				<button
 					type="button"
 					className={showMoreButtonCss(primaryColor)}
 					onClick={() => {
-						setShowMore(true);
+						setShowMorePaymentMethods(true);
 					}}
 				>
 					More options
