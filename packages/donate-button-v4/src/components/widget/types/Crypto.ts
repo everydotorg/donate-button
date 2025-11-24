@@ -14,8 +14,8 @@ import graph from 'src/components/widget/icons/CryptoCurrencyIcon/graph.svg';
 import litecoin from 'src/components/widget/icons/CryptoCurrencyIcon/litecoin.svg';
 import mobilecoin from 'src/components/widget/icons/CryptoCurrencyIcon/mobilecoin.svg';
 import polkadot from 'src/components/widget/icons/CryptoCurrencyIcon/polkadot.svg';
-import polygon from 'src/components/widget/icons/CryptoCurrencyIcon/polygon.svg';
 import raydium from 'src/components/widget/icons/CryptoCurrencyIcon/raydium.svg';
+import rlusd from 'src/components/widget/icons/CryptoCurrencyIcon/rlusd.svg';
 import saber from 'src/components/widget/icons/CryptoCurrencyIcon/saber.svg';
 import samoyed from 'src/components/widget/icons/CryptoCurrencyIcon/samoyed.svg';
 import shiba_inu from 'src/components/widget/icons/CryptoCurrencyIcon/shiba-inu.svg';
@@ -31,6 +31,7 @@ export enum CryptoCurrency {
 	AAVE = 'AAVE',
 	ALCX = 'ALCX',
 	ALGO = 'ALGO',
+	// ALI = "ALI",
 	AMP = 'AMP',
 	ANKR = 'ANKR',
 	APE = 'APE',
@@ -42,11 +43,15 @@ export enum CryptoCurrency {
 	BCH = 'BCH',
 	BNB = 'BNB',
 	BNT = 'BNT',
+	BOME = 'BOME',
 	BOND = 'BOND',
+	BONK = 'BONK',
 	BTC = 'BTC',
+	CHILLGUY = 'CHILLGUY',
 	CHZ = 'CHZ',
 	COMP = 'COMP',
 	CRV = 'CRV',
+	CTX = 'CTX',
 	CUBE = 'CUBE',
 	CVC = 'CVC',
 	DAI = 'DAI',
@@ -55,15 +60,21 @@ export enum CryptoCurrency {
 	ELON = 'ELON',
 	ENS = 'ENS',
 	ETH = 'ETH',
+	FARTCOIN = 'FARTCOIN',
 	FET = 'FET',
 	FIL = 'FIL',
+	FLOKI = 'FLOKI',
 	FTM = 'FTM',
 	GAL = 'GAL',
 	GALA = 'GALA',
 	GMT = 'GMT',
+	GOAT = 'GOAT',
 	GRT = 'GRT',
 	GUSD = 'GUSD',
+	HNT = 'HNT',
+	IMX = 'IMX',
 	INJ = 'INJ',
+	IOTX = 'IOTX',
 	JAM = 'JAM',
 	KNC = 'KNC',
 	KP3R = 'KP3R',
@@ -74,17 +85,27 @@ export enum CryptoCurrency {
 	LTC = 'LTC',
 	MANA = 'MANA',
 	MASK = 'MASK',
-	MATIC = 'MATIC',
 	MCO2 = 'MCO2',
+	MEW = 'MEW',
 	MKR = 'MKR',
+	MNT = 'MNT',
 	MOB = 'MOB',
+	MOODENG = 'MOODENG',
 	NMR = 'NMR',
+	OP = 'OP',
 	OXT = 'OXT',
 	PAXG = 'PAXG',
+	PEPE = 'PEPE',
+	PNUT = 'PNUT',
+	POL = 'POL',
+	POPCAT = 'POPCAT',
+	PYTH = 'PYTH',
 	QNT = 'QNT',
 	QRDO = 'QRDO',
+	RARE = 'RARE',
 	RAY = 'RAY',
 	REN = 'REN',
+	RLUSD = 'RLUSD',
 	RNDR = 'RNDR',
 	SAMO = 'SAMO',
 	SAND = 'SAND',
@@ -100,6 +121,7 @@ export enum CryptoCurrency {
 	UNI = 'UNI',
 	USDC = 'USDC',
 	USDT = 'USDT',
+	WIF = 'WIF',
 	XLM = 'XLM',
 	XRP = 'XRP',
 	XTZ = 'XTZ',
@@ -226,6 +248,13 @@ export const SharedCryptoCurrencyConfig: {
 		decimalOffset: 18,
 		coingeckoId: 'bancor'
 	},
+	[CryptoCurrency.BOME]: {
+		displayName: 'BOME',
+		abbreviation: 'BOME',
+		contractType: ContractType.SPL,
+		decimalOffset: 9,
+		coingeckoId: 'book-of-meme'
+	},
 	[CryptoCurrency.BOND]: {
 		displayName: 'BarnBridge',
 		abbreviation: 'BOND',
@@ -233,11 +262,25 @@ export const SharedCryptoCurrencyConfig: {
 		decimalOffset: 18,
 		coingeckoId: 'barnbridge'
 	},
+	[CryptoCurrency.BONK]: {
+		displayName: 'Bonk',
+		abbreviation: 'BONK',
+		contractType: ContractType.SPL,
+		decimalOffset: 9,
+		coingeckoId: 'bonk'
+	},
 	[CryptoCurrency.BTC]: {
 		displayName: 'Bitcoin',
 		abbreviation: 'BTC',
 		decimalOffset: 8,
 		coingeckoId: 'bitcoin'
+	},
+	[CryptoCurrency.CHILLGUY]: {
+		displayName: 'Just a chill guy',
+		abbreviation: 'CHILLGUY',
+		contractType: ContractType.SPL,
+		decimalOffset: 9,
+		coingeckoId: 'chill-guy'
 	},
 	[CryptoCurrency.CHZ]: {
 		displayName: 'Chiliz',
@@ -259,6 +302,13 @@ export const SharedCryptoCurrencyConfig: {
 		contractType: ContractType.ERC20,
 		decimalOffset: 18,
 		coingeckoId: 'curve-dao-token'
+	},
+	[CryptoCurrency.CTX]: {
+		displayName: 'Cryptex Finance',
+		abbreviation: 'CTX',
+		contractType: ContractType.ERC20,
+		decimalOffset: 18,
+		coingeckoId: 'cryptex-finance'
 	},
 	[CryptoCurrency.CUBE]: {
 		displayName: 'Cube',
@@ -313,6 +363,13 @@ export const SharedCryptoCurrencyConfig: {
 		decimalOffset: 18,
 		coingeckoId: 'ethereum'
 	},
+	[CryptoCurrency.FARTCOIN]: {
+		displayName: 'Fartcoin',
+		abbreviation: 'FARTCOIN',
+		contractType: ContractType.SPL,
+		decimalOffset: 9,
+		coingeckoId: 'fartcoin'
+	},
 	[CryptoCurrency.FET]: {
 		displayName: 'Fetch.ai',
 		abbreviation: 'FET',
@@ -325,6 +382,13 @@ export const SharedCryptoCurrencyConfig: {
 		abbreviation: 'FIL',
 		decimalOffset: 18,
 		coingeckoId: 'filecoin'
+	},
+	[CryptoCurrency.FLOKI]: {
+		displayName: 'FLOKI',
+		abbreviation: 'FLOKI',
+		contractType: ContractType.ERC20,
+		decimalOffset: 18,
+		coingeckoId: 'floki'
 	},
 	[CryptoCurrency.FTM]: {
 		displayName: 'Fantom',
@@ -354,6 +418,13 @@ export const SharedCryptoCurrencyConfig: {
 		decimalOffset: 9,
 		coingeckoId: 'stepn'
 	},
+	[CryptoCurrency.GOAT]: {
+		displayName: 'Goatcoin',
+		abbreviation: 'GOAT',
+		contractType: ContractType.SPL,
+		decimalOffset: 9,
+		coingeckoId: 'goatseus-maximus'
+	},
 	[CryptoCurrency.GRT]: {
 		displayName: 'The Graph',
 		abbreviation: 'GRT',
@@ -368,12 +439,33 @@ export const SharedCryptoCurrencyConfig: {
 		decimalOffset: 18,
 		coingeckoId: 'gemini-dollar'
 	},
+	[CryptoCurrency.HNT]: {
+		displayName: 'Helium',
+		abbreviation: 'HNT',
+		contractType: ContractType.SPL,
+		decimalOffset: 9,
+		coingeckoId: 'helium'
+	},
+	[CryptoCurrency.IMX]: {
+		displayName: 'Immutable X',
+		abbreviation: 'IMX',
+		contractType: ContractType.ERC20,
+		decimalOffset: 18,
+		coingeckoId: 'immutable-x'
+	},
 	[CryptoCurrency.INJ]: {
 		displayName: 'Injective Protocol',
 		abbreviation: 'INJ',
 		contractType: ContractType.ERC20,
 		decimalOffset: 18,
 		coingeckoId: 'injective-protocol'
+	},
+	[CryptoCurrency.IOTX]: {
+		displayName: 'IoTeX',
+		abbreviation: 'IOTX',
+		contractType: ContractType.ERC20,
+		decimalOffset: 18,
+		coingeckoId: 'iotex'
 	},
 	[CryptoCurrency.JAM]: {
 		displayName: 'Geojam',
@@ -444,19 +536,19 @@ export const SharedCryptoCurrencyConfig: {
 		decimalOffset: 18,
 		coingeckoId: 'mask-network'
 	},
-	[CryptoCurrency.MATIC]: {
-		displayName: 'Polygon',
-		abbreviation: 'MATIC',
-		decimalOffset: 18,
-		contractType: ContractType.ERC20,
-		coingeckoId: 'matic-network'
-	},
 	[CryptoCurrency.MCO2]: {
 		displayName: 'Moss Carbon Credit',
 		abbreviation: 'MCO2',
 		contractType: ContractType.ERC20,
 		decimalOffset: 18,
 		coingeckoId: 'moss-carbon-credit'
+	},
+	[CryptoCurrency.MEW]: {
+		displayName: 'MEW',
+		abbreviation: 'MEW',
+		contractType: ContractType.SPL,
+		decimalOffset: 9,
+		coingeckoId: 'cat-in-a-dogs-world'
 	},
 	[CryptoCurrency.MKR]: {
 		displayName: 'Maker',
@@ -465,11 +557,25 @@ export const SharedCryptoCurrencyConfig: {
 		decimalOffset: 18,
 		coingeckoId: 'maker'
 	},
+	[CryptoCurrency.MNT]: {
+		displayName: 'Mantle',
+		abbreviation: 'MNT',
+		contractType: ContractType.ERC20,
+		decimalOffset: 18,
+		coingeckoId: 'mantle'
+	},
 	[CryptoCurrency.MOB]: {
 		displayName: 'MobileCoin',
 		abbreviation: 'MOB',
 		decimalOffset: 12,
 		coingeckoId: 'mobilecoin'
+	},
+	[CryptoCurrency.MOODENG]: {
+		displayName: 'MOODENG',
+		abbreviation: 'MOODENG',
+		contractType: ContractType.SPL,
+		decimalOffset: 9,
+		coingeckoId: 'moo-deng'
 	},
 	[CryptoCurrency.NMR]: {
 		displayName: 'Numeraire',
@@ -477,6 +583,13 @@ export const SharedCryptoCurrencyConfig: {
 		contractType: ContractType.ERC20,
 		decimalOffset: 18,
 		coingeckoId: 'numeraire'
+	},
+	[CryptoCurrency.OP]: {
+		displayName: 'Optimism',
+		abbreviation: 'OP',
+		contractType: ContractType.ERC20,
+		decimalOffset: 18,
+		coingeckoId: 'optimism'
 	},
 	[CryptoCurrency.OXT]: {
 		displayName: 'Orchid',
@@ -492,6 +605,41 @@ export const SharedCryptoCurrencyConfig: {
 		decimalOffset: 18,
 		coingeckoId: 'pax-gold'
 	},
+	[CryptoCurrency.PEPE]: {
+		displayName: 'PEPE',
+		abbreviation: 'PEPE',
+		contractType: ContractType.ERC20,
+		decimalOffset: 18,
+		coingeckoId: 'pepe'
+	},
+	[CryptoCurrency.PNUT]: {
+		displayName: 'Peanut',
+		abbreviation: 'PNUT',
+		contractType: ContractType.SPL,
+		decimalOffset: 9,
+		coingeckoId: 'peanut-the-squirrel'
+	},
+	[CryptoCurrency.POL]: {
+		displayName: 'Polygon',
+		abbreviation: 'POL',
+		contractType: ContractType.ERC20,
+		decimalOffset: 18,
+		coingeckoId: 'polygon-ecosystem-token'
+	},
+	[CryptoCurrency.POPCAT]: {
+		displayName: 'Popcat',
+		abbreviation: 'POPCAT',
+		contractType: ContractType.ERC20,
+		decimalOffset: 18,
+		coingeckoId: 'popcat'
+	},
+	[CryptoCurrency.PYTH]: {
+		displayName: 'Pyth Network',
+		abbreviation: 'PYTH',
+		contractType: ContractType.SPL,
+		decimalOffset: 9,
+		coingeckoId: 'pyth-network'
+	},
 	[CryptoCurrency.QNT]: {
 		displayName: 'Quant',
 		abbreviation: 'QNT',
@@ -506,6 +654,13 @@ export const SharedCryptoCurrencyConfig: {
 		decimalOffset: 18,
 		coingeckoId: 'qredo'
 	},
+	[CryptoCurrency.RARE]: {
+		displayName: 'SuperRare',
+		abbreviation: 'RARE',
+		contractType: ContractType.ERC20,
+		decimalOffset: 18,
+		coingeckoId: 'superrare'
+	},
 	[CryptoCurrency.RAY]: {
 		displayName: 'Raydium',
 		abbreviation: 'RAY',
@@ -519,6 +674,13 @@ export const SharedCryptoCurrencyConfig: {
 		contractType: ContractType.ERC20,
 		decimalOffset: 18,
 		coingeckoId: 'republic-protocol'
+	},
+	[CryptoCurrency.RLUSD]: {
+		displayName: 'Ripple USD',
+		abbreviation: 'RLUSD',
+		contractType: ContractType.ERC20,
+		decimalOffset: 18,
+		coingeckoId: 'ripple-usd'
 	},
 	[CryptoCurrency.RNDR]: {
 		displayName: 'Render Token',
@@ -621,7 +783,15 @@ export const SharedCryptoCurrencyConfig: {
 		displayName: 'Tether',
 		abbreviation: 'USDT',
 		decimalOffset: 6,
+		contractType: ContractType.ERC20,
 		coingeckoId: 'tether'
+	},
+	[CryptoCurrency.WIF]: {
+		displayName: 'dogwifhat',
+		abbreviation: 'WIF',
+		contractType: ContractType.SPL,
+		decimalOffset: 9,
+		coingeckoId: 'dogwifcoin'
 	},
 	[CryptoCurrency.XLM]: {
 		displayName: 'Stellar',
@@ -687,48 +857,127 @@ type WebsiteCryptoCurrencyConfig =
 const WebsiteCryptoCurrencyConfig: {
 	[key in CryptoCurrency]: WebsiteCryptoCurrencyConfig;
 } = {
-	[CryptoCurrency.AAVE]: {iconCloudinaryId: 'crypto/aave_oszkzj'},
-	[CryptoCurrency.ALCX]: {iconCloudinaryId: 'crypto/alcx_agfvh3'},
-	[CryptoCurrency.AMP]: {iconCloudinaryId: 'crypto/amp_zrgutx'},
-	[CryptoCurrency.ANKR]: {iconCloudinaryId: 'crypto/ankr_vipelu'},
-	[CryptoCurrency.ALGO]: {icon: algorand},
-	[CryptoCurrency.APE]: {icon: apecoin},
-	[CryptoCurrency.AVAX]: {icon: avalanche},
-	[CryptoCurrency.AXS]: {iconCloudinaryId: 'crypto/axs_vdwbc0'},
-	[CryptoCurrency.BAT]: {icon: basic_attention_token},
-	[CryptoCurrency.BCH]: {icon: bitcoincash},
-	[CryptoCurrency.BNB]: {icon: binance},
-	[CryptoCurrency.BTC]: {icon: bitcoin},
-	[CryptoCurrency.CHZ]: {iconCloudinaryId: 'crypto/chiliz_j11blm'},
-	[CryptoCurrency.DAI]: {icon: dai},
-	[CryptoCurrency.DOGE]: {icon: dogecoin},
-	[CryptoCurrency.DOT]: {icon: polkadot},
-	[CryptoCurrency.ETH]: {icon: ethereum},
-	[CryptoCurrency.FIL]: {icon: filecoin},
-	[CryptoCurrency.GRT]: {icon: graph},
-	[CryptoCurrency.LINK]: {icon: chainlink},
-	[CryptoCurrency.LTC]: {icon: litecoin},
-	[CryptoCurrency.MATIC]: {icon: polygon},
-	[CryptoCurrency.MOB]: {icon: mobilecoin},
-	[CryptoCurrency.RAY]: {icon: raydium},
-	[CryptoCurrency.SAMO]: {icon: samoyed},
-	[CryptoCurrency.SBR]: {icon: saber},
-	[CryptoCurrency.SHIB]: {icon: shiba_inu},
-	[CryptoCurrency.SLP]: {iconCloudinaryId: 'crypto/slp_clp71c'},
-	[CryptoCurrency.SOL]: {icon: solana},
-	[CryptoCurrency.UNI]: {icon: uniswap},
-	[CryptoCurrency.USDC]: {icon: usdcoin},
-	[CryptoCurrency.USDT]: {icon: tether},
-	[CryptoCurrency.XLM]: {icon: stellar},
-	[CryptoCurrency.XRP]: {iconCloudinaryId: 'crypto/xrp_uwcehg'},
-	[CryptoCurrency.XTZ]: {icon: tezos},
-	[CryptoCurrency.ZEC]: {icon: zcash},
+	[CryptoCurrency.AAVE]: {
+		iconCloudinaryId: 'crypto/aave_oszkzj'
+	},
+	[CryptoCurrency.ALCX]: {
+		iconCloudinaryId: 'crypto/alcx_agfvh3'
+	},
+	[CryptoCurrency.AMP]: {
+		iconCloudinaryId: 'crypto/amp_zrgutx'
+	},
+	[CryptoCurrency.ANKR]: {
+		iconCloudinaryId: 'crypto/ankr_vipelu'
+	},
+	[CryptoCurrency.ALGO]: {
+		icon: algorand
+	},
+	[CryptoCurrency.APE]: {
+		icon: apecoin
+	},
+	[CryptoCurrency.AVAX]: {
+		icon: avalanche
+	},
+	[CryptoCurrency.AXS]: {
+		iconCloudinaryId: 'crypto/axs_vdwbc0'
+	},
+	[CryptoCurrency.BAT]: {
+		icon: basic_attention_token
+	},
+	[CryptoCurrency.BCH]: {
+		icon: bitcoincash
+	},
+	[CryptoCurrency.BNB]: {
+		icon: binance
+	},
+	[CryptoCurrency.BTC]: {
+		icon: bitcoin
+	},
+	[CryptoCurrency.CHZ]: {
+		iconCloudinaryId: 'crypto/chiliz_j11blm'
+	},
+	[CryptoCurrency.DAI]: {
+		icon: dai
+	},
+	[CryptoCurrency.DOGE]: {
+		icon: dogecoin
+	},
+	[CryptoCurrency.DOT]: {
+		icon: polkadot
+	},
+	[CryptoCurrency.ETH]: {
+		icon: ethereum
+	},
+	[CryptoCurrency.FARTCOIN]: {
+		iconCloudinaryId: 'crypto/fartcoin_lc4soe'
+	},
+	[CryptoCurrency.FIL]: {
+		icon: filecoin
+	},
+	[CryptoCurrency.GRT]: {
+		icon: graph
+	},
+	[CryptoCurrency.LINK]: {
+		icon: chainlink
+	},
+	[CryptoCurrency.LTC]: {
+		icon: litecoin
+	},
+	[CryptoCurrency.MNT]: {
+		iconCloudinaryId: 'Mantle-Logo-mark_yfifiz'
+	},
+	[CryptoCurrency.MOB]: {
+		icon: mobilecoin
+	},
+	[CryptoCurrency.RAY]: {
+		icon: raydium
+	},
+	[CryptoCurrency.SAMO]: {
+		icon: samoyed
+	},
+	[CryptoCurrency.SBR]: {
+		icon: saber
+	},
+	[CryptoCurrency.SHIB]: {
+		icon: shiba_inu
+	},
+	[CryptoCurrency.SLP]: {
+		iconCloudinaryId: 'crypto/slp_clp71c'
+	},
+	[CryptoCurrency.SOL]: {
+		icon: solana
+	},
+	[CryptoCurrency.UNI]: {
+		icon: uniswap
+	},
+	[CryptoCurrency.USDC]: {
+		icon: usdcoin
+	},
+	[CryptoCurrency.USDT]: {
+		icon: tether
+	},
+	[CryptoCurrency.XLM]: {
+		icon: stellar
+	},
+	[CryptoCurrency.XRP]: {
+		iconCloudinaryId: 'crypto/xrp_uwcehg'
+	},
+	[CryptoCurrency.XTZ]: {
+		icon: tezos
+	},
+	[CryptoCurrency.ZEC]: {
+		icon: zcash
+	},
+	// [CryptoCurrency.ALI]: { iconCloudinaryId: "crypto/clt7rs4wap5nvyerm2gr" },
 	[CryptoCurrency.API3]: {iconCloudinaryId: 'crypto/xb8xoz6kxev0uytaejlo'},
 	[CryptoCurrency.AUDIO]: {iconCloudinaryId: 'crypto/ucctvvgwedku9hexplp7'},
 	[CryptoCurrency.BNT]: {iconCloudinaryId: 'crypto/jgb6ub5gckohghdrt1ig'},
+	[CryptoCurrency.BOME]: {iconCloudinaryId: 'crypto/bqqz7kifthzfat7jyjqs'},
 	[CryptoCurrency.BOND]: {iconCloudinaryId: 'crypto/cidlkxmdqdoi2ezygfjj'},
+	[CryptoCurrency.BONK]: {iconCloudinaryId: 'crypto/tu3cprnhlpkew6ijzmyn'},
 	[CryptoCurrency.COMP]: {iconCloudinaryId: 'crypto/ayjushqknohuz9x3hcx5'},
 	[CryptoCurrency.CRV]: {iconCloudinaryId: 'crypto/txyb4aa9a0skuhoyjcti'},
+	[CryptoCurrency.CTX]: {iconCloudinaryId: 'crypto/mpno6vbbahgx8lgxmb4a'},
 	[CryptoCurrency.CUBE]: {iconCloudinaryId: 'crypto/n8su92fe1atqx79hrhqf'},
 	[CryptoCurrency.CVC]: {iconCloudinaryId: 'crypto/cw8ahifxtnfw8pbgh5o9'},
 	[CryptoCurrency.ELON]: {iconCloudinaryId: 'crypto/fvsarijyyz1v9j5w1sh2'},
@@ -738,8 +987,11 @@ const WebsiteCryptoCurrencyConfig: {
 	[CryptoCurrency.GAL]: {iconCloudinaryId: 'crypto/a5km5rat7dpiz6ckkvfi'},
 	[CryptoCurrency.GALA]: {iconCloudinaryId: 'crypto/rifljrw1ry9wu1i7mxji'},
 	[CryptoCurrency.GMT]: {iconCloudinaryId: 'crypto/uyyddnskoabbpei7olin'},
+	[CryptoCurrency.GOAT]: {iconCloudinaryId: 'crypto/eur83ufigc8id1ouov6k'},
 	[CryptoCurrency.GUSD]: {iconCloudinaryId: 'crypto/w8zltgl5ngsz1lqch17g'},
+	[CryptoCurrency.IMX]: {iconCloudinaryId: 'crypto/dzbiyoog90osmjwx1col'},
 	[CryptoCurrency.INJ]: {iconCloudinaryId: 'crypto/gi0voz42gn33azwaa11a'},
+	[CryptoCurrency.IOTX]: {iconCloudinaryId: 'crypto/pkc4lx0unriaayfdx8us'},
 	[CryptoCurrency.JAM]: {iconCloudinaryId: 'crypto/xmn1xxzccz84xiej1esw'},
 	[CryptoCurrency.KNC]: {iconCloudinaryId: 'crypto/mqdyhpc07mle6dkfomye'},
 	[CryptoCurrency.KP3R]: {iconCloudinaryId: 'crypto/eoabgtxyhpqqfhv1bxud'},
@@ -749,14 +1001,22 @@ const WebsiteCryptoCurrencyConfig: {
 	[CryptoCurrency.MANA]: {iconCloudinaryId: 'crypto/ekefdi1p3jgoeb08oszc'},
 	[CryptoCurrency.MASK]: {iconCloudinaryId: 'crypto/ykwym7djaofb2q6lcn5n'},
 	[CryptoCurrency.MCO2]: {iconCloudinaryId: 'crypto/ysuyysfrukryu1jw2wrh'},
+	[CryptoCurrency.MEW]: {iconCloudinaryId: 'crypto/u5yaemgk4ajviyqriav6'},
 	[CryptoCurrency.MKR]: {iconCloudinaryId: 'crypto/tpdipvaap6m150j2hdec'},
+	[CryptoCurrency.MOODENG]: {iconCloudinaryId: 'crypto/csrl7ferznsrkjcwg5lq'},
 	[CryptoCurrency.NMR]: {iconCloudinaryId: 'crypto/bqecgq3rawel0k99tohj'},
+	[CryptoCurrency.OP]: {iconCloudinaryId: 'crypto/mg3ut47msiik6ote2vvy'},
 	[CryptoCurrency.OXT]: {iconCloudinaryId: 'crypto/ietkmjcp0yj71vlg0zjy'},
 	[CryptoCurrency.PAXG]: {iconCloudinaryId: 'crypto/yb5x1aizhhdn8mprrn2m'},
+	[CryptoCurrency.PEPE]: {iconCloudinaryId: 'crypto/li6d622yragqd5qktcel'},
+	[CryptoCurrency.PNUT]: {iconCloudinaryId: 'crypto/blutzmogx9bihtkcgvlh'},
+	[CryptoCurrency.POPCAT]: {iconCloudinaryId: 'crypto/kcu6of08mi1dpxk5dadu'},
 	[CryptoCurrency.QNT]: {iconCloudinaryId: 'crypto/dwdx02ifn9fsvbw1pgfz'},
 	[CryptoCurrency.QRDO]: {iconCloudinaryId: 'crypto/jzbmlpvwoogroaaazkxz'},
+	[CryptoCurrency.RARE]: {iconCloudinaryId: 'crypto/dau8mznijmzzcd6jdc6s'},
 	[CryptoCurrency.REN]: {iconCloudinaryId: 'crypto/ili8nkjwnifmbfra20ly'},
 	[CryptoCurrency.RNDR]: {iconCloudinaryId: 'crypto/tm0klwno0hqjbcxsuvrp'},
+	[CryptoCurrency.RLUSD]: {icon: rlusd},
 	[CryptoCurrency.SAND]: {iconCloudinaryId: 'crypto/w6g6ep4ghqpsz54vqzmy'},
 	[CryptoCurrency.SKL]: {iconCloudinaryId: 'crypto/zccvwa5yin8r32s4sfqy'},
 	[CryptoCurrency.SNX]: {iconCloudinaryId: 'crypto/sxvudvsjujuhdupwssvz'},
@@ -765,7 +1025,15 @@ const WebsiteCryptoCurrencyConfig: {
 	[CryptoCurrency.UMA]: {iconCloudinaryId: 'crypto/imxydvsf4mydmyjukbel'},
 	[CryptoCurrency.YFI]: {iconCloudinaryId: 'crypto/mal5muwn4fcsbuuyhohz'},
 	[CryptoCurrency.ZBC]: {iconCloudinaryId: 'crypto/hhiopvuac8qbpcnupgle'},
-	[CryptoCurrency.ZRX]: {iconCloudinaryId: 'crypto/ge5jqonw89ffg200z0in'}
+	[CryptoCurrency.ZRX]: {iconCloudinaryId: 'crypto/ge5jqonw89ffg200z0in'},
+	[CryptoCurrency.CHILLGUY]: {
+		iconCloudinaryId: 'crypto/j75hb0lxbsbapieemaye'
+	},
+	[CryptoCurrency.FLOKI]: {iconCloudinaryId: 'crypto/rlxx86vydn8ccfxtm4vp'},
+	[CryptoCurrency.HNT]: {iconCloudinaryId: 'crypto/pet5gmpzfy2x2mhun0hn'},
+	[CryptoCurrency.POL]: {iconCloudinaryId: 'crypto/i1m8h4uzfijyjcfeeydg'},
+	[CryptoCurrency.PYTH]: {iconCloudinaryId: 'crypto/wyrrhmpb286mabrfuvm1'},
+	[CryptoCurrency.WIF]: {iconCloudinaryId: 'crypto/kbpw2ho4rnvleavinyxj'}
 };
 
 export const CryptoCurrencyConfig = Object.fromEntries(
