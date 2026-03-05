@@ -22,6 +22,9 @@ interface WidgetContextProps {
 	selectedPaymentMethod: PaymentMethod;
 	setSelectedPaymentMethod: StateUpdater<PaymentMethod>;
 
+	showMorePaymentMethods: boolean;
+	setShowMorePaymentMethods: StateUpdater<boolean>;
+
 	stockAmount?: number;
 	setStockAmount: StateUpdater<number | undefined>;
 
@@ -80,6 +83,9 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 		}
 	}, [config.methods, selectedPaymentMethod]);
 
+	const [showMorePaymentMethods, setShowMorePaymentMethods] =
+		useState<boolean>(false);
+
 	const [stockAmount, setStockAmount] = useState<number>();
 	const [stockSymbol, setStockSymbol] = useState<string>();
 
@@ -107,6 +113,8 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 				setSubmitError,
 				selectedPaymentMethod,
 				setSelectedPaymentMethod,
+				showMorePaymentMethods,
+				setShowMorePaymentMethods,
 				stockAmount,
 				setStockAmount,
 				stockSymbol,
