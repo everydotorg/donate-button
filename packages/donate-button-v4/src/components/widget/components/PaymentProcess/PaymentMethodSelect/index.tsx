@@ -187,8 +187,8 @@ export const LargePaymentMethodSelect = () => {
 export const SmallPaymentMethodSelect = () => {
 	const methods = usePaymentMethods();
 	const {primaryColor} = useConfigContext();
-  const  {showMorePaymentMethods, setShowMorePaymentMethods} = useWidgetContext();
-
+	const {showMorePaymentMethods, setShowMorePaymentMethods} =
+		useWidgetContext();
 
 	if (methods.length === 1) {
 		return null;

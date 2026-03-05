@@ -83,7 +83,8 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 		}
 	}, [config.methods, selectedPaymentMethod]);
 
-	const [showMorePaymentMethods, setShowMorePaymentMethods] = useState<boolean>(false);
+	const [showMorePaymentMethods, setShowMorePaymentMethods] =
+		useState<boolean>(false);
 
 	const [stockAmount, setStockAmount] = useState<number>();
 	const [stockSymbol, setStockSymbol] = useState<string>();
