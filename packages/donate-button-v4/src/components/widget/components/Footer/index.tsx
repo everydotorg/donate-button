@@ -20,8 +20,7 @@ import {
 import {mailToLink} from 'src/helpers/mailToLink';
 
 const FEEDBACK_URL = mailToLink({address: SUPPORT_EMAIL});
-interface FooterLinkProps
-	extends JSXInternal.HTMLAttributes<HTMLAnchorElement> {}
+type FooterLinkProps = JSXInternal.HTMLAttributes<HTMLAnchorElement>;
 const FooterLink: FunctionComponent<FooterLinkProps> = ({
 	children,
 	...rest

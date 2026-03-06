@@ -4,7 +4,6 @@
  */
 
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
-/* eslint-disable unicorn/prefer-dom-node-append */
 /* eslint-disable @typescript-eslint/consistent-indexed-object-style */
 import * as CSS from 'csstype';
 import resetcss from 'src/resetCss';

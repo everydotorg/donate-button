@@ -10,7 +10,7 @@ import {
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {CheckMarkIcon} from 'src/components/widget/icons/CheckMarkIcon';
 
-interface CheckboxProps extends JSXInternal.HTMLAttributes<HTMLInputElement> {}
+type CheckboxProps = JSXInternal.HTMLAttributes<HTMLInputElement>;
 
 export const Checkbox: FunctionComponent<CheckboxProps> = ({
 	children,
