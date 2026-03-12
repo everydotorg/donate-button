@@ -1,7 +1,6 @@
 import {createContext, FunctionalComponent} from 'preact';
 import {useCallback, useEffect, useState} from 'preact/hooks';
 import {getNonprofit} from 'src/components/widget/api';
-import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {
 	Nonprofit,
 	NonprofitFetchError,
@@ -17,8 +16,9 @@ export const NonprofitContext = createContext<NonprofitContextData>({
 	nonprofit: NonprofitFetching
 });
 
-export const NonprofitContextProvider: FunctionalComponent = ({children}) => {
-	const {nonprofitSlug} = useConfigContext();
+export const NonprofitContextProvider: FunctionalComponent<{
+	nonprofitSlug?: string;
+}> = ({children, nonprofitSlug}) => {
 	const [nonprofit, setNonprofit] =
 		useState<NonprofitContextData['nonprofit']>(NonprofitFetching);
 	const [parentNonprofit, setParentNonprofitNonprofit] =
@@ -26,6 +26,10 @@ export const NonprofitContextProvider: FunctionalComponent = ({children}) => {
 
 	const fetchNonprofit = useCallback(async () => {
 		try {
+			if (!nonprofitSlug) {
+				throw new Error('No nonprofit slug provided');
+			}
+
 			const response = await getNonprofit(nonprofitSlug);
 			setNonprofit(response);
 
