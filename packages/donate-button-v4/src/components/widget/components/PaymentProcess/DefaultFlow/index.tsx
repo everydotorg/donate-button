@@ -1,4 +1,5 @@
 import {ErrorMessage} from 'src/components/widget/components/ErrorMessage';
+import {CustomFields} from 'src/components/widget/components/PaymentProcess/CustomFields';
 import {DonationAmount} from 'src/components/widget/components/PaymentProcess/DonationAmount';
 import {Frequency} from 'src/components/widget/components/PaymentProcess/Frequency';
 import {
@@ -42,6 +43,7 @@ export const DefaultFlow = () => {
 					<Frequency />
 					<DonationAmount />
 				</div>
+				<CustomFields />
 				<PrivateNote />
 				<PublicTestimony />
 				<ErrorMessage message={submitError} />

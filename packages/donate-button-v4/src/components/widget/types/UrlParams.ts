@@ -62,7 +62,9 @@ export enum DonateUrlParameters {
 	GIFT_CARD_CODE = 'gift_card_code',
 
 	// Customization code
-	CODE = 'code'
+	CODE = 'code',
+
+	CUSTOM_FIELD_RESPONSES = 'custom_field_responses'
 }
 
 export enum UTM_QUERY_PARAM {

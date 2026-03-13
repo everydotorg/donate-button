@@ -1,6 +1,7 @@
 import {ErrorMessage} from 'src/components/widget/components/ErrorMessage';
 import {CryptoAmountInput} from 'src/components/widget/components/PaymentProcess/CryptoFlow/CryptoAmountInput';
 import {CryptoSelector} from 'src/components/widget/components/PaymentProcess/CryptoFlow/CryptoSelector';
+import {CustomFields} from 'src/components/widget/components/PaymentProcess/CustomFields';
 import {
 	LargePaymentMethodSelect,
 	SmallPaymentMethodSelect
@@ -57,6 +58,7 @@ export const CryptoFlow = () => {
 						</div>
 					)}
 				</fieldset>
+				<CustomFields />
 				<PrivateNote />
 				<PublicTestimony />
 				<ErrorMessage message={submitError} />

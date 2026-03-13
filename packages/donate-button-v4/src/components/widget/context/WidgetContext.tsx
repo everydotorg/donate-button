@@ -51,6 +51,9 @@ interface WidgetContextProps {
 
 	subMethod: 'apple' | 'google';
 	setSubMethod: StateUpdater<'apple' | 'google'>;
+
+	customFieldValues: Record<string, string>;
+	setCustomFieldValues: StateUpdater<Record<string, string>>;
 }
 
 export const WidgetContext = createContext<WidgetContextProps>(
@@ -101,6 +104,10 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 
 	const [subMethod, setSubMethod] = useState<'apple' | 'google'>('apple');
 
+	const [customFieldValues, setCustomFieldValues] = useState<
+		Record<string, string>
+	>({});
+
 	return (
 		<WidgetContext.Provider
 			value={{
@@ -131,7 +138,9 @@ export const WidgetContextProvider: FunctionalComponent<{hide: () => void}> = ({
 				giftCardCode,
 				setGiftCardCode,
 				subMethod,
-				setSubMethod
+				setSubMethod,
+				customFieldValues,
+				setCustomFieldValues
 			}}
 		>
 			{children}

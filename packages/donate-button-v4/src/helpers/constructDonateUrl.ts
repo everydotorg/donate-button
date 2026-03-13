@@ -25,6 +25,7 @@ interface BaseUrlParams {
 	partnerMetadata?: string;
 	designation?: string;
 	requireShareInfo?: boolean;
+	customFieldResponses?: string;
 }
 
 interface DonateUrlParams extends BaseUrlParams {
@@ -93,7 +94,8 @@ function getBaseParams({
 	webhookToken,
 	partnerMetadata,
 	designation,
-	requireShareInfo
+	requireShareInfo,
+	customFieldResponses
 }: Pick<
 	BaseUrlParams,
 	| 'nonprofitSlug'
@@ -106,6 +108,7 @@ function getBaseParams({
 	| 'partnerMetadata'
 	| 'designation'
 	| 'requireShareInfo'
+	| 'customFieldResponses'
 >) {
 	const utmParams = getUTMParamsFromPageUrl();
 
@@ -118,6 +121,7 @@ function getBaseParams({
 		[DonateUrlParameters.PARTNER_METADATA]: partnerMetadata,
 		[DonateUrlParameters.DESIGNATION]: designation,
 		[DonateUrlParameters.REQUIRE_SHARE_INFO]: requireShareInfo,
+		[DonateUrlParameters.CUSTOM_FIELD_RESPONSES]: customFieldResponses,
 		[UTM_QUERY_PARAM.utm_campaign]: 'donate-button',
 		[UTM_QUERY_PARAM.utm_source]: utmSource ?? nonprofitSlug,
 		[UTM_QUERY_PARAM.utm_medium]: UTM_MEDIUM,
