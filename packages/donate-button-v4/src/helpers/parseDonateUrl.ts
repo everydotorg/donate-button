@@ -118,6 +118,7 @@ export function parseDonateUrl(
 		undefined;
 	const partnerMetadata =
 		searchParameters.get(DonateUrlParameters.PARTNER_METADATA) ?? undefined;
+	const code = searchParameters.get(DonateUrlParameters.CODE) ?? undefined;
 
 	if (!nonprofitSlug) {
 		return;
@@ -139,6 +140,7 @@ export function parseDonateUrl(
 		designation,
 		requireShareInfo,
 		webhookToken,
-		partnerMetadata
+		partnerMetadata,
+		code
 	});
 }
