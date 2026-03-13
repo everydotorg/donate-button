@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/prevent-abbreviations */
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {
 	AvailablePaymentMethods,
