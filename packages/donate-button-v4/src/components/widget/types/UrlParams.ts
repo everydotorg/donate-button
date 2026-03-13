@@ -59,7 +59,12 @@ export enum DonateUrlParameters {
 
 	SEARCH_META = 'search_meta',
 
-	GIFT_CARD_CODE = 'gift_card_code'
+	GIFT_CARD_CODE = 'gift_card_code',
+
+	// Customization code
+	CODE = 'code',
+
+	CUSTOM_FIELD_RESPONSES = 'custom_field_responses'
 }
 
 export enum UTM_QUERY_PARAM {

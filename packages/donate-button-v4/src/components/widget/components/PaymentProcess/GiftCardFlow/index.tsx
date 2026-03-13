@@ -1,4 +1,5 @@
 import {ErrorMessage} from 'src/components/widget/components/ErrorMessage';
+import {CustomFields} from 'src/components/widget/components/PaymentProcess/CustomFields';
 import {giftCardIconCss} from 'src/components/widget/components/PaymentProcess/GiftCardFlow/styles';
 import {
 	LargePaymentMethodSelect,
@@ -42,6 +43,7 @@ export const GiftCardFlow = () => {
 						}}
 					/>
 				)}
+				<CustomFields />
 				<ErrorMessage message={submitError} />
 				<SubmitButton>
 					{getSubmitButtonText({method: PaymentMethod.GIFT_CARD})}

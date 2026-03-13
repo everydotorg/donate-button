@@ -1,5 +1,6 @@
 import {ErrorMessage} from 'src/components/widget/components/ErrorMessage';
 import {donationAmountInputCss} from 'src/components/widget/components/PaymentProcess/DonationAmount/styles';
+import {CustomFields} from 'src/components/widget/components/PaymentProcess/CustomFields';
 import {
 	LargePaymentMethodSelect,
 	SmallPaymentMethodSelect
@@ -15,7 +16,6 @@ import {
 	legendCss
 } from 'src/components/widget/components/PaymentProcess/styles';
 import {TextInput} from 'src/components/widget/components/TextInput';
-import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useSubmitDonation} from 'src/components/widget/hooks/useSubmitDonation';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {verticalStackCss, Spacing} from 'src/components/widget/theme/spacing';
@@ -25,8 +25,6 @@ import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
 export const StocksFlow = () => {
 	const submitDonation = useSubmitDonation();
-
-	const {primaryColor} = useConfigContext();
 
 	const {
 		stockAmount,
@@ -81,6 +79,7 @@ export const StocksFlow = () => {
 						/>
 					</div>
 				</fieldset>
+				<CustomFields />
 				<PrivateNote />
 				<PublicTestimony />
 				<ErrorMessage message={submitError} />

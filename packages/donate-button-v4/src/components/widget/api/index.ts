@@ -1,3 +1,4 @@
+import {DonateFlowCustomization} from 'src/components/widget/types/DonateFlowCustomization';
 import {Fundraiser} from 'src/components/widget/types/Fundraiser';
 import {Nonprofit} from 'src/components/widget/types/Nonprofit';
 import {BASE_API_URL, BASE_COINGECKO_URL} from 'src/constants/url';
@@ -49,4 +50,14 @@ export async function getCoingeckoRate(coingeckoId: string) {
 	const data = await fetch(url).then(async (response) => response.json());
 
 	return (data as CoingeckoData).market_data.current_price.usd;
+}
+
+export async function getCustomization(nonprofitId: string, code?: string) {
+	const url = `${BASE_API_URL}/${nonprofitId}/customization${
+		code ? `?code=${code}` : ''
+	}`;
+	const response: DonateFlowCustomization = await fetch(url).then(
+		async (response) => response.json()
+	);
+	return response;
 }

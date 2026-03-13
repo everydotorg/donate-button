@@ -1,10 +1,10 @@
 import {useCallback} from 'preact/hooks';
 import {JSXInternal} from 'preact/src/jsx';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
+import {useCustomizationOrUndefined} from 'src/components/widget/hooks/useCustmization';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {
-	AvailablePaymentMethods,
 	OneTimeFrequencyMethods,
 	PaymentMethod
 } from 'src/components/widget/types/PaymentMethod';
@@ -18,6 +18,7 @@ import {
 
 export const useSubmitDonation = () => {
 	const config = useConfigContext();
+	const customization = useCustomizationOrUndefined();
 
 	const {
 		frequency,
@@ -30,7 +31,8 @@ export const useSubmitDonation = () => {
 		cryptoCurrency,
 		privateNote,
 		publicTestimony,
-		giftCardCode
+		giftCardCode,
+		customFieldValues
 	} = useWidgetContext();
 	const {
 		minDonationAmount,
@@ -46,6 +48,19 @@ export const useSubmitDonation = () => {
 
 			const target = config.completeDonationInNewTab ? '_blank' : '_self';
 
+			const requiredField = (customization?.fields ?? []).find(
+				(field) => field.required && !customFieldValues[field.heading]?.trim()
+			);
+			if (requiredField) {
+				setSubmitError('Please fill in all required fields');
+				return;
+			}
+
+			const customFieldResponses =
+				Object.keys(customFieldValues).length > 0
+					? JSON.stringify(customFieldValues)
+					: undefined;
+
 			const baseParameters = {
 				methods: [selectedPaymentMethod],
 				nonprofitSlug: config.nonprofitSlug,
@@ -56,7 +71,8 @@ export const useSubmitDonation = () => {
 				webhookToken,
 				partnerMetadata: config.partnerMetadata,
 				designation,
-				requireShareInfo
+				requireShareInfo,
+				customFieldResponses
 			};
 			switch (selectedPaymentMethod) {
 				case PaymentMethod.CRYPTO:
@@ -138,7 +154,9 @@ export const useSubmitDonation = () => {
 			webhookToken,
 			redeemGiftCardInFlow,
 			designation,
-			requireShareInfo
+			requireShareInfo,
+			customization,
+			customFieldValues
 		]
 	);
 
