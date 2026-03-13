@@ -1,5 +1,6 @@
 import {ErrorMessage} from 'src/components/widget/components/ErrorMessage';
 import {BackButton} from 'src/components/widget/components/PaymentProcess/BackButton';
+import {CustomFields} from 'src/components/widget/components/PaymentProcess/CustomFields';
 import {
 	DafFlowViewProps,
 	DafFlowView
@@ -34,6 +35,7 @@ export const DafAmountView = ({changeView}: DafFlowViewProps) => {
 				<h3>Connect your DAF with Chariot</h3>
 				<Frequency />
 				<DonationAmount />
+				<CustomFields />
 				<PrivateNote />
 				<PublicTestimony />
 				<ErrorMessage message={submitError} />
