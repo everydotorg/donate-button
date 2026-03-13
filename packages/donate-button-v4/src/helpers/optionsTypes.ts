@@ -1,4 +1,5 @@
 import deepMerge, {Options as DeepMergeOptions} from 'deepmerge';
+import {DonateFlowCustomization} from 'src/components/widget/types/DonateFlowCustomization';
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {
 	AvailablePaymentMethods,
@@ -6,6 +7,7 @@ import {
 	PaymentMethod
 } from 'src/components/widget/types/PaymentMethod';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
+import {customizationToWidgetConfig} from 'src/helpers/customizationToWidgetConfig';
 import getScriptParameters from 'src/helpers/getScriptParameters';
 
 const PREVIEW_MODE_PARAM = 'previewMode';
@@ -28,23 +30,36 @@ const DEEP_MERGE_OPTIONS: DeepMergeOptions = {
 	arrayMerge: (_, sourceArray) => sourceArray
 };
 
-export const mergeConfig = (options: Partial<WidgetConfig>): WidgetConfig => {
-	const filteredInputMethods = options.methods?.filter((method) =>
+export const mergeConfig = (
+	options: Partial<WidgetConfig>,
+	customization?: DonateFlowCustomization | null
+): WidgetConfig => {
+	const customizationConfig = customization
+		? customizationToWidgetConfig(customization)
+		: {};
+
+	// Determine methods: options > customization > defaults
+	const sourceMethods =
+		options.methods ?? customizationConfig.methods ?? DefaultPaymentMethods;
+
+	const filteredInputMethods = sourceMethods.filter((method) =>
 		AvailablePaymentMethods.includes(method)
 	);
 
-	const additionalMethods = options.showGiftCardOption
-		? [PaymentMethod.GIFT_CARD]
-		: [];
+	const additionalMethods =
+		options.showGiftCardOption ??
+		(customizationConfig as Partial<WidgetConfig>).showGiftCardOption
+			? [PaymentMethod.GIFT_CARD]
+			: [];
 
 	const methods = (
-		filteredInputMethods && filteredInputMethods.length > 0
+		filteredInputMethods.length > 0
 			? filteredInputMethods
 			: DefaultPaymentMethods
 	).concat(additionalMethods);
 
 	return deepMerge.all<WidgetConfig>(
-		[defaults, options, {methods}],
+		[defaults, customizationConfig, options, {methods}],
 		DEEP_MERGE_OPTIONS
 	);
 };
