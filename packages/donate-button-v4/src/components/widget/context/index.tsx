@@ -9,7 +9,10 @@ export const ContextProvider: FunctionComponent<{
 	options: Partial<WidgetConfig>;
 	hide: () => void;
 }> = ({options, hide, children}) => (
-	<NonprofitContextProvider nonprofitSlug={options.nonprofitSlug}>
+	<NonprofitContextProvider
+		nonprofitSlug={options.nonprofitSlug}
+		code={options.code}
+	>
 		<FundraiserContextProvider fundraiserSlug={options.fundraiserSlug}>
 			<ConfigContextProvider options={options}>
 				<WidgetContextProvider hide={hide}>{children}</WidgetContextProvider>
