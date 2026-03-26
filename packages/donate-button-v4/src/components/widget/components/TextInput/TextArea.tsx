@@ -12,7 +12,6 @@ interface TextAreaProps
 	extends JSXInternal.HTMLAttributes<HTMLTextAreaElement> {
 	containerClassName?: string;
 	inputClassName?: string;
-	containerOnClick?: () => void;
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -20,8 +19,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 		const inputRef = useRef<HTMLTextAreaElement>();
 		const {primaryColor} = useConfigContext();
 
-		const {containerClassName, inputClassName, containerOnClick, ...rest} =
-			props;
+		const {containerClassName, inputClassName, ...rest} = props;
 
 		return (
 			<div

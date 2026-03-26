@@ -43,8 +43,7 @@ const LargeFundraiserCard = ({fundraiser}: FundraiserCardProps) => {
 	const {
 		name: nonprofitName,
 		logoCloudinaryId,
-		coverImageCloudinaryId,
-		hasAdmin
+		coverImageCloudinaryId
 	} = useNonprofitOrError();
 	const logoUrl = getCloudinaryUrl(
 		logoCloudinaryId ?? LOGO_IMAGE_PLACEHOLDER_ID
@@ -78,17 +77,10 @@ const LargeFundraiserCard = ({fundraiser}: FundraiserCardProps) => {
 };
 
 const SmallFundraiserCard = ({fundraiser}: FundraiserCardProps) => {
-	const {
-		name: nonprofitName,
-		logoCloudinaryId,
-		coverImageCloudinaryId,
-		hasAdmin
-	} = useNonprofitOrError();
+	const {logoCloudinaryId} = useNonprofitOrError();
 	const logoUrl = getCloudinaryUrl(
 		logoCloudinaryId ?? LOGO_IMAGE_PLACEHOLDER_ID
 	);
-	const coverImageUrl =
-		coverImageCloudinaryId && getCloudinaryUrl(coverImageCloudinaryId);
 
 	return (
 		<GridCard className={smallFundraiserCardCss}>

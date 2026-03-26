@@ -5,7 +5,7 @@ import {STRIPE_API_VERSION, STRIPE_PUBLIC_KEY} from 'src/constants/stripe';
 
 declare global {
 	interface Window {
-		ApplePaySession: any;
+		ApplePaySession: unknown;
 	}
 }
 

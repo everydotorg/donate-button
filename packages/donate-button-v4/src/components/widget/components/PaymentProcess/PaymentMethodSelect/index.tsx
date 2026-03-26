@@ -1,5 +1,5 @@
 import React from 'preact/compat';
-import {useMemo, useState} from 'preact/hooks';
+import {useMemo} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {IconForPaymentMethod} from 'src/components/widget/components/PaymentProcess/PaymentMethodSelect/IconForPaymentMethod';
 import {NameForPaymentMethod} from 'src/components/widget/components/PaymentProcess/PaymentMethodSelect/NameForPaymentMethod';
@@ -76,7 +76,13 @@ const usePaymentMethods = () => {
 					(a, b) =>
 						PaymentMethodsOrder.indexOf(a) - PaymentMethodsOrder.indexOf(b)
 				),
-		[methods, fixedFrequency, paymentRequestAvailable, previewMode]
+		[
+			methods,
+			fixedFrequency,
+			paymentRequestAvailable,
+			previewMode,
+			nonprofit?.metadata?.disabledPaymentFlowOptions
+		]
 	);
 
 	return filteredMethods;

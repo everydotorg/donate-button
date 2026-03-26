@@ -1,8 +1,5 @@
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
-import {
-	AvailablePaymentMethods,
-	PaymentMethod
-} from 'src/components/widget/types/PaymentMethod';
+import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
 import {
 	DonateUrlParameters,
 	UTM_QUERY_PARAM
@@ -53,7 +50,10 @@ function serializeParams(
 ) {
 	return Object.entries(params)
 		.filter(([, value]) => Boolean(value))
-		.map((entry) => entry.map((part) => encodeURIComponent(part!)).join('='))
+		.map(
+			([key, value]) =>
+				`${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`
+		)
 		.join('&');
 }
 
