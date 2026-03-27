@@ -15,7 +15,6 @@ type CheckboxProps = JSXInternal.HTMLAttributes<HTMLInputElement>;
 export const Checkbox: FunctionComponent<CheckboxProps> = ({
 	children,
 	checked,
-	className,
 	...rest
 }) => {
 	const {primaryColor} = useConfigContext();

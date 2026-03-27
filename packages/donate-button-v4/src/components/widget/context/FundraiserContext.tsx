@@ -18,7 +18,9 @@ export const FundraiserContext = createContext<FundraiserContextData>({
 	fundraiser: FundraiserFetching
 });
 
-export const FundraiserContextProvider: FunctionalComponent = ({children}) => {
+export const FundraiserContextProvider: FunctionalComponent<{
+	fundraiserSlug?: string;
+}> = ({children}) => {
 	const {fundraiserSlug, nonprofitSlug} = useConfigContext();
 	const [fundraiser, setFundraiser] =
 		useState<FundraiserContextData['fundraiser']>(FundraiserFetching);

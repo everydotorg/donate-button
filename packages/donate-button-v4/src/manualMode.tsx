@@ -106,7 +106,7 @@ export default function manualMode() {
 		Object.assign(options, {
 			openAt: optionsCopy.openAt ?? DEFAULT_HASH_OPEN_WIDGET
 		});
-		return (event: any) => {
+		return (event: Event) => {
 			event.preventDefault();
 			instanceOptions = optionsCopy;
 			showWidget();
