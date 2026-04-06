@@ -56,8 +56,18 @@ export async function getCustomization(nonprofitId: string, code?: string) {
 	const url = `${BASE_API_URL}/${nonprofitId}/customization${
 		code ? `?code=${code}` : ''
 	}`;
-	const response: DonateFlowCustomization = await fetch(url).then(
-		async (response) => response.json()
-	);
+	const response = await fetch(url).then(async (response) => {
+		const body = await response.text();
+
+		if (!body) {
+			return undefined;
+		}
+
+		try {
+			return JSON.parse(body) as DonateFlowCustomization;
+		} catch {
+			return undefined;
+		}
+	});
 	return response;
 }
