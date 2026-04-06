@@ -71,6 +71,25 @@ export const Frequency = () => {
 					<input
 						type="radio"
 						name="frequency"
+						id="yearly"
+						checked={frequency === DonationFrequency.Yearly}
+						value={DonationFrequency.Yearly}
+					/>
+					<label
+						className={inputLabelCss(primaryColor)}
+						id="frequency-yearly"
+						htmlFor="yearly"
+						onClick={() => {
+							setFrequency(DonationFrequency.Yearly);
+						}}
+					>
+						Yearly
+					</label>
+				</div>
+				<div className={inputItemCss(primaryColor)}>
+					<input
+						type="radio"
+						name="frequency"
 						id="monthly"
 						checked={frequency === DonationFrequency.Monthly}
 						value={DonationFrequency.Monthly}
@@ -83,7 +102,7 @@ export const Frequency = () => {
 							setFrequency(DonationFrequency.Monthly);
 						}}
 					>
-						Give Monthly
+						Monthly
 					</label>
 				</div>
 				<div className={inputItemCss(primaryColor)}>
