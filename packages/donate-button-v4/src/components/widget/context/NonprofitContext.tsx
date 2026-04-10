@@ -62,11 +62,18 @@ export const NonprofitContextProvider: FunctionalComponent<{
 				}
 			}
 
-			try {
-				const customizationResponse = await getCustomization(response.id, code);
-				setCustomization(customizationResponse);
-			} catch {
-				setCustomization(DonateFlowCustomizationFetchError);
+			if (code) {
+				try {
+					const customizationResponse = await getCustomization(
+						response.id,
+						code
+					);
+					setCustomization(customizationResponse);
+				} catch {
+					setCustomization(DonateFlowCustomizationFetchError);
+				}
+			} else {
+				setCustomization(undefined);
 			}
 		} catch {
 			setNonprofit(NonprofitFetchError);
