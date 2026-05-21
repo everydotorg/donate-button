@@ -4,11 +4,7 @@ import {
 	DonateUrlParameters,
 	UTM_QUERY_PARAM
 } from 'src/components/widget/types/UrlParams';
-import {
-	BASE_URL,
-	GIFT_CARD_ROUTE,
-	STAGING_BASE_URL
-} from 'src/constants/url';
+import {GIFT_CARD_ROUTE, getSiteUrl} from 'src/constants/url';
 
 const UTM_MEDIUM = 'donate-button-0.4'; // Update this if the major version changes
 const HASH = 'donate';
@@ -67,7 +63,7 @@ function getBaseUrl({
 	nonprofitSlug,
 	staging
 }: Pick<BaseUrlParams, 'nonprofitSlug' | 'fundraiserSlug' | 'staging'>) {
-	let baseUrl = (staging ? STAGING_BASE_URL : BASE_URL) + nonprofitSlug;
+	let baseUrl = getSiteUrl(staging) + nonprofitSlug;
 
 	if (fundraiserSlug) {
 		baseUrl += '/f/' + fundraiserSlug;
@@ -217,8 +213,7 @@ export function constructGiftCardUrl({
 		return `${baseUrl}?${parameters}#/${HASH}`;
 	}
 
-	const giftCardUrl =
-		(rest.staging ? STAGING_BASE_URL : BASE_URL) + GIFT_CARD_ROUTE;
+	const giftCardUrl = getSiteUrl(rest.staging) + GIFT_CARD_ROUTE;
 	const parameters = serializeParams({
 		nonprofitSlug: rest.nonprofitSlug
 	});
