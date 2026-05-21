@@ -39,7 +39,8 @@ export const useSubmitDonation = () => {
 		webhookToken,
 		redeemGiftCardInFlow,
 		designation,
-		requireShareInfo
+		requireShareInfo,
+		staging
 	} = useConfigContext();
 
 	const submitDonation = useCallback(
@@ -72,7 +73,8 @@ export const useSubmitDonation = () => {
 				partnerMetadata: config.partnerMetadata,
 				designation,
 				requireShareInfo,
-				customFieldResponses
+				customFieldResponses,
+				staging
 			};
 			switch (selectedPaymentMethod) {
 				case PaymentMethod.CRYPTO:
@@ -156,7 +158,8 @@ export const useSubmitDonation = () => {
 			designation,
 			requireShareInfo,
 			customization,
-			customFieldValues
+			customFieldValues,
+			staging
 		]
 	);
 

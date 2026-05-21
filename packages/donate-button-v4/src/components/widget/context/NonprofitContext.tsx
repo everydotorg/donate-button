@@ -30,7 +30,8 @@ export const NonprofitContext = createContext<NonprofitContextData>({
 export const NonprofitContextProvider: FunctionalComponent<{
 	nonprofitSlug?: string;
 	code?: string;
-}> = ({children, nonprofitSlug, code}) => {
+	staging?: boolean;
+}> = ({children, nonprofitSlug, code, staging}) => {
 	const [nonprofit, setNonprofit] =
 		useState<NonprofitContextData['nonprofit']>(NonprofitFetching);
 	const [parentNonprofit, setParentNonprofitNonprofit] =
@@ -45,7 +46,7 @@ export const NonprofitContextProvider: FunctionalComponent<{
 				throw new Error('No nonprofit slug provided');
 			}
 
-			const response = await getNonprofit(nonprofitSlug);
+			const response = await getNonprofit(nonprofitSlug, staging);
 			setNonprofit(response);
 
 			const parentNonprofitId =
@@ -55,7 +56,7 @@ export const NonprofitContextProvider: FunctionalComponent<{
 
 			if (parentNonprofitId) {
 				try {
-					const response = await getNonprofit(parentNonprofitId);
+					const response = await getNonprofit(parentNonprofitId, staging);
 					setParentNonprofitNonprofit(response);
 				} catch {
 					setParentNonprofitNonprofit(undefined);
@@ -66,7 +67,8 @@ export const NonprofitContextProvider: FunctionalComponent<{
 				try {
 					const customizationResponse = await getCustomization(
 						response.id,
-						code
+						code,
+						staging
 					);
 					setCustomization(customizationResponse);
 				} catch {
@@ -78,7 +80,7 @@ export const NonprofitContextProvider: FunctionalComponent<{
 		} catch {
 			setNonprofit(NonprofitFetchError);
 		}
-	}, [nonprofitSlug, code]);
+	}, [nonprofitSlug, code, staging]);
 
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises

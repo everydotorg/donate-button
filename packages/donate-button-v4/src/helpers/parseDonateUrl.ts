@@ -121,6 +121,8 @@ export function parseDonateUrl(
 		return;
 	}
 
+	const staging = url.hostname === 'staging.every.org' || undefined;
+
 	return removeEmptyValues({
 		fundraiserSlug,
 		nonprofitSlug,
@@ -138,6 +140,7 @@ export function parseDonateUrl(
 		requireShareInfo,
 		webhookToken,
 		partnerMetadata,
-		code
+		code,
+		staging
 	});
 }

@@ -1,7 +1,7 @@
 import {DonateFlowCustomization} from 'src/components/widget/types/DonateFlowCustomization';
 import {Fundraiser} from 'src/components/widget/types/Fundraiser';
 import {Nonprofit} from 'src/components/widget/types/Nonprofit';
-import {BASE_API_URL, BASE_COINGECKO_URL} from 'src/constants/url';
+import {BASE_API_URL, BASE_COINGECKO_URL, STAGING_API_URL} from 'src/constants/url';
 
 type NonprofitResponse = {
 	message: string;
@@ -17,9 +17,10 @@ type FundraiserResponse = {
 	};
 };
 
-export async function getNonprofit(nonprofitSlug: string) {
+export async function getNonprofit(nonprofitSlug: string, staging?: boolean) {
+	const apiUrl = staging ? STAGING_API_URL : BASE_API_URL;
 	const data: NonprofitResponse = await fetch(
-		`${BASE_API_URL}/${nonprofitSlug}`
+		`${apiUrl}/${nonprofitSlug}`
 	).then(async (response) => response.json());
 
 	return data.data.nonprofit;
@@ -27,9 +28,11 @@ export async function getNonprofit(nonprofitSlug: string) {
 
 export async function getFundraiser(
 	nonprofitSlug: string,
-	fundraiserSlug: string
+	fundraiserSlug: string,
+	staging?: boolean
 ) {
-	const url = `${BASE_API_URL}/${nonprofitSlug}/fundraiser/${fundraiserSlug}`;
+	const apiUrl = staging ? STAGING_API_URL : BASE_API_URL;
+	const url = `${apiUrl}/${nonprofitSlug}/fundraiser/${fundraiserSlug}`;
 	const data: FundraiserResponse = await fetch(url).then(async (response) =>
 		response.json()
 	);
@@ -52,8 +55,13 @@ export async function getCoingeckoRate(coingeckoId: string) {
 	return (data as CoingeckoData).market_data.current_price.usd;
 }
 
-export async function getCustomization(nonprofitId: string, code?: string) {
-	const url = `${BASE_API_URL}/${nonprofitId}/customization${
+export async function getCustomization(
+	nonprofitId: string,
+	code?: string,
+	staging?: boolean
+) {
+	const apiUrl = staging ? STAGING_API_URL : BASE_API_URL;
+	const url = `${apiUrl}/${nonprofitId}/customization${
 		code ? `?code=${code}` : ''
 	}`;
 	const response = await fetch(url).then(async (response) => {

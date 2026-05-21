@@ -4,7 +4,11 @@ import {
 	DonateUrlParameters,
 	UTM_QUERY_PARAM
 } from 'src/components/widget/types/UrlParams';
-import {BASE_URL, GIFT_CARD_URL} from 'src/constants/url';
+import {
+	BASE_URL,
+	GIFT_CARD_ROUTE,
+	STAGING_BASE_URL
+} from 'src/constants/url';
 
 const UTM_MEDIUM = 'donate-button-0.4'; // Update this if the major version changes
 const HASH = 'donate';
@@ -23,6 +27,7 @@ interface BaseUrlParams {
 	designation?: string;
 	requireShareInfo?: boolean;
 	customFieldResponses?: string;
+	staging?: boolean;
 }
 
 interface DonateUrlParams extends BaseUrlParams {
@@ -59,9 +64,10 @@ function serializeParams(
 
 function getBaseUrl({
 	fundraiserSlug,
-	nonprofitSlug
-}: Pick<BaseUrlParams, 'nonprofitSlug' | 'fundraiserSlug'>) {
-	let baseUrl = BASE_URL + nonprofitSlug;
+	nonprofitSlug,
+	staging
+}: Pick<BaseUrlParams, 'nonprofitSlug' | 'fundraiserSlug' | 'staging'>) {
+	let baseUrl = (staging ? STAGING_BASE_URL : BASE_URL) + nonprofitSlug;
 
 	if (fundraiserSlug) {
 		baseUrl += '/f/' + fundraiserSlug;
@@ -211,9 +217,11 @@ export function constructGiftCardUrl({
 		return `${baseUrl}?${parameters}#/${HASH}`;
 	}
 
+	const giftCardUrl =
+		(rest.staging ? STAGING_BASE_URL : BASE_URL) + GIFT_CARD_ROUTE;
 	const parameters = serializeParams({
 		nonprofitSlug: rest.nonprofitSlug
 	});
 
-	return `${GIFT_CARD_URL}?${parameters}`;
+	return `${giftCardUrl}?${parameters}`;
 }

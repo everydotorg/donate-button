@@ -1,5 +1,8 @@
 export const BASE_URL = 'https://www.every.org/';
 export const BASE_API_URL = 'https://partners.every.org/v0.2/nonprofit';
+
+export const STAGING_BASE_URL = 'https://staging.every.org/';
+export const STAGING_API_URL = 'https://partners-staging.every.org/v0.2/nonprofit';
 export const BASE_CLOUDINARY_URL =
 	'https://res.cloudinary.com/everydotorg/image/upload/';
 export const BASE_COINGECKO_URL = 'https://api.coingecko.com/api/v3';

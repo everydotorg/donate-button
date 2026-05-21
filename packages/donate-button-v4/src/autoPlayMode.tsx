@@ -114,7 +114,9 @@ function createButton({element, ...options}: CreateButtonProps) {
 }
 
 function findAndReplaceLinks() {
-	const links = document.querySelectorAll("*[href^='https://www.every.org/']");
+	const links = document.querySelectorAll(
+		"*[href^='https://www.every.org/'], *[href^='https://staging.every.org/']"
+	);
 
 	links.forEach((link) => {
 		const urlString = link.getAttribute('href');

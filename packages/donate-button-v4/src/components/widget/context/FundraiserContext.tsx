@@ -21,7 +21,7 @@ export const FundraiserContext = createContext<FundraiserContextData>({
 export const FundraiserContextProvider: FunctionalComponent<{
 	fundraiserSlug?: string;
 }> = ({children}) => {
-	const {fundraiserSlug, nonprofitSlug} = useConfigContext();
+	const {fundraiserSlug, nonprofitSlug, staging} = useConfigContext();
 	const [fundraiser, setFundraiser] =
 		useState<FundraiserContextData['fundraiser']>(FundraiserFetching);
 
@@ -32,12 +32,16 @@ export const FundraiserContextProvider: FunctionalComponent<{
 		}
 
 		try {
-			const response = await getFundraiser(nonprofitSlug, fundraiserSlug);
+			const response = await getFundraiser(
+				nonprofitSlug,
+				fundraiserSlug,
+				staging
+			);
 			setFundraiser(response);
 		} catch {
 			setFundraiser(FundraiserFetchError);
 		}
-	}, [nonprofitSlug, fundraiserSlug]);
+	}, [nonprofitSlug, fundraiserSlug, staging]);
 
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
