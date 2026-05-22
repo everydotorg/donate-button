@@ -2,7 +2,8 @@ export const BASE_URL = 'https://www.every.org/';
 export const BASE_API_URL = 'https://partners.every.org/v0.2/nonprofit';
 
 export const STAGING_BASE_URL = 'https://staging.every.org/';
-export const STAGING_API_URL = 'https://partners-staging.every.org/v0.2/nonprofit';
+export const STAGING_API_URL =
+	'https://partners-staging.every.org/v0.2/nonprofit';
 
 export const getSiteUrl = (staging?: boolean) =>
 	staging ? STAGING_BASE_URL : BASE_URL;
