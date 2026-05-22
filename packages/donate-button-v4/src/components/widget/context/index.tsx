@@ -12,6 +12,7 @@ export const ContextProvider: FunctionComponent<{
 	<NonprofitContextProvider
 		nonprofitSlug={options.nonprofitSlug}
 		code={options.code}
+		staging={options.staging}
 	>
 		<FundraiserContextProvider fundraiserSlug={options.fundraiserSlug}>
 			<ConfigContextProvider options={options}>

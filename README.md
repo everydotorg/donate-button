@@ -30,6 +30,8 @@ The below code will use Every.org styling, because the `a` tag has the `data-eve
 </html>
 ```
 
+Note that you can use the donate button in our staging environment by using a staging link like: https://staging.every.org/ofsds#/donate
+
 ## Configure
 
 To configure your button manually, add `?explicit=1` to the script `src`
@@ -68,6 +70,8 @@ Here is an example html file with a manual configuration.
   </body>
 </html>
 ```
+
+Note that you can use the donate button in our staging environment by adding the `staging: true` parameter to the `create*` calls.
 
 ### Widget
 

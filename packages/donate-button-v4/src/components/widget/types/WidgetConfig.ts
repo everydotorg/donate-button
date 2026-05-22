@@ -57,4 +57,6 @@ export interface WidgetConfig {
 	previewMode?: boolean;
 
 	code?: string;
+
+	staging?: boolean;
 }

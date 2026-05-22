@@ -8,8 +8,10 @@ import {
 	UTM_QUERY_PARAM
 } from 'src/components/widget/types/UrlParams';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
+import {STAGING_BASE_URL} from 'src/constants/url';
 
 const MAX_AMOUNT_SUGGESTIONS = 5;
+const STAGING_HOSTNAME = new URL(STAGING_BASE_URL).hostname;
 
 /**
  * Just for backwards compatibility
@@ -121,6 +123,8 @@ export function parseDonateUrl(
 		return;
 	}
 
+	const staging = url.hostname === STAGING_HOSTNAME || undefined;
+
 	return removeEmptyValues({
 		fundraiserSlug,
 		nonprofitSlug,
@@ -138,6 +142,7 @@ export function parseDonateUrl(
 		requireShareInfo,
 		webhookToken,
 		partnerMetadata,
-		code
+		code,
+		staging
 	});
 }

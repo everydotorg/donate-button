@@ -1,6 +1,7 @@
 import {render as preactRender} from 'preact';
 import EmbedButton from 'src/components/embed-button';
 import {WidgetConfig} from 'src/components/widget/types/WidgetConfig';
+import {BASE_URL, STAGING_BASE_URL} from 'src/constants/url';
 import {parseDonateUrl} from 'src/helpers/parseDonateUrl';
 import shouldApplyEveryStyleForAllLinks from 'src/helpers/shouldApplyEveryStyleForAllLinks';
 import {loadFonts} from 'src/loadFonts';
@@ -114,7 +115,9 @@ function createButton({element, ...options}: CreateButtonProps) {
 }
 
 function findAndReplaceLinks() {
-	const links = document.querySelectorAll("*[href^='https://www.every.org/']");
+	const links = document.querySelectorAll(
+		`*[href^='${BASE_URL}'], *[href^='${STAGING_BASE_URL}']`
+	);
 
 	links.forEach((link) => {
 		const urlString = link.getAttribute('href');

@@ -23,6 +23,8 @@ export interface DonateButtonOptions {
 	readonly noExit?: boolean;
 
 	url?: string;
+
+	staging?: boolean;
 }
 export interface EmbedButtonOptions extends DonateButtonOptions {
 	readonly label?: string;

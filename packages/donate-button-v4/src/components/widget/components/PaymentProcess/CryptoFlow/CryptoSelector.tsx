@@ -1,4 +1,5 @@
 import {filter as fuzzyFilter} from 'fuzzy';
+import {getSiteUrl} from 'src/constants/url';
 import {useRef, useState} from 'preact/hooks';
 import {Fragment} from 'preact/jsx-runtime';
 import {linkCss} from 'src/components/widget/components/FundraiserLink/styles';
@@ -102,8 +103,9 @@ const CryptoSelectorDropDownItem = ({
 const CryptoSupprotLink = () => {
 	const nonprofit = useNonprofitOrError();
 
-	const {primaryColor} = useConfigContext();
-	const cryptoSupportBody = `Contents: I would like to make a crypto donation to support https://www.every.org/${nonprofit.primarySlug}.\n\nMy name:\nToken name:\nToken symbol:\nToken quantity:\n\nPlease reply back with an address where I can donate, as this is worth over $100,000 USD.`;
+	const {primaryColor, staging} = useConfigContext();
+	const baseUrl = getSiteUrl(staging);
+	const cryptoSupportBody = `Contents: I would like to make a crypto donation to support ${baseUrl}${nonprofit.primarySlug}.\n\nMy name:\nToken name:\nToken symbol:\nToken quantity:\n\nPlease reply back with an address where I can donate, as this is worth over $100,000 USD.`;
 
 	return (
 		<a
