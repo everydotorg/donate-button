@@ -147,6 +147,8 @@ function findAndReplaceLinks() {
 			} else {
 				link.addEventListener('click', (event) => {
 					event.preventDefault();
+					event.stopPropagation();
+					event.stopImmediatePropagation();
 					widget.show();
 				});
 			}

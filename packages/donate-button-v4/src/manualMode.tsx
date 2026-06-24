@@ -108,6 +108,8 @@ export default function manualMode() {
 		});
 		return (event: Event) => {
 			event.preventDefault();
+			event.stopPropagation();
+			event.stopImmediatePropagation();
 			instanceOptions = optionsCopy;
 			showWidget();
 		};

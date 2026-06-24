@@ -40,6 +40,8 @@ const EmbedButton = ({
 				onClick
 					? (event) => {
 							event.preventDefault();
+							event.stopPropagation();
+							event.stopImmediatePropagation();
 							onClick();
 					  }
 					: undefined
