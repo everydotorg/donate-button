@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -73,20 +74,15 @@ export default defineConfig(({command}) => {
 				? `https://${vercelBaseUrl}/${VERSION_SLUG}/`
 				: `https://assets.every.org/${VERSION_PATH}/`
 			: '/';
-	if (command === 'build') {
-		console.log('Building for', base);
-	}
 
 	return {
 		base,
-		publicDir: false,
 		plugins: [preact(), demoPage(base)],
 		resolve: {
 			alias: {src: path.join(packageDir, 'src')}
 		},
 		build: {
 			outDir: VERSION_PATH,
-			emptyOutDir: true,
 			sourcemap: true,
 			target: 'es2015',
 			// Keep icons as separate files served from `base`, as preact-cli did.
@@ -96,7 +92,10 @@ export default defineConfig(({command}) => {
 				output: {
 					format: 'iife',
 					entryFileNames: 'index.js',
-					assetFileNames: '[name]-[hash][extname]'
+					// Keep the names preact-cli's file-loader gave: the MD4 digest of
+					// the contents. Node only provides MD4 with --openssl-legacy-provider.
+					assetFileNames: ({source}) =>
+						`${crypto.createHash('md4').update(source).digest('hex')}[extname]`
 				}
 			}
 		}
