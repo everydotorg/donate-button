@@ -35,16 +35,13 @@ function demoPage(base) {
 		},
 		transformIndexHtml: {
 			order: 'pre',
-			handler: (_html, ctx) =>
+			handler: (html, ctx) =>
 				ctx.server
-					? [
-							{
-								tag: 'script',
-								attrs: {type: 'module', src: '/src/index.tsx'},
-								injectTo: 'head'
-							}
-					  ]
-					: []
+					? html.replace(
+							'</head>',
+							'<script type="module" src="/src/index.tsx"></script></head>'
+					  )
+					: html
 		},
 		generateBundle() {
 			const html = fs
