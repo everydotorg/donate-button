@@ -9,6 +9,7 @@
 	"scripts": {
 		"tsc": "tsc",
 		"test": "echo 'no tests'",
+		"postinstall": "node ../../node_modules/patch-package --patch-dir patches",
 		"build": "preact build --no-prerender --no-sw && yarn postbuild",
 		"postbuild": "cp dist/donate-button/0.4/index.js dist/donate-button/0.4/button.js",
 		"serve": "preact serve",

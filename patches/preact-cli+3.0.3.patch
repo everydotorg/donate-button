@@ -1,0 +1,18 @@
+diff --git a/node_modules/preact-cli/lib/lib/webpack/transform-config.js b/node_modules/preact-cli/lib/lib/webpack/transform-config.js
+index ac5a7ae..c350920 100644
+--- a/node_modules/preact-cli/lib/lib/webpack/transform-config.js
++++ b/node_modules/preact-cli/lib/lib/webpack/transform-config.js
+@@ -107,7 +107,12 @@ module.exports = async function(env, webpackConfig, isServer = false) {
+ 		);
+ 	}
+ 
+-	const m = require('esm')(module)(myConfig);
++	let m;
++	try {
++		m = require(myConfig);
++	} catch (requireError) {
++		m = require('esm')(module)(myConfig);
++	}
+ 
+ 	const transformers = parseConfig((m && m.default) || m);
+ 

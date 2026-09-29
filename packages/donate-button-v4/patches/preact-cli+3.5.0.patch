@@ -1,0 +1,31 @@
+diff --git a/node_modules/preact-cli/src/lib/webpack/transform-config.js b/node_modules/preact-cli/src/lib/webpack/transform-config.js
+index a36ae64..00225ac 100644
+--- a/node_modules/preact-cli/src/lib/webpack/transform-config.js
++++ b/node_modules/preact-cli/src/lib/webpack/transform-config.js
+@@ -107,14 +107,18 @@ module.exports = async function (env, webpackConfig, isServer = false) {
+
+ 	let m;
+ 	try {
+-		m = esmImport(cliConfig);
+-	} catch (error) {
+-		warn(
+-			`Failed to load preact-cli config file, using default!\n${
+-				env.verbose ? error.stack : error.message
+-			}`
+-		);
+-		return;
++		m = require(cliConfig);
++	} catch (requireError) {
++		try {
++			m = esmImport(cliConfig);
++		} catch (error) {
++			warn(
++				`Failed to load preact-cli config file, using default!\n${
++					env.verbose ? error.stack : error.message
++				}`
++			);
++			return;
++		}
+ 	}
+
+ 	const transformers = parseConfig((m && m.default) || m);
