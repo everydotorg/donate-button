@@ -17,7 +17,7 @@ const UNSUPPORTED_METHODS = [
 ];
 UNSUPPORTED_METHODS.forEach((method) => {
 	test(`handler returns 404 with request method ${method}`, async (t) => {
-		const url = 'https://assets.every.org/donate-button/someClientId.js';
+		const url = 'https://assets.test/donate-button/someClientId.js';
 		const requestFixture = {method, url};
 		const request =
 			method === 'CONNECT' || method === 'TRACE'
@@ -37,7 +37,7 @@ test('Saves and fetches CURRENT_VERSION if no client found', async (t) => {
 
 	const clientId = 'nonexistentClientId';
 	const result = await handleRequest(
-		new Request(`https://assets.every.org/donate-button/${clientId}/bundle.js`),
+		new Request(`https://assets.test/donate-button/${clientId}/bundle.js`),
 		mockKv as unknown as KVNamespace,
 		mockFetch
 	);
@@ -81,7 +81,7 @@ test('Fetches proper version from kv if client found', async (t) => {
 
 	const clientId = 'someClientId';
 	const result = await handleRequest(
-		new Request(`https://assets.every.org/donate-button/${clientId}/bundle.js`),
+		new Request(`https://assets.test/donate-button/${clientId}/bundle.js`),
 		mockKv as unknown as KVNamespace,
 		mockFetch
 	);
