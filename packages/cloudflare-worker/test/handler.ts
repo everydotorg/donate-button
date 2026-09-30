@@ -18,9 +18,10 @@ const UNSUPPORTED_METHODS = [
 UNSUPPORTED_METHODS.forEach((method) => {
 	test(`handler returns 404 with request method ${method}`, async (t) => {
 		const url = 'https://assets.every.org/donate-button/someClientId.js';
+		const requestFixture = {method, url};
 		const request =
 			method === 'CONNECT' || method === 'TRACE'
-				? ({method, url} as Request) // eslint-disable-line @typescript-eslint/consistent-type-assertions
+				? (requestFixture as Request)
 				: new Request(url, {method});
 		const result = await handleRequest(request, {} as KVNamespace, async () =>
 			Promise.resolve(new Response())
