@@ -18,10 +18,10 @@ const UNSUPPORTED_METHODS = [
 UNSUPPORTED_METHODS.forEach((method) => {
 	test(`handler returns 404 with request method ${method}`, async (t) => {
 		const url = 'https://assets.every.org.test/donate-button/someClientId.js';
-		const requestFixture = {method, url};
+		const requestFake = {method, url};
 		const request =
 			method === 'CONNECT' || method === 'TRACE'
-				? (requestFixture as Request)
+				? (requestFake as Request)
 				: new Request(url, {method});
 		const result = await handleRequest(request, {} as KVNamespace, async () =>
 			Promise.resolve(new Response())
