@@ -1,5 +1,5 @@
 const config = {
-	extensions: ['ts', 'js'],
+	extensions: ['ts'],
 	require: ['ts-node/register', 'tsconfig-paths/register']
 };
 export default config;
