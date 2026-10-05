@@ -8,7 +8,7 @@
 	"source": "components/hello-world/index.js",
 	"scripts": {
 		"tsc": "tsc",
-		"test": "echo 'no tests'",
+		"test": "node --test test/*.test.cjs",
 		"build": "NODE_OPTIONS=--openssl-legacy-provider vite build && yarn postbuild",
 		"postbuild": "cp dist/donate-button/0.4/index.js dist/donate-button/0.4/button.js",
 		"serve": "vite preview",
