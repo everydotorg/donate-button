@@ -26,25 +26,10 @@ function demoPage(base) {
 	return {
 		name: 'donate-button-demo-page',
 		configurePreviewServer(server) {
-			// Keep deployed HTML intact; only preview loads the local build.
-			const html = fs
-				.readFileSync(
-					path.resolve(
-						server.config.root,
-						server.config.build.outDir,
-						'index.html'
-					),
-					'utf8'
-				)
-				.replace(
-					/<script type="text\/javascript" src="[^"]+">/,
-					'<script type="text/javascript" src="/index.js">'
-				);
-			server.middlewares.use((req, res, next) => {
+			server.middlewares.use((req, _res, next) => {
 				const pathname = req.url?.split('?')[0];
 				if (
-					!['GET', 'HEAD'].includes(req.method) ||
-					![
+					[
 						'/',
 						'/index.html',
 						`/${VERSION_SLUG}`,
@@ -52,10 +37,9 @@ function demoPage(base) {
 						`/${VERSION_SLUG}/index.html`
 					].includes(pathname)
 				) {
-					return next();
+					req.url = '/preview.html';
 				}
-				res.setHeader('Content-Type', 'text/html; charset=utf-8');
-				res.end(html);
+				next();
 			});
 		},
 		configureServer(server) {
@@ -77,13 +61,17 @@ function demoPage(base) {
 					: html
 		},
 		generateBundle() {
-			const html = fs
-				.readFileSync(HTML_TEMPLATE, 'utf8')
-				.replace(
+			const template = fs.readFileSync(HTML_TEMPLATE, 'utf8');
+			for (const [fileName, scriptUrl] of [
+				['index.html', `${base}index.js`],
+				['preview.html', '/index.js']
+			]) {
+				const html = template.replace(
 					'</head>',
-					`<script type="text/javascript" src="${base}index.js"></script></head>`
+					`<script type="text/javascript" src="${scriptUrl}"></script></head>`
 				);
-			this.emitFile({type: 'asset', fileName: 'index.html', source: html});
+				this.emitFile({type: 'asset', fileName, source: html});
+			}
 			// preact-cli copied src/assets verbatim; keep those URLs available.
 			for (const file of fs.readdirSync(STATIC_ASSETS_DIR)) {
 				this.emitFile({
