@@ -25,6 +25,39 @@ const STATIC_ASSETS_DIR = path.join(packageDir, 'src/assets');
 function demoPage(base) {
 	return {
 		name: 'donate-button-demo-page',
+		configurePreviewServer(server) {
+			// Keep deployed HTML intact; only preview loads the local build.
+			const html = fs
+				.readFileSync(
+					path.resolve(
+						server.config.root,
+						server.config.build.outDir,
+						'index.html'
+					),
+					'utf8'
+				)
+				.replace(
+					/<script type="text\/javascript" src="[^"]+">/,
+					'<script type="text/javascript" src="/index.js">'
+				);
+			server.middlewares.use((req, res, next) => {
+				const pathname = req.url?.split('?')[0];
+				if (
+					!['GET', 'HEAD'].includes(req.method) ||
+					![
+						'/',
+						'/index.html',
+						`/${VERSION_SLUG}`,
+						`/${VERSION_SLUG}/`,
+						`/${VERSION_SLUG}/index.html`
+					].includes(pathname)
+				) {
+					return next();
+				}
+				res.setHeader('Content-Type', 'text/html; charset=utf-8');
+				res.end(html);
+			});
+		},
 		configureServer(server) {
 			server.middlewares.use((req, _res, next) => {
 				if (req.url === '/' || req.url === '/index.html') {
