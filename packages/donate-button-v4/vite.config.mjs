@@ -25,23 +25,6 @@ const STATIC_ASSETS_DIR = path.join(packageDir, 'src/assets');
 function demoPage(base) {
 	return {
 		name: 'donate-button-demo-page',
-		configurePreviewServer(server) {
-			server.middlewares.use((req, _res, next) => {
-				const pathname = req.url?.split('?')[0];
-				if (
-					[
-						'/',
-						'/index.html',
-						`/${VERSION_SLUG}`,
-						`/${VERSION_SLUG}/`,
-						`/${VERSION_SLUG}/index.html`
-					].includes(pathname)
-				) {
-					req.url = '/preview.html';
-				}
-				next();
-			});
-		},
 		configureServer(server) {
 			server.middlewares.use((req, _res, next) => {
 				if (req.url === '/' || req.url === '/index.html') {
