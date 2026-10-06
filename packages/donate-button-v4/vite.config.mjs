@@ -1,4 +1,5 @@
 import crypto from 'node:crypto';
+import {createRequire} from 'node:module';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
@@ -6,10 +7,9 @@ import preact from '@preact/preset-vite';
 import semver from 'semver';
 import {defineConfig} from 'vite';
 
-import packageJson from './package.json';
-
 const packageDir = path.dirname(fileURLToPath(import.meta.url));
 
+const packageJson = createRequire(import.meta.url)('./package.json');
 const VERSION = semver.parse(packageJson.version);
 const VERSION_SLUG =
 	VERSION.major === 0 ? `${VERSION.major}.${VERSION.minor}` : VERSION.major;
