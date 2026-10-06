@@ -1,14 +1,10 @@
 import crypto from 'node:crypto';
-import path from 'node:path';
-import {fileURLToPath} from 'node:url';
 
 import preact from '@preact/preset-vite';
 import semver from 'semver';
 import {defineConfig} from 'vite';
 
 import packageJson from './package.json' with {type: 'json'};
-
-const packageDir = path.dirname(fileURLToPath(import.meta.url));
 
 const VERSION = semver.parse(packageJson.version);
 const VERSION_SLUG =
@@ -22,7 +18,7 @@ export default defineConfig({
 		: '/',
 	plugins: [preact()],
 	resolve: {
-		alias: {src: path.join(packageDir, 'src')}
+		tsconfigPaths: true
 	},
 	build: {
 		outDir: `dist/donate-button/${VERSION_SLUG}`,
