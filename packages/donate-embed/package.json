@@ -1,0 +1,17 @@
+{
+	"name": "@everydotorg/donate-embed",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Loader script (embed.js) for the embedded every.org donate flow, published at https://embeds.every.org/embed.js",
+	"scripts": {
+		"build": "mkdir -p dist/donate-button && cp embed.js dist/donate-button/embed.js",
+		"lint": "prettier --check .",
+		"lint:fix": "prettier --write .",
+		"test": "echo 'no tests'"
+	},
+	"author": "Every.org",
+	"license": "MIT",
+	"devDependencies": {
+		"prettier": "^2.2.1"
+	}
+}

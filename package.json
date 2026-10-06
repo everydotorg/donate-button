@@ -3,8 +3,9 @@
     "build:donateButton": "yarn workspace @everydotorg/donate-button build && cp -r packages/donate-button/dist ./docs",
     "build:donateButtonNext": "yarn workspace @everydotorg/donate-button-next build && cp -r packages/donate-button-next/dist ./docs",
     "build:donateButtonV4": "yarn workspace @everydotorg/donate-button-v4 build && cp -r packages/donate-button-v4/dist ./docs",
-    "build": "yarn build:donateButtonV4",
-    "lint": "yarn workspace @everydotorg/donate-button-v4 lint",
+    "build:donateEmbed": "yarn workspace @everydotorg/donate-embed build && cp -r packages/donate-embed/dist ./docs",
+    "build": "yarn build:donateButtonV4 && yarn build:donateEmbed",
+    "lint": "yarn workspace @everydotorg/donate-button-v4 lint && yarn workspace @everydotorg/donate-embed lint",
     "lint:fix": "yarn workspaces @everydotorg/donate-button-v4 lint:fix",
     "test": "yarn concurrently -n 'api,website-next,common,partner-api' 'yarn workspace @everydotorg/donate-button-cloudflare-worker test'  'yarn workspace @everydotorg/donate-button test'  'yarn workspace @everydotorg/donate-button-next test' 'yarn workspace @everydotorg/donate-button-v4 test'",
     "postinstall": "patch-package"
@@ -14,7 +15,8 @@
     "packages/cloudflare-worker",
     "packages/donate-button",
     "packages/donate-button-next",
-    "packages/donate-button-v4"
+    "packages/donate-button-v4",
+    "packages/donate-embed"
   ],
   "devDependencies": {
     "concurrently": "^7.1.0",
