@@ -30,10 +30,7 @@ export default defineConfig({
 		target: 'es2015',
 		// Keep icons as separate files served from `base`, as preact-cli did.
 		assetsInlineLimit: 0,
-		rollupOptions: {
-			// The demo page (embeds.every.org/0.4); Vite swaps its /src/index.tsx
-			// script for the built index.js.
-			input: path.join(packageDir, 'index.html'),
+		rolldownOptions: {
 			output: {
 				format: 'iife',
 				entryFileNames: 'index.js',
