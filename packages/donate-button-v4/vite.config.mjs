@@ -1,42 +1,26 @@
 import crypto from 'node:crypto';
-import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 import preact from '@preact/preset-vite';
+import semver from 'semver';
 import {defineConfig} from 'vite';
 
+import packageJson from './package.json';
+
 const packageDir = path.dirname(fileURLToPath(import.meta.url));
-const packageJson = JSON.parse(
-	fs.readFileSync(path.join(packageDir, 'package.json'), 'utf8')
-);
 
-const [major, minor] = packageJson.version.split('.').map(Number);
-const VERSION_SLUG = major === 0 ? `${major}.${minor}` : `${major}`;
-
-// Production builds run on Vercel, which sets VERCEL_URL. The bundle runs on
-// third-party pages, so its icon URLs must point back to the deployment.
-const base = process.env.VERCEL_URL
-	? `https://${process.env.VERCEL_URL}/${VERSION_SLUG}/`
-	: '/';
-
-/** Emits the demo page (embeds.every.org/0.4) with the built script. */
-const demoPage = {
-	name: 'donate-button-demo-page',
-	generateBundle() {
-		const html = fs
-			.readFileSync(path.join(packageDir, 'index.html'), 'utf8')
-			.replace(
-				'<script type="module" src="/src/index.tsx"></script>',
-				`<script src="${base}index.js"></script>`
-			);
-		this.emitFile({type: 'asset', fileName: 'index.html', source: html});
-	}
-};
+const VERSION = semver.parse(packageJson.version);
+const VERSION_SLUG =
+	VERSION.major === 0 ? `${VERSION.major}.${VERSION.minor}` : VERSION.major;
 
 export default defineConfig({
-	base,
-	plugins: [preact(), demoPage],
+	// Production builds run on Vercel, which sets VERCEL_URL. The bundle runs on
+	// third-party pages, so its icon URLs must point back to the deployment.
+	base: process.env.VERCEL_URL
+		? `https://${process.env.VERCEL_URL}/${VERSION_SLUG}/`
+		: '/',
+	plugins: [preact()],
 	resolve: {
 		alias: {src: path.join(packageDir, 'src')}
 	},
@@ -47,7 +31,9 @@ export default defineConfig({
 		// Keep icons as separate files served from `base`, as preact-cli did.
 		assetsInlineLimit: 0,
 		rollupOptions: {
-			input: path.join(packageDir, 'src/index.tsx'),
+			// The demo page (embeds.every.org/0.4); Vite swaps its /src/index.tsx
+			// script for the built index.js.
+			input: path.join(packageDir, 'index.html'),
 			output: {
 				format: 'iife',
 				entryFileNames: 'index.js',
