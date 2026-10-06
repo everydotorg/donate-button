@@ -1,7 +1,5 @@
-import getCurrentScript from 'src/helpers/getCurrentScript';
-
 export default function getScriptParameters() {
-	const parametersString = getCurrentScript()
+	const parametersString = document.currentScript
 		?.getAttribute('src')
 		?.split('?')[1];
 	const parametersArray = parametersString

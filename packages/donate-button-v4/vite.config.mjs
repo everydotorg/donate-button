@@ -39,7 +39,7 @@ function demoPage(base) {
 				ctx.server
 					? html.replace(
 							'</head>',
-							'<script type="module" data-every-dev-script src="/src/index.tsx"></script></head>'
+							'<script type="module" src="/src/index.tsx"></script></head>'
 					  )
 					: html
 		},
