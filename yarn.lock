@@ -2305,7 +2305,7 @@ __metadata:
     identity-obj-proxy: ^3.0.0
     preact: ^10.17.1
     preact-render-to-string: ^5.1.12
-    prettier: ^2.2.1
+    prettier: ~3.0.0
     sass-loader: ^6.0.6
     semver: ^6.3.1
     style-loader: ^2.0.0
@@ -17992,6 +17992,15 @@ __metadata:
   bin:
     prettier: bin-prettier.js
   checksum: b49e409431bf129dd89238d64299ba80717b57ff5a6d1c1a8b1a28b590d998a34e083fa13573bc732bb8d2305becb4c9a4407f8486c81fa7d55100eb08263cf8
+  languageName: node
+  linkType: hard
+
+"prettier@npm:~3.0.0":
+  version: 3.0.3
+  resolution: "prettier@npm:3.0.3"
+  bin:
+    prettier: bin/prettier.cjs
+  checksum: e10b9af02b281f6c617362ebd2571b1d7fc9fb8a3bd17e371754428cda992e5e8d8b7a046e8f7d3e2da1dcd21aa001e2e3c797402ebb6111b5cd19609dd228e0
   languageName: node
   linkType: hard
 
