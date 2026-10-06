@@ -44,17 +44,13 @@ function demoPage(base) {
 					: html
 		},
 		generateBundle() {
-			const template = fs.readFileSync(HTML_TEMPLATE, 'utf8');
-			for (const [fileName, scriptUrl] of [
-				['index.html', `${base}index.js`],
-				['preview.html', '/index.js']
-			]) {
-				const html = template.replace(
+			const html = fs
+				.readFileSync(HTML_TEMPLATE, 'utf8')
+				.replace(
 					'</head>',
-					`<script type="text/javascript" src="${scriptUrl}"></script></head>`
+					`<script type="text/javascript" src="${base}index.js"></script></head>`
 				);
-				this.emitFile({type: 'asset', fileName, source: html});
-			}
+			this.emitFile({type: 'asset', fileName: 'index.html', source: html});
 			// preact-cli copied src/assets verbatim; keep those URLs available.
 			for (const file of fs.readdirSync(STATIC_ASSETS_DIR)) {
 				this.emitFile({

@@ -10,7 +10,6 @@
 		"tsc": "tsc",
 		"build": "NODE_OPTIONS=--openssl-legacy-provider vite build && yarn postbuild",
 		"postbuild": "cp dist/donate-button/0.4/index.js dist/donate-button/0.4/button.js",
-		"serve": "vite preview --open /preview.html",
 		"dev": "vite",
 		"lint": "eslint src --ext .ts,.tsx && prettier --check .",
 		"lint:fix": "eslint src --ext .ts,.tsx --fix && prettier --write ."
