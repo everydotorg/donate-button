@@ -56,7 +56,11 @@ export const Frequency = () => {
 			<fieldset className={fieldSetCss}>
 				<legend className={legendCss}>Frequency</legend>
 				<p>
-					{selectedPaymentMethod === PaymentMethod.DAF ? 'Chariot' : 'Venmo'}{' '}
+					{selectedPaymentMethod === PaymentMethod.DAF
+						? 'Chariot'
+						: selectedPaymentMethod === PaymentMethod.IRA
+						? 'IRA'
+						: 'Venmo'}{' '}
 					only supports one-time donations
 				</p>
 			</fieldset>

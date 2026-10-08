@@ -1,6 +1,6 @@
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 
-export const DafIcon = () => {
+export const IraIcon = () => {
 	const {primaryColor} = useConfigContext();
 	return (
 		<svg
@@ -17,7 +17,7 @@ export const DafIcon = () => {
 				strokeLinecap="round"
 			/>
 			<path
-				d="M13 16v-.667c0-.353-.21-.692-.586-.943C12.04 14.14 11.53 14 11 14H7c-.53 0-1.04.14-1.414.39-.375.25-.586.59-.586.943V16M9 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
+				d="M7 7v10M9.1 9H6.1a1.6 1.6 0 0 0 0 3.2h1.8a1.6 1.6 0 0 1 0 3.2H4.5M12 16.5h7.5"
 				stroke={primaryColor}
 				strokeWidth="1.5"
 				strokeLinecap="round"
