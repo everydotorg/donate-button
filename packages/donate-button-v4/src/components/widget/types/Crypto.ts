@@ -85,6 +85,7 @@ export enum CryptoCurrency {
 	LTC = 'LTC',
 	MANA = 'MANA',
 	MASK = 'MASK',
+	MATIC = 'MATIC',
 	MCO2 = 'MCO2',
 	MEW = 'MEW',
 	MKR = 'MKR',
@@ -148,7 +149,8 @@ export const DISABLED_TOKENS = [
 	CryptoCurrency.ALGO,
 	CryptoCurrency.MOB,
 	CryptoCurrency.XLM,
-	CryptoCurrency.BNB
+	CryptoCurrency.BNB,
+	CryptoCurrency.MATIC
 ];
 
 export const SharedCryptoCurrencyConfig: {
@@ -535,6 +537,13 @@ export const SharedCryptoCurrencyConfig: {
 		contractType: ContractType.ERC20,
 		decimalOffset: 18,
 		coingeckoId: 'mask-network'
+	},
+	[CryptoCurrency.MATIC]: {
+		displayName: 'Polygon',
+		abbreviation: 'MATIC',
+		contractType: ContractType.ERC20,
+		decimalOffset: 18,
+		coingeckoId: 'matic-network'
 	},
 	[CryptoCurrency.MCO2]: {
 		displayName: 'Moss Carbon Credit',
@@ -1000,6 +1009,7 @@ const WebsiteCryptoCurrencyConfig: {
 	[CryptoCurrency.LRC]: {iconCloudinaryId: 'crypto/sazpx9zyfsgbmprmfag9'},
 	[CryptoCurrency.MANA]: {iconCloudinaryId: 'crypto/ekefdi1p3jgoeb08oszc'},
 	[CryptoCurrency.MASK]: {iconCloudinaryId: 'crypto/ykwym7djaofb2q6lcn5n'},
+	[CryptoCurrency.MATIC]: {iconCloudinaryId: 'crypto/i1m8h4uzfijyjcfeeydg'},
 	[CryptoCurrency.MCO2]: {iconCloudinaryId: 'crypto/ysuyysfrukryu1jw2wrh'},
 	[CryptoCurrency.MEW]: {iconCloudinaryId: 'crypto/u5yaemgk4ajviyqriav6'},
 	[CryptoCurrency.MKR]: {iconCloudinaryId: 'crypto/tpdipvaap6m150j2hdec'},
