@@ -9,10 +9,9 @@
 	"scripts": {
 		"tsc": "tsc",
 		"test": "echo 'no tests'",
-		"build": "preact build --no-prerender --no-sw && yarn postbuild",
+		"build": "NODE_OPTIONS=--openssl-legacy-provider vite build && yarn postbuild",
 		"postbuild": "cp dist/donate-button/0.4/index.js dist/donate-button/0.4/button.js",
-		"serve": "preact serve",
-		"dev": "preact watch -c ./preact.config.js --no-prerender --no-sw",
+		"dev": "vite",
 		"lint": "eslint src --ext .ts,.tsx && prettier --check .",
 		"lint:fix": "eslint src --ext .ts,.tsx --fix && prettier --write ."
 	},
@@ -31,6 +30,7 @@
 		"@babel/preset-env": "^7.12.1",
 		"@babel/preset-stage-1": "^7.8.3",
 		"@babel/preset-typescript": "^7.13.0",
+		"@preact/preset-vite": "^2.10.6",
 		"@testing-library/react": "^11.2.5",
 		"@types/big.js": "^6.2.2",
 		"@typescript-eslint/eslint-plugin": "^5",
@@ -45,16 +45,16 @@
 		"eslint-plugin-react": "^7.22.0",
 		"eslint-plugin-react-hooks": "^4.2.0",
 		"identity-obj-proxy": "^3.0.0",
-		"preact-cli": "^3.5.0",
 		"preact-render-to-string": "^5.1.12",
-		"prettier": "^2.2.1",
+		"prettier": "~3.0.0",
 		"sass-loader": "^6.0.6",
+		"semver": "^6.3.1",
 		"style-loader": "^2.0.0",
 		"to-string-loader": "^1.1.6",
 		"ts-node": "^9.1.1",
 		"tsconfig-paths": "^3.9.0",
-		"tsconfig-paths-webpack-plugin": "^4.1.0",
-		"typescript": "^4.1.3"
+		"typescript": "^4.1.3",
+		"vite": "^8.3.1"
 	},
 	"dependencies": {
 		"@stripe/stripe-js": "^1.53.0",
