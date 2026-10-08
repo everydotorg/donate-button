@@ -142,6 +142,13 @@ export function getFeeDescriptionBody(
 					{getNfgDisclaimer(nonprofit)}
 				</Fragment>
 			);
+		case PaymentMethod.IRA:
+			return (
+				<Fragment>
+					<p>We do not charge any fees to accept IRA gifts.</p>
+					{getNfgDisclaimer(nonprofit)}
+				</Fragment>
+			);
 		default:
 			return (
 				<Fragment>

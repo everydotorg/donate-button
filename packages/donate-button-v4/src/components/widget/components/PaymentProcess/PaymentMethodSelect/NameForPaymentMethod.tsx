@@ -16,7 +16,8 @@ const NameForPaymentMethodMap: {
 	[PaymentMethod.GIFT_CARD]: 'Gift card',
 	[PaymentMethod.CRYPTO]: 'Crypto',
 	[PaymentMethod.STOCKS]: 'Stocks',
-	[PaymentMethod.DAF]: 'DAF'
+	[PaymentMethod.DAF]: 'DAF',
+	[PaymentMethod.IRA]: 'IRA'
 };
 
 function getNameForPaymentMethod(

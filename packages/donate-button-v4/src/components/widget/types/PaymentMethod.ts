@@ -7,14 +7,16 @@ export enum PaymentMethod {
 	CRYPTO = 'crypto',
 	STOCKS = 'stocks',
 	DAF = 'daf',
-	GIFT_CARD = 'gift'
+	GIFT_CARD = 'gift',
+	IRA = 'ira'
 }
 
 export const OneTimeFrequencyMethods = [
 	PaymentMethod.VENMO,
 	PaymentMethod.DAF,
 	PaymentMethod.CRYPTO,
-	PaymentMethod.STOCKS
+	PaymentMethod.STOCKS,
+	PaymentMethod.IRA
 ];
 
 export const AvailablePaymentMethods = Object.values(PaymentMethod);
@@ -34,5 +36,6 @@ export const PaymentMethodsOrder = [
 	PaymentMethod.DAF,
 	PaymentMethod.VENMO,
 	PaymentMethod.STOCKS,
-	PaymentMethod.PAYMENT_REQUEST
+	PaymentMethod.PAYMENT_REQUEST,
+	PaymentMethod.IRA
 ];
