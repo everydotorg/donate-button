@@ -17,14 +17,10 @@ const UNSUPPORTED_METHODS = [
 ];
 UNSUPPORTED_METHODS.forEach((method) => {
 	test(`handler returns 404 with request method ${method}`, async (t) => {
-		const url = 'https://assets.every.org.test/donate-button/someClientId.js';
-		const requestFake = {method, url};
-		const request =
-			method === 'CONNECT' || method === 'TRACE'
-				? (requestFake as Request)
-				: new Request(url, {method});
-		const result = await handleRequest(request, {} as KVNamespace, async () =>
-			Promise.resolve(new Response())
+		const result = await handleRequest(
+			new Request('/donate-button/someClientId.js', {method}),
+			{} as KVNamespace,
+			async () => Promise.resolve(new Response())
 		);
 		t.is(result.status, 404, 'Response returned 404 status');
 	});
@@ -37,10 +33,8 @@ test('Saves and fetches CURRENT_VERSION if no client found', async (t) => {
 
 	const clientId = 'nonexistentClientId';
 	const result = await handleRequest(
-		new Request(
-			`https://assets.every.org.test/donate-button/${clientId}/bundle.js`
-		),
-		mockKv as unknown as KVNamespace,
+		new Request(`/donate-button/${clientId}/bundle.js`, {method: 'GET'}),
+		(mockKv as unknown) as KVNamespace,
 		mockFetch
 	);
 
@@ -83,10 +77,8 @@ test('Fetches proper version from kv if client found', async (t) => {
 
 	const clientId = 'someClientId';
 	const result = await handleRequest(
-		new Request(
-			`https://assets.every.org.test/donate-button/${clientId}/bundle.js`
-		),
-		mockKv as unknown as KVNamespace,
+		new Request(`/donate-button/${clientId}/bundle.js`, {method: 'GET'}),
+		(mockKv as unknown) as KVNamespace,
 		mockFetch
 	);
 	t.true(mockKv.get.calledOnce, 'Got config from KV oncewith correct key');
