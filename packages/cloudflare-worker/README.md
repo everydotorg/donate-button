@@ -32,8 +32,7 @@ Feel free to make pull requests that update how this code works.
 
 ### 🧪 Testing
 
-Run `yarn test` to run the test suite. It mocks the service-worker context that
-Cloudflare emulates to allow testing locally.
+Run `yarn test` to run the handler tests.
 
 ### ✏️ Linting
 
@@ -55,4 +54,4 @@ permission.
 
 ## ⚠️ Caveats
 
-The `service-worker-mock` used by the tests is not a perfect representation of the Cloudflare Workers runtime. It is a general approximation. We recommend that you test end to end with `wrangler dev` in addition to a [staging environment](https://developers.cloudflare.com/workers/tooling/wrangler/configuration/environments/) to test things before deploying.
+The handler tests use Node's native web APIs, which do not fully represent the Cloudflare Workers runtime. We recommend that you test end to end with `wrangler dev` in addition to a [staging environment](https://developers.cloudflare.com/workers/tooling/wrangler/configuration/environments/) to test things before deploying.
