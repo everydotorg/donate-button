@@ -23,7 +23,7 @@ export function getSubmitButtonText({
 		case PaymentMethod.PAYMENT_REQUEST:
 			return base + (paymentRequestIsApplePay ? 'Apple Pay' : 'Google Pay');
 		case PaymentMethod.DAF:
-			return base + 'Chariot';
+			return base + 'DAFpay';
 		case PaymentMethod.CRYPTO:
 			return base + (cryptoCurrency ?? 'crypto');
 		case PaymentMethod.GIFT_CARD:

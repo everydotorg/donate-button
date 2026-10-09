@@ -50,8 +50,8 @@ export const DafStartView = ({changeView}: DafFlowViewProps) => {
 				<SmallPaymentMethodSelect />
 				<h4>Instant DAF donation</h4>
 				<p>
-					We use Chariot to verify your account info and automatically initiate
-					a grant from your DAF, or you can get instructions for making the
+					We use DAFpay to verify your account info and automatically initiate a
+					grant from your DAF, or you can get instructions for making the
 					donation manually.
 				</p>
 				<button
