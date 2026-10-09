@@ -16,7 +16,7 @@ import {
 	PaymentMethod
 } from 'src/components/widget/types/PaymentMethod';
 
-export const Frequency = ({allowRecurring}: {allowRecurring?: boolean}) => {
+export const Frequency = () => {
 	const {
 		primaryColor,
 		frequency: fixedFrequency,
@@ -51,16 +51,13 @@ export const Frequency = ({allowRecurring}: {allowRecurring?: boolean}) => {
 		);
 	}
 
-	if (
-		!allowRecurring &&
-		OneTimeFrequencyMethods.includes(selectedPaymentMethod)
-	) {
+	if (OneTimeFrequencyMethods.includes(selectedPaymentMethod)) {
 		return (
 			<fieldset className={fieldSetCss}>
 				<legend className={legendCss}>Frequency</legend>
 				<p>
 					{selectedPaymentMethod === PaymentMethod.DAF
-						? 'Chariot'
+						? 'DAF'
 						: selectedPaymentMethod === PaymentMethod.IRA
 						? 'IRA'
 						: 'Venmo'}{' '}

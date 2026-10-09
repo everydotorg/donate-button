@@ -24,10 +24,8 @@ export const DafAmountView = ({
 	changeView,
 	manual
 }: DafFlowViewProps & {manual?: boolean}) => {
-	// Chariot only supports one-time grants; manual grants can recur
 	const submitDonation = useSubmitDonation({
-		route: manual ? 'daf/manual/confirm' : 'daf/chariot/confirm',
-		allowRecurring: manual
+		route: manual ? 'daf/manual/confirm' : 'daf/chariot/confirm'
 	});
 	const {donationAmount, submitError} = useWidgetContext();
 
@@ -42,7 +40,7 @@ export const DafAmountView = ({
 				<h3>
 					{manual ? 'Manual DAF donation' : 'Connect your DAF with Chariot'}
 				</h3>
-				<Frequency allowRecurring={manual} />
+				<Frequency />
 				<DonationAmount />
 				<CustomFields />
 				<PrivateNote />

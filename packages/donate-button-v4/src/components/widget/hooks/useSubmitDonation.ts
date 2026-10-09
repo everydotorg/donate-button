@@ -17,13 +17,10 @@ import {
 } from 'src/helpers/constructDonateUrl';
 
 export const useSubmitDonation = ({
-	route,
-	allowRecurring
+	route
 }: {
 	/** Route under the donate hash on every.org, e.g. `daf/chariot/confirm` */
 	route?: string;
-	/** Keep the selected frequency even if the method is one-time only */
-	allowRecurring?: boolean;
 } = {}) => {
 	const config = useConfigContext();
 	const customization = useCustomizationOrUndefined();
@@ -137,11 +134,9 @@ export const useSubmitDonation = ({
 					window.open(
 						constructDonateUrl({
 							amount: donationAmount,
-							frequency:
-								!allowRecurring &&
-								OneTimeFrequencyMethods.includes(selectedPaymentMethod)
-									? DonationFrequency.OneTime
-									: frequency,
+							frequency: OneTimeFrequencyMethods.includes(selectedPaymentMethod)
+								? DonationFrequency.OneTime
+								: frequency,
 							route,
 							...baseParameters
 						}),
@@ -171,8 +166,7 @@ export const useSubmitDonation = ({
 			customization,
 			customFieldValues,
 			staging,
-			route,
-			allowRecurring
+			route
 		]
 	);
 
