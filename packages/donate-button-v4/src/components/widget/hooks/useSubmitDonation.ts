@@ -2,6 +2,7 @@ import {useCallback} from 'preact/hooks';
 import {JSXInternal} from 'preact/src/jsx';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useCustomizationOrUndefined} from 'src/components/widget/hooks/useCustmization';
+import {useMinDonationAmount} from 'src/components/widget/hooks/useMinDonationAmount';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {
@@ -39,8 +40,8 @@ export const useSubmitDonation = ({
 		giftCardCode,
 		customFieldValues
 	} = useWidgetContext();
+	const minDonationAmount = useMinDonationAmount();
 	const {
-		minDonationAmount,
 		webhookToken,
 		redeemGiftCardInFlow,
 		designation,
