@@ -16,7 +16,15 @@ import {
 	constructGiftCardUrl
 } from 'src/helpers/constructDonateUrl';
 
-export const useSubmitDonation = () => {
+export const useSubmitDonation = ({
+	route,
+	allowRecurring
+}: {
+	/** Route under the donate hash on every.org, e.g. `daf/chariot/confirm` */
+	route?: string;
+	/** Keep the selected frequency even if the method is one-time only */
+	allowRecurring?: boolean;
+} = {}) => {
 	const config = useConfigContext();
 	const customization = useCustomizationOrUndefined();
 
@@ -129,13 +137,12 @@ export const useSubmitDonation = () => {
 					window.open(
 						constructDonateUrl({
 							amount: donationAmount,
-							frequency: OneTimeFrequencyMethods.includes(selectedPaymentMethod)
-								? DonationFrequency.OneTime
-								: frequency,
-							route:
-								selectedPaymentMethod === PaymentMethod.DAF
-									? 'daf/chariot/confirm'
-									: undefined,
+							frequency:
+								!allowRecurring &&
+								OneTimeFrequencyMethods.includes(selectedPaymentMethod)
+									? DonationFrequency.OneTime
+									: frequency,
+							route,
 							...baseParameters
 						}),
 						target
@@ -163,7 +170,9 @@ export const useSubmitDonation = () => {
 			requireShareInfo,
 			customization,
 			customFieldValues,
-			staging
+			staging,
+			route,
+			allowRecurring
 		]
 	);
 

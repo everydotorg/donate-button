@@ -146,7 +146,7 @@ export function constructBasicDonateUrl(
 
 	const parameters = serializeParams(params);
 
-	return `${baseUrl}?${parameters}${getHash(props.route)}`;
+	return `${baseUrl}?${parameters}#/${HASH}`;
 }
 
 export function constructDonateUrl({

@@ -12,5 +12,7 @@ export const DafFlow = () => {
 			return <DafStartView changeView={setView} />;
 		case DafFlowView.AMOUNT:
 			return <DafAmountView changeView={setView} />;
+		case DafFlowView.MANUAL:
+			return <DafAmountView manual changeView={setView} />;
 	}
 };
