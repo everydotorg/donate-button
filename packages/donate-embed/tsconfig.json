@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"target": "es2015",
+		"module": "es2015",
+		"lib": ["es2015", "dom"],
+		"strict": true,
+		"rootDir": "src",
+		"outDir": "dist/donate-button",
+		"newLine": "lf",
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"types": []
+	},
+	"include": ["src"]
+}
