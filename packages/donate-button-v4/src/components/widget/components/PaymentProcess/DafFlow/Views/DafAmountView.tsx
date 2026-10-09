@@ -20,8 +20,13 @@ import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
 import {getSubmitButtonText} from 'src/helpers/getSubmitButtonText';
 
-export const DafAmountView = ({changeView}: DafFlowViewProps) => {
-	const submitDonation = useSubmitDonation();
+export const DafAmountView = ({
+	changeView,
+	manual
+}: DafFlowViewProps & {manual?: boolean}) => {
+	const submitDonation = useSubmitDonation({
+		route: manual ? 'daf/manual/confirm' : 'daf/chariot/confirm'
+	});
 	const {donationAmount, submitError} = useWidgetContext();
 
 	return (
@@ -32,7 +37,9 @@ export const DafAmountView = ({changeView}: DafFlowViewProps) => {
 				}}
 			/>
 			<div className={formContainerCss}>
-				<h3>Connect your DAF with Chariot</h3>
+				<h3>
+					{manual ? 'Manual DAF donation' : 'Connect your DAF with Chariot'}
+				</h3>
 				<Frequency />
 				<DonationAmount />
 				<CustomFields />
@@ -42,7 +49,9 @@ export const DafAmountView = ({changeView}: DafFlowViewProps) => {
 				<SubmitButton
 					disabled={!donationAmount || Number.isNaN(donationAmount)}
 				>
-					{getSubmitButtonText({method: PaymentMethod.DAF})}
+					{manual
+						? 'Continue'
+						: getSubmitButtonText({method: PaymentMethod.DAF})}
 				</SubmitButton>
 				<RedirectNotice />
 			</div>

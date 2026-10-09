@@ -15,6 +15,7 @@ import {
 } from 'src/components/widget/components/PaymentProcess/styles';
 import {TextInput} from 'src/components/widget/components/TextInput';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
+import {useMinDonationAmount} from 'src/components/widget/hooks/useMinDonationAmount';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {verticalStackCss, Spacing} from 'src/components/widget/theme/spacing';
 import {DEFAULT_CURRENCY} from 'src/constants/currency';
@@ -65,9 +66,9 @@ export const DonationAmount = () => {
 		primaryColor,
 		addAmounts,
 		amount: fixedAmount,
-		frequency: fixedFrequency,
-		minDonationAmount
+		frequency: fixedFrequency
 	} = useConfigContext();
+	const minDonationAmount = useMinDonationAmount();
 
 	const {setDonationAmount, donationAmount, setSubmitError, submitError} =
 		useWidgetContext();

@@ -2,6 +2,7 @@ import {useCallback} from 'preact/hooks';
 import {JSXInternal} from 'preact/src/jsx';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useCustomizationOrUndefined} from 'src/components/widget/hooks/useCustmization';
+import {useMinDonationAmount} from 'src/components/widget/hooks/useMinDonationAmount';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {DonationFrequency} from 'src/components/widget/types/DonationFrequency';
 import {
@@ -16,7 +17,12 @@ import {
 	constructGiftCardUrl
 } from 'src/helpers/constructDonateUrl';
 
-export const useSubmitDonation = () => {
+export const useSubmitDonation = ({
+	route
+}: {
+	/** Route under the donate hash on every.org, e.g. `daf/chariot/confirm` */
+	route?: string;
+} = {}) => {
 	const config = useConfigContext();
 	const customization = useCustomizationOrUndefined();
 
@@ -34,8 +40,8 @@ export const useSubmitDonation = () => {
 		giftCardCode,
 		customFieldValues
 	} = useWidgetContext();
+	const minDonationAmount = useMinDonationAmount();
 	const {
-		minDonationAmount,
 		webhookToken,
 		redeemGiftCardInFlow,
 		designation,
@@ -132,6 +138,7 @@ export const useSubmitDonation = () => {
 							frequency: OneTimeFrequencyMethods.includes(selectedPaymentMethod)
 								? DonationFrequency.OneTime
 								: frequency,
+							route,
 							...baseParameters
 						}),
 						target
@@ -159,7 +166,8 @@ export const useSubmitDonation = () => {
 			requireShareInfo,
 			customization,
 			customFieldValues,
-			staging
+			staging,
+			route
 		]
 	);
 

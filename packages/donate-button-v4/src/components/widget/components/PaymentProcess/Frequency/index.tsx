@@ -57,7 +57,7 @@ export const Frequency = () => {
 				<legend className={legendCss}>Frequency</legend>
 				<p>
 					{selectedPaymentMethod === PaymentMethod.DAF
-						? 'Chariot'
+						? 'DAF'
 						: selectedPaymentMethod === PaymentMethod.IRA
 						? 'IRA'
 						: 'Venmo'}{' '}

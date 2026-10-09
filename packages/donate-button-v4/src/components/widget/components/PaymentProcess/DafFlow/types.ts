@@ -1,7 +1,7 @@
 export enum DafFlowView {
 	START,
-	MANUAL,
-	AMOUNT
+	AMOUNT,
+	MANUAL
 }
 
 export interface DafFlowViewProps {
