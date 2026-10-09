@@ -132,6 +132,10 @@ export const useSubmitDonation = () => {
 							frequency: OneTimeFrequencyMethods.includes(selectedPaymentMethod)
 								? DonationFrequency.OneTime
 								: frequency,
+							route:
+								selectedPaymentMethod === PaymentMethod.DAF
+									? 'daf/chariot/confirm'
+									: undefined,
 							...baseParameters
 						}),
 						target

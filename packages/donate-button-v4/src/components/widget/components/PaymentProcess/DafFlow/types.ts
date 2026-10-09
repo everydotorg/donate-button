@@ -1,6 +1,5 @@
 export enum DafFlowView {
 	START,
-	MANUAL,
 	AMOUNT
 }
 

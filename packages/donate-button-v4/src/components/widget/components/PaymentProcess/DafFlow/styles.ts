@@ -34,6 +34,7 @@ export const manualButtonCss = (primaryColor: string) =>
 		background: 'none',
 		fontFamily: 'inherit',
 		color: primaryColor,
+		textDecoration: 'none',
 		alignSelf: 'center',
 		display: 'flex',
 		alignItems: 'center',

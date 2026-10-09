@@ -24,6 +24,8 @@ interface BaseUrlParams {
 	requireShareInfo?: boolean;
 	customFieldResponses?: string;
 	staging?: boolean;
+	/** Route under the donate hash, e.g. `daf/manual` -> `#/donate/daf/manual` */
+	route?: string;
 }
 
 interface DonateUrlParams extends BaseUrlParams {
@@ -44,6 +46,10 @@ interface DonateCryptoUrlParams extends BaseUrlParams {
 interface GiftCardUrlParams extends BaseUrlParams {
 	giftCardCode?: string;
 	redeemGiftCardInFlow?: boolean;
+}
+
+function getHash(route?: string) {
+	return route ? `#/${HASH}/${route}` : `#/${HASH}`;
 }
 
 function serializeParams(
@@ -140,7 +146,7 @@ export function constructBasicDonateUrl(
 
 	const parameters = serializeParams(params);
 
-	return `${baseUrl}?${parameters}#/${HASH}`;
+	return `${baseUrl}?${parameters}${getHash(props.route)}`;
 }
 
 export function constructDonateUrl({
@@ -159,7 +165,7 @@ export function constructDonateUrl({
 		...params
 	});
 
-	return `${baseUrl}?${parameters}#/${HASH}`;
+	return `${baseUrl}?${parameters}${getHash(rest.route)}`;
 }
 
 export function constructDonateStocksUrl({

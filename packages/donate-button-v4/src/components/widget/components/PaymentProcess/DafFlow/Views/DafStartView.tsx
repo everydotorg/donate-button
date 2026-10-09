@@ -16,6 +16,8 @@ import {
 	formContainerCss
 } from 'src/components/widget/components/PaymentProcess/styles';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
+import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
+import {constructBasicDonateUrl} from 'src/helpers/constructDonateUrl';
 
 export const DafLogo = () => {
 	return (
@@ -41,7 +43,19 @@ export const DafLogo = () => {
 };
 
 export const DafStartView = ({changeView}: DafFlowViewProps) => {
-	const {primaryColor} = useConfigContext();
+	const config = useConfigContext();
+	const manualDafUrl = constructBasicDonateUrl({
+		methods: [PaymentMethod.DAF],
+		nonprofitSlug: config.nonprofitSlug,
+		fundraiserSlug: config.fundraiserSlug,
+		utmSource: config.utmSource,
+		webhookToken: config.webhookToken,
+		partnerMetadata: config.partnerMetadata,
+		designation: config.designation,
+		requireShareInfo: config.requireShareInfo,
+		staging: config.staging,
+		route: 'daf/manual'
+	});
 
 	return (
 		<div className={formCss}>
@@ -64,15 +78,14 @@ export const DafStartView = ({changeView}: DafFlowViewProps) => {
 					<span>Donate with</span>
 					<DafLogo />
 				</button>
-				<button
-					type="button"
-					className={manualButtonCss(primaryColor)}
-					onClick={() => {
-						changeView(DafFlowView.MANUAL);
-					}}
+				<a
+					className={manualButtonCss(config.primaryColor)}
+					href={manualDafUrl}
+					target={config.completeDonationInNewTab ? '_blank' : '_self'}
+					rel="noreferrer"
 				>
 					Get instructions for a manual DAF donation
-				</button>
+				</a>
 				<RedirectNotice />
 			</div>
 		</div>
