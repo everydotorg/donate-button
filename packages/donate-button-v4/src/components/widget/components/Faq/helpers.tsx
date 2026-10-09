@@ -126,11 +126,9 @@ export function getFeeDescriptionBody(
 			return (
 				<Fragment>
 					<p>
-						Every.org covers all brokerage fees for commonly traded stocks! For
-						mutual funds, the First Republic brokerage fee is usually 0.1% of
-						the principle, with a $30 minimum and $150 maximum. Some slippage
-						may occur between when you donate and when we sell making the final
-						amount different from what you donate.
+						Every.org covers all fees for stock donations, so usually no! For
+						some mutual funds there is a small brokerage fee which will be
+						deducted.
 					</p>
 					{getNfgDisclaimer(nonprofit)}
 				</Fragment>
@@ -138,7 +136,10 @@ export function getFeeDescriptionBody(
 		case PaymentMethod.DAF:
 			return (
 				<Fragment>
-					<p>We do not charge any fees, but your DAF provider may have fees.</p>
+					<p>
+						We do not charge any fees to accept DAF gifts, and currently cover
+						all the Chariot fees.
+					</p>
 					{getNfgDisclaimer(nonprofit)}
 				</Fragment>
 			);

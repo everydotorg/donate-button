@@ -38,7 +38,7 @@ export const DafAmountView = ({
 			/>
 			<div className={formContainerCss}>
 				<h3>
-					{manual ? 'Manual DAF donation' : 'Connect your DAF with Chariot'}
+					{manual ? 'Manual DAF donation' : 'Connect your DAF with DAFpay'}
 				</h3>
 				<Frequency />
 				<DonationAmount />
