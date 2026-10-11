@@ -24,8 +24,11 @@ export function isOfficialFundraiser(fundraiser: Fundraiser): boolean {
 	return fundraiser.nonprofitId === fundraiser.creatorNonprofitId;
 }
 
-const DAF_DEDUCTIBLE_STATEMENT =
+export const DAF_DEDUCTIBLE_STATEMENT =
 	'If you use a Donor Advised Fund (DAF), your receipt from Every.org will not be tax-deductible as the tax deduction was already received at the time you contributed to your DAF. For any other payment method, you will get a tax-deductible receipt emailed to you';
+
+export const IRA_DEDUCTIBLE_STATEMENT =
+	'If you give through a Qualified Charitable Distribution (QCD) from your IRA, your receipt from Every.org will not be tax-deductible as QCD gifts are excluded from your taxable income rather than deducted. For any other payment method, you will get a tax-deductible receipt emailed to you';
 
 export const getTaxDeductibleStatement = (
 	nonprofit: Nonprofit,
@@ -37,6 +40,8 @@ export const getTaxDeductibleStatement = (
 	const deductibleStatement =
 		paymentOption === PaymentMethod.DAF
 			? DAF_DEDUCTIBLE_STATEMENT
+			: paymentOption === PaymentMethod.IRA
+			? IRA_DEDUCTIBLE_STATEMENT
 			: '100% of your donation is tax-deductible to the extent allowed by US law';
 
 	const main = `${deductibleStatement}. Your donation is made to Every.org, a tax-exempt US 501(c)(3) charity that
