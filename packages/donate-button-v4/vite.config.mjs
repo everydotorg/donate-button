@@ -11,12 +11,21 @@ const VERSION = semver.parse(packageJson.version);
 const VERSION_SLUG =
 	VERSION.major === 0 ? `${VERSION.major}.${VERSION.minor}` : VERSION.major;
 
-export default defineConfig({
-	// Production builds run on Vercel, which sets VERCEL_URL. The bundle runs on
-	// third-party pages, so its icon URLs must point back to the deployment.
-	base: process.env.VERCEL_URL
+/**
+ * The bundle runs on third-party pages, so built icon URLs must be absolute.
+ * Vercel sets VERCEL_URL; other builds are checked into docs/ and served by
+ * assets.every.org.
+ * @see ../../README.md#demo-site-hosting-details
+ */
+function getBase(command) {
+	if (command !== 'build') return '/';
+	return process.env.VERCEL_URL
 		? `https://${process.env.VERCEL_URL}/${VERSION_SLUG}/`
-		: '/',
+		: `https://assets.every.org/dist/donate-button/${VERSION_SLUG}/`;
+}
+
+export default defineConfig(({command}) => ({
+	base: getBase(command),
 	plugins: [preact()],
 	resolve: {
 		tsconfigPaths: true
@@ -38,4 +47,4 @@ export default defineConfig({
 			}
 		}
 	}
-});
+}));
