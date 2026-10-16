@@ -11,6 +11,7 @@ import {
 	useNonprofitOrError,
 	useParentNonprofit
 } from 'src/components/widget/hooks/useNonprofit';
+import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {
 	TERMS_URL,
 	HELP_URL,
@@ -34,11 +35,17 @@ export const Footer = () => {
 	const nonprofit = useNonprofitOrError();
 	const fundraiser = useFundraiserOrUndefined();
 	const parentNonprofit = useParentNonprofit();
+	const {selectedPaymentMethod} = useWidgetContext();
 
 	return (
 		<GridCard className={footerCardCss}>
 			<p>
-				{getTaxDeductibleStatement(nonprofit, fundraiser, parentNonprofit)}{' '}
+				{getTaxDeductibleStatement(
+					nonprofit,
+					fundraiser,
+					parentNonprofit,
+					selectedPaymentMethod
+				)}{' '}
 				<FooterLink href={TERMS_URL}>See Terms</FooterLink>
 			</p>
 			<p>

@@ -14,7 +14,11 @@ import {
 	faqLinkCss,
 	faqListCss
 } from 'src/components/widget/components/Faq/styles';
-import {getTaxDeductibleStatement} from 'src/components/widget/components/Footer/helpers';
+import {
+	DAF_DEDUCTIBLE_STATEMENT,
+	getTaxDeductibleStatement,
+	IRA_DEDUCTIBLE_STATEMENT
+} from 'src/components/widget/components/Footer/helpers';
 import {GridCard} from 'src/components/widget/components/GridCard';
 import {useConfigContext} from 'src/components/widget/hooks/useConfigContext';
 import {useFundraiserOrUndefined} from 'src/components/widget/hooks/useFundraiser';
@@ -24,6 +28,7 @@ import {
 } from 'src/components/widget/hooks/useNonprofit';
 import {useWidgetContext} from 'src/components/widget/hooks/useWidgetContext';
 import {ArrowIcon} from 'src/components/widget/icons/ArrowIcon';
+import {PaymentMethod} from 'src/components/widget/types/PaymentMethod';
 import {BASE_URL, FUNDRAISER_ROUTE} from 'src/constants/url';
 
 interface FaqItemTypes {
@@ -75,8 +80,8 @@ export const Faq = () => {
 				<Fragment>
 					<p>
 						Your donation is made to Every.org, a US 501(c)(3) public charity.
-						Every.org will immediately send you a receipt by email.{' '}
-						{getDisbursementDescription(nonprofit)}
+						Once a gift has completed processing, Every.org will immediately
+						send you a receipt by email. {getDisbursementDescription(nonprofit)}
 					</p>
 					<p>
 						This process ensures your eligibility for a tax deduction, enables
@@ -92,31 +97,33 @@ export const Faq = () => {
 			description: getFeeDescription(selectedPaymentMethod, nonprofit)
 		},
 		{
-			id: 'tax',
-			title: 'Is this donation tax-deductible?',
-			description: (
-				<p>
-					Yes,{' '}
-					{getTaxDeductibleStatement(nonprofit, fundraiser, parentNonprofit)}
-				</p>
-			)
-		},
-		{
 			id: 'receipt',
-			title: 'Will I receive a receipt for my donation?',
-			description: (
-				<Fragment>
-					<p>
-						Yes, after your donation payment is confirmed, you will immediately
-						get a receipt emailed to you.
-					</p>
-					<p>
-						Additionally, if you have an Every.org account, you can always get a
-						single itemized receipt that shows all your donations in a given
-						year.
-					</p>
-				</Fragment>
-			)
+			title: 'Will I receive a tax-deductible receipt for my donation?',
+			description:
+				selectedPaymentMethod === PaymentMethod.DAF ? (
+					<p>{DAF_DEDUCTIBLE_STATEMENT}</p>
+				) : selectedPaymentMethod === PaymentMethod.IRA ? (
+					<p>{IRA_DEDUCTIBLE_STATEMENT}</p>
+				) : (
+					<Fragment>
+						<p>
+							Yes. After your donation payment is confirmed, you will
+							immediately get a tax-deductible receipt emailed to you.
+						</p>
+						<p>
+							{getTaxDeductibleStatement(
+								nonprofit,
+								fundraiser,
+								parentNonprofit
+							)}
+						</p>
+						<p>
+							Additionally, if you have an Every.org account, you can always get
+							a single itemized receipt that shows all your donations in a given
+							year.
+						</p>
+					</Fragment>
+				)
 		}
 	];
 
