@@ -28,9 +28,47 @@ Options for `everyWidget.create`:
   to, or the element itself. Pass an element when the container is not
   reachable from `document`, for example inside a web component's shadow root.
   A malformed selector string throws, just like `document.querySelector`.
-- `partnerSlug` (required): the partner slug every.org assigned to you.
+- `partnerSlug`: the partner slug every.org assigned to you. One of
+  `partnerSlug` or `partnerId` is required.
+- `partnerId`: the partner id every.org assigned to you. An alternative to
+  `partnerSlug`; if both are given, `partnerId` takes precedence.
 - `nonprofitSlug` (required): the every.org slug of the nonprofit to donate to.
 - `onSuccess` (optional): called when a donation completes.
+
+The form also takes the customizations of an every.org
+[donate link](https://docs.every.org/docs/donate-link). All are optional:
+
+| Option              | Donate link parameter | Description                                                                                                                                        |
+| ------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `amount`            | `amount`              | Donation amount the form starts with.                                                                                                              |
+| `suggestedAmounts`  | `suggestedAmounts`    | Array of up to five suggested amounts, shown as buttons below the amount field.                                                                    |
+| `frequency`         | `frequency`           | Donation frequency the form starts with: `'ONCE'` or `'MONTHLY'`.                                                                                  |
+| `email`             | `email`               | Donor's email.                                                                                                                                     |
+| `firstName`         | `first_name`          | Donor's first name.                                                                                                                                |
+| `lastName`          | `last_name`           | Donor's last name.                                                                                                                                 |
+| `description`       | `description`         | Replaces the text on the nonprofit's card in the form.                                                                                             |
+| `partnerDonationId` | `partner_donation_id` | A unique id of yours to associate with the donation.                                                                                               |
+| `partnerMetadata`   | `partner_metadata`    | A base64 encoded JSON object that is forwarded to you in the partner webhook notification.                                                         |
+| `requireShareInfo`  | `require_share_info`  | `true` requires the donor to share their contact info with the nonprofit.                                                                          |
+| `shareInfo`         | `share_info`          | Whether sharing contact info is checked by default.                                                                                                |
+| `designation`       | `designation`         | Designation for the donation (a recommendation to the nonprofit, not a legal restriction).                                                         |
+| `webhookToken`      | `webhook_token`       | Token of your partner webhook; it is notified of every donation completed through the form.                                                        |
+| `themeColor`        | `theme_color`         | Primary theme color of the form as a hex color, with or without the leading `#`: for example `'#009BF8'`.                                          |
+| `method`            | `method`              | Allowed donation methods, as an array or a comma separated string: `card`, `bank`, `paypal`, `venmo`, `pay`, `crypto`, `stocks`, `daf` and `gift`. |
+| `code`              | `code`                | Code of a custom donate link created by the nonprofit; the form uses that link's settings. Options given here override them.                       |
+
+```js
+everyWidget.create({
+	selector: '#donate-widget',
+	partnerSlug: 'your-partner-slug',
+	nonprofitSlug: 'nonprofit-slug',
+	amount: 25,
+	suggestedAmounts: [10, 25, 50, 100],
+	frequency: 'MONTHLY',
+	method: ['card', 'bank', 'paypal'],
+	themeColor: '#009BF8'
+});
+```
 
 `create` returns the `<iframe>` element, or `null` if the options are invalid.
 
