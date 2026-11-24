@@ -38,24 +38,24 @@ Options for `everyWidget.create`:
 The form also takes the customizations of an every.org
 [donate link](https://docs.every.org/docs/donate-link). All are optional:
 
-| Option              | Donate link parameter | Description                                                                                                                                        |
-| ------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `amount`            | `amount`              | Donation amount the form starts with.                                                                                                              |
-| `suggestedAmounts`  | `suggestedAmounts`    | Array of up to five suggested amounts, shown as buttons below the amount field.                                                                    |
-| `frequency`         | `frequency`           | Donation frequency the form starts with: `'ONCE'` or `'MONTHLY'`.                                                                                  |
-| `email`             | `email`               | Donor's email.                                                                                                                                     |
-| `firstName`         | `first_name`          | Donor's first name.                                                                                                                                |
-| `lastName`          | `last_name`           | Donor's last name.                                                                                                                                 |
-| `description`       | `description`         | Replaces the text on the nonprofit's card in the form.                                                                                             |
-| `partnerDonationId` | `partner_donation_id` | A unique id of yours to associate with the donation.                                                                                               |
-| `partnerMetadata`   | `partner_metadata`    | A base64 encoded JSON object that is forwarded to you in the partner webhook notification.                                                         |
-| `requireShareInfo`  | `require_share_info`  | `true` requires the donor to share their contact info with the nonprofit.                                                                          |
-| `shareInfo`         | `share_info`          | Whether sharing contact info is checked by default.                                                                                                |
-| `designation`       | `designation`         | Designation for the donation (a recommendation to the nonprofit, not a legal restriction).                                                         |
-| `webhookToken`      | `webhook_token`       | Token of your partner webhook; it is notified of every donation completed through the form.                                                        |
-| `themeColor`        | `theme_color`         | Primary theme color of the form as a hex color, with or without the leading `#`: for example `'#009BF8'`.                                          |
+| Option              | Donate link parameter | Description                                                                                                                                       |
+| ------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `amount`            | `amount`              | Donation amount the form starts with.                                                                                                             |
+| `suggestedAmounts`  | `suggestedAmounts`    | Array of up to five suggested amounts, shown as buttons below the amount field.                                                                   |
+| `frequency`         | `frequency`           | Donation frequency the form starts with: `'ONCE'` or `'MONTHLY'`.                                                                                 |
+| `email`             | `email`               | Donor's email.                                                                                                                                    |
+| `firstName`         | `first_name`          | Donor's first name.                                                                                                                               |
+| `lastName`          | `last_name`           | Donor's last name.                                                                                                                                |
+| `description`       | `description`         | Replaces the text on the nonprofit's card in the form.                                                                                            |
+| `partnerDonationId` | `partner_donation_id` | A unique id of yours to associate with the donation.                                                                                              |
+| `partnerMetadata`   | `partner_metadata`    | A base64 encoded JSON object that is forwarded to you in the partner webhook notification.                                                        |
+| `requireShareInfo`  | `require_share_info`  | `true` requires the donor to share their contact info with the nonprofit.                                                                         |
+| `shareInfo`         | `share_info`          | Whether sharing contact info is checked by default.                                                                                               |
+| `designation`       | `designation`         | Designation for the donation (a recommendation to the nonprofit, not a legal restriction).                                                        |
+| `webhookToken`      | `webhook_token`       | Token of your partner webhook; it is notified of every donation completed through the form.                                                       |
+| `themeColor`        | `theme_color`         | Primary theme color of the form as a hex color, with or without the leading `#`: for example `'#009BF8'`.                                         |
 | `method`            | `method`              | Allowed donation methods, as an array or a comma separated string: `card`, `bank`, `paypal`, `venmo`, `pay`, `crypto`, `stocks`, `daf` and `ira`. |
-| `code`              | `code`                | Code of a custom donate link created by the nonprofit; the form uses that link's settings. Options given here override them.                       |
+| `code`              | `code`                | Code of a custom donate link created by the nonprofit; the form uses that link's settings. Options given here override them.                      |
 
 ```js
 everyWidget.create({
