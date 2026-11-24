@@ -54,7 +54,7 @@ The form also takes the customizations of an every.org
 | `designation`       | `designation`         | Designation for the donation (a recommendation to the nonprofit, not a legal restriction).                                                         |
 | `webhookToken`      | `webhook_token`       | Token of your partner webhook; it is notified of every donation completed through the form.                                                        |
 | `themeColor`        | `theme_color`         | Primary theme color of the form as a hex color, with or without the leading `#`: for example `'#009BF8'`.                                          |
-| `method`            | `method`              | Allowed donation methods, as an array or a comma separated string: `card`, `bank`, `paypal`, `venmo`, `pay`, `crypto`, `stocks`, `daf` and `gift`. |
+| `method`            | `method`              | Allowed donation methods, as an array or a comma separated string: `card`, `bank`, `paypal`, `venmo`, `pay`, `crypto`, `stocks`, `daf` and `ira`. |
 | `code`              | `code`                | Code of a custom donate link created by the nonprofit; the form uses that link's settings. Options given here override them.                       |
 
 ```js

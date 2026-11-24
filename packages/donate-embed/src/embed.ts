@@ -94,8 +94,8 @@ interface EveryWidgetOptions {
 	themeColor?: string;
 	/**
 	 * Allowed donation methods: card, bank, paypal, venmo, pay (mobile
-	 * payments), crypto, stocks, daf and gift (gift cards). Either an array or
-	 * a comma separated string.
+	 * payments), crypto, stocks, daf and ira. Either an array or a comma
+	 * separated string.
 	 */
 	method?: string | string[];
 	/**
